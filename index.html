@@ -20,7 +20,7 @@
 
   :root {
     /* AI2ARCH Brand Guidelines v2 */
-    --ink-night: #0A0F1D;
+    --ink-night: #0A0F1A;
     --navy-mid:  #111828;
     --navy-deep: #070C18;
     --graphite:  #2A2F3E;
@@ -31,18 +31,18 @@
     --cyan:      #4DA3FF;
     --cyan-soft: #7BBFFF;
     --w100: #FFFFFF;
-    --warm-white:#F6F4EF;
+    --warm-white:#F6F4F0;
     --w70:  rgba(246,244,239,0.70);
     --w40:  rgba(246,244,239,0.40);
     --w15:  rgba(246,244,239,0.10);
     --w07:  rgba(246,244,239,0.05);
 
     /* Guide (light) — Warm White система */
-    --bg:       #F6F4EF;
+    --bg:       #F6F4F0;
     --surface:  #FFFFFF;
     --surface2: #F2F0EB;
     --border:   #E4E1D8;
-    --ink:      #0A0F1D;
+    --ink:      #0A0F1A;
     --ink-muted:#2A2F3E;
     --ink-faint:#6A7080;
     --accent:   #4DA3FF;
@@ -57,7 +57,7 @@
     --sans: 'Manrope', sans-serif;
   }
 
-  body { font-family:var(--sans); overflow-x:hidden; }
+  body { font-family:var(--sans); overflow-x:clip; }
   a { color:var(--accent); text-decoration:none; }
   a:hover { text-decoration:underline; }
 
@@ -78,32 +78,10 @@
 
   .cover-bg {
     position: absolute; inset:0; z-index:0;
-    background:
-      radial-gradient(ellipse 60% 50% at 80% 25%, rgba(77,163,255,0.18) 0%, transparent 58%),
-      radial-gradient(ellipse 40% 40% at 12% 78%, rgba(42,47,62,0.8) 0%, transparent 55%),
-      linear-gradient(150deg, #070C18 0%, #0A0F1D 45%, #111828 100%);
+    background: #0A0F1A;
   }
-  /* Topographic lines — fирменная графика AI2ARCH */
-  .cover-bg::before {
-    content:''; position:absolute; inset:0;
-    background-image:
-      linear-gradient(rgba(77,163,255,0.055) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(77,163,255,0.055) 1px, transparent 1px),
-      linear-gradient(rgba(77,163,255,0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(77,163,255,0.02) 1px, transparent 1px);
-    background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
-    mask-image: radial-gradient(ellipse 120% 100% at 55% 45%, black 20%, transparent 75%);
-  }
-  .cover-bg::after {
-    content:''; position:absolute;
-    top:-15%; right:-8%; width:700px; height:700px; border-radius:50%;
-    background: radial-gradient(circle, rgba(77,163,255,0.14) 0%, rgba(42,47,62,0.06) 40%, transparent 70%);
-    animation: pulse-glow 6s ease-in-out infinite;
-  }
-  @keyframes pulse-glow {
-    0%,100%{opacity:1; transform:scale(1)}
-    50%{opacity:0.7; transform:scale(1.08)}
-  }
+  .cover-bg::before { content: none; }
+  .cover-bg::after  { content: none; }
 
   .cover-inner {
     position:relative; z-index:1;
@@ -165,7 +143,7 @@
     align-items: flex-start;
     gap: 10px;
     background: linear-gradient(90deg, rgba(77,163,255,0.1) 0%, rgba(26,50,120,0.08) 100%);
-    border: 1px solid rgba(77,163,255,0.3);
+    border: 1px solid rgba(42,47,62,.4);
     border-radius: 14px;
     padding: 14px 18px;
     font-size: 13px;
@@ -192,7 +170,7 @@
     padding:18px 20px; display:flex; align-items:flex-start; gap:14px;
     transition:border-color .2s, background .2s;
   }
-  .feat:hover { border-color:rgba(77,163,255,.4); background:rgba(77,163,255,.1); transform:translateY(-1px); }
+  .feat:hover { border-color:rgba(42,47,62,.5); background:rgba(42,47,62,.08); transform:translateY(-1px); }
   .feat-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
   .fi-blue   { background:rgba(22,80,212,.4); }
   .fi-cyan   { background:rgba(0,191,255,.15); }
@@ -247,10 +225,10 @@
     padding:9px 14px; font-size:12.5px; font-weight:600; color:var(--w70);
     text-decoration:none; transition:all .15s; cursor:pointer;
   }
-  .qlink:hover { border-color:rgba(77,163,255,.5); color:var(--azure-soft,#4A9FFF); background:rgba(77,163,255,.1); text-decoration:none; }
+  .qlink:hover { border-color:rgba(42,47,62,.6); color:var(--graphite,#2A2F3E); background:rgba(42,47,62,.06); text-decoration:none; }
   .ql-badge {
     font-size:9px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
-    background:rgba(77,163,255,.15); color:var(--azure-soft,#4A9FFF); padding:1px 6px; border-radius:3px; margin-left:2px;
+    background:rgba(42,47,62,.12); color:var(--graphite,#2A2F3E); padding:1px 6px; border-radius:3px; margin-left:2px;
   }
 
   /* light variants for guide-ref-section (sits on light bg) */
@@ -276,7 +254,7 @@
   .guide-ref-section {
     background: var(--surface);
     border-bottom: 2px solid var(--border);
-    border-top: 2px solid var(--azure,#4DA3FF);
+    border-top: 2px solid var(--graphite,#2A2F3E);
   }
   .guide-ref-inner {
     max-width: 920px; margin: 0 auto;
@@ -325,30 +303,22 @@
     font-size: 9px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
     color: rgba(255,255,255,0.35);
   }
-  .topo-deco {
-    position: absolute;
-    top: 0; right: -60px;
-    width: 520px; height: 420px;
-    pointer-events: none; z-index: 0;
-    opacity: 1;
-  }
-  .topo-deco svg { width:100%; height:100%; }
   .hero { position: relative; z-index: 1; }
 
   /* Architectural corner decoration */
   .arch-corner {
     position: absolute; bottom: 80px; right: 40px;
     width: 120px; height: 120px;
-    border-right: 1px solid rgba(77,163,255,.2);
-    border-bottom: 1px solid rgba(77,163,255,.2);
+    border-right: 1px solid rgba(42,47,62,.4);
+    border-bottom: 1px solid rgba(42,47,62,.4);
     pointer-events: none; z-index: 1;
   }
   .arch-corner::before {
     content:''; position:absolute;
     bottom: 8px; right: 8px;
     width: 80px; height: 80px;
-    border-right: 1px solid rgba(77,163,255,.12);
-    border-bottom: 1px solid rgba(77,163,255,.12);
+    border-right: 1px solid rgba(42,47,62,.25);
+    border-bottom: 1px solid rgba(42,47,62,.25);
   }
 
   /* Data/system tag line */
@@ -359,12 +329,12 @@
     font-size: 9.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
     color: rgba(255,255,255,0.25);
   }
-  .sys-tag-sep { color: rgba(77,163,255,.4); font-size: 9px; }
+  .sys-tag-sep { color: rgba(42,47,62,.5); font-size: 9px; }
 
   /* Outcomes numbering: architectural style */
   .oc-num {
     font-family: var(--mono); font-size: 10px; font-weight: 700;
-    color: var(--azure,#4DA3FF); flex-shrink: 0; margin-top:2px;
+    color: var(--graphite,#2A2F3E); opacity:0.7; flex-shrink: 0; margin-top:2px;
     opacity: 0.8; letter-spacing: .05em;
   }
 
@@ -376,11 +346,11 @@
   }
   .brand-tagline::before {
     content:''; width: 40px; height: 1px;
-    background: rgba(77,163,255,.5);
+    background: rgba(42,47,62,.6);
   }
 
   .cover-bottom {
-    margin-top:52px; padding-top:22px; border-top:1px solid rgba(77,163,255,.2);
+    margin-top:52px; padding-top:22px; border-top:1px solid rgba(42,47,62,.4);
     display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
   }
   .strip-label { font-size:10.5px; color:var(--w40); font-weight:600; letter-spacing:.06em; text-transform:uppercase; }
@@ -402,7 +372,7 @@
 
   /* back bar */
   .back-bar {
-    background: linear-gradient(90deg, #070C18 0%, #0A0F1D 100%); border-bottom:1px solid rgba(77,163,255,.12);
+    background: linear-gradient(90deg, #070C18 0%, #0A0F1A 100%); border-bottom:1px solid rgba(246,244,240,.08);
     padding: 0;
     position: sticky; top:0; z-index:200;
     display:flex; align-items:stretch;
@@ -413,12 +383,12 @@
     padding:14px 20px;
     font-size:13px; font-weight:700;
     color:var(--azure-soft,#4A9FFF);
-    background:none; border:none; border-right:1px solid rgba(77,163,255,.15);
+    background:none; border:none; border-right:1px solid rgba(42,47,62,.4);
     cursor:pointer; font-family:var(--sans);
     transition:background .15s; white-space:nowrap;
     letter-spacing:.01em;
   }
-  .back-btn:hover { background:rgba(77,163,255,.1); }
+  .back-btn:hover { background:rgba(42,47,62,.15); }
   .back-btn .arrow { font-size:16px; }
 
   .guide-breadcrumb {
@@ -435,16 +405,19 @@
     background: var(--surface);
     border-bottom:1px solid var(--border);
     box-shadow:0 2px 12px rgba(10,19,36,0.08);
+    overflow: visible;
   }
 
   /* module tabs (top-level sections) */
   .module-tabs {
     display: flex; gap: 0;
-    max-width: 920px; margin: 0 auto;
+    max-width: none;
     padding: 0 28px;
     overflow-x: auto;
     scrollbar-width: none;
     border-bottom: 1px solid var(--border);
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
   }
   .module-tabs::-webkit-scrollbar { display:none; }
   .module-tab {
@@ -474,8 +447,10 @@
   .nav-pills {
     display:flex; gap:6px; padding:11px 28px;
     flex-wrap:nowrap; overflow-x:auto;
-    max-width:920px; margin:0 auto;
+    max-width:none;
     scrollbar-width:none;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
   }
   .nav-pills::-webkit-scrollbar { display:none; }
   .pill {
@@ -492,11 +467,11 @@
   .guide-inner { max-width:920px; margin:0 auto; padding:0 32px 80px; }
 
   /* labels / headings */
-  .sec-label { font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--azure,#4DA3FF); margin-bottom:8px; }
+  .sec-label { font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--graphite,#2A2F3E); margin-bottom:8px; }
   .sec-label.purple { color:var(--purple); }
   .sec-label.green  { color:var(--green); }
   .sec-label.orange { color:var(--accent2); }
-  h2 { font-size:21px; font-weight:800; color:var(--ink); margin-bottom:14px; letter-spacing:-.02em; padding-left:12px; border-left:3px solid var(--azure,#4DA3FF); }
+  h2 { font-size:21px; font-weight:800; color:var(--ink); margin-bottom:14px; letter-spacing:-.02em; }
   h3 { font-size:15px; font-weight:700; color:var(--ink); margin-bottom:8px; margin-top:22px; }
   p  { color:var(--ink-muted); margin-bottom:12px; font-size:14.5px; }
 
@@ -518,7 +493,7 @@
   section[id] { scroll-margin-top: 0; }
 
   /* lesson block */
-  .lesson-block { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; margin-bottom:24px; border-left:3px solid var(--azure,#4DA3FF); box-shadow:0 1px 4px rgba(10,15,29,0.06); }
+  .lesson-block { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; margin-bottom:24px; border-left:3px solid var(--graphite,#2A2F3E); box-shadow:0 1px 4px rgba(10,15,29,0.06); }
   .lesson-header { padding:20px 24px 18px; border-bottom:1px solid var(--border); display:flex; align-items:flex-start; gap:16px; }
   .lesson-num { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800; flex-shrink:0; color:#fff; }
   .ln-purple { background:linear-gradient(135deg,#0A1B50,#4DA3FF); }
@@ -641,6 +616,10 @@
   .prompt-hl { color:#FFD080; }
 
   /* footer */
+    45%      { transform: translateY(-12px) rotate(1.2deg); }
+    70%      { transform: translateY(-6px) rotate(-0.8deg); }
+  }
+
   .guide-footer { background:#0A0D18; color:rgba(255,255,255,.3); text-align:center; padding:24px; font-size:11.5px; }
 
   /* page transition */
@@ -656,56 +635,19 @@
 <div id="view-cover" class="view active">
   <div class="cover-bg"></div>
   <div class="cover-inner">
-
-    <div class="topbar">
+  <div class="topbar">
       <div class="topbar-label">ААИ ЮФУ · Учебные материалы</div>
       <div class="topbar-badge"><div class="dot"></div>Программа повышения квалификации</div>
     </div>
     <div class="instructor-line">
       Руководитель курса — <a href="https://t.me/darkbluekuleshov" target="_blank" rel="noopener">Кулешов Александр Алексеевич</a>
     </div>
-
-    <!-- Topographic SVG decoration — фирменная графика AI2ARCH -->
-  <div class="topo-deco" aria-hidden="true">
-    <svg viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-      <g opacity="0.16" stroke="#4DA3FF" stroke-width="0.7" fill="none">
-        <ellipse cx="210" cy="160" rx="200" ry="140"/>
-        <ellipse cx="210" cy="160" rx="175" ry="118"/>
-        <ellipse cx="210" cy="160" rx="148" ry="97"/>
-        <ellipse cx="210" cy="160" rx="120" ry="77"/>
-        <ellipse cx="210" cy="160" rx="92" ry="57"/>
-        <ellipse cx="210" cy="160" rx="65" ry="38"/>
-        <ellipse cx="210" cy="160" rx="38" ry="20"/>
-      </g>
-      <g opacity="0.07" stroke="#7BBFFF" stroke-width="0.5" fill="none">
-        <ellipse cx="330" cy="60" rx="90" ry="55"/>
-        <ellipse cx="330" cy="60" rx="68" ry="40"/>
-        <ellipse cx="330" cy="60" rx="46" ry="26"/>
-        <ellipse cx="330" cy="60" rx="24" ry="13"/>
-      </g>
-      <!-- Network nodes -->
-      <g opacity="0.55">
-        <circle cx="210" cy="160" r="3.5" fill="#4DA3FF"/>
-        <circle cx="210" cy="160" r="7" fill="none" stroke="#4DA3FF" stroke-width="0.8" opacity="0.5"/>
-        <circle cx="330" cy="60" r="2.5" fill="#7BBFFF"/>
-        <circle cx="100" cy="250" r="2" fill="#7BBFFF" opacity="0.7"/>
-        <circle cx="360" cy="240" r="1.8" fill="#7BBFFF" opacity="0.5"/>
-        <circle cx="80" cy="90" r="1.5" fill="#7BBFFF" opacity="0.4"/>
-        <line x1="210" y1="160" x2="330" y2="60" stroke="#4DA3FF" stroke-width="0.6" opacity="0.3"/>
-        <line x1="210" y1="160" x2="100" y2="250" stroke="#4DA3FF" stroke-width="0.6" opacity="0.25"/>
-        <line x1="210" y1="160" x2="360" y2="240" stroke="#4DA3FF" stroke-width="0.5" opacity="0.2"/>
-        <line x1="210" y1="160" x2="80" y2="90" stroke="#4DA3FF" stroke-width="0.5" opacity="0.2"/>
-        <line x1="330" y1="60" x2="80" y2="90" stroke="#7BBFFF" stroke-width="0.4" opacity="0.15"/>
-      </g>
-    </svg>
-  </div>
-
   <div class="hero">
       <div class="program-tag">Современные инструменты проектного анализа</div>
       <h1><em>ИИ</em> в архитектуре —</h1>
       <div class="h1-sub">Новый уровень<br>проектного анализа</div>
 
-      <!-- Brand tagline — SYSTEM · ANALYSIS · STRATEGY · RESEARCH -->
+      <!-- Brand tagline — СИСТЕМА · СТРАТЕГИЯ · АНАЛИТИКА · ИССЛЕДОВАНИЯ -->
       <div class="brand-tagline">ИСКУССТВЕННЫЙ ИНТЕЛЛЕКТ · АРХИТЕКТУРА · ТЕРРИТОРИИ</div>
 
       <button class="cta-btn cta-btn-top" onclick="openGuide('top')">
@@ -773,7 +715,7 @@
 
     <div class="arch-corner"></div>
     <div class="cover-bottom">
-      <div class="strip-label">«Современные инструменты проектного анализа: ИИ и мобильные сервисы в работе с архитектурной средой» · 2025</div>
+      <div class="strip-label">«Современные инструменты проектного анализа: ИИ и мобильные сервисы в работе с архитектурной средой» · 2026</div>
       <div class="strip-label">Академия архитектуры и искусств ЮФУ · Ростов-на-Дону</div>
       <div class="strip-tags">
         <span class="ttag ttag-blue">QGIS</span>
@@ -1428,15 +1370,15 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
         <h3>Используя пример, составить промпт для создания:</h3>
         <div class="card-grid" style="grid-template-columns:repeat(3,1fr);margin-top:12px;">
           <div class="card" style="text-align:center;padding:16px 12px;">
-            <div style="font-family:var(--mono);font-size:22px;font-weight:800;color:var(--azure,#4DA3FF);margin-bottom:6px;">1</div>
+            <div style="font-family:var(--mono);font-size:22px;font-weight:800;color:var(--graphite,#2A2F3E);margin-bottom:6px;">1</div>
             <div style="font-size:13px;font-weight:700;color:var(--ink);">Концепции проекта</div>
           </div>
           <div class="card" style="text-align:center;padding:16px 12px;">
-            <div style="font-family:var(--mono);font-size:22px;font-weight:800;color:var(--azure,#4DA3FF);margin-bottom:6px;">2</div>
+            <div style="font-family:var(--mono);font-size:22px;font-weight:800;color:var(--graphite,#2A2F3E);margin-bottom:6px;">2</div>
             <div style="font-size:13px;font-weight:700;color:var(--ink);">Генерального плана проекта</div>
           </div>
           <div class="card" style="text-align:center;padding:16px 12px;">
-            <div style="font-family:var(--mono);font-size:22px;font-weight:800;color:var(--azure,#4DA3FF);margin-bottom:6px;">3</div>
+            <div style="font-family:var(--mono);font-size:22px;font-weight:800;color:var(--graphite,#2A2F3E);margin-bottom:6px;">3</div>
             <div style="font-size:13px;font-weight:700;color:var(--ink);">2–3 визуализаций проекта</div>
           </div>
         </div>
@@ -1762,7 +1704,19 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
   </div>
 
   <div class="guide-footer">
-    Курс дополнительного образования · ИИ в архитектуре · ААИ ЮФУ · Ростов-на-Дону
+    <svg width="40" height="40" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:10px;opacity:0.35;">
+      <path d="M140,44 C162,40 184,52 194,70 C210,68 226,78 232,96 C242,118 230,142 212,150 C214,170 202,188 182,194 C170,210 152,216 136,210 C120,218 100,212 90,198 C70,194 56,178 58,158 C38,152 28,130 36,108 C40,90 56,80 72,80 C78,62 98,46 118,44 C126,42 134,42 140,44Z"
+        fill="rgba(77,163,255,0.1)" stroke="#4DA3FF" stroke-width="4"/>
+      <ellipse cx="140" cy="96" rx="20" ry="18" fill="#050A14" stroke="#4DA3FF" stroke-width="3.5"/>
+      <ellipse cx="102" cy="166" rx="18" ry="17" transform="rotate(-15,102,166)" fill="#050A14" stroke="#4DA3FF" stroke-width="3.5"/>
+      <ellipse cx="182" cy="160" rx="18" ry="17" transform="rotate(15,182,160)" fill="#050A14" stroke="#4DA3FF" stroke-width="3.5"/>
+    </svg>
+    <div style="font-size:13px;color:rgba(255,255,255,.55);font-weight:500;margin-bottom:8px;letter-spacing:.01em;">
+      Мы объединяем архитектуру, данные и искусственный интеллект,<br>чтобы проектировать будущее городов и территорий.
+    </div>
+    <div style="font-size:10.5px;color:rgba(255,255,255,.25);letter-spacing:.08em;text-transform:uppercase;">
+      AI2ARCH · Курс дополнительного образования · ААИ ЮФУ · Ростов-на-Дону
+    </div>
   </div>
 
 </div><!-- /view-guide -->
