@@ -816,7 +816,6 @@
       <span class="pill" data-target="schemes" onclick="scrollToSection('schemes')">Схемы для ИИ</span>
       <span class="pill" data-target="export" onclick="scrollToSection('export')">Экспорт</span>
       <span class="pill" data-target="aicomp" onclick="scrollToSection('aicomp')">Платформы ИИ</span>
-      <span class="pill" data-target="prompts" onclick="scrollToSection('prompts')">Промты</span>
       <span class="pill" data-target="workflow" onclick="scrollToSection('workflow')">Воркфлоу</span>
     </div>
   </div>
@@ -1201,9 +1200,151 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       </div>
     </section>
 
+
+
     <div class="sec-divider"></div>
 
-    <!-- PROMPTS -->
+    <!-- WORKFLOW -->
+    <section id="workflow">
+      <div class="sec-label">07</div>
+      <h2>Полный воркфлоу: от данных до ИИ-анализа</h2>
+      <div class="card card-warn" style="margin-bottom:20px;">
+        <h3>🗂️ Подготовка занимает 20% времени, остальное — QGIS работает за вас</h3>
+        <p>Один правильно настроенный стиль → экспорт любых фрагментов за секунды.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Сбор данных</h3><p>QuickOSM → здания, дороги, зелень по bbox. Кадастр из pkk.rosreestr.ru. Спутниковая подложка через XYZ Tiles.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Подготовка стилей</h3><p>Символика слоёв: минималистичные заливки, чёткие обводки. Сохранить стиль (.qml) — применять к любому проекту.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Создание компоновщиков</h3><p>По компоновщику на каждый тип схемы. Зафиксировать масштаб. Настроить один раз — использовать многократно.</p></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Экспорт PNG 300 DPI</h3><p>Макет → Экспорт как изображение. Имена файлов с кодом: zone_01.png, transport_01.png.</p></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Загрузка в ИИ + промт</h3><p>Прикрепить PNG, вставить промт с легендой и задачами. Для серий — загружать последовательно.</p></div></div>
+        <div class="step"><div class="step-num">6</div><div class="step-body"><h3>Итерация по замечаниям</h3><p>Выделить ключевые выводы. Вернуться в QGIS, скорректировать схему, экспортировать v2. Повторить.</p></div></div>
+      </div>
+      <div class="card card-success">
+        <h3>✅ Итог: что даёт связка QGIS + ИИ</h3>
+        <p>Точная геоподоснова + Vision-модели = быстрая предпроектная аналитика, обоснование решений и генерация текстовых описаний для ПЗЗ, ТЗ и презентаций — без ручного описания каждого чертежа.</p>
+      </div>
+    </section>
+
+  </div><!-- /guide-inner -->
+
+  </div><!-- /panel-qgis -->
+
+  <!-- ════════════ MODULE PANEL: NEURAL (Модуль 2) ════════════ -->
+  <div class="module-panel" id="panel-neural">
+    <div class="guide-inner" style="padding-top:40px;">
+
+      <div class="author-strip">
+        <div class="av">КА</div>
+        <div>Автор раздела: <strong>Кулешов Александр Алексеевич</strong></div>
+      </div>
+
+      <div class="sec-label purple">Модуль 2</div>
+      <h2>Нейросети — основы перед началом модуля</h2>
+      <p>Перед тем как переходить к практической работе с генерацией изображений и текстов, важно понимать базовые принципы устройства современных нейросетей и различия между основными типами моделей, которые встретятся в курсе.</p>
+
+      <h3>Какие нейросети используются в курсе</h3>
+      <div class="ai-grid" style="grid-template-columns:repeat(3,1fr);">
+        <div class="ai-card">
+          <div class="ai-name">Текстовые модели (LLM)</div>
+          <span class="ai-badge" style="background:#E8F4FD;color:#1A73E8;">ChatGPT · Claude · Gemini</span>
+          <ul>
+            <li>Работают с текстом, кодом, документами</li>
+            <li>Понимают и генерируют развёрнутые ответы</li>
+            <li>Анализируют изображения (vision)</li>
+            <li>Основа для промтинга в курсе</li>
+          </ul>
+        </div>
+        <div class="ai-card">
+          <div class="ai-name">Генеративные изображения</div>
+          <span class="ai-badge" style="background:#F0FDF4;color:#16A34A;">ChatGPT · Gemini</span>
+          <ul>
+            <li>Создают изображения по текстовому промту</li>
+            <li>Работают с референсами и стилями</li>
+            <li>Применяются для визуализации идей</li>
+            <li>Основа Модуля 3</li>
+          </ul>
+        </div>
+        <div class="ai-card">
+          <div class="ai-name">Локально доступные сервисы</div>
+          <span class="ai-badge" style="background:#FFF3E0;color:#F57C00;">Алиса ИИ · Arena AI · DeepSeek</span>
+          <ul>
+            <li>Доступны без VPN на территории РФ</li>
+            <li>Хорошо работают с русским языком</li>
+            <li>Интеграция с отечественными сервисами</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Ключевые понятия</h3>
+      <ul class="checklist">
+        <li><div class="chk">✓</div> Промт — текстовый запрос, формирующий результат работы нейросети</li>
+        <li><div class="chk">✓</div> Токены — единицы текста, которыми оперирует модель при обработке запроса</li>
+        <li><div class="chk">✓</div> Контекстное окно — объём информации, который модель «помнит» в рамках диалога</li>
+        <li><div class="chk">✓</div> Референс — изображение-образец, на основе которого генерируется новый результат</li>
+        <li><div class="chk">✓</div> Галлюцинации — ошибочные или придуманные ответы модели, требующие проверки</li>
+        <li><div class="chk">✓</div> Мультимодальность — способность модели работать одновременно с текстом, изображениями и документами</li>
+      </ul>
+
+      <div class="tip">
+        <div class="tip-i">💡</div>
+        <div>В Модуле 2 разбирается, как выбрать подходящую нейросеть под конкретную архитектурную задачу — анализ, текст или визуализация — и как корректно формулировать запрос для получения предсказуемого результата.</div>
+      </div>
+
+      <div class="card card-accent">
+        <div class="card-icon">🧭</div>
+        <h3>Что дальше</h3>
+        <p>После знакомства с основами курс переходит к Модулю 3 — практической генерации идей и визуализации, где эти модели применяются в реальных архитектурных задачах.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════ MODULE PANEL: GENVIZ (Модуль 3) ════════════ -->
+  <div class="module-panel" id="panel-genviz">
+    <div class="guide-inner" style="padding-top:40px;">
+
+      <div class="author-strip">
+        <div class="av" style="background:linear-gradient(135deg, var(--green) 0%, #5DDDB0 100%);">ПП</div>
+        <div>Авторы раздела: <strong>Петренко Екатерина Сергеевна</strong> и <strong>Попова Елизавета Андреевна</strong></div>
+      </div>
+
+      <div class="sec-label green">Модуль 3</div>
+      <h2>Генерация идей и визуализация</h2>
+      <p>Модуль посвящён практической работе с нейросетями для визуализации архитектурных решений: от подготовки исходного драфта в Photoshop и формулировки промта до отбора результата и финальной постобработки.</p>
+
+      <h3>Структура модуля</h3>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Промтинг для визуализации</h3><p>Принципы составления запросов для генеративных моделей: описание объекта, стиля, освещения, ракурса, материалов.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Подготовка драфта в Photoshop</h3><p>Сборка исходника для нейросети: скетч композиции, коллаж из референсов, маски зон контроля, корректная перспектива.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Отбор и доработка драфта</h3><p>Выбор наиболее удачного варианта, повторная генерация деталей, работа с masking и inpainting при необходимости.</p></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Постобработка в Photoshop</h3><p>Цветокоррекция, ретушь, добавление контекста (люди, окружение, растительность), финальная компоновка изображения.</p></div></div>
+      </div>
+
+      <h3>Принципы хорошего промта для визуализации</h3>
+      <ul class="checklist">
+        <li><div class="chk">✓</div> Чёткое описание типа объекта и архитектурного стиля</li>
+        <li><div class="chk">✓</div> Указание ракурса и масштаба (вид с улицы, аэросъёмка, интерьер)</li>
+        <li><div class="chk">✓</div> Описание материалов и текстур (бетон, дерево, стекло, металл)</li>
+        <li><div class="chk">✓</div> Условия освещения и время суток</li>
+        <li><div class="chk">✓</div> Референсные стили или известные архитектурные аналоги</li>
+        <li><div class="chk">✓</div> Негативные промты — что нужно исключить из результата</li>
+      </ul>
+
+      <div class="prompt-box">
+        <div class="prompt-hdr">📋 Пример промта для визуализации</div>
+        <div class="prompt-body">
+Современный жилой дом, минималистичная архитектура, фасад из бетона и дерева,<br>
+большие панорамные окна, вид с улицы в вечернее время, тёплое освещение окон,<br>
+ландшафтное озеленение на переднем плане, фотореалистичный рендер,<br>
+<span class="prompt-hl">--no</span> искажённые пропорции, лишние объекты на фасаде
+        </div>
+      </div>
+
+
+    <div class="sec-divider"></div>
+
+    <!-- PROMPTS (перенесено из Модуля 1) -->
     <section id="prompts">
       <div class="sec-label">06</div>
       <h2>Промтинг для архитектора — основы и практика</h2>
@@ -1450,147 +1591,6 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
         <div><strong>Главное правило:</strong> Нейросеть не умеет читать мысли. Чем подробнее и понятнее вы объясните задачу, тем качественнее получите результат.</div>
       </div>
 
-    </section>
-
-    <div class="sec-divider"></div>
-
-    <!-- WORKFLOW -->
-    <section id="workflow">
-      <div class="sec-label">07</div>
-      <h2>Полный воркфлоу: от данных до ИИ-анализа</h2>
-      <div class="card card-warn" style="margin-bottom:20px;">
-        <h3>🗂️ Подготовка занимает 20% времени, остальное — QGIS работает за вас</h3>
-        <p>Один правильно настроенный стиль → экспорт любых фрагментов за секунды.</p>
-      </div>
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Сбор данных</h3><p>QuickOSM → здания, дороги, зелень по bbox. Кадастр из pkk.rosreestr.ru. Спутниковая подложка через XYZ Tiles.</p></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Подготовка стилей</h3><p>Символика слоёв: минималистичные заливки, чёткие обводки. Сохранить стиль (.qml) — применять к любому проекту.</p></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Создание компоновщиков</h3><p>По компоновщику на каждый тип схемы. Зафиксировать масштаб. Настроить один раз — использовать многократно.</p></div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Экспорт PNG 300 DPI</h3><p>Макет → Экспорт как изображение. Имена файлов с кодом: zone_01.png, transport_01.png.</p></div></div>
-        <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Загрузка в ИИ + промт</h3><p>Прикрепить PNG, вставить промт с легендой и задачами. Для серий — загружать последовательно.</p></div></div>
-        <div class="step"><div class="step-num">6</div><div class="step-body"><h3>Итерация по замечаниям</h3><p>Выделить ключевые выводы. Вернуться в QGIS, скорректировать схему, экспортировать v2. Повторить.</p></div></div>
-      </div>
-      <div class="card card-success">
-        <h3>✅ Итог: что даёт связка QGIS + ИИ</h3>
-        <p>Точная геоподоснова + Vision-модели = быстрая предпроектная аналитика, обоснование решений и генерация текстовых описаний для ПЗЗ, ТЗ и презентаций — без ручного описания каждого чертежа.</p>
-      </div>
-    </section>
-
-  </div><!-- /guide-inner -->
-
-  </div><!-- /panel-qgis -->
-
-  <!-- ════════════ MODULE PANEL: NEURAL (Модуль 2) ════════════ -->
-  <div class="module-panel" id="panel-neural">
-    <div class="guide-inner" style="padding-top:40px;">
-
-      <div class="author-strip">
-        <div class="av">КА</div>
-        <div>Автор раздела: <strong>Кулешов Александр Алексеевич</strong></div>
-      </div>
-
-      <div class="sec-label purple">Модуль 2</div>
-      <h2>Нейросети — основы перед началом модуля</h2>
-      <p>Перед тем как переходить к практической работе с генерацией изображений и текстов, важно понимать базовые принципы устройства современных нейросетей и различия между основными типами моделей, которые встретятся в курсе.</p>
-
-      <h3>Какие нейросети используются в курсе</h3>
-      <div class="ai-grid" style="grid-template-columns:repeat(3,1fr);">
-        <div class="ai-card">
-          <div class="ai-name">Текстовые модели (LLM)</div>
-          <span class="ai-badge" style="background:#E8F4FD;color:#1A73E8;">ChatGPT · Claude · Gemini</span>
-          <ul>
-            <li>Работают с текстом, кодом, документами</li>
-            <li>Понимают и генерируют развёрнутые ответы</li>
-            <li>Анализируют изображения (vision)</li>
-            <li>Основа для промтинга в курсе</li>
-          </ul>
-        </div>
-        <div class="ai-card">
-          <div class="ai-name">Генеративные изображения</div>
-          <span class="ai-badge" style="background:#F0FDF4;color:#16A34A;">ChatGPT · Gemini</span>
-          <ul>
-            <li>Создают изображения по текстовому промту</li>
-            <li>Работают с референсами и стилями</li>
-            <li>Применяются для визуализации идей</li>
-            <li>Основа Модуля 3</li>
-          </ul>
-        </div>
-        <div class="ai-card">
-          <div class="ai-name">Локально доступные сервисы</div>
-          <span class="ai-badge" style="background:#FFF3E0;color:#F57C00;">Алиса ИИ · Arena AI · DeepSeek</span>
-          <ul>
-            <li>Доступны без VPN на территории РФ</li>
-            <li>Хорошо работают с русским языком</li>
-            <li>Интеграция с отечественными сервисами</li>
-          </ul>
-        </div>
-      </div>
-
-      <h3>Ключевые понятия</h3>
-      <ul class="checklist">
-        <li><div class="chk">✓</div> Промт — текстовый запрос, формирующий результат работы нейросети</li>
-        <li><div class="chk">✓</div> Токены — единицы текста, которыми оперирует модель при обработке запроса</li>
-        <li><div class="chk">✓</div> Контекстное окно — объём информации, который модель «помнит» в рамках диалога</li>
-        <li><div class="chk">✓</div> Референс — изображение-образец, на основе которого генерируется новый результат</li>
-        <li><div class="chk">✓</div> Галлюцинации — ошибочные или придуманные ответы модели, требующие проверки</li>
-        <li><div class="chk">✓</div> Мультимодальность — способность модели работать одновременно с текстом, изображениями и документами</li>
-      </ul>
-
-      <div class="tip">
-        <div class="tip-i">💡</div>
-        <div>В Модуле 2 разбирается, как выбрать подходящую нейросеть под конкретную архитектурную задачу — анализ, текст или визуализация — и как корректно формулировать запрос для получения предсказуемого результата.</div>
-      </div>
-
-      <div class="card card-accent">
-        <div class="card-icon">🧭</div>
-        <h3>Что дальше</h3>
-        <p>После знакомства с основами курс переходит к Модулю 3 — практической генерации идей и визуализации, где эти модели применяются в реальных архитектурных задачах.</p>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ════════════ MODULE PANEL: GENVIZ (Модуль 3) ════════════ -->
-  <div class="module-panel" id="panel-genviz">
-    <div class="guide-inner" style="padding-top:40px;">
-
-      <div class="author-strip">
-        <div class="av" style="background:linear-gradient(135deg, var(--green) 0%, #5DDDB0 100%);">ПП</div>
-        <div>Авторы раздела: <strong>Петренко Екатерина Сергеевна</strong> и <strong>Попова Елизавета Андреевна</strong></div>
-      </div>
-
-      <div class="sec-label green">Модуль 3</div>
-      <h2>Генерация идей и визуализация</h2>
-      <p>Модуль посвящён практической работе с нейросетями для визуализации архитектурных решений: от подготовки исходного драфта в Photoshop и формулировки промта до отбора результата и финальной постобработки.</p>
-
-      <h3>Структура модуля</h3>
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Промтинг для визуализации</h3><p>Принципы составления запросов для генеративных моделей: описание объекта, стиля, освещения, ракурса, материалов.</p></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Подготовка драфта в Photoshop</h3><p>Сборка исходника для нейросети: скетч композиции, коллаж из референсов, маски зон контроля, корректная перспектива.</p></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Отбор и доработка драфта</h3><p>Выбор наиболее удачного варианта, повторная генерация деталей, работа с masking и inpainting при необходимости.</p></div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Постобработка в Photoshop</h3><p>Цветокоррекция, ретушь, добавление контекста (люди, окружение, растительность), финальная компоновка изображения.</p></div></div>
-      </div>
-
-      <h3>Принципы хорошего промта для визуализации</h3>
-      <ul class="checklist">
-        <li><div class="chk">✓</div> Чёткое описание типа объекта и архитектурного стиля</li>
-        <li><div class="chk">✓</div> Указание ракурса и масштаба (вид с улицы, аэросъёмка, интерьер)</li>
-        <li><div class="chk">✓</div> Описание материалов и текстур (бетон, дерево, стекло, металл)</li>
-        <li><div class="chk">✓</div> Условия освещения и время суток</li>
-        <li><div class="chk">✓</div> Референсные стили или известные архитектурные аналоги</li>
-        <li><div class="chk">✓</div> Негативные промты — что нужно исключить из результата</li>
-      </ul>
-
-      <div class="prompt-box">
-        <div class="prompt-hdr">📋 Пример промта для визуализации</div>
-        <div class="prompt-body">
-Современный жилой дом, минималистичная архитектура, фасад из бетона и дерева,<br>
-большие панорамные окна, вид с улицы в вечернее время, тёплое освещение окон,<br>
-ландшафтное озеленение на переднем плане, фотореалистичный рендер,<br>
-<span class="prompt-hl">--no</span> искажённые пропорции, лишние объекты на фасаде
-        </div>
-      </div>
-
       <h3>Photoshop до генерации — подготовка драфта для нейросети</h3>
       <p>Photoshop работает не только после генерации: качественный исходник, собранный вручную, значительно повышает точность и управляемость результата на выходе из нейросети.</p>
       <div class="card-grid">
@@ -1654,6 +1654,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
         <div>Результат работы этого модуля — готовое визуализированное изображение — становится исходным материалом для Модуля 4, где собирается итоговая презентация проекта.</div>
       </div>
 
+    </section>
     </div>
   </div>
 
