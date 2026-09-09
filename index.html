@@ -16,7 +16,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior: smooth; overflow-x: hidden; }
+  html { scroll-behavior: smooth; overflow-x: clip; }
 
   :root {
     /* AI2ARCH Brand Guidelines v2 */
@@ -57,7 +57,7 @@
     --sans: 'Manrope', sans-serif;
   }
 
-  body { font-family:var(--sans); overflow-x:hidden; width:100%; }
+  body { font-family:var(--sans); width:100%; }
   a { color:var(--accent); text-decoration:none; }
   a:hover { text-decoration:underline; }
 
@@ -676,10 +676,10 @@
   .tip { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:12px 15px; font-size:13px; color:var(--ink-muted); display:flex; gap:9px; align-items:flex-start; margin:14px 0; }
   .tip-i { font-size:15px; flex-shrink:0; }
 
-  .video-gate { border:1px solid var(--border); border-radius:10px; overflow:hidden; margin:16px 0; background:var(--surface2); }
-  .video-gate-locked { padding:15px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
-  .video-gate-icon { font-size:17px; flex-shrink:0; opacity:.55; }
-  .video-gate-text { flex:1 1 180px; font-size:12.5px; color:var(--ink-faint); }
+  .video-gate { border:1px solid var(--border); border-left:3px solid #D64545; border-radius:10px; overflow:hidden; margin:16px 0; background:var(--surface2); }
+  .video-gate-locked { padding:14px 18px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .video-gate-badge { display:inline-flex; align-items:center; gap:5px; background:#FDECEC; color:#C0392B; font-size:10.5px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; padding:5px 10px; border-radius:6px; flex-shrink:0; white-space:nowrap; }
+  .video-gate-text { flex:1 1 140px; font-size:12.5px; color:var(--ink-faint); }
   .video-gate-form { display:flex; gap:8px; flex-shrink:0; }
   .video-gate-form input { background:#fff; border:1px solid var(--border); border-radius:7px; padding:8px 12px; font-size:13px; width:130px; color:var(--ink); }
   .video-gate-form input::placeholder { color:var(--ink-faint); }
@@ -1012,8 +1012,8 @@
 
         <div class="video-gate" data-code="qgis1">
           <div class="video-gate-locked">
-            <div class="video-gate-icon">🔒</div>
-            <div class="video-gate-text">Видео этого урока пока не открыто</div>
+            <span class="video-gate-badge">🔒 Видео — по коду</span>
+            <div class="video-gate-text">Пока не открыто</div>
             <div class="video-gate-form">
               <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
               <button onclick="unlockVideo(this)">Открыть</button>
@@ -1106,8 +1106,8 @@
 
         <div class="video-gate" data-code="qgis2">
           <div class="video-gate-locked">
-            <div class="video-gate-icon">🔒</div>
-            <div class="video-gate-text">Видео этого урока пока не открыто</div>
+            <span class="video-gate-badge">🔒 Видео — по коду</span>
+            <div class="video-gate-text">Пока не открыто</div>
             <div class="video-gate-form">
               <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
               <button onclick="unlockVideo(this)">Открыть</button>
@@ -1181,8 +1181,8 @@
 
         <div class="video-gate" data-code="qgis3">
           <div class="video-gate-locked">
-            <div class="video-gate-icon">🔒</div>
-            <div class="video-gate-text">Видео этого урока пока не открыто</div>
+            <span class="video-gate-badge">🔒 Видео — по коду</span>
+            <div class="video-gate-text">Пока не открыто</div>
             <div class="video-gate-form">
               <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
               <button onclick="unlockVideo(this)">Открыть</button>
@@ -1584,8 +1584,8 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
       <div class="video-gate" data-code="ai1">
         <div class="video-gate-locked">
-          <div class="video-gate-icon">🔒</div>
-          <div class="video-gate-text">Видео этого урока пока не открыто</div>
+          <span class="video-gate-badge">🔒 Видео — по коду</span>
+          <div class="video-gate-text">Пока не открыто</div>
           <div class="video-gate-form">
             <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
             <button onclick="unlockVideo(this)">Открыть</button>
@@ -1642,8 +1642,8 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
       <div class="video-gate" data-code="ai2">
         <div class="video-gate-locked">
-          <div class="video-gate-icon">🔒</div>
-          <div class="video-gate-text">Видео этого урока пока не открыто</div>
+          <span class="video-gate-badge">🔒 Видео — по коду</span>
+          <div class="video-gate-text">Пока не открыто</div>
           <div class="video-gate-form">
             <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
             <button onclick="unlockVideo(this)">Открыть</button>
@@ -1859,8 +1859,8 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
         <div class="video-gate" data-code="psh1">
           <div class="video-gate-locked">
-            <div class="video-gate-icon">🔒</div>
-            <div class="video-gate-text">Видео этого урока пока не открыто</div>
+            <span class="video-gate-badge">🔒 Видео — по коду</span>
+            <div class="video-gate-text">Пока не открыто</div>
             <div class="video-gate-form">
               <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
               <button onclick="unlockVideo(this)">Открыть</button>
