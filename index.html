@@ -1451,6 +1451,20 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
   <!-- ════════════ MODULE PANEL: GENVIZ (Модуль 3) ════════════ -->
   <div class="module-panel" id="panel-genviz">
+
+  <!-- sub-nav -->
+  <div class="nav-wrap" id="genvizSubNav" style="top:0;">
+    <div class="nav-pills">
+      <span class="pill" data-target="genviz-intro" onclick="scrollToSection('genviz-intro')">Обзор модуля</span>
+      <span class="pill" data-target="prompts" onclick="scrollToSection('prompts')">Основы нейросетей</span>
+      <span class="pill" data-target="prompt-formula" onclick="scrollToSection('prompt-formula')">Формула промпта</span>
+      <span class="pill" data-target="example-rostov" onclick="scrollToSection('example-rostov')">Пример: Ростов</span>
+      <span class="pill" data-target="example-elista" onclick="scrollToSection('example-elista')">Пример: Элиста</span>
+      <span class="pill" data-target="prompt-mistakes" onclick="scrollToSection('prompt-mistakes')">Ошибки</span>
+      <span class="pill" data-target="photoshop-draft" onclick="scrollToSection('photoshop-draft')">Photoshop</span>
+    </div>
+  </div>
+
     <div class="guide-inner" style="padding-top:40px;">
 
       <div class="author-strip">
@@ -1459,7 +1473,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       </div>
 
       <div class="sec-label green">Модуль 3</div>
-      <h2>Генерация идей и визуализация</h2>
+      <h2 id="genviz-intro">Генерация идей и визуализация</h2>
       <p>Модуль посвящён практической работе с нейросетями для визуализации архитектурных решений: от подготовки исходного драфта в Photoshop и формулировки промта до отбора результата и финальной постобработки.</p>
 
       <h3>Структура модуля</h3>
@@ -1581,7 +1595,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       </div>
 
       <!-- ФОРМУЛА ПРОМТА -->
-      <h3>Что такое промпт?</h3>
+      <h3 id="prompt-formula">Что такое промпт?</h3>
       <p>Промпт — это запрос или инструкция, которую мы пишем нейросети. <strong>Чем лучше написан промпт — тем лучше получится результат.</strong></p>
 
       <h3>Формула хорошего промпта: РОЛЬ + КОНТЕКСТ + ЗАДАЧА + ПРИМЕРЫ + ФОРМАТ + ТОН</h3>
@@ -1639,7 +1653,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       </div>
 
       <!-- ПРИМЕР ПРОМТА: ДЕТСКАЯ ПЛОЩАДКА НАБЕРЕЖНАЯ -->
-      <h3>Пример промпта по формуле — детская площадка на набережной</h3>
+      <h3 id="example-rostov">Пример промпта по формуле — детская площадка на набережной</h3>
       <p>Тема: концепция детской площадки на набережной в Ростове-на-Дону</p>
 
       <div style="overflow-x:auto;margin-bottom:20px;">
@@ -1707,7 +1721,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       </div>
 
       <!-- НЕОБХОДИМЫЕ ЭЛЕМЕНТЫ ПРОМПТА (Элиста) -->
-      <h3>Пример задания: детская площадка в Элисте</h3>
+      <h3 id="example-elista">Пример задания: детская площадка в Элисте</h3>
       <div class="card-grid">
         <div class="card card-accent">
           <h3>РОЛЬ</h3>
@@ -1760,7 +1774,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       <div class="sec-divider"></div>
 
       <!-- ОСНОВНЫЕ ОШИБКИ -->
-      <h3>Основные ошибки в промтинге</h3>
+      <h3 id="prompt-mistakes">Основные ошибки в промтинге</h3>
       <div class="card-grid">
         <div class="card" style="border-left:3px solid #E53E3E;">
           <h3 style="color:#E53E3E;">✗ Слишком короткий запрос</h3>
@@ -1785,7 +1799,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
         <div><strong>Главное правило:</strong> Нейросеть не умеет читать мысли. Чем подробнее и понятнее вы объясните задачу, тем качественнее получите результат.</div>
       </div>
 
-      <h3>Photoshop до генерации — подготовка драфта для нейросети</h3>
+      <h3 id="photoshop-draft">Photoshop до генерации — подготовка драфта для нейросети</h3>
       <p>Photoshop работает не только после генерации: качественный исходник, собранный вручную, значительно повышает точность и управляемость результата на выходе из нейросети.</p>
       <div class="card-grid">
         <div class="card card-accent"><div class="card-icon">✏️</div><h3>Скетч-основа композиции</h3><p>Быстрый набросок объёмов и расположения объекта на участке — задаёт нейросети правильную геометрию и пропорции сцены.</p></div>
@@ -1934,13 +1948,12 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
   function layoutStickyBars() {
     const backBar = document.querySelector('.back-bar');
     const moduleTabsWrap = document.getElementById('moduleTabsWrap');
-    const qgisSubNav = document.getElementById('qgisSubNav');
     const h1 = backBar ? backBar.offsetHeight : 0;
     if (moduleTabsWrap) moduleTabsWrap.style.top = h1 + 'px';
-    if (qgisSubNav) {
-      const h2 = moduleTabsWrap ? moduleTabsWrap.offsetHeight : 0;
-      qgisSubNav.style.top = (h1 + h2) + 'px';
-    }
+    const h2 = moduleTabsWrap ? moduleTabsWrap.offsetHeight : 0;
+    document.querySelectorAll('.module-panel .nav-wrap').forEach(function(nw) {
+      nw.style.top = (h1 + h2) + 'px';
+    });
   }
 
   function getOffset() {
@@ -2034,7 +2047,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
   // ─── Scroll-spy: highlight nav pill for the section currently in view ───
   let scrollSpyObserver = null;
-  const spySectionIds = ['lesson1','lesson2','lesson3','overview','data','schemes','export','aicomp','prompts','workflow'];
+  const spySectionIds = ['lesson1','lesson2','lesson3','overview','data','schemes','export','aicomp','prompts','workflow','genviz-intro','prompt-formula','example-rostov','example-elista','prompt-mistakes','photoshop-draft'];
 
   function setActivePill(id) {
     document.querySelectorAll('.nav-pills .pill').forEach(p => p.classList.remove('active-scroll'));
@@ -2048,8 +2061,9 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       scrollSpyObserver.disconnect();
       scrollSpyObserver = null;
     }
-    const panel = document.getElementById('panel-qgis');
-    if (!panel || !panel.classList.contains('active')) {
+    const panel = document.querySelector('.module-panel.active');
+    const hasSubNav = panel ? panel.querySelector('.nav-wrap .nav-pills') : null;
+    if (!panel || !hasSubNav) {
       setActivePill(null);
       return;
     }
@@ -2074,7 +2088,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
     spySectionIds.forEach(id => {
       const el = document.getElementById(id);
-      if (el) scrollSpyObserver.observe(el);
+      if (el && panel.contains(el)) scrollSpyObserver.observe(el);
     });
   }
 
