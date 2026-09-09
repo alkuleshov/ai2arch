@@ -83,6 +83,19 @@
   .cover-bg::before { content: none; }
   .cover-bg::after  { content: none; }
 
+  .brand-mark {
+    display: none;
+    position: absolute; z-index: 0;
+    top: -40px; right: -60px;
+    width: 340px; height: auto;
+    opacity: .45;
+    pointer-events: none;
+    filter: drop-shadow(0 0 50px rgba(0,191,255,.3));
+  }
+  @media (min-width: 1300px) {
+    .brand-mark { display: block; }
+  }
+
   .cover-inner {
     position:relative; z-index:1;
     max-width:1000px; margin:0 auto;
@@ -700,13 +713,14 @@
 ════════════════════════════════════ -->
 <div id="view-cover" class="view active">
   <div class="cover-bg"></div>
+  <img class="brand-mark" src="images/brand-mark.png" alt="" aria-hidden="true">
   <div class="cover-inner">
   <div class="topbar">
       <div class="topbar-label">Южный федеральный университет · ААИ</div>
       <div class="topbar-badge"><div class="dot"></div>Программа повышения квалификации</div>
     </div>
     <div class="instructor-line">
-      Руководитель курса — <a href="https://t.me/darkbluekuleshov" target="_blank" rel="noopener">Кулешов Александр Алексеевич</a>
+      Руководитель курса — <a href="https://t.me/ai2arch" target="_blank" rel="noopener">Кулешов Александр Алексеевич</a>
     </div>
   <div class="hero">
       <div class="program-tag">Современные инструменты проектного анализа</div>
@@ -2158,7 +2172,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
         <div style="font-size:40px;margin-bottom:16px;">⚠️</div>
         <div style="font-size:15px;font-weight:700;color:#0A0F1A;margin-bottom:8px;">Не удалось отправить заявку</div>
         <div style="font-size:13.5px;color:#3A4560;line-height:1.6;margin-bottom:16px;">Попробуйте ещё раз, либо напишите руководителю курса напрямую в Telegram.</div>
-        <a href="https://t.me/darkbluekuleshov" target="_blank" style="color:#4DA3FF;font-weight:700;font-size:13.5px;text-decoration:none;">Написать в Telegram →</a>
+        <a href="https://t.me/alkuleshov" target="_blank" style="color:#4DA3FF;font-weight:700;font-size:13.5px;text-decoration:none;">Написать в Telegram →</a>
       </div>
 
     </div>
