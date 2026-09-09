@@ -674,6 +674,18 @@
   .tip { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:12px 15px; font-size:13px; color:var(--ink-muted); display:flex; gap:9px; align-items:flex-start; margin:14px 0; }
   .tip-i { font-size:15px; flex-shrink:0; }
 
+  .video-gate { border:1px solid var(--border); border-radius:12px; overflow:hidden; margin:16px 0; background:#0A0D18; }
+  .video-gate-locked { padding:32px 22px; text-align:center; }
+  .video-gate-icon { font-size:26px; margin-bottom:10px; }
+  .video-gate-locked p { color:rgba(255,255,255,.55); font-size:13px; margin:0 0 16px; }
+  .video-gate-form { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
+  .video-gate-form input { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.16); border-radius:8px; padding:10px 14px; color:#fff; font-size:14px; width:170px; text-align:center; }
+  .video-gate-form input::placeholder { color:rgba(255,255,255,.35); }
+  .video-gate-form button { background:var(--azure,#4DA3FF); color:#fff; border:none; border-radius:8px; padding:10px 18px; font-weight:700; font-size:13.5px; cursor:pointer; }
+  .video-gate-form button:hover { opacity:.9; }
+  .video-gate-error { color:#FF7A7A; font-size:12px; margin-top:12px; display:none; }
+  .video-gate iframe { width:100%; aspect-ratio:16/9; display:block; border:0; }
+
   /* ai grid */
   .ai-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:14px 0 20px; }
   @media(max-width:580px){ .ai-grid{grid-template-columns:1fr;} }
@@ -938,7 +950,17 @@
             <div class="lesson-title">Знакомство с программой: интерфейс, проект, подложки, координаты</div>
           </div>
         </div>
-        <div class="tip"><div class="tip-i">📹</div><div>Видео к этому уроку будет выслано участникам в рамках прохождения курса.</div></div>
+        <div class="video-gate" data-code="qgis1">
+          <div class="video-gate-locked">
+            <div class="video-gate-icon">🔒</div>
+            <p>Видео этого урока пока не открыто</p>
+            <div class="video-gate-form">
+              <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
+              <button onclick="unlockVideo(this)">Открыть</button>
+            </div>
+            <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
+          </div>
+        </div>
 
         <div class="lesson-body">
           <div class="intro-quote">
@@ -998,7 +1020,17 @@
             <div class="lesson-title">Загрузка данных OSM, Rule-based стилизация, легенда</div>
           </div>
         </div>
-        <div class="tip"><div class="tip-i">📹</div><div>Видео к этому уроку будет выслано участникам в рамках прохождения курса.</div></div>
+        <div class="video-gate" data-code="qgis2">
+          <div class="video-gate-locked">
+            <div class="video-gate-icon">🔒</div>
+            <p>Видео этого урока пока не открыто</p>
+            <div class="video-gate-form">
+              <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
+              <button onclick="unlockVideo(this)">Открыть</button>
+            </div>
+            <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
+          </div>
+        </div>
 
         <div class="lesson-body">
           <div class="intro-quote green">
@@ -1082,7 +1114,17 @@
             <div class="lesson-title">Изолинии рельефа, кадастр, компоновка карты в Layout и экспорт PDF</div>
           </div>
         </div>
-        <div class="tip"><div class="tip-i">📹</div><div>Видео к этому уроку будет выслано участникам в рамках прохождения курса.</div></div>
+        <div class="video-gate" data-code="qgis3">
+          <div class="video-gate-locked">
+            <div class="video-gate-icon">🔒</div>
+            <p>Видео этого урока пока не открыто</p>
+            <div class="video-gate-form">
+              <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
+              <button onclick="unlockVideo(this)">Открыть</button>
+            </div>
+            <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
+          </div>
+        </div>
 
         <div class="lesson-body">
           <div class="intro-quote orange">
@@ -1524,6 +1566,18 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
       <div class="sec-divider"></div>
 
+      <div class="video-gate" data-code="ai1">
+        <div class="video-gate-locked">
+          <div class="video-gate-icon">🔒</div>
+          <p>Видео этого урока пока не открыто</p>
+          <div class="video-gate-form">
+            <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
+            <button onclick="unlockVideo(this)">Открыть</button>
+          </div>
+          <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
+        </div>
+      </div>
+
       <!-- ФОРМУЛА ПРОМТА -->
       <h3>Что такое промпт?</h3>
       <p>Промпт — это запрос или инструкция, которую мы пишем нейросети. <strong>Чем лучше написан промпт — тем лучше получится результат.</strong></p>
@@ -1567,6 +1621,20 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       </div>
 
       <div class="sec-divider"></div>
+
+      <div class="sec-divider"></div>
+
+      <div class="video-gate" data-code="ai2">
+        <div class="video-gate-locked">
+          <div class="video-gate-icon">🔒</div>
+          <p>Видео этого урока пока не открыто</p>
+          <div class="video-gate-form">
+            <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
+            <button onclick="unlockVideo(this)">Открыть</button>
+          </div>
+          <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
+        </div>
+      </div>
 
       <!-- ПРИМЕР ПРОМТА: ДЕТСКАЯ ПЛОЩАДКА НАБЕРЕЖНАЯ -->
       <h3>Пример промпта по формуле — детская площадка на набережной</h3>
@@ -1757,6 +1825,19 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
             <div class="lesson-title">Photoshop — базовые инструменты для архитектурного коллажа</div>
           </div>
         </div>
+
+        <div class="video-gate" data-code="psh1">
+          <div class="video-gate-locked">
+            <div class="video-gate-icon">🔒</div>
+            <p>Видео этого урока пока не открыто</p>
+            <div class="video-gate-form">
+              <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
+              <button onclick="unlockVideo(this)">Открыть</button>
+            </div>
+            <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
+          </div>
+        </div>
+
         <div class="lesson-body">
           <p style="margin-bottom:14px;">На этом занятии мы разобрали полный рабочий процесс от создания документа до финального экспорта:</p>
           <ul class="checklist">
@@ -1994,6 +2075,46 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       if (el) scrollSpyObserver.observe(el);
     });
   }
+
+  const VIDEO_SOURCES = {
+    qgis1: 'https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239021&hash=10d57373894892c6&hd=3',
+    qgis2: 'https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239022&hash=0b309b8157578de9&hd=3',
+    qgis3: 'https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239020&hash=43d302046779cefa&hd=3',
+    ai1:   'https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239018&hash=dcd1af5d77f72ffe&hd=3',
+    ai2:   'https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239019&hash=544bb9860e7b9670&hd=3',
+    psh1:  'https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239017&hash=dcff08884df56f92&hd=3'
+  };
+
+  function renderVideoGate(gate) {
+    const code = gate.dataset.code;
+    const src = VIDEO_SOURCES[code];
+    if (!src) return;
+    gate.innerHTML = '<iframe src="' + src + '" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>';
+  }
+
+  function unlockVideo(btn) {
+    const gate = btn.closest('.video-gate');
+    const input = gate.querySelector('input');
+    const code = gate.dataset.code;
+    const entered = input.value.trim().toLowerCase();
+    if (entered === code) {
+      try { localStorage.setItem('unlocked_' + code, '1'); } catch(e) {}
+      renderVideoGate(gate);
+    } else {
+      gate.querySelector('.video-gate-error').style.display = 'block';
+      input.value = '';
+    }
+  }
+
+  function initVideoGates() {
+    document.querySelectorAll('.video-gate').forEach(function(gate) {
+      const code = gate.dataset.code;
+      let unlocked = false;
+      try { unlocked = localStorage.getItem('unlocked_' + code) === '1'; } catch(e) {}
+      if (unlocked) renderVideoGate(gate);
+    });
+  }
+  document.addEventListener('DOMContentLoaded', initVideoGates);
 
   // Re-init scroll-spy whenever the QGIS module becomes active
   function switchModuleWithSpy(mod) {
