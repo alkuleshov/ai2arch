@@ -824,7 +824,7 @@
 
   <!-- back bar -->
   <div class="back-bar">
-    <button class="back-btn" onclick="closGuide()">
+    <button class="back-btn" onclick="closeGuide()">
       <span class="arrow">←</span> На главную
     </button>
     <div class="guide-breadcrumb">
@@ -1987,9 +1987,10 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
     setTimeout(initScrollSpy, 60);
   }
 
-  function closGuide() {
+  function closeGuide() {
     document.getElementById('view-guide').classList.remove('active');
     document.getElementById('view-cover').classList.add('active');
+    history.replaceState(null, '', window.location.pathname + window.location.search);
     window.scrollTo(0, 0);
   }
 
