@@ -676,6 +676,9 @@
   .prompt-box { background:#0A0D18; border-radius:8px; overflow:hidden; margin:10px 0; border:1px solid rgba(255,255,255,.06); }
   .prompt-hdr { background:rgba(255,255,255,.05); padding:7px 15px; font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.35); border-bottom:1px solid rgba(255,255,255,.05); }
   .prompt-body { padding:14px 18px; font-family:var(--mono); font-size:12px; color:#C8D8F8; line-height:1.9; }
+  .result-shot { margin:18px 0 6px; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+  .result-shot img { display:block; width:100%; height:auto; }
+  .result-caption { padding:10px 16px; font-size:12.5px; color:var(--ink-faint); background:#F7F6F1; border-top:1px solid var(--border); }
   .prompt-hl { color:#FFD080; }
 
   /* footer */
@@ -776,7 +779,7 @@
         <div class="cert-icon">🎓</div>
         <div>
           <div class="cert-title">Официальный сертификат о повышении квалификации</div>
-          <div class="cert-desc">Курс реализует <strong>Южный федеральный университет</strong> — Академия архитектуры и искусств (Ростов-на-Дону). По итогам обучения выдаётся сертификат установленного образца ДПО — документ не выдаётся только школьникам и тем, кто ещё учится на бакалавриате или специалитете (при заполнении заявки на записи система подскажет, положен ли он именно вам).</div>
+          <div class="cert-desc">Курс реализует <strong>Южный федеральный университет</strong> — Академия архитектуры и искусств (Ростов-на-Дону). По итогам обучения выдаётся сертификат установленного образца ДПО — документ не выдаётся только школьникам и тем, кто ещё учится — в колледже на СПО или в вузе на бакалавриате/специалитете (при заполнении заявки на записи система подскажет, положен ли он именно вам).</div>
         </div>
       </div>
 
@@ -1591,6 +1594,11 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
         </div>
       </div>
 
+      <div class="result-shot">
+        <img src="images/rostov-naberezhnaya-gallery.jpg" alt="Детская площадка на набережной в Ростове-на-Дону — рендеры, генплан и список материалов, сгенерированные по этому промпту" loading="lazy">
+        <div class="result-caption">Так выглядит результат по этому промпту: рендеры с разных ракурсов, генплан и список материалов — всё получено из формулы выше.</div>
+      </div>
+
       <div class="sec-divider"></div>
 
       <!-- ЗАДАНИЕ -->
@@ -1649,6 +1657,20 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
           <h3>ТОН</h3>
           <p>Профессиональный, креативный, культурно-чувствительный. С акцентом на безопасность детей, экологичность, аутентичность и связь с буддийской традицией Калмыкии.</p>
         </div>
+      </div>
+
+      <h3 style="margin-top:24px;">Как из этого промпта получить генплан?</h3>
+      <p>В пункте «Формат результата» отдельно пропишите генплан — и дополните запрос нужными подробностями (масштаб, экспликация зон, легенда).</p>
+      <div class="result-shot">
+        <img src="images/elista-mandala-genplan.jpg" alt="Генплан детской площадки «Мандала степи» в Элисте с функциональными зонами и легендой" loading="lazy">
+        <div class="result-caption">Детская площадка «Мандала степи», Элиста — генплан с 10 функциональными зонами и легендой, полученный из промпта выше.</div>
+      </div>
+
+      <h3 style="margin-top:24px;">Как из этого промпта получить визуализации?</h3>
+      <p>Так же — пропишите визуализации в «Формате результата» и дополните запрос нужными подробностями (ракурс, время суток, количество людей в кадре).</p>
+      <div class="result-shot">
+        <img src="images/elista-mandala-vizualizacii.jpg" alt="Визуализации детской площадки «Мандала степи» в Элисте с разных ракурсов" loading="lazy">
+        <div class="result-caption">Визуализации той же площадки с разных ракурсов — общий план, входная группа, амфитеатр.</div>
       </div>
 
       <div class="sec-divider"></div>
@@ -1981,7 +2003,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
   const CERT_ELIGIBLE_TEXT = '<strong>Сертификат о повышении квалификации</strong> будет доступен по итогам курса.';
   const CERT_RULES = {
     school:              { eligible: false, text: 'Школьники проходят курс на общих основаниях, но <strong>сертификат о повышении квалификации не выдаётся</strong>.' },
-    spo_studying:        { eligible: true,  text: CERT_ELIGIBLE_TEXT },
+    spo_studying:        { eligible: false, text: 'Пока вы учитесь в колледже, <strong>сертификат о повышении квалификации не выдаётся</strong> — он станет доступен после завершения обучения по программе СПО.' },
     spo_done:            { eligible: true,  text: CERT_ELIGIBLE_TEXT },
     university_studying: { eligible: false, text: 'Пока вы учитесь на бакалавриате или специалитете, <strong>сертификат о повышении квалификации не выдаётся</strong> — он станет доступен после защиты диплома.' },
     bachelor_done:       { eligible: true,  text: CERT_ELIGIBLE_TEXT },
