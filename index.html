@@ -371,6 +371,28 @@
     .enroll-banner-text { font-size: 11.5px; }
   }
 
+  .format-banner {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(232,134,43,0.12);
+    border: 1px solid rgba(232,134,43,0.4);
+    border-radius: 100px;
+    padding: 9px 18px 9px 14px;
+    margin-bottom: 18px;
+    margin-left: 10px;
+  }
+  .format-banner-dot {
+    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+    background: #E8862B; box-shadow: 0 0 8px rgba(232,134,43,.9);
+  }
+  .format-banner-text {
+    font-size: 13px; color: rgba(255,255,255,.85); font-weight: 500;
+  }
+  .format-banner-text strong { color: #FFB258; font-weight: 800; }
+  @media (max-width: 640px) {
+    .format-banner { padding: 8px 14px; margin-left:0; }
+    .format-banner-text { font-size: 11.5px; }
+  }
+
   /* AI2ARCH Brand elements */
   .ai2arch-brand {
     display: flex; flex-direction: column; gap: 3px; margin-bottom: 40px;
@@ -748,6 +770,10 @@
       <div class="enroll-banner">
         <div class="enroll-banner-dot"></div>
         <div class="enroll-banner-text">Новый набор стартует <strong>21 сентября 2026</strong> · Стоимость для студентов — <strong>5 000 ₽</strong></div>
+      </div>
+      <div class="format-banner">
+        <div class="format-banner-dot"></div>
+        <div class="format-banner-text">Полностью дистанционно · курс идёт <strong>2,5 недели</strong></div>
       </div>
 
       <div class="cta-row cta-row-top">
