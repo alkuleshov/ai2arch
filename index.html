@@ -836,7 +836,7 @@
           <div class="feat-icon fi-purple">⚙️</div>
           <div>
             <div class="feat-title">Подготовка к старту</div>
-            <div class="feat-desc">Спринт 0 — настройка VPN, аккаунтов в нейросетях и софта ещё до первого занятия</div>
+            <div class="feat-desc">Спринт 0 — настройка сетевого доступа, аккаунтов в нейросетях и софта ещё до первого занятия</div>
           </div>
         </div>
       </div>
@@ -967,7 +967,7 @@
   <!-- sub-nav -->
   <div class="nav-wrap" id="sprintSubNav" style="top:0;">
     <div class="nav-pills">
-      <span class="pill" data-target="s0-vpn" onclick="scrollToSection('s0-vpn')">VPN</span>
+      <span class="pill" data-target="s0-network" onclick="scrollToSection('s0-network')">Доступ к сервисам</span>
       <span class="pill" data-target="s0-llm" onclick="scrollToSection('s0-llm')">Регистрация в LLM</span>
       <span class="pill" data-target="s0-soft" onclick="scrollToSection('s0-soft')">Установка софта</span>
       <span class="pill" data-target="s0-checklist" onclick="scrollToSection('s0-checklist')">Чек-лист</span>
@@ -994,24 +994,14 @@
 
           <div class="sec-divider"></div>
 
-          <section id="s0-vpn">
-            <h3>Блок 1. VPN и зарубежный контур</h3>
-            <p>Claude, ChatGPT и Gemini официально не работают на территории России — без VPN зарегистрироваться и пользоваться ими не получится. Вот на что смотреть при выборе сервиса, без привязки к конкретному названию:</p>
-            <ul class="checklist">
-              <li><div class="chk">✓</div> Современный протокол — WireGuard или актуальные версии OpenVPN. Старые протоколы (PPTP, L2TP) чаще всего режутся провайдерами и работают нестабильно</li>
-              <li><div class="chk">✓</div> Сервер физически расположен в стране, где сервис официально доступен (США, страны ЕС) — не любая страна подходит: у некоторых зарубежных ИИ-сервисов тоже есть свои региональные ограничения</li>
-              <li><div class="chk">✓</div> Несколько серверов на выбор — если один перегружен или сервис его заблокировал, можно быстро переключиться на другой</li>
-              <li><div class="chk">✓</div> Есть приложение и на компьютер, и на телефон — пригодится, если планируете работать с разных устройств</li>
-              <li><div class="chk">✓</div> Стабильное соединение без частых обрывов — для генерации изображений и долгой работы в браузере это важнее, чем максимальная скорость</li>
-            </ul>
-            <p style="margin-top:14px;"><strong>Если что-то не работает:</strong></p>
-            <ul class="checklist">
-              <li><div class="chk">✓</div> Сайт всё равно не открывается — смените сервер (страну или город) на другой в том же приложении</li>
-              <li><div class="chk">✓</div> Соединение постоянно рвётся — переключите протокол в настройках VPN-приложения (обычно можно выбрать между WireGuard, OpenVPN и другими)</li>
-              <li><div class="chk">✓</div> Сервис пишет, что недоступен в вашем регионе, хотя VPN включён — очистите куки и кэш браузера для этого сайта или откройте его заново в режиме инкогнито</li>
-              <li><div class="chk">✓</div> Всё работает очень медленно — выберите менее загруженный сервер; в большинстве приложений нагрузка или пинг показаны прямо в списке серверов</li>
-              <li><div class="chk">✓</div> Ничего не помогло — перезапустите само VPN-приложение и роутер</li>
-            </ul>
+          <section id="s0-network">
+            <h3>Блок 1. Сетевые и технические требования</h3>
+            <p>Для работы с курсом нужны активные учётные записи в сервисах Claude, ChatGPT и Gemini, а также стабильное сетевое соединение, позволяющее к ним подключаться.</p>
+            <div class="tip">
+              <div class="tip-i">ℹ️</div>
+              <div>Студент самостоятельно обеспечивает доступ к необходимым для обучения сервисам в соответствии с их пользовательскими соглашениями и применимым законодательством. Организатор курса не оказывает услуг по предоставлению инструментов связи и не распространяет средства обхода блокировок.</div>
+            </div>
+            <p style="margin-top:14px;">Подробный технический регламент настройки рабочего места высылается участникам отдельно, в закрытом чате потока.</p>
           </section>
 
           <div class="sec-divider"></div>
@@ -1020,12 +1010,12 @@
             <h3>Блок 2. Регистрация в LLM</h3>
             <p>Одинаковый порядок действий для Claude (<em>claude.ai</em>), ChatGPT (<em>chatgpt.com</em>) и Gemini (<em>gemini.google.com</em>):</p>
             <ul class="checklist">
-              <li><div class="chk">✓</div> Включите VPN и подключитесь к серверу в поддерживаемой стране — сделайте это до начала регистрации, не после</li>
+              <li><div class="chk">✓</div> Убедитесь, что ваше рабочее место соответствует сетевым требованиям сервиса — сделайте это до начала регистрации, не после</li>
               <li><div class="chk">✓</div> Заведите отдельную почту, которая раньше не использовалась в этом сервисе — подойдёт обычный Gmail или Outlook</li>
               <li><div class="chk">✓</div> Перейдите на официальный сайт сервиса и пройдите регистрацию по email, подтвердите адрес по ссылке из письма</li>
               <li><div class="chk">✓</div> Если сервис просит номер телефона для подтверждения — используйте реальный номер, способный принимать SMS</li>
-              <li><div class="chk">✓</div> Не отключайте и не меняйте сервер VPN в процессе регистрации — смена региона IP на середине пути — частая причина блокировки аккаунта</li>
-              <li><div class="chk">✓</div> После регистрации заходите в сервис тоже через VPN — не отключайте его совсем для повседневной работы</li>
+              <li><div class="chk">✓</div> Сохраняйте одни и те же сетевые условия на протяжении всей регистрации — их смена в процессе — частая причина блокировки аккаунта</li>
+              <li><div class="chk">✓</div> Используйте те же сетевые условия и при дальнейшей работе с сервисом</li>
               <li><div class="chk">✓</div> Сохраните логин и пароль в надёжном месте, включите двухфакторную аутентификацию, если сервис её предлагает</li>
             </ul>
           </section>
@@ -1050,7 +1040,7 @@
             <h3>Блок 4. Чек-лист готовности к занятиям</h3>
             <p>Перед первым звонком убедитесь, что закрыты все четыре пункта:</p>
             <ul class="checklist">
-              <li><div class="chk">✓</div> VPN настроен и стабильно подключается к разрешённому серверу</li>
+              <li><div class="chk">✓</div> Сетевой доступ к сервисам настроен и работает стабильно</li>
               <li><div class="chk">✓</div> Аккаунты в Claude, ChatGPT и Gemini созданы и доступны для входа</li>
               <li><div class="chk">✓</div> QGIS (LTR) установлен и открывается без ошибок</li>
               <li><div class="chk">✓</div> Photoshop установлен, обновлён до актуальной версии, подписка активна</li>
@@ -1425,7 +1415,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
             <li>Развёрнутое текстовое описание схем</li>
             <li>Хорошо работает с легендой в промте</li>
             <li>API для пакетной обработки серий</li>
-            <li>Требует VPN — недоступен в России без него</li>
+            <li>Требует доступа из поддерживаемого региона</li>
           </ul>
         </div>
         <div class="ai-card">
@@ -1437,7 +1427,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
             <li>Хорошо работает в диалоговом режиме</li>
             <li>Code Interpreter: считает площади</li>
             <li>1 изображение в бесплатном тарифе</li>
-            <li>Требует VPN — недоступен в России без него</li>
+            <li>Требует доступа из поддерживаемого региона</li>
           </ul>
         </div>
         <div class="ai-card">
@@ -1448,7 +1438,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
             <li>Составление ТЗ и пояснительных записок</li>
             <li>Генерация промтов для других ИИ</li>
             <li>Работа с длинными документами (PDF)</li>
-            <li>Доступен без VPN через claude.ai</li>
+            <li>Доступен напрямую, из России</li>
           </ul>
         </div>
       </div>
@@ -1460,7 +1450,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
             <li>Понимает русскоязычные подписи на схемах</li>
             <li>Интеграция с геосервисами Яндекс</li>
             <li>Корректно читает топонимику РФ</li>
-            <li>Доступна без VPN, работает в России</li>
+            <li>Работает напрямую, из России</li>
             <li>Лучше для описания, чем для анализа</li>
           </ul>
         </div>
@@ -1579,7 +1569,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
           <div class="ai-name">Локально доступные сервисы</div>
           <span class="ai-badge" style="background:#FFF3E0;color:#F57C00;">Алиса ИИ · Arena AI · DeepSeek</span>
           <ul>
-            <li>Доступны без VPN на территории РФ</li>
+            <li>Доступны напрямую на территории РФ</li>
             <li>Хорошо работают с русским языком</li>
             <li>Интеграция с отечественными сервисами</li>
           </ul>
@@ -2224,7 +2214,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
   // ─── Scroll-spy: highlight nav pill for the section currently in view ───
   let scrollSpyObserver = null;
-  const spySectionIds = ['lesson1','lesson2','lesson3','overview','data','schemes','export','aicomp','prompts','workflow','gen-intro','prompt-formula','example-rostov','example-elista','prompt-mistakes','photoshop-draft','s0-vpn','s0-llm','s0-soft','s0-checklist'];
+  const spySectionIds = ['lesson1','lesson2','lesson3','overview','data','schemes','export','aicomp','prompts','workflow','gen-intro','prompt-formula','example-rostov','example-elista','prompt-mistakes','photoshop-draft','s0-network','s0-llm','s0-soft','s0-checklist'];
 
   function setActivePill(id) {
     document.querySelectorAll('.nav-pills .pill').forEach(p => p.classList.remove('active-scroll'));
