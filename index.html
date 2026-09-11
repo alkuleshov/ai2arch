@@ -938,11 +938,11 @@
   <!-- module tabs -->
   <div class="nav-wrap" id="moduleTabsWrap" style="top:0;">
     <div class="module-tabs">
-      <div class="module-tab" id="mtab-sprint" onclick="switchModuleWithSpy('sprint')">
+      <div class="module-tab active" id="mtab-sprint" onclick="switchModuleWithSpy('sprint')">
         <span class="mt-eyebrow">Спринт 0</span>
         <span class="mt-title">⚙️ Настройка рабочего места</span>
       </div>
-      <div class="module-tab active" id="mtab-qgis" onclick="switchModuleWithSpy('qgis')">
+      <div class="module-tab" id="mtab-qgis" onclick="switchModuleWithSpy('qgis')">
         <span class="mt-eyebrow">Модуль 1</span>
         <span class="mt-title">📐 QGIS</span>
       </div>
@@ -962,7 +962,7 @@
   </div>
 
   <!-- ════════════ MODULE PANEL: SPRINT 0 ════════════ -->
-  <div class="module-panel" id="panel-sprint">
+  <div class="module-panel active" id="panel-sprint">
 
   <!-- sub-nav -->
   <div class="nav-wrap" id="sprintSubNav" style="top:0;">
@@ -1053,7 +1053,7 @@
   </div>
 
   <!-- ════════════ MODULE PANEL: QGIS ════════════ -->
-  <div class="module-panel active" id="panel-qgis">
+  <div class="module-panel" id="panel-qgis">
 
   <!-- sub-nav -->
   <div class="nav-wrap" id="qgisSubNav" style="top:0;">
@@ -2155,7 +2155,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
   function openGuide(anchor) {
     document.getElementById('view-cover').classList.remove('active');
     document.getElementById('view-guide').classList.add('active');
-    switchModule('qgis');
+    switchModule('sprint');
     window.scrollTo(0, 0);
     setTimeout(layoutStickyBars, 30);
     if (anchor && anchor !== 'top') {
