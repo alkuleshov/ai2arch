@@ -725,6 +725,10 @@
 
   .content-gate { margin:16px 0; }
   .content-gate .video-gate-locked { border:1px solid #E8A3A3; border-left:4px solid #C0392B; border-radius:10px; background:#F9DADA; }
+  .module-gate-preview { display:flex; gap:10px; flex-wrap:wrap; margin:14px 0 0; }
+  .preview-chip { display:flex; align-items:center; gap:6px; background:#fff; border:1px solid var(--border); border-radius:8px; padding:8px 14px; font-size:12px; color:var(--ink-muted); font-weight:600; }
+  .video-embed { margin:16px 0; border-radius:10px; overflow:hidden; }
+  .video-embed iframe { width:100%; aspect-ratio:16/9; display:block; border:0; }
 
   /* ai grid */
   .ai-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:14px 0 20px; }
@@ -1084,6 +1088,23 @@
     <div class="sec-label">Модуль 1</div>
     <h2>QGIS — Пространственный анализ</h2>
 
+    <div class="content-gate" data-code="qgis">
+      <div class="video-gate-locked">
+        <span class="video-gate-badge">🔒 Модуль — по коду</span>
+        <div class="video-gate-text">Пока не открыто</div>
+        <div class="video-gate-form">
+          <input type="text" placeholder="Код доступа" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
+          <button onclick="unlockContent(this)">Открыть</button>
+        </div>
+        <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
+      </div>
+      <div class="module-gate-preview">
+        <div class="preview-chip">🎥 3 видеоурока</div>
+        <div class="preview-chip">📝 Конспекты, данные, экспорт, воркфлоу</div>
+      </div>
+
+      <div class="gated-content" hidden>
+
     <!-- OVERVIEW -->
     <section id="overview">
       <div class="sec-label">Модуль 1</div>
@@ -1153,16 +1174,8 @@
           </ul>
         </div>
 
-        <div class="video-gate" data-code="qgis1">
-          <div class="video-gate-locked">
-            <span class="video-gate-badge">🔒 Видео — по коду</span>
-            <div class="video-gate-text">Пока не открыто</div>
-            <div class="video-gate-form">
-              <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
-              <button onclick="unlockVideo(this)">Открыть</button>
-            </div>
-            <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
-          </div>
+        <div class="video-embed">
+          <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239021&hash=10d57373894892c6&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
         </div>
       </div>
     </section>
@@ -1247,16 +1260,8 @@
           </ul>
         </div>
 
-        <div class="video-gate" data-code="qgis2">
-          <div class="video-gate-locked">
-            <span class="video-gate-badge">🔒 Видео — по коду</span>
-            <div class="video-gate-text">Пока не открыто</div>
-            <div class="video-gate-form">
-              <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
-              <button onclick="unlockVideo(this)">Открыть</button>
-            </div>
-            <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
-          </div>
+        <div class="video-embed">
+          <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239022&hash=0b309b8157578de9&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
         </div>
       </div>
     </section>
@@ -1322,16 +1327,8 @@
           </ul>
         </div>
 
-        <div class="video-gate" data-code="qgis3">
-          <div class="video-gate-locked">
-            <span class="video-gate-badge">🔒 Видео — по коду</span>
-            <div class="video-gate-text">Пока не открыто</div>
-            <div class="video-gate-form">
-              <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
-              <button onclick="unlockVideo(this)">Открыть</button>
-            </div>
-            <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
-          </div>
+        <div class="video-embed">
+          <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239020&hash=43d302046779cefa&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
         </div>
       </div>
     </section>
@@ -1518,6 +1515,9 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       </div>
     </section>
 
+      </div>
+    </div>
+
   </div><!-- /guide-inner -->
 
   </div><!-- /panel-qgis -->
@@ -1534,6 +1534,22 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       <div class="sec-label purple">Модуль 2</div>
       <h2>Нейросети — основы перед началом модуля</h2>
       <p>Перед тем как переходить к практической работе с генерацией изображений и текстов, важно понимать базовые принципы устройства современных нейросетей и различия между основными типами моделей, которые встретятся в курсе.</p>
+
+      <div class="content-gate" data-code="neural">
+        <div class="video-gate-locked">
+          <span class="video-gate-badge">🔒 Модуль — по коду</span>
+          <div class="video-gate-text">Пока не открыто</div>
+          <div class="video-gate-form">
+            <input type="text" placeholder="Код доступа" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
+            <button onclick="unlockContent(this)">Открыть</button>
+          </div>
+          <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
+        </div>
+        <div class="module-gate-preview">
+          <div class="preview-chip">📝 Типы нейросетей и ключевые понятия</div>
+        </div>
+
+        <div class="gated-content" hidden>
 
       <h3>Какие нейросети используются в курсе</h3>
       <div class="ai-grid" style="grid-template-columns:repeat(3,1fr);">
@@ -1589,6 +1605,9 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
         <p>После знакомства с основами курс переходит к Модулю 3 — практической генерации идей и визуализации, где эти модели применяются в реальных архитектурных задачах.</p>
       </div>
 
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -1618,6 +1637,23 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       <div class="sec-label green">Модуль 3</div>
       <h2 id="genviz-intro">Генерация идей и визуализация</h2>
       <p>Модуль посвящён практической работе с нейросетями для визуализации архитектурных решений: от подготовки исходного драфта в Photoshop и формулировки промта до отбора результата и финальной постобработки.</p>
+
+      <div class="content-gate" data-code="genviz">
+        <div class="video-gate-locked">
+          <span class="video-gate-badge">🔒 Модуль — по коду</span>
+          <div class="video-gate-text">Пока не открыто</div>
+          <div class="video-gate-form">
+            <input type="text" placeholder="Код доступа" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
+            <button onclick="unlockContent(this)">Открыть</button>
+          </div>
+          <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
+        </div>
+        <div class="module-gate-preview">
+          <div class="preview-chip">🎥 3 видеоурока</div>
+          <div class="preview-chip">📝 Формула промпта, примеры, Photoshop</div>
+        </div>
+
+        <div class="gated-content" hidden>
 
       <h3>Структура модуля</h3>
       <div class="steps">
@@ -1725,16 +1761,8 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
       <div class="sec-divider"></div>
 
-      <div class="video-gate" data-code="ai1">
-        <div class="video-gate-locked">
-          <span class="video-gate-badge">🔒 Видео — по коду</span>
-          <div class="video-gate-text">Пока не открыто</div>
-          <div class="video-gate-form">
-            <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
-            <button onclick="unlockVideo(this)">Открыть</button>
-          </div>
-          <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
-        </div>
+      <div class="video-embed">
+        <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239018&hash=dcd1af5d77f72ffe&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
       </div>
 
       <!-- ФОРМУЛА ПРОМТА -->
@@ -1779,20 +1807,14 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
         </div>
       </div>
 
-      <div class="sec-divider"></div>
+
 
       <div class="sec-divider"></div>
 
-      <div class="video-gate" data-code="ai2">
-        <div class="video-gate-locked">
-          <span class="video-gate-badge">🔒 Видео — по коду</span>
-          <div class="video-gate-text">Пока не открыто</div>
-          <div class="video-gate-form">
-            <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
-            <button onclick="unlockVideo(this)">Открыть</button>
-          </div>
-          <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
-        </div>
+      <div class="sec-divider"></div>
+
+      <div class="video-embed">
+        <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239019&hash=544bb9860e7b9670&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
       </div>
 
       <!-- ПРИМЕР ПРОМТА: ДЕТСКАЯ ПЛОЩАДКА НАБЕРЕЖНАЯ -->
@@ -2000,22 +2022,17 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
           </ul>
         </div>
 
-        <div class="video-gate" data-code="psh1">
-          <div class="video-gate-locked">
-            <span class="video-gate-badge">🔒 Видео — по коду</span>
-            <div class="video-gate-text">Пока не открыто</div>
-            <div class="video-gate-form">
-              <input type="text" placeholder="Код урока" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
-              <button onclick="unlockVideo(this)">Открыть</button>
-            </div>
-            <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
-          </div>
+        <div class="video-embed">
+          <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239017&hash=dcff08884df56f92&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
         </div>
       </div>
 
       <div class="tip">
         <div class="tip-i">💡</div>
         <div>Результат работы этого модуля — готовое визуализированное изображение — становится исходным материалом для Модуля 4, где собирается итоговая презентация проекта.</div>
+      </div>
+
+        </div>
       </div>
 
     </section>
@@ -2034,6 +2051,22 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       <div class="sec-label orange">Модуль 4</div>
       <h2>Синтез и презентация</h2>
       <p>Завершающий модуль курса посвящён сборке всех наработок — схем из QGIS, визуализаций и текстовых описаний — в единую презентацию проекта с помощью Gamma.app.</p>
+
+      <div class="content-gate" data-code="synth">
+        <div class="video-gate-locked">
+          <span class="video-gate-badge">🔒 Модуль — по коду</span>
+          <div class="video-gate-text">Пока не открыто</div>
+          <div class="video-gate-form">
+            <input type="text" placeholder="Код доступа" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
+            <button onclick="unlockContent(this)">Открыть</button>
+          </div>
+          <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
+        </div>
+        <div class="module-gate-preview">
+          <div class="preview-chip">📝 Этапы сборки, чек-лист презентации</div>
+        </div>
+
+        <div class="gated-content" hidden>
 
       <h3>Что такое Gamma.app</h3>
       <div class="card card-success" style="margin-bottom:20px;">
@@ -2063,6 +2096,9 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       <div class="card card-warn">
         <h3>Итог курса</h3>
         <p>К завершению Модуля 4 у каждого слушателя есть готовая презентация проекта, собранная с использованием полного цикла инструментов курса: QGIS для пространственного анализа, нейросети для визуализации и текста, Gamma.app для финальной сборки.</p>
+      </div>
+
+        </div>
       </div>
 
     </div>
