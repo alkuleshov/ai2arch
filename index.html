@@ -739,6 +739,8 @@
   }
 
   .guide-footer { background:transparent; color:var(--ink-faint); text-align:center; padding:28px 24px; font-size:11.5px; border-top:1px solid var(--border); }
+  .footer-mark { display:inline-block; font-family:var(--mono); font-size:15px; font-weight:800; letter-spacing:-.02em; color:var(--azure); position:relative; padding-bottom:12px; margin-bottom:6px; }
+  .footer-mark::after { content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:26px; height:2px; background:var(--azure); border-radius:2px; }
 
   /* page transition */
   .view { animation: fadeIn .25s ease; }
@@ -2061,18 +2063,12 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
   <div class="guide-footer">
     <div style="max-width:560px; margin:0 auto;">
-    <svg width="40" height="40" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:10px;opacity:0.5;">
-      <path d="M140,44 C162,40 184,52 194,70 C210,68 226,78 232,96 C242,118 230,142 212,150 C214,170 202,188 182,194 C170,210 152,216 136,210 C120,218 100,212 90,198 C70,194 56,178 58,158 C38,152 28,130 36,108 C40,90 56,80 72,80 C78,62 98,46 118,44 C126,42 134,42 140,44Z"
-        fill="rgba(77,163,255,0.08)" stroke="#2A7CE8" stroke-width="4"/>
-      <ellipse cx="140" cy="96" rx="20" ry="18" fill="#F4F2EC" stroke="#2A7CE8" stroke-width="3.5"/>
-      <ellipse cx="102" cy="166" rx="18" ry="17" transform="rotate(-15,102,166)" fill="#F4F2EC" stroke="#2A7CE8" stroke-width="3.5"/>
-      <ellipse cx="182" cy="160" rx="18" ry="17" transform="rotate(15,182,160)" fill="#F4F2EC" stroke="#2A7CE8" stroke-width="3.5"/>
-    </svg>
+    <div class="footer-mark">ai2arch</div>
     <div style="font-size:13px;color:var(--ink-muted);font-weight:500;margin-bottom:8px;letter-spacing:.01em;">
       Мы объединяем архитектуру, данные и искусственный интеллект,<br>чтобы проектировать будущее городов и территорий.
     </div>
     <div style="font-size:10.5px;color:var(--ink-faint);letter-spacing:.08em;text-transform:uppercase;">
-      AI2ARCH · Курс дополнительного образования · ААИ ЮФУ · Ростов-на-Дону
+      Курс дополнительного образования · ААИ ЮФУ · Ростов-на-Дону
     </div>
     </div>
   </div>
