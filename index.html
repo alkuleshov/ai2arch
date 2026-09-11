@@ -710,6 +710,9 @@
   .video-gate-error { color:#8A3232; font-size:11.5px; margin-top:2px; flex-basis:100%; display:none; font-weight:700; }
   .video-gate iframe { width:100%; aspect-ratio:16/9; display:block; border:0; }
 
+  .content-gate { margin:16px 0; }
+  .content-gate .video-gate-locked { border:1px solid #E8A3A3; border-left:4px solid #C0392B; border-radius:10px; background:#F9DADA; }
+
   /* ai grid */
   .ai-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:14px 0 20px; }
   @media(max-width:580px){ .ai-grid{grid-template-columns:1fr;} }
@@ -920,6 +923,10 @@
   <!-- module tabs -->
   <div class="nav-wrap" id="moduleTabsWrap" style="top:0;">
     <div class="module-tabs">
+      <div class="module-tab" id="mtab-sprint0" onclick="switchModuleWithSpy('sprint0')">
+        <span class="mt-eyebrow">Спринт 0</span>
+        <span class="mt-title">⚙️ Настройка рабочего места</span>
+      </div>
       <div class="module-tab active" id="mtab-qgis" onclick="switchModuleWithSpy('qgis')">
         <span class="mt-eyebrow">Модуль 1</span>
         <span class="mt-title">📐 QGIS</span>
@@ -935,6 +942,107 @@
       <div class="module-tab" id="mtab-synth" onclick="switchModuleWithSpy('synth')">
         <span class="mt-eyebrow">Модуль 4</span>
         <span class="mt-title">📊 Синтез и презентация</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════ MODULE PANEL: SPRINT 0 ════════════ -->
+  <div class="module-panel" id="panel-sprint0">
+
+  <!-- sub-nav -->
+  <div class="nav-wrap" id="sprint0SubNav" style="top:0;">
+    <div class="nav-pills">
+      <span class="pill" data-target="s0-vpn" onclick="scrollToSection('s0-vpn')">VPN</span>
+      <span class="pill" data-target="s0-llm" onclick="scrollToSection('s0-llm')">Регистрация в LLM</span>
+      <span class="pill" data-target="s0-soft" onclick="scrollToSection('s0-soft')">Установка софта</span>
+      <span class="pill" data-target="s0-checklist" onclick="scrollToSection('s0-checklist')">Чек-лист</span>
+    </div>
+  </div>
+
+    <div class="guide-inner" style="padding-top:40px;">
+      <div class="sec-label">Спринт 0</div>
+      <h2 id="sprint0-intro">Настройка рабочего места</h2>
+      <p>Это подготовительный шаг перед первым занятием — здесь всё, что нужно сделать заранее: получить доступ к нейросетям, установить софт и проверить, что всё работает. Отведите на это отдельный вечер до старта курса, чтобы на самих занятиях не тратить время на технические проблемы.</p>
+
+      <div class="content-gate" data-code="sprint0">
+        <div class="video-gate-locked">
+          <span class="video-gate-badge">🔒 Раздел — по коду</span>
+          <div class="video-gate-text">Пока не открыто</div>
+          <div class="video-gate-form">
+            <input type="text" placeholder="Код доступа" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
+            <button onclick="unlockContent(this)">Открыть</button>
+          </div>
+          <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
+        </div>
+
+        <div class="gated-content" hidden>
+
+          <div class="sec-divider"></div>
+
+          <section id="s0-vpn">
+            <h3>Блок 1. VPN и зарубежный контур</h3>
+            <p>Claude, ChatGPT и Gemini официально не работают на территории России — без VPN зарегистрироваться и пользоваться ими не получится. Вот на что смотреть при выборе сервиса, без привязки к конкретному названию:</p>
+            <ul class="checklist">
+              <li><div class="chk">✓</div> Современный протокол — WireGuard или актуальные версии OpenVPN. Старые протоколы (PPTP, L2TP) чаще всего режутся провайдерами и работают нестабильно</li>
+              <li><div class="chk">✓</div> Сервер физически расположен в стране, где сервис официально доступен (США, страны ЕС) — не любая страна подходит: у некоторых зарубежных ИИ-сервисов тоже есть свои региональные ограничения</li>
+              <li><div class="chk">✓</div> Несколько серверов на выбор — если один перегружен или сервис его заблокировал, можно быстро переключиться на другой</li>
+              <li><div class="chk">✓</div> Есть приложение и на компьютер, и на телефон — пригодится, если планируете работать с разных устройств</li>
+              <li><div class="chk">✓</div> Стабильное соединение без частых обрывов — для генерации изображений и долгой работы в браузере это важнее, чем максимальная скорость</li>
+            </ul>
+            <p style="margin-top:14px;"><strong>Если что-то не работает:</strong></p>
+            <ul class="checklist">
+              <li><div class="chk">✓</div> Сайт всё равно не открывается — смените сервер (страну или город) на другой в том же приложении</li>
+              <li><div class="chk">✓</div> Соединение постоянно рвётся — переключите протокол в настройках VPN-приложения (обычно можно выбрать между WireGuard, OpenVPN и другими)</li>
+              <li><div class="chk">✓</div> Сервис пишет, что недоступен в вашем регионе, хотя VPN включён — очистите куки и кэш браузера для этого сайта или откройте его заново в режиме инкогнито</li>
+              <li><div class="chk">✓</div> Всё работает очень медленно — выберите менее загруженный сервер; в большинстве приложений нагрузка или пинг показаны прямо в списке серверов</li>
+              <li><div class="chk">✓</div> Ничего не помогло — перезапустите само VPN-приложение и роутер</li>
+            </ul>
+          </section>
+
+          <div class="sec-divider"></div>
+
+          <section id="s0-llm">
+            <h3>Блок 2. Регистрация в LLM</h3>
+            <p>Одинаковый порядок действий для Claude (<em>claude.ai</em>), ChatGPT (<em>chatgpt.com</em>) и Gemini (<em>gemini.google.com</em>):</p>
+            <ul class="checklist">
+              <li><div class="chk">✓</div> Включите VPN и подключитесь к серверу в поддерживаемой стране — сделайте это до начала регистрации, не после</li>
+              <li><div class="chk">✓</div> Заведите отдельную почту, которая раньше не использовалась в этом сервисе — подойдёт обычный Gmail или Outlook</li>
+              <li><div class="chk">✓</div> Перейдите на официальный сайт сервиса и пройдите регистрацию по email, подтвердите адрес по ссылке из письма</li>
+              <li><div class="chk">✓</div> Если сервис просит номер телефона для подтверждения — используйте реальный номер, способный принимать SMS</li>
+              <li><div class="chk">✓</div> Не отключайте и не меняйте сервер VPN в процессе регистрации — смена региона IP на середине пути — частая причина блокировки аккаунта</li>
+              <li><div class="chk">✓</div> После регистрации заходите в сервис тоже через VPN — не отключайте его совсем для повседневной работы</li>
+              <li><div class="chk">✓</div> Сохраните логин и пароль в надёжном месте, включите двухфакторную аутентификацию, если сервис её предлагает</li>
+            </ul>
+          </section>
+
+          <div class="sec-divider"></div>
+
+          <section id="s0-soft">
+            <h3>Блок 3. Установка софта</h3>
+            <p><strong>QGIS.</strong> Устанавливайте версию LTR (Long Term Release) — сейчас это 3.44. Она стабильнее последней «свежей» версии и меньше преподносит сюрпризов на занятиях. Скачать можно с официального сайта <em>qgis.org/download</em> — там же есть версии под Windows и macOS с пошаговой инструкцией по установке.</p>
+            <p style="margin-top:14px;"><strong>Photoshop.</strong> Нужна активная подписка Adobe Creative Cloud с доступом к Photoshop. Минимальные системные требования на 2026 год:</p>
+            <ul class="checklist">
+              <li><div class="chk">✓</div> Windows 11 (64-бит, версия 23H2 и новее) или macOS 13 (Ventura) и новее</li>
+              <li><div class="chk">✓</div> Не менее 8 ГБ оперативной памяти, комфортно — от 16 ГБ</li>
+              <li><div class="chk">✓</div> Видеокарта с поддержкой DirectX 12 (Windows) или Metal (Mac)</li>
+              <li><div class="chk">✓</div> Быстрый SSD-накопитель, минимум 20 ГБ свободного места под установку и рабочие файлы</li>
+            </ul>
+          </section>
+
+          <div class="sec-divider"></div>
+
+          <section id="s0-checklist">
+            <h3>Блок 4. Чек-лист готовности к занятиям</h3>
+            <p>Перед первым звонком убедитесь, что закрыты все четыре пункта:</p>
+            <ul class="checklist">
+              <li><div class="chk">✓</div> VPN настроен и стабильно подключается к разрешённому серверу</li>
+              <li><div class="chk">✓</div> Аккаунты в Claude, ChatGPT и Gemini созданы и доступны для входа</li>
+              <li><div class="chk">✓</div> QGIS (LTR) установлен и открывается без ошибок</li>
+              <li><div class="chk">✓</div> Photoshop установлен, обновлён до актуальной версии, подписка активна</li>
+            </ul>
+          </section>
+
+        </div>
       </div>
     </div>
   </div>
@@ -2073,7 +2181,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
   // ─── Scroll-spy: highlight nav pill for the section currently in view ───
   let scrollSpyObserver = null;
-  const spySectionIds = ['lesson1','lesson2','lesson3','overview','data','schemes','export','aicomp','prompts','workflow','genviz-intro','prompt-formula','example-rostov','example-elista','prompt-mistakes','photoshop-draft'];
+  const spySectionIds = ['lesson1','lesson2','lesson3','overview','data','schemes','export','aicomp','prompts','workflow','genviz-intro','prompt-formula','example-rostov','example-elista','prompt-mistakes','photoshop-draft','s0-vpn','s0-llm','s0-soft','s0-checklist'];
 
   function setActivePill(id) {
     document.querySelectorAll('.nav-pills .pill').forEach(p => p.classList.remove('active-scroll'));
@@ -2156,7 +2264,42 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       if (unlocked) renderVideoGate(gate);
     });
   }
-  document.addEventListener('DOMContentLoaded', initVideoGates);
+
+  function revealGatedContent(gate) {
+    const bar = gate.querySelector('.video-gate-locked');
+    if (bar) bar.style.display = 'none';
+    const content = gate.querySelector('.gated-content');
+    if (content) content.hidden = false;
+  }
+
+  function unlockContent(btn) {
+    const gate = btn.closest('.content-gate');
+    const input = gate.querySelector('input');
+    const code = gate.dataset.code;
+    const entered = input.value.trim().toLowerCase();
+    if (entered === code) {
+      try { localStorage.setItem('unlocked_' + code, '1'); } catch(e) {}
+      revealGatedContent(gate);
+      setTimeout(initScrollSpy, 30);
+    } else {
+      gate.querySelector('.video-gate-error').style.display = 'block';
+      input.value = '';
+    }
+  }
+
+  function initContentGates() {
+    document.querySelectorAll('.content-gate').forEach(function(gate) {
+      const code = gate.dataset.code;
+      let unlocked = false;
+      try { unlocked = localStorage.getItem('unlocked_' + code) === '1'; } catch(e) {}
+      if (unlocked) revealGatedContent(gate);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    initVideoGates();
+    initContentGates();
+  });
 
   // Re-init scroll-spy whenever the QGIS module becomes active
   function switchModuleWithSpy(mod) {
