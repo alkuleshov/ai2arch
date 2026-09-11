@@ -218,6 +218,16 @@
     color: var(--w40);
     font-weight: 500;
     margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .instructor-photo {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid rgba(255,255,255,.25);
+    flex-shrink: 0;
   }
   .instructor-line a {
     color: var(--w40);
@@ -761,7 +771,8 @@
       <div class="topbar-badge"><div class="dot"></div>Программа повышения квалификации</div>
     </div>
     <div class="instructor-line">
-      Руководитель курса — <a href="https://t.me/ai2arch" target="_blank" rel="noopener">Кулешов Александр Алексеевич</a>
+      <img class="instructor-photo" src="images/kuleshov.jpg" alt="Кулешов Александр Алексеевич">
+      <span>Руководитель курса — <a href="https://t.me/ai2arch" target="_blank" rel="noopener">Кулешов Александр Алексеевич</a></span>
     </div>
   <div class="hero">
       <div class="program-tag">Современные инструменты проектного анализа</div>
