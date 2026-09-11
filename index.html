@@ -729,6 +729,8 @@
   .preview-chip { display:flex; align-items:center; gap:6px; background:#fff; border:1px solid var(--border); border-radius:8px; padding:8px 14px; font-size:12px; color:var(--ink-muted); font-weight:600; }
   .video-embed { margin:16px 0; border-radius:10px; overflow:hidden; }
   .video-embed iframe { width:100%; aspect-ratio:16/9; display:block; border:0; }
+  .gated-content { filter: blur(6px); pointer-events: none; user-select: none; transition: filter .35s ease; margin-top: 20px; }
+  .gated-content.unlocked { filter: none; pointer-events: auto; user-select: auto; }
 
   /* ai grid */
   .ai-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:14px 0 20px; }
@@ -936,7 +938,7 @@
   <!-- module tabs -->
   <div class="nav-wrap" id="moduleTabsWrap" style="top:0;">
     <div class="module-tabs">
-      <div class="module-tab" id="mtab-sprint0" onclick="switchModuleWithSpy('sprint0')">
+      <div class="module-tab" id="mtab-sprint" onclick="switchModuleWithSpy('sprint')">
         <span class="mt-eyebrow">Спринт 0</span>
         <span class="mt-title">⚙️ Настройка рабочего места</span>
       </div>
@@ -944,15 +946,15 @@
         <span class="mt-eyebrow">Модуль 1</span>
         <span class="mt-title">📐 QGIS</span>
       </div>
-      <div class="module-tab" id="mtab-neural" onclick="switchModuleWithSpy('neural')">
+      <div class="module-tab" id="mtab-ai" onclick="switchModuleWithSpy('ai')">
         <span class="mt-eyebrow">Модуль 2</span>
         <span class="mt-title">🧠 Нейросети — основы</span>
       </div>
-      <div class="module-tab" id="mtab-genviz" onclick="switchModuleWithSpy('genviz')">
+      <div class="module-tab" id="mtab-gen" onclick="switchModuleWithSpy('gen')">
         <span class="mt-eyebrow">Модуль 3</span>
         <span class="mt-title">🎨 Генерация идей и визуализация</span>
       </div>
-      <div class="module-tab" id="mtab-synth" onclick="switchModuleWithSpy('synth')">
+      <div class="module-tab" id="mtab-pres" onclick="switchModuleWithSpy('pres')">
         <span class="mt-eyebrow">Модуль 4</span>
         <span class="mt-title">📊 Синтез и презентация</span>
       </div>
@@ -960,10 +962,10 @@
   </div>
 
   <!-- ════════════ MODULE PANEL: SPRINT 0 ════════════ -->
-  <div class="module-panel" id="panel-sprint0">
+  <div class="module-panel" id="panel-sprint">
 
   <!-- sub-nav -->
-  <div class="nav-wrap" id="sprint0SubNav" style="top:0;">
+  <div class="nav-wrap" id="sprintSubNav" style="top:0;">
     <div class="nav-pills">
       <span class="pill" data-target="s0-vpn" onclick="scrollToSection('s0-vpn')">VPN</span>
       <span class="pill" data-target="s0-llm" onclick="scrollToSection('s0-llm')">Регистрация в LLM</span>
@@ -974,7 +976,7 @@
 
     <div class="guide-inner" style="padding-top:40px;">
       <div class="sec-label">Спринт 0</div>
-      <h2 id="sprint0-intro">Настройка рабочего места</h2>
+      <h2 id="sprint-intro">Настройка рабочего места</h2>
       <p>Это подготовительный шаг перед первым занятием — здесь всё, что нужно сделать заранее: получить доступ к нейросетям, установить софт и проверить, что всё работает. Отведите на это отдельный вечер до старта курса, чтобы на самих занятиях не тратить время на технические проблемы.</p>
 
       <div class="content-gate" data-code="sprint0">
@@ -988,7 +990,7 @@
           <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
         </div>
 
-        <div class="gated-content" hidden>
+        <div class="gated-content">
 
           <div class="sec-divider"></div>
 
@@ -1088,7 +1090,7 @@
     <div class="sec-label">Модуль 1</div>
     <h2>QGIS — Пространственный анализ</h2>
 
-    <div class="content-gate" data-code="qgis">
+    <div class="content-gate" data-code="qgis1">
       <div class="video-gate-locked">
         <span class="video-gate-badge">🔒 Модуль — по коду</span>
         <div class="video-gate-text">Пока не открыто</div>
@@ -1103,7 +1105,7 @@
         <div class="preview-chip">📝 Конспекты, данные, экспорт, воркфлоу</div>
       </div>
 
-      <div class="gated-content" hidden>
+      <div class="gated-content">
 
     <!-- OVERVIEW -->
     <section id="overview">
@@ -1523,7 +1525,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
   </div><!-- /panel-qgis -->
 
   <!-- ════════════ MODULE PANEL: NEURAL (Модуль 2) ════════════ -->
-  <div class="module-panel" id="panel-neural">
+  <div class="module-panel" id="panel-ai">
     <div class="guide-inner" style="padding-top:40px;">
 
       <div class="author-strip">
@@ -1535,7 +1537,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       <h2>Нейросети — основы перед началом модуля</h2>
       <p>Перед тем как переходить к практической работе с генерацией изображений и текстов, важно понимать базовые принципы устройства современных нейросетей и различия между основными типами моделей, которые встретятся в курсе.</p>
 
-      <div class="content-gate" data-code="neural">
+      <div class="content-gate" data-code="ai2">
         <div class="video-gate-locked">
           <span class="video-gate-badge">🔒 Модуль — по коду</span>
           <div class="video-gate-text">Пока не открыто</div>
@@ -1549,7 +1551,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
           <div class="preview-chip">📝 Типы нейросетей и ключевые понятия</div>
         </div>
 
-        <div class="gated-content" hidden>
+        <div class="gated-content">
 
       <h3>Какие нейросети используются в курсе</h3>
       <div class="ai-grid" style="grid-template-columns:repeat(3,1fr);">
@@ -1612,12 +1614,12 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
   </div>
 
   <!-- ════════════ MODULE PANEL: GENVIZ (Модуль 3) ════════════ -->
-  <div class="module-panel" id="panel-genviz">
+  <div class="module-panel" id="panel-gen">
 
   <!-- sub-nav -->
-  <div class="nav-wrap" id="genvizSubNav" style="top:0;">
+  <div class="nav-wrap" id="genSubNav" style="top:0;">
     <div class="nav-pills">
-      <span class="pill" data-target="genviz-intro" onclick="scrollToSection('genviz-intro')">Обзор модуля</span>
+      <span class="pill" data-target="gen-intro" onclick="scrollToSection('gen-intro')">Обзор модуля</span>
       <span class="pill" data-target="prompts" onclick="scrollToSection('prompts')">Основы нейросетей</span>
       <span class="pill" data-target="prompt-formula" onclick="scrollToSection('prompt-formula')">Формула промпта</span>
       <span class="pill" data-target="example-rostov" onclick="scrollToSection('example-rostov')">Пример: Ростов</span>
@@ -1635,10 +1637,10 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       </div>
 
       <div class="sec-label green">Модуль 3</div>
-      <h2 id="genviz-intro">Генерация идей и визуализация</h2>
+      <h2 id="gen-intro">Генерация идей и визуализация</h2>
       <p>Модуль посвящён практической работе с нейросетями для визуализации архитектурных решений: от подготовки исходного драфта в Photoshop и формулировки промта до отбора результата и финальной постобработки.</p>
 
-      <div class="content-gate" data-code="genviz">
+      <div class="content-gate" data-code="gen3">
         <div class="video-gate-locked">
           <span class="video-gate-badge">🔒 Модуль — по коду</span>
           <div class="video-gate-text">Пока не открыто</div>
@@ -1653,7 +1655,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
           <div class="preview-chip">📝 Формула промпта, примеры, Photoshop</div>
         </div>
 
-        <div class="gated-content" hidden>
+        <div class="gated-content">
 
       <h3>Структура модуля</h3>
       <div class="steps">
@@ -2040,7 +2042,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
   </div>
 
   <!-- ════════════ MODULE PANEL: SYNTH (Модуль 4) ════════════ -->
-  <div class="module-panel" id="panel-synth">
+  <div class="module-panel" id="panel-pres">
     <div class="guide-inner" style="padding-top:40px;">
 
       <div class="author-strip">
@@ -2052,7 +2054,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
       <h2>Синтез и презентация</h2>
       <p>Завершающий модуль курса посвящён сборке всех наработок — схем из QGIS, визуализаций и текстовых описаний — в единую презентацию проекта с помощью Gamma.app.</p>
 
-      <div class="content-gate" data-code="synth">
+      <div class="content-gate" data-code="pres4">
         <div class="video-gate-locked">
           <span class="video-gate-badge">🔒 Модуль — по коду</span>
           <div class="video-gate-text">Пока не открыто</div>
@@ -2066,7 +2068,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
           <div class="preview-chip">📝 Этапы сборки, чек-лист презентации</div>
         </div>
 
-        <div class="gated-content" hidden>
+        <div class="gated-content">
 
       <h3>Что такое Gamma.app</h3>
       <div class="card card-success" style="margin-bottom:20px;">
@@ -2187,7 +2189,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
   layoutStickyBars();
 
   // ── Hash routing: прямые ссылки на модули ──────────────────
-  const HASH_MODULES = { qgis: true, neural: true, genviz: true, synth: true };
+  const HASH_MODULES = { sprint: true, qgis: true, ai: true, gen: true, pres: true };
 
   function openByHash(hash) {
     const mod = hash.replace('#', '');
@@ -2222,7 +2224,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
   // ─── Scroll-spy: highlight nav pill for the section currently in view ───
   let scrollSpyObserver = null;
-  const spySectionIds = ['lesson1','lesson2','lesson3','overview','data','schemes','export','aicomp','prompts','workflow','genviz-intro','prompt-formula','example-rostov','example-elista','prompt-mistakes','photoshop-draft','s0-vpn','s0-llm','s0-soft','s0-checklist'];
+  const spySectionIds = ['lesson1','lesson2','lesson3','overview','data','schemes','export','aicomp','prompts','workflow','gen-intro','prompt-formula','example-rostov','example-elista','prompt-mistakes','photoshop-draft','s0-vpn','s0-llm','s0-soft','s0-checklist'];
 
   function setActivePill(id) {
     document.querySelectorAll('.nav-pills .pill').forEach(p => p.classList.remove('active-scroll'));
@@ -2309,8 +2311,10 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
   function revealGatedContent(gate) {
     const bar = gate.querySelector('.video-gate-locked');
     if (bar) bar.style.display = 'none';
+    const preview = gate.querySelector('.module-gate-preview');
+    if (preview) preview.style.display = 'none';
     const content = gate.querySelector('.gated-content');
-    if (content) content.hidden = false;
+    if (content) content.classList.add('unlocked');
   }
 
   function unlockContent(btn) {
