@@ -656,8 +656,8 @@
   .task-box { background:var(--green-l); border:1.5px solid var(--green); border-radius:10px; padding:18px 20px; margin:16px 0; }
   .task-title { font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--green); margin-bottom:10px; display:flex; align-items:center; gap:6px; }
   .task-list { list-style:none; display:flex; flex-direction:column; gap:6px; }
-  .task-list li { font-size:13.5px; color:var(--ink-muted); display:flex; gap:8px; align-items:flex-start; }
-  .task-list li::before { content:'▸'; color:var(--green); flex-shrink:0; margin-top:1px; }
+  .task-list li { font-size:13.5px; color:var(--ink-muted); position:relative; padding-left:18px; }
+  .task-list li::before { content:'▸'; color:var(--green); position:absolute; left:0; top:0; }
   .task-list li strong { color:var(--ink); }
   .subtask-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0 4px; }
   @media(max-width:520px){ .subtask-grid{grid-template-columns:1fr;} }
