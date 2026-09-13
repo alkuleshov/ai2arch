@@ -735,7 +735,8 @@
 
   /* ai grid */
   .ai-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:14px 0 20px; }
-  @media(max-width:580px){ .ai-grid{grid-template-columns:1fr;} }
+  .ai-grid-2col { grid-template-columns:repeat(2,1fr); }
+  @media(max-width:580px){ .ai-grid, .ai-grid-2col { grid-template-columns:1fr; } }
   .ai-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:18px; }
   .ai-name  { font-size:14.5px; font-weight:700; margin-bottom:5px; color:var(--ink); }
   .ai-badge { font-size:9.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:3px 7px; border-radius:3px; margin-bottom:11px; display:inline-block; }
@@ -1432,7 +1433,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
     <section id="aicomp">
       <div class="sec-label">05</div>
       <h2>ИИ-платформы курса</h2>
-      <div class="ai-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="ai-grid">
         <div class="ai-card">
           <div class="ai-name">Gemini 1.5 Pro</div>
           <span class="ai-badge" style="background:#E8F4FD;color:#1A73E8;">Google</span>
@@ -1469,7 +1470,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
           </ul>
         </div>
       </div>
-      <div class="ai-grid" style="grid-template-columns:repeat(2,1fr); margin-top:10px;">
+      <div class="ai-grid ai-grid-2col" style="margin-top:10px;">
         <div class="ai-card">
           <div class="ai-name">Алиса AI</div>
           <span class="ai-badge" style="background:#FFF3E0;color:#F57C00;">Яндекс</span>
@@ -1571,7 +1572,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
         <div class="gated-content">
 
       <h3>Какие нейросети используются в курсе</h3>
-      <div class="ai-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="ai-grid">
         <div class="ai-card">
           <div class="ai-name">Текстовые модели (LLM)</div>
           <span class="ai-badge" style="background:#E8F4FD;color:#1A73E8;">ChatGPT · Claude · Gemini</span>
