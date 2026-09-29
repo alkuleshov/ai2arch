@@ -214,33 +214,45 @@
   .feat-desc  { font-size:12px; color:var(--w40); line-height:1.5; }
 
   .instructor-line {
-    font-size: 13.5px;
+    font-size: 13px;
     color: var(--w70);
     font-weight: 500;
     margin-bottom: 40px;
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 16px;
+    line-height: 1.5;
   }
   .instructor-photo {
-    width: 60px; height: 60px;
+    width: 68px; height: 68px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid rgba(77,163,255,.5);
     box-shadow: 0 0 0 3px rgba(77,163,255,.1);
     flex-shrink: 0;
   }
-  .instructor-line a {
+  .instructor-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .instructor-info a {
     color: #fff;
-    font-weight: 700;
+    font-size: 14.5px;
+    font-weight: 800;
     text-decoration: underline;
     text-decoration-color: rgba(255,255,255,0.25);
     text-underline-offset: 2px;
     transition: color .15s, text-decoration-color .15s;
   }
-  .instructor-line a:hover {
+  .instructor-info a:hover {
     color: var(--cyan-soft);
     text-decoration-color: var(--cyan-soft);
+  }
+  .instructor-bio {
+    font-size: 11.5px;
+    color: var(--w40);
+    letter-spacing: .01em;
   }
 
   .ref-section { margin-bottom:44px; }
@@ -433,34 +445,6 @@
     border-bottom: 1px solid rgba(42,47,62,.25);
   }
 
-  /* Data/system tag line */
-  .system-tags {
-    display: flex; gap: 20px; margin-bottom: 32px; flex-wrap: wrap;
-  }
-  .sys-tag {
-    font-size: 9.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
-    color: rgba(255,255,255,0.25);
-  }
-  .sys-tag-sep { color: rgba(42,47,62,.5); font-size: 9px; }
-
-  /* Outcomes numbering: architectural style */
-  .oc-num {
-    font-family: var(--mono); font-size: 10px; font-weight: 700;
-    color: var(--graphite,#2A2F3E); opacity:0.7; flex-shrink: 0; margin-top:2px;
-    opacity: 0.8; letter-spacing: .05em;
-  }
-
-  /* Tag line below h1 */
-  .brand-tagline {
-    font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
-    color: rgba(255,255,255,0.22); margin-bottom: 36px;
-    display: flex; align-items: center; gap: 16px;
-  }
-  .brand-tagline::before {
-    content:''; width: 40px; height: 1px;
-    background: rgba(42,47,62,.6);
-  }
-
   .cover-bottom {
     margin-top:52px; padding-top:22px; border-top:1px solid rgba(42,47,62,.4);
     display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
@@ -483,7 +467,6 @@
     width: 100%;
   }
 
-  /* back bar */
   .back-bar {
     background: linear-gradient(90deg, #070C18 0%, #0A0F1A 100%); border-bottom:1px solid rgba(246,244,240,.08);
     padding: 0;
@@ -516,7 +499,6 @@
     .bc-root, .bc-sep { display:none; }
   }
 
-  /* sticky sub-nav inside guide */
   .nav-wrap {
     position: sticky; top:49px; z-index:100;
     background: var(--surface);
@@ -531,7 +513,6 @@
     background:linear-gradient(to right, transparent, var(--surface));
   }
 
-  /* module tabs (top-level sections) */
   .module-tabs {
     display: flex; gap: 0;
     max-width: none;
@@ -589,7 +570,6 @@
 
   .guide-inner { max-width:920px; margin:0 auto; padding:0 32px 80px; }
 
-  /* labels / headings */
   .sec-label { font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--graphite,#2A2F3E); margin-bottom:8px; }
   .sec-label.purple { color:var(--purple); }
   .sec-label.green  { color:var(--green); }
@@ -599,7 +579,6 @@
   p  { color:var(--ink-muted); margin-bottom:12px; font-size:14.5px; }
 
   .sec-divider { height:1px; background:var(--border); margin:36px 0; }
-  .sec-pt { padding-top:40px; }
   .author-strip {
     display:flex; align-items:center; gap:10px;
     margin-bottom:24px; padding:10px 16px;
@@ -615,7 +594,6 @@
   .author-strip strong { color:var(--ink); font-weight:700; }
   section[id] { scroll-margin-top: 0; }
 
-  /* lesson block */
   .lesson-block { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; margin-bottom:24px; border-left:3px solid var(--graphite,#2A2F3E); box-shadow:0 1px 4px rgba(10,15,29,0.06); }
   .lesson-header { padding:20px 24px 18px; border-bottom:1px solid var(--border); display:flex; align-items:flex-start; gap:16px; }
   .lesson-num { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800; flex-shrink:0; color:#fff; }
@@ -637,7 +615,6 @@
   .intro-quote.green { border-left-color:var(--green); }
   .intro-quote.orange { border-left-color:var(--accent2); }
 
-  /* resource links */
   .res-links { display:flex; flex-direction:column; gap:8px; margin:14px 0; }
   .res-link {
     display:flex; align-items:center; gap:10px;
@@ -650,7 +627,6 @@
   .res-url   { font-size:11px; color:var(--ink-faint); font-family:var(--mono); margin-top:1px; }
   .res-arrow { margin-left:auto; color:var(--ink-faint); font-size:14px; flex-shrink:0; }
 
-  /* coords — dark island on light page */
   .coords-wrap { background:#0A0D18; border:1px solid rgba(0,191,255,0.25); border-radius:12px; overflow:hidden; margin:14px 0; }
   .coords-head { display:grid; grid-template-columns:52px 1fr 1fr; padding:8px 18px; background:rgba(0,191,255,0.08); border-bottom:1px solid rgba(0,191,255,0.15); }
   .coords-head span { font-family:var(--mono); font-size:9.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:rgba(0,191,255,0.55); }
@@ -662,7 +638,6 @@
   .coord-val.lon { color:rgba(200,230,255,0.7); }
   @media(max-width:480px){ .coords-wrap{overflow-x:auto;} .coords-head,.coord-row{grid-template-columns:44px 1fr 1fr; padding-left:12px; padding-right:12px;} .coord-val{font-size:11.5px;} }
 
-  /* task */
   .task-box { background:var(--green-l); border:1.5px solid var(--green); border-radius:10px; padding:18px 20px; margin:16px 0; }
   .task-title { font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--green); margin-bottom:10px; display:flex; align-items:center; gap:6px; }
   .task-list { list-style:none; display:flex; flex-direction:column; gap:6px; }
@@ -674,13 +649,11 @@
   .subtask { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:11px 14px; font-size:12.5px; color:var(--ink-muted); }
   .subtask-label { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--green); margin-bottom:4px; }
 
-  /* checklist */
   .checklist { list-style:none; margin:10px 0 18px; }
   .checklist li { display:flex; align-items:flex-start; gap:9px; font-size:13px; color:var(--ink-muted); padding:6px 0; border-bottom:1px solid var(--border); }
   .checklist li:last-child { border-bottom:none; }
   .chk { width:17px; height:17px; border-radius:4px; background:var(--accent); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; font-size:9px; color:#fff; }
 
-  /* cards */
   .card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:22px; margin-bottom:14px; }
   .card-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
   .card-grid-3col { grid-template-columns:repeat(3,1fr); }
@@ -695,7 +668,6 @@
   .card-success { border-left:3px solid var(--green); background:var(--green-l); }
   .card-success h3 { color:var(--green); }
 
-  /* steps */
   .steps { display:flex; flex-direction:column; gap:0; margin-bottom:20px; }
   .step { display:grid; grid-template-columns:46px 1fr; position:relative; }
   .step:not(:last-child)::before { content:''; position:absolute; left:21px; top:46px; bottom:0; width:2px; background:var(--border); }
@@ -704,11 +676,9 @@
   .step-body h3 { margin-top:0; font-size:14px; }
   .step-body p  { font-size:13px; margin-bottom:0; }
 
-  /* code */
   .code-block { background:#0A0D18; color:#A8D8A8; font-family:var(--mono); font-size:12px; border-radius:8px; padding:14px 18px; margin:10px 0; overflow-x:auto; line-height:1.8; border:1px solid rgba(255,255,255,0.06); }
   .ck { color:#5A6A7A; } .kk { color:#7A9BFF; } .vv { color:#FFD080; }
 
-  /* table */
   .table-wrap { overflow-x:auto; margin:14px 0 20px; }
   table { width:100%; border-collapse:collapse; font-size:13px; min-width:480px; }
   th { text-align:left; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); padding:9px 13px; border-bottom:2px solid var(--border); background:var(--surface2); }
@@ -719,7 +689,6 @@
   .tag.g { background:var(--green-l); color:var(--green); }
   .tag.o { background:var(--accent2-l); color:var(--accent2); }
 
-  /* tip */
   .tip { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:12px 15px; font-size:13px; color:var(--ink-muted); display:flex; gap:9px; align-items:flex-start; margin:14px 0; }
   .tip-i { font-size:15px; flex-shrink:0; }
 
@@ -744,7 +713,6 @@
   .gated-content { filter: blur(6px); pointer-events: none; user-select: none; transition: filter .35s ease; margin-top: 20px; }
   .gated-content.unlocked { filter: none; pointer-events: auto; user-select: auto; }
 
-  /* ai grid */
   .ai-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:14px 0 20px; }
   .ai-grid-2col { grid-template-columns:repeat(2,1fr); }
   @media(max-width:580px){ .ai-grid, .ai-grid-2col { grid-template-columns:1fr; } }
@@ -756,7 +724,6 @@
   .ai-card ul li:last-child { border-bottom:none; }
   .ai-card ul li::before { content:'→'; color:var(--ink-faint); flex-shrink:0; }
 
-  /* prompt */
   .prompt-box { background:#0A0D18; border-radius:8px; overflow:hidden; margin:10px 0; border:1px solid rgba(255,255,255,.06); }
   .prompt-hdr { background:rgba(255,255,255,.05); padding:7px 15px; font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.35); border-bottom:1px solid rgba(255,255,255,.05); }
   .prompt-body { padding:14px 18px; font-family:var(--mono); font-size:12px; color:#C8D8F8; line-height:1.9; }
@@ -764,11 +731,6 @@
   .result-shot img { display:block; width:100%; height:auto; }
   .result-caption { padding:10px 16px; font-size:12.5px; color:var(--ink-faint); background:#F7F6F1; border-top:1px solid var(--border); }
   .prompt-hl { color:#FFD080; }
-
-  /* footer */
-    45%      { transform: translateY(-12px) rotate(1.2deg); }
-    70%      { transform: translateY(-6px) rotate(-0.8deg); }
-  }
 
   .guide-footer { background:transparent; color:var(--ink-faint); text-align:center; padding:28px 24px; font-size:11.5px; border-top:1px solid var(--border); }
   .section-end { max-width:560px; margin:36px auto 0; text-align:center; padding:22px 20px; background:var(--surface2); border:1px solid var(--border); border-radius:12px; }
@@ -780,7 +742,6 @@
   .footer-mark { display:inline-block; font-family:var(--mono); font-size:15px; font-weight:800; letter-spacing:-.02em; color:var(--azure); position:relative; padding-bottom:12px; margin-bottom:6px; }
   .footer-mark::after { content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:26px; height:2px; background:var(--azure); border-radius:2px; }
 
-  /* page transition */
   .view { animation: fadeIn .25s ease; }
   @keyframes fadeIn { from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)} }
 </style>
@@ -800,17 +761,20 @@
     </div>
     <div class="instructor-line">
       <img class="instructor-photo" src="images/kuleshov.jpg" alt="Кулешов Александр Алексеевич">
-      <span>Руководитель курса — <a href="https://t.me/ai2arch" target="_blank" rel="noopener">Кулешов Александр Алексеевич</a></span>
+      <div class="instructor-info">
+        <span>Руководитель курса — <a href="https://t.me/alkuleshov" target="_blank" rel="noopener">Кулешов Александр Алексеевич</a></span>
+        <span class="instructor-bio">AI Product & Spatial Intelligence Strategist · 15+ лет в архитектуре, КРТ и редевелопменте · Основатель ai2arch.ru</span>
+      </div>
     </div>
   <div class="hero">
       <div class="program-tag">Современные инструменты проектного анализа</div>
       <h1><em>ИИ</em> в архитектуре —</h1>
       <div class="h1-sub">Новый уровень<br>проектного анализа</div>
 
-      <!-- Набор — главный призыв к действию, самое заметное место страницы -->
+      <!-- Набор — главный призыв к действию -->
       <div class="enroll-banner">
         <div class="enroll-banner-dot"></div>
-        <div class="enroll-banner-text">Новый поток стартует после <strong>21 сентября 2026</strong> · Стоимость для студентов и специалистов — <strong>5 000 ₽</strong></div>
+        <div class="enroll-banner-text">Новый поток стартует <strong>в сентябре 2026</strong> · Стоимость за курс — <strong>5 000 ₽</strong> (действует скидка для сотрудников ЮФУ)</div>
       </div>
       <div class="format-banner">
         <div class="format-banner-dot"></div>
@@ -827,7 +791,6 @@
           <span>→</span>
         </button>
       </div>
-
 
       <div class="features">
         <div class="feat">
@@ -848,7 +811,7 @@
           <div class="feat-icon fi-green">🗺️</div>
           <div>
             <div class="feat-title">Пространственный анализ</div>
-            <div class="feat-desc">QGIS, OSM, геоданные — подготовка схем для ИИ-обработки</div>
+            <div class="feat-desc">QGIS, OSM, геоданные — подготовка схем для ИИ-обработки без перегруза теорией</div>
           </div>
         </div>
         <div class="feat">
@@ -879,7 +842,7 @@
         </div>
       </div>
 
-      <!-- Повторный призыв внизу — для тех, кто долистал до конца -->
+      <!-- Повторный призыв внизу -->
       <div class="cta-row">
         <button class="cta-btn cta-btn-outline" onclick="document.getElementById('enroll-modal').style.display='flex'">
           Записаться на курс
@@ -887,7 +850,7 @@
         </button>
       </div>
       <div class="enroll-meta">
-        Стоимость курса для студентов — <strong>5 000 ₽</strong> · Новый поток стартует <strong>21 сентября 2026</strong>
+        Стоимость за курс — <strong>5 000 ₽</strong> · Действует специальная скидка для сотрудников ЮФУ
       </div>
     </div>
 
@@ -925,7 +888,7 @@
     </div>
   </div>
 
-  <!-- reference materials — above all modules -->
+  <!-- reference materials -->
   <div class="guide-ref-section">
     <div class="guide-ref-inner">
       <div class="ref-eyebrow light">Справочные материалы</div>
@@ -1002,16 +965,14 @@
 
   <!-- ════════════ MODULE PANEL: SPRINT 0 ════════════ -->
   <div class="module-panel active" id="panel-sprint">
-
-  <!-- sub-nav -->
-  <div class="nav-wrap" id="sprintSubNav" style="top:0;">
-    <div class="nav-pills">
-      <span class="pill" data-target="s0-network" onclick="scrollToSection('s0-network')">Доступ к сервисам</span>
-      <span class="pill" data-target="s0-llm" onclick="scrollToSection('s0-llm')">Регистрация в LLM</span>
-      <span class="pill" data-target="s0-soft" onclick="scrollToSection('s0-soft')">Установка софта</span>
-      <span class="pill" data-target="s0-checklist" onclick="scrollToSection('s0-checklist')">Чек-лист</span>
+    <div class="nav-wrap" id="sprintSubNav" style="top:0;">
+      <div class="nav-pills">
+        <span class="pill" data-target="s0-network" onclick="scrollToSection('s0-network')">Доступ к сервисам</span>
+        <span class="pill" data-target="s0-llm" onclick="scrollToSection('s0-llm')">Регистрация в LLM</span>
+        <span class="pill" data-target="s0-soft" onclick="scrollToSection('s0-soft')">Установка софта</span>
+        <span class="pill" data-target="s0-checklist" onclick="scrollToSection('s0-checklist')">Чек-лист</span>
+      </div>
     </div>
-  </div>
 
     <div class="guide-inner" style="padding-top:40px;">
       <div class="sec-label">Спринт 0</div>
@@ -1030,9 +991,7 @@
         </div>
 
         <div class="gated-content">
-
           <div class="sec-divider"></div>
-
           <section id="s0-network">
             <h3>Блок 1. Сетевые и технические требования</h3>
             <p>Для работы с курсом нужны активные учётные записи в сервисах Claude, ChatGPT и Gemini, а также стабильное сетевое соединение, позволяющее к ним подключаться.</p>
@@ -1085,7 +1044,6 @@
               <li><div class="chk">✓</div> Photoshop установлен, обновлён до актуальной версии, подписка активна</li>
             </ul>
           </section>
-
         </div>
       </div>
     </div>
@@ -1093,338 +1051,327 @@
 
   <!-- ════════════ MODULE PANEL: QGIS ════════════ -->
   <div class="module-panel" id="panel-qgis">
-
-  <!-- sub-nav -->
-  <div class="nav-wrap" id="qgisSubNav" style="top:0;">
-    <div class="nav-pills">
-      <span class="pill" data-target="overview" onclick="scrollToSection('overview')">Обзор QGIS</span>
-      <span class="pill lesson" data-target="lesson1" onclick="scrollToSection('lesson1')">📹 Видеоурок Часть 1</span>
-      <span class="pill lesson" data-target="lesson2" onclick="scrollToSection('lesson2')">📹 Видеоурок Часть 2</span>
-      <span class="pill lesson" data-target="lesson3" onclick="scrollToSection('lesson3')">📹 Видеоурок Часть 3</span>
-      <span class="pill" data-target="data" onclick="scrollToSection('data')">Данные</span>
-      <span class="pill" data-target="schemes" onclick="scrollToSection('schemes')">Схемы для ИИ</span>
-      <span class="pill" data-target="export" onclick="scrollToSection('export')">Экспорт</span>
-      <span class="pill" data-target="aicomp" onclick="scrollToSection('aicomp')">Платформы ИИ</span>
-      <span class="pill" data-target="workflow" onclick="scrollToSection('workflow')">Воркфлоу</span>
-    </div>
-  </div>
-
-  <div class="guide-inner" style="padding-top:40px;">
-
-    <div class="author-strip">
-      <div class="av">КД</div>
-      <div>Автор раздела: <strong>Костенко Дарья Богдановна</strong></div>
+    <div class="nav-wrap" id="qgisSubNav" style="top:0;">
+      <div class="nav-pills">
+        <span class="pill" data-target="overview" onclick="scrollToSection('overview')">Обзор QGIS</span>
+        <span class="pill lesson" data-target="lesson1" onclick="scrollToSection('lesson1')">📹 Видеоурок Часть 1</span>
+        <span class="pill lesson" data-target="lesson2" onclick="scrollToSection('lesson2')">📹 Видеоурок Часть 2</span>
+        <span class="pill lesson" data-target="lesson3" onclick="scrollToSection('lesson3')">📹 Видеоурок Часть 3</span>
+        <span class="pill" data-target="data" onclick="scrollToSection('data')">Данные</span>
+        <span class="pill" data-target="schemes" onclick="scrollToSection('schemes')">Схемы для ИИ</span>
+        <span class="pill" data-target="export" onclick="scrollToSection('export')">Экспорт</span>
+        <span class="pill" data-target="aicomp" onclick="scrollToSection('aicomp')">Платформы ИИ</span>
+        <span class="pill" data-target="workflow" onclick="scrollToSection('workflow')">Воркфлоу</span>
+      </div>
     </div>
 
-    <div class="sec-label">Модуль 1</div>
-    <h2>QGIS — Пространственный анализ</h2>
-
-    <div class="content-gate" data-code="qgis1">
-      <div class="video-gate-locked">
-        <span class="video-gate-badge">🔒 Модуль — по коду</span>
-        <div class="video-gate-text">Пока не открыто</div>
-        <div class="video-gate-form">
-          <input type="text" placeholder="Код доступа" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
-          <button onclick="unlockContent(this)">Открыть</button>
-        </div>
-        <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
-      </div>
-      <div class="module-gate-preview">
-        <div class="preview-chip">🎥 3 видеоурока</div>
-        <div class="preview-chip">📝 Конспекты, данные, экспорт, воркфлоу</div>
+    <div class="guide-inner" style="padding-top:40px;">
+      <div class="author-strip">
+        <div class="av">КД</div>
+        <div>Автор раздела: <strong>Костенко Дарья Богдановна</strong></div>
       </div>
 
-      <div class="gated-content">
-
-    <!-- OVERVIEW -->
-    <section id="overview">
       <div class="sec-label">Модуль 1</div>
-      <h2>Что такое QGIS и зачем он архитектору</h2>
-      <p>QGIS — бесплатная геоинформационная система с открытым кодом. Для архитектора и градостроителя это инструмент пространственного анализа: работа с геоподосновой, наложение слоёв данных и генерация чистых графических схем.</p>
-      <div class="card-grid">
-        <div class="card card-accent"><div class="card-icon">🗺️</div><h3>Геопривязка</h3><p>Все объекты имеют точные координаты. Схема всегда соответствует реальной территории.</p></div>
-        <div class="card card-accent"><div class="card-icon">📐</div><h3>Точные масштабы</h3><p>Любой экспорт — с заданным масштабом, рамкой, сеткой. Контроль над каждым пикселем.</p></div>
-        <div class="card card-accent"><div class="card-icon">🔗</div><h3>Открытые данные</h3><p>OSM, Росреестр, данные переписи, DEM-рельеф — всё загружается напрямую.</p></div>
-        <div class="card card-accent"><div class="card-icon">🤖</div><h3>ИИ-совместимые выгрузки</h3><p>PNG с прозрачным фоном, чёткими контурами и минималистичным стилем — идеал для vision-моделей.</p></div>
-      </div>
-    </section>
+      <h2>QGIS — Пространственный анализ</h2>
 
-    <div class="sec-divider"></div>
-
-    <!-- LESSON 1 -->
-    <section id="lesson1">
-      <h2>Видеоурок Часть 1 — Интерфейс, проект, система координат</h2>
-      <div class="lesson-block">
-        <div class="lesson-header">
-          <div class="lesson-num ln-purple">1</div>
-          <div>
-            <div class="lesson-eyebrow le-purple">Вступление к видеоролику</div>
-            <div class="lesson-title">Знакомство с программой: интерфейс, проект, подложки, координаты</div>
+      <div class="content-gate" data-code="qgis1">
+        <div class="video-gate-locked">
+          <span class="video-gate-badge">🔒 Модуль — по коду</span>
+          <div class="video-gate-text">Пока не открыто</div>
+          <div class="video-gate-form">
+            <input type="text" placeholder="Код доступа" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
+            <button onclick="unlockContent(this)">Открыть</button>
           </div>
+          <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
         </div>
-        <div class="lesson-body">
-          <div class="intro-quote">
-            Первый видеоурок по QGIS — основательно познакомимся с программой. Изучим интерфейс, научимся правильно создавать проект, настраивать систему координат и подключать картографические подложки. Также узнаем, как быстро находить нужные точки на карте по заданным координатам.<br><br>
-            К этому видео прикреплена таблица с готовыми координатами участка и удобный геокалькулятор — чтобы легко переводить свои координаты в нужный формат. Открываем QGIS и погружаемся в работу.
-          </div>
+        <div class="module-gate-preview">
+          <div class="preview-chip">🎥 3 видеоурока</div>
+          <div class="preview-chip">📝 Конспекты, данные, экспорт, воркфлоу</div>
+        </div>
 
-          <h3>Геокалькулятор</h3>
-          <div class="res-links">
-            <a class="res-link" href="https://geoproj.ru/" target="_blank" rel="noopener">
-              <div class="res-icon" style="background:#EEF1FD;">🧮</div>
-              <div>
-                <div class="res-title">GeoProj — онлайн-геокалькулятор координат</div>
-                <div class="res-url">geoproj.ru</div>
-              </div>
-              <div class="res-arrow">↗</div>
-            </a>
-          </div>
-
-          <h3>Координаты участка для практики</h3>
-          <p style="font-size:13px;">Введите точки в инструмент «Перейти к координатам» или создайте временный слой. Система координат — WGS 84 (EPSG:4326).</p>
-          <div class="coords-wrap">
-            <div class="coords-head">
-              <span>Точка</span><span>Широта (lat)</span><span>Долгота (lon)</span>
+        <div class="gated-content">
+          <section id="overview">
+            <div class="sec-label">Модуль 1</div>
+            <h2>Что такое QGIS и зачем он архитектору</h2>
+            <p>QGIS — бесплатная геоинформационная система с открытым кодом. Для архитектора и градостроителя это инструмент пространственного анализа: работа с геоподосновой, наложение слоёв данных и генерация чистых графических схем.</p>
+            <div class="card-grid">
+              <div class="card card-accent"><div class="card-icon">🗺️</div><h3>Геопривязка</h3><p>Все объекты имеют точные координаты. Схема всегда соответствует реальной территории.</p></div>
+              <div class="card card-accent"><div class="card-icon">📐</div><h3>Точные масштабы</h3><p>Любой экспорт — с заданным масштабом, рамкой, сеткой. Контроль над каждым пикселем.</p></div>
+              <div class="card card-accent"><div class="card-icon">🔗</div><h3>Открытые данные</h3><p>OSM, Росреестр, данные переписи, DEM-рельеф — всё загружается напрямую.</p></div>
+              <div class="card card-accent"><div class="card-icon">🤖</div><h3>ИИ-совместимые выгрузки</h3><p>PNG с прозрачным фоном, чёткими контурами и минималистичным стилем — идеал для vision-моделей.</p></div>
             </div>
-            <div class="coord-row"><span class="coord-pt">T1</span><span class="coord-val">47.212056991</span><span class="coord-val lon">39.786585841</span></div>
-            <div class="coord-row"><span class="coord-pt">T2</span><span class="coord-val">47.213334769</span><span class="coord-val lon">39.787252508</span></div>
-            <div class="coord-row"><span class="coord-pt">T3</span><span class="coord-val">47.216168102</span><span class="coord-val lon">39.785002508</span></div>
-            <div class="coord-row"><span class="coord-pt">T4</span><span class="coord-val">47.218279213</span><span class="coord-val lon">39.781280286</span></div>
-            <div class="coord-row"><span class="coord-pt">T5</span><span class="coord-val">47.216390324</span><span class="coord-val lon">39.775169174</span></div>
-          </div>
-          <div class="tip"><div class="tip-i">💡</div><div>Координаты в формате десятичных градусов (DD). При создании точечного слоя выберите <strong>EPSG:4326 (WGS 84)</strong>. Пересчёт в Pulkovo/Gauss-Krüger — через geoproj.ru.</div></div>
+          </section>
 
-          <h3>Что изучается в Видеоуроке Часть 1</h3>
-          <ul class="checklist">
-            <li><div class="chk">✓</div> Интерфейс QGIS: панели, менеджер слоёв, строка состояния</li>
-            <li><div class="chk">✓</div> Создание нового проекта и сохранение .qgz</li>
-            <li><div class="chk">✓</div> Настройка системы координат проекта (CRS)</li>
-            <li><div class="chk">✓</div> Подключение картографических подложек (XYZ Tiles, WMS)</li>
-            <li><div class="chk">✓</div> Инструмент «Перейти к координатам» — поиск точки на карте</li>
-            <li><div class="chk">✓</div> Конвертация форматов координат через geoproj.ru</li>
-          </ul>
-        </div>
+          <div class="sec-divider"></div>
 
-        <div class="video-embed">
-          <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239021&hash=10d57373894892c6&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
-        </div>
-      </div>
-    </section>
-
-    <div class="sec-divider"></div>
-
-    <!-- LESSON 2 -->
-    <section id="lesson2">
-      <h2>Видеоурок Часть 2 — OpenStreetMap, QuickOSM, оформление карты</h2>
-      <div class="lesson-block">
-        <div class="lesson-header">
-          <div class="lesson-num ln-green">2</div>
-          <div>
-            <div class="lesson-eyebrow le-green">Материалы и задание</div>
-            <div class="lesson-title">Загрузка данных OSM, Rule-based стилизация, легенда</div>
-          </div>
-        </div>
-        <div class="lesson-body">
-          <div class="intro-quote green">
-            Второй видеоурок по QGIS — продолжаем работать с программой. Научимся загружать реальные данные из OpenStreetMap: дома, дороги, земельные участки и другие объекты по специальным тегам. Разберёмся, как быстро находить и импортировать нужную информацию через плагин QuickOSM, а также красиво оформлять всё это на карте.
-          </div>
-
-          <h3>Справочники тегов OSM</h3>
-          <div class="res-links">
-            <a class="res-link" href="https://wiki.openstreetmap.org/wiki/Map_features" target="_blank" rel="noopener">
-              <div class="res-icon" style="background:var(--green-l);">🗺️</div>
-              <div>
-                <div class="res-title">OSM Wiki — полный справочник Map Features</div>
-                <div class="res-url">wiki.openstreetmap.org/wiki/Map_features</div>
+          <section id="lesson1">
+            <h2>Видеоурок Часть 1 — Интерфейс, проект, система координат</h2>
+            <div class="lesson-block">
+              <div class="lesson-header">
+                <div class="lesson-num ln-purple">1</div>
+                <div>
+                  <div class="lesson-eyebrow le-purple">Вступление к видеоролику</div>
+                  <div class="lesson-title">Знакомство с программой: интерфейс, проект, подложки, координаты</div>
+                </div>
               </div>
-              <div class="res-arrow">↗</div>
-            </a>
-            <a class="res-link" href="https://softculture.cc/blog/entries/articles/osm-tags-1" target="_blank" rel="noopener">
-              <div class="res-icon" style="background:var(--purple-l);">📖</div>
-              <div>
-                <div class="res-title">SoftCulture — Теги OSM для архитекторов и урбанистов</div>
-                <div class="res-url">softculture.cc — osm-tags-1</div>
-              </div>
-              <div class="res-arrow">↗</div>
-            </a>
-          </div>
+              <div class="lesson-body">
+                <div class="intro-quote">
+                  Первый видеоурок по QGIS — основательно познакомимся с программой. Изучим интерфейс, научимся правильно создавать проект, настраивать систему координат и подключать картографические подложки. Также узнаем, как быстро находить нужные точки на карте по заданным координатам.<br><br>
+                  К этому видео прикреплена таблица с готовыми координатами участка и удобный геокалькулятор — чтобы легко переводить свои координаты в нужный формат. Открываем QGIS и погружаемся в работу.
+                </div>
 
-          <div class="task-box">
-            <div class="task-title">✏️ Задание к видеоуроку</div>
-            <ul class="task-list">
-              <li>Оформите карту своего участка проектирования с <strong>Rule-based (правило-based) оформлением</strong></li>
-              <li>Возьмите <strong>Ботанический сад</strong> или любой другой участок: парк, жилой квартал, территорию университета</li>
-            </ul>
-            <div class="subtask-grid" style="margin-top:14px;">
-              <div class="subtask"><div class="subtask-label">Скачать через QuickOSM</div>Дороги по типам · Здания · Земельные участки / landuse</div>
-              <div class="subtask"><div class="subtask-label">Настроить стиль</div>Цвета и толщины для типов дорог · Оформление зданий по категориям</div>
-              <div class="subtask"><div class="subtask-label">Легенда</div>Читаемая легенда в компоновщике карт</div>
-              <div class="subtask"><div class="subtask-label">Подписи</div>Основные улицы и важные объекты через Layer Labels</div>
+                <h3>Геокалькулятор</h3>
+                <div class="res-links">
+                  <a class="res-link" href="https://geoproj.ru/" target="_blank" rel="noopener">
+                    <div class="res-icon" style="background:#EEF1FD;">🧮</div>
+                    <div>
+                      <div class="res-title">GeoProj — онлайн-геокалькулятор координат</div>
+                      <div class="res-url">geoproj.ru</div>
+                    </div>
+                    <div class="res-arrow">↗</div>
+                  </a>
+                </div>
+
+                <h3>Координаты участка для практики</h3>
+                <p style="font-size:13px;">Введите точки в инструмент «Перейти к координатам» или создайте временный слой. Система координат — WGS 84 (EPSG:4326).</p>
+                <div class="coords-wrap">
+                  <div class="coords-head">
+                    <span>Точка</span><span>Широта (lat)</span><span>Долгота (lon)</span>
+                  </div>
+                  <div class="coord-row"><span class="coord-pt">T1</span><span class="coord-val">47.212056991</span><span class="coord-val lon">39.786585841</span></div>
+                  <div class="coord-row"><span class="coord-pt">T2</span><span class="coord-val">47.213334769</span><span class="coord-val lon">39.787252508</span></div>
+                  <div class="coord-row"><span class="coord-pt">T3</span><span class="coord-val">47.216168102</span><span class="coord-val lon">39.785002508</span></div>
+                  <div class="coord-row"><span class="coord-pt">T4</span><span class="coord-val">47.218279213</span><span class="coord-val lon">39.781280286</span></div>
+                  <div class="coord-row"><span class="coord-pt">T5</span><span class="coord-val">47.216390324</span><span class="coord-val lon">39.775169174</span></div>
+                </div>
+                <div class="tip"><div class="tip-i">💡</div><div>Координаты в формате десятичных градусов (DD). При создании точечного слоя выберите <strong>EPSG:4326 (WGS 84)</strong>. Пересчёт в Pulkovo/Gauss-Krüger — через geoproj.ru.</div></div>
+
+                <h3>Что изучается в Видеоуроке Часть 1</h3>
+                <ul class="checklist">
+                  <li><div class="chk">✓</div> Интерфейс QGIS: панели, менеджер слоёв, строка состояния</li>
+                  <li><div class="chk">✓</div> Создание нового проекта и сохранение .qgz</li>
+                  <li><div class="chk">✓</div> Настройка системы координат проекта (CRS)</li>
+                  <li><div class="chk">✓</div> Подключение картографических подложек (XYZ Tiles, WMS)</li>
+                  <li><div class="chk">✓</div> Инструмент «Перейти к координатам» — поиск точки на карте</li>
+                  <li><div class="chk">✓</div> Конвертация форматов координат через geoproj.ru</li>
+                </ul>
+              </div>
+
+              <div class="video-embed">
+                <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239021&hash=10d57373894892c6&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
+              </div>
             </div>
-          </div>
+          </section>
 
-          <h3>Ключевые теги QuickOSM</h3>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Ключ (Key)</th><th>Значение (Value)</th><th>Что загружает</th><th>Тип</th></tr></thead>
-              <tbody>
-                <tr><td><code style="font-family:var(--mono);font-size:12px;">highway</code></td><td><code style="font-family:var(--mono);font-size:11px;">primary / residential / footway</code></td><td>Дороги по иерархии</td><td><span class="tag">Линии</span></td></tr>
-                <tr><td><code style="font-family:var(--mono);font-size:12px;">building</code></td><td><code style="font-family:var(--mono);font-size:11px;">yes / residential / commercial</code></td><td>Контуры зданий</td><td><span class="tag g">Полигоны</span></td></tr>
-                <tr><td><code style="font-family:var(--mono);font-size:12px;">landuse</code></td><td><code style="font-family:var(--mono);font-size:11px;">residential / park / forest</code></td><td>Функциональные зоны</td><td><span class="tag g">Полигоны</span></td></tr>
-                <tr><td><code style="font-family:var(--mono);font-size:12px;">natural</code></td><td><code style="font-family:var(--mono);font-size:11px;">wood / water / grassland</code></td><td>Природные объекты</td><td><span class="tag g">Полигоны</span></td></tr>
-                <tr><td><code style="font-family:var(--mono);font-size:12px;">leisure</code></td><td><code style="font-family:var(--mono);font-size:11px;">park / garden / playground</code></td><td>Рекреация и досуг</td><td><span class="tag g">Полигоны</span></td></tr>
-                <tr><td><code style="font-family:var(--mono);font-size:12px;">amenity</code></td><td><code style="font-family:var(--mono);font-size:11px;">school / cafe / parking</code></td><td>Общественные объекты</td><td><span class="tag o">Точки/Полигоны</span></td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="tip"><div class="tip-i">💡</div><div>Оставьте поле «Value» пустым, чтобы загрузить все объекты с данным ключом. Например, <strong>Key: building</strong>, Value: (пусто) — загрузит все здания в bbox.</div></div>
+          <div class="sec-divider"></div>
 
-          <h3>Что изучается в Видеоуроке Часть 2</h3>
-          <ul class="checklist">
-            <li><div class="chk">✓</div> Установка и запуск плагина QuickOSM</li>
-            <li><div class="chk">✓</div> Загрузка данных по bbox и по ключам/тегам</li>
-            <li><div class="chk">✓</div> Rule-based стилизация: условные правила оформления</li>
-            <li><div class="chk">✓</div> Иерархия дорог по толщине и цвету линий</li>
-            <li><div class="chk">✓</div> Оформление зданий по типу через атрибут building=*</li>
-            <li><div class="chk">✓</div> Подписи объектов через Layer Labels (поле name)</li>
-            <li><div class="chk">✓</div> Создание компоновщика с легендой</li>
-          </ul>
-        </div>
-
-        <div class="video-embed">
-          <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239022&hash=0b309b8157578de9&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
-        </div>
-      </div>
-    </section>
-
-    <div class="sec-divider"></div>
-
-    <!-- LESSON 3 -->
-    <section id="lesson3">
-      <h2>Видеоурок Часть 3 — Транспортная схема, рельеф, кадастр, макет и PDF</h2>
-      <div class="lesson-block">
-        <div class="lesson-header">
-          <div class="lesson-num ln-orange">3</div>
-          <div>
-            <div class="lesson-eyebrow le-orange">Финальный этап работы</div>
-            <div class="lesson-title">Изолинии рельефа, кадастр, компоновка карты в Layout и экспорт PDF</div>
-          </div>
-        </div>
-        <div class="lesson-body">
-          <div class="intro-quote orange">
-            На завершающем видеоуроке мы серьёзно продвинемся вперёд. Создадим транспортную схему, научимся строить изолинии рельефа и красиво их подписывать. Также разберёмся, как быстро добавлять кадастровые участки через специальный плагин.<br><br>
-            А самое важное на этом уроке — мы перейдём к финальному этапу работы: подготовим карту в макете (Layout). Вы научитесь добавлять масштабную линейку, легенду, текст, северную стрелку и красиво оформлять карту для печати или презентации. В конце урока мы сохраним готовую карту в PDF.<br><br>
-            Это один из самых важных и практических уроков курса! Готовы? Тогда открываем наш проект и продолжаем!
-          </div>
-
-          <h3>Материалы к уроку</h3>
-          <div class="res-links">
-            <a class="res-link" href="https://nspd.gov.ru/map?thematic=PKK&zoom=15.801076400338978&coordinate_x=4414990.092500253&coordinate_y=5979832.999746717&baseLayerId=235&theme_id=1&is_copy_url=true&active_layers=36049%2C36048" target="_blank" rel="noopener">
-              <div class="res-icon" style="background:var(--accent2-l);">📍</div>
-              <div>
-                <div class="res-title">НСПД — Национальная система пространственных данных (ПКК)</div>
-                <div class="res-url">nspd.gov.ru — кадастровая карта</div>
+          <section id="lesson2">
+            <h2>Видеоурок Часть 2 — OpenStreetMap, QuickOSM, оформление карты</h2>
+            <div class="lesson-block">
+              <div class="lesson-header">
+                <div class="lesson-num ln-green">2</div>
+                <div>
+                  <div class="lesson-eyebrow le-green">Материалы и задание</div>
+                  <div class="lesson-title">Загрузка данных OSM, Rule-based стилизация, легенда</div>
+                </div>
               </div>
-              <div class="res-arrow">↗</div>
-            </a>
-            <a class="res-link" href="https://opentopography.org/" target="_blank" rel="noopener">
-              <div class="res-icon" style="background:var(--accent2-l);">⛰️</div>
-              <div>
-                <div class="res-title">OpenTopography — данные рельефа и ЦМР для построения изолиний</div>
-                <div class="res-url">opentopography.org</div>
-              </div>
-              <div class="res-arrow">↗</div>
-            </a>
-          </div>
+              <div class="lesson-body">
+                <div class="intro-quote green">
+                  Второй видеоурок по QGIS — продолжаем работать с программой. Научимся загружать реальные данные из OpenStreetMap: дома, дороги, земельные участки и другие объекты по специальным тегам. Разберёмся, как быстро находить и импортировать нужную информацию через плагин QuickOSM, а также красиво оформлять всё это на карте.
+                </div>
 
-          <div class="task-box" style="background:var(--accent2-l); border-color:var(--accent2);">
-            <div class="task-title" style="color:var(--accent2);">✏️ Домашнее задание</div>
-            <p style="font-size:13.5px; margin-bottom:10px; color:var(--ink-muted);">Пришло время собрать всё вместе и сделать полноценную карту!</p>
-            <ul class="task-list">
-              <li><strong>Основное задание:</strong> подготовьте и оформите в макете красивую ситуационную схему вашего участка (или территории проектирования)</li>
-              <li><strong>Дополнительное задание (для желающих):</strong> сделайте отдельную транспортную схему с акцентом на дорожную сеть и тоже оформите её в макете</li>
+                <h3>Справочники тегов OSM</h3>
+                <div class="res-links">
+                  <a class="res-link" href="https://wiki.openstreetmap.org/wiki/Map_features" target="_blank" rel="noopener">
+                    <div class="res-icon" style="background:var(--green-l);">🗺️</div>
+                    <div>
+                      <div class="res-title">OSM Wiki — полный справочник Map Features</div>
+                      <div class="res-url">wiki.openstreetmap.org/wiki/Map_features</div>
+                    </div>
+                    <div class="res-arrow">↗</div>
+                  </a>
+                  <a class="res-link" href="https://softculture.cc/blog/entries/articles/osm-tags-1" target="_blank" rel="noopener">
+                    <div class="res-icon" style="background:var(--purple-l);">📖</div>
+                    <div>
+                      <div class="res-title">SoftCulture — Теги OSM для архитекторов и урбанистов</div>
+                      <div class="res-url">softculture.cc — osm-tags-1</div>
+                    </div>
+                    <div class="res-arrow">↗</div>
+                  </a>
+                </div>
+
+                <div class="task-box">
+                  <div class="task-title">✏️ Задание к видеоуроку</div>
+                  <ul class="task-list">
+                    <li>Оформите карту своего участка проектирования с <strong>Rule-based (правило-based) оформлением</strong></li>
+                    <li>Возьмите <strong>Ботанический сад</strong> или любой другой участок: парк, жилой квартал, территорию университета</li>
+                  </ul>
+                  <div class="subtask-grid" style="margin-top:14px;">
+                    <div class="subtask"><div class="subtask-label">Скачать через QuickOSM</div>Дороги по типам · Здания · Земельные участки / landuse</div>
+                    <div class="subtask"><div class="subtask-label">Настроить стиль</div>Цвета и толщины для типов дорог · Оформление зданий по категориям</div>
+                    <div class="subtask"><div class="subtask-label">Легенда</div>Читаемая легенда в компоновщике карт</div>
+                    <div class="subtask"><div class="subtask-label">Подписи</div>Основные улицы и важные объекты через Layer Labels</div>
+                  </div>
+                </div>
+
+                <h3>Ключевые теги QuickOSM</h3>
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Ключ (Key)</th><th>Значение (Value)</th><th>Что загружает</th><th>Тип</th></tr></thead>
+                    <tbody>
+                      <tr><td><code style="font-family:var(--mono);font-size:12px;">highway</code></td><td><code style="font-family:var(--mono);font-size:11px;">primary / residential / footway</code></td><td>Дороги по иерархии</td><td><span class="tag">Линии</span></td></tr>
+                      <tr><td><code style="font-family:var(--mono);font-size:12px;">building</code></td><td><code style="font-family:var(--mono);font-size:11px;">yes / residential / commercial</code></td><td>Контуры зданий</td><td><span class="tag g">Полигоны</span></td></tr>
+                      <tr><td><code style="font-family:var(--mono);font-size:12px;">landuse</code></td><td><code style="font-family:var(--mono);font-size:11px;">residential / park / forest</code></td><td>Функциональные зоны</td><td><span class="tag g">Полигоны</span></td></tr>
+                      <tr><td><code style="font-family:var(--mono);font-size:12px;">natural</code></td><td><code style="font-family:var(--mono);font-size:11px;">wood / water / grassland</code></td><td>Природные объекты</td><td><span class="tag g">Полигоны</span></td></tr>
+                      <tr><td><code style="font-family:var(--mono);font-size:12px;">leisure</code></td><td><code style="font-family:var(--mono);font-size:11px;">park / garden / playground</code></td><td>Рекреация и досуг</td><td><span class="tag g">Полигоны</span></td></tr>
+                      <tr><td><code style="font-family:var(--mono);font-size:12px;">amenity</code></td><td><code style="font-family:var(--mono);font-size:11px;">school / cafe / parking</code></td><td>Общественные объекты</td><td><span class="tag o">Точки/Полигоны</span></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="tip"><div class="tip-i">💡</div><div>Оставьте поле «Value» пустым, чтобы загрузить все объекты с данным ключом. Например, <strong>Key: building</strong>, Value: (пусто) — загрузит все здания в bbox.</div></div>
+
+                <h3>Что изучается в Видеоуроке Часть 2</h3>
+                <ul class="checklist">
+                  <li><div class="chk">✓</div> Установка и запуск плагина QuickOSM</li>
+                  <li><div class="chk">✓</div> Загрузка данных по bbox и по ключам/тегам</li>
+                  <li><div class="chk">✓</div> Rule-based стилизация: условные правила оформления</li>
+                  <li><div class="chk">✓</div> Иерархия дорог по толщине и цвету линий</li>
+                  <li><div class="chk">✓</div> Оформление зданий по типу через атрибут building=*</li>
+                  <li><div class="chk">✓</div> Подписи объектов через Layer Labels (поле name)</li>
+                  <li><div class="chk">✓</div> Создание компоновщика с легендой</li>
+                </ul>
+              </div>
+
+              <div class="video-embed">
+                <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239022&hash=0b309b8157578de9&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
+              </div>
+            </div>
+          </section>
+
+          <div class="sec-divider"></div>
+
+          <section id="lesson3">
+            <h2>Видеоурок Часть 3 — Транспортная схема, рельеф, кадастр, макет и PDF</h2>
+            <div class="lesson-block">
+              <div class="lesson-header">
+                <div class="lesson-num ln-orange">3</div>
+                <div>
+                  <div class="lesson-eyebrow le-orange">Финальный этап работы</div>
+                  <div class="lesson-title">Изолинии рельефа, кадастр, компоновка карты в Layout и экспорт PDF</div>
+                </div>
+              </div>
+              <div class="lesson-body">
+                <div class="intro-quote orange">
+                  На завершающем видеоуроке мы серьёзно продвинемся вперёд. Создадим транспортную схему, научимся строить изолинии рельефа и красиво их подписывать. Также разберёмся, как быстро добавлять кадастровые участки через специальный плагин.<br><br>
+                  А самое важное на этом уроке — мы перейдём к финальному этапу работы: подготовим карту в макете (Layout). Вы научитесь добавлять масштабную линейку, легенду, текст, северную стрелку и красиво оформлять карту для печати или презентации. В конце урока мы сохраним готовую карту в PDF.<br><br>
+                  Это один из самых важных и практических уроков курса! Готовы? Тогда открываем наш проект и продолжаем!
+                </div>
+
+                <h3>Материалы к уроку</h3>
+                <div class="res-links">
+                  <a class="res-link" href="https://nspd.gov.ru/map?thematic=PKK&zoom=15.801076400338978&coordinate_x=4414990.092500253&coordinate_y=5979832.999746717&baseLayerId=235&theme_id=1&is_copy_url=true&active_layers=36049%2C36048" target="_blank" rel="noopener">
+                    <div class="res-icon" style="background:var(--accent2-l);">📍</div>
+                    <div>
+                      <div class="res-title">НСПД — Национальная система пространственных данных (ПКК)</div>
+                      <div class="res-url">nspd.gov.ru — кадастровая карта</div>
+                    </div>
+                    <div class="res-arrow">↗</div>
+                  </a>
+                  <a class="res-link" href="https://opentopography.org/" target="_blank" rel="noopener">
+                    <div class="res-icon" style="background:var(--accent2-l);">⛰️</div>
+                    <div>
+                      <div class="res-title">OpenTopography — данные рельефа и ЦМР для построения изолиний</div>
+                      <div class="res-url">opentopography.org</div>
+                    </div>
+                    <div class="res-arrow">↗</div>
+                  </a>
+                </div>
+
+                <div class="task-box" style="background:var(--accent2-l); border-color:var(--accent2);">
+                  <div class="task-title" style="color:var(--accent2);">✏️ Домашнее задание</div>
+                  <p style="font-size:13.5px; margin-bottom:10px; color:var(--ink-muted);">Пришло время собрать всё вместе и сделать полноценную карту!</p>
+                  <ul class="task-list">
+                    <li><strong>Основное задание:</strong> подготовьте и оформите в макете красивую ситуационную схему вашего участка (или территории проектирования)</li>
+                    <li><strong>Дополнительное задание (для желающих):</strong> сделайте отдельную транспортную схему с акцентом на дорожную сеть и тоже оформите её в макете</li>
+                  </ul>
+                </div>
+
+                <h3>Что изучается в Видеоуроке Часть 3</h3>
+                <ul class="checklist">
+                  <li><div class="chk">✓</div> Построение транспортной схемы территории</li>
+                  <li><div class="chk">✓</div> Создание изолиний рельефа и их подписи</li>
+                  <li><div class="chk">✓</div> Загрузка кадастровых участков через плагин (НСПД / ПКК)</li>
+                  <li><div class="chk">✓</div> Работа с данными рельефа OpenTopography</li>
+                  <li><div class="chk">✓</div> Компоновка карты в Layout: масштабная линейка, легенда, текст</li>
+                  <li><div class="chk">✓</div> Северная стрелка и оформление карты для печати/презентации</li>
+                  <li><div class="chk">✓</div> Экспорт готовой карты в PDF</li>
+                </ul>
+              </div>
+
+              <div class="video-embed">
+                <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239020&hash=43d302046779cefa&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
+              </div>
+            </div>
+          </section>
+
+          <div class="sec-divider"></div>
+
+          <section id="data">
+            <div class="sec-label">02</div>
+            <h2>Типы данных и источники</h2>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Тип данных</th><th>Формат</th><th>Источник</th><th>Применение</th></tr></thead>
+                <tbody>
+                  <tr><td>Векторные границы</td><td><span class="tag">SHP / GeoJSON</span></td><td>OSM, Росреестр</td><td>Контуры зданий, кварталов, ЗУ</td></tr>
+                  <tr><td>Рельеф / ЦМР</td><td><span class="tag o">GeoTIFF / DEM</span></td><td>SRTM, Copernicus</td><td>Горизонтали, визуализация рельефа</td></tr>
+                  <tr><td>Спутниковая подложка</td><td><span class="tag g">WMS / XYZ tiles</span></td><td>Google, Bing, Яндекс</td><td>Контекст, идентификация</td></tr>
+                  <tr><td>Кадастр / ЗУ</td><td><span class="tag">GeoJSON / KML</span></td><td>pkk.rosreestr.ru</td><td>Границы участков, категории земель</td></tr>
+                  <tr><td>Транспортная сеть</td><td><span class="tag">SHP / OSM</span></td><td>OpenStreetMap</td><td>Дороги, пешеходные связи</td></tr>
+                  <tr><td>Социальные данные</td><td><span class="tag o">CSV / XLS</span></td><td>Росстат</td><td>Тепловые карты, аналитика</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <div class="sec-divider"></div>
+
+          <section id="schemes">
+            <div class="sec-label">03</div>
+            <h2>Типы схем, которые читают ИИ-нейросети</h2>
+            <p>Vision-модели анализируют изображения через паттерны и контрасты. Схема должна быть читаемой, контрастной и семантически однозначной.</p>
+            <div class="steps">
+              <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Функциональное зонирование</h3><p>Заливки зон цветами, минимум текста, чёткие границы. ИИ распознаёт зоны по цвету и просит описание легенды. PNG 2000×2000 пикс.</p></div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Транспортно-пешеходные связи</h3><p>Линии разной толщины по иерархии (магистраль → улица → тропа). ИИ хорошо читает иерархию и анализирует связность.</p></div></div>
+              <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Морфотипологическая схема</h3><p>Контуры зданий с заливкой по типу застройки. Минималистичный стиль — белый фон, серые контуры, акцентные цвета.</p></div></div>
+              <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Тепловая карта (Heatmap)</h3><p>Градиентная визуализация плотности. ИИ распознаёт кластеры и аномалии. Чёрный или белый фон — не серый.</p></div></div>
+              <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Схема рельефа / высотности</h3><p>Горизонтали с подписями или цветовая шкала высот. ИИ точно описывает перепад рельефа и ориентацию склонов.</p></div></div>
+            </div>
+          </section>
+
+          <div class="sec-divider"></div>
+
+          <section id="export">
+            <div class="sec-label">04</div>
+            <h2>Настройки стилей и экспорт под ИИ</h2>
+            <h3>Принципы стиля для ИИ-читаемости</h3>
+            <ul class="checklist">
+              <li><div class="chk">✓</div> Белый или светлый фон (#FAFAFA) — нейросети лучше читают контраст на светлом</li>
+              <li><div class="chk">✓</div> Обводки объектов не тоньше 0.5 pt в масштабе экспорта</li>
+              <li><div class="chk">✓</div> Цветовые заливки с насыщенностью 40–80%</li>
+              <li><div class="chk">✓</div> Легенда выносится за рамку или передаётся текстом в промте</li>
+              <li><div class="chk">✓</div> Разрешение: минимум 150 DPI, рекомендовано 300 DPI</li>
+              <li><div class="chk">✓</div> Формат: PNG без потерь предпочтительнее JPG</li>
             </ul>
-          </div>
-
-          <h3>Что изучается в Видеоуроке Часть 3</h3>
-          <ul class="checklist">
-            <li><div class="chk">✓</div> Построение транспортной схемы территории</li>
-            <li><div class="chk">✓</div> Создание изолиний рельефа и их подписи</li>
-            <li><div class="chk">✓</div> Загрузка кадастровых участков через плагин (НСПД / ПКК)</li>
-            <li><div class="chk">✓</div> Работа с данными рельефа OpenTopography</li>
-            <li><div class="chk">✓</div> Компоновка карты в Layout: масштабная линейка, легенда, текст</li>
-            <li><div class="chk">✓</div> Северная стрелка и оформление карты для печати/презентации</li>
-            <li><div class="chk">✓</div> Экспорт готовой карты в PDF</li>
-          </ul>
-        </div>
-
-        <div class="video-embed">
-          <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239020&hash=43d302046779cefa&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
-        </div>
-      </div>
-    </section>
-
-    <div class="sec-divider"></div>
-
-    <!-- DATA -->
-    <section id="data">
-      <div class="sec-label">02</div>
-      <h2>Типы данных и источники</h2>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Тип данных</th><th>Формат</th><th>Источник</th><th>Применение</th></tr></thead>
-          <tbody>
-            <tr><td>Векторные границы</td><td><span class="tag">SHP / GeoJSON</span></td><td>OSM, Росреестр</td><td>Контуры зданий, кварталов, ЗУ</td></tr>
-            <tr><td>Рельеф / ЦМР</td><td><span class="tag o">GeoTIFF / DEM</span></td><td>SRTM, Copernicus</td><td>Горизонтали, визуализация рельефа</td></tr>
-            <tr><td>Спутниковая подложка</td><td><span class="tag g">WMS / XYZ tiles</span></td><td>Google, Bing, Яндекс</td><td>Контекст, идентификация</td></tr>
-            <tr><td>Кадастр / ЗУ</td><td><span class="tag">GeoJSON / KML</span></td><td>pkk.rosreestr.ru</td><td>Границы участков, категории земель</td></tr>
-            <tr><td>Транспортная сеть</td><td><span class="tag">SHP / OSM</span></td><td>OpenStreetMap</td><td>Дороги, пешеходные связи</td></tr>
-            <tr><td>Социальные данные</td><td><span class="tag o">CSV / XLS</span></td><td>Росстат</td><td>Тепловые карты, аналитика</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <div class="sec-divider"></div>
-
-    <!-- SCHEMES -->
-    <section id="schemes">
-      <div class="sec-label">03</div>
-      <h2>Типы схем, которые читают ИИ-нейросети</h2>
-      <p>Vision-модели анализируют изображения через паттерны и контрасты. Схема должна быть читаемой, контрастной и семантически однозначной.</p>
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Функциональное зонирование</h3><p>Заливки зон цветами, минимум текста, чёткие границы. ИИ распознаёт зоны по цвету и просит описание легенды. PNG 2000×2000 пикс.</p></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Транспортно-пешеходные связи</h3><p>Линии разной толщины по иерархии (магистраль → улица → тропа). ИИ хорошо читает иерархию и анализирует связность.</p></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Морфотипологическая схема</h3><p>Контуры зданий с заливкой по типу застройки. Минималистичный стиль — белый фон, серые контуры, акцентные цвета.</p></div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Тепловая карта (Heatmap)</h3><p>Градиентная визуализация плотности. ИИ распознаёт кластеры и аномалии. Чёрный или белый фон — не серый.</p></div></div>
-        <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Схема рельефа / высотности</h3><p>Горизонтали с подписями или цветовая шкала высот. ИИ точно описывает перепад рельефа и ориентацию склонов.</p></div></div>
-      </div>
-    </section>
-
-    <div class="sec-divider"></div>
-
-    <!-- EXPORT -->
-    <section id="export">
-      <div class="sec-label">04</div>
-      <h2>Настройки стилей и экспорт под ИИ</h2>
-      <h3>Принципы стиля для ИИ-читаемости</h3>
-      <ul class="checklist">
-        <li><div class="chk">✓</div> Белый или светлый фон (#FAFAFA) — нейросети лучше читают контраст на светлом</li>
-        <li><div class="chk">✓</div> Обводки объектов не тоньше 0.5 pt в масштабе экспорта</li>
-        <li><div class="chk">✓</div> Цветовые заливки с насыщенностью 40–80%</li>
-        <li><div class="chk">✓</div> Легенда выносится за рамку или передаётся текстом в промте</li>
-        <li><div class="chk">✓</div> Разрешение: минимум 150 DPI, рекомендовано 300 DPI</li>
-        <li><div class="chk">✓</div> Формат: PNG без потерь предпочтительнее JPG</li>
-      </ul>
-      <h3>Экспорт через Print Layout</h3>
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Проект → Создать компоновщик печати</h3><p>Размер A3 горизонтально. Добавьте элемент «Карта», зафиксируйте масштаб.</p></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Настройка масштаба</h3><p>В свойствах карты установите масштаб вручную (1:5000). Нажмите «Зафиксировать».</p></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Макет → Экспорт как изображение</h3><p>PNG, 300 DPI. Снимите «Антиалиасинг» только если контуры задваиваются.</p></div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Экспорт PDF</h3><p>PDF сохраняет векторные объекты. Используйте для постобработки в Illustrator.</p></div></div>
-        <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Пакетный экспорт через Atlas</h3><p>Генерирует серию схем по объектам. Удобно для загрузки серии в ИИ за один раз.</p></div></div>
-      </div>
-      <div class="code-block">
+            <h3>Экспорт через Print Layout</h3>
+            <div class="steps">
+              <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Проект → Создать компоновщик печати</h3><p>Размер A3 горизонтально. Добавьте элемент «Карта», зафиксируйте масштаб.</p></div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Настройка масштаба</h3><p>В свойствах карты установите масштаб вручную (1:5000). Нажмите «Зафиксировать».</p></div></div>
+              <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Макет → Экспорт как изображение</h3><p>PNG, 300 DPI. Снимите «Антиалиасинг» только если контуры задваиваются.</p></div></div>
+              <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Экспорт PDF</h3><p>PDF сохраняет векторные объекты. Используйте для постобработки в Illustrator.</p></div></div>
+              <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Пакетный экспорт через Atlas</h3><p>Генерирует серию схем по объектам. Удобно для загрузки серии в ИИ за один раз.</p></div></div>
+            </div>
+            <div class="code-block">
 <span class="ck"># Экспорт через Python Console</span>
 <span class="kk">from</span> qgis.core <span class="kk">import</span> QgsProject, QgsLayoutExporter
 
@@ -1434,129 +1381,121 @@ exporter = QgsLayoutExporter(layout)
 settings = QgsLayoutExporter.ImageExportSettings()
 settings.dpi = <span class="vv">300</span>
 exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
-      </div>
-      <div class="tip"><div class="tip-i">⚠️</div><div>Для детальных схем увеличьте DPI до 400–600. Gemini Vision работает с изображениями до 4096×4096 пикселей.</div></div>
-    </section>
+            </div>
+            <div class="tip"><div class="tip-i">⚠️</div><div>Для детальных схем увеличьте DPI до 400–600. Gemini Vision работает с изображениями до 4096×4096 пикселей.</div></div>
+          </section>
 
-    <div class="sec-divider"></div>
+          <div class="sec-divider"></div>
 
-    <!-- ИИ PLATFORMS -->
-    <section id="aicomp">
-      <div class="sec-label">05</div>
-      <h2>ИИ-платформы курса</h2>
-      <div class="ai-grid">
-        <div class="ai-card">
-          <div class="ai-name">Gemini 1.5 Pro</div>
-          <span class="ai-badge" style="background:#E8F4FD;color:#1A73E8;">Google</span>
-          <ul>
-            <li>Точнее всех читает пространственные схемы</li>
-            <li>Поддерживает загрузку PDF напрямую</li>
-            <li>Развёрнутое текстовое описание схем</li>
-            <li>Хорошо работает с легендой в промте</li>
-            <li>API для пакетной обработки серий</li>
-            <li>Требует доступа из поддерживаемого региона</li>
-          </ul>
+          <section id="aicomp">
+            <div class="sec-label">05</div>
+            <h2>ИИ-платформы курса</h2>
+            <div class="ai-grid">
+              <div class="ai-card">
+                <div class="ai-name">Gemini 1.5 Pro</div>
+                <span class="ai-badge" style="background:#E8F4FD;color:#1A73E8;">Google</span>
+                <ul>
+                  <li>Точнее всех читает пространственные схемы</li>
+                  <li>Поддерживает загрузку PDF напрямую</li>
+                  <li>Развёрнутое текстовое описание схем</li>
+                  <li>Хорошо работает с легендой в промте</li>
+                  <li>API для пакетной обработки серий</li>
+                  <li>Требует доступа из поддерживаемого региона</li>
+                </ul>
+              </div>
+              <div class="ai-card">
+                <div class="ai-name">ChatGPT (GPT-4o)</div>
+                <span class="ai-badge" style="background:#F0FDF4;color:#16A34A;">OpenAI</span>
+                <ul>
+                  <li>Сильный анализ структуры и иерархии</li>
+                  <li>Может предложить улучшения схемы</li>
+                  <li>Хорошо работает в диалоговом режиме</li>
+                  <li>Code Interpreter: считает площади</li>
+                  <li>1 изображение в бесплатном тарифе</li>
+                  <li>Требует доступа из поддерживаемого региона</li>
+                </ul>
+              </div>
+              <div class="ai-card">
+                <div class="ai-name">Claude</div>
+                <span class="ai-badge" style="background:#F5F0FF;color:#7B3FE4;">Anthropic</span>
+                <ul>
+                  <li>Глубокий текстовый анализ и синтез</li>
+                  <li>Составление ТЗ и пояснительных записок</li>
+                  <li>Генерация промтов для других ИИ</li>
+                  <li>Работа с длинными документами (PDF)</li>
+                  <li>Доступен напрямую, из России</li>
+                </ul>
+              </div>
+            </div>
+            <div class="ai-grid ai-grid-2col" style="margin-top:10px;">
+              <div class="ai-card">
+                <div class="ai-name">Алиса AI</div>
+                <span class="ai-badge" style="background:#FFF3E0;color:#F57C00;">Яндекс</span>
+                <ul>
+                  <li>Понимает русскоязычные подписи на схемах</li>
+                  <li>Интеграция с геосервисами Яндекс</li>
+                  <li>Корректно читает топонимику РФ</li>
+                  <li>Работает напрямую, из России</li>
+                  <li>Лучше для описания, чем для анализа</li>
+                </ul>
+              </div>
+              <div class="ai-card">
+                <div class="ai-name">Gamma.app</div>
+                <span class="ai-badge" style="background:#EDFAF4;color:#1A9E6E;">Презентации</span>
+                <ul>
+                  <li>ИИ-генерация презентаций из текста</li>
+                  <li>Автоматическое создание слайдов по промту</li>
+                  <li>Встроенные профессиональные шаблоны</li>
+                  <li>Экспорт в PDF и PowerPoint</li>
+                  <li>Идеально для подачи проектного анализа</li>
+                </ul>
+              </div>
+            </div>
+            <div class="table-wrap" style="margin-top:20px;">
+              <table>
+                <thead><tr><th>Задача</th><th>Платформа</th><th>Формат подачи</th></tr></thead>
+                <tbody>
+                  <tr><td>Анализ пространственных схем</td><td><span class="tag">Gemini</span></td><td>PNG + легенда в тексте</td></tr>
+                  <tr><td>Анализ транспортной связности</td><td><span class="tag">ChatGPT</span></td><td>PNG, масштаб 1:5000–1:10000</td></tr>
+                  <tr><td>ТЗ, пояснительные записки, промты</td><td><span class="tag" style="background:var(--purple-l);color:var(--purple);">Claude</span></td><td>Текст / PDF документ</td></tr>
+                  <tr><td>Описание схем на русском</td><td><span class="tag o">Алиса AI</span></td><td>PNG с русскими подписями</td></tr>
+                  <tr><td>Презентация проектного анализа</td><td><span class="tag g">Gamma.app</span></td><td>Текст / структура → слайды</td></tr>
+                  <tr><td>Сравнение «до/после»</td><td><span class="tag">Gemini</span></td><td>2 PNG в одном запросе</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <div class="sec-divider"></div>
+
+          <section id="workflow">
+            <div class="sec-label">07</div>
+            <h2>Полный воркфлоу: от данных до ИИ-анализа</h2>
+            <div class="card card-warn" style="margin-bottom:20px;">
+              <h3>Подготовка занимает 20% времени, остальное — QGIS работает за вас</h3>
+              <p>Один правильно настроенный стиль → экспорт любых фрагментов за секунды.</p>
+            </div>
+            <div class="steps">
+              <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Сбор данных</h3><p>QuickOSM → здания, дороги, зелень по bbox. Кадастр из pkk.rosreestr.ru. Спутниковая подложка через XYZ Tiles.</p></div></div>
+              <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Подготовка стилей</h3><p>Символика слоёв: минималистичные заливки, чёткие обводки. Сохранить стиль (.qml) — применять к любому проекту.</p></div></div>
+              <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Создание компоновщиков</h3><p>По компоновщику на каждый тип схемы. Зафиксировать масштаб. Настроить один раз — использовать многократно.</p></div></div>
+              <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Экспорт PNG 300 DPI</h3><p>Макет → Экспорт как изображение. Имена файлов с кодом: zone_01.png, transport_01.png.</p></div></div>
+              <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Загрузка в ИИ + промт</h3><p>Прикрепить PNG, вставить промт с легендой и задачами. Для серий — загружать последовательно.</p></div></div>
+              <div class="step"><div class="step-num">6</div><div class="step-body"><h3>Итерация по замечаниям</h3><p>Выделить ключевые выводы. Вернуться в QGIS, скорректировать схему, экспортировать v2. Повторить.</p></div></div>
+            </div>
+            <div class="card card-success">
+              <h3>Итог: что даёт связка QGIS + ИИ</h3>
+              <p>Точная геоподоснова + Vision-модели = быстрая предпроектная аналитика, обоснование решений и генерация текстовых описаний для ПЗЗ, ТЗ и презентаций — без ручного описания каждого чертежа.</p>
+            </div>
+          </section>
         </div>
-        <div class="ai-card">
-          <div class="ai-name">ChatGPT (GPT-4o)</div>
-          <span class="ai-badge" style="background:#F0FDF4;color:#16A34A;">OpenAI</span>
-          <ul>
-            <li>Сильный анализ структуры и иерархии</li>
-            <li>Может предложить улучшения схемы</li>
-            <li>Хорошо работает в диалоговом режиме</li>
-            <li>Code Interpreter: считает площади</li>
-            <li>1 изображение в бесплатном тарифе</li>
-            <li>Требует доступа из поддерживаемого региона</li>
-          </ul>
-        </div>
-        <div class="ai-card">
-          <div class="ai-name">Claude</div>
-          <span class="ai-badge" style="background:#F5F0FF;color:#7B3FE4;">Anthropic</span>
-          <ul>
-            <li>Глубокий текстовый анализ и синтез</li>
-            <li>Составление ТЗ и пояснительных записок</li>
-            <li>Генерация промтов для других ИИ</li>
-            <li>Работа с длинными документами (PDF)</li>
-            <li>Доступен напрямую, из России</li>
-          </ul>
-        </div>
-      </div>
-      <div class="ai-grid ai-grid-2col" style="margin-top:10px;">
-        <div class="ai-card">
-          <div class="ai-name">Алиса AI</div>
-          <span class="ai-badge" style="background:#FFF3E0;color:#F57C00;">Яндекс</span>
-          <ul>
-            <li>Понимает русскоязычные подписи на схемах</li>
-            <li>Интеграция с геосервисами Яндекс</li>
-            <li>Корректно читает топонимику РФ</li>
-            <li>Работает напрямую, из России</li>
-            <li>Лучше для описания, чем для анализа</li>
-          </ul>
-        </div>
-        <div class="ai-card">
-          <div class="ai-name">Gamma.app</div>
-          <span class="ai-badge" style="background:#EDFAF4;color:#1A9E6E;">Презентации</span>
-          <ul>
-            <li>ИИ-генерация презентаций из текста</li>
-            <li>Автоматическое создание слайдов по промту</li>
-            <li>Встроенные профессиональные шаблоны</li>
-            <li>Экспорт в PDF и PowerPoint</li>
-            <li>Идеально для подачи проектного анализа</li>
-          </ul>
-        </div>
-      </div>
-      <div class="table-wrap" style="margin-top:20px;">
-        <table>
-          <thead><tr><th>Задача</th><th>Платформа</th><th>Формат подачи</th></tr></thead>
-          <tbody>
-            <tr><td>Анализ пространственных схем</td><td><span class="tag">Gemini</span></td><td>PNG + легенда в тексте</td></tr>
-            <tr><td>Анализ транспортной связности</td><td><span class="tag">ChatGPT</span></td><td>PNG, масштаб 1:5000–1:10000</td></tr>
-            <tr><td>ТЗ, пояснительные записки, промты</td><td><span class="tag" style="background:var(--purple-l);color:var(--purple);">Claude</span></td><td>Текст / PDF документ</td></tr>
-            <tr><td>Описание схем на русском</td><td><span class="tag o">Алиса AI</span></td><td>PNG с русскими подписями</td></tr>
-            <tr><td>Презентация проектного анализа</td><td><span class="tag g">Gamma.app</span></td><td>Текст / структура → слайды</td></tr>
-            <tr><td>Сравнение «до/после»</td><td><span class="tag">Gemini</span></td><td>2 PNG в одном запросе</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-
-
-    <div class="sec-divider"></div>
-
-    <!-- WORKFLOW -->
-    <section id="workflow">
-      <div class="sec-label">07</div>
-      <h2>Полный воркфлоу: от данных до ИИ-анализа</h2>
-      <div class="card card-warn" style="margin-bottom:20px;">
-        <h3>Подготовка занимает 20% времени, остальное — QGIS работает за вас</h3>
-        <p>Один правильно настроенный стиль → экспорт любых фрагментов за секунды.</p>
-      </div>
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Сбор данных</h3><p>QuickOSM → здания, дороги, зелень по bbox. Кадастр из pkk.rosreestr.ru. Спутниковая подложка через XYZ Tiles.</p></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Подготовка стилей</h3><p>Символика слоёв: минималистичные заливки, чёткие обводки. Сохранить стиль (.qml) — применять к любому проекту.</p></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Создание компоновщиков</h3><p>По компоновщику на каждый тип схемы. Зафиксировать масштаб. Настроить один раз — использовать многократно.</p></div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Экспорт PNG 300 DPI</h3><p>Макет → Экспорт как изображение. Имена файлов с кодом: zone_01.png, transport_01.png.</p></div></div>
-        <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Загрузка в ИИ + промт</h3><p>Прикрепить PNG, вставить промт с легендой и задачами. Для серий — загружать последовательно.</p></div></div>
-        <div class="step"><div class="step-num">6</div><div class="step-body"><h3>Итерация по замечаниям</h3><p>Выделить ключевые выводы. Вернуться в QGIS, скорректировать схему, экспортировать v2. Повторить.</p></div></div>
-      </div>
-      <div class="card card-success">
-        <h3>Итог: что даёт связка QGIS + ИИ</h3>
-        <p>Точная геоподоснова + Vision-модели = быстрая предпроектная аналитика, обоснование решений и генерация текстовых описаний для ПЗЗ, ТЗ и презентаций — без ручного описания каждого чертежа.</p>
-      </div>
-    </section>
-
       </div>
     </div>
-
-  </div><!-- /guide-inner -->
-
-  </div><!-- /panel-qgis -->
+  </div>
 
   <!-- ════════════ MODULE PANEL: NEURAL (Модуль 2) ════════════ -->
   <div class="module-panel" id="panel-ai">
     <div class="guide-inner" style="padding-top:40px;">
-
       <div class="author-strip">
         <div class="av">КА</div>
         <div>Автор раздела: <strong>Кулешов Александр Алексеевич</strong></div>
@@ -1581,85 +1520,79 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
         </div>
 
         <div class="gated-content">
+          <h3>Какие нейросети используются в курсе</h3>
+          <div class="ai-grid">
+            <div class="ai-card">
+              <div class="ai-name">Текстовые модели (LLM)</div>
+              <span class="ai-badge" style="background:#E8F4FD;color:#1A73E8;">ChatGPT · Claude · Gemini</span>
+              <ul>
+                <li>Работают с текстом, кодом, документами</li>
+                <li>Понимают и генерируют развёрнутые ответы</li>
+                <li>Анализируют изображения (vision)</li>
+                <li>Основа для промтинга в курсе</li>
+              </ul>
+            </div>
+            <div class="ai-card">
+              <div class="ai-name">Генеративные изображения</div>
+              <span class="ai-badge" style="background:#F0FDF4;color:#16A34A;">ChatGPT · Gemini</span>
+              <ul>
+                <li>Создают изображения по текстовому промту</li>
+                <li>Работают с референсами и стилями</li>
+                <li>Применяются для визуализации идей</li>
+                <li>Основа Модуля 3</li>
+              </ul>
+            </div>
+            <div class="ai-card">
+              <div class="ai-name">Локально доступные сервисы</div>
+              <span class="ai-badge" style="background:#FFF3E0;color:#F57C00;">Алиса ИИ · Arena AI · DeepSeek</span>
+              <ul>
+                <li>Доступны напрямую на территории РФ</li>
+                <li>Хорошо работают с русским языком</li>
+                <li>Интеграция с отечественными сервисами</li>
+              </ul>
+            </div>
+          </div>
 
-      <h3>Какие нейросети используются в курсе</h3>
-      <div class="ai-grid">
-        <div class="ai-card">
-          <div class="ai-name">Текстовые модели (LLM)</div>
-          <span class="ai-badge" style="background:#E8F4FD;color:#1A73E8;">ChatGPT · Claude · Gemini</span>
-          <ul>
-            <li>Работают с текстом, кодом, документами</li>
-            <li>Понимают и генерируют развёрнутые ответы</li>
-            <li>Анализируют изображения (vision)</li>
-            <li>Основа для промтинга в курсе</li>
+          <h3>Ключевые понятия</h3>
+          <ul class="checklist">
+            <li><div class="chk">✓</div> Промт — текстовый запрос, формирующий результат работы нейросети</li>
+            <li><div class="chk">✓</div> Токены — единицы текста, которыми оперирует модель при обработке запроса</li>
+            <li><div class="chk">✓</div> Контекстное окно — объём информации, который модель «помнит» в рамках диалога</li>
+            <li><div class="chk">✓</div> Референс — изображение-образец, на основе которого генерируется новый результат</li>
+            <li><div class="chk">✓</div> Галлюцинации — ошибочные или придуманные ответы модели, требующие проверки</li>
+            <li><div class="chk">✓</div> Мультимодальность — способность модели работать одновременно с текстом, изображениями и документами</li>
           </ul>
-        </div>
-        <div class="ai-card">
-          <div class="ai-name">Генеративные изображения</div>
-          <span class="ai-badge" style="background:#F0FDF4;color:#16A34A;">ChatGPT · Gemini</span>
-          <ul>
-            <li>Создают изображения по текстовому промту</li>
-            <li>Работают с референсами и стилями</li>
-            <li>Применяются для визуализации идей</li>
-            <li>Основа Модуля 3</li>
-          </ul>
-        </div>
-        <div class="ai-card">
-          <div class="ai-name">Локально доступные сервисы</div>
-          <span class="ai-badge" style="background:#FFF3E0;color:#F57C00;">Алиса ИИ · Arena AI · DeepSeek</span>
-          <ul>
-            <li>Доступны напрямую на территории РФ</li>
-            <li>Хорошо работают с русским языком</li>
-            <li>Интеграция с отечественными сервисами</li>
-          </ul>
+
+          <div class="tip">
+            <div class="tip-i">💡</div>
+            <div>В Модуле 2 разбирается, как выбрать подходящую нейросеть под конкретную архитектурную задачу — анализ, текст или визуализация — и как корректно формулировать запрос для получения предсказуемого результата.</div>
+          </div>
+
+          <div class="card card-accent">
+            <div class="card-icon">🧭</div>
+            <h3>Что дальше</h3>
+            <p>После знакомства с основами курс переходит к Модулю 3 — практической генерации идей и визуализации, где эти модели применяются в реальных архитектурных задачах.</p>
+          </div>
         </div>
       </div>
-
-      <h3>Ключевые понятия</h3>
-      <ul class="checklist">
-        <li><div class="chk">✓</div> Промт — текстовый запрос, формирующий результат работы нейросети</li>
-        <li><div class="chk">✓</div> Токены — единицы текста, которыми оперирует модель при обработке запроса</li>
-        <li><div class="chk">✓</div> Контекстное окно — объём информации, который модель «помнит» в рамках диалога</li>
-        <li><div class="chk">✓</div> Референс — изображение-образец, на основе которого генерируется новый результат</li>
-        <li><div class="chk">✓</div> Галлюцинации — ошибочные или придуманные ответы модели, требующие проверки</li>
-        <li><div class="chk">✓</div> Мультимодальность — способность модели работать одновременно с текстом, изображениями и документами</li>
-      </ul>
-
-      <div class="tip">
-        <div class="tip-i">💡</div>
-        <div>В Модуле 2 разбирается, как выбрать подходящую нейросеть под конкретную архитектурную задачу — анализ, текст или визуализация — и как корректно формулировать запрос для получения предсказуемого результата.</div>
-      </div>
-
-      <div class="card card-accent">
-        <div class="card-icon">🧭</div>
-        <h3>Что дальше</h3>
-        <p>После знакомства с основами курс переходит к Модулю 3 — практической генерации идей и визуализации, где эти модели применяются в реальных архитектурных задачах.</p>
-      </div>
-
-        </div>
-      </div>
-
     </div>
   </div>
 
   <!-- ════════════ MODULE PANEL: GENVIZ (Модуль 3) ════════════ -->
   <div class="module-panel" id="panel-gen">
-
-  <!-- sub-nav -->
-  <div class="nav-wrap" id="genSubNav" style="top:0;">
-    <div class="nav-pills">
-      <span class="pill" data-target="gen-intro" onclick="scrollToSection('gen-intro')">Обзор модуля</span>
-      <span class="pill" data-target="prompts" onclick="scrollToSection('prompts')">Основы нейросетей</span>
-      <span class="pill" data-target="prompt-formula" onclick="scrollToSection('prompt-formula')">Формула промпта</span>
-      <span class="pill" data-target="example-rostov" onclick="scrollToSection('example-rostov')">Пример: Ростов</span>
-      <span class="pill" data-target="example-elista" onclick="scrollToSection('example-elista')">Пример: Элиста</span>
-      <span class="pill" data-target="prompt-mistakes" onclick="scrollToSection('prompt-mistakes')">Ошибки</span>
-      <span class="pill" data-target="photoshop-draft" onclick="scrollToSection('photoshop-draft')">Photoshop</span>
+    <div class="nav-wrap" id="genSubNav" style="top:0;">
+      <div class="nav-pills">
+        <span class="pill" data-target="gen-intro" onclick="scrollToSection('gen-intro')">Обзор модуля</span>
+        <span class="pill" data-target="prompts" onclick="scrollToSection('prompts')">Основы нейросетей</span>
+        <span class="pill" data-target="prompt-formula" onclick="scrollToSection('prompt-formula')">Формула промпта</span>
+        <span class="pill" data-target="example-rostov" onclick="scrollToSection('example-rostov')">Пример: Ростов</span>
+        <span class="pill" data-target="example-elista" onclick="scrollToSection('example-elista')">Пример: Элиста</span>
+        <span class="pill" data-target="prompt-mistakes" onclick="scrollToSection('prompt-mistakes')">Ошибки</span>
+        <span class="pill" data-target="photoshop-draft" onclick="scrollToSection('photoshop-draft')">Photoshop</span>
+      </div>
     </div>
-  </div>
 
     <div class="guide-inner" style="padding-top:40px;">
-
       <div class="author-strip">
         <div class="av" style="background:linear-gradient(135deg, var(--green) 0%, #5DDDB0 100%);">ПП</div>
         <div>Авторы раздела: <strong>Петренко Екатерина Сергеевна</strong> и <strong>Попова Елизавета Андреевна</strong></div>
@@ -1685,395 +1618,379 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
         </div>
 
         <div class="gated-content">
+          <h3>Структура модуля</h3>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Промтинг для визуализации</h3><p>Принципы составления запросов для генеративных моделей: описание объекта, стиля, освещения, ракурса, материалов.</p></div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Подготовка драфта в Photoshop</h3><p>Сборка исходника для нейросети: скетч композиции, коллаж из референсов, маски зон контроля, корректная перспектива.</p></div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Отбор и доработка драфта</h3><p>Выбор наиболее удачного варианта, повторная генерация деталей, работа с masking и inpainting при необходимости.</p></div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Постобработка в Photoshop</h3><p>Цветокоррекция, ретушь, добавление контекста (люди, окружение, растительность), финальная компоновка изображения.</p></div></div>
+          </div>
 
-      <h3>Структура модуля</h3>
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Промтинг для визуализации</h3><p>Принципы составления запросов для генеративных моделей: описание объекта, стиля, освещения, ракурса, материалов.</p></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Подготовка драфта в Photoshop</h3><p>Сборка исходника для нейросети: скетч композиции, коллаж из референсов, маски зон контроля, корректная перспектива.</p></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Отбор и доработка драфта</h3><p>Выбор наиболее удачного варианта, повторная генерация деталей, работа с masking и inpainting при необходимости.</p></div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Постобработка в Photoshop</h3><p>Цветокоррекция, ретушь, добавление контекста (люди, окружение, растительность), финальная компоновка изображения.</p></div></div>
-      </div>
+          <h3>Принципы хорошего промта для визуализации</h3>
+          <ul class="checklist">
+            <li><div class="chk">✓</div> Чёткое описание типа объекта и архитектурного стиля</li>
+            <li><div class="chk">✓</div> Указание ракурса и масштаба (вид с улицы, аэросъёмка, интерьер)</li>
+            <li><div class="chk">✓</div> Описание материалов и текстур (бетон, дерево, стекло, металл)</li>
+            <li><div class="chk">✓</div> Условия освещения и время суток</li>
+            <li><div class="chk">✓</div> Референсные стили или известные архитектурные аналоги</li>
+            <li><div class="chk">✓</div> Негативные промты — что нужно исключить из результата</li>
+          </ul>
 
-      <h3>Принципы хорошего промта для визуализации</h3>
-      <ul class="checklist">
-        <li><div class="chk">✓</div> Чёткое описание типа объекта и архитектурного стиля</li>
-        <li><div class="chk">✓</div> Указание ракурса и масштаба (вид с улицы, аэросъёмка, интерьер)</li>
-        <li><div class="chk">✓</div> Описание материалов и текстур (бетон, дерево, стекло, металл)</li>
-        <li><div class="chk">✓</div> Условия освещения и время суток</li>
-        <li><div class="chk">✓</div> Референсные стили или известные архитектурные аналоги</li>
-        <li><div class="chk">✓</div> Негативные промты — что нужно исключить из результата</li>
-      </ul>
-
-      <div class="prompt-box">
-        <div class="prompt-hdr">📋 Пример промта для визуализации</div>
-        <div class="prompt-body">
+          <div class="prompt-box">
+            <div class="prompt-hdr">📋 Пример промта для визуализации</div>
+            <div class="prompt-body">
 Современный жилой дом, минималистичная архитектура, фасад из бетона и дерева,<br>
 большие панорамные окна, вид с улицы в вечернее время, тёплое освещение окон,<br>
 ландшафтное озеленение на переднем плане, фотореалистичный рендер,<br>
 <span class="prompt-hl">--no</span> искажённые пропорции, лишние объекты на фасаде
-        </div>
-      </div>
-
-
-    <div class="sec-divider"></div>
-
-    <!-- PROMPTS (перенесено из Модуля 1) -->
-    <section id="prompts">
-      <div class="sec-label">06</div>
-      <h2>Промтинг для архитектора — основы и практика</h2>
-
-      <!-- КОНСПЕКТ -->
-      <div class="lesson-block" style="border-left-color:var(--purple);">
-        <div class="lesson-header">
-          <div class="lesson-num" style="background:linear-gradient(135deg,var(--purple),#A56EF8);">ИИ</div>
-          <div>
-            <div class="lesson-eyebrow le-purple">Конспект занятия</div>
-            <div class="lesson-title">Основы работы с нейросетями для архитектора</div>
-          </div>
-        </div>
-        <div class="lesson-body">
-          <h3>Что такое нейросеть?</h3>
-          <p>Нейросеть — это инструмент, который помогает ускорить работу архитектора. Она <strong>не заменяет специалиста</strong> и не принимает решения за него. Может ошибаться, придумывать факты и не знает всех строительных норм. Любой результат нужно проверять.</p>
-          <p>Лучше всего нейросети помогают:</p>
-          <ul class="checklist">
-            <li><div class="chk">✓</div> Искать идеи</li>
-            <li><div class="chk">✓</div> Создавать первые концепции</li>
-            <li><div class="chk">✓</div> Подбирать референсы</li>
-            <li><div class="chk">✓</div> Делать черновые визуализации</li>
-            <li><div class="chk">✓</div> Писать и редактировать тексты</li>
-            <li><div class="chk">✓</div> Автоматизировать рутинные задачи</li>
-          </ul>
-
-          <div class="sec-divider"></div>
-
-          <h3>Основные виды нейросетей</h3>
-          <div class="card-grid">
-            <div class="card card-accent">
-              <div class="card-icon">📝</div>
-              <h3>Для работы с текстом</h3>
-              <p>Поиск идей, описания проектов, анализ документов, составление ТЗ.</p>
-              <p><strong>Примеры:</strong> ChatGPT, Claude, Gemini</p>
-            </div>
-            <div class="card card-accent">
-              <div class="card-icon">🎨</div>
-              <h3>Для генерации изображений</h3>
-              <p>Концепции, референсы, эскизы и визуализации.</p>
-              <p><strong>Примеры:</strong> ChatGPT, Midjourney, Flux, Stable Diffusion, Visoid</p>
-            </div>
-            <div class="card card-accent">
-              <div class="card-icon">🏗️</div>
-              <h3>Для создания 3D-моделей</h3>
-              <p>Быстрая концептуальная модель по тексту или изображению.</p>
-              <p><strong>Примеры:</strong> Tripo AI, Meshy AI, Rodin</p>
-            </div>
-            <div class="card card-accent">
-              <div class="card-icon">📊</div>
-              <h3>Для создания презентаций</h3>
-              <p>Автоматически оформляют презентации, структуру и тексты.</p>
-              <p><strong>Примеры:</strong> Gamma, Canva AI, Beautiful.ai, Tome</p>
             </div>
           </div>
 
           <div class="sec-divider"></div>
 
-          <h3>Где архитектор может использовать нейросети?</h3>
-          <div class="card-grid">
-            <div class="card"><div class="card-icon">💡</div><h3>Поиск концепций и идей</h3></div>
-            <div class="card"><div class="card-icon">🖼️</div><h3>Подбор референсов</h3></div>
-            <div class="card"><div class="card-icon">🎯</div><h3>Концептуальные визуализации</h3></div>
-            <div class="card"><div class="card-icon">📐</div><h3>Схемы, диаграммы и иконки</h3></div>
-            <div class="card"><div class="card-icon">🧱</div><h3>Быстрые 3D-модели</h3></div>
-            <div class="card"><div class="card-icon">📑</div><h3>Подготовка презентаций</h3></div>
-            <div class="card"><div class="card-icon">📄</div><h3>Написание пояснительных записок</h3></div>
-            <div class="card"><div class="card-icon">📋</div><h3>Анализ документов и нормативной базы</h3></div>
-          </div>
-        </div>
-      </div>
+          <section id="prompts">
+            <div class="sec-label">06</div>
+            <h2>Промтинг для архитектора — основы и практика</h2>
 
-      <div class="sec-divider"></div>
+            <div class="lesson-block" style="border-left-color:var(--purple);">
+              <div class="lesson-header">
+                <div class="lesson-num" style="background:linear-gradient(135deg,var(--purple),#A56EF8);">ИИ</div>
+                <div>
+                  <div class="lesson-eyebrow le-purple">Конспект занятия</div>
+                  <div class="lesson-title">Основы работы с нейросетями для архитектора</div>
+                </div>
+              </div>
+              <div class="lesson-body">
+                <h3>Что такое нейросеть?</h3>
+                <p>Нейросеть — это инструмент, который помогает ускорить работу архитектора. Она <strong>не заменяет специалиста</strong> и не принимает решения за него. Может ошибаться, придумывать факты и не знает всех строительных норм. Любой результат нужно проверять.</p>
+                <p>Лучше всего нейросети помогают:</p>
+                <ul class="checklist">
+                  <li><div class="chk">✓</div> Искать идеи</li>
+                  <li><div class="chk">✓</div> Создавать первые концепции</li>
+                  <li><div class="chk">✓</div> Подбирать референсы</li>
+                  <li><div class="chk">✓</div> Делать черновые визуализации</li>
+                  <li><div class="chk">✓</div> Писать и редактировать тексты</li>
+                  <li><div class="chk">✓</div> Автоматизировать рутинные задачи</li>
+                </ul>
 
-      <div class="video-embed">
-        <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239018&hash=dcd1af5d77f72ffe&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
-      </div>
+                <div class="sec-divider"></div>
 
-      <!-- ФОРМУЛА ПРОМТА -->
-      <h3 id="prompt-formula">Что такое промпт?</h3>
-      <p>Промпт — это запрос или инструкция, которую мы пишем нейросети. <strong>Чем лучше написан промпт — тем лучше получится результат.</strong></p>
+                <h3>Основные виды нейросетей</h3>
+                <div class="card-grid">
+                  <div class="card card-accent">
+                    <div class="card-icon">📝</div>
+                    <h3>Для работы с текстом</h3>
+                    <p>Поиск идей, описания проектов, анализ документов, составление ТЗ.</p>
+                    <p><strong>Примеры:</strong> ChatGPT, Claude, Gemini</p>
+                  </div>
+                  <div class="card card-accent">
+                    <div class="card-icon">🎨</div>
+                    <h3>Для генерации изображений</h3>
+                    <p>Концепции, референсы, эскизы и визуализации.</p>
+                    <p><strong>Примеры:</strong> ChatGPT, Midjourney, Flux, Stable Diffusion, Visoid</p>
+                  </div>
+                  <div class="card card-accent">
+                    <div class="card-icon">🏗️</div>
+                    <h3>Для создания 3D-моделей</h3>
+                    <p>Быстрая концептуальная модель по тексту или изображению.</p>
+                    <p><strong>Примеры:</strong> Tripo AI, Meshy AI, Rodin</p>
+                  </div>
+                  <div class="card card-accent">
+                    <div class="card-icon">📊</div>
+                    <h3>Для создания презентаций</h3>
+                    <p>Автоматически оформляют презентации, структуру и тексты.</p>
+                    <p><strong>Примеры:</strong> Gamma, Canva AI, Beautiful.ai, Tome</p>
+                  </div>
+                </div>
 
-      <h3>Формула хорошего промпта: РОЛЬ + КОНТЕКСТ + ЗАДАЧА + ПРИМЕРЫ + ФОРМАТ + ТОН</h3>
-      <div class="card-grid">
-        <div class="card card-accent">
-          <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">1</div>
-          <h3>Роль</h3>
-          <p>Кем должна быть нейросеть?</p>
-          <p style="font-size:12px;color:var(--ink-faint);">Например: архитектор, урбанист, дизайнер интерьера.</p>
-        </div>
-        <div class="card card-accent">
-          <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">2</div>
-          <h3>Контекст</h3>
-          <p>Что происходит? Над каким проектом работаете, какие ограничения, для кого.</p>
-        </div>
-        <div class="card card-accent">
-          <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">3</div>
-          <h3>Задача</h3>
-          <p>Что именно нужно сделать?</p>
-          <p style="font-size:12px;color:var(--ink-faint);">Придумать концепцию, написать текст, проанализировать документ, создать визуализацию.</p>
-        </div>
-        <div class="card card-accent">
-          <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">4</div>
-          <h3>Примеры</h3>
-          <p>Покажите образец или опишите, на что ориентироваться.</p>
-        </div>
-        <div class="card card-accent">
-          <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">5</div>
-          <h3>Формат</h3>
-          <p>Как должен выглядеть ответ?</p>
-          <p style="font-size:12px;color:var(--ink-faint);">Список, таблица, текст, презентация.</p>
-        </div>
-        <div class="card card-accent">
-          <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">6</div>
-          <h3>Тон</h3>
-          <p>Какой стиль ответа нужен?</p>
-          <p style="font-size:12px;color:var(--ink-faint);">Официальный, простой, научный, дружелюбный.</p>
-        </div>
-      </div>
+                <div class="sec-divider"></div>
 
+                <h3>Где архитектор может использовать нейросети?</h3>
+                <div class="card-grid">
+                  <div class="card"><div class="card-icon">💡</div><h3>Поиск концепций и идей</h3></div>
+                  <div class="card"><div class="card-icon">🖼️</div><h3>Подбор референсов</h3></div>
+                  <div class="card"><div class="card-icon">🎯</div><h3>Концептуальные визуализации</h3></div>
+                  <div class="card"><div class="card-icon">📐</div><h3>Схемы, диаграммы и иконки</h3></div>
+                  <div class="card"><div class="card-icon">🧱</div><h3>Быстрые 3D-модели</h3></div>
+                  <div class="card"><div class="card-icon">📑</div><h3>Подготовка презентаций</h3></div>
+                  <div class="card"><div class="card-icon">📄</div><h3>Написание пояснительных записок</h3></div>
+                  <div class="card"><div class="card-icon">📋</div><h3>Анализ документов и нормативной базы</h3></div>
+                </div>
+              </div>
+            </div>
 
+            <div class="sec-divider"></div>
 
-      <div class="sec-divider"></div>
+            <div class="video-embed">
+              <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239018&hash=dcd1af5d77f72ffe&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
+            </div>
 
-      <div class="sec-divider"></div>
+            <h3 id="prompt-formula">Что такое промпт?</h3>
+            <p>Промпт — это запрос или инструкция, которую мы пишем нейросети. <strong>Чем лучше написан промпт — тем лучше получится результат.</strong></p>
 
-      <div class="video-embed">
-        <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239019&hash=544bb9860e7b9670&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
-      </div>
+            <h3>Формула хорошего промпта: РОЛЬ + КОНТЕКСТ + ЗАДАЧА + ПРИМЕРЫ + ФОРМАТ + ТОН</h3>
+            <div class="card-grid">
+              <div class="card card-accent">
+                <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">1</div>
+                <h3>Роль</h3>
+                <p>Кем должна быть нейросеть?</p>
+                <p style="font-size:12px;color:var(--ink-faint);">Например: архитектор, урбанист, дизайнер интерьера.</p>
+              </div>
+              <div class="card card-accent">
+                <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">2</div>
+                <h3>Контекст</h3>
+                <p>Что происходит? Над каким проектом работаете, какие ограничения, для кого.</p>
+              </div>
+              <div class="card card-accent">
+                <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">3</div>
+                <h3>Задача</h3>
+                <p>Что именно нужно сделать?</p>
+                <p style="font-size:12px;color:var(--ink-faint);">Придумать концепцию, написать текст, проанализировать документ, создать визуализацию.</p>
+              </div>
+              <div class="card card-accent">
+                <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">4</div>
+                <h3>Примеры</h3>
+                <p>Покажите образец или опишите, на что ориентироваться.</p>
+              </div>
+              <div class="card card-accent">
+                <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">5</div>
+                <h3>Формат</h3>
+                <p>Как должен выглядеть ответ?</p>
+                <p style="font-size:12px;color:var(--ink-faint);">Список, таблица, текст, презентация.</p>
+              </div>
+              <div class="card card-accent">
+                <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">6</div>
+                <h3>Тон</h3>
+                <p>Какой стиль ответа нужен?</p>
+                <p style="font-size:12px;color:var(--ink-faint);">Официальный, простой, научный, дружелюбный.</p>
+              </div>
+            </div>
 
-      <!-- ПРИМЕР ПРОМТА: ДЕТСКАЯ ПЛОЩАДКА НАБЕРЕЖНАЯ -->
-      <h3 id="example-rostov">Пример промпта по формуле — детская площадка на набережной</h3>
-      <p>Тема: концепция детской площадки на набережной в Ростове-на-Дону</p>
+            <div class="sec-divider"></div>
 
-      <div style="overflow-x:auto;margin-bottom:20px;">
-        <table style="width:100%;border-collapse:collapse;font-size:13px;">
-          <thead>
-            <tr>
-              <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Роль</th>
-              <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Контекст</th>
-              <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Задача</th>
-              <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Примеры</th>
-              <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Формат</th>
-              <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Тон</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">Ты — архитектор и ландшафтный дизайнер с опытом создания общественных пространств и детских площадок.</td>
-              <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">Ростов-на-Дону, набережная реки Дон. Тёплый климат, много солнечных дней. Локация — активная городская зона. Рядом вода, зелёные зоны и велодорожка. Площадка для детей разного возраста (2–12 лет).</td>
-              <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">Разработай концепцию детской площадки на набережной в Ростове-на-Дону. Предложи идею, которую можно связать с характером города и рекой Дон. Опиши основные зоны и сценарии использования, подбери материалы и элементы благоустройства.</td>
-              <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">— Современные природные площадки с деревом и водой<br>— Волнообразные формы и плавные линии<br>— Использование местных материалов (дерево, металл, песок)<br>— Интеграция с набережной и видами на реку</td>
-              <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">1. Общая концепция<br>2. Функциональные зоны<br>3. Визуализация (2–3 изображения)<br>4. Генеральный план<br>5. Список материалов</td>
-              <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">Профессиональный, креативный, но понятный заказчику. Акцент на комфорт детей, безопасность, экологичность и связь с местом.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+            <div class="video-embed">
+              <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239019&hash=544bb9860e7b9670&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
+            </div>
 
-      <div class="prompt-box">
-        <div class="prompt-hdr">📋 Полный промпт (пример запроса)</div>
-        <div class="prompt-body">
+            <h3 id="example-rostov">Пример промпта по формуле — детская площадка на набережной</h3>
+            <p>Тема: концепция детской площадки на набережной в Ростове-на-Дону</p>
+
+            <div style="overflow-x:auto;margin-bottom:20px;">
+              <table style="width:100%;border-collapse:collapse;font-size:13px;">
+                <thead>
+                  <tr>
+                    <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Роль</th>
+                    <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Контекст</th>
+                    <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Задача</th>
+                    <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Примеры</th>
+                    <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Формат</th>
+                    <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Тон</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">Ты — архитектор и ландшафтный дизайнер с опытом создания общественных пространств и детских площадок.</td>
+                    <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">Ростов-на-Дону, набережная реки Дон. Тёплый климат, много солнечных дней. Локация — активная городская зона. Рядом вода, зелёные зоны и велодорожка. Площадка для детей разного возраста (2–12 лет).</td>
+                    <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">Разработай концепцию детской площадки на набережной в Ростове-на-Дону. Предложи идею, которую можно связать с характером города и рекой Дон. Опиши основные зоны и сценарии использования, подбери материалы и элементы благоустройства.</td>
+                    <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">— Современные природные площадки с деревом и водой<br>— Волнообразные формы и плавные линии<br>— Использование местных материалов (дерево, металл, песок)<br>— Интеграция с набережной и видами на реку</td>
+                    <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">1. Общая концепция<br>2. Функциональные зоны<br>3. Визуализация (2–3 изображения)<br>4. Генеральный план<br>5. Список материалов</td>
+                    <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">Профессиональный, креативный, но понятный заказчику. Акцент на комфорт детей, безопасность, экологичность и связь с местом.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="prompt-box">
+              <div class="prompt-hdr">📋 Полный промпт (пример запроса)</div>
+              <div class="prompt-body">
 Ты — архитектор и ландшафтный дизайнер с опытом создания общественных пространств и детских площадок. Контекст: Ростов-на-Дону, набережная реки Дон. Тёплый климат, много солнечных дней. Локация — активная городская зона с прогулочным потоком людей. Рядом вода, зелёные зоны и велодорожка. Площадка для детей разного возраста (2–12 лет).<br><br>
 Задача: разработай концепцию детской площадки на набережной в Ростове-на-Дону. Предложи идею, которую можно связать с характером города и рекой Дон. Опиши основные зоны и сценарии использования, подбери материалы и элементы благоустройства. Предложи визуальный образ площадки.<br><br>
 Примеры для ориентира: современные природные площадки с деревом и водой, волнообразные формы и плавные линии, использование местных материалов (дерево, металл, песок), интеграция с набережной и видами на реку.<br><br>
 Формат результата: 1) общая концепция площадки; 2) функциональные зоны и сценарии использования; 3) визуализация площадки (2–3 изображения с разных ракурсов); 4) генеральный план; 5) список материалов и элементов.<br><br>
 Тон: профессиональный, креативный, но понятный заказчику. С акцентом на комфорт детей, безопасность, экологичность и связь с местом.
+              </div>
+            </div>
+
+            <div class="result-shot">
+              <img src="images/rostov-naberezhnaya-gallery.jpg" alt="Детская площадка на набережной в Ростове-на-Дону — рендеры, генплан и список материалов, сгенерированные по этому промпту" loading="lazy">
+              <div class="result-caption">Так выглядит результат по этому промпту: рендеры с разных ракурсов, генплан и список материалов — всё получено из формулы выше.</div>
+            </div>
+
+            <div class="sec-divider"></div>
+
+            <h3>Задание</h3>
+            <div class="card card-warn" style="margin-bottom:20px;">
+              <h3>Используя пример, составить промпт для создания:</h3>
+              <div class="card-grid card-grid-3col" style="margin-top:12px;">
+                <div class="card" style="text-align:center;padding:16px 12px;">
+                  <div style="font-family:var(--mono);font-size:22px;font-weight:800;color:var(--graphite,#2A2F3E);margin-bottom:6px;">1</div>
+                  <div style="font-size:13px;font-weight:700;color:var(--ink);">Концепции проекта</div>
+                </div>
+                <div class="card" style="text-align:center;padding:16px 12px;">
+                  <div style="font-family:var(--mono);font-size:22px;font-weight:800;color:var(--graphite,#2A2F3E);margin-bottom:6px;">2</div>
+                  <div style="font-size:13px;font-weight:700;color:var(--ink);">Генерального плана проекта</div>
+                </div>
+                <div class="card" style="text-align:center;padding:16px 12px;">
+                  <div style="font-family:var(--mono);font-size:22px;font-weight:800;color:var(--graphite,#2A2F3E);margin-bottom:6px;">3</div>
+                  <div style="font-size:13px;font-weight:700;color:var(--ink);">2–3 визуализаций проекта</div>
+                </div>
+              </div>
+              <p style="margin-top:14px;font-weight:700;color:var(--ink);">Материалы, подготовленные на основе заданных промптов, будут использованы в финальной презентации.</p>
+            </div>
+
+            <h3 id="example-elista">Пример задания: детская площадка в Элисте</h3>
+            <div class="card-grid">
+              <div class="card card-accent">
+                <h3>РОЛЬ</h3>
+                <p>Ты — архитектор и ландшафтный дизайнер с опытом создания общественных пространств и детских площадок.</p>
+              </div>
+              <div class="card card-accent">
+                <h3>КОНТЕКСТ</h3>
+                <p>Элиста, Республика Калмыкия. Континентальный климат: жаркое сухое лето, холодная зима, много солнечных дней. Локация — центральная городская зона, либо парк рядом с буддийским храмом (хурулом). Площадка для детей разного возраста (2–12 лет). Важно отразить культурный код региона и буддийскую эстетику.</p>
+              </div>
+              <div class="card card-accent">
+                <h3>ЗАДАЧА</h3>
+                <p>Разработай концепцию детской площадки в буддийском стиле для города Элиста. Предложи идею, которая связывает игровое пространство с калмыцкой культурой и буддийскими символами. Опиши основные зоны и сценарии использования, подбери материалы и элементы благоустройства. Предложи визуальный образ площадки.</p>
+              </div>
+              <div class="card card-accent">
+                <h3>ПРИМЕРЫ ДЛЯ ОРИЕНТИРА</h3>
+                <ul class="checklist" style="margin-top:8px;">
+                  <li><div class="chk">✓</div> Использование мандалы в планировке</li>
+                  <li><div class="chk">✓</div> Элементы буддийской символики (лотос, колесо Дхармы, ступы) в игровых формах</li>
+                  <li><div class="chk">✓</div> Калмыцкий орнамент в мощении и малых формах</li>
+                  <li><div class="chk">✓</div> Дерево, камень, природные материалы</li>
+                  <li><div class="chk">✓</div> Молитвенные флажки и ветряные колокольчики как часть среды</li>
+                  <li><div class="chk">✓</div> Зоны для тихих игр и медитации</li>
+                  <li><div class="chk">✓</div> Цветовая гамма: красный, жёлтый, синий, белый</li>
+                </ul>
+              </div>
+              <div class="card card-accent">
+                <h3>ФОРМАТ РЕЗУЛЬТАТА</h3>
+                <p>Общая концепция площадки (описание идеи и культурной отсылки).</p>
+              </div>
+              <div class="card card-accent">
+                <h3>ТОН</h3>
+                <p>Профессиональный, креативный, культурно-чувствительный. С акцентом на безопасность детей, экологичность, аутентичность и связь с буддийской традицией Калмыкии.</p>
+              </div>
+            </div>
+
+            <h3 style="margin-top:24px;">Как из этого промпта получить генплан?</h3>
+            <p>В пункте «Формат результата» отдельно пропишите генплан — и дополните запрос нужными подробностями (масштаб, экспликация зон, легенда).</p>
+            <div class="result-shot">
+              <img src="images/elista-mandala-genplan.jpg" alt="Генплан детской площадки «Мандала степи» в Элисте с функциональными зонами и легендой" loading="lazy">
+              <div class="result-caption">Детская площадка «Мандала степи», Элиста — генплан с 10 функциональными зонами и легендой, полученный из промпта выше.</div>
+            </div>
+
+            <h3 style="margin-top:24px;">Как из этого промпта получить визуализации?</h3>
+            <p>Так же — пропишите визуализации в «Формате результата» и дополните запрос нужными подробностями (ракурс, время суток, количество людей в кадре).</p>
+            <div class="result-shot">
+              <img src="images/elista-mandala-vizualizacii.jpg" alt="Визуализации детской площадки «Мандала степи» в Элисте с разных ракурсов" loading="lazy">
+              <div class="result-caption">Визуализации той же площадки с разных ракурсов — общий план, входная группа, амфитеатр.</div>
+            </div>
+
+            <div class="sec-divider"></div>
+
+            <h3 id="prompt-mistakes">Основные ошибки в промтинге</h3>
+            <div class="card-grid">
+              <div class="card" style="border-left:3px solid #E53E3E;">
+                <h3 style="color:#E53E3E;">✗ Слишком короткий запрос</h3>
+                <p>«Сделай презентацию.» — нейросеть не знает ни темы, ни стиля, ни аудитории.</p>
+              </div>
+              <div class="card" style="border-left:3px solid #E53E3E;">
+                <h3 style="color:#E53E3E;">✗ Нет контекста</h3>
+                <p>Нейросеть не знает, над каким проектом вы работаете.</p>
+              </div>
+              <div class="card" style="border-left:3px solid #E53E3E;">
+                <h3 style="color:#E53E3E;">✗ Ожидание идеального результата с первого раза</h3>
+                <p>Работа с нейросетью — это диалог и несколько итераций.</p>
+              </div>
+              <div class="card" style="border-left:3px solid #E53E3E;">
+                <h3 style="color:#E53E3E;">✗ Полное доверие нейросети</h3>
+                <p>Всегда проверяйте факты, нормативы и выводы.</p>
+              </div>
+            </div>
+
+            <div class="tip">
+              <div class="tip-i">💡</div>
+              <div><strong>Главное правило:</strong> Нейросеть не умеет читать мысли. Чем подробнее и понятнее вы объясните задачу, тем качественнее получите результат.</div>
+            </div>
+
+            <h3 id="photoshop-draft">Photoshop до генерации — подготовка драфта для нейросети</h3>
+            <p>Photoshop работает не только после генерации: качественный исходник, собранный вручную, значительно повышает точность и управляемость результата на выходе из нейросети.</p>
+            <div class="card-grid">
+              <div class="card card-accent"><div class="card-icon">✏️</div><h3>Скетч-основа композиции</h3><p>Быстрый набросок объёмов и расположения объекта на участке — задаёт нейросети правильную геометрию и пропорции сцены.</p></div>
+              <div class="card card-accent"><div class="card-icon">🖼️</div><h3>Коллаж из референсов</h3><p>Совмещение нескольких изображений-аналогов в один драфт — материалы, формы, окружение собираются в единую отправную точку.</p></div>
+              <div class="card card-accent"><div class="card-icon">🎭</div><h3>Маски для зон контроля</h3><p>Выделение областей, которые нейросеть должна изменить или, наоборот, сохранить без изменений — основа для inpainting.</p></div>
+              <div class="card card-accent"><div class="card-icon">📐</div><h3>Корректная перспектива</h3><p>Выравнивание линий и горизонта на исходнике — нейросеть точнее держит перспективу, если она задана корректно изначально.</p></div>
+            </div>
+            <ul class="checklist">
+              <li><div class="chk">✓</div> Чёрно-белый или плоско закрашенный драфт уже задаёт силуэт и масштаб будущего здания</li>
+              <li><div class="chk">✓</div> Грубая тоновая подкладка (light/shadow map) помогает нейросети выбрать верное освещение сцены</li>
+              <li><div class="chk">✓</div> Контекст участка (соседние здания, дорога, зелень) на драфте удерживает масштаб и не даёт сцене «потеряться»</li>
+              <li><div class="chk">✓</div> Чистый альфа-канал вокруг объекта упрощает дальнейшую замену фона при генерации</li>
+            </ul>
+
+            <h3>Postprocessing — на что обратить внимание в Photoshop</h3>
+            <div class="card-grid">
+              <div class="card card-accent"><div class="card-icon">🎨</div><h3>Цветокоррекция</h3><p>Баланс белого, контраст, насыщенность — приведение изображения к единому визуальному стилю.</p></div>
+              <div class="card card-accent"><div class="card-icon">🧹</div><h3>Устранение артефактов</h3><p>Исправление характерных ошибок генерации: искажённой геометрии, лишних деталей, швов.</p></div>
+              <div class="card card-accent"><div class="card-icon">🌳</div><h3>Добавление контекста</h3><p>Вставка людей, машин, растительности для повышения реалистичности сцены.</p></div>
+              <div class="card card-accent"><div class="card-icon">✨</div><h3>Финальная ретушь</h3><p>Резкость, виньетирование, итоговая компоновка для презентации проекта.</p></div>
+            </div>
+
+            <div class="sec-divider"></div>
+
+            <h3>Материалы занятия по Photoshop</h3>
+            <p>Референсы и примеры работ с занятия доступны по ссылке:</p>
+            <div class="links-row" style="margin-bottom:20px;">
+              <a class="qlink light" href="https://pin.it/69uNk7DuA" target="_blank" rel="noopener noreferrer">
+                <span>📌</span> Референсы с занятия — Pinterest
+                <span class="ql-badge light">Photoshop</span>
+              </a>
+            </div>
+
+            <div class="lesson-block" style="border-left-color:var(--green);">
+              <div class="lesson-header">
+                <div class="lesson-num" style="background:linear-gradient(135deg,var(--green),#5DDDB0);">PS</div>
+                <div>
+                  <div class="lesson-eyebrow le-green">Конспект занятия</div>
+                  <div class="lesson-title">Photoshop — базовые инструменты для архитектурного коллажа</div>
+                </div>
+              </div>
+
+              <div class="lesson-body">
+                <p style="margin-bottom:14px;">На этом занятии мы разобрали полный рабочий процесс от создания документа до финального экспорта:</p>
+                <ul class="checklist">
+                  <li><div class="chk">✓</div> Создали новый документ (<em>Файл → Создать</em>) с нужными размерами</li>
+                  <li><div class="chk">✓</div> Познакомились со слоями — загружали фото, меняли порядок слоёв, группировали их</li>
+                  <li><div class="chk">✓</div> Вырезали объекты с помощью быстрого выделения и прямолинейного лассо</li>
+                  <li><div class="chk">✓</div> Трансформировали элементы — масштабировали и поворачивали через <em>Ctrl+T</em></li>
+                  <li><div class="chk">✓</div> Собирали коллаж: фон, архитектура, детали (люди, деревья) на отдельных слоях</li>
+                  <li><div class="chk">✓</div> Корректировали цвет и тональность через корректирующие слои (Цветовой тон, Насыщенность, Кривые)</li>
+                  <li><div class="chk">✓</div> Добавляли тени и свет (применяли эффекты шума и движения)</li>
+                  <li><div class="chk">✓</div> Работали с текстом — редактировали параметры шрифта, загружали новый шрифт</li>
+                  <li><div class="chk">✓</div> Запомнили важные правила: как сохранять <em>.psd</em> и экспортировать в <em>JPG</em></li>
+                </ul>
+              </div>
+
+              <div class="video-embed">
+                <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239017&hash=dcff08884df56f92&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
+              </div>
+            </div>
+
+            <div class="tip">
+              <div class="tip-i">💡</div>
+              <div>Результат работы этого модуля — готовое визуализированное изображение — становится исходным материалом для Модуля 4, где собирается итоговая презентация проекта.</div>
+            </div>
+          </section>
         </div>
       </div>
-
-      <div class="result-shot">
-        <img src="images/rostov-naberezhnaya-gallery.jpg" alt="Детская площадка на набережной в Ростове-на-Дону — рендеры, генплан и список материалов, сгенерированные по этому промпту" loading="lazy">
-        <div class="result-caption">Так выглядит результат по этому промпту: рендеры с разных ракурсов, генплан и список материалов — всё получено из формулы выше.</div>
-      </div>
-
-      <div class="sec-divider"></div>
-
-      <!-- ЗАДАНИЕ -->
-      <h3>Задание</h3>
-      <div class="card card-warn" style="margin-bottom:20px;">
-        <h3>Используя пример, составить промпт для создания:</h3>
-        <div class="card-grid card-grid-3col" style="margin-top:12px;">
-          <div class="card" style="text-align:center;padding:16px 12px;">
-            <div style="font-family:var(--mono);font-size:22px;font-weight:800;color:var(--graphite,#2A2F3E);margin-bottom:6px;">1</div>
-            <div style="font-size:13px;font-weight:700;color:var(--ink);">Концепции проекта</div>
-          </div>
-          <div class="card" style="text-align:center;padding:16px 12px;">
-            <div style="font-family:var(--mono);font-size:22px;font-weight:800;color:var(--graphite,#2A2F3E);margin-bottom:6px;">2</div>
-            <div style="font-size:13px;font-weight:700;color:var(--ink);">Генерального плана проекта</div>
-          </div>
-          <div class="card" style="text-align:center;padding:16px 12px;">
-            <div style="font-family:var(--mono);font-size:22px;font-weight:800;color:var(--graphite,#2A2F3E);margin-bottom:6px;">3</div>
-            <div style="font-size:13px;font-weight:700;color:var(--ink);">2–3 визуализаций проекта</div>
-          </div>
-        </div>
-        <p style="margin-top:14px;font-weight:700;color:var(--ink);">Материалы, подготовленные на основе заданных промптов, будут использованы в финальной презентации.</p>
-      </div>
-
-      <!-- НЕОБХОДИМЫЕ ЭЛЕМЕНТЫ ПРОМПТА (Элиста) -->
-      <h3 id="example-elista">Пример задания: детская площадка в Элисте</h3>
-      <div class="card-grid">
-        <div class="card card-accent">
-          <h3>РОЛЬ</h3>
-          <p>Ты — архитектор и ландшафтный дизайнер с опытом создания общественных пространств и детских площадок.</p>
-        </div>
-        <div class="card card-accent">
-          <h3>КОНТЕКСТ</h3>
-          <p>Элиста, Республика Калмыкия. Континентальный климат: жаркое сухое лето, холодная зима, много солнечных дней. Локация — центральная городская зона, либо парк рядом с буддийским храмом (хурулом). Площадка для детей разного возраста (2–12 лет). Важно отразить культурный код региона и буддийскую эстетику.</p>
-        </div>
-        <div class="card card-accent">
-          <h3>ЗАДАЧА</h3>
-          <p>Разработай концепцию детской площадки в буддийском стиле для города Элиста. Предложи идею, которая связывает игровое пространство с калмыцкой культурой и буддийскими символами. Опиши основные зоны и сценарии использования, подбери материалы и элементы благоустройства. Предложи визуальный образ площадки.</p>
-        </div>
-        <div class="card card-accent">
-          <h3>ПРИМЕРЫ ДЛЯ ОРИЕНТИРА</h3>
-          <ul class="checklist" style="margin-top:8px;">
-            <li><div class="chk">✓</div> Использование мандалы в планировке</li>
-            <li><div class="chk">✓</div> Элементы буддийской символики (лотос, колесо Дхармы, ступы) в игровых формах</li>
-            <li><div class="chk">✓</div> Калмыцкий орнамент в мощении и малых формах</li>
-            <li><div class="chk">✓</div> Дерево, камень, природные материалы</li>
-            <li><div class="chk">✓</div> Молитвенные флажки и ветряные колокольчики как часть среды</li>
-            <li><div class="chk">✓</div> Зоны для тихих игр и медитации</li>
-            <li><div class="chk">✓</div> Цветовая гамма: красный, жёлтый, синий, белый</li>
-          </ul>
-        </div>
-        <div class="card card-accent">
-          <h3>ФОРМАТ РЕЗУЛЬТАТА</h3>
-          <p>Общая концепция площадки (описание идеи и культурной отсылки).</p>
-        </div>
-        <div class="card card-accent">
-          <h3>ТОН</h3>
-          <p>Профессиональный, креативный, культурно-чувствительный. С акцентом на безопасность детей, экологичность, аутентичность и связь с буддийской традицией Калмыкии.</p>
-        </div>
-      </div>
-
-      <h3 style="margin-top:24px;">Как из этого промпта получить генплан?</h3>
-      <p>В пункте «Формат результата» отдельно пропишите генплан — и дополните запрос нужными подробностями (масштаб, экспликация зон, легенда).</p>
-      <div class="result-shot">
-        <img src="images/elista-mandala-genplan.jpg" alt="Генплан детской площадки «Мандала степи» в Элисте с функциональными зонами и легендой" loading="lazy">
-        <div class="result-caption">Детская площадка «Мандала степи», Элиста — генплан с 10 функциональными зонами и легендой, полученный из промпта выше.</div>
-      </div>
-
-      <h3 style="margin-top:24px;">Как из этого промпта получить визуализации?</h3>
-      <p>Так же — пропишите визуализации в «Формате результата» и дополните запрос нужными подробностями (ракурс, время суток, количество людей в кадре).</p>
-      <div class="result-shot">
-        <img src="images/elista-mandala-vizualizacii.jpg" alt="Визуализации детской площадки «Мандала степи» в Элисте с разных ракурсов" loading="lazy">
-        <div class="result-caption">Визуализации той же площадки с разных ракурсов — общий план, входная группа, амфитеатр.</div>
-      </div>
-
-      <div class="sec-divider"></div>
-
-      <!-- ОСНОВНЫЕ ОШИБКИ -->
-      <h3 id="prompt-mistakes">Основные ошибки в промтинге</h3>
-      <div class="card-grid">
-        <div class="card" style="border-left:3px solid #E53E3E;">
-          <h3 style="color:#E53E3E;">✗ Слишком короткий запрос</h3>
-          <p>«Сделай презентацию.» — нейросеть не знает ни темы, ни стиля, ни аудитории.</p>
-        </div>
-        <div class="card" style="border-left:3px solid #E53E3E;">
-          <h3 style="color:#E53E3E;">✗ Нет контекста</h3>
-          <p>Нейросеть не знает, над каким проектом вы работаете.</p>
-        </div>
-        <div class="card" style="border-left:3px solid #E53E3E;">
-          <h3 style="color:#E53E3E;">✗ Ожидание идеального результата с первого раза</h3>
-          <p>Работа с нейросетью — это диалог и несколько итераций.</p>
-        </div>
-        <div class="card" style="border-left:3px solid #E53E3E;">
-          <h3 style="color:#E53E3E;">✗ Полное доверие нейросети</h3>
-          <p>Всегда проверяйте факты, нормативы и выводы.</p>
-        </div>
-      </div>
-
-      <div class="tip">
-        <div class="tip-i">💡</div>
-        <div><strong>Главное правило:</strong> Нейросеть не умеет читать мысли. Чем подробнее и понятнее вы объясните задачу, тем качественнее получите результат.</div>
-      </div>
-
-      <h3 id="photoshop-draft">Photoshop до генерации — подготовка драфта для нейросети</h3>
-      <p>Photoshop работает не только после генерации: качественный исходник, собранный вручную, значительно повышает точность и управляемость результата на выходе из нейросети.</p>
-      <div class="card-grid">
-        <div class="card card-accent"><div class="card-icon">✏️</div><h3>Скетч-основа композиции</h3><p>Быстрый набросок объёмов и расположения объекта на участке — задаёт нейросети правильную геометрию и пропорции сцены.</p></div>
-        <div class="card card-accent"><div class="card-icon">🖼️</div><h3>Коллаж из референсов</h3><p>Совмещение нескольких изображений-аналогов в один драфт — материалы, формы, окружение собираются в единую отправную точку.</p></div>
-        <div class="card card-accent"><div class="card-icon">🎭</div><h3>Маски для зон контроля</h3><p>Выделение областей, которые нейросеть должна изменить или, наоборот, сохранить без изменений — основа для inpainting.</p></div>
-        <div class="card card-accent"><div class="card-icon">📐</div><h3>Корректная перспектива</h3><p>Выравнивание линий и горизонта на исходнике — нейросеть точнее держит перспективу, если она задана корректно изначально.</p></div>
-      </div>
-      <ul class="checklist">
-        <li><div class="chk">✓</div> Чёрно-белый или плоско закрашенный драфт уже задаёт силуэт и масштаб будущего здания</li>
-        <li><div class="chk">✓</div> Грубая тоновая подкладка (light/shadow map) помогает нейросети выбрать верное освещение сцены</li>
-        <li><div class="chk">✓</div> Контекст участка (соседние здания, дорога, зелень) на драфте удерживает масштаб и не даёт сцене «потеряться»</li>
-        <li><div class="chk">✓</div> Чистый альфа-канал вокруг объекта упрощает дальнейшую замену фона при генерации</li>
-      </ul>
-
-      <h3>Postprocessing — на что обратить внимание в Photoshop</h3>
-      <div class="card-grid">
-        <div class="card card-accent"><div class="card-icon">🎨</div><h3>Цветокоррекция</h3><p>Баланс белого, контраст, насыщенность — приведение изображения к единому визуальному стилю.</p></div>
-        <div class="card card-accent"><div class="card-icon">🧹</div><h3>Устранение артефактов</h3><p>Исправление характерных ошибок генерации: искажённой геометрии, лишних деталей, швов.</p></div>
-        <div class="card card-accent"><div class="card-icon">🌳</div><h3>Добавление контекста</h3><p>Вставка людей, машин, растительности для повышения реалистичности сцены.</p></div>
-        <div class="card card-accent"><div class="card-icon">✨</div><h3>Финальная ретушь</h3><p>Резкость, виньетирование, итоговая компоновка для презентации проекта.</p></div>
-      </div>
-
-      <div class="sec-divider"></div>
-
-      <h3>Материалы занятия по Photoshop</h3>
-      <p>Референсы и примеры работ с занятия доступны по ссылке:</p>
-      <div class="links-row" style="margin-bottom:20px;">
-        <a class="qlink light" href="https://pin.it/69uNk7DuA" target="_blank" rel="noopener noreferrer">
-          <span>📌</span> Референсы с занятия — Pinterest
-          <span class="ql-badge light">Photoshop</span>
-        </a>
-      </div>
-
-      <div class="lesson-block" style="border-left-color:var(--green);">
-        <div class="lesson-header">
-          <div class="lesson-num" style="background:linear-gradient(135deg,var(--green),#5DDDB0);">PS</div>
-          <div>
-            <div class="lesson-eyebrow le-green">Конспект занятия</div>
-            <div class="lesson-title">Photoshop — базовые инструменты для архитектурного коллажа</div>
-          </div>
-        </div>
-
-        <div class="lesson-body">
-          <p style="margin-bottom:14px;">На этом занятии мы разобрали полный рабочий процесс от создания документа до финального экспорта:</p>
-          <ul class="checklist">
-            <li><div class="chk">✓</div> Создали новый документ (<em>Файл → Создать</em>) с нужными размерами</li>
-            <li><div class="chk">✓</div> Познакомились со слоями — загружали фото, меняли порядок слоёв, группировали их</li>
-            <li><div class="chk">✓</div> Вырезали объекты с помощью быстрого выделения и прямолинейного лассо</li>
-            <li><div class="chk">✓</div> Трансформировали элементы — масштабировали и поворачивали через <em>Ctrl+T</em></li>
-            <li><div class="chk">✓</div> Собирали коллаж: фон, архитектура, детали (люди, деревья) на отдельных слоях</li>
-            <li><div class="chk">✓</div> Корректировали цвет и тональность через корректирующие слои (Цветовой тон, Насыщенность, Кривые)</li>
-            <li><div class="chk">✓</div> Добавляли тени и свет (применяли эффекты шума и движения)</li>
-            <li><div class="chk">✓</div> Работали с текстом — редактировали параметры шрифта, загружали новый шрифт</li>
-            <li><div class="chk">✓</div> Запомнили важные правила: как сохранять <em>.psd</em> и экспортировать в <em>JPG</em></li>
-          </ul>
-        </div>
-
-        <div class="video-embed">
-          <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239017&hash=dcff08884df56f92&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
-        </div>
-      </div>
-
-      <div class="tip">
-        <div class="tip-i">💡</div>
-        <div>Результат работы этого модуля — готовое визуализированное изображение — становится исходным материалом для Модуля 4, где собирается итоговая презентация проекта.</div>
-      </div>
-
-        </div>
-      </div>
-
-    </section>
     </div>
   </div>
 
   <!-- ════════════ MODULE PANEL: SYNTH (Модуль 4) ════════════ -->
   <div class="module-panel" id="panel-pres">
     <div class="guide-inner" style="padding-top:40px;">
-
       <div class="author-strip">
         <div class="av">КА</div>
         <div>Автор раздела: <strong>Кулешов Александр Алексеевич</strong></div>
@@ -2098,40 +2015,37 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
         </div>
 
         <div class="gated-content">
+          <h3>Что такое Gamma.app</h3>
+          <div class="card card-success" style="margin-bottom:20px;">
+            <h3>ИИ-сервис для сборки презентаций</h3>
+            <p>Gamma.app генерирует структуру и дизайн слайдов на основе текстового описания или плана проекта, избавляя от ручной вёрстки в PowerPoint и позволяя сосредоточиться на содержании.</p>
+          </div>
 
-      <h3>Что такое Gamma.app</h3>
-      <div class="card card-success" style="margin-bottom:20px;">
-        <h3>ИИ-сервис для сборки презентаций</h3>
-        <p>Gamma.app генерирует структуру и дизайн слайдов на основе текстового описания или плана проекта, избавляя от ручной вёрстки в PowerPoint и позволяя сосредоточиться на содержании.</p>
-      </div>
+          <h3>Этапы сборки презентации</h3>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Сбор материалов проекта</h3><p>Схемы из QGIS (зонирование, транспорт, рельеф), визуализации из Модуля 3, текстовые описания и аналитика из ИИ-инструментов.</p></div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Формирование структуры</h3><p>Составление текстового плана презентации: введение, анализ территории, концепция, визуализация, выводы.</p></div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Генерация в Gamma.app</h3><p>Загрузка плана или текста в сервис, выбор шаблона и стиля оформления, автоматическая генерация слайдов.</p></div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Доработка и оформление</h3><p>Замена сгенерированных изображений на собственные схемы и визуализации, корректировка текста и порядка слайдов.</p></div></div>
+            <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Экспорт презентации</h3><p>Сохранение готовой работы в PDF или PowerPoint для защиты проекта или отправки заказчику.</p></div></div>
+          </div>
 
-      <h3>Этапы сборки презентации</h3>
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Сбор материалов проекта</h3><p>Схемы из QGIS (зонирование, транспорт, рельеф), визуализации из Модуля 3, текстовые описания и аналитика из ИИ-инструментов.</p></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Формирование структуры</h3><p>Составление текстового плана презентации: введение, анализ территории, концепция, визуализация, выводы.</p></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Генерация в Gamma.app</h3><p>Загрузка плана или текста в сервис, выбор шаблона и стиля оформления, автоматическая генерация слайдов.</p></div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Доработка и оформление</h3><p>Замена сгенерированных изображений на собственные схемы и визуализации, корректировка текста и порядка слайдов.</p></div></div>
-        <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Экспорт презентации</h3><p>Сохранение готовой работы в PDF или PowerPoint для защиты проекта или отправки заказчику.</p></div></div>
-      </div>
+          <h3>Чек-лист готовой презентации</h3>
+          <ul class="checklist">
+            <li><div class="chk">✓</div> Ситуационная схема территории из QGIS, оформленная в макете</li>
+            <li><div class="chk">✓</div> Транспортная и/или функциональная схема (при наличии)</li>
+            <li><div class="chk">✓</div> Визуализация проекта после постобработки в Photoshop</li>
+            <li><div class="chk">✓</div> Текстовое обоснование решений, подготовленное с помощью ИИ</li>
+            <li><div class="chk">✓</div> Единый визуальный стиль слайдов (шрифты, цвета, отступы)</li>
+            <li><div class="chk">✓</div> Экспортированный итоговый файл в PDF</li>
+          </ul>
 
-      <h3>Чек-лист готовой презентации</h3>
-      <ul class="checklist">
-        <li><div class="chk">✓</div> Ситуационная схема территории из QGIS, оформленная в макете</li>
-        <li><div class="chk">✓</div> Транспортная и/или функциональная схема (при наличии)</li>
-        <li><div class="chk">✓</div> Визуализация проекта после постобработки в Photoshop</li>
-        <li><div class="chk">✓</div> Текстовое обоснование решений, подготовленное с помощью ИИ</li>
-        <li><div class="chk">✓</div> Единый визуальный стиль слайдов (шрифты, цвета, отступы)</li>
-        <li><div class="chk">✓</div> Экспортированный итоговый файл в PDF</li>
-      </ul>
-
-      <div class="card card-warn">
-        <h3>Итог курса</h3>
-        <p>К завершению Модуля 4 у каждого слушателя есть готовая презентация проекта, собранная с использованием полного цикла инструментов курса: QGIS для пространственного анализа, нейросети для визуализации и текста, Gamma.app для финальной сборки.</p>
-      </div>
-
+          <div class="card card-warn">
+            <h3>Итог курса</h3>
+            <p>К завершению Модуля 4 у каждого слушателя есть готовая презентация проекта, собранная с использованием полного цикла инструментов курса: QGIS для пространственного анализа, нейросети для визуализации и текста, Gamma.app для финальной сборки.</p>
+          </div>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -2157,7 +2071,6 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
 </div><!-- /view-guide -->
 
-
 <script>
   function layoutStickyBars() {
     const backBar = document.querySelector('.back-bar');
@@ -2175,7 +2088,6 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
     const navWraps = document.querySelectorAll('#view-guide .nav-wrap');
     let total = backBar ? backBar.offsetHeight : 0;
     navWraps.forEach(nw => {
-      // only count nav-wraps that are actually visible (offsetParent not null)
       if (nw.offsetParent !== null) total += nw.offsetHeight;
     });
     return total + 8;
@@ -2225,7 +2137,6 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
   layoutStickyBars();
 
-  // ── Hash routing: прямые ссылки на модули ──────────────────
   const HASH_MODULES = { sprint: true, qgis: true, ai: true, gen: true, pres: true };
 
   function openByHash(hash) {
@@ -2239,17 +2150,14 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
     setTimeout(initScrollSpy, 100);
   }
 
-  // При загрузке — проверяем хэш
   if (window.location.hash && HASH_MODULES[window.location.hash.replace('#', '')]) {
     openByHash(window.location.hash);
   }
 
-  // При изменении хэша (кнопка назад/вперёд браузера)
   window.addEventListener('hashchange', function() {
     openByHash(window.location.hash);
   });
 
-  // Обновляем хэш при переключении модулей
   const _origSwitchForHash = switchModule;
   switchModule = function(mod) {
     _origSwitchForHash(mod);
@@ -2259,7 +2167,6 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
   };
   window.addEventListener('resize', layoutStickyBars);
 
-  // ─── Scroll-spy: highlight nav pill for the section currently in view ───
   let scrollSpyObserver = null;
   const spySectionIds = ['lesson1','lesson2','lesson3','overview','data','schemes','export','aicomp','prompts','workflow','gen-intro','prompt-formula','example-rostov','example-elista','prompt-mistakes','photoshop-draft','s0-network','s0-llm','s0-soft','s0-checklist'];
 
@@ -2284,7 +2191,6 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
     const offset = getOffset();
     scrollSpyObserver = new IntersectionObserver((entries) => {
-      // pick the entry closest to the top of the viewport among intersecting ones
       let best = null;
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -2383,7 +2289,6 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
     initContentGates();
   });
 
-  // Re-init scroll-spy whenever the QGIS module becomes active
   function switchModuleWithSpy(mod) {
     switchModule(mod);
     setTimeout(initScrollSpy, 60);
@@ -2400,9 +2305,6 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
     jumpTo(id);
   }
 
-  // ═══════════ ENROLLMENT FORM ═══════════
-
-  // Правила по образованию: доступен ли сертификат
   const CERT_ELIGIBLE_TEXT = '<strong>Сертификат о повышении квалификации</strong> будет доступен по итогам курса.';
   const CERT_RULES = {
     school:              { eligible: false, text: 'Школьники проходят курс на общих основаниях, но <strong>сертификат о повышении квалификации не выдаётся</strong>.' },
@@ -2429,7 +2331,6 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
   function closeEnrollModal() {
     document.getElementById('enroll-modal').style.display = 'none';
-    // сброс к исходному состоянию формы при следующем открытии
     setTimeout(() => {
       document.getElementById('enroll-form').style.display = 'block';
       document.getElementById('enroll-success').style.display = 'none';
@@ -2437,8 +2338,6 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
     }, 300);
   }
 
-  // ⚠️ Замените этот URL на адрес вашего развёрнутого Google Apps Script
-  // (см. инструкцию по настройке ниже в чате)
   const ENROLL_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby1af9vPX9ucvhf1phoY_kr0BQ3q4YMAVVRNUMB0Y_xbYHxlhyp2ca69mpD3S7uTRY/exec';
 
   function submitEnrollForm(e) {
@@ -2464,7 +2363,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
     fetch(ENROLL_SCRIPT_URL, {
       method: 'POST',
-      mode: 'no-cors', // Google Apps Script Web App требует no-cors при простом POST
+      mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(payload)
     })
@@ -2482,7 +2381,6 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
     });
   }
 
-  // Escape закрывает форму записи тоже
   window.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       const m = document.getElementById('enroll-modal');
@@ -2491,21 +2389,16 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
   });
 </script>
 
-
 <!-- ═══════════ ENROLLMENT FORM MODAL ═══════════ -->
 <div id="enroll-modal" style="display:none;position:fixed;inset:0;background:rgba(10,15,26,.82);z-index:9999;align-items:center;justify-content:center;padding:20px;">
   <div style="background:#fff;border-radius:14px;width:100%;max-width:560px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;">
-
     <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 24px;background:#0A0F1A;color:#fff;flex-shrink:0;">
       <span style="font-weight:700;font-size:15px;">Запись на курс «ИИ в архитектуре»</span>
       <button onclick="closeEnrollModal()" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer;line-height:1;">&times;</button>
     </div>
 
     <div style="overflow-y:auto;padding:24px;">
-
-      <!-- STEP 1: form -->
       <form id="enroll-form" onsubmit="submitEnrollForm(event)">
-
         <label style="display:block;font-size:13px;font-weight:700;color:#0A0F1A;margin-bottom:6px;">ФИО *</label>
         <input required type="text" id="ef-name" placeholder="Иванова Мария Сергеевна"
           style="width:100%;padding:11px 14px;border:1px solid #E2E5EF;border-radius:8px;font-size:14px;margin-bottom:16px;font-family:inherit;">
@@ -2532,11 +2425,10 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
           <option value="higher_done">Высшее образование (специалитет/иное), уже завершено</option>
         </select>
 
-        <!-- Cert eligibility notice — dynamic -->
         <div id="cert-notice" style="display:none;padding:12px 14px;border-radius:8px;font-size:12.5px;line-height:1.5;margin-bottom:16px;"></div>
 
         <label style="display:block;font-size:13px;font-weight:700;color:#0A0F1A;margin-bottom:6px;">Комментарий (необязательно)</label>
-        <textarea id="ef-comment" rows="2" placeholder="Например, откуда узнали о курсе"
+        <textarea id="ef-comment" rows="2" placeholder="Например, подразделение ЮФУ или откуда узнали о курсе"
           style="width:100%;padding:11px 14px;border:1px solid #E2E5EF;border-radius:8px;font-size:14px;margin-bottom:20px;font-family:inherit;resize:vertical;"></textarea>
 
         <button type="submit" id="ef-submit-btn"
@@ -2548,21 +2440,18 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
         </div>
       </form>
 
-      <!-- STEP 2: success state -->
       <div id="enroll-success" style="display:none;text-align:center;padding:20px 0;">
         <div style="font-size:40px;margin-bottom:16px;">✅</div>
         <div style="font-size:17px;font-weight:700;color:#0A0F1A;margin-bottom:8px;">Заявка отправлена</div>
-        <div style="font-size:13.5px;color:#3A4560;line-height:1.6;">Мы свяжемся с вами по указанному телефону в ближайшее время для подтверждения записи на поток 21 сентября 2026 года.</div>
+        <div style="font-size:13.5px;color:#3A4560;line-height:1.6;">Мы свяжемся с вами в ближайшее время для подтверждения записи и оформления договора с ЮФУ.</div>
       </div>
 
-      <!-- STEP 2b: error state -->
       <div id="enroll-error" style="display:none;text-align:center;padding:20px 0;">
         <div style="font-size:40px;margin-bottom:16px;">⚠️</div>
         <div style="font-size:15px;font-weight:700;color:#0A0F1A;margin-bottom:8px;">Не удалось отправить заявку</div>
         <div style="font-size:13.5px;color:#3A4560;line-height:1.6;margin-bottom:16px;">Попробуйте ещё раз, либо напишите руководителю курса напрямую в Telegram.</div>
         <a href="https://t.me/alkuleshov" target="_blank" style="color:#4DA3FF;font-weight:700;font-size:13.5px;text-decoration:none;">Написать в Telegram →</a>
       </div>
-
     </div>
   </div>
 </div>
