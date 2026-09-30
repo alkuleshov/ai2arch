@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Редевелопмент и адаптация среды — вторая ступень · ai2arch</title>
+<meta name="description" content="Программа повышения квалификации ЮФУ: аналитика данных и генеративный ИИ в концептуальном проектировании редевелопмента.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; overflow-x:clip; }
+
+  :root {
+    --ink-night:#0A0F1A; --graphite:#2A2F3E;
+    --azure:#4DA3FF; --azure-dark:#2A7CE8; --azure-soft:#7BBFFF;
+    --bg:#F6F4F0; --surface:#FFFFFF; --surface2:#F2F0EB; --border:#E4E1D8;
+    --ink:#0A0F1A; --ink-muted:#2A2F3E; --ink-faint:#6A7080;
+    --accent-l:#EBF4FF; --orange:#E8862B; --orange-l:#FDF3EE;
+    --green:#1A9E6E; --green-l:#EDFAF4; --purple:#6B3FD4; --purple-l:#F0EEFF;
+    --red:#C0392B; --red-l:#FBEAEA;
+    --mono:'JetBrains Mono', monospace; --sans:'Manrope', sans-serif;
+    --nav-h:56px;
+  }
+
+  body { font-family:var(--sans); background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; }
+  .wrap { max-width:980px; margin:0 auto; padding:0 28px; }
+
+  /* ── hero ── */
+  .hero { position:relative; background:var(--ink-night); color:#fff; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(60% 80% at 85% 0%, rgba(77,163,255,.18), transparent 70%); pointer-events:none; }
+  .hero-mark { display:none; position:absolute; top:-30px; right:-50px; width:320px; opacity:.4; pointer-events:none; }
+  @media (min-width:1200px) { .hero-mark { display:block; } }
+  .hero-inner { position:relative; padding:56px 0 64px; }
+  .hero-top { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:48px; }
+  .hero-eyebrow { font-size:11px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.45); }
+  .hero-back { font-size:12px; font-weight:700; color:var(--azure-soft); text-decoration:none; }
+  .hero-back:hover { text-decoration:underline; }
+  .hero h1 { font-size:clamp(34px, 6vw, 60px); line-height:1.05; font-weight:800; letter-spacing:-.02em; margin-bottom:18px; }
+  .hero h1 em { font-style:normal; color:var(--azure); }
+  .hero-sub { font-size:clamp(16px, 2.2vw, 20px); color:rgba(255,255,255,.72); max-width:640px; margin-bottom:12px; }
+  .hero-line { font-size:13px; color:rgba(255,255,255,.45); max-width:640px; margin-bottom:32px; }
+  .btn { display:inline-flex; align-items:center; gap:8px; font-family:var(--sans); font-size:14px; font-weight:700; padding:12px 22px; border-radius:10px; border:1px solid transparent; cursor:pointer; text-decoration:none; transition:transform .15s, opacity .15s; }
+  .btn:hover { opacity:.9; }
+  .btn-primary { background:linear-gradient(135deg, var(--azure-dark), var(--azure)); color:#fff; box-shadow:0 8px 24px rgba(77,163,255,.3); }
+  .btn-ghost { background:transparent; color:var(--ink-muted); border-color:var(--border); }
+  .hero-hint { margin-top:16px; font-size:12px; color:rgba(255,255,255,.4); }
+  @media (max-width:760px) { .hero-hint { display:none; } }
+
+  /* ── sticky nav ── */
+  .nav { position:sticky; top:0; z-index:50; background:var(--surface); border-bottom:1px solid var(--border); box-shadow:0 2px 12px rgba(10,19,36,.06); }
+  .nav-scroll { display:flex; gap:8px; align-items:center; overflow-x:auto; scrollbar-width:none; padding:0 28px; height:var(--nav-h); max-width:980px; margin:0 auto; -webkit-overflow-scrolling:touch; }
+  .nav-scroll::-webkit-scrollbar { display:none; }
+  .nav::after { content:''; position:absolute; top:0; right:0; bottom:0; width:34px; pointer-events:none; background:linear-gradient(to right, transparent, var(--surface)); }
+  .pill { flex:0 0 auto; display:inline-flex; align-items:center; gap:7px; font-family:var(--sans); font-size:12.5px; font-weight:600; color:var(--ink-muted); background:var(--surface2); border:1px solid var(--border); border-radius:100px; padding:7px 13px; cursor:pointer; white-space:nowrap; transition:all .15s; }
+  .pill b { font-family:var(--mono); font-size:11px; color:var(--ink-faint); font-weight:700; }
+  .pill:hover { border-color:var(--azure); }
+  .pill.active { background:var(--accent-l); border-color:var(--azure); color:var(--azure-dark); }
+  .pill.active b { color:var(--azure-dark); }
+
+  /* ── slides ── */
+  .slide { scroll-margin-top:calc(var(--nav-h) + 6px); padding:64px 0 24px; }
+  .slide + .slide { border-top:1px solid var(--border); }
+  .slide-head { display:flex; align-items:baseline; gap:16px; margin-bottom:28px; }
+  .slide-num { font-family:var(--mono); font-size:14px; font-weight:700; color:var(--azure-dark); background:var(--accent-l); border-radius:8px; padding:4px 10px; flex-shrink:0; }
+  .slide h2 { font-size:clamp(24px, 3.6vw, 34px); line-height:1.15; font-weight:800; letter-spacing:-.015em; }
+  .lead { font-size:17px; color:var(--ink-muted); max-width:720px; margin-bottom:24px; }
+  h3 { font-size:15px; font-weight:800; margin-bottom:10px; }
+  .label { font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:10px; }
+  .sub-block { margin-top:32px; }
+  p + p { margin-top:10px; }
+
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:20px 22px; }
+  .card p, .card li { font-size:14px; color:var(--ink-muted); }
+  .card h3 { margin-bottom:8px; }
+  .grid2, .grid3, .grid4 { display:grid; gap:14px; }
+  .grid2 { grid-template-columns:repeat(2, minmax(0,1fr)); }
+  .grid3 { grid-template-columns:repeat(3, minmax(0,1fr)); }
+  .grid4 { grid-template-columns:repeat(4, minmax(0,1fr)); }
+  @media (max-width:900px) { .grid4 { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+  @media (max-width:760px) { .grid3 { grid-template-columns:minmax(0,1fr); } }
+  @media (max-width:640px) { .grid2, .grid4 { grid-template-columns:minmax(0,1fr); } .wrap { padding:0 20px; } .nav-scroll { padding:0 20px; } }
+
+  .list { list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .list li { position:relative; padding-left:18px; }
+  .list li::before { content:'▸'; position:absolute; left:0; top:0; color:var(--azure-dark); }
+  .list-plain { padding-left:0; }
+
+  /* facts */
+  .fact { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:18px 20px; }
+  .fact-val { font-size:30px; font-weight:800; letter-spacing:-.02em; line-height:1.1; }
+  .fact-val small { font-size:14px; font-weight:700; color:var(--ink-faint); margin-left:4px; }
+  .fact-lab { font-size:12.5px; color:var(--ink-faint); margin-top:6px; }
+
+  /* team */
+  .person { display:flex; gap:16px; align-items:flex-start; }
+  .avatar { width:64px; height:64px; border-radius:50%; object-fit:cover; flex-shrink:0; border:2px solid rgba(77,163,255,.5); }
+  .avatar-ini { display:flex; align-items:center; justify-content:center; background:var(--purple-l); color:var(--purple); font-weight:800; font-size:20px; border-color:rgba(107,63,212,.3); }
+  .person-name { font-size:17px; font-weight:800; }
+  .person-role { font-size:12.5px; font-weight:700; color:var(--azure-dark); margin-bottom:12px; }
+  .person .label { margin:12px 0 6px; }
+
+  /* two-step path */
+  .path { display:flex; align-items:stretch; gap:12px; flex-wrap:wrap; }
+  .path-step { flex:1 1 260px; min-width:0; background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:16px 20px; }
+  .path-step.now { border-color:var(--azure); background:var(--accent-l); }
+  .path-step .label { margin-bottom:4px; }
+  .path-arrow { align-self:center; font-size:22px; color:var(--ink-faint); }
+  @media (max-width:640px) { .path-arrow { display:none; } }
+
+  /* price */
+  .price { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:22px; }
+  .price.main { border-color:var(--azure); background:var(--accent-l); }
+  .price-val { font-size:34px; font-weight:800; letter-spacing:-.02em; }
+  .price-val small { font-size:16px; color:var(--ink-faint); font-weight:700; }
+  .price-lab { font-size:13px; color:var(--ink-muted); margin-top:4px; }
+
+  /* competitors */
+  .comp-name { font-size:15px; font-weight:800; margin-bottom:8px; }
+  .comp-them { font-size:13.5px; color:var(--ink-faint); margin-bottom:10px; }
+  .comp-us { font-size:13.5px; color:var(--ink-muted); padding-top:10px; border-top:1px dashed var(--border); }
+  .comp-us b { color:var(--green); }
+
+  /* statement */
+  .statement { font-size:clamp(20px, 3vw, 26px); line-height:1.35; font-weight:700; letter-spacing:-.01em; padding:26px 28px; border-left:4px solid var(--azure); background:var(--surface); border-radius:0 14px 14px 0; margin-bottom:22px; }
+
+  /* hours bar */
+  .hours-bar { display:flex; height:14px; border-radius:100px; overflow:hidden; gap:3px; margin-bottom:18px; }
+  .hours-bar span { min-width:0; }
+  .c1 { background:var(--azure); } .c2 { background:var(--purple); } .c3 { background:var(--green); } .c4 { background:var(--orange); } .c5 { background:var(--graphite); }
+  .module { border-top:4px solid var(--azure); }
+  .module.m2 { border-top-color:var(--purple); } .module.m3 { border-top-color:var(--green); } .module.m4 { border-top-color:var(--orange); } .module.m5 { border-top-color:var(--graphite); }
+  .module-top { display:flex; justify-content:space-between; align-items:baseline; gap:10px; margin-bottom:8px; }
+  .module-n { font-family:var(--mono); font-size:11px; font-weight:700; color:var(--ink-faint); letter-spacing:.06em; }
+  .module-h { font-family:var(--mono); font-size:12px; font-weight:700; background:var(--surface2); border-radius:6px; padding:2px 8px; white-space:nowrap; }
+  .module h3 { font-size:15px; line-height:1.3; }
+
+  .result { border-left:4px solid var(--green); }
+  .result .label { color:var(--green); }
+
+  .note { margin-top:20px; font-size:12.5px; color:var(--ink-faint); background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:12px 16px; }
+
+  /* timeline */
+  .step-date { font-family:var(--mono); font-size:12px; font-weight:700; color:var(--azure-dark); margin-bottom:6px; }
+
+  /* risks */
+  .risk { border-left:4px solid var(--orange); }
+  .risk.key { border-left-color:var(--red); }
+  .risk-tag { display:inline-block; font-size:10.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--red); background:var(--red-l); border-radius:6px; padding:2px 8px; margin-bottom:8px; }
+  .risk h3 { line-height:1.3; }
+  .risk .label { margin:12px 0 6px; color:var(--green); }
+
+  /* next / footer */
+  .next { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:36px; padding-top:18px; }
+  .next-lab { font-size:12px; color:var(--ink-faint); }
+  .contact { padding:56px 0 72px; border-top:1px solid var(--border); }
+  .contact-row { display:flex; gap:14px; flex-wrap:wrap; margin-top:16px; }
+  .contact-item { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:14px 18px; font-size:14px; }
+  .contact-item span { display:block; font-size:11.5px; color:var(--ink-faint); margin-bottom:2px; }
+  .contact-item b { font-weight:700; word-break:break-word; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img class="hero-mark" src="images/brand-mark.png" alt="" aria-hidden="true">
+  <div class="wrap hero-inner">
+    <div class="hero-top">
+      <div class="hero-eyebrow">ААИ ЮФУ · Вторая ступень · Повышение квалификации</div>
+      <a class="hero-back" href="index.html">← Первая ступень: ИИ в архитектуре</a>
+    </div>
+    <h1><em>Редевелопмент</em> и адаптация среды</h1>
+    <p class="hero-sub">Аналитика данных и генеративный искусственный интеллект в концептуальном проектировании</p>
+    <p class="hero-line">Углублённое продолжение программы «Современные инструменты проектного анализа». Ниже девять разделов паспорта проекта, от команды до рисков.</p>
+    <button class="btn btn-primary" data-next="0">Начать с команды ↓</button>
+    <p class="hero-hint">Листайте или переходите между разделами стрелками ← →</p>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Разделы паспорта">
+  <div class="nav-scroll" id="navScroll">
+    <button class="pill" data-go="0"><b>1</b> Команда</button>
+    <button class="pill" data-go="1"><b>2</b> Продукт</button>
+    <button class="pill" data-go="2"><b>3</b> Проблема и аудитория</button>
+    <button class="pill" data-go="3"><b>4</b> Спрос</button>
+    <button class="pill" data-go="4"><b>5</b> Уникальность</button>
+    <button class="pill" data-go="5"><b>6</b> Содержание</button>
+    <button class="pill" data-go="6"><b>7</b> ИИ и технологии</button>
+    <button class="pill" data-go="7"><b>8</b> Запуск и набор</button>
+    <button class="pill" data-go="8"><b>9</b> Риски</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- 1 -->
+<section class="slide" id="s1">
+  <div class="wrap">
+    <div class="slide-head"><span class="slide-num">01</span><h2>Команда и роли</h2></div>
+    <p class="lead">Структурное подразделение: Академия архитектуры и искусств ЮФУ (ААИ ЮФУ).</p>
+    <div class="grid2">
+      <div class="card person">
+        <img class="avatar" src="images/kuleshov.jpg" alt="Кулешов Александр Алексеевич">
+        <div>
+          <div class="person-name">Кулешов Александр Алексеевич</div>
+          <div class="person-role">Руководитель программы, ведущий эксперт-практик</div>
+          <div class="label">Роль</div>
+          <ul class="list">
+            <li>Общая методологическая концепция</li>
+            <li>Ключевые воркшопы и разбор концепций слушателей</li>
+            <li>Полное техническое обеспечение: настройка цифровой среды, библиотеки промптов, демонстрационные рабочие цепочки на нейросетях</li>
+          </ul>
+          <div class="label">Опыт и экспертиза</div>
+          <ul class="list">
+            <li>15 лет практики в средовом проектировании и редевелопменте</li>
+            <li>Создатель первого креативного кластера на Юге России («С52», Ростов-на-Дону)</li>
+            <li>Руководитель запущенной в ЮФУ программы ДПО по ИИ в архитектуре</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card person">
+        <div class="avatar avatar-ini">ЕП</div>
+        <div>
+          <div class="person-name">Петренко Екатерина Сергеевна</div>
+          <div class="person-role">Куратор рабочей программы и работы со слушателями</div>
+          <div class="label">Роль</div>
+          <ul class="list">
+            <li>Методическая проработка модулей и фонда оценочных средств</li>
+            <li>Нормативное согласование в структурах ЮФУ</li>
+            <li>Администрирование учебного процесса, связь со слушателями, контроль сдачи этапов</li>
+          </ul>
+          <div class="label">Опыт и экспертиза</div>
+          <ul class="list">
+            <li>Архитектор-градостроитель</li>
+            <li>Разработчик проектов комплексного развития территорий (КРТ)</li>
+            <li>Методическое сопровождение и администрирование образовательных программ ААИ ЮФУ</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="next"><span class="next-lab">Дальше: название и тип продукта</span><button class="btn btn-ghost" data-next="1">Далее →</button></div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="slide" id="s2">
+  <div class="wrap">
+    <div class="slide-head"><span class="slide-num">02</span><h2>Название и тип продукта</h2></div>
+    <div class="statement">«Редевелопмент и адаптация среды: аналитика данных и генеративный искусственный интеллект в концептуальном проектировании»</div>
+    <p class="lead">Программа дополнительного профессионального образования (повышение квалификации). Новый продукт второй ступени: углублённое продолжение базовой программы проектного анализа среды.</p>
+    <div class="grid4">
+      <div class="fact"><div class="fact-val">4<small>недели</small></div><div class="fact-lab">продолжительность</div></div>
+      <div class="fact"><div class="fact-val">72<small>ак. ч</small></div><div class="fact-lab">общий объём</div></div>
+      <div class="fact"><div class="fact-val">8<small>ак. ч</small></div><div class="fact-lab">контактные: воркшопы и разборы</div></div>
+      <div class="fact"><div class="fact-val">64<small>ак. ч</small></div><div class="fact-lab">асинхронные спринты и самостоятельная работа</div></div>
+    </div>
+    <p class="note">Формат смешанный, с дистанционными образовательными технологиями: асинхронные модули, видеоспринты, онлайн-мастермайнды и финальная открытая защита проекта (Demo Day).</p>
+    <div class="sub-block">
+      <div class="label">Место в линейке</div>
+      <div class="path">
+        <div class="path-step"><div class="label">Ступень 1</div><h3>Современные инструменты проектного анализа</h3><p style="font-size:13.5px;color:var(--ink-muted)">22 ак. часа, 2,5 недели. Пространственный анализ, нейросети, сборка презентации.</p></div>
+        <div class="path-arrow">→</div>
+        <div class="path-step now"><div class="label">Ступень 2 · эта программа</div><h3>Редевелопмент и адаптация среды</h3><p style="font-size:13.5px;color:var(--ink-muted)">72 ак. часа, 4 недели. Работа с готовыми зданиями и территориями на данных.</p></div>
+      </div>
+    </div>
+    <div class="next"><span class="next-lab">Дальше: проблема и целевая аудитория</span><button class="btn btn-ghost" data-next="2">Далее →</button></div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="slide" id="s3">
+  <div class="wrap">
+    <div class="slide-head"><span class="slide-num">03</span><h2>Проблема и целевая аудитория</h2></div>
+    <div class="label">Проблема</div>
+    <div class="grid3">
+      <div class="card"><h3>Образование смотрит на новое строительство</h3><p>Архитектурное образование ориентировано на свободные участки (greenfield) и не учит работать с устаревшими зданиями, бывшими фабриками и общественными пространствами (brownfield).</p></div>
+      <div class="card"><h3>Контекст собирают вручную</h3><p>Архитекторы тратят недели на ручной сбор контекста и часто не могут аргументировать инвестору назначение объекта.</p></div>
+      <div class="card"><h3>Массовые курсы дают картинки без конструктива</h3><p>Курсы по нейросетям учат случайной генерации изображений, не учитывая несущие стены, шаг колонн и градостроительные регламенты. Такие концепты непригодны для реального девелопмента.</p></div>
+    </div>
+
+    <div class="sub-block">
+      <div class="label">Кто идёт на программу</div>
+      <div class="grid2">
+        <div class="card">
+          <h3>Портрет слушателя</h3>
+          <ul class="list">
+            <li>Студенты старших курсов бакалавриата и магистратуры: «Архитектура», «Градостроительство», «Дизайн архитектурной среды»</li>
+            <li>Начинающие архитекторы-практики, концептуалисты и средовые дизайнеры проектных бюро</li>
+            <li>Младшие специалисты аналитических отделов девелоперских компаний</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Запросы аудитории</h3>
+          <ul class="list">
+            <li>Быстро освоить методы редевелопмента</li>
+            <li>Обосновывать функционал здания данными</li>
+            <li>Внедрить ИИ в работу без сложного программирования</li>
+            <li>Положить в портфолио сильный инвестиционный концепт-проект</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">Достижимость аудитории высокая: у вуза есть прямая база студентов ААИ ЮФУ, а также выпускники первой ступени (11–17 человек в первом потоке), готовые продолжить на углублённом треке.</p>
+    </div>
+    <div class="next"><span class="next-lab">Дальше: спрос и коммерческая жизнеспособность</span><button class="btn btn-ghost" data-next="3">Далее →</button></div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="slide" id="s4">
+  <div class="wrap">
+    <div class="slide-head"><span class="slide-num">04</span><h2>Спрос и коммерческая жизнеспособность</h2></div>
+
+    <div class="label">Подтверждение спроса</div>
+    <div class="grid3">
+      <div class="card"><div class="fact-val">100<small>%</small></div><div class="fact-lab" style="margin-top:6px">доходимость первого потока вводной программы ДПО; выручка пилота 55 000 ₽</div></div>
+      <div class="card"><h3>Запросы слушателей</h3><p>Прямые просьбы об углублённой работе со сложными зданиями, функциональным программированием и инвестиционной подачей концепций.</p></div>
+      <div class="card"><h3>Тренд рынка</h3><p>Общероссийское внимание девелопмента к КРТ и ревитализации историко-промышленного фонда.</p></div>
+    </div>
+
+    <div class="sub-block">
+      <div class="label">Чем отличаемся от альтернатив</div>
+      <div class="grid3">
+        <div class="card"><div class="comp-name">Софт Культура / STEMPS</div><div class="comp-them">Курсы по ИИ в архитектуре, акцент на генерации изображений в Midjourney.</div><div class="comp-us"><b>У нас:</b> сохраняется конструктив реального здания, а геоаналитика локации связана с архитектурной формой.</div></div>
+        <div class="card"><div class="comp-name">НИУ ВШЭ / ИТМО</div><div class="comp-them">Urban Data Science: программирование на Python и высшая математика, далеко от объёмного проектирования.</div><div class="comp-us"><b>У нас:</b> набор инструментов без написания кода, понятный проектировщикам.</div></div>
+        <div class="card"><div class="comp-name">МАРШ / Ре-Школа</div><div class="comp-them">Ревитализация и редевелопмент: от 6 месяцев, 150 000–350 000 ₽, без применения ИИ.</div><div class="comp-us"><b>У нас:</b> 4 недели прикладного формата с языковыми моделями и нейросетями, стоимость доступнее.</div></div>
+      </div>
+    </div>
+
+    <div class="sub-block">
+      <div class="label">Стоимость и объём запуска</div>
+      <div class="grid3">
+        <div class="price main"><div class="price-val">18 900 <small>₽</small></div><div class="price-lab">полная стоимость</div></div>
+        <div class="price"><div class="price-val">14 900 <small>₽</small></div><div class="price-lab">льготная цена для студентов очной формы ЮФУ</div></div>
+        <div class="price"><div class="price-val">15–20 <small>человек</small></div><div class="price-lab">слушателей на первом основном запуске</div></div>
+      </div>
+      <p class="note">Прогноз выручки: 225 000 – 283 500 ₽ за запуск.</p>
+    </div>
+    <div class="next"><span class="next-lab">Дальше: ценностное предложение и уникальность</span><button class="btn btn-ghost" data-next="4">Далее →</button></div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="slide" id="s5">
+  <div class="wrap">
+    <div class="slide-head"><span class="slide-num">05</span><h2>Ценностное предложение и уникальность</h2></div>
+    <div class="statement">Программа короткого формата, которая соединяет пространственные данные, прикладной ИИ и практику адаптивного использования зданий (Adaptive Reuse).</div>
+    <div class="grid3">
+      <div class="card"><h3>Опыт автора</h3><p>Основа программы: 15 лет реализации знаковых проектов на Юге России, включая запуск первого креативного кластера региона («С52», Ростов-на-Дону).</p></div>
+      <div class="card"><h3>Компетенции ЮФУ</h3><p>Научно-педагогическая школа ААИ ЮФУ в области градостроительного анализа, средового дизайна, КРТ и реконструкции городской среды. Программа развивает цифровую экосистему университета: пространственный интеллект (Spatial Intelligence) и ИИ-ассистенты в проектной деятельности.</p></div>
+      <div class="card"><h3>Витринная программа</h3><p>Переводит классическое архитектурное образование на проектирование на данных и цифровые технологии. Публичный результат слушателей (Demo Day) укрепляет статус ЮФУ как регионального центра компетенций в пространственном развитии и цифровом девелопменте.</p></div>
+    </div>
+    <div class="next"><span class="next-lab">Дальше: содержание и результаты</span><button class="btn btn-ghost" data-next="5">Далее →</button></div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="slide" id="s6">
+  <div class="wrap">
+    <div class="slide-head"><span class="slide-num">06</span><h2>Содержание и результаты</h2></div>
+    <div class="label">Модули · 72 академических часа</div>
+    <div class="hours-bar" aria-hidden="true">
+      <span class="c1" style="flex:18 1 0"></span><span class="c2" style="flex:18 1 0"></span><span class="c3" style="flex:18 1 0"></span><span class="c4" style="flex:14 1 0"></span><span class="c5" style="flex:4 1 0"></span>
+    </div>
+    <div class="grid2">
+      <div class="card module"><div class="module-top"><span class="module-n">МОДУЛЬ 1</span><span class="module-h">18 ч</span></div><h3>Пространственный аудит и контекст территории</h3><p>Сбор открытых геоданных в QGIS, пешеходные изохроны на 15 минут, анализ дефицитов инфраструктуры и сервисов вокруг объекта.</p></div>
+      <div class="card module m2"><div class="module-top"><span class="module-n">МОДУЛЬ 2</span><span class="module-h">18 ч</span></div><h3>Сценарное программирование и прикладные языковые модели</h3><p>Анализ наилучшего использования (HBU), градостроительные ограничения, функциональная матрица здания с помощью языковой модели, расчёт баланса площадей.</p></div>
+      <div class="card module m3"><div class="module-top"><span class="module-n">МОДУЛЬ 3</span><span class="module-h">18 ч</span></div><h3>Генеративный скетчинг и визуализация решений</h3><p>Концептуальный редизайн фасадов и интерьеров по фотофиксации без искажения несущих стен; обзор продвинутых сред управления геометрией (ComfyUI / ControlNet).</p></div>
+      <div class="card module m4"><div class="module-top"><span class="module-n">МОДУЛЬ 4</span><span class="module-h">14 ч</span></div><h3>Синтез и оформление инвестиционного паспорта</h3><p>Структурирование аналитики и графики в единый девелоперский буклет.</p></div>
+    </div>
+    <div class="card module m5" style="margin-top:14px"><div class="module-top"><span class="module-n">ИТОГОВАЯ АТТЕСТАЦИЯ</span><span class="module-h">4 ч</span></div><h3>Открытая защита проекта редевелопмента (Demo Day)</h3></div>
+
+    <div class="sub-block">
+      <div class="label">Что получит слушатель</div>
+      <div class="grid3">
+        <div class="card result"><div class="label">Компетенции</div><p>Экспресс-аудит городской среды, сценарное функциональное зонирование объектов в устаревших зданиях (brownfield), контролируемое эскизирование с помощью нейросетей.</p></div>
+        <div class="card result"><div class="label">Артефакт</div><p>Комплексный инвестиционный концепт-паспорт редевелопмента выбранного здания: карты доступности, баланс площадей, серия эскизных визуализаций «было / стало». Идёт в личное портфолио.</p></div>
+        <div class="card result"><div class="label">Документ</div><p>Удостоверение о повышении квалификации установленного образца ЮФУ на 72 академических часа.</p></div>
+      </div>
+    </div>
+    <div class="next"><span class="next-lab">Дальше: использование ИИ и цифровых технологий</span><button class="btn btn-ghost" data-next="6">Далее →</button></div>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="slide" id="s7">
+  <div class="wrap">
+    <div class="slide-head"><span class="slide-num">07</span><h2>Использование ИИ и цифровых технологий</h2></div>
+    <div class="grid2">
+      <div class="card"><h3>QGIS и OpenStreetMap</h3><p>Извлечение геопространственных данных, графы связности и изохроны пешеходной доступности, чтобы выявить функциональные пустоты территории.</p></div>
+      <div class="card"><h3>Большие языковые модели: Claude, ChatGPT, Gemini</h3><p>Анализ нормативных текстов (ПЗЗ), средовые сценарии, проектные концепции, расчёт экспликации помещений.</p></div>
+      <div class="card"><h3>Генеративные диффузионные нейросети</h3><p>Быстрая генерация фактур, материалов и элементов адаптации фасадов и интерьеров. Обзорная демонстрация ComfyUI + ControlNet: жёсткая фиксация конструктивных осей через карты глубины и контуров.</p></div>
+      <div class="card"><h3>Notion и среды вёрстки</h3><p>Быстрая компоновка данных и сборка структуры инвестиционной презентации.</p></div>
+    </div>
+    <p class="note">Без программирования: обучение идёт на готовых библиотеках промптов и понятных веб-сервисах, а сложные связки показывает эксперт обзорно. Студент самостоятельно обеспечивает доступ к необходимым для обучения сервисам в соответствии с их пользовательскими соглашениями и применимым законодательством. Организатор курса не оказывает услуг по предоставлению инструментов связи и не распространяет средства обхода блокировок.</p>
+    <div class="next"><span class="next-lab">Дальше: план запуска и набора</span><button class="btn btn-ghost" data-next="7">Далее →</button></div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="slide" id="s8">
+  <div class="wrap">
+    <div class="slide-head"><span class="slide-num">08</span><h2>План запуска и набора</h2></div>
+    <div class="label">Каналы набора: бесплатные и партнёрские</div>
+    <div class="grid2">
+      <div class="card"><ul class="list"><li>Прямая рассылка и презентация выпускникам первой программы ДПО по ИИ в архитектуре</li><li>Ресурсы ААИ ЮФУ: сообщества во ВКонтакте, Telegram-каналы подразделения, старостаты</li></ul></div>
+      <div class="card"><ul class="list"><li>Открытый вебинар «Как оживить заброшенное здание: опыт кластера С52 и инструменты ИИ» для студентов и молодых специалистов</li><li>Профессиональный сайт ai2arch.ru</li></ul></div>
+    </div>
+    <div class="sub-block">
+      <div class="label">Сроки</div>
+      <div class="grid3">
+        <div class="card"><div class="step-date">СЕНТЯБРЬ – ОКТЯБРЬ</div><p>Разработка учебно-методического комплекса, согласование и регистрация приказа программы в ЮФУ.</p></div>
+        <div class="card"><div class="step-date">ОКТЯБРЬ – ДЕКАБРЬ</div><p>Информационная кампания, сбор предзаказов и прогрев аудитории.</p></div>
+        <div class="card"><div class="step-date">ФЕВРАЛЬ – МАРТ</div><p>Весенний семестр: официальный старт обучения первого потока.</p></div>
+      </div>
+      <p class="note">Ответственный за набор: Петренко Екатерина Сергеевна, при методической поддержке дирекции ААИ ЮФУ.</p>
+    </div>
+    <div class="next"><span class="next-lab">Дальше: риски и их решения</span><button class="btn btn-ghost" data-next="8">Далее →</button></div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="slide" id="s9">
+  <div class="wrap">
+    <div class="slide-head"><span class="slide-num">09</span><h2>Риски и их решения</h2></div>
+    <div class="grid2">
+      <div class="card risk key">
+        <span class="risk-tag">Ключевой риск</span>
+        <h3>Недобор группы из-за нехватки ресурсов на продвижение</h3>
+        <div class="label">Что делаем</div>
+        <ul class="list">
+          <li>Позиционируем программу как ступень 2 и напрямую донабираем выпускников первого потока со скидкой выпускника</li>
+          <li>Идём к студентам старших курсов и дипломникам кафедр градостроительства и дизайна среды через учебные чаты и старостаты, без затрат на рекламу</li>
+          <li>Привлекаем аудиторию экспертным контентом автора: открытый разбор кейса С52 в Telegram-каналах и на ai2arch.ru</li>
+        </ul>
+      </div>
+      <div class="card risk">
+        <h3>Технический барьер перед нейросетями</h3>
+        <div class="label">Что делаем</div>
+        <ul class="list">
+          <li>Исключаем сложные настройки на устройствах слушателей</li>
+          <li>Обучаем на готовых библиотеках промптов и понятных веб-сервисах</li>
+          <li>Сложные связки показываем обзорно, самостоятельный кодинг не требуется</li>
+        </ul>
+      </div>
+      <div class="card risk">
+        <h3>Срыв сроков и перегрузка команды</h3>
+        <div class="label">Что делаем</div>
+        <ul class="list">
+          <li>Чётко делим обязанности: методическая часть и контекст КРТ у куратора, техническая часть у руководителя</li>
+          <li>Переносим старт на весенний семестр, после планового утверждения приказа в октябре</li>
+        </ul>
+      </div>
+      <div class="card risk">
+        <h3>Низкая конверсия заявок в оплаты</h3>
+        <div class="label">Что делаем</div>
+        <ul class="list">
+          <li>Вводим двухступенчатую тарифную сетку: льготный студенческий тариф 14 900 ₽</li>
+          <li>Проводим продающий открытый мастер-класс с портфолио-результатами предыдущих потоков</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="contact">
+  <div class="wrap">
+    <div class="label">Контакты для связи</div>
+    <div class="contact-row">
+      <div class="contact-item"><span>Кулешов А. А.</span><b>@alkuleshov</b></div>
+      <div class="contact-item"><span>Официальная почта дирекции</span><b>alandreev@sfedu.ru</b></div>
+    </div>
+    <div class="next" style="margin-top:28px"><button class="btn btn-ghost" id="toTop">↑ К началу</button></div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var pills = Array.prototype.slice.call(document.querySelectorAll('.pill'));
+  var navScroll = document.getElementById('navScroll');
+  var current = -1;
+
+  function go(i) {
+    if (i < 0 || i >= slides.length) return;
+    slides[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  pills.forEach(function (p) {
+    p.addEventListener('click', function () { go(parseInt(p.getAttribute('data-go'), 10)); });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-next]'), function (b) {
+    b.addEventListener('click', function () { go(parseInt(b.getAttribute('data-next'), 10)); });
+  });
+  document.getElementById('toTop').addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  function setActive(i) {
+    current = i;
+    pills.forEach(function (p, idx) { p.classList.toggle('active', idx === i); });
+    if (i >= 0 && pills[i]) {
+      var p = pills[i];
+      var target = p.offsetLeft - (navScroll.clientWidth - p.offsetWidth) / 2;
+      navScroll.scrollTo({ left: target, behavior: 'smooth' });
+    }
+  }
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) setActive(slides.indexOf(e.target));
+      });
+    }, { rootMargin: '-25% 0px -65% 0px', threshold: 0 });
+    slides.forEach(function (s) { io.observe(s); });
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(Math.min(current + 1, slides.length - 1)); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); go(Math.max(current - 1, 0)); }
+  });
+})();
+</script>
+</body>
+</html>
