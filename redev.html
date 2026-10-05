@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Редевелопмент и ИИ — программа повышения квалификации ЮФУ · ai2arch</title>
+<title>ИИ в редевелопменте — программа повышения квалификации ЮФУ · ai2arch</title>
 <meta name="description" content="72 ак. часа, онлайн, старт 5 ноября 2026. Берёте реальный объект и доводите его до защищённой концепции с помощью данных и ИИ. Удостоверение о повышении квалификации ЮФУ.">
-<meta property="og:title" content="Редевелопмент и ИИ — программа повышения квалификации ЮФУ">
+<meta property="og:title" content="ИИ в редевелопменте — программа повышения квалификации ЮФУ">
 <meta property="og:description" content="Реальный объект, аналитика на данных, генеративный ИИ и защита проекта. 72 ак. часа, 5 мест в пилотной группе.">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -53,8 +53,20 @@
   .nav::-webkit-scrollbar { display:none; }
   .nav a { flex:0 0 auto; font-size:13px; font-weight:600; color:rgba(255,255,255,.65); text-decoration:none; padding:8px 10px; border-radius:8px; white-space:nowrap; }
   .nav a:hover, .nav a.on { color:#fff; background:rgba(255,255,255,.08); }
+  .burger { display:none; width:42px; height:42px; border-radius:10px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:5px; flex-shrink:0; }
+  .burger span { display:block; width:18px; height:2px; background:#fff; border-radius:2px; transition:transform .2s, opacity .2s; }
+  .burger[aria-expanded="true"] span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+  .burger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+  .burger[aria-expanded="true"] span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+  @media (max-width:1100px) {
+    .burger { display:flex; }
+    .head-apply { margin-left:auto; }
+    .nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; gap:2px; overflow:visible; background:rgba(10,15,26,.98); padding:10px 20px 18px; border-bottom:1px solid rgba(255,255,255,.1); }
+    .nav.open { display:flex; }
+    .nav a { padding:13px 12px; font-size:16px; }
+  }
   @media (max-width:860px) { .brand span { display:none; } .head-in { gap:12px; } }
-  @media (max-width:520px) { .head .btn-sm { display:none; } }
+  @media (max-width:520px) { .head-apply { display:none; } .burger { margin-left:auto; } }
 
   /* ── hero ── */
   .hero { position:relative; background:var(--ink-night); color:#fff; overflow:hidden; }
@@ -63,9 +75,14 @@
   @media (min-width:1100px) { .hero-mark { display:block; } }
   .hero-in { position:relative; padding-top:72px; }
   .eyebrow { font-size:12px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--azure-soft); margin-bottom:22px; }
-  .hero h1 { font-size:clamp(44px, 8vw, 84px); line-height:1.02; font-weight:800; letter-spacing:-.03em; margin-bottom:22px; }
+  .hero h1 { font-size:clamp(30px, 8.4vw, 84px); line-height:1.02; font-weight:800; letter-spacing:-.03em; margin-bottom:22px; }
   .hero h1 em { font-style:normal; color:var(--azure); }
   .hero-sub { font-size:clamp(17px, 2.2vw, 21px); line-height:1.5; color:rgba(255,255,255,.78); max-width:660px; margin-bottom:12px; }
+  .ast { font-size:.42em; vertical-align:top; position:relative; top:.35em; margin-left:.08em; font-weight:700; }
+  .ast a { color:var(--azure-soft); text-decoration:none; }
+  .hero-fn { font-size:13.5px; line-height:1.5; color:rgba(255,255,255,.6); max-width:660px; margin-bottom:30px; padding-left:16px; border-left:2px solid rgba(77,163,255,.5); }
+  .hero-fn span { color:var(--azure-soft); font-weight:800; }
+  .hero-fn b { color:rgba(255,255,255,.85); }
   .hero-name { font-size:13px; color:rgba(255,255,255,.42); max-width:660px; margin-bottom:34px; }
   .hero-cta { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
   .hero-note { font-size:13px; color:rgba(255,255,255,.5); }
@@ -236,7 +253,8 @@
       <a href="#price">Стоимость</a>
       <a href="#faq">Вопросы</a>
     </nav>
-    <button class="btn btn-primary btn-sm" data-apply>Оставить заявку</button>
+    <button class="btn btn-primary btn-sm head-apply" data-apply>Оставить заявку</button>
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -245,9 +263,10 @@
   <img class="hero-mark" src="images/brand-mark.png" alt="" aria-hidden="true">
   <div class="wrap hero-in">
     <div class="eyebrow">Программа повышения квалификации · ЮФУ · вторая ступень</div>
-    <h1><em>Редевелопмент</em> и ИИ</h1>
+    <h1><em>ИИ</em> в редевелопменте<sup class="ast"><a href="#fn-redev" aria-label="Что такое редевелопмент">*</a></sup></h1>
     <p class="hero-sub">Берёте реальное здание или территорию и доводите до защищённой концепции: проверяете идею на данных, считаете функции и площади, оформляете визуально. Рутину делает ИИ, решения остаются за вами.</p>
     <p class="hero-name">Полное название: «Современные инструменты развития территорий и объектов: аналитика данных и генеративный ИИ в разработке концепций»</p>
+    <p class="hero-fn" id="fn-redev"><span>*</span> <b>Редевелопмент</b> (от англ. redevelopment, «повторное развитие») — обновление уже застроенной территории или здания с новым назначением, например превращение заброшенной фабрики в креативный кластер.</p>
     <div class="hero-cta">
       <button class="btn btn-primary" data-apply>Оставить заявку</button>
       <a class="btn btn-ghost" href="#program">Смотреть программу</a>
@@ -636,7 +655,7 @@
 <!-- ═══ ЗАЯВКА ═══ -->
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal-box">
-    <div class="modal-top"><span id="modalTitle">Заявка на программу «Редевелопмент и ИИ»</span><button class="modal-x" id="modalX" aria-label="Закрыть">&times;</button></div>
+    <div class="modal-top"><span id="modalTitle">Заявка на программу «ИИ в редевелопменте»</span><button class="modal-x" id="modalX" aria-label="Закрыть">&times;</button></div>
     <div class="modal-body">
       <form id="form">
         <label for="f-name">ФИО *</label>
@@ -754,7 +773,7 @@
       certEligible: rule ? rule.cert : '',
       comment: 'Статус: ' + status + (comment ? '. ' + comment : ''),
       timestamp: new Date().toISOString(),
-      source: 'ai2arch.ru — лендинг «Редевелопмент и ИИ»'
+      source: 'ai2arch.ru — лендинг «ИИ в редевелопменте»'
     };
     btn.disabled = true; btn.textContent = 'Отправка...';
     fetch(ENROLL_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) })
@@ -762,6 +781,15 @@
       .catch(function () { form.style.display = 'none'; fail.style.display = 'block'; })
       .then(function () { btn.disabled = false; btn.textContent = 'Отправить заявку'; });
   });
+
+  // меню на планшетах и телефонах
+  var burger = document.getElementById('burger');
+  var navEl = document.getElementById('nav');
+  function setMenu(open) { navEl.classList.toggle('open', open); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  burger.addEventListener('click', function (e) { e.stopPropagation(); setMenu(!navEl.classList.contains('open')); });
+  navEl.addEventListener('click', function (e) { if (e.target.tagName === 'A') setMenu(false); });
+  document.addEventListener('click', function (e) { if (!navEl.contains(e.target)) setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
 
   // подсветка раздела в меню
   var links = Array.prototype.slice.call(document.querySelectorAll('#nav a'));
