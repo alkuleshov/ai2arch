@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ИИ в архитектуре — программа повышения квалификации ЮФУ · ai2arch</title>
+<meta name="description" content="22 ак. часа, 2,5 недели, с применением дистанционных технологий. QGIS и нейросети с нуля: карты участка, ИИ-анализ и итоговая презентация. Удостоверение о повышении квалификации ЮФУ.">
+<meta property="og:title" content="ИИ в архитектуре — программа повышения квалификации ЮФУ">
+<meta property="og:description" content="Карты участка в QGIS, ИИ-анализ территории и итоговая презентация. 22 ак. часа, онлайн, 5 000 ₽.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; overflow-x:clip; }
+
+  :root {
+    --ink-night:#0A0F1A; --graphite:#2A2F3E;
+    --azure:#4DA3FF; --azure-dark:#2A7CE8; --azure-soft:#7BBFFF;
+    --bg:#F6F4F0; --surface:#FFFFFF; --surface2:#F2F0EB; --border:#E4E1D8;
+    --ink:#0A0F1A; --ink-muted:#2A2F3E; --ink-faint:#6A7080; --accent-l:#EBF4FF;
+    --orange:#E8862B; --green:#1A9E6E; --green-l:#EDFAF4; --purple:#6B3FD4; --purple-l:#F0EEFF;
+    --mono:'JetBrains Mono', monospace; --sans:'Manrope', sans-serif;
+    --nav-h:56px;
+  }
+  body { font-family:var(--sans); background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; }
+  img { max-width:100%; display:block; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 28px; }
+  @media (max-width:640px) { .wrap { padding:0 20px; } }
+
+  /* маркер недостающих данных: видно только на черновике */
+  .todo { background:#FFF3B0; color:#6B5300; border-radius:4px; padding:0 4px; font-weight:600; }
+
+  /* ── buttons ── */
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:var(--sans); font-size:15px; font-weight:700; padding:14px 26px; border-radius:12px; border:1px solid transparent; cursor:pointer; text-decoration:none; transition:transform .15s, opacity .15s; }
+  .btn:hover { opacity:.92; transform:translateY(-1px); }
+  .btn-primary { background:linear-gradient(135deg, var(--azure-dark), var(--azure)); color:#fff; box-shadow:0 8px 24px rgba(77,163,255,.32); }
+  .btn-ghost { background:transparent; color:#fff; border-color:rgba(255,255,255,.28); }
+  .btn-dark { background:var(--ink-night); color:#fff; }
+  .btn-line { background:var(--surface); color:var(--ink-muted); border-color:var(--border); }
+  .btn-sm { padding:9px 18px; font-size:13px; border-radius:10px; }
+
+  /* ── header ── */
+  .head { position:sticky; top:0; z-index:60; background:rgba(10,15,26,.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(255,255,255,.08); }
+  .head-in { display:flex; align-items:center; gap:20px; height:var(--nav-h); }
+  .brand { display:flex; align-items:baseline; gap:10px; text-decoration:none; color:#fff; flex-shrink:0; }
+  .brand b { font-family:var(--mono); font-size:16px; font-weight:700; color:var(--azure); letter-spacing:-.02em; }
+  .brand span { font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.45); }
+  .nav { display:flex; gap:2px; flex:1; min-width:0; justify-content:flex-start; overflow-x:auto; scrollbar-width:none; }
+  .nav::-webkit-scrollbar { display:none; }
+  .nav a { flex:0 0 auto; font-size:13px; font-weight:600; color:rgba(255,255,255,.65); text-decoration:none; padding:8px 10px; border-radius:8px; white-space:nowrap; }
+  .nav a:hover, .nav a.on { color:#fff; background:rgba(255,255,255,.08); }
+  .burger { display:none; width:42px; height:42px; border-radius:10px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:5px; flex-shrink:0; }
+  .burger span { display:block; width:18px; height:2px; background:#fff; border-radius:2px; transition:transform .2s, opacity .2s; }
+  .burger[aria-expanded="true"] span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+  .burger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+  .burger[aria-expanded="true"] span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+  @media (max-width:1100px) {
+    .burger { display:flex; }
+    .head-apply { margin-left:auto; }
+    .nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; gap:2px; overflow:visible; background:rgba(10,15,26,.98); padding:10px 20px 18px; border-bottom:1px solid rgba(255,255,255,.1); }
+    .nav.open { display:flex; }
+    .nav a { padding:13px 12px; font-size:16px; }
+  }
+  @media (max-width:860px) { .brand span { display:none; } .head-in { gap:12px; } }
+  @media (max-width:520px) { .head-apply { display:none; } .burger { margin-left:auto; } }
+
+  /* ── hero ── */
+  .hero { position:relative; background:var(--ink-night); color:#fff; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(60% 80% at 85% 0%, rgba(77,163,255,.2), transparent 70%); pointer-events:none; }
+  .hero-mark { display:none; position:absolute; top:-10px; right:-60px; width:430px; opacity:.5; pointer-events:none; }
+  @media (min-width:1100px) { .hero-mark { display:block; } }
+  .hero-in { position:relative; padding-top:72px; }
+  .eyebrow { font-size:12px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--azure-soft); margin-bottom:22px; }
+  .hero h1 { font-size:clamp(30px, 8.4vw, 84px); line-height:1.02; font-weight:800; letter-spacing:-.03em; margin-bottom:22px; }
+  .hero h1 em { font-style:normal; color:var(--azure); }
+  .hero-sub { font-size:clamp(17px, 2.2vw, 21px); line-height:1.5; color:rgba(255,255,255,.78); max-width:660px; margin-bottom:12px; }
+  .ast { font-size:.42em; vertical-align:top; position:relative; top:.35em; margin-left:.08em; font-weight:700; }
+  .ast a { color:var(--azure-soft); text-decoration:none; }
+  .hero-fn { font-size:13.5px; line-height:1.5; color:rgba(255,255,255,.6); max-width:660px; margin-bottom:30px; padding-left:16px; border-left:2px solid rgba(77,163,255,.5); }
+  .hero-fn span { color:var(--azure-soft); font-weight:800; }
+  .hero-fn b { color:rgba(255,255,255,.85); }
+  .hero-name { font-size:13px; color:rgba(255,255,255,.42); max-width:660px; margin-bottom:34px; }
+  .hero-cta { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
+  .hero-note { font-size:13px; color:rgba(255,255,255,.5); }
+  .facts { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:0; margin-top:56px; border-top:1px solid rgba(255,255,255,.14); }
+  .fact { padding:24px 20px 28px 0; }
+  .fact + .fact { padding-left:24px; border-left:1px solid rgba(255,255,255,.1); }
+  .fact b { display:block; font-size:clamp(24px, 3.4vw, 36px); font-weight:800; letter-spacing:-.02em; line-height:1.1; }
+  .fact b small { font-size:.5em; color:rgba(255,255,255,.55); margin-left:5px; font-weight:700; }
+  .fact span { display:block; font-size:13px; color:rgba(255,255,255,.55); margin-top:6px; line-height:1.4; }
+  @media (max-width:820px) {
+    .facts { grid-template-columns:repeat(2, minmax(0,1fr)); }
+    .fact, .fact + .fact { padding:20px 12px 20px 0; border-left:0; }
+    .fact:nth-child(even) { padding-left:20px; border-left:1px solid rgba(255,255,255,.1); }
+    .fact:nth-child(n+3) { border-top:1px solid rgba(255,255,255,.1); }
+  }
+
+  /* ── sections ── */
+  section { scroll-margin-top:calc(var(--nav-h) + 4px); }
+  .sec { padding:88px 0; }
+  .sec.alt { background:var(--surface); }
+  .sec.dark { background:var(--ink-night); color:#fff; position:relative; overflow:hidden; }
+  .sec.dark::before { content:''; position:absolute; inset:0; background:radial-gradient(50% 70% at 10% 0%, rgba(77,163,255,.16), transparent 70%); pointer-events:none; }
+  .sec.dark > .wrap { position:relative; }
+  @media (max-width:640px) { .sec { padding:64px 0; } }
+  .kicker { font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--azure-dark); margin-bottom:12px; }
+  .dark .kicker { color:var(--azure-soft); }
+  h2 { font-size:clamp(28px, 4.4vw, 42px); line-height:1.12; font-weight:800; letter-spacing:-.02em; margin-bottom:18px; max-width:760px; }
+  .lead { font-size:18px; line-height:1.55; color:var(--ink-muted); max-width:720px; margin-bottom:36px; }
+  .dark .lead { color:rgba(255,255,255,.72); }
+  h3 { font-size:19px; line-height:1.25; font-weight:800; letter-spacing:-.01em; margin-bottom:10px; }
+
+  .grid2, .grid3, .grid4 { display:grid; gap:16px; }
+  .grid2 { grid-template-columns:repeat(2, minmax(0,1fr)); }
+  .grid3 { grid-template-columns:repeat(3, minmax(0,1fr)); }
+  .grid4 { grid-template-columns:repeat(4, minmax(0,1fr)); }
+  @media (max-width:900px) { .grid4 { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+  @media (max-width:760px) { .grid3 { grid-template-columns:minmax(0,1fr); } }
+  @media (max-width:640px) { .grid2, .grid4 { grid-template-columns:minmax(0,1fr); } }
+
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:24px 26px; }
+  .alt .card { background:var(--bg); }
+  .card p, .card li { font-size:15px; color:var(--ink-muted); }
+  .card p + p { margin-top:10px; }
+  .ico { width:42px; height:42px; border-radius:12px; background:var(--accent-l); color:var(--azure-dark); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-weight:700; font-size:15px; margin-bottom:16px; }
+  .list { list-style:none; display:flex; flex-direction:column; gap:9px; }
+  .list li { position:relative; padding-left:20px; }
+  .list li::before { content:''; position:absolute; left:2px; top:.62em; width:8px; height:8px; border-radius:50%; background:var(--azure); }
+  .dark .card { background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.12); }
+  .dark .card p, .dark .card li { color:rgba(255,255,255,.75); }
+
+  /* tracks */
+  .track { border-top:5px solid var(--azure); }
+  .track.b { border-top-color:var(--purple); }
+  .track .who { font-size:13px; font-weight:700; color:var(--ink-faint); margin-bottom:14px; }
+  .track .label { font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); margin:16px 0 8px; }
+  .track .btn { margin-top:20px; }
+  .note { margin-top:18px; background:var(--surface2); border:1px solid var(--border); border-radius:14px; padding:16px 22px; font-size:14px; color:var(--ink-muted); }
+  .alt .note { background:var(--bg); }
+
+  /* hours bar + modules */
+  .bar { display:flex; gap:4px; height:12px; border-radius:100px; overflow:hidden; margin-bottom:24px; }
+  .bar span { min-width:0; }
+  .c0{background:var(--graphite)} .c1{background:var(--azure)} .c2{background:var(--purple)} .c3{background:var(--green)} .c4{background:var(--orange)} .c5{background:#C0392B}
+  details.mod { background:var(--surface); border:1px solid var(--border); border-radius:16px; margin-bottom:10px; overflow:hidden; }
+  details.mod summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:14px; padding:18px 22px; }
+  details.mod summary::-webkit-details-marker { display:none; }
+  .mod-dot { width:10px; height:34px; border-radius:6px; flex-shrink:0; }
+  .mod-t { flex:1; min-width:0; }
+  .mod-t small { display:block; font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.08em; color:var(--ink-faint); text-transform:uppercase; }
+  .mod-t strong { font-size:17px; font-weight:800; line-height:1.3; }
+  .mod-h { font-family:var(--mono); font-size:13px; font-weight:700; background:var(--surface2); border-radius:8px; padding:4px 10px; white-space:nowrap; }
+  .mod-plus { width:28px; height:28px; border-radius:50%; background:var(--accent-l); color:var(--azure-dark); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700; flex-shrink:0; transition:transform .2s; }
+  details[open] > summary .mod-plus { transform:rotate(45deg); }
+  .mod-body { padding:2px 22px 22px 46px; }
+  .mod-body li { font-size:15px; color:var(--ink-muted); }
+  .mod-body .list li { margin-bottom:0; }
+  .tag { display:inline-block; font-family:var(--mono); font-size:10.5px; font-weight:700; letter-spacing:.04em; border-radius:6px; padding:1px 7px; margin-right:7px; vertical-align:1px; }
+  .tag.all { background:var(--surface2); color:var(--ink-faint); }
+  .tag.a { background:var(--accent-l); color:var(--azure-dark); }
+  .tag.b { background:var(--purple-l); color:var(--purple); }
+  .tag.live { background:#FDF3EE; color:var(--orange); }
+  @media (max-width:640px) { .mod-body { padding:2px 18px 20px 18px; } details.mod summary { padding:16px 16px; gap:10px; } .mod-h { display:none; } }
+
+  /* format */
+  .step-n { font-family:var(--mono); font-size:12px; font-weight:700; color:var(--azure-dark); margin-bottom:10px; }
+
+  /* result */
+  .res-big { font-size:clamp(22px, 3vw, 30px); line-height:1.3; font-weight:700; max-width:800px; margin-bottom:30px; }
+  .res-big em { font-style:normal; color:var(--azure); }
+
+  /* team */
+  .person { display:flex; gap:20px; align-items:flex-start; }
+  .avatar { width:104px; height:104px; border-radius:50%; object-fit:cover; flex-shrink:0; border:3px solid rgba(77,163,255,.55); }
+  .person h3 { margin-bottom:4px; font-size:20px; }
+  .role { font-size:13px; font-weight:700; color:var(--azure-dark); margin-bottom:14px; }
+  @media (max-width:520px) { .person { flex-direction:column; } }
+
+  /* price */
+  .price { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:28px; }
+  .price.main { border:2px solid var(--azure); background:var(--accent-l); }
+  .price-val { font-size:clamp(34px, 5vw, 46px); font-weight:800; letter-spacing:-.02em; line-height:1.05; }
+  .price-val small { font-size:.45em; color:var(--ink-faint); font-weight:700; }
+  .price-lab { font-size:14px; color:var(--ink-muted); margin:8px 0 18px; }
+  .price .list li { font-size:14px; }
+  .deduct { display:flex; gap:18px; align-items:flex-start; margin-top:16px; background:var(--green-l); border:1px solid #CBEBDD; border-radius:16px; padding:20px 24px; }
+  .deduct b { font-family:var(--mono); font-size:22px; color:var(--green); flex-shrink:0; }
+  .deduct p { font-size:14.5px; color:var(--ink-muted); }
+  @media (max-width:520px) { .deduct { flex-direction:column; gap:8px; } }
+
+  /* steps */
+  .step { position:relative; }
+  .step .n { width:34px; height:34px; border-radius:50%; background:var(--ink-night); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-weight:700; font-size:14px; margin-bottom:14px; }
+
+  /* faq */
+  details.q { background:var(--surface); border:1px solid var(--border); border-radius:14px; margin-bottom:10px; }
+  details.q summary { list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 22px; font-weight:700; font-size:16px; }
+  details.q summary::-webkit-details-marker { display:none; }
+  details.q .mod-plus { }
+  details.q[open] > summary .mod-plus { transform:rotate(45deg); }
+  details.q .ans { padding:0 22px 20px; font-size:15px; color:var(--ink-muted); max-width:780px; }
+  details.q .ans p + p { margin-top:10px; }
+
+  /* contact */
+  .contact { display:flex; gap:26px; align-items:center; flex-wrap:wrap; }
+  .contact .avatar { width:120px; height:120px; }
+  .contact-main { flex:1 1 280px; min-width:0; }
+  .contact-links { display:flex; gap:12px; flex-wrap:wrap; margin-top:14px; }
+
+  footer { background:var(--ink-night); color:rgba(255,255,255,.6); padding:48px 0 56px; font-size:13px; }
+  footer .brand { margin-bottom:14px; }
+  footer p { max-width:760px; }
+  footer p + p { margin-top:8px; }
+  footer a { color:var(--azure-soft); }
+
+  /* modal */
+  .modal { display:none; position:fixed; inset:0; z-index:200; background:rgba(10,15,26,.82); align-items:center; justify-content:center; padding:16px; }
+  .modal.open { display:flex; }
+  .modal-box { background:#fff; border-radius:16px; width:100%; max-width:560px; max-height:94vh; display:flex; flex-direction:column; overflow:hidden; }
+  .modal-top { display:flex; align-items:center; justify-content:space-between; padding:16px 22px; background:var(--ink-night); color:#fff; font-weight:700; font-size:15px; flex-shrink:0; }
+  .modal-x { background:none; border:none; color:#fff; font-size:26px; line-height:1; cursor:pointer; }
+  .modal-body { overflow-y:auto; padding:22px; }
+  .modal label { display:block; font-size:13px; font-weight:700; margin:0 0 6px; }
+  .modal input[type=text], .modal input[type=tel], .modal input[type=email], .modal select, .modal textarea { width:100%; padding:11px 14px; border:1px solid #DDE1EC; border-radius:9px; font-size:14px; font-family:inherit; margin-bottom:14px; background:#fff; color:var(--ink); }
+  .modal textarea { resize:vertical; }
+  .notice { display:none; padding:11px 14px; border-radius:9px; font-size:12.5px; line-height:1.5; margin:-4px 0 14px; background:var(--accent-l); color:#1F4F8F; }
+  .notice.warn { background:#FDF3EE; color:#8A4B12; }
+  .consent { display:flex; gap:10px; align-items:flex-start; font-size:12px; color:#5B647A; margin:6px 0 18px; }
+  .consent input { margin-top:3px; flex-shrink:0; }
+  .consent label { font-weight:500; margin:0; font-size:12px; }
+  .submit { width:100%; padding:14px; background:linear-gradient(135deg, #111828, #4DA3FF 65%, #6DBEFF); color:#fff; border:none; border-radius:10px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit; }
+  .submit:disabled { opacity:.6; cursor:default; }
+  .done { display:none; text-align:center; padding:26px 6px; }
+  .done h3 { font-size:20px; margin-bottom:10px; }
+  .done p { font-size:14.5px; color:var(--ink-muted); }
+  .tag.sprint { background:var(--purple-l); color:var(--purple); }
+  .shots { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; margin-top:28px; align-items:start; }
+  .shot { margin:0; }
+  .shot.wide { grid-column:1 / -1; }
+  .shot img { width:100%; height:auto; border-radius:14px; border:1px solid var(--border); background:var(--surface); }
+  .shot figcaption { font-size:13px; color:var(--ink-faint); margin-top:8px; }
+  @media (max-width:640px) { .shots { grid-template-columns:minmax(0,1fr); } }
+</style>
+</head>
+<body>
+
+<header class="head">
+  <div class="wrap head-in">
+    <a class="brand" href="index.html"><b>ai2arch</b><span>ААИ ЮФУ</span></a>
+    <nav class="nav" id="nav">
+      <a href="#audience">Для кого</a>
+      <a href="#about">О программе</a>
+      <a href="#program">Программа</a>
+      <a href="#team">Спикеры</a>
+      <a href="#price">Стоимость</a>
+      <a href="#faq">Вопросы</a>
+      <a href="archi-guide.html" style="color:var(--azure-soft)">Слушателям →</a>
+    </nav>
+    <button class="btn btn-primary btn-sm head-apply" data-apply>Оставить заявку</button>
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <img class="hero-mark" src="images/brand-mark.png" alt="" aria-hidden="true">
+  <div class="wrap hero-in">
+    <div class="eyebrow">Программа повышения квалификации · ЮФУ · первая ступень</div>
+    <h1><em>ИИ</em> в архитектуре</h1>
+    <p class="hero-sub">Строите цифровой двойник территории, анализируете её с помощью ИИ и собираете презентацию, которая убеждает заказчика и комиссию. QGIS и нейросети разбираем с нуля.</p>
+    <p class="hero-name">Полное название: «Современные инструменты проектного анализа: ИИ и мобильные сервисы в работе с архитектурной средой»</p>
+    <div class="hero-cta">
+      <button class="btn btn-primary" data-apply>Оставить заявку</button>
+      <a class="btn btn-ghost" href="#program">Смотреть программу</a>
+    </div>
+    <p class="hero-note">Новый поток стартует 6 октября 2026 · <a href="archi-guide.html" style="color:var(--azure-soft)">Уже записаны? Открыть учебное пособие →</a></p>
+
+    <div class="facts">
+      <div class="fact"><b>22<small>ак. ч</small></b><span>8 часов лекций, 12 практики и консультаций, 2 аттестации. Удостоверение ЮФУ</span></div>
+      <div class="fact"><b>2,5<small>недели</small></b><span>с применением дистанционных технологий</span></div>
+      <div class="fact"><b>2<small>воркшопа</small></b><span>онлайн по вечерам, с разбором работ участников</span></div>
+      <div class="fact"><b>5 000<small>₽</small></b><span>стоимость курса, 3 600 ₽ для сотрудников ЮФУ</span></div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ═══ ДЛЯ КОГО ═══ -->
+<section class="sec" id="audience">
+  <div class="wrap">
+    <div class="kicker">Для кого этот курс</div>
+    <h2>Для тех, кто анализирует территорию и хочет делать это быстрее</h2>
+    <p class="lead">QGIS и работа с нейросетями разбираются с нуля, поэтому специальная подготовка не нужна: достаточно уверенно пользоваться компьютером.</p>
+    <div class="card">
+      <h3>Подойдёт, если вы</h3>
+      <ul class="list">
+        <li>студент бакалавриата, специалитета или магистратуры по архитектуре, градостроительству, дизайну архитектурной среды;</li>
+        <li>выпускник этих направлений, начинающий или практикующий архитектор, урбанист, дизайнер среды;</li>
+        <li>готовите конкурсную заявку или концепцию и хотите подкрепить её данными.</li>
+      </ul>
+    </div>
+    <p class="note">Программа рассчитана на обучающихся, которые имеют или получают высшее образование в области архитектуры, градостроительства, дизайна архитектурной среды. Вступительных испытаний нет. Если ваше образование другое, напишите нам, и мы уточним, можно ли вам участвовать.</p>
+  </div>
+</section>
+
+<!-- ═══ О ПРОГРАММЕ ═══ -->
+<section class="sec alt" id="about">
+  <div class="wrap">
+    <div class="kicker">О программе · какие проблемы решает</div>
+    <h2>Три места, где анализ территории чаще всего тормозит</h2>
+    <div class="grid3">
+      <div class="card"><div class="ico">01</div><h3>Анализ отнимает дни</h3><p>Карты, схемы и описания приходится собирать и оформлять вручную. На курсе схемы строятся в QGIS из открытых данных, а выводы по ним помогает формулировать ИИ.</p></div>
+      <div class="card"><div class="ico">02</div><h3>ИИ используют вслепую</h3><p>Запрос «придумай концепт парка» выдаёт банальный результат. На курсе задачу ставят по схеме: роль, контекст, задача, примеры, формат, тон.</p></div>
+      <div class="card"><div class="ico">03</div><h3>Выводы трудно показать</h3><p>Анализ остаётся в таблицах и файлах. На курсе всё собирается в одну интерактивную презентацию, которую можно показать заказчику или комиссии.</p></div>
+    </div>
+    <h3 style="margin:36px 0 14px">Что вы делаете на курсе</h3>
+    <div class="grid3">
+      <div class="card"><div class="ico">А</div><h3>Готовите карты участка</h3><p>Подложки, дороги, здания, рельеф, кадастр. Оформляете карту в QGIS и выгружаете в PDF.</p></div>
+      <div class="card"><div class="ico">Б</div><h3>Анализируете с помощью ИИ</h3><p>Собираете техническое задание и контекст, строите сценарии и портреты аудитории с помощью языковых моделей.</p></div>
+      <div class="card"><div class="ico">В</div><h3>Визуализируете и собираете проект</h3><p>Превращаете эскизы в визуализации с помощью нейросетей и собираете результат в итоговую презентацию.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ РЕЗУЛЬТАТЫ ═══ -->
+<section class="sec dark" id="result">
+  <div class="wrap">
+    <div class="kicker">Результаты обучения</div>
+    <div class="res-big">К концу курса у вас есть <em>готовый проект по вашему участку</em>: от карт до презентации.</div>
+    <div class="grid2">
+      <div class="card"><h3>Цифровой двойник территории</h3><p>Точная модель участка, готовая к любому анализу: подложки, транспорт, здания, рельеф, кадастр.</p></div>
+      <div class="card"><h3>ИИ-анализ за минуты</h3><p>Анализ территории и прогноз поведенческих сценариев там, где раньше уходили дни.</p></div>
+      <div class="card"><h3>Десятки вариантов решений</h3><p>Генерация вариантов решений и визуализаций с помощью нейросетей вместо одной ручной отрисовки.</p></div>
+      <div class="card"><h3>Презентация на данных</h3><p>Итоговая интерактивная презентация, которая выигрывает у заказчика и комиссии.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ СПИКЕРЫ ═══ -->
+<section class="sec alt" id="team">
+  <div class="wrap">
+    <div class="kicker">Спикеры</div>
+    <h2>Практик, куратор и авторы видеоуроков</h2>
+    <div class="grid2">
+      <div class="card person">
+        <img class="avatar" src="images/kuleshov.jpg" alt="Кулешов Александр Алексеевич">
+        <div>
+          <h3>Кулешов Александр Алексеевич</h3>
+          <div class="role">Руководитель программы</div>
+          <ul class="list">
+            <li>15 лет практики в средовом проектировании и редевелопменте</li>
+            <li>Создатель первого креативного кластера на Юге России («С52», Ростов-на-Дону)</li>
+            <li>Ведёт воркшопы, автор разделов «Нейросети» и «Синтез и презентация»</li>
+          </ul>
+          <p style="margin-top:12px;font-size:13px">Сайт автора: <a href="https://ku1eshov.ru" target="_blank" rel="noopener" style="color:var(--azure-dark);font-weight:700">ku1eshov.ru</a></p>
+        </div>
+      </div>
+      <div class="card person">
+        <img class="avatar" src="images/petrenko.jpg" alt="Петренко Екатерина Сергеевна">
+        <div>
+          <h3>Петренко Екатерина Сергеевна</h3>
+          <div class="role">Куратор курса, соавтор раздела «Генерация идей и визуализация»</div>
+          <ul class="list">
+            <li>Преподаватель Академии архитектуры и искусств ЮФУ</li>
+            <li>Архитектор, специалист по средовому дизайну</li>
+            <li>Разработчик проектов комплексного развития территорий (КРТ)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card person">
+        <div class="avatar avatar-ini">ДК</div>
+        <div>
+          <h3>Костенко Дарья Богдановна</h3>
+          <div class="role">Автор видеоуроков по QGIS</div>
+          <p><span class="todo">[должность, опыт, фото — уточнить]</span></p>
+        </div>
+      </div>
+      <div class="card person">
+        <div class="avatar avatar-ini">ЕП</div>
+        <div>
+          <h3>Попова Елизавета Андреевна</h3>
+          <div class="role">Соавтор раздела «Генерация идей и визуализация»</div>
+          <p><span class="todo">[должность, опыт, фото — уточнить]</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ПРОГРАММА ═══ -->
+<section class="sec" id="program">
+  <div class="wrap">
+    <div class="kicker">Программа · 22 академических часа</div>
+    <h2>Подготовка, четыре модуля и итоговая аттестация</h2>
+    <p class="lead">По утверждённому учебному плану: в каждом модуле лекции, практические занятия и самостоятельная работа над вашим проектом. Метки показывают формат: <span class="tag live">ЖИВОЙ ВОРКШОП</span> онлайн-встреча с группой, <span class="tag sprint">САМОСТОЯТЕЛЬНО</span> задание в удобное время.</p>
+
+    <div class="bar" aria-hidden="true">
+      <span class="c1" style="flex:18 1 0"></span><span class="c2" style="flex:18 1 0"></span><span class="c3" style="flex:16 1 0"></span><span class="c4" style="flex:16 1 0"></span><span class="c5" style="flex:2 1 0"></span>
+    </div>
+
+    <details class="mod">
+      <summary><span class="mod-dot c0"></span><span class="mod-t"><small>Перед стартом</small><strong>Спринт 0. Подготовка рабочего места</strong></span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li><span class="tag sprint">САМОСТОЯТЕЛЬНО</span>Доступ хотя бы к одному сервису с языковой моделью: достаточно Алисы AI или аналогичного локального решения.</li>
+        <li><span class="tag sprint">САМОСТОЯТЕЛЬНО</span>Установка QGIS (версия LTR) и проверка Photoshop.</li>
+        <li><span class="tag sprint">САМОСТОЯТЕЛЬНО</span>Чек-лист готовности к первому занятию.</li>
+      </ul></div>
+    </details>
+
+    <details class="mod">
+      <summary><span class="mod-dot c1"></span><span class="mod-t"><small>Модуль 1</small><strong>Цифровая компоновка графических изображений</strong></span><span class="mod-h">18 ч</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li>Лекции 3 ч, практические занятия 3 ч, самостоятельная работа 12 ч. Форма контроля: практическая работа.</li>
+        <li><span class="tag sprint">САМОСТОЯТЕЛЬНО</span>Видеоуроки: интерфейс QGIS, проект и система координат, подложки, поиск точки по координатам.</li>
+        <li><span class="tag sprint">САМОСТОЯТЕЛЬНО</span>Загрузка данных OpenStreetMap через QuickOSM, оформление карты по правилам, легенда.</li>
+        <li><span class="tag sprint">САМОСТОЯТЕЛЬНО</span>Транспортная схема, изолинии рельефа, кадастровые участки, компоновка карты и экспорт в PDF.</li>
+        <li><span class="tag live">ЖИВОЙ ВОРКШОП</span>Выгрузка слоёв вашего участка и аналитические карты среды. Разбор вопросов и утверждение подосновы.</li>
+      </ul></div>
+    </details>
+
+    <details class="mod">
+      <summary><span class="mod-dot c2"></span><span class="mod-t"><small>Модуль 2</small><strong>Анализ данных и сценариев</strong></span><span class="mod-h">18 ч</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li>Лекции 3 ч, практические занятия 3 ч, самостоятельная работа 12 ч. Форма контроля: практическая работа.</li>
+        <li><span class="tag sprint">САМОСТОЯТЕЛЬНО</span>Языковые модели для сбора технического задания, контекста и предпроектного анализа.</li>
+        <li><span class="tag sprint">САМОСТОЯТЕЛЬНО</span>Схема запроса: роль, контекст, задача, примеры, формат, тон. Типичные ошибки.</li>
+        <li><span class="tag sprint">САМОСТОЯТЕЛЬНО</span>Простые поведенческие сценарии территории и подготовка эскизов к визуализации. Работы разбираются в чате группы.</li>
+      </ul></div>
+    </details>
+
+    <details class="mod">
+      <summary><span class="mod-dot c3"></span><span class="mod-t"><small>Модуль 3</small><strong>Генерация идей и визуализация</strong></span><span class="mod-h">16 ч</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li>Лекции 1 ч, практические занятия 3 ч, самостоятельная работа 12 ч. Форма контроля: практическая работа.</li>
+        <li><span class="tag sprint">САМОСТОЯТЕЛЬНО</span>Промпты для визуализации на учебных заданиях, подготовка черновика в Photoshop и постобработка результата.</li>
+        <li><span class="tag live">ЖИВОЙ ВОРКШОП</span>Управляемая визуализация с помощью нейросетей: концепции фасадов и среды по эскизам и объёмным заготовкам.</li>
+      </ul></div>
+    </details>
+
+    <details class="mod">
+      <summary><span class="mod-dot c4"></span><span class="mod-t"><small>Модуль 4</small><strong>Синтез и презентация</strong></span><span class="mod-h">16 ч</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li>Лекции 1 ч, практические занятия 3 ч, самостоятельная работа 12 ч. Форма контроля: итоговая работа.</li>
+        <li><span class="tag sprint">САМОСТОЯТЕЛЬНО</span>Сборка в Gamma: геоаналитика из QGIS, текстовый анализ и визуализации в одной интерактивной презентации.</li>
+      </ul></div>
+    </details>
+
+    <details class="mod">
+      <summary><span class="mod-dot c5"></span><span class="mod-t"><small>Итоговая аттестация</small><strong>Сдача проекта, зачёт</strong></span><span class="mod-h">2 ч</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li>Ссылка на итоговую презентацию и форма с описанием кейса и отзывом. Это условие получения удостоверения.</li>
+      </ul></div>
+    </details>
+  </div>
+</section>
+
+<!-- ═══ ОСОБЕННОСТИ ═══ -->
+<section class="sec alt" id="features">
+  <div class="wrap">
+    <div class="kicker">Особенности программы</div>
+    <h2>Короткий курс с готовыми материалами и своим участком</h2>
+    <div class="grid3">
+      <div class="card"><div class="ico">01</div><h3>Один участок на весь курс</h3><p>Берёте свой: парк, жилой квартал, территорию университета. Если выбрать трудно, можно взять Ботанический сад.</p></div>
+      <div class="card"><div class="ico">02</div><h3>Видеоуроки и пособие</h3><p>Видеоуроки и учебное пособие с конспектами, чек-листами и шаблонами. Материалы открываются слушателям.</p></div>
+      <div class="card"><div class="ico">03</div><h3>Готовая схема запроса</h3><p>Роль, контекст, задача, примеры, формат, тон. Разобрана на учебных заданиях с результатами нейросетей.</p></div>
+      <div class="card"><div class="ico">04</div><h3>Открытые данные</h3><p>OpenStreetMap, кадастр, данные рельефа. QGIS бесплатный, платные программы для карт не нужны.</p></div>
+      <div class="card"><div class="ico">05</div><h3>Два живых воркшопа</h3><p>Вечерние онлайн-встречи по 3 астрономических часа, на которых разбираются работы участников.</p></div>
+      <div class="card"><div class="ico">06</div><h3>С нуля и без кода</h3><p>QGIS и работа с нейросетями разбираются с нуля. Программирование не нужно.</p></div>
+    </div>
+    <p class="note">В курсе используются QGIS, Photoshop и сервисы с языковыми моделями. Платные подписки не нужны: для целей курса достаточно Алисы AI или другого аналогичного локального решения. Если вы выбираете другие сервисы, например Gemini, ChatGPT или Claude, студент самостоятельно обеспечивает доступ к ним в соответствии с их пользовательскими соглашениями и применимым законодательством. Организатор не оказывает услуг по предоставлению инструментов связи и не распространяет средства обхода блокировок.</p>
+  </div>
+</section>
+
+<!-- ═══ КАК ПРОХОДИТ ═══ -->
+<section class="sec" id="format">
+  <div class="wrap">
+    <div class="kicker">Как проходит обучение</div>
+    <h2>Видеоуроки в своём темпе и две живые встречи</h2>
+    <p class="lead">Основную работу вы делаете самостоятельно в течение 2,5 недель, а встречи в группе нужны, чтобы разобрать ваши материалы.</p>
+    <div class="grid4">
+      <div class="card"><div class="step-n">01 · В ЛЮБОЕ ВРЕМЯ</div><h3>Видеоуроки</h3><p>Видеоуроки и конспекты в учебном пособии. Смотрите и повторяйте в своём темпе.</p></div>
+      <div class="card"><div class="step-n">02 · В ГРУППЕ</div><h3>Два воркшопа</h3><p>Живые онлайн-встречи вечером: выгрузка слоёв участка, управляемая визуализация, ответы на вопросы.</p></div>
+      <div class="card"><div class="step-n">03 · САМОСТОЯТЕЛЬНО</div><h3>Спринты</h3><p>Задания с дедлайнами между встречами. Запросы и концепции разбираются в чате группы.</p></div>
+      <div class="card"><div class="step-n">04 · НА СВЯЗИ</div><h3>Консультации</h3><p>Консультации по самостоятельной работе и закрытый чат группы в Яндекс Мессенджере.</p></div>
+    </div>
+    <p class="note">Объём программы 22 академических часа: 8 часов лекций, 12 часов практических занятий и консультаций и 2 часа итоговой аттестации. В группе не более 25 человек.</p>
+  </div>
+</section>
+
+<!-- ═══ КЕЙСЫ И ОТЗЫВЫ ═══ -->
+<section class="sec alt" id="cases">
+  <div class="wrap">
+    <div class="kicker">Кейсы и отзывы</div>
+    <h2>Что получается на выходе</h2>
+    <div class="grid3">
+      <div class="card"><h3>Первый поток</h3><p>Курс прошли 11 слушателей, все дошли до защиты проекта.</p></div>
+      <div class="card"><h3>Работы слушателей</h3><p><span class="todo">[2–3 лучшие работы выпускников: ссылка на презентацию или скриншоты, с согласия авторов]</span></p></div>
+      <div class="card"><h3>Отзывы выпускников</h3><p><span class="todo">[2–3 отзыва: цитата, имя, должность. Согласие на публикацию собираем через форму отзыва]</span></p></div>
+    </div>
+    <div class="shots">
+      <figure class="shot wide"><img src="images/rostov-naberezhnaya-gallery.jpg" loading="lazy" alt="Детская площадка на набережной в Ростове-на-Дону: визуализации, генплан и список материалов"><figcaption>Учебное задание курса: детская площадка на набережной. Визуализации, генплан и список материалов получены по одному промпту.</figcaption></figure>
+      <figure class="shot"><img src="images/elista-mandala-genplan.jpg" loading="lazy" alt="Генплан детской площадки «Мандала степи» в Элисте"><figcaption>Генплан с функциональными зонами и легендой.</figcaption></figure>
+      <figure class="shot"><img src="images/elista-mandala-vizualizacii.jpg" loading="lazy" alt="Визуализации детской площадки «Мандала степи» с разных ракурсов"><figcaption>Визуализации той же площадки с разных ракурсов.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ВЕБИНАР ═══ -->
+<section class="sec" id="webinar">
+  <div class="wrap">
+    <div class="kicker">Ознакомительный вебинар</div>
+    <h2>Показываем все инструменты до начала работы</h2>
+    <p class="lead">На вебинаре разбираем, как пользоваться QGIS, сервисами с языковыми моделями (в том числе Алисой AI и аналогичными локальными решениями), Photoshop и Gamma. После него остаётся работать с материалами курса в своём темпе.</p>
+    <p class="note" style="margin-top:0">Дата, время и ссылка: <span class="todo">[уточнить]</span></p>
+  </div>
+</section>
+
+<!-- ═══ ТАРИФЫ ═══ -->
+<section class="sec alt" id="price">
+  <div class="wrap">
+    <div class="kicker">Тарифы и скидки</div>
+    <h2>Стоимость курса и цена для сотрудников ЮФУ</h2>
+    <div class="grid2">
+      <div class="price main">
+        <div class="price-val">5 000 <small>₽</small></div>
+        <div class="price-lab">стоимость курса, 22 ак. часа</div>
+        <ul class="list">
+          <li>видеоуроки и учебное пособие</li>
+          <li>два живых воркшопа</li>
+          <li>консультации по самостоятельной работе</li>
+          <li>удостоверение о повышении квалификации ЮФУ</li>
+        </ul>
+        <button class="btn btn-primary" style="margin-top:22px;width:100%" data-apply>Оставить заявку</button>
+      </div>
+      <div class="price">
+        <div class="price-val">3 600 <small>₽</small></div>
+        <div class="price-lab">для сотрудников ЮФУ</div>
+        <ul class="list">
+          <li>состав курса тот же</li>
+          <li>подтверждение статуса пришлёте после заявки</li>
+        </ul>
+        <button class="btn btn-dark" style="margin-top:22px;width:100%" data-apply>Оставить заявку как сотрудник ЮФУ</button>
+      </div>
+    </div>
+    <div class="deduct">
+      <b>13%</b>
+      <p><strong>Налоговый вычет.</strong> Если вы платите за обучение сами и платите НДФЛ, можно вернуть 13% стоимости: 650 ₽ при цене 5 000 ₽ и 468 ₽ при 3 600 ₽. Вычет положен за обучение в организации с лицензией, а лимит расходов в 2026 году составляет 150 000 ₽.</p>
+    </div>
+    <p class="note">Договор с ЮФУ заключается с физическим или юридическим лицом. Способ оплаты: <span class="todo">[уточнить]</span></p>
+  </div>
+</section>
+
+<!-- ═══ ДОКУМЕНТЫ ═══ -->
+<section class="sec" id="docs">
+  <div class="wrap">
+    <div class="kicker">Документы при успешном освоении</div>
+    <h2>Удостоверение о повышении квалификации ЮФУ</h2>
+    <p class="lead">Удостоверение установленного образца на 22 академических часа выдаётся после итоговой аттестации: нужно сдать проект, то есть ссылку на итоговую презентацию и форму с описанием кейса.</p>
+    <p class="note" style="margin-top:0">Программа рассчитана на обучающихся, имеющих или получающих высшее образование в области архитектуры, градостроительства, дизайна архитектурной среды. Студентам удостоверение выдаётся одновременно с дипломом об основном образовании, а участвовать и сдавать проект можно сразу.</p>
+  </div>
+</section>
+
+<!-- ═══ ЧТО ДАЛЬШЕ ═══ -->
+<section class="sec alt" id="next">
+  <div class="wrap">
+    <div class="kicker">Что дальше</div>
+    <h2>Вторая ступень: ИИ в редевелопменте</h2>
+    <p class="lead">72 академических часа, старт 5 ноября 2026. Вы берёте реальное здание или территорию и доводите до защищённой концепции с расчётом площадей и экономики. Выпускникам первой ступени цена 14 900 ₽ вместо 18 900 ₽.</p>
+    <a class="btn btn-dark" href="redev.html">Подробнее о второй ступени →</a>
+  </div>
+</section>
+
+<!-- ═══ КАК ЗАПИСАТЬСЯ ═══ -->
+<section class="sec" id="apply">
+  <div class="wrap">
+    <div class="kicker">Как записаться</div>
+    <h2>Четыре шага до старта</h2>
+    <div class="grid4">
+      <div class="card step"><div class="n">1</div><h3>Заявка</h3><p>Оставляете контакты и сведения об образовании. Это займёт две минуты.</p></div>
+      <div class="card step"><div class="n">2</div><h3>Короткий разговор</h3><p>Отвечаем на вопросы и подтверждаем участие.</p></div>
+      <div class="card step"><div class="n">3</div><h3>Договор, оплата, зачисление</h3><p>Заключаем договор с ЮФУ, принимаем оплату и зачисляем вас на курс приказом.</p></div>
+      <div class="card step"><div class="n">4</div><h3>Старт 6 октября</h3><p>Открываем доступ к пособию и чату группы в Яндекс Мессенджере, начинаем со Спринта 0.</p></div>
+    </div>
+    <div style="margin-top:28px"><button class="btn btn-primary" data-apply>Оставить заявку</button></div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="sec alt" id="faq">
+  <div class="wrap">
+    <div class="kicker">Вопросы и ответы</div>
+    <h2>Что обычно спрашивают до записи</h2>
+
+    <details class="q"><summary>Нужно ли уметь работать в QGIS или с нейросетями?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Нет. QGIS и работа с языковыми моделями разбираются с нуля: интерфейс, проект, данные, схема запроса. Достаточно уверенно пользоваться компьютером.</p></div></details>
+
+    <details class="q"><summary>Нужно ли программировать?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Нет, ни строчки кода. Работа идёт в QGIS, веб-сервисах с нейросетями и Photoshop.</p></div></details>
+
+    <details class="q"><summary>Какой участок взять для проекта?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Свой: парк, жилой квартал, территорию университета, место, с которым вы работаете. Если выбрать трудно, можно взять Ботанический сад.</p></div></details>
+
+    <details class="q"><summary>Что нужно для занятий?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Компьютер, интернет, QGIS (бесплатный), Photoshop по подписке Adobe и любой сервис с языковой моделью. Платные подписки на нейросети не нужны: для целей курса можно пользоваться Алисой AI или другими аналогичными локальными решениями. Все инструменты показываем на ознакомительном вебинаре и рассказываем, как ими пользоваться.</p>
+      <p>Если вы выбираете зарубежные сервисы, студент самостоятельно обеспечивает доступ к ним в соответствии с их пользовательскими соглашениями и применимым законодательством.</p></div></details>
+
+    <details class="q"><summary>Сколько времени это занимает?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Объём программы 22 академических часа за 2,5 недели: 8 часов лекций, 12 часов практических занятий и консультаций, 2 часа итоговой аттестации. Две вечерние онлайн-встречи, остальное в удобное время. Самостоятельная работа над проектом идёт сверх занятий, по учебному плану это 12 часов на каждый модуль.</p></div></details>
+
+    <details class="q"><summary>Я студент. Получу ли удостоверение?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Да, вместе с дипломом. Программа рассчитана в том числе на тех, кто ещё получает высшее образование, но удостоверение выдаётся одновременно с документом об основном образовании. Участвовать в курсе и сдавать проект можно сразу.</p></div></details>
+
+    <details class="q"><summary>Кто платит 3 600 ₽?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Сотрудники ЮФУ. Остальные слушатели платят 5 000 ₽. Подтверждение статуса пришлём после заявки.</p></div></details>
+
+    <details class="q"><summary>Можно ли вернуть часть денег налогом?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Да, если вы платите сами и у вас есть доход, облагаемый НДФЛ: вернуть можно 13% стоимости. Оформляется через налоговую или работодателя по договору и чеку об оплате.</p></div></details>
+
+    <details class="q"><summary>Что дальше после курса?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Можно продолжить на второй ступени «ИИ в редевелопменте»: там вы берёте реальный объект и доводите его до защищённой концепции. Выпускникам первой ступени действует льготная цена.</p></div></details>
+
+    <details class="q"><summary>Что если я передумаю или поток не наберётся?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Условия возврата прописаны в договоре с ЮФУ: <span class="todo">[порядок возврата — уточнить]</span></p></div></details>
+  </div>
+</section>
+
+<!-- ═══ КОНТАКТЫ ═══ -->
+<section class="sec" id="contact">
+  <div class="wrap">
+    <div class="kicker">Контакты</div>
+    <div class="card contact">
+      <img class="avatar" src="images/kuleshov.jpg" alt="Кулешов Александр Алексеевич">
+      <div class="contact-main">
+        <h2 style="font-size:clamp(24px,3.4vw,32px);margin-bottom:8px">Остались вопросы?</h2>
+        <p style="font-size:15px;color:var(--ink-muted)">Расскажем больше о курсе и поможем подать заявку. Вопросы принимает руководитель курса Александр Кулешов.</p>
+        <div class="contact-links">
+          <button class="btn btn-primary btn-sm" data-apply>Оставить заявку</button>
+          <a class="btn btn-line btn-sm" href="https://t.me/alkuleshov" target="_blank" rel="noopener">Задать вопрос в Telegram</a>
+        </div>
+        <p style="font-size:13px;color:var(--ink-faint);margin-top:14px">По договору, оплате и зачислению: ответственный за набор слушателей Андреев Александр Александрович, <a href="mailto:alandreev@sfedu.ru" style="color:var(--azure-dark);font-weight:700">alandreev@sfedu.ru</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="index.html"><b>ai2arch</b><span>ААИ ЮФУ</span></a>
+    <p>Программу реализует Южный федеральный университет, Академия архитектуры и искусств. Ростов-на-Дону.</p>
+    <p>Программа утверждена приказом ЮФУ от 21.05.2026 № 1298. Форма обучения очная, с применением дистанционных технологий.</p>
+    <p>Лицензия на осуществление образовательной деятельности: <span class="todo">[номер и дата — уточнить]</span></p>
+    <p><a href="#" onclick="return false"><span class="todo">[Политика обработки персональных данных]</span></a> · <a href="#" onclick="return false"><span class="todo">[Договор-оферта]</span></a> · <a href="redev.html">Вторая ступень: ИИ в редевелопменте</a></p>
+  </div>
+</footer>
+
+<!-- ═══ ЗАЯВКА ═══ -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <div class="modal-top"><span id="modalTitle">Заявка на курс «ИИ в архитектуре»</span><button class="modal-x" id="modalX" aria-label="Закрыть">&times;</button></div>
+    <div class="modal-body">
+      <form id="form">
+        <label for="f-name">ФИО *</label>
+        <input required type="text" id="f-name" placeholder="Иванова Мария Сергеевна" autocomplete="name">
+
+        <label for="f-email">Email *</label>
+        <input required type="email" id="f-email" placeholder="mail@example.com" autocomplete="email">
+
+        <label for="f-phone">Телефон или мессенджер *</label>
+        <input required type="text" id="f-phone" placeholder="+7 900 000-00-00 или @ник" autocomplete="tel">
+
+        <label for="f-edu">Образование *</label>
+        <select required id="f-edu">
+          <option value="">Выберите вариант</option>
+          <option value="he_done">Высшее образование получено</option>
+          <option value="he_studying">Учусь в вузе (бакалавриат, специалитет, магистратура)</option>
+          <option value="other">Другое (колледж, иное образование)</option>
+        </select>
+        <div class="notice" id="notice"></div>
+
+        <label for="f-status">Вы *</label>
+        <select required id="f-status">
+          <option value="">Выберите вариант</option>
+          <option value="Сотрудник ЮФУ">Сотрудник ЮФУ</option>
+          <option value="Студент ЮФУ">Студент ЮФУ</option>
+          <option value="Студент другого вуза">Студент другого вуза</option>
+          <option value="Практикующий архитектор или дизайнер">Практикующий архитектор или дизайнер</option>
+          <option value="Другое">Другое</option>
+        </select>
+
+        <label for="f-comment">Комментарий (необязательно)</label>
+        <textarea id="f-comment" rows="2" placeholder="Какой участок хотите взять и откуда узнали о курсе"></textarea>
+
+        <div class="consent"><input type="checkbox" id="f-consent" required><label for="f-consent">Согласен(на) на обработку персональных данных. <span class="todo">[ссылка на политику]</span></label></div>
+        <button type="submit" class="submit" id="submitBtn">Отправить заявку</button>
+      </form>
+      <div class="done" id="done">
+        <h3>Заявка принята</h3>
+        <p>Мы свяжемся с вами в ближайшее время, подтвердим трек и ответим на вопросы. Если хотите уточнить что-то сразу, напишите в Telegram: <a href="https://t.me/alkuleshov" target="_blank" rel="noopener" style="color:var(--azure-dark);font-weight:700">@alkuleshov</a>.</p>
+      </div>
+      <div class="done" id="fail">
+        <h3>Не получилось отправить</h3>
+        <p>Попробуйте ещё раз или напишите напрямую в Telegram: <a href="https://t.me/alkuleshov" target="_blank" rel="noopener" style="color:var(--azure-dark);font-weight:700">@alkuleshov</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  // Адрес приёма заявок: тот же скрипт Google, что и на первой ступени (колонки таблицы совпадают).
+  var ENROLL_URL = 'https://script.google.com/macros/s/AKfycby1af9vPX9ucvhf1phoY_kr0BQ3q4YMAVVRNUMB0Y_xbYHxlhyp2ca69mpD3S7uTRY/exec';
+
+  var modal = document.getElementById('modal');
+  var form = document.getElementById('form');
+  var done = document.getElementById('done');
+  var fail = document.getElementById('fail');
+  var notice = document.getElementById('notice');
+
+  function openModal(track) {
+    form.style.display = 'block'; done.style.display = 'none'; fail.style.display = 'none';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-apply]'), function (b) {
+    b.addEventListener('click', function () { openModal(b.getAttribute('data-apply')); });
+  });
+  document.getElementById('modalX').addEventListener('click', closeModal);
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+
+  var EDU = {
+    he_done: { cert: 'Да', text: '', warn: false },
+    he_studying: { cert: 'Одновременно с дипломом', text: 'Участвовать и сдавать проект можно сразу. Удостоверение о повышении квалификации выдаётся одновременно с дипломом об основном образовании.', warn: false },
+    other: { cert: 'Уточняется', text: 'Программа рассчитана на тех, кто имеет или получает высшее образование в области архитектуры, градостроительства, дизайна архитектурной среды. Отправьте заявку или напишите нам, и мы уточним, можно ли вам участвовать.', warn: true }
+  };
+  document.getElementById('f-edu').addEventListener('change', function () {
+    var r = EDU[this.value];
+    if (r && r.text) { notice.textContent = r.text; notice.className = 'notice' + (r.warn ? ' warn' : ''); notice.style.display = 'block'; }
+    else { notice.style.display = 'none'; }
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = document.getElementById('submitBtn');
+    var eduSel = document.getElementById('f-edu');
+    var eduLabel = eduSel.options[eduSel.selectedIndex].text;
+    var rule = EDU[eduSel.value];
+    var status = document.getElementById('f-status').value;
+    var comment = document.getElementById('f-comment').value;
+    var payload = {
+      name: document.getElementById('f-name').value,
+      phone: document.getElementById('f-phone').value,
+      email: document.getElementById('f-email').value,
+      education: eduLabel,
+      certEligible: rule ? rule.cert : '',
+      comment: 'Статус: ' + status + (comment ? '. ' + comment : ''),
+      timestamp: new Date().toISOString(),
+      source: 'ai2arch.ru — лендинг «ИИ в архитектуре»'
+    };
+    btn.disabled = true; btn.textContent = 'Отправка...';
+    fetch(ENROLL_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) })
+      .then(function () { form.style.display = 'none'; done.style.display = 'block'; })
+      .catch(function () { form.style.display = 'none'; fail.style.display = 'block'; })
+      .then(function () { btn.disabled = false; btn.textContent = 'Отправить заявку'; });
+  });
+
+  // меню на планшетах и телефонах
+  var burger = document.getElementById('burger');
+  var navEl = document.getElementById('nav');
+  function setMenu(open) { navEl.classList.toggle('open', open); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  burger.addEventListener('click', function (e) { e.stopPropagation(); setMenu(!navEl.classList.contains('open')); });
+  navEl.addEventListener('click', function (e) { if (e.target.tagName === 'A') setMenu(false); });
+  document.addEventListener('click', function (e) { if (!navEl.contains(e.target)) setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+  // подсветка раздела в меню
+  var links = Array.prototype.slice.call(document.querySelectorAll('#nav a'));
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting && map[en.target.id]) {
+          links.forEach(function (a) { a.classList.remove('on'); });
+          map[en.target.id].classList.add('on');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>
