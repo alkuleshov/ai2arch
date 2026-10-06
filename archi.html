@@ -46,6 +46,7 @@
   /* ── header ── */
   .head { position:sticky; top:0; z-index:60; background:rgba(10,15,26,.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(255,255,255,.08); }
   .head-in { display:flex; align-items:center; gap:20px; height:var(--nav-h); }
+  .head .wrap { max-width:1160px; }
   /* логотип AI2ARCH: знак + надпись + дескриптор (брендбук, раздел 11) */
   .brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; flex-shrink:0; }
   .brand-sign { width:38px; height:38px; flex-shrink:0; }
@@ -62,7 +63,7 @@
   .burger[aria-expanded="true"] span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
   .burger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
   .burger[aria-expanded="true"] span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
-  @media (max-width:1100px) {
+  @media (max-width:1180px) {
     .burger { display:flex; }
     .head-apply { margin-left:auto; }
     .nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; gap:2px; overflow:visible; background:rgba(10,15,26,.98); padding:10px 20px 18px; border-bottom:1px solid rgba(255,255,255,.1); }
@@ -76,8 +77,10 @@
   /* ── hero ── */
   .hero { position:relative; background:var(--ink-night); color:#fff; overflow:hidden; }
   .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(60% 80% at 85% 0%, rgba(77,163,255,.2), transparent 70%); pointer-events:none; }
-  .hero-mark { display:none; position:absolute; top:-10px; right:-60px; width:430px; opacity:.5; pointer-events:none; }
-  @media (min-width:1100px) { .hero-mark { display:block; } }
+  .hero-mark { display:block; position:absolute; top:-90px; right:-4vw; width:min(52vw, 560px); height:auto; opacity:.9; mix-blend-mode:screen; pointer-events:none;
+    -webkit-mask-image:radial-gradient(closest-side, #000 58%, transparent 100%); mask-image:radial-gradient(closest-side, #000 58%, transparent 100%); }
+  @media (max-width:760px) { .hero-mark { top:-70px; right:-200px; width:420px; opacity:.4; } }
+  @media (prefers-reduced-motion:no-preference) { .hero-mark { animation:drift 20s ease-in-out infinite alternate; } @keyframes drift { from { transform:translate3d(0,-6px,0) rotate(-1.5deg); } to { transform:translate3d(0,8px,0) rotate(1.5deg); } } }
   .hero-in { position:relative; padding-top:72px; }
   .eyebrow { font-size:12px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--azure-soft); margin-bottom:22px; }
   .hero h1 { font-size:clamp(30px, 8.4vw, 84px); line-height:1.02; font-weight:800; letter-spacing:-.03em; margin-bottom:22px; }
@@ -181,6 +184,7 @@
   /* team */
   .person { display:flex; gap:20px; align-items:flex-start; }
   .avatar { width:104px; height:104px; border-radius:50%; object-fit:cover; flex-shrink:0; border:3px solid rgba(77,163,255,.55); }
+  .avatar-ini { display:flex; align-items:center; justify-content:center; background:#0A0F1A; color:#F6F4F0; font-size:30px; font-weight:600; letter-spacing:.02em; border-color:rgba(26,130,255,.55); }
   .person h3 { margin-bottom:4px; font-size:20px; }
   .role { font-size:13px; font-weight:700; color:var(--azure-dark); margin-bottom:14px; }
   @media (max-width:520px) { .person { flex-direction:column; } }
@@ -272,7 +276,7 @@
 
 <!-- ═══ HERO ═══ -->
 <div class="hero">
-  <img class="hero-mark" src="images/brand-mark.png" alt="" aria-hidden="true">
+  <img class="hero-mark" src="images/ai2arch-artifact.webp" width="960" height="960" alt="" aria-hidden="true" decoding="async">
   <div class="wrap hero-in">
     <div class="eyebrow">Программа повышения квалификации · ЮФУ · первая ступень</div>
     <h1><em>ИИ</em> в архитектуре</h1>
@@ -381,16 +385,23 @@
         <div class="avatar avatar-ini">ДК</div>
         <div>
           <h3>Костенко Дарья Богдановна</h3>
-          <div class="role">Автор видеоуроков по QGIS</div>
-          <p><span class="todo">[должность, опыт, фото — уточнить]</span></p>
+          <div class="role">Практикующий архитектор, автор видеоуроков по QGIS</div>
+          <ul class="list">
+            <li>Преподаватель Академии архитектуры и искусств ЮФУ</li>
+            <li>Архитектор, специалист по средовому дизайну</li>
+          </ul>
         </div>
       </div>
       <div class="card person">
         <div class="avatar avatar-ini">ЕП</div>
         <div>
           <h3>Попова Елизавета Андреевна</h3>
-          <div class="role">Соавтор раздела «Генерация идей и визуализация»</div>
-          <p><span class="todo">[должность, опыт, фото — уточнить]</span></p>
+          <div class="role">Практикующий архитектор, соавтор раздела «Генерация идей и визуализация»</div>
+          <ul class="list">
+            <li>Преподаватель Академии архитектуры и искусств ЮФУ</li>
+            <li>Архитектор, специалист по средовому дизайну</li>
+            <li>Разработчик проектов комплексного развития территорий (КРТ)</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -500,12 +511,11 @@
 <!-- ═══ КЕЙСЫ И ОТЗЫВЫ ═══ -->
 <section class="sec alt" id="cases">
   <div class="wrap">
-    <div class="kicker">Кейсы и отзывы</div>
+    <div class="kicker">Примеры работ</div>
     <h2>Что получается на выходе</h2>
-    <div class="grid3">
+    <div class="grid2">
       <div class="card"><h3>Первый поток</h3><p>Курс прошли 11 слушателей, все дошли до защиты проекта.</p></div>
-      <div class="card"><h3>Работы слушателей</h3><p><span class="todo">[2–3 лучшие работы выпускников: ссылка на презентацию или скриншоты, с согласия авторов]</span></p></div>
-      <div class="card"><h3>Отзывы выпускников</h3><p><span class="todo">[2–3 отзыва: цитата, имя, должность. Согласие на публикацию собираем через форму отзыва]</span></p></div>
+      <div class="card"><h3>Итоговый проект</h3><p>К защите вы приходите с проектом по своему участку: цифровая модель территории в QGIS, ИИ-анализ с прогнозом сценариев, несколько вариантов решений с визуализациями и интерактивная презентация, собранная в Gamma. Примеры ниже получены на учебных заданиях курса.</p></div>
     </div>
     <div class="shots">
       <figure class="shot wide"><img src="images/rostov-naberezhnaya-gallery.jpg" loading="lazy" alt="Детская площадка на набережной в Ростове-на-Дону: визуализации, генплан и список материалов"><figcaption>Учебное задание курса: детская площадка на набережной. Визуализации, генплан и список материалов получены по одному промпту.</figcaption></figure>
@@ -515,18 +525,9 @@
   </div>
 </section>
 
-<!-- ═══ ВЕБИНАР ═══ -->
-<section class="sec" id="webinar">
-  <div class="wrap">
-    <div class="kicker">Ознакомительный вебинар</div>
-    <h2>Показываем все инструменты до начала работы</h2>
-    <p class="lead">На вебинаре разбираем, как пользоваться QGIS, сервисами с языковыми моделями (в том числе Алисой AI и аналогичными локальными решениями), Photoshop и Gamma. После него остаётся работать с материалами курса в своём темпе.</p>
-    <p class="note" style="margin-top:0">Дата, время и ссылка: <span class="todo">[уточнить]</span></p>
-  </div>
-</section>
 
 <!-- ═══ ТАРИФЫ ═══ -->
-<section class="sec alt" id="price">
+<section class="sec" id="price">
   <div class="wrap">
     <div class="kicker">Тарифы и скидки</div>
     <h2>Стоимость курса и цена для сотрудников ЮФУ</h2>
@@ -556,12 +557,12 @@
       <b>13%</b>
       <p><strong>Налоговый вычет.</strong> Если вы платите за обучение сами и платите НДФЛ, можно вернуть 13% стоимости: 650 ₽ при цене 5 000 ₽ и 468 ₽ при 3 600 ₽. Вычет положен за обучение в организации с лицензией, а лимит расходов в 2026 году составляет 150 000 ₽.</p>
     </div>
-    <p class="note">Договор с ЮФУ заключается с физическим или юридическим лицом. Способ оплаты: <span class="todo">[уточнить]</span></p>
+    <p class="note">Договор с ЮФУ заключается с физическим или юридическим лицом.</p>
   </div>
 </section>
 
 <!-- ═══ ДОКУМЕНТЫ ═══ -->
-<section class="sec" id="docs">
+<section class="sec alt" id="docs">
   <div class="wrap">
     <div class="kicker">Документы при успешном освоении</div>
     <h2>Удостоверение о повышении квалификации ЮФУ</h2>
@@ -571,7 +572,7 @@
 </section>
 
 <!-- ═══ ЧТО ДАЛЬШЕ ═══ -->
-<section class="sec alt" id="next">
+<section class="sec" id="next">
   <div class="wrap">
     <div class="kicker">Что дальше</div>
     <h2>Вторая ступень: ИИ в редевелопменте</h2>
@@ -581,7 +582,7 @@
 </section>
 
 <!-- ═══ КАК ЗАПИСАТЬСЯ ═══ -->
-<section class="sec" id="apply">
+<section class="sec alt" id="apply">
   <div class="wrap">
     <div class="kicker">Как записаться</div>
     <h2>Четыре шага до старта</h2>
@@ -596,7 +597,7 @@
 </section>
 
 <!-- ═══ FAQ ═══ -->
-<section class="sec alt" id="faq">
+<section class="sec" id="faq">
   <div class="wrap">
     <div class="kicker">Вопросы и ответы</div>
     <h2>Что обычно спрашивают до записи</h2>
@@ -611,7 +612,7 @@
       <div class="ans"><p>Свой: парк, жилой квартал, территорию университета, место, с которым вы работаете. Если выбрать трудно, можно взять Ботанический сад.</p></div></details>
 
     <details class="q"><summary>Что нужно для занятий?<span class="mod-plus">+</span></summary>
-      <div class="ans"><p>Компьютер, интернет, QGIS (бесплатный), Photoshop по подписке Adobe и любой сервис с языковой моделью. Платные подписки на нейросети не нужны: для целей курса можно пользоваться Алисой AI или другими аналогичными локальными решениями. Все инструменты показываем на ознакомительном вебинаре и рассказываем, как ими пользоваться.</p>
+      <div class="ans"><p>Компьютер, интернет, QGIS (бесплатный), Photoshop по подписке Adobe и любой сервис с языковой моделью. Платные подписки на нейросети не нужны: для целей курса можно пользоваться Алисой AI или другими аналогичными локальными решениями. Установку и настройку всех инструментов разбираем в подготовительном модуле «Спринт 0» учебного пособия.</p>
       <p>Если вы выбираете зарубежные сервисы, студент самостоятельно обеспечивает доступ к ним в соответствии с их пользовательскими соглашениями и применимым законодательством.</p></div></details>
 
     <details class="q"><summary>Сколько времени это занимает?<span class="mod-plus">+</span></summary>
@@ -629,13 +630,13 @@
     <details class="q"><summary>Что дальше после курса?<span class="mod-plus">+</span></summary>
       <div class="ans"><p>Можно продолжить на второй ступени «ИИ в редевелопменте»: там вы берёте реальный объект и доводите его до защищённой концепции. Выпускникам первой ступени действует льготная цена.</p></div></details>
 
-    <details class="q"><summary>Что если я передумаю или поток не наберётся?<span class="mod-plus">+</span></summary>
-      <div class="ans"><p>Условия возврата прописаны в договоре с ЮФУ: <span class="todo">[порядок возврата — уточнить]</span></p></div></details>
+    <details class="q"><summary>Что если я передумаю?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Условия возврата прописаны в договоре с ЮФУ. Договор вы подписываете до оплаты, поэтому с условиями можно ознакомиться заранее. Вопросы по договору — куратору ЮФУ: Андреев Александр Александрович, <a href="mailto:alandreev@sfedu.ru" style="color:var(--azure-dark);font-weight:700">alandreev@sfedu.ru</a>.</p></div></details>
   </div>
 </section>
 
 <!-- ═══ КОНТАКТЫ ═══ -->
-<section class="sec" id="contact">
+<section class="sec alt" id="contact">
   <div class="wrap">
     <div class="kicker">Контакты</div>
     <div class="card contact">
@@ -647,7 +648,7 @@
           <button class="btn btn-primary btn-sm" data-apply>Оставить заявку</button>
           <a class="btn btn-line btn-sm" href="https://t.me/alkuleshov" target="_blank" rel="noopener">Задать вопрос в Telegram</a>
         </div>
-        <p style="font-size:13px;color:var(--ink-faint);margin-top:14px">По договору, оплате и зачислению: ответственный за набор слушателей Андреев Александр Александрович, <a href="mailto:alandreev@sfedu.ru" style="color:var(--azure-dark);font-weight:700">alandreev@sfedu.ru</a>.</p>
+        <p style="font-size:13px;color:var(--ink-faint);margin-top:14px">По договору, оплате и зачислению: куратор от ЮФУ ААИ Андреев Александр Александрович, <a href="mailto:alandreev@sfedu.ru" style="color:var(--azure-dark);font-weight:700">alandreev@sfedu.ru</a>.</p>
       </div>
     </div>
   </div>
@@ -660,8 +661,7 @@
     <a class="brand" href="index.html"><img class="brand-sign" src="images/ai2arch-sign.png" width="38" height="38" alt=""><span class="brand-text"><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
     <p>Программу реализует Южный федеральный университет, Академия архитектуры и искусств. Ростов-на-Дону.</p>
     <p>Программа утверждена приказом ЮФУ от 21.05.2026 № 1298. Форма обучения очная, с применением дистанционных технологий.</p>
-    <p>Лицензия на осуществление образовательной деятельности: <span class="todo">[номер и дата — уточнить]</span></p>
-    <p><a href="#" onclick="return false"><span class="todo">[Политика обработки персональных данных]</span></a> · <a href="#" onclick="return false"><span class="todo">[Договор-оферта]</span></a> · <a href="redev.html">Вторая ступень: ИИ в редевелопменте</a></p>
+    <p><a href="redev.html">Вторая ступень: ИИ в редевелопменте</a></p>
   </div>
 </footer>
 
@@ -702,7 +702,7 @@
         <label for="f-comment">Комментарий (необязательно)</label>
         <textarea id="f-comment" rows="2" placeholder="Какой участок хотите взять и откуда узнали о курсе"></textarea>
 
-        <div class="consent"><input type="checkbox" id="f-consent" required><label for="f-consent">Согласен(на) на обработку персональных данных. <span class="todo">[ссылка на политику]</span></label></div>
+        <div class="consent"><input type="checkbox" id="f-consent" required><label for="f-consent">Согласен(на) на обработку персональных данных.</label></div>
         <button type="submit" class="submit" id="submitBtn">Отправить заявку</button>
       </form>
       <div class="done" id="done">
@@ -741,6 +741,9 @@
   document.getElementById('modalX').addEventListener('click', closeModal);
   modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+  // ссылка archi.html#enroll (кнопка «Записаться» на главной) сразу открывает форму
+  if (location.hash === '#enroll') openModal();
+  window.addEventListener('hashchange', function () { if (location.hash === '#enroll') openModal(); });
 
   var EDU = {
     he_done: { cert: 'Да', text: '', warn: false },
@@ -769,6 +772,7 @@
       certEligible: rule ? rule.cert : '',
       comment: 'Статус: ' + status + (comment ? '. ' + comment : ''),
       timestamp: new Date().toISOString(),
+      course: 'ИИ в архитектуре',
       source: 'ai2arch.ru — лендинг «ИИ в архитектуре»'
     };
     btn.disabled = true; btn.textContent = 'Отправка...';

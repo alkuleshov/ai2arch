@@ -46,6 +46,7 @@
   /* ── header ── */
   .head { position:sticky; top:0; z-index:60; background:rgba(10,15,26,.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(255,255,255,.08); }
   .head-in { display:flex; align-items:center; gap:20px; height:var(--nav-h); }
+  .head .wrap { max-width:1160px; }
   /* логотип AI2ARCH: знак + надпись + дескриптор (брендбук, раздел 11) */
   .brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; flex-shrink:0; }
   .brand-sign { width:38px; height:38px; flex-shrink:0; }
@@ -62,7 +63,7 @@
   .burger[aria-expanded="true"] span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
   .burger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
   .burger[aria-expanded="true"] span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
-  @media (max-width:1100px) {
+  @media (max-width:1180px) {
     .burger { display:flex; }
     .head-apply { margin-left:auto; }
     .nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; gap:2px; overflow:visible; background:rgba(10,15,26,.98); padding:10px 20px 18px; border-bottom:1px solid rgba(255,255,255,.1); }
@@ -76,8 +77,10 @@
   /* ── hero ── */
   .hero { position:relative; background:var(--ink-night); color:#fff; overflow:hidden; }
   .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(60% 80% at 85% 0%, rgba(77,163,255,.2), transparent 70%); pointer-events:none; }
-  .hero-mark { display:none; position:absolute; top:-10px; right:-60px; width:430px; opacity:.5; pointer-events:none; }
-  @media (min-width:1100px) { .hero-mark { display:block; } }
+  .hero-mark { display:block; position:absolute; top:-90px; right:-4vw; width:min(52vw, 560px); height:auto; opacity:.9; mix-blend-mode:screen; pointer-events:none;
+    -webkit-mask-image:radial-gradient(closest-side, #000 58%, transparent 100%); mask-image:radial-gradient(closest-side, #000 58%, transparent 100%); }
+  @media (max-width:760px) { .hero-mark { top:-70px; right:-200px; width:420px; opacity:.4; } }
+  @media (prefers-reduced-motion:no-preference) { .hero-mark { animation:drift 20s ease-in-out infinite alternate; } @keyframes drift { from { transform:translate3d(0,-6px,0) rotate(-1.5deg); } to { transform:translate3d(0,8px,0) rotate(1.5deg); } } }
   .hero-in { position:relative; padding-top:72px; }
   .eyebrow { font-size:12px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--azure-soft); margin-bottom:22px; }
   .hero h1 { font-size:clamp(30px, 8.4vw, 84px); line-height:1.02; font-weight:800; letter-spacing:-.03em; margin-bottom:22px; }
@@ -265,7 +268,7 @@
 
 <!-- ═══ HERO ═══ -->
 <div class="hero">
-  <img class="hero-mark" src="images/brand-mark.png" alt="" aria-hidden="true">
+  <img class="hero-mark" src="images/ai2arch-artifact.webp" width="960" height="960" alt="" aria-hidden="true" decoding="async">
   <div class="wrap hero-in">
     <div class="eyebrow">Программа повышения квалификации · ЮФУ · вторая ступень</div>
     <h1><em>ИИ</em> в редевелопменте<sup class="ast"><a href="#fn-redev" aria-label="Что такое редевелопмент">*</a></sup></h1>
@@ -464,7 +467,7 @@
     <details class="mod">
       <summary><span class="mod-dot c5"></span><span class="mod-t"><small>Итоговая аттестация</small><strong>Открытая защита проектов (Demo Day)</strong></span><span class="mod-h">4 ч</span><span class="mod-plus">+</span></summary>
       <div class="mod-body"><ul class="list">
-        <li><span class="tag live">ЖИВАЯ ВСТРЕЧА</span>Питч концепции перед экспертным жюри. Дата и состав жюри: <span class="todo">[уточнить]</span></li>
+        <li><span class="tag live">ЖИВАЯ ВСТРЕЧА</span>Питч концепции перед экспертным жюри.</li>
       </ul></div>
     </details>
   </div>
@@ -507,28 +510,18 @@
 <!-- ═══ КЕЙСЫ И ОТЗЫВЫ ═══ -->
 <section class="sec alt" id="cases">
   <div class="wrap">
-    <div class="kicker">Кейсы и отзывы</div>
+    <div class="kicker">Кейсы</div>
     <h2>Опыт, на котором построена программа</h2>
-    <div class="grid3">
+    <div class="grid2">
       <div class="card"><h3>Кейс «С52»</h3><p>Первый креативный кластер на Юге России, который создал руководитель программы. На вводном модуле разбираем на нём жизненный цикл объекта, а слушателям без собственного объекта он достаётся как учебный кейс.</p></div>
       <div class="card"><h3>Первая ступень</h3><p>Программу «Современные инструменты проектного анализа» прошли 11 слушателей, все дошли до защиты. <a href="archi.html" style="color:var(--azure-dark);font-weight:700">Посмотреть первую ступень →</a></p></div>
-      <div class="card"><h3>Отзывы выпускников</h3><p><span class="todo">[2–3 отзыва выпускников первой ступени: цитата, имя, должность. Согласие на публикацию собираем через форму отзыва]</span></p></div>
     </div>
   </div>
 </section>
 
-<!-- ═══ ВЕБИНАР ═══ -->
-<section class="sec" id="webinar">
-  <div class="wrap">
-    <div class="kicker">Открытый вебинар</div>
-    <h2>Как оживить заброшенное здание: опыт кластера С52 и инструменты ИИ</h2>
-    <p class="lead">Бесплатная встреча для студентов и молодых специалистов: разбираем путь объекта от заброшенного здания до креативного кластера и показываем, где в этом пути помогает ИИ. Подойдёт, чтобы познакомиться с преподавателем и задать вопросы до записи.</p>
-    <p class="note" style="margin-top:0">Дата, время и регистрация: <span class="todo">[уточнить]</span></p>
-  </div>
-</section>
 
 <!-- ═══ ТАРИФЫ ═══ -->
-<section class="sec alt" id="price">
+<section class="sec" id="price">
   <div class="wrap">
     <div class="kicker">Тарифы и скидки</div>
     <h2>Полная цена и льготная</h2>
@@ -558,12 +551,12 @@
       <b>13%</b>
       <p><strong>Налоговый вычет.</strong> Если вы платите за обучение сами и платите НДФЛ, можно вернуть 13% стоимости: 2 457 ₽ при полной цене и 1 937 ₽ при льготной. Вычет положен за обучение в организации с лицензией, а лимит расходов в 2026 году составляет 150 000 ₽.</p>
     </div>
-    <p class="note">Оплата по договору с ЮФУ: <span class="todo">[способ оплаты, рассрочка, оплата от организации — уточнить]</span></p>
+    <p class="note">По договору, оплате и зачислению: куратор от ЮФУ ААИ Андреев Александр Александрович, <a href="mailto:alandreev@sfedu.ru" style="color:var(--azure-dark);font-weight:700">alandreev@sfedu.ru</a>.</p>
   </div>
 </section>
 
 <!-- ═══ ДОКУМЕНТЫ ═══ -->
-<section class="sec" id="docs">
+<section class="sec alt" id="docs">
   <div class="wrap">
     <div class="kicker">Документы при успешном освоении</div>
     <h2>Удостоверение о повышении квалификации ЮФУ</h2>
@@ -573,7 +566,7 @@
 </section>
 
 <!-- ═══ КАК ЗАПИСАТЬСЯ ═══ -->
-<section class="sec alt" id="apply">
+<section class="sec" id="apply">
   <div class="wrap">
     <div class="kicker">Как записаться</div>
     <h2>Четыре шага до старта</h2>
@@ -588,7 +581,7 @@
 </section>
 
 <!-- ═══ FAQ ═══ -->
-<section class="sec" id="faq">
+<section class="sec alt" id="faq">
   <div class="wrap">
     <div class="kicker">Вопросы и ответы</div>
     <h2>Что обычно спрашивают до записи</h2>
@@ -624,13 +617,13 @@
     <details class="q"><summary>Можно ли вернуть часть денег налогом?<span class="mod-plus">+</span></summary>
       <div class="ans"><p>Да, если вы платите сами и у вас есть доход, облагаемый НДФЛ: вернуть можно 13% стоимости. Оформляется через налоговую или работодателя по договору и чеку об оплате.</p></div></details>
 
-    <details class="q"><summary>Что если я передумаю или группа не наберётся?<span class="mod-plus">+</span></summary>
-      <div class="ans"><p>Условия возврата прописаны в договоре с ЮФУ: <span class="todo">[минимальный состав группы и порядок возврата — уточнить]</span></p></div></details>
+    <details class="q"><summary>Что если я передумаю?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Условия возврата прописаны в договоре с ЮФУ. Договор вы подписываете до оплаты, поэтому с условиями можно ознакомиться заранее. Вопросы по договору — куратору ЮФУ: Андреев Александр Александрович, <a href="mailto:alandreev@sfedu.ru" style="color:var(--azure-dark);font-weight:700">alandreev@sfedu.ru</a>.</p></div></details>
   </div>
 </section>
 
 <!-- ═══ КОНТАКТЫ ═══ -->
-<section class="sec alt" id="contact">
+<section class="sec" id="contact">
   <div class="wrap">
     <div class="kicker">Контакты</div>
     <div class="card contact">
@@ -642,6 +635,7 @@
           <button class="btn btn-primary btn-sm" data-apply>Оставить заявку</button>
           <a class="btn btn-line btn-sm" href="https://t.me/alkuleshov" target="_blank" rel="noopener">Задать вопрос в Telegram</a>
         </div>
+        <p style="font-size:13px;color:var(--ink-faint);margin-top:14px">По договору, оплате и зачислению: куратор от ЮФУ ААИ Андреев Александр Александрович, <a href="mailto:alandreev@sfedu.ru" style="color:var(--azure-dark);font-weight:700">alandreev@sfedu.ru</a>.</p>
       </div>
     </div>
   </div>
@@ -653,8 +647,7 @@
   <div class="wrap">
     <a class="brand" href="index.html"><img class="brand-sign" src="images/ai2arch-sign.png" width="38" height="38" alt=""><span class="brand-text"><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
     <p>Программу реализует Южный федеральный университет, Академия архитектуры и искусств. Ростов-на-Дону.</p>
-    <p>Лицензия на осуществление образовательной деятельности: <span class="todo">[номер и дата — уточнить]</span></p>
-    <p><a href="#" onclick="return false"><span class="todo">[Политика обработки персональных данных]</span></a> · <a href="#" onclick="return false"><span class="todo">[Договор-оферта]</span></a> · <a href="archi.html">Первая ступень программы</a></p>
+    <p><a href="archi.html">Первая ступень: ИИ в архитектуре</a></p>
   </div>
 </footer>
 
@@ -707,7 +700,7 @@
         <label for="f-comment">Комментарий (необязательно)</label>
         <textarea id="f-comment" rows="2" placeholder="Какой объект хотите взять (или «нужен С52») и откуда узнали о программе"></textarea>
 
-        <div class="consent"><input type="checkbox" id="f-consent" required><label for="f-consent">Согласен(на) на обработку персональных данных. <span class="todo">[ссылка на политику]</span></label></div>
+        <div class="consent"><input type="checkbox" id="f-consent" required><label for="f-consent">Согласен(на) на обработку персональных данных.</label></div>
         <button type="submit" class="submit" id="submitBtn">Отправить заявку</button>
       </form>
       <div class="done" id="done">
@@ -779,6 +772,8 @@
       certEligible: rule ? rule.cert : '',
       comment: 'Статус: ' + status + (comment ? '. ' + comment : ''),
       timestamp: new Date().toISOString(),
+      course: 'ИИ в редевелопменте',
+      track: track,
       source: 'ai2arch.ru — лендинг «ИИ в редевелопменте»'
     };
     btn.disabled = true; btn.textContent = 'Отправка...';

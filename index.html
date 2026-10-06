@@ -2,2459 +2,412 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ИИ в архитектуре — Курс дополнительного образования</title>
-<meta property="og:title" content="ИИ в архитектуре — Искусственный интеллект для архитектуры, девелопмента и развития территорий">
-<meta property="og:description" content="Искусственный интеллект для архитектуры, девелопмента и развития территорий">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0A0F1A">
+<title>AI2ARCH — лаборатория проектного интеллекта · курс «ИИ в архитектуре»</title>
+<meta name="description" content="Лаборатория проектного интеллекта AI2ARCH. Курс повышения квалификации «ИИ в архитектуре» на базе ААИ ЮФУ: 22 ак. часа, QGIS и нейросети с нуля, удостоверение ЮФУ. Курс «ИИ в редевелопменте» — скоро.">
+<link rel="canonical" href="https://ai2arch.ru/">
 <meta property="og:type" content="website">
-<meta name="description" content="Искусственный интеллект для архитектуры, девелопмента и развития территорий">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:url" content="https://ai2arch.ru/">
+<meta property="og:title" content="AI2ARCH — лаборатория проектного интеллекта">
+<meta property="og:description" content="Курс «ИИ в архитектуре» на базе ААИ ЮФУ: QGIS и нейросети с нуля, удостоверение о повышении квалификации. Курс «ИИ в редевелопменте» — скоро.">
+<meta property="og:image" content="https://ai2arch.ru/images/og-ai2arch.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior: smooth; overflow-x: clip; }
 
   :root {
-    /* AI2ARCH Brand Guidelines v2 */
-    --ink-night: #0A0F1A;
-    --navy-mid:  #111828;
-    --navy-deep: #070C18;
-    --graphite:  #2A2F3E;
-    --azure:     #4DA3FF;
-    --azure-glow:rgba(77,163,255,0.3);
-    --azure-soft:#7BBFFF;
-    --azure-dark:#2A7CE8;
-    --cyan:      #4DA3FF;
-    --cyan-soft: #7BBFFF;
-    --w100: #FFFFFF;
-    --warm-white:#F6F4F0;
-    --w70:  rgba(246,244,239,0.70);
-    --w40:  rgba(246,244,239,0.40);
-    --w15:  rgba(246,244,239,0.10);
-    --w07:  rgba(246,244,239,0.05);
-
-    /* Guide (light) — Warm White система */
-    --bg:       #F6F4F0;
-    --surface:  #FFFFFF;
-    --surface2: #F2F0EB;
-    --border:   #E4E1D8;
-    --ink:      #0A0F1A;
-    --ink-muted:#2A2F3E;
-    --ink-faint:#6A7080;
-    --accent:   #4DA3FF;
-    --accent-l: #EBF4FF;
-    --accent2:  #E8862B;
-    --accent2-l:#FDF3EE;
-    --green:    #1A9E6E;
-    --green-l:  #EDFAF4;
-    --purple:   #6B3FD4;
-    --purple-l: #F0EEFF;
-    --mono: 'JetBrains Mono', monospace;
-    --sans: 'Manrope', sans-serif;
+    --night:#0A0F1A;           /* основной, брендбук 04 */
+    --warm:#F6F4F0;            /* дополнительный */
+    --azure:#1A82FF;           /* акцент */
+    --azure-deep:#1466D6;      /* акцент для заливки кнопок: 5,4:1 с белым текстом */
+    --card:rgba(15,22,36,.80);
+    --card-soon:rgba(12,18,30,.90);
+    --line:#252D40;
+    --line-soft:#1A2131;
+    --muted:#A3ACBD;
+    --faint:#818A9D;
+    --sans:'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   }
 
-  body { font-family:var(--sans); width:100%; }
-  a { color:var(--accent); text-decoration:none; }
-  a:hover { text-decoration:underline; }
-
-  /* ─── SPA VIEWS ─── */
-  .view { display:none; }
-  .view.active { display:block; }
-
-  /* ════════════════════════════════════
-     COVER VIEW
-  ════════════════════════════════════ */
-  #view-cover {
-    min-height: 100vh;
-    width: 100%;
-    background: var(--ink-night);
-    color: var(--w100);
-    position: relative;
-    overflow: hidden;
+  html { color-scheme:dark; background:var(--night); }
+  body {
+    font-family:var(--sans); background:var(--night); color:var(--warm);
+    line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:clip;
   }
+  a { color:inherit; }
 
-  .cover-bg {
-    position: absolute; inset:0; z-index:0;
-    background: #0A0F1A;
-  }
-  .cover-bg::before { content: none; }
-  .cover-bg::after  { content: none; }
+  .screen { position:relative; overflow:hidden; }
+  .wrap { position:relative; z-index:1; width:100%; max-width:1040px; margin:0 auto; padding:0 28px; }
 
-  .brand-mark {
-    display: none;
-    position: absolute; z-index: 0;
-    top: -40px; right: -60px;
-    width: 340px; height: auto;
-    opacity: .45;
-    pointer-events: none;
-    filter: drop-shadow(0 0 50px rgba(0,191,255,.3));
+  /* артефакт бренда: глубина на фоне, движение — одно, медленное */
+  .art {
+    position:absolute; z-index:0; top:-110px; right:-3vw;
+    width:min(56vw, 640px); height:auto;
+    mix-blend-mode:screen; pointer-events:none; user-select:none;
+    -webkit-mask-image:radial-gradient(closest-side, #000 58%, transparent 100%);
+            mask-image:radial-gradient(closest-side, #000 58%, transparent 100%);
+    animation:drift 20s ease-in-out infinite alternate;
   }
-  @media (min-width: 1300px) {
-    .brand-mark { display: block; }
+  @keyframes drift {
+    from { transform:translate3d(0,-6px,0) rotate(-1.5deg); }
+    to   { transform:translate3d(0,8px,0)  rotate(1.5deg); }
   }
 
-  .cover-inner {
-    position:relative; z-index:1;
-    max-width:1000px; margin:0 auto;
-    padding: 48px 40px 56px;
-    min-height:100vh;
-    display:flex; flex-direction:column;
-    overflow:hidden;
-  }
+  /* логотип: знак + надпись + дескриптор, он же h1 страницы */
+  .top { padding-top:30px; }
+  .brand { display:flex; align-items:center; gap:16px; font-weight:inherit; }
+  .brand-sign { width:60px; height:60px; flex-shrink:0; }
+  .brand-text { display:flex; flex-direction:column; line-height:1.15; }
+  .brand-text b { font-size:28px; font-weight:600; letter-spacing:.02em; }
+  .brand-text small { font-size:14px; font-weight:400; color:var(--muted); margin-top:4px; }
 
-  .topbar {
-    display:flex; align-items:center; justify-content:space-between;
-    margin-bottom:52px; flex-wrap:wrap; gap:12px;
-  }
-  .topbar-label { font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--w40); }
-  .topbar-badge {
-    display:flex; align-items:center; gap:8px;
-    border:1px solid var(--w15); border-radius:24px;
-    padding:6px 16px; font-size:11.5px; font-weight:600; color:var(--w70); background:var(--w07);
-  }
-  .topbar-badge .dot {
-    width:6px; height:6px; border-radius:50%;
-    background:var(--azure,#4DA3FF); box-shadow:0 0 8px rgba(77,163,255,.8);
-    animation: blink 2s infinite;
-  }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
+  .lead { margin-top:22px; max-width:44ch; font-size:16px; color:var(--muted); }
 
-  .hero { flex:1; display:flex; flex-direction:column; justify-content:center; }
+  /* карточки курсов */
+  .cards { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:20px; margin-top:clamp(26px, 5vh, 46px); }
+  .card {
+    display:flex; flex-direction:column; padding:28px; border-radius:14px;
+    background:var(--card); border:1px solid var(--line);
+    -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+  }
+  .card--open { border-top:2px solid var(--azure); }
+  .card--soon { background:var(--card-soon); border-color:var(--line-soft); }
 
-  .program-tag {
-    display:inline-flex; align-items:center; gap:8px;
-    font-size:11px; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
-    color:var(--cyan-soft); margin-bottom:22px;
-  }
-  .program-tag::before { content:''; width:24px; height:1px; background:var(--cyan-soft); }
+  .step { font-size:13px; color:var(--faint); margin-bottom:8px; }
+  .card h2 { font-size:clamp(26px, 3vw, 33px); font-weight:600; line-height:1.12; letter-spacing:-.01em; margin-bottom:12px; }
+  .card--soon h2 { color:#D3D8E2; }
+  .official { font-size:13.5px; color:var(--faint); max-width:46ch; margin-bottom:16px; }
+  .desc { font-size:15.5px; color:var(--muted); margin-bottom:18px; }
 
-  h1 {
-    font-size:clamp(36px,6.5vw,64px); font-weight:900;
-    line-height:1.05; letter-spacing:-.025em; color:var(--w100); margin-bottom:8px;
-  }
-  h1 em {
-    font-style:normal;
-    background:linear-gradient(90deg, #4DA3FF 0%, #7BBFFF 55%, #B0D8FF 100%);
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-  }
-  .h1-sub {
-    font-size:clamp(20px,3vw,28px); font-weight:800; line-height:1.2;
-    color:var(--w70); margin-bottom:20px; letter-spacing:-.01em;
-  }
-  .course-name {
-    font-size:13.5px; font-weight:500; color:var(--w40);
-    line-height:1.6; max-width:540px;
-    margin-bottom:18px;
-    border-left:2px solid rgba(0,191,255,0.3); padding-left:14px;
-  }
+  .facts { display:flex; flex-wrap:wrap; row-gap:4px; list-style:none; margin-bottom:22px; font-size:13.5px; font-weight:500; }
+  .facts li { padding:0 14px; border-left:1px solid var(--line); }
+  .facts li:first-child { padding-left:0; border-left:0; }
 
-  .cert-block {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    background: linear-gradient(135deg, rgba(0,191,255,.08) 0%, rgba(17,24,40,.5) 100%);
-    border: 1px solid rgba(0,191,255,.3);
-    border-radius: 14px;
-    padding: 20px 22px;
-    margin-bottom: 44px;
+  .actions { margin-top:auto; display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+  .btn {
+    display:inline-flex; align-items:center; justify-content:center; min-height:46px; padding:0 22px;
+    border-radius:10px; border:1px solid transparent; font:600 15px/1 var(--sans); text-decoration:none;
+    transition:background-color .15s, border-color .15s;
   }
-  .cert-icon {
-    width: 48px; height: 48px; border-radius: 50%;
-    background: rgba(0,191,255,.15); border: 1px solid rgba(0,191,255,.4);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px; flex-shrink: 0;
-  }
-  .cert-title { font-size: 14.5px; font-weight: 800; color: #fff; margin-bottom: 6px; line-height: 1.35; }
-  .cert-desc { font-size: 12.5px; color: var(--w70); line-height: 1.6; }
-  .cert-desc strong { color: var(--cyan-soft); }
+  .btn-primary { background:var(--azure-deep); color:#fff; }
+  .btn-primary:hover { background:#1A72EC; }
+  .btn-ghost { border-color:rgba(246,244,240,.30); color:var(--warm); }
+  .btn-ghost:hover { border-color:rgba(246,244,240,.60); }
+  .btn:focus-visible { outline:2px solid var(--azure); outline-offset:3px; }
 
-  .usp-badge {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    background: linear-gradient(90deg, rgba(77,163,255,0.1) 0%, rgba(26,50,120,0.08) 100%);
-    border: 1px solid rgba(42,47,62,.4);
-    border-radius: 14px;
-    padding: 14px 18px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--cyan-soft);
-    letter-spacing: .005em;
-    line-height: 1.55;
-    margin-bottom: 20px;
-    max-width: 560px;
-  }
-  .usp-dot {
-    margin-top: 5px;
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--cyan);
-    box-shadow: 0 0 8px var(--cyan);
-    flex-shrink: 0;
-    animation: blink 2s infinite;
-  }
+  .soon { display:inline-flex; align-items:center; gap:10px; min-height:46px; font-size:15px; font-weight:600; color:var(--muted); }
+  .soon::before { content:''; width:8px; height:8px; border-radius:50%; background:var(--azure); flex-shrink:0; }
 
-  .features { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:44px; }
-  @media(max-width:560px){ .features{grid-template-columns:1fr;} }
-  .feat {
-    background:var(--w07); border:1px solid var(--w15); border-radius:8px;
-    padding:18px 20px; display:flex; align-items:flex-start; gap:14px;
-    transition:border-color .2s, background .2s;
-  }
-  .feat:hover { border-color:rgba(42,47,62,.5); background:rgba(42,47,62,.08); transform:translateY(-1px); }
-  .feat-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
-  .fi-blue   { background:rgba(22,80,212,.4); }
-  .fi-cyan   { background:rgba(0,191,255,.15); }
-  .fi-green  { background:rgba(26,158,110,.25); }
-  .fi-purple { background:rgba(123,63,228,.25); }
-  .feat-title { font-size:14px; font-weight:700; color:var(--w100); margin-bottom:3px; line-height:1.3; }
-  .feat-desc  { font-size:12px; color:var(--w40); line-height:1.5; }
+  /* ── разделы ниже карточек ── */
+  .sec { margin-top:clamp(56px, 9vw, 96px); }
+  .sec h2 { font-size:clamp(24px, 3vw, 30px); font-weight:600; line-height:1.15; letter-spacing:-.01em; margin-bottom:10px; }
+  .sec-sub { max-width:60ch; margin-bottom:28px; font-size:15px; color:var(--muted); }
+  .fine { margin-top:22px; max-width:70ch; font-size:12.5px; color:var(--faint); }
 
-  .instructor-line {
-    font-size: 13px;
-    color: var(--w70);
-    font-weight: 500;
-    margin-bottom: 40px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    line-height: 1.5;
-  }
-  .instructor-photo {
-    width: 68px; height: 68px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid rgba(77,163,255,.5);
-    box-shadow: 0 0 0 3px rgba(77,163,255,.1);
-    flex-shrink: 0;
-  }
-  .instructor-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .instructor-info a {
-    color: #fff;
-    font-size: 14.5px;
-    font-weight: 800;
-    text-decoration: underline;
-    text-decoration-color: rgba(255,255,255,0.25);
-    text-underline-offset: 2px;
-    transition: color .15s, text-decoration-color .15s;
-  }
-  .instructor-info a:hover {
-    color: var(--cyan-soft);
-    text-decoration-color: var(--cyan-soft);
-  }
-  .instructor-bio {
-    font-size: 11.5px;
-    color: var(--w40);
-    letter-spacing: .01em;
-  }
+  /* руководитель */
+  .person { display:flex; align-items:center; gap:20px; margin-top:20px; padding:20px 24px; border:1px solid var(--line-soft); border-radius:14px; background:rgba(12,18,30,.7); }
+  .person img { width:76px; height:76px; flex-shrink:0; border-radius:50%; object-fit:cover; border:2px solid #1D4A8A; }
+  .person-role { font-size:13px; color:var(--faint); }
+  .person-name { margin:2px 0 6px; font-size:19px; font-weight:600; line-height:1.25; }
+  .person-links { display:flex; flex-wrap:wrap; gap:6px 22px; margin-top:12px; font-size:14px; font-weight:600; }
+  .person-links a { color:var(--azure); text-decoration:none; }
+  .person-links a:hover { text-decoration:underline; text-underline-offset:4px; }
+  .person-links a:focus-visible { outline:2px solid var(--azure); outline-offset:3px; border-radius:4px; }
+  .person-about { font-size:14px; color:var(--muted); max-width:62ch; }
 
-  .ref-section { margin-bottom:44px; }
-  .ref-eyebrow {
-    font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
-    color:var(--cyan-soft); margin-bottom:12px;
-    display:flex; align-items:center; gap:8px;
-  }
-  .ref-eyebrow::after { content:''; flex:1; height:1px; background:var(--w15); }
+  /* инструменты: логотип появляется сам, если файл лежит в images/tools/ */
+  .tool-groups { display:grid; gap:28px; }
+  .tool-group h3 { margin-bottom:12px; font-size:14px; font-weight:600; color:var(--muted); }
+  .tools { display:grid; grid-template-columns:repeat(auto-fill, minmax(212px, 1fr)); gap:10px; list-style:none; }
+  .tool { display:flex; align-items:center; gap:12px; min-height:58px; padding:11px 14px; border:1px solid var(--line-soft); border-radius:12px; background:rgba(15,22,36,.6); }
+  .tool-logo { display:none; width:34px; height:34px; flex-shrink:0; align-items:center; justify-content:center; border-radius:8px; background:var(--warm); }
+  .tool.has-logo .tool-logo { display:flex; }
+  .tool-logo img { width:22px; height:22px; object-fit:contain; }
+  .tool > span:last-child { min-width:0; }
+  .tool b { display:block; font-size:14.5px; font-weight:600; line-height:1.2; overflow-wrap:anywhere; }
+  .tool small { display:block; margin-top:3px; font-size:12px; color:var(--faint); }
 
-  .outcomes-section { margin-bottom: 44px; }
-  .outcomes-note { margin-top: 14px; font-size: 12.5px; color: var(--cyan-soft); font-weight: 500; line-height: 1.5; }
-  .outcomes-list { list-style: none; display:flex; flex-direction:column; gap:0; }
-  .outcomes-list li {
-    display:flex; align-items:flex-start; gap:14px;
-    font-size:13.5px; color:var(--w70); font-weight:500; line-height:1.5;
-    padding:11px 0; border-bottom:1px solid var(--w15);
-  }
-  .outcomes-list li:last-child { border-bottom:none; }
-  .oc-num {
-    font-family:var(--mono); font-size:11px; font-weight:700;
-    color:var(--cyan-soft); flex-shrink:0; margin-top:1px;
-    opacity:0.7;
-  }
-  .links-row { display:flex; gap:7px; flex-wrap:wrap; }
-  .qlink {
-    display:inline-flex; align-items:center; gap:5px;
-    background:var(--w07); border:1px solid var(--w15); border-radius:6px;
-    padding:5px 10px; font-size:11px; font-weight:600; color:var(--w70);
-    text-decoration:none; transition:all .15s; cursor:pointer;
-  }
-  .qlink:hover { border-color:rgba(42,47,62,.6); color:var(--graphite,#2A2F3E); background:rgba(42,47,62,.06); text-decoration:none; }
-  .ql-badge {
-    font-size:8px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
-    background:rgba(42,47,62,.12); color:var(--graphite,#2A2F3E); padding:1px 5px; border-radius:3px; margin-left:1px;
-  }
+  /* результаты */
+  .sec h2 + .outcomes { margin-top:22px; }
+  .outcomes { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:34px 44px; }
+  .outcomes h3 { margin-bottom:6px; font-size:16px; font-weight:600; }
+  .outcomes ul { list-style:none; }
+  .outcomes li { padding:14px 0; border-top:1px solid var(--line-soft); font-size:15.5px; color:#D5DAE4; }
+  .note { margin-top:30px; max-width:62ch; padding-left:16px; border-left:2px solid var(--azure); font-size:15px; color:var(--muted); }
 
-  /* light variants for guide-ref-section (sits on light bg) */
-  .ref-eyebrow.light {
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-  .ref-eyebrow.light::after { background: var(--border); }
-  .qlink.light {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--ink-muted);
-  }
-  .qlink.light:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: var(--accent-l);
-  }
-  .ql-badge.light {
-    background: var(--accent-l);
-    color: var(--accent);
-  }
+  /* сводка по ступеням */
+  .cmp { width:100%; border-collapse:collapse; font-size:14.5px; }
+  .cmp th, .cmp td { padding:16px 18px 16px 0; border-top:1px solid var(--line-soft); text-align:left; vertical-align:top; }
+  .cmp thead td { border-top:0; padding:0; }
+  .cmp thead th { padding-top:0; border-top:0; font-size:17px; font-weight:600; color:var(--warm); }
+  .cmp tbody th { width:17%; font-size:13.5px; font-weight:500; color:var(--faint); }
+  .cmp td { color:var(--muted); line-height:1.5; }
+  .cmp td strong { font-weight:600; color:var(--warm); }
+  .cmp .soon-cell { color:var(--faint); }
 
-  .guide-ref-section {
-    background: var(--surface);
-    border-bottom: 2px solid var(--border);
-    border-top: 2px solid var(--graphite,#2A2F3E);
-  }
-  .guide-ref-inner {
-    max-width: 920px; margin: 0 auto;
-    padding: 12px 32px 14px;
-  }
+  /* удостоверение */
+  .doc { padding:26px 28px; border:1px solid var(--line); border-top:2px solid var(--azure); border-radius:14px; background:var(--card); }
+  .doc h2 { font-size:clamp(21px, 2.6vw, 25px); }
+  .doc p { max-width:74ch; font-size:15px; color:var(--muted); }
+  .doc p + p { margin-top:10px; }
 
-  /* CTA — главная кнопка открывает Guide-view */
-  .cta-row { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
-  .enroll-meta {
-    margin-top: 14px;
-    font-size: 12.5px;
-    color: var(--w40);
-    font-weight: 500;
-  }
-  .enroll-meta strong { color: var(--cyan-soft); font-weight: 700; }
-  .cta-btn {
-    display:inline-flex; align-items:center; gap:10px;
-    background:linear-gradient(135deg, #111828 0%, #4DA3FF 65%, #6DBEFF 100%);
-    color:#fff; font-size:14px; font-weight:700;
-    padding:14px 28px; border-radius:10px;
-    border:none; cursor:pointer;
-    letter-spacing:.02em; box-shadow:0 4px 28px rgba(77,163,255,.45), 0 0 0 1px rgba(77,163,255,.18);
-    transition:all .2s; font-family:var(--sans);
-  }
-  .cta-btn:hover { transform:translateY(-2px); box-shadow:0 8px 40px rgba(77,163,255,.6), 0 0 0 1px rgba(77,163,255,.28); letter-spacing:.04em; }
-  .cta-btn-outline {
-    background: var(--w07);
-    border: 1px solid rgba(0,191,255,0.4);
-    color: var(--cyan-soft);
-    box-shadow: none;
-    text-decoration: none;
-  }
-  .cta-btn-outline:hover {
-    background: rgba(0,191,255,0.1);
-    border-color: var(--cyan-soft);
-    box-shadow: 0 4px 20px rgba(0,191,255,0.2);
-    text-decoration: none;
-  }
-  .cta-btn-ghost {
-    background: transparent;
-    border: 1px solid var(--w15);
-    color: var(--w70);
-    box-shadow: none;
-    font-weight: 600;
-  }
-  .cta-btn-ghost:hover {
-    background: var(--w07);
-    border-color: var(--w40);
-    color: #fff;
-    box-shadow: none;
-    transform: none;
-    letter-spacing: .02em;
-  }
-  .cta-row-top { margin-bottom: 28px; }
-  @media (max-width: 520px) {
-    .cta-row-top { flex-direction: column; align-items: stretch; }
-    .cta-row-top .cta-btn { justify-content: center; }
-  }
+  /* повторный призыв */
+  .final { display:flex; flex-wrap:wrap; align-items:center; gap:14px 22px; }
+  .final p { font-size:14px; color:var(--muted); }
 
-  /* Баннер набора — главный акцент над CTA-кнопками */
-  .enroll-banner {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: rgba(77,163,255,0.1);
-    border: 1px solid rgba(77,163,255,0.3);
-    border-radius: 100px;
-    padding: 9px 18px 9px 14px;
-    margin-bottom: 18px;
-  }
-  .enroll-banner-dot {
-    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
-    background: var(--azure,#4DA3FF); box-shadow: 0 0 8px rgba(77,163,255,.9);
-    animation: blink 2s infinite;
-  }
-  .enroll-banner-text {
-    font-size: 13px; color: rgba(255,255,255,.85); font-weight: 500;
-  }
-  .enroll-banner-text strong { color: #fff; font-weight: 800; }
-  @media (max-width: 640px) {
-    .enroll-banner { padding: 8px 14px; }
-    .enroll-banner-text { font-size: 11.5px; }
-  }
+  /* подвал из оригинальной версии */
+  .foot { position:relative; z-index:1; margin-top:clamp(64px, 10vw, 104px); padding:34px 0 40px; border-top:1px solid var(--line-soft); text-align:center; }
+  .foot-brand { display:inline-flex; align-items:center; gap:12px; margin-bottom:14px; text-align:left; }
+  .foot-brand img { width:44px; height:44px; flex-shrink:0; }
+  .foot-brand b { display:block; font-size:17px; font-weight:600; letter-spacing:.02em; line-height:1.15; }
+  .foot-brand small { display:block; margin-top:2px; font-size:11.5px; color:var(--faint); }
+  .foot-tag { max-width:560px; margin:0 auto 10px; font-size:13.5px; color:var(--muted); }
+  .foot-meta { font-size:12px; color:var(--faint); }
 
-  .format-banner {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: rgba(232,134,43,0.12);
-    border: 1px solid rgba(232,134,43,0.4);
-    border-radius: 100px;
-    padding: 9px 18px 9px 14px;
-    margin-bottom: 18px;
-    margin-left: 10px;
+  @media (max-width:860px) {
+    .cards { grid-template-columns:minmax(0,1fr); gap:14px; }
+    .outcomes { grid-template-columns:minmax(0,1fr); }
   }
-  .format-banner-dot {
-    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
-    background: #E8862B; box-shadow: 0 0 8px rgba(232,134,43,.9);
+  @media (max-width:760px) {
+    .wrap { padding:0 20px; }
+    .art { top:-80px; right:-210px; width:420px; opacity:.5; }
+    .top { padding-top:24px; }
+    .brand-sign { width:52px; height:52px; }
+    .brand-text b { font-size:24px; }
+    .card { padding:22px; }
+    .card h2 { overflow-wrap:break-word; }
+    .actions .btn { flex:1 1 auto; }
+    .person { align-items:flex-start; padding:18px; gap:16px; }
+    .person img { width:60px; height:60px; }
+    .tools { grid-template-columns:repeat(2, minmax(0,1fr)); gap:8px; }
+    .tool { gap:9px; padding:10px; }
+    .tool-logo { width:28px; height:28px; }
+    .tool-logo img { width:18px; height:18px; }
+    .tool b { font-size:13px; }
+    .doc { padding:22px 20px; }
+    .final .btn { flex:1 1 100%; }
+    .cmp, .cmp tbody, .cmp tr, .cmp th, .cmp td { display:block; width:auto; }
+    .cmp thead { display:none; }
+    .cmp tr { padding:16px 0; border-top:1px solid var(--line-soft); }
+    .cmp tbody th { width:auto; padding:0 0 8px; border:0; }
+    .cmp td { padding:6px 0; border:0; }
+    .cmp td::before { content:attr(data-s); display:block; margin-bottom:2px; font-size:12px; color:var(--faint); }
   }
-  .format-banner-text {
-    font-size: 13px; color: rgba(255,255,255,.85); font-weight: 500;
+  @media (max-width:359px) {
+    .tools { grid-template-columns:minmax(0,1fr); }
+    .brand-text small { font-size:12.5px; }
+    .card h2 { font-size:23px; }
   }
-  .format-banner-text strong { color: #FFB258; font-weight: 800; }
-  @media (max-width: 640px) {
-    .format-banner { padding: 8px 14px; margin-left:0; }
-    .format-banner-text { font-size: 11.5px; }
-  }
-
-  /* AI2ARCH Brand elements */
-  .ai2arch-brand {
-    display: flex; flex-direction: column; gap: 3px; margin-bottom: 40px;
-  }
-  .ai2arch-sub {
-    font-size: 9px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-  }
-  .hero { position: relative; z-index: 1; }
-
-  /* Architectural corner decoration */
-  .arch-corner {
-    position: absolute; bottom: 80px; right: 40px;
-    width: 120px; height: 120px;
-    border-right: 1px solid rgba(42,47,62,.4);
-    border-bottom: 1px solid rgba(42,47,62,.4);
-    pointer-events: none; z-index: 1;
-  }
-  .arch-corner::before {
-    content:''; position:absolute;
-    bottom: 8px; right: 8px;
-    width: 80px; height: 80px;
-    border-right: 1px solid rgba(42,47,62,.25);
-    border-bottom: 1px solid rgba(42,47,62,.25);
-  }
-
-  .cover-bottom {
-    margin-top:52px; padding-top:22px; border-top:1px solid rgba(42,47,62,.4);
-    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
-  }
-  .strip-label { font-size:10.5px; color:var(--w40); font-weight:600; letter-spacing:.06em; text-transform:uppercase; }
-  .strip-tags { display:flex; gap:6px; flex-wrap:wrap; }
-  .ttag { font-size:10.5px; font-weight:700; letter-spacing:.06em; padding:4px 10px; border-radius:4px; border:1px solid; }
-  .ttag-blue   { border-color:rgba(22,80,212,.6);  color:#7AABFF; background:rgba(22,80,212,.12); }
-  .ttag-green  { border-color:rgba(26,158,110,.5); color:#5DDDB0; background:rgba(26,158,110,.1); }
-  .ttag-purple { border-color:rgba(123,63,228,.5); color:#C498FF; background:rgba(123,63,228,.1); }
-  .ttag-orange { border-color:rgba(232,134,43,.5); color:#FFC07A; background:rgba(232,134,43,.1); }
-
-  /* ════════════════════════════════════
-     GUIDE VIEW
-  ════════════════════════════════════ */
-  #view-guide {
-    background: var(--bg);
-    color: var(--ink);
-    min-height: 100vh;
-    width: 100%;
-  }
-
-  .back-bar {
-    background: linear-gradient(90deg, #070C18 0%, #0A0F1A 100%); border-bottom:1px solid rgba(246,244,240,.08);
-    padding: 0;
-    position: sticky; top:0; z-index:200;
-    display:flex; align-items:stretch;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
-  }
-  .back-btn {
-    display:flex; align-items:center; gap:10px;
-    padding:14px 20px;
-    font-size:13px; font-weight:700;
-    color:var(--azure-soft,#4A9FFF);
-    background:none; border:none; border-right:1px solid rgba(42,47,62,.4);
-    cursor:pointer; font-family:var(--sans);
-    transition:background .15s; white-space:nowrap;
-    letter-spacing:.01em;
-  }
-  .back-btn:hover { background:rgba(42,47,62,.15); }
-  .back-btn .arrow { font-size:16px; }
-
-  .guide-breadcrumb {
-    display:flex; align-items:center; gap:8px;
-    padding:0 20px; flex:1; overflow:hidden;
-    min-width: 0;
-  }
-  .bc-root { font-size:11px; color:var(--w40); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .bc-sep  { color:var(--w15); font-size:12px; flex-shrink:0; }
-  .bc-cur  { font-size:11px; color:var(--cyan-soft); font-weight:700; letter-spacing:.04em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
-  @media (max-width: 480px) {
-    .bc-root, .bc-sep { display:none; }
-  }
-
-  .nav-wrap {
-    position: sticky; top:49px; z-index:100;
-    background: var(--surface);
-    border-bottom:1px solid var(--border);
-    box-shadow:0 2px 12px rgba(10,19,36,0.08);
-    overflow: visible;
-  }
-  .nav-wrap::after {
-    content:'';
-    position:absolute; top:0; right:0; bottom:0;
-    width:34px; pointer-events:none;
-    background:linear-gradient(to right, transparent, var(--surface));
-  }
-
-  .module-tabs {
-    display: flex; gap: 0;
-    max-width: none;
-    padding: 0 28px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    border-bottom: 1px solid var(--border);
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-x;
-  }
-  .module-tabs::-webkit-scrollbar { display:none; }
-  .module-tab {
-    display: flex; flex-direction: column;
-    gap: 2px;
-    padding: 12px 20px 11px;
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-    white-space: nowrap;
-    transition: border-color .2s, background .15s;
-    flex-shrink: 0;
-  }
-  .module-tab:hover { background: var(--surface2); }
-  .module-tab.active { border-bottom-color: var(--azure,#4DA3FF); }
-  .module-tab .mt-eyebrow {
-    font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-  .module-tab.active .mt-eyebrow { color: var(--accent); }
-  .module-tab .mt-title {
-    font-size: 12.5px; font-weight: 700; color: var(--ink-muted);
-  }
-  .module-tab.active .mt-title { color: var(--ink); }
-
-  .module-panel { display:none; }
-  .module-panel.active { display:block; }
-  .nav-pills {
-    display:flex; gap:6px; padding:11px 28px;
-    flex-wrap:nowrap; overflow-x:auto;
-    max-width:none;
-    scrollbar-width:none;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-x;
-  }
-  .nav-pills::-webkit-scrollbar { display:none; }
-  .pill {
-    font-size:11.5px; font-weight:600; color:var(--ink-muted);
-    background:var(--surface2); border:1px solid var(--border);
-    border-radius:20px; padding:5px 13px;
-    text-decoration:none; white-space:nowrap; flex-shrink:0; transition:all .15s;
-  }
-  .pill:hover       { border-color:var(--azure,#4DA3FF); color:var(--azure,#4DA3FF); background:var(--accent-l); text-decoration:none; }
-  .pill.lesson:hover{ border-color:var(--purple); color:var(--purple); background:var(--purple-l); }
-  .pill.active-scroll        { border-color:var(--azure,#4DA3FF); color:var(--azure,#4DA3FF); background:var(--accent-l); }
-  .pill.lesson.active-scroll { border-color:var(--purple); color:var(--purple); background:var(--purple-l); }
-
-  .guide-inner { max-width:920px; margin:0 auto; padding:0 32px 80px; }
-
-  .sec-label { font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--graphite,#2A2F3E); margin-bottom:8px; }
-  .sec-label.purple { color:var(--purple); }
-  .sec-label.green  { color:var(--green); }
-  .sec-label.orange { color:var(--accent2); }
-  h2 { font-size:21px; font-weight:800; color:var(--ink); margin-bottom:14px; letter-spacing:-.02em; }
-  h3 { font-size:15px; font-weight:700; color:var(--ink); margin-bottom:8px; margin-top:22px; }
-  p  { color:var(--ink-muted); margin-bottom:12px; font-size:14.5px; }
-
-  .sec-divider { height:1px; background:var(--border); margin:36px 0; }
-  .author-strip {
-    display:flex; align-items:center; gap:10px;
-    margin-bottom:24px; padding:10px 16px;
-    background:var(--surface); border:1px solid var(--border);
-    border-radius:8px; font-size:12.5px; color:var(--ink-muted);
-  }
-  .author-strip .av {
-    width:28px; height:28px; border-radius:50%; flex-shrink:0;
-    display:flex; align-items:center; justify-content:center;
-    font-size:11px; font-weight:800; color:#fff;
-    background:linear-gradient(135deg, var(--ink-night) 0%, var(--azure,#4DA3FF) 100%);
-  }
-  .author-strip strong { color:var(--ink); font-weight:700; }
-  section[id] { scroll-margin-top: 0; }
-
-  .lesson-block { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; margin-bottom:24px; border-left:3px solid var(--graphite,#2A2F3E); box-shadow:0 1px 4px rgba(10,15,29,0.06); }
-  .lesson-header { padding:20px 24px 18px; border-bottom:1px solid var(--border); display:flex; align-items:flex-start; gap:16px; }
-  .lesson-num { width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800; flex-shrink:0; color:#fff; }
-  .ln-purple { background:linear-gradient(135deg,#0A1B50,#4DA3FF); }
-  .ln-green  { background:var(--green); }
-  .ln-orange { background:var(--accent2); }
-  .lesson-eyebrow { font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; margin-bottom:4px; }
-  .le-purple { color:var(--purple); }
-  .le-green  { color:var(--green); }
-  .le-orange { color:var(--accent2); }
-  .lesson-title { font-size:17px; font-weight:700; color:var(--ink); line-height:1.3; }
-  .lesson-body  { padding:20px 24px 24px; }
-
-  .intro-quote {
-    background:var(--surface2); border-left:3px solid var(--purple);
-    border-radius:0 8px 8px 0; padding:14px 18px;
-    font-size:13.5px; color:var(--ink-muted); font-style:italic; line-height:1.65; margin-bottom:20px;
-  }
-  .intro-quote.green { border-left-color:var(--green); }
-  .intro-quote.orange { border-left-color:var(--accent2); }
-
-  .res-links { display:flex; flex-direction:column; gap:8px; margin:14px 0; }
-  .res-link {
-    display:flex; align-items:center; gap:10px;
-    background:var(--surface2); border:1px solid var(--border);
-    border-radius:8px; padding:11px 14px; text-decoration:none; transition:all .15s;
-  }
-  .res-link:hover { border-color:var(--accent); background:var(--accent-l); text-decoration:none; }
-  .res-icon { width:32px; height:32px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
-  .res-title { font-size:13px; font-weight:600; color:var(--ink); line-height:1.3; }
-  .res-url   { font-size:11px; color:var(--ink-faint); font-family:var(--mono); margin-top:1px; }
-  .res-arrow { margin-left:auto; color:var(--ink-faint); font-size:14px; flex-shrink:0; }
-
-  .coords-wrap { background:#0A0D18; border:1px solid rgba(0,191,255,0.25); border-radius:12px; overflow:hidden; margin:14px 0; }
-  .coords-head { display:grid; grid-template-columns:52px 1fr 1fr; padding:8px 18px; background:rgba(0,191,255,0.08); border-bottom:1px solid rgba(0,191,255,0.15); }
-  .coords-head span { font-family:var(--mono); font-size:9.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:rgba(0,191,255,0.55); }
-  .coord-row { display:grid; grid-template-columns:52px 1fr 1fr; padding:10px 18px; border-bottom:1px solid rgba(255,255,255,0.05); align-items:center; transition:background .15s; }
-  .coord-row:last-child { border-bottom:none; }
-  .coord-row:hover { background:rgba(0,191,255,0.06); }
-  .coord-pt  { font-family:var(--mono); font-size:13px; font-weight:700; color:#00BFFF; text-shadow:0 0 10px rgba(0,191,255,0.6); }
-  .coord-val { font-family:var(--mono); font-size:13px; font-weight:500; color:#E8F4FF; letter-spacing:.02em; }
-  .coord-val.lon { color:rgba(200,230,255,0.7); }
-  @media(max-width:480px){ .coords-wrap{overflow-x:auto;} .coords-head,.coord-row{grid-template-columns:44px 1fr 1fr; padding-left:12px; padding-right:12px;} .coord-val{font-size:11.5px;} }
-
-  .task-box { background:var(--green-l); border:1.5px solid var(--green); border-radius:10px; padding:18px 20px; margin:16px 0; }
-  .task-title { font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--green); margin-bottom:10px; display:flex; align-items:center; gap:6px; }
-  .task-list { list-style:none; display:flex; flex-direction:column; gap:6px; }
-  .task-list li { font-size:13.5px; color:var(--ink-muted); position:relative; padding-left:18px; }
-  .task-list li::before { content:'▸'; color:var(--green); position:absolute; left:0; top:0; }
-  .task-list li strong { color:var(--ink); }
-  .subtask-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0 4px; }
-  @media(max-width:520px){ .subtask-grid{grid-template-columns:1fr;} }
-  .subtask { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:11px 14px; font-size:12.5px; color:var(--ink-muted); }
-  .subtask-label { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--green); margin-bottom:4px; }
-
-  .checklist { list-style:none; margin:10px 0 18px; }
-  .checklist li { display:flex; align-items:flex-start; gap:9px; font-size:13px; color:var(--ink-muted); padding:6px 0; border-bottom:1px solid var(--border); }
-  .checklist li:last-child { border-bottom:none; }
-  .chk { width:17px; height:17px; border-radius:4px; background:var(--accent); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; font-size:9px; color:#fff; }
-
-  .card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:22px; margin-bottom:14px; }
-  .card-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
-  .card-grid-3col { grid-template-columns:repeat(3,1fr); }
-  @media(max-width:520px){ .card-grid, .card-grid-3col {grid-template-columns:1fr;} }
-  .card-icon { font-size:20px; margin-bottom:8px; }
-  .card h3 { margin-top:0; font-size:14.5px; }
-  .card p  { font-size:13px; margin-bottom:0; }
-  .card-accent  { border-left:3px solid var(--accent); background:var(--accent-l); }
-  .card-accent .card-icon, .card-accent h3 { color:var(--accent); }
-  .card-warn    { border-left:3px solid var(--accent2); background:var(--accent2-l); }
-  .card-warn h3 { color:var(--accent2); }
-  .card-success { border-left:3px solid var(--green); background:var(--green-l); }
-  .card-success h3 { color:var(--green); }
-
-  .steps { display:flex; flex-direction:column; gap:0; margin-bottom:20px; }
-  .step { display:grid; grid-template-columns:46px 1fr; position:relative; }
-  .step:not(:last-child)::before { content:''; position:absolute; left:21px; top:46px; bottom:0; width:2px; background:var(--border); }
-  .step-num { width:34px; height:34px; background:var(--accent); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; margin-top:10px; position:relative; z-index:1; }
-  .step-body { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:14px 18px; margin:6px 0 10px; }
-  .step-body h3 { margin-top:0; font-size:14px; }
-  .step-body p  { font-size:13px; margin-bottom:0; }
-
-  .code-block { background:#0A0D18; color:#A8D8A8; font-family:var(--mono); font-size:12px; border-radius:8px; padding:14px 18px; margin:10px 0; overflow-x:auto; line-height:1.8; border:1px solid rgba(255,255,255,0.06); }
-  .ck { color:#5A6A7A; } .kk { color:#7A9BFF; } .vv { color:#FFD080; }
-
-  .table-wrap { overflow-x:auto; margin:14px 0 20px; }
-  table { width:100%; border-collapse:collapse; font-size:13px; min-width:480px; }
-  th { text-align:left; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); padding:9px 13px; border-bottom:2px solid var(--border); background:var(--surface2); }
-  td { padding:10px 13px; border-bottom:1px solid var(--border); color:var(--ink-muted); vertical-align:top; }
-  tr:last-child td { border-bottom:none; }
-  tr:hover td { background:var(--surface2); }
-  .tag   { display:inline-block; background:var(--accent-l); color:var(--accent); font-size:10.5px; font-weight:600; padding:2px 7px; border-radius:3px; }
-  .tag.g { background:var(--green-l); color:var(--green); }
-  .tag.o { background:var(--accent2-l); color:var(--accent2); }
-
-  .tip { background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:12px 15px; font-size:13px; color:var(--ink-muted); display:flex; gap:9px; align-items:flex-start; margin:14px 0; }
-  .tip-i { font-size:15px; flex-shrink:0; }
-
-  .video-gate { border:1px solid #E8A3A3; border-left:4px solid #C0392B; border-radius:10px; overflow:hidden; margin:16px 0; background:#F9DADA; }
-  .video-gate-locked { padding:14px 18px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
-  .video-gate-badge { display:inline-flex; align-items:center; gap:5px; background:#C0392B; color:#fff; font-size:10.5px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; padding:5px 10px; border-radius:6px; flex-shrink:0; white-space:nowrap; }
-  .video-gate-text { flex:1 1 140px; font-size:12.5px; color:#8A3232; font-weight:600; }
-  .video-gate-form { display:flex; gap:8px; flex-shrink:0; }
-  .video-gate-form input { background:#fff; border:1px solid #E8A3A3; border-radius:7px; padding:8px 12px; font-size:13px; width:130px; color:var(--ink); }
-  .video-gate-form input::placeholder { color:#B87A7A; }
-  .video-gate-form button { background:#C0392B; color:#fff; border:none; border-radius:7px; padding:8px 16px; font-weight:700; font-size:12.5px; cursor:pointer; white-space:nowrap; }
-  .video-gate-form button:hover { opacity:.88; }
-  .video-gate-error { color:#8A3232; font-size:11.5px; margin-top:2px; flex-basis:100%; display:none; font-weight:700; }
-  .video-gate iframe { width:100%; aspect-ratio:16/9; display:block; border:0; }
-
-  .content-gate { margin:16px 0; }
-  .content-gate .video-gate-locked { border:1px solid #E8A3A3; border-left:4px solid #C0392B; border-radius:10px; background:#F9DADA; }
-  .module-gate-preview { display:flex; gap:10px; flex-wrap:wrap; margin:14px 0 0; }
-  .preview-chip { display:flex; align-items:center; gap:6px; background:#fff; border:1px solid var(--border); border-radius:8px; padding:8px 14px; font-size:12px; color:var(--ink-muted); font-weight:600; }
-  .video-embed { margin:16px 0; border-radius:10px; overflow:hidden; }
-  .video-embed iframe { width:100%; aspect-ratio:16/9; display:block; border:0; }
-  .gated-content { filter: blur(6px); pointer-events: none; user-select: none; transition: filter .35s ease; margin-top: 20px; }
-  .gated-content.unlocked { filter: none; pointer-events: auto; user-select: auto; }
-
-  .ai-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:14px 0 20px; }
-  .ai-grid-2col { grid-template-columns:repeat(2,1fr); }
-  @media(max-width:580px){ .ai-grid, .ai-grid-2col { grid-template-columns:1fr; } }
-  .ai-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:18px; }
-  .ai-name  { font-size:14.5px; font-weight:700; margin-bottom:5px; color:var(--ink); }
-  .ai-badge { font-size:9.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:3px 7px; border-radius:3px; margin-bottom:11px; display:inline-block; }
-  .ai-card ul { list-style:none; font-size:12px; color:var(--ink-muted); }
-  .ai-card ul li { padding:3.5px 0; border-bottom:1px solid var(--border); display:flex; gap:5px; }
-  .ai-card ul li:last-child { border-bottom:none; }
-  .ai-card ul li::before { content:'→'; color:var(--ink-faint); flex-shrink:0; }
-
-  .prompt-box { background:#0A0D18; border-radius:8px; overflow:hidden; margin:10px 0; border:1px solid rgba(255,255,255,.06); }
-  .prompt-hdr { background:rgba(255,255,255,.05); padding:7px 15px; font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.35); border-bottom:1px solid rgba(255,255,255,.05); }
-  .prompt-body { padding:14px 18px; font-family:var(--mono); font-size:12px; color:#C8D8F8; line-height:1.9; }
-  .result-shot { margin:18px 0 6px; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
-  .result-shot img { display:block; width:100%; height:auto; }
-  .result-caption { padding:10px 16px; font-size:12.5px; color:var(--ink-faint); background:#F7F6F1; border-top:1px solid var(--border); }
-  .prompt-hl { color:#FFD080; }
-
-  .guide-footer { background:transparent; color:var(--ink-faint); text-align:center; padding:28px 24px; font-size:11.5px; border-top:1px solid var(--border); }
-  .section-end { max-width:560px; margin:36px auto 0; text-align:center; padding:22px 20px; background:var(--surface2); border:1px solid var(--border); border-radius:12px; }
-  .section-end p { font-size:13px; color:var(--ink-muted); margin-bottom:12px; }
-  .section-end-row { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
-  .section-end-btn { display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; padding:9px 16px; border-radius:8px; text-decoration:none; cursor:pointer; border:1px solid var(--border); }
-  .section-end-btn.primary { background:var(--ink-night); color:#fff; border-color:var(--ink-night); }
-  .section-end-btn.ghost { background:#fff; color:var(--ink-muted); }
-  .footer-mark { display:inline-block; font-family:var(--mono); font-size:15px; font-weight:800; letter-spacing:-.02em; color:var(--azure); position:relative; padding-bottom:12px; margin-bottom:6px; }
-  .footer-mark::after { content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:26px; height:2px; background:var(--azure); border-radius:2px; }
-
-  .view { animation: fadeIn .25s ease; }
-  @keyframes fadeIn { from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)} }
+  @media (prefers-reduced-motion:reduce) { .art { animation:none; } .btn { transition:none; } }
 </style>
 </head>
 <body>
-
-<!-- ════════════════════════════════════
-     VIEW 1 — COVER
-════════════════════════════════════ -->
-<div id="view-cover" class="view active">
-  <div class="cover-bg"></div>
-  <img class="brand-mark" src="images/brand-mark.png" alt="" aria-hidden="true">
-  <div class="cover-inner">
-  <div class="topbar">
-      <div class="topbar-label">Южный федеральный университет · ААИ</div>
-      <div class="topbar-badge"><div class="dot"></div>Программа повышения квалификации</div>
-    </div>
-    <div class="instructor-line">
-      <img class="instructor-photo" src="images/kuleshov.jpg" alt="Кулешов Александр Алексеевич">
-      <div class="instructor-info">
-        <span>Руководитель курса — <a href="https://ku1eshov.ru" target="_blank" rel="noopener">Кулешов Александр Алексеевич</a></span>
-        <span class="instructor-bio">AI Product & Spatial Intelligence Strategist · 15+ лет в архитектуре, КРТ и редевелопменте · Основатель ai2arch</span>
-      </div>
-    </div>
-  <div class="hero">
-      <div class="program-tag">Современные инструменты проектного анализа</div>
-      <h1><em>ИИ</em> в архитектуре —</h1>
-      <div class="h1-sub">Новый уровень<br>проектного анализа</div>
-
-      <!-- Набор — главный призыв к действию -->
-      <div class="enroll-banner">
-        <div class="enroll-banner-dot"></div>
-        <div class="enroll-banner-text">Новый поток стартует <strong>в октябре 2026</strong> · Стоимость за курс — <strong>5 000 ₽</strong> (действует скидка для сотрудников ЮФУ)</div>
-      </div>
-      <div class="format-banner">
-        <div class="format-banner-dot"></div>
-        <div class="format-banner-text">Полностью дистанционно · курс идёт <strong>2,5 недели</strong></div>
-      </div>
-
-      <div class="cta-row cta-row-top">
-        <button class="cta-btn cta-btn-top" onclick="document.getElementById('enroll-modal').style.display='flex'">
-          Записаться на курс
-          <span>↗</span>
-        </button>
-        <button class="cta-btn cta-btn-ghost" onclick="openGuide('top')">
-          Открыть учебное пособие
-          <span>→</span>
-        </button>
-      </div>
-
-      <div class="features">
-        <div class="feat">
-          <div class="feat-icon fi-blue">⏱️</div>
-          <div>
-            <div class="feat-title">22 академических часа</div>
-            <div class="feat-desc">10 часов практических занятий + 12 часов консультаций по самостоятельной работе</div>
-          </div>
-        </div>
-        <div class="feat">
-          <div class="feat-icon fi-cyan">🤖</div>
-          <div>
-            <div class="feat-title">ИИ-визуализация и промтинг</div>
-            <div class="feat-desc">Gemini, ChatGPT, Claude, Алиса AI, Gamma.app — анализ, генерация идей и презентации</div>
-          </div>
-        </div>
-        <div class="feat">
-          <div class="feat-icon fi-green">🗺️</div>
-          <div>
-            <div class="feat-title">Пространственный анализ</div>
-            <div class="feat-desc">QGIS, OSM, геоданные — подготовка схем для ИИ-обработки без перегруза теорией</div>
-          </div>
-        </div>
-        <div class="feat">
-          <div class="feat-icon fi-purple">⚙️</div>
-          <div>
-            <div class="feat-title">Подготовка к старту</div>
-            <div class="feat-desc">Спринт 0 — настройка сетевого доступа, аккаунтов в нейросетях и софта ещё до первого занятия</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="outcomes-section">
-        <div class="ref-eyebrow">Благодаря курсу вы сможете</div>
-        <ul class="outcomes-list">
-          <li><span class="oc-num">01</span>Строить «цифрового двойника» территории — точную модель участка, готовую к любому анализу</li>
-          <li><span class="oc-num">02</span>За минуты проводить ИИ-анализ территории и прогнозировать поведенческие сценарии — там, где раньше уходили дни</li>
-          <li><span class="oc-num">03</span>Генерировать десятки вариантов решений и визуализаций с помощью нейросетей — вместо одной ручной отрисовки</li>
-          <li><span class="oc-num">04</span>Собирать убедительную data-driven презентацию, которая выигрывает у заказчика и комиссии</li>
-        </ul>
-        <div class="outcomes-note">Всегда на шаг впереди рынка: самые актуальные нейросети и ИИ-инструменты для архитекторов — программа постоянно обновляется.</div>
-      </div>
-
-      <div class="cert-block">
-        <div class="cert-icon">🎓</div>
-        <div>
-          <div class="cert-title">Официальный сертификат о повышении квалификации</div>
-          <div class="cert-desc">Курс реализует <strong>Южный федеральный университет</strong> — Академия архитектуры и искусств (Ростов-на-Дону). По итогам обучения выдаётся сертификат установленного образца ДПО — документ не выдаётся только школьникам и тем, кто ещё учится — в колледже на СПО или в вузе на бакалавриате/специалитете (при заполнении заявки на записи система подскажет, положен ли он именно вам).</div>
-        </div>
-      </div>
-
-      <!-- Повторный призыв внизу -->
-      <div class="cta-row">
-        <button class="cta-btn cta-btn-outline" onclick="document.getElementById('enroll-modal').style.display='flex'">
-          Записаться на курс
-          <span>↗</span>
-        </button>
-      </div>
-      <div class="enroll-meta">
-        Стоимость за курс — <strong>5 000 ₽</strong> · Действует специальная скидка для сотрудников ЮФУ
-      </div>
-    </div>
-
-    <div class="arch-corner"></div>
-    <div class="cover-bottom">
-      <div class="strip-label">«Современные инструменты проектного анализа: ИИ и мобильные сервисы в работе с архитектурной средой» · 2026</div>
-      <div class="strip-label">Академия архитектуры и искусств ЮФУ · Ростов-на-Дону</div>
-      <div class="strip-tags">
-        <span class="ttag ttag-blue">QGIS</span>
-        <span class="ttag ttag-green">Gemini</span>
-        <span class="ttag ttag-purple">ChatGPT</span>
-        <span class="ttag ttag-purple">Claude</span>
-        <span class="ttag ttag-orange">Алиса AI</span>
-        <span class="ttag ttag-green">Gamma.app</span>
-        <span class="ttag ttag-blue">Photoshop</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════
-     VIEW 2 — GUIDE
-════════════════════════════════════ -->
-<div id="view-guide" class="view">
-
-  <!-- back bar -->
-  <div class="back-bar">
-    <button class="back-btn" onclick="closeGuide()">
-      <span class="arrow">←</span> На главную
-    </button>
-    <div class="guide-breadcrumb">
-      <span class="bc-root">ИИ в архитектуре</span>
-      <span class="bc-sep">/</span>
-      <span class="bc-cur">Курс дополнительного образования · ИИ в архитектуре</span>
-    </div>
-  </div>
-
-  <!-- reference materials -->
-  <div class="guide-ref-section">
-    <div class="guide-ref-inner">
-      <div class="ref-eyebrow light">Справочные материалы</div>
-      <div class="links-row">
-        <span class="qlink light" onclick="goToRef('qgis', 'lesson1')">
-          <span>🧮</span> GeoProj — геокалькулятор
-          <span class="ql-badge light">QGIS</span>
-        </span>
-        <span class="qlink light" onclick="goToRef('qgis', 'lesson2')">
-          <span>🗺️</span> Теги OSM
-          <span class="ql-badge light">QGIS</span>
-        </span>
-        <span class="qlink light" onclick="goToRef('qgis', 'lesson2')">
-          <span>📖</span> SoftCulture OSM
-          <span class="ql-badge light">QGIS</span>
-        </span>
-        <span class="qlink light" onclick="goToRef('qgis', 'lesson3')">
-          <span>📍</span> НСПД — кадастр
-          <span class="ql-badge light">QGIS</span>
-        </span>
-        <span class="qlink light" onclick="goToRef('qgis', 'lesson3')">
-          <span>⛰️</span> OpenTopography
-          <span class="ql-badge light">QGIS</span>
-        </span>
-        <a class="qlink light" href="https://qgis.org/download" target="_blank" rel="noopener noreferrer">
-          <span>⬇️</span> QGIS — официальный сайт
-          <span class="ql-badge light">QGIS</span>
-        </a>
-        <a class="qlink light" href="https://claude.ai" target="_blank" rel="noopener noreferrer">
-          <span>✳️</span> Claude
-          <span class="ql-badge light">ИИ</span>
-        </a>
-        <a class="qlink light" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer">
-          <span>💬</span> ChatGPT
-          <span class="ql-badge light">ИИ</span>
-        </a>
-        <a class="qlink light" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">
-          <span>♊</span> Gemini
-          <span class="ql-badge light">ИИ</span>
-        </a>
-        <a class="qlink light" href="https://gamma.app" target="_blank" rel="noopener noreferrer">
-          <span>📊</span> Gamma.app
-          <span class="ql-badge light">Синтез</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- module tabs -->
-  <div class="nav-wrap" id="moduleTabsWrap" style="top:0;">
-    <div class="module-tabs">
-      <div class="module-tab active" id="mtab-sprint" onclick="switchModuleWithSpy('sprint')">
-        <span class="mt-eyebrow">Спринт 0</span>
-        <span class="mt-title">⚙️ Настройка рабочего места</span>
-      </div>
-      <div class="module-tab" id="mtab-qgis" onclick="switchModuleWithSpy('qgis')">
-        <span class="mt-eyebrow">Модуль 1</span>
-        <span class="mt-title">📐 QGIS</span>
-      </div>
-      <div class="module-tab" id="mtab-ai" onclick="switchModuleWithSpy('ai')">
-        <span class="mt-eyebrow">Модуль 2</span>
-        <span class="mt-title">🧠 Нейросети — основы</span>
-      </div>
-      <div class="module-tab" id="mtab-gen" onclick="switchModuleWithSpy('gen')">
-        <span class="mt-eyebrow">Модуль 3</span>
-        <span class="mt-title">🎨 Генерация идей и визуализация</span>
-      </div>
-      <div class="module-tab" id="mtab-pres" onclick="switchModuleWithSpy('pres')">
-        <span class="mt-eyebrow">Модуль 4</span>
-        <span class="mt-title">📊 Синтез и презентация</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════ MODULE PANEL: SPRINT 0 ════════════ -->
-  <div class="module-panel active" id="panel-sprint">
-    <div class="nav-wrap" id="sprintSubNav" style="top:0;">
-      <div class="nav-pills">
-        <span class="pill" data-target="s0-network" onclick="scrollToSection('s0-network')">Доступ к сервисам</span>
-        <span class="pill" data-target="s0-llm" onclick="scrollToSection('s0-llm')">Регистрация в LLM</span>
-        <span class="pill" data-target="s0-soft" onclick="scrollToSection('s0-soft')">Установка софта</span>
-        <span class="pill" data-target="s0-checklist" onclick="scrollToSection('s0-checklist')">Чек-лист</span>
-      </div>
-    </div>
-
-    <div class="guide-inner" style="padding-top:40px;">
-      <div class="sec-label">Спринт 0</div>
-      <h2 id="sprint-intro">Настройка рабочего места</h2>
-      <p>Это подготовительный шаг перед первым занятием — здесь всё, что нужно сделать заранее: получить доступ к нейросетям, установить софт и проверить, что всё работает. Отведите на это отдельный вечер до старта курса, чтобы на самих занятиях не тратить время на технические проблемы.</p>
-
-      <div class="content-gate" data-code="sprint0">
-        <div class="video-gate-locked">
-          <span class="video-gate-badge">🔒 Раздел — по коду</span>
-          <div class="video-gate-text">Пока не открыто</div>
-          <div class="video-gate-form">
-            <input type="text" placeholder="Код доступа" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
-            <button onclick="unlockContent(this)">Открыть</button>
-          </div>
-          <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
-        </div>
-
-        <div class="gated-content">
-          <div class="sec-divider"></div>
-          <section id="s0-network">
-            <h3>Блок 1. Сетевые и технические требования</h3>
-            <p>Для работы с курсом нужны активные учётные записи в сервисах Claude, ChatGPT и Gemini, а также стабильное сетевое соединение, позволяющее к ним подключаться.</p>
-            <div class="tip">
-              <div class="tip-i">ℹ️</div>
-              <div>Студент самостоятельно обеспечивает доступ к необходимым для обучения сервисам в соответствии с их пользовательскими соглашениями и применимым законодательством. Организатор курса не оказывает услуг по предоставлению инструментов связи и не распространяет средства обхода блокировок.</div>
-            </div>
-            <p style="margin-top:14px;">Подробный технический регламент настройки рабочего места высылается участникам отдельно, в закрытом чате потока.</p>
-          </section>
-
-          <div class="sec-divider"></div>
-
-          <section id="s0-llm">
-            <h3>Блок 2. Регистрация в LLM</h3>
-            <p>Одинаковый порядок действий для Claude (<em>claude.ai</em>), ChatGPT (<em>chatgpt.com</em>) и Gemini (<em>gemini.google.com</em>):</p>
-            <ul class="checklist">
-              <li><div class="chk">✓</div> Убедитесь, что ваше рабочее место соответствует сетевым требованиям сервиса — сделайте это до начала регистрации, не после</li>
-              <li><div class="chk">✓</div> Заведите отдельную почту, которая раньше не использовалась в этом сервисе — подойдёт обычный Gmail или Outlook</li>
-              <li><div class="chk">✓</div> Перейдите на официальный сайт сервиса и пройдите регистрацию по email, подтвердите адрес по ссылке из письма</li>
-              <li><div class="chk">✓</div> Если сервис просит номер телефона для подтверждения — используйте реальный номер, способный принимать SMS</li>
-              <li><div class="chk">✓</div> Сохраняйте одни и те же сетевые условия на протяжении всей регистрации — их смена в процессе — частая причина блокировки аккаунта</li>
-              <li><div class="chk">✓</div> Используйте те же сетевые условия и при дальнейшей работе с сервисом</li>
-              <li><div class="chk">✓</div> Сохраните логин и пароль в надёжном месте, включите двухфакторную аутентификацию, если сервис её предлагает</li>
-            </ul>
-          </section>
-
-          <div class="sec-divider"></div>
-
-          <section id="s0-soft">
-            <h3>Блок 3. Установка софта</h3>
-            <p><strong>QGIS.</strong> Устанавливайте версию LTR (Long Term Release) — сейчас это 3.44. Она стабильнее последней «свежей» версии и меньше преподносит сюрпризов на занятиях. Скачать можно с официального сайта <em>qgis.org/download</em> — там же есть версии под Windows и macOS с пошаговой инструкцией по установке.</p>
-            <p style="margin-top:14px;"><strong>Photoshop.</strong> Нужна активная подписка Adobe Creative Cloud с доступом к Photoshop. Минимальные системные требования на 2026 год:</p>
-            <ul class="checklist">
-              <li><div class="chk">✓</div> Windows 11 (64-бит, версия 23H2 и новее) или macOS 13 (Ventura) и новее</li>
-              <li><div class="chk">✓</div> Не менее 8 ГБ оперативной памяти, комфортно — от 16 ГБ</li>
-              <li><div class="chk">✓</div> Видеокарта с поддержкой DirectX 12 (Windows) или Metal (Mac)</li>
-              <li><div class="chk">✓</div> Быстрый SSD-накопитель, минимум 20 ГБ свободного места под установку и рабочие файлы</li>
-            </ul>
-          </section>
-
-          <div class="sec-divider"></div>
-
-          <section id="s0-checklist">
-            <h3>Блок 4. Чек-лист готовности к занятиям</h3>
-            <p>Перед первым звонком убедитесь, что закрыты все четыре пункта:</p>
-            <ul class="checklist">
-              <li><div class="chk">✓</div> Сетевой доступ к сервисам настроен и работает стабильно</li>
-              <li><div class="chk">✓</div> Аккаунты в Claude, ChatGPT и Gemini созданы и доступны для входа</li>
-              <li><div class="chk">✓</div> QGIS (LTR) установлен и открывается без ошибок</li>
-              <li><div class="chk">✓</div> Photoshop установлен, обновлён до актуальной версии, подписка активна</li>
-            </ul>
-          </section>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════ MODULE PANEL: QGIS ════════════ -->
-  <div class="module-panel" id="panel-qgis">
-    <div class="nav-wrap" id="qgisSubNav" style="top:0;">
-      <div class="nav-pills">
-        <span class="pill" data-target="overview" onclick="scrollToSection('overview')">Обзор QGIS</span>
-        <span class="pill lesson" data-target="lesson1" onclick="scrollToSection('lesson1')">📹 Видеоурок Часть 1</span>
-        <span class="pill lesson" data-target="lesson2" onclick="scrollToSection('lesson2')">📹 Видеоурок Часть 2</span>
-        <span class="pill lesson" data-target="lesson3" onclick="scrollToSection('lesson3')">📹 Видеоурок Часть 3</span>
-        <span class="pill" data-target="data" onclick="scrollToSection('data')">Данные</span>
-        <span class="pill" data-target="schemes" onclick="scrollToSection('schemes')">Схемы для ИИ</span>
-        <span class="pill" data-target="export" onclick="scrollToSection('export')">Экспорт</span>
-        <span class="pill" data-target="aicomp" onclick="scrollToSection('aicomp')">Платформы ИИ</span>
-        <span class="pill" data-target="workflow" onclick="scrollToSection('workflow')">Воркфлоу</span>
-      </div>
-    </div>
-
-    <div class="guide-inner" style="padding-top:40px;">
-      <div class="author-strip">
-        <div class="av">КД</div>
-        <div>Автор раздела: <strong>Костенко Дарья Богдановна</strong></div>
-      </div>
-
-      <div class="sec-label">Модуль 1</div>
-      <h2>QGIS — Пространственный анализ</h2>
-
-      <div class="content-gate" data-code="qgis1">
-        <div class="video-gate-locked">
-          <span class="video-gate-badge">🔒 Модуль — по коду</span>
-          <div class="video-gate-text">Пока не открыто</div>
-          <div class="video-gate-form">
-            <input type="text" placeholder="Код доступа" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
-            <button onclick="unlockContent(this)">Открыть</button>
-          </div>
-          <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
-        </div>
-        <div class="module-gate-preview">
-          <div class="preview-chip">🎥 3 видеоурока</div>
-          <div class="preview-chip">📝 Конспекты, данные, экспорт, воркфлоу</div>
-        </div>
-
-        <div class="gated-content">
-          <section id="overview">
-            <div class="sec-label">Модуль 1</div>
-            <h2>Что такое QGIS и зачем он архитектору</h2>
-            <p>QGIS — бесплатная геоинформационная система с открытым кодом. Для архитектора и градостроителя это инструмент пространственного анализа: работа с геоподосновой, наложение слоёв данных и генерация чистых графических схем.</p>
-            <div class="card-grid">
-              <div class="card card-accent"><div class="card-icon">🗺️</div><h3>Геопривязка</h3><p>Все объекты имеют точные координаты. Схема всегда соответствует реальной территории.</p></div>
-              <div class="card card-accent"><div class="card-icon">📐</div><h3>Точные масштабы</h3><p>Любой экспорт — с заданным масштабом, рамкой, сеткой. Контроль над каждым пикселем.</p></div>
-              <div class="card card-accent"><div class="card-icon">🔗</div><h3>Открытые данные</h3><p>OSM, Росреестр, данные переписи, DEM-рельеф — всё загружается напрямую.</p></div>
-              <div class="card card-accent"><div class="card-icon">🤖</div><h3>ИИ-совместимые выгрузки</h3><p>PNG с прозрачным фоном, чёткими контурами и минималистичным стилем — идеал для vision-моделей.</p></div>
-            </div>
-          </section>
-
-          <div class="sec-divider"></div>
-
-          <section id="lesson1">
-            <h2>Видеоурок Часть 1 — Интерфейс, проект, система координат</h2>
-            <div class="lesson-block">
-              <div class="lesson-header">
-                <div class="lesson-num ln-purple">1</div>
-                <div>
-                  <div class="lesson-eyebrow le-purple">Вступление к видеоролику</div>
-                  <div class="lesson-title">Знакомство с программой: интерфейс, проект, подложки, координаты</div>
-                </div>
-              </div>
-              <div class="lesson-body">
-                <div class="intro-quote">
-                  Первый видеоурок по QGIS — основательно познакомимся с программой. Изучим интерфейс, научимся правильно создавать проект, настраивать систему координат и подключать картографические подложки. Также узнаем, как быстро находить нужные точки на карте по заданным координатам.<br><br>
-                  К этому видео прикреплена таблица с готовыми координатами участка и удобный геокалькулятор — чтобы легко переводить свои координаты в нужный формат. Открываем QGIS и погружаемся в работу.
-                </div>
-
-                <h3>Геокалькулятор</h3>
-                <div class="res-links">
-                  <a class="res-link" href="https://geoproj.ru/" target="_blank" rel="noopener">
-                    <div class="res-icon" style="background:#EEF1FD;">🧮</div>
-                    <div>
-                      <div class="res-title">GeoProj — онлайн-геокалькулятор координат</div>
-                      <div class="res-url">geoproj.ru</div>
-                    </div>
-                    <div class="res-arrow">↗</div>
-                  </a>
-                </div>
-
-                <h3>Координаты участка для практики</h3>
-                <p style="font-size:13px;">Введите точки в инструмент «Перейти к координатам» или создайте временный слой. Система координат — WGS 84 (EPSG:4326).</p>
-                <div class="coords-wrap">
-                  <div class="coords-head">
-                    <span>Точка</span><span>Широта (lat)</span><span>Долгота (lon)</span>
-                  </div>
-                  <div class="coord-row"><span class="coord-pt">T1</span><span class="coord-val">47.212056991</span><span class="coord-val lon">39.786585841</span></div>
-                  <div class="coord-row"><span class="coord-pt">T2</span><span class="coord-val">47.213334769</span><span class="coord-val lon">39.787252508</span></div>
-                  <div class="coord-row"><span class="coord-pt">T3</span><span class="coord-val">47.216168102</span><span class="coord-val lon">39.785002508</span></div>
-                  <div class="coord-row"><span class="coord-pt">T4</span><span class="coord-val">47.218279213</span><span class="coord-val lon">39.781280286</span></div>
-                  <div class="coord-row"><span class="coord-pt">T5</span><span class="coord-val">47.216390324</span><span class="coord-val lon">39.775169174</span></div>
-                </div>
-                <div class="tip"><div class="tip-i">💡</div><div>Координаты в формате десятичных градусов (DD). При создании точечного слоя выберите <strong>EPSG:4326 (WGS 84)</strong>. Пересчёт в Pulkovo/Gauss-Krüger — через geoproj.ru.</div></div>
-
-                <h3>Что изучается в Видеоуроке Часть 1</h3>
-                <ul class="checklist">
-                  <li><div class="chk">✓</div> Интерфейс QGIS: панели, менеджер слоёв, строка состояния</li>
-                  <li><div class="chk">✓</div> Создание нового проекта и сохранение .qgz</li>
-                  <li><div class="chk">✓</div> Настройка системы координат проекта (CRS)</li>
-                  <li><div class="chk">✓</div> Подключение картографических подложек (XYZ Tiles, WMS)</li>
-                  <li><div class="chk">✓</div> Инструмент «Перейти к координатам» — поиск точки на карте</li>
-                  <li><div class="chk">✓</div> Конвертация форматов координат через geoproj.ru</li>
-                </ul>
-              </div>
-
-              <div class="video-embed">
-                <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239021&hash=10d57373894892c6&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
-              </div>
-            </div>
-          </section>
-
-          <div class="sec-divider"></div>
-
-          <section id="lesson2">
-            <h2>Видеоурок Часть 2 — OpenStreetMap, QuickOSM, оформление карты</h2>
-            <div class="lesson-block">
-              <div class="lesson-header">
-                <div class="lesson-num ln-green">2</div>
-                <div>
-                  <div class="lesson-eyebrow le-green">Материалы и задание</div>
-                  <div class="lesson-title">Загрузка данных OSM, Rule-based стилизация, легенда</div>
-                </div>
-              </div>
-              <div class="lesson-body">
-                <div class="intro-quote green">
-                  Второй видеоурок по QGIS — продолжаем работать с программой. Научимся загружать реальные данные из OpenStreetMap: дома, дороги, земельные участки и другие объекты по специальным тегам. Разберёмся, как быстро находить и импортировать нужную информацию через плагин QuickOSM, а также красиво оформлять всё это на карте.
-                </div>
-
-                <h3>Справочники тегов OSM</h3>
-                <div class="res-links">
-                  <a class="res-link" href="https://wiki.openstreetmap.org/wiki/Map_features" target="_blank" rel="noopener">
-                    <div class="res-icon" style="background:var(--green-l);">🗺️</div>
-                    <div>
-                      <div class="res-title">OSM Wiki — полный справочник Map Features</div>
-                      <div class="res-url">wiki.openstreetmap.org/wiki/Map_features</div>
-                    </div>
-                    <div class="res-arrow">↗</div>
-                  </a>
-                  <a class="res-link" href="https://softculture.cc/blog/entries/articles/osm-tags-1" target="_blank" rel="noopener">
-                    <div class="res-icon" style="background:var(--purple-l);">📖</div>
-                    <div>
-                      <div class="res-title">SoftCulture — Теги OSM для архитекторов и урбанистов</div>
-                      <div class="res-url">softculture.cc — osm-tags-1</div>
-                    </div>
-                    <div class="res-arrow">↗</div>
-                  </a>
-                </div>
-
-                <div class="task-box">
-                  <div class="task-title">✏️ Задание к видеоуроку</div>
-                  <ul class="task-list">
-                    <li>Оформите карту своего участка проектирования с <strong>Rule-based (правило-based) оформлением</strong></li>
-                    <li>Возьмите <strong>Ботанический сад</strong> или любой другой участок: парк, жилой квартал, территорию университета</li>
-                  </ul>
-                  <div class="subtask-grid" style="margin-top:14px;">
-                    <div class="subtask"><div class="subtask-label">Скачать через QuickOSM</div>Дороги по типам · Здания · Земельные участки / landuse</div>
-                    <div class="subtask"><div class="subtask-label">Настроить стиль</div>Цвета и толщины для типов дорог · Оформление зданий по категориям</div>
-                    <div class="subtask"><div class="subtask-label">Легенда</div>Читаемая легенда в компоновщике карт</div>
-                    <div class="subtask"><div class="subtask-label">Подписи</div>Основные улицы и важные объекты через Layer Labels</div>
-                  </div>
-                </div>
-
-                <h3>Ключевые теги QuickOSM</h3>
-                <div class="table-wrap">
-                  <table>
-                    <thead><tr><th>Ключ (Key)</th><th>Значение (Value)</th><th>Что загружает</th><th>Тип</th></tr></thead>
-                    <tbody>
-                      <tr><td><code style="font-family:var(--mono);font-size:12px;">highway</code></td><td><code style="font-family:var(--mono);font-size:11px;">primary / residential / footway</code></td><td>Дороги по иерархии</td><td><span class="tag">Линии</span></td></tr>
-                      <tr><td><code style="font-family:var(--mono);font-size:12px;">building</code></td><td><code style="font-family:var(--mono);font-size:11px;">yes / residential / commercial</code></td><td>Контуры зданий</td><td><span class="tag g">Полигоны</span></td></tr>
-                      <tr><td><code style="font-family:var(--mono);font-size:12px;">landuse</code></td><td><code style="font-family:var(--mono);font-size:11px;">residential / park / forest</code></td><td>Функциональные зоны</td><td><span class="tag g">Полигоны</span></td></tr>
-                      <tr><td><code style="font-family:var(--mono);font-size:12px;">natural</code></td><td><code style="font-family:var(--mono);font-size:11px;">wood / water / grassland</code></td><td>Природные объекты</td><td><span class="tag g">Полигоны</span></td></tr>
-                      <tr><td><code style="font-family:var(--mono);font-size:12px;">leisure</code></td><td><code style="font-family:var(--mono);font-size:11px;">park / garden / playground</code></td><td>Рекреация и досуг</td><td><span class="tag g">Полигоны</span></td></tr>
-                      <tr><td><code style="font-family:var(--mono);font-size:12px;">amenity</code></td><td><code style="font-family:var(--mono);font-size:11px;">school / cafe / parking</code></td><td>Общественные объекты</td><td><span class="tag o">Точки/Полигоны</span></td></tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div class="tip"><div class="tip-i">💡</div><div>Оставьте поле «Value» пустым, чтобы загрузить все объекты с данным ключом. Например, <strong>Key: building</strong>, Value: (пусто) — загрузит все здания в bbox.</div></div>
-
-                <h3>Что изучается в Видеоуроке Часть 2</h3>
-                <ul class="checklist">
-                  <li><div class="chk">✓</div> Установка и запуск плагина QuickOSM</li>
-                  <li><div class="chk">✓</div> Загрузка данных по bbox и по ключам/тегам</li>
-                  <li><div class="chk">✓</div> Rule-based стилизация: условные правила оформления</li>
-                  <li><div class="chk">✓</div> Иерархия дорог по толщине и цвету линий</li>
-                  <li><div class="chk">✓</div> Оформление зданий по типу через атрибут building=*</li>
-                  <li><div class="chk">✓</div> Подписи объектов через Layer Labels (поле name)</li>
-                  <li><div class="chk">✓</div> Создание компоновщика с легендой</li>
-                </ul>
-              </div>
-
-              <div class="video-embed">
-                <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239022&hash=0b309b8157578de9&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
-              </div>
-            </div>
-          </section>
-
-          <div class="sec-divider"></div>
-
-          <section id="lesson3">
-            <h2>Видеоурок Часть 3 — Транспортная схема, рельеф, кадастр, макет и PDF</h2>
-            <div class="lesson-block">
-              <div class="lesson-header">
-                <div class="lesson-num ln-orange">3</div>
-                <div>
-                  <div class="lesson-eyebrow le-orange">Финальный этап работы</div>
-                  <div class="lesson-title">Изолинии рельефа, кадастр, компоновка карты в Layout и экспорт PDF</div>
-                </div>
-              </div>
-              <div class="lesson-body">
-                <div class="intro-quote orange">
-                  На завершающем видеоуроке мы серьёзно продвинемся вперёд. Создадим транспортную схему, научимся строить изолинии рельефа и красиво их подписывать. Также разберёмся, как быстро добавлять кадастровые участки через специальный плагин.<br><br>
-                  А самое важное на этом уроке — мы перейдём к финальному этапу работы: подготовим карту в макете (Layout). Вы научитесь добавлять масштабную линейку, легенду, текст, северную стрелку и красиво оформлять карту для печати или презентации. В конце урока мы сохраним готовую карту в PDF.<br><br>
-                  Это один из самых важных и практических уроков курса! Готовы? Тогда открываем наш проект и продолжаем!
-                </div>
-
-                <h3>Материалы к уроку</h3>
-                <div class="res-links">
-                  <a class="res-link" href="https://nspd.gov.ru/map?thematic=PKK&zoom=15.801076400338978&coordinate_x=4414990.092500253&coordinate_y=5979832.999746717&baseLayerId=235&theme_id=1&is_copy_url=true&active_layers=36049%2C36048" target="_blank" rel="noopener">
-                    <div class="res-icon" style="background:var(--accent2-l);">📍</div>
-                    <div>
-                      <div class="res-title">НСПД — Национальная система пространственных данных (ПКК)</div>
-                      <div class="res-url">nspd.gov.ru — кадастровая карта</div>
-                    </div>
-                    <div class="res-arrow">↗</div>
-                  </a>
-                  <a class="res-link" href="https://opentopography.org/" target="_blank" rel="noopener">
-                    <div class="res-icon" style="background:var(--accent2-l);">⛰️</div>
-                    <div>
-                      <div class="res-title">OpenTopography — данные рельефа и ЦМР для построения изолиний</div>
-                      <div class="res-url">opentopography.org</div>
-                    </div>
-                    <div class="res-arrow">↗</div>
-                  </a>
-                </div>
-
-                <div class="task-box" style="background:var(--accent2-l); border-color:var(--accent2);">
-                  <div class="task-title" style="color:var(--accent2);">✏️ Домашнее задание</div>
-                  <p style="font-size:13.5px; margin-bottom:10px; color:var(--ink-muted);">Пришло время собрать всё вместе и сделать полноценную карту!</p>
-                  <ul class="task-list">
-                    <li><strong>Основное задание:</strong> подготовьте и оформите в макете красивую ситуационную схему вашего участка (или территории проектирования)</li>
-                    <li><strong>Дополнительное задание (для желающих):</strong> сделайте отдельную транспортную схему с акцентом на дорожную сеть и тоже оформите её в макете</li>
-                  </ul>
-                </div>
-
-                <h3>Что изучается в Видеоуроке Часть 3</h3>
-                <ul class="checklist">
-                  <li><div class="chk">✓</div> Построение транспортной схемы территории</li>
-                  <li><div class="chk">✓</div> Создание изолиний рельефа и их подписи</li>
-                  <li><div class="chk">✓</div> Загрузка кадастровых участков через плагин (НСПД / ПКК)</li>
-                  <li><div class="chk">✓</div> Работа с данными рельефа OpenTopography</li>
-                  <li><div class="chk">✓</div> Компоновка карты в Layout: масштабная линейка, легенда, текст</li>
-                  <li><div class="chk">✓</div> Северная стрелка и оформление карты для печати/презентации</li>
-                  <li><div class="chk">✓</div> Экспорт готовой карты в PDF</li>
-                </ul>
-              </div>
-
-              <div class="video-embed">
-                <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239020&hash=43d302046779cefa&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
-              </div>
-            </div>
-          </section>
-
-          <div class="sec-divider"></div>
-
-          <section id="data">
-            <div class="sec-label">02</div>
-            <h2>Типы данных и источники</h2>
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th>Тип данных</th><th>Формат</th><th>Источник</th><th>Применение</th></tr></thead>
-                <tbody>
-                  <tr><td>Векторные границы</td><td><span class="tag">SHP / GeoJSON</span></td><td>OSM, Росреестр</td><td>Контуры зданий, кварталов, ЗУ</td></tr>
-                  <tr><td>Рельеф / ЦМР</td><td><span class="tag o">GeoTIFF / DEM</span></td><td>SRTM, Copernicus</td><td>Горизонтали, визуализация рельефа</td></tr>
-                  <tr><td>Спутниковая подложка</td><td><span class="tag g">WMS / XYZ tiles</span></td><td>Google, Bing, Яндекс</td><td>Контекст, идентификация</td></tr>
-                  <tr><td>Кадастр / ЗУ</td><td><span class="tag">GeoJSON / KML</span></td><td>pkk.rosreestr.ru</td><td>Границы участков, категории земель</td></tr>
-                  <tr><td>Транспортная сеть</td><td><span class="tag">SHP / OSM</span></td><td>OpenStreetMap</td><td>Дороги, пешеходные связи</td></tr>
-                  <tr><td>Социальные данные</td><td><span class="tag o">CSV / XLS</span></td><td>Росстат</td><td>Тепловые карты, аналитика</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <div class="sec-divider"></div>
-
-          <section id="schemes">
-            <div class="sec-label">03</div>
-            <h2>Типы схем, которые читают ИИ-нейросети</h2>
-            <p>Vision-модели анализируют изображения через паттерны и контрасты. Схема должна быть читаемой, контрастной и семантически однозначной.</p>
-            <div class="steps">
-              <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Функциональное зонирование</h3><p>Заливки зон цветами, минимум текста, чёткие границы. ИИ распознаёт зоны по цвету и просит описание легенды. PNG 2000×2000 пикс.</p></div></div>
-              <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Транспортно-пешеходные связи</h3><p>Линии разной толщины по иерархии (магистраль → улица → тропа). ИИ хорошо читает иерархию и анализирует связность.</p></div></div>
-              <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Морфотипологическая схема</h3><p>Контуры зданий с заливкой по типу застройки. Минималистичный стиль — белый фон, серые контуры, акцентные цвета.</p></div></div>
-              <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Тепловая карта (Heatmap)</h3><p>Градиентная визуализация плотности. ИИ распознаёт кластеры и аномалии. Чёрный или белый фон — не серый.</p></div></div>
-              <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Схема рельефа / высотности</h3><p>Горизонтали с подписями или цветовая шкала высот. ИИ точно описывает перепад рельефа и ориентацию склонов.</p></div></div>
-            </div>
-          </section>
-
-          <div class="sec-divider"></div>
-
-          <section id="export">
-            <div class="sec-label">04</div>
-            <h2>Настройки стилей и экспорт под ИИ</h2>
-            <h3>Принципы стиля для ИИ-читаемости</h3>
-            <ul class="checklist">
-              <li><div class="chk">✓</div> Белый или светлый фон (#FAFAFA) — нейросети лучше читают контраст на светлом</li>
-              <li><div class="chk">✓</div> Обводки объектов не тоньше 0.5 pt в масштабе экспорта</li>
-              <li><div class="chk">✓</div> Цветовые заливки с насыщенностью 40–80%</li>
-              <li><div class="chk">✓</div> Легенда выносится за рамку или передаётся текстом в промте</li>
-              <li><div class="chk">✓</div> Разрешение: минимум 150 DPI, рекомендовано 300 DPI</li>
-              <li><div class="chk">✓</div> Формат: PNG без потерь предпочтительнее JPG</li>
-            </ul>
-            <h3>Экспорт через Print Layout</h3>
-            <div class="steps">
-              <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Проект → Создать компоновщик печати</h3><p>Размер A3 горизонтально. Добавьте элемент «Карта», зафиксируйте масштаб.</p></div></div>
-              <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Настройка масштаба</h3><p>В свойствах карты установите масштаб вручную (1:5000). Нажмите «Зафиксировать».</p></div></div>
-              <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Макет → Экспорт как изображение</h3><p>PNG, 300 DPI. Снимите «Антиалиасинг» только если контуры задваиваются.</p></div></div>
-              <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Экспорт PDF</h3><p>PDF сохраняет векторные объекты. Используйте для постобработки в Illustrator.</p></div></div>
-              <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Пакетный экспорт через Atlas</h3><p>Генерирует серию схем по объектам. Удобно для загрузки серии в ИИ за один раз.</p></div></div>
-            </div>
-            <div class="code-block">
-<span class="ck"># Экспорт через Python Console</span>
-<span class="kk">from</span> qgis.core <span class="kk">import</span> QgsProject, QgsLayoutExporter
-
-manager = QgsProject.instance().layoutManager()
-layout  = manager.layoutByName(<span class="vv">"Схема_зонирование"</span>)
-exporter = QgsLayoutExporter(layout)
-settings = QgsLayoutExporter.ImageExportSettings()
-settings.dpi = <span class="vv">300</span>
-exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
-            </div>
-            <div class="tip"><div class="tip-i">⚠️</div><div>Для детальных схем увеличьте DPI до 400–600. Gemini Vision работает с изображениями до 4096×4096 пикселей.</div></div>
-          </section>
-
-          <div class="sec-divider"></div>
-
-          <section id="aicomp">
-            <div class="sec-label">05</div>
-            <h2>ИИ-платформы курса</h2>
-            <div class="ai-grid">
-              <div class="ai-card">
-                <div class="ai-name">Gemini 1.5 Pro</div>
-                <span class="ai-badge" style="background:#E8F4FD;color:#1A73E8;">Google</span>
-                <ul>
-                  <li>Точнее всех читает пространственные схемы</li>
-                  <li>Поддерживает загрузку PDF напрямую</li>
-                  <li>Развёрнутое текстовое описание схем</li>
-                  <li>Хорошо работает с легендой в промте</li>
-                  <li>API для пакетной обработки серий</li>
-                  <li>Требует доступа из поддерживаемого региона</li>
-                </ul>
-              </div>
-              <div class="ai-card">
-                <div class="ai-name">ChatGPT (GPT-4o)</div>
-                <span class="ai-badge" style="background:#F0FDF4;color:#16A34A;">OpenAI</span>
-                <ul>
-                  <li>Сильный анализ структуры и иерархии</li>
-                  <li>Может предложить улучшения схемы</li>
-                  <li>Хорошо работает в диалоговом режиме</li>
-                  <li>Code Interpreter: считает площади</li>
-                  <li>1 изображение в бесплатном тарифе</li>
-                  <li>Требует доступа из поддерживаемого региона</li>
-                </ul>
-              </div>
-              <div class="ai-card">
-                <div class="ai-name">Claude</div>
-                <span class="ai-badge" style="background:#F5F0FF;color:#7B3FE4;">Anthropic</span>
-                <ul>
-                  <li>Глубокий текстовый анализ и синтез</li>
-                  <li>Составление ТЗ и пояснительных записок</li>
-                  <li>Генерация промтов для других ИИ</li>
-                  <li>Работа с длинными документами (PDF)</li>
-                  <li>Доступен напрямую, из России</li>
-                </ul>
-              </div>
-            </div>
-            <div class="ai-grid ai-grid-2col" style="margin-top:10px;">
-              <div class="ai-card">
-                <div class="ai-name">Алиса AI</div>
-                <span class="ai-badge" style="background:#FFF3E0;color:#F57C00;">Яндекс</span>
-                <ul>
-                  <li>Понимает русскоязычные подписи на схемах</li>
-                  <li>Интеграция с геосервисами Яндекс</li>
-                  <li>Корректно читает топонимику РФ</li>
-                  <li>Работает напрямую, из России</li>
-                  <li>Лучше для описания, чем для анализа</li>
-                </ul>
-              </div>
-              <div class="ai-card">
-                <div class="ai-name">Gamma.app</div>
-                <span class="ai-badge" style="background:#EDFAF4;color:#1A9E6E;">Презентации</span>
-                <ul>
-                  <li>ИИ-генерация презентаций из текста</li>
-                  <li>Автоматическое создание слайдов по промту</li>
-                  <li>Встроенные профессиональные шаблоны</li>
-                  <li>Экспорт в PDF и PowerPoint</li>
-                  <li>Идеально для подачи проектного анализа</li>
-                </ul>
-              </div>
-            </div>
-            <div class="table-wrap" style="margin-top:20px;">
-              <table>
-                <thead><tr><th>Задача</th><th>Платформа</th><th>Формат подачи</th></tr></thead>
-                <tbody>
-                  <tr><td>Анализ пространственных схем</td><td><span class="tag">Gemini</span></td><td>PNG + легенда в тексте</td></tr>
-                  <tr><td>Анализ транспортной связности</td><td><span class="tag">ChatGPT</span></td><td>PNG, масштаб 1:5000–1:10000</td></tr>
-                  <tr><td>ТЗ, пояснительные записки, промты</td><td><span class="tag" style="background:var(--purple-l);color:var(--purple);">Claude</span></td><td>Текст / PDF документ</td></tr>
-                  <tr><td>Описание схем на русском</td><td><span class="tag o">Алиса AI</span></td><td>PNG с русскими подписями</td></tr>
-                  <tr><td>Презентация проектного анализа</td><td><span class="tag g">Gamma.app</span></td><td>Текст / структура → слайды</td></tr>
-                  <tr><td>Сравнение «до/после»</td><td><span class="tag">Gemini</span></td><td>2 PNG в одном запросе</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <div class="sec-divider"></div>
-
-          <section id="workflow">
-            <div class="sec-label">07</div>
-            <h2>Полный воркфлоу: от данных до ИИ-анализа</h2>
-            <div class="card card-warn" style="margin-bottom:20px;">
-              <h3>Подготовка занимает 20% времени, остальное — QGIS работает за вас</h3>
-              <p>Один правильно настроенный стиль → экспорт любых фрагментов за секунды.</p>
-            </div>
-            <div class="steps">
-              <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Сбор данных</h3><p>QuickOSM → здания, дороги, зелень по bbox. Кадастр из pkk.rosreestr.ru. Спутниковая подложка через XYZ Tiles.</p></div></div>
-              <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Подготовка стилей</h3><p>Символика слоёв: минималистичные заливки, чёткие обводки. Сохранить стиль (.qml) — применять к любому проекту.</p></div></div>
-              <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Создание компоновщиков</h3><p>По компоновщику на каждый тип схемы. Зафиксировать масштаб. Настроить один раз — использовать многократно.</p></div></div>
-              <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Экспорт PNG 300 DPI</h3><p>Макет → Экспорт как изображение. Имена файлов с кодом: zone_01.png, transport_01.png.</p></div></div>
-              <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Загрузка в ИИ + промт</h3><p>Прикрепить PNG, вставить промт с легендой и задачами. Для серий — загружать последовательно.</p></div></div>
-              <div class="step"><div class="step-num">6</div><div class="step-body"><h3>Итерация по замечаниям</h3><p>Выделить ключевые выводы. Вернуться в QGIS, скорректировать схему, экспортировать v2. Повторить.</p></div></div>
-            </div>
-            <div class="card card-success">
-              <h3>Итог: что даёт связка QGIS + ИИ</h3>
-              <p>Точная геоподоснова + Vision-модели = быстрая предпроектная аналитика, обоснование решений и генерация текстовых описаний для ПЗЗ, ТЗ и презентаций — без ручного описания каждого чертежа.</p>
-            </div>
-          </section>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════ MODULE PANEL: NEURAL (Модуль 2) ════════════ -->
-  <div class="module-panel" id="panel-ai">
-    <div class="guide-inner" style="padding-top:40px;">
-      <div class="author-strip">
-        <div class="av">КА</div>
-        <div>Автор раздела: <strong>Кулешов Александр Алексеевич</strong></div>
-      </div>
-
-      <div class="sec-label purple">Модуль 2</div>
-      <h2>Нейросети — основы перед началом модуля</h2>
-      <p>Перед тем как переходить к практической работе с генерацией изображений и текстов, важно понимать базовые принципы устройства современных нейросетей и различия между основными типами моделей, которые встретятся в курсе.</p>
-
-      <div class="content-gate" data-code="ai2">
-        <div class="video-gate-locked">
-          <span class="video-gate-badge">🔒 Модуль — по коду</span>
-          <div class="video-gate-text">Пока не открыто</div>
-          <div class="video-gate-form">
-            <input type="text" placeholder="Код доступа" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
-            <button onclick="unlockContent(this)">Открыть</button>
-          </div>
-          <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
-        </div>
-        <div class="module-gate-preview">
-          <div class="preview-chip">📝 Типы нейросетей и ключевые понятия</div>
-        </div>
-
-        <div class="gated-content">
-          <h3>Какие нейросети используются в курсе</h3>
-          <div class="ai-grid">
-            <div class="ai-card">
-              <div class="ai-name">Текстовые модели (LLM)</div>
-              <span class="ai-badge" style="background:#E8F4FD;color:#1A73E8;">ChatGPT · Claude · Gemini</span>
-              <ul>
-                <li>Работают с текстом, кодом, документами</li>
-                <li>Понимают и генерируют развёрнутые ответы</li>
-                <li>Анализируют изображения (vision)</li>
-                <li>Основа для промтинга в курсе</li>
-              </ul>
-            </div>
-            <div class="ai-card">
-              <div class="ai-name">Генеративные изображения</div>
-              <span class="ai-badge" style="background:#F0FDF4;color:#16A34A;">ChatGPT · Gemini</span>
-              <ul>
-                <li>Создают изображения по текстовому промту</li>
-                <li>Работают с референсами и стилями</li>
-                <li>Применяются для визуализации идей</li>
-                <li>Основа Модуля 3</li>
-              </ul>
-            </div>
-            <div class="ai-card">
-              <div class="ai-name">Локально доступные сервисы</div>
-              <span class="ai-badge" style="background:#FFF3E0;color:#F57C00;">Алиса ИИ · Arena AI · DeepSeek</span>
-              <ul>
-                <li>Доступны напрямую на территории РФ</li>
-                <li>Хорошо работают с русским языком</li>
-                <li>Интеграция с отечественными сервисами</li>
-              </ul>
-            </div>
-          </div>
-
-          <h3>Ключевые понятия</h3>
-          <ul class="checklist">
-            <li><div class="chk">✓</div> Промт — текстовый запрос, формирующий результат работы нейросети</li>
-            <li><div class="chk">✓</div> Токены — единицы текста, которыми оперирует модель при обработке запроса</li>
-            <li><div class="chk">✓</div> Контекстное окно — объём информации, который модель «помнит» в рамках диалога</li>
-            <li><div class="chk">✓</div> Референс — изображение-образец, на основе которого генерируется новый результат</li>
-            <li><div class="chk">✓</div> Галлюцинации — ошибочные или придуманные ответы модели, требующие проверки</li>
-            <li><div class="chk">✓</div> Мультимодальность — способность модели работать одновременно с текстом, изображениями и документами</li>
-          </ul>
-
-          <div class="tip">
-            <div class="tip-i">💡</div>
-            <div>В Модуле 2 разбирается, как выбрать подходящую нейросеть под конкретную архитектурную задачу — анализ, текст или визуализация — и как корректно формулировать запрос для получения предсказуемого результата.</div>
-          </div>
-
-          <div class="card card-accent">
-            <div class="card-icon">🧭</div>
-            <h3>Что дальше</h3>
-            <p>После знакомства с основами курс переходит к Модулю 3 — практической генерации идей и визуализации, где эти модели применяются в реальных архитектурных задачах.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════ MODULE PANEL: GENVIZ (Модуль 3) ════════════ -->
-  <div class="module-panel" id="panel-gen">
-    <div class="nav-wrap" id="genSubNav" style="top:0;">
-      <div class="nav-pills">
-        <span class="pill" data-target="gen-intro" onclick="scrollToSection('gen-intro')">Обзор модуля</span>
-        <span class="pill" data-target="prompts" onclick="scrollToSection('prompts')">Основы нейросетей</span>
-        <span class="pill" data-target="prompt-formula" onclick="scrollToSection('prompt-formula')">Формула промпта</span>
-        <span class="pill" data-target="example-rostov" onclick="scrollToSection('example-rostov')">Пример: Ростов</span>
-        <span class="pill" data-target="example-elista" onclick="scrollToSection('example-elista')">Пример: Элиста</span>
-        <span class="pill" data-target="prompt-mistakes" onclick="scrollToSection('prompt-mistakes')">Ошибки</span>
-        <span class="pill" data-target="photoshop-draft" onclick="scrollToSection('photoshop-draft')">Photoshop</span>
-      </div>
-    </div>
-
-    <div class="guide-inner" style="padding-top:40px;">
-      <div class="author-strip">
-        <div class="av" style="background:linear-gradient(135deg, var(--green) 0%, #5DDDB0 100%);">ПП</div>
-        <div>Авторы раздела: <strong>Петренко Екатерина Сергеевна</strong> и <strong>Попова Елизавета Андреевна</strong></div>
-      </div>
-
-      <div class="sec-label green">Модуль 3</div>
-      <h2 id="gen-intro">Генерация идей и визуализация</h2>
-      <p>Модуль посвящён практической работе с нейросетями для визуализации архитектурных решений: от подготовки исходного драфта в Photoshop и формулировки промта до отбора результата и финальной постобработки.</p>
-
-      <div class="content-gate" data-code="gen3">
-        <div class="video-gate-locked">
-          <span class="video-gate-badge">🔒 Модуль — по коду</span>
-          <div class="video-gate-text">Пока не открыто</div>
-          <div class="video-gate-form">
-            <input type="text" placeholder="Код доступа" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
-            <button onclick="unlockContent(this)">Открыть</button>
-          </div>
-          <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
-        </div>
-        <div class="module-gate-preview">
-          <div class="preview-chip">🎥 3 видеоурока</div>
-          <div class="preview-chip">📝 Формула промпта, примеры, Photoshop</div>
-        </div>
-
-        <div class="gated-content">
-          <h3>Структура модуля</h3>
-          <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Промтинг для визуализации</h3><p>Принципы составления запросов для генеративных моделей: описание объекта, стиля, освещения, ракурса, материалов.</p></div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Подготовка драфта в Photoshop</h3><p>Сборка исходника для нейросети: скетч композиции, коллаж из референсов, маски зон контроля, корректная перспектива.</p></div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Отбор и доработка драфта</h3><p>Выбор наиболее удачного варианта, повторная генерация деталей, работа с masking и inpainting при необходимости.</p></div></div>
-            <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Постобработка в Photoshop</h3><p>Цветокоррекция, ретушь, добавление контекста (люди, окружение, растительность), финальная компоновка изображения.</p></div></div>
-          </div>
-
-          <h3>Принципы хорошего промта для визуализации</h3>
-          <ul class="checklist">
-            <li><div class="chk">✓</div> Чёткое описание типа объекта и архитектурного стиля</li>
-            <li><div class="chk">✓</div> Указание ракурса и масштаба (вид с улицы, аэросъёмка, интерьер)</li>
-            <li><div class="chk">✓</div> Описание материалов и текстур (бетон, дерево, стекло, металл)</li>
-            <li><div class="chk">✓</div> Условия освещения и время суток</li>
-            <li><div class="chk">✓</div> Референсные стили или известные архитектурные аналоги</li>
-            <li><div class="chk">✓</div> Негативные промты — что нужно исключить из результата</li>
-          </ul>
-
-          <div class="prompt-box">
-            <div class="prompt-hdr">📋 Пример промта для визуализации</div>
-            <div class="prompt-body">
-Современный жилой дом, минималистичная архитектура, фасад из бетона и дерева,<br>
-большие панорамные окна, вид с улицы в вечернее время, тёплое освещение окон,<br>
-ландшафтное озеленение на переднем плане, фотореалистичный рендер,<br>
-<span class="prompt-hl">--no</span> искажённые пропорции, лишние объекты на фасаде
-            </div>
-          </div>
-
-          <div class="sec-divider"></div>
-
-          <section id="prompts">
-            <div class="sec-label">06</div>
-            <h2>Промтинг для архитектора — основы и практика</h2>
-
-            <div class="lesson-block" style="border-left-color:var(--purple);">
-              <div class="lesson-header">
-                <div class="lesson-num" style="background:linear-gradient(135deg,var(--purple),#A56EF8);">ИИ</div>
-                <div>
-                  <div class="lesson-eyebrow le-purple">Конспект занятия</div>
-                  <div class="lesson-title">Основы работы с нейросетями для архитектора</div>
-                </div>
-              </div>
-              <div class="lesson-body">
-                <h3>Что такое нейросеть?</h3>
-                <p>Нейросеть — это инструмент, который помогает ускорить работу архитектора. Она <strong>не заменяет специалиста</strong> и не принимает решения за него. Может ошибаться, придумывать факты и не знает всех строительных норм. Любой результат нужно проверять.</p>
-                <p>Лучше всего нейросети помогают:</p>
-                <ul class="checklist">
-                  <li><div class="chk">✓</div> Искать идеи</li>
-                  <li><div class="chk">✓</div> Создавать первые концепции</li>
-                  <li><div class="chk">✓</div> Подбирать референсы</li>
-                  <li><div class="chk">✓</div> Делать черновые визуализации</li>
-                  <li><div class="chk">✓</div> Писать и редактировать тексты</li>
-                  <li><div class="chk">✓</div> Автоматизировать рутинные задачи</li>
-                </ul>
-
-                <div class="sec-divider"></div>
-
-                <h3>Основные виды нейросетей</h3>
-                <div class="card-grid">
-                  <div class="card card-accent">
-                    <div class="card-icon">📝</div>
-                    <h3>Для работы с текстом</h3>
-                    <p>Поиск идей, описания проектов, анализ документов, составление ТЗ.</p>
-                    <p><strong>Примеры:</strong> ChatGPT, Claude, Gemini</p>
-                  </div>
-                  <div class="card card-accent">
-                    <div class="card-icon">🎨</div>
-                    <h3>Для генерации изображений</h3>
-                    <p>Концепции, референсы, эскизы и визуализации.</p>
-                    <p><strong>Примеры:</strong> ChatGPT, Midjourney, Flux, Stable Diffusion, Visoid</p>
-                  </div>
-                  <div class="card card-accent">
-                    <div class="card-icon">🏗️</div>
-                    <h3>Для создания 3D-моделей</h3>
-                    <p>Быстрая концептуальная модель по тексту или изображению.</p>
-                    <p><strong>Примеры:</strong> Tripo AI, Meshy AI, Rodin</p>
-                  </div>
-                  <div class="card card-accent">
-                    <div class="card-icon">📊</div>
-                    <h3>Для создания презентаций</h3>
-                    <p>Автоматически оформляют презентации, структуру и тексты.</p>
-                    <p><strong>Примеры:</strong> Gamma, Canva AI, Beautiful.ai, Tome</p>
-                  </div>
-                </div>
-
-                <div class="sec-divider"></div>
-
-                <h3>Где архитектор может использовать нейросети?</h3>
-                <div class="card-grid">
-                  <div class="card"><div class="card-icon">💡</div><h3>Поиск концепций и идей</h3></div>
-                  <div class="card"><div class="card-icon">🖼️</div><h3>Подбор референсов</h3></div>
-                  <div class="card"><div class="card-icon">🎯</div><h3>Концептуальные визуализации</h3></div>
-                  <div class="card"><div class="card-icon">📐</div><h3>Схемы, диаграммы и иконки</h3></div>
-                  <div class="card"><div class="card-icon">🧱</div><h3>Быстрые 3D-модели</h3></div>
-                  <div class="card"><div class="card-icon">📑</div><h3>Подготовка презентаций</h3></div>
-                  <div class="card"><div class="card-icon">📄</div><h3>Написание пояснительных записок</h3></div>
-                  <div class="card"><div class="card-icon">📋</div><h3>Анализ документов и нормативной базы</h3></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="sec-divider"></div>
-
-            <div class="video-embed">
-              <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239018&hash=dcd1af5d77f72ffe&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
-            </div>
-
-            <h3 id="prompt-formula">Что такое промпт?</h3>
-            <p>Промпт — это запрос или инструкция, которую мы пишем нейросети. <strong>Чем лучше написан промпт — тем лучше получится результат.</strong></p>
-
-            <h3>Формула хорошего промпта: РОЛЬ + КОНТЕКСТ + ЗАДАЧА + ПРИМЕРЫ + ФОРМАТ + ТОН</h3>
-            <div class="card-grid">
-              <div class="card card-accent">
-                <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">1</div>
-                <h3>Роль</h3>
-                <p>Кем должна быть нейросеть?</p>
-                <p style="font-size:12px;color:var(--ink-faint);">Например: архитектор, урбанист, дизайнер интерьера.</p>
-              </div>
-              <div class="card card-accent">
-                <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">2</div>
-                <h3>Контекст</h3>
-                <p>Что происходит? Над каким проектом работаете, какие ограничения, для кого.</p>
-              </div>
-              <div class="card card-accent">
-                <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">3</div>
-                <h3>Задача</h3>
-                <p>Что именно нужно сделать?</p>
-                <p style="font-size:12px;color:var(--ink-faint);">Придумать концепцию, написать текст, проанализировать документ, создать визуализацию.</p>
-              </div>
-              <div class="card card-accent">
-                <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">4</div>
-                <h3>Примеры</h3>
-                <p>Покажите образец или опишите, на что ориентироваться.</p>
-              </div>
-              <div class="card card-accent">
-                <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">5</div>
-                <h3>Формат</h3>
-                <p>Как должен выглядеть ответ?</p>
-                <p style="font-size:12px;color:var(--ink-faint);">Список, таблица, текст, презентация.</p>
-              </div>
-              <div class="card card-accent">
-                <div class="card-icon" style="font-family:var(--mono);font-size:16px;font-weight:800;color:var(--purple);">6</div>
-                <h3>Тон</h3>
-                <p>Какой стиль ответа нужен?</p>
-                <p style="font-size:12px;color:var(--ink-faint);">Официальный, простой, научный, дружелюбный.</p>
-              </div>
-            </div>
-
-            <div class="sec-divider"></div>
-
-            <div class="video-embed">
-              <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239019&hash=544bb9860e7b9670&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
-            </div>
-
-            <h3 id="example-rostov">Пример промпта по формуле — детская площадка на набережной</h3>
-            <p>Тема: концепция детской площадки на набережной в Ростове-на-Дону</p>
-
-            <div style="overflow-x:auto;margin-bottom:20px;">
-              <table style="width:100%;border-collapse:collapse;font-size:13px;">
-                <thead>
-                  <tr>
-                    <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Роль</th>
-                    <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Контекст</th>
-                    <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Задача</th>
-                    <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Примеры</th>
-                    <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Формат</th>
-                    <th style="background:var(--ink-night);color:#fff;padding:10px 14px;text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;">Тон</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">Ты — архитектор и ландшафтный дизайнер с опытом создания общественных пространств и детских площадок.</td>
-                    <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">Ростов-на-Дону, набережная реки Дон. Тёплый климат, много солнечных дней. Локация — активная городская зона. Рядом вода, зелёные зоны и велодорожка. Площадка для детей разного возраста (2–12 лет).</td>
-                    <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">Разработай концепцию детской площадки на набережной в Ростове-на-Дону. Предложи идею, которую можно связать с характером города и рекой Дон. Опиши основные зоны и сценарии использования, подбери материалы и элементы благоустройства.</td>
-                    <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">— Современные природные площадки с деревом и водой<br>— Волнообразные формы и плавные линии<br>— Использование местных материалов (дерево, металл, песок)<br>— Интеграция с набережной и видами на реку</td>
-                    <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">1. Общая концепция<br>2. Функциональные зоны<br>3. Визуализация (2–3 изображения)<br>4. Генеральный план<br>5. Список материалов</td>
-                    <td style="padding:12px 14px;border:1px solid var(--border);vertical-align:top;line-height:1.5;color:var(--ink-muted);">Профессиональный, креативный, но понятный заказчику. Акцент на комфорт детей, безопасность, экологичность и связь с местом.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div class="prompt-box">
-              <div class="prompt-hdr">📋 Полный промпт (пример запроса)</div>
-              <div class="prompt-body">
-Ты — архитектор и ландшафтный дизайнер с опытом создания общественных пространств и детских площадок. Контекст: Ростов-на-Дону, набережная реки Дон. Тёплый климат, много солнечных дней. Локация — активная городская зона с прогулочным потоком людей. Рядом вода, зелёные зоны и велодорожка. Площадка для детей разного возраста (2–12 лет).<br><br>
-Задача: разработай концепцию детской площадки на набережной в Ростове-на-Дону. Предложи идею, которую можно связать с характером города и рекой Дон. Опиши основные зоны и сценарии использования, подбери материалы и элементы благоустройства. Предложи визуальный образ площадки.<br><br>
-Примеры для ориентира: современные природные площадки с деревом и водой, волнообразные формы и плавные линии, использование местных материалов (дерево, металл, песок), интеграция с набережной и видами на реку.<br><br>
-Формат результата: 1) общая концепция площадки; 2) функциональные зоны и сценарии использования; 3) визуализация площадки (2–3 изображения с разных ракурсов); 4) генеральный план; 5) список материалов и элементов.<br><br>
-Тон: профессиональный, креативный, но понятный заказчику. С акцентом на комфорт детей, безопасность, экологичность и связь с местом.
-              </div>
-            </div>
-
-            <div class="result-shot">
-              <img src="images/rostov-naberezhnaya-gallery.jpg" alt="Детская площадка на набережной в Ростове-на-Дону — рендеры, генплан и список материалов, сгенерированные по этому промпту" loading="lazy">
-              <div class="result-caption">Так выглядит результат по этому промпту: рендеры с разных ракурсов, генплан и список материалов — всё получено из формулы выше.</div>
-            </div>
-
-            <div class="sec-divider"></div>
-
-            <h3>Задание</h3>
-            <div class="card card-warn" style="margin-bottom:20px;">
-              <h3>Используя пример, составить промпт для создания:</h3>
-              <div class="card-grid card-grid-3col" style="margin-top:12px;">
-                <div class="card" style="text-align:center;padding:16px 12px;">
-                  <div style="font-family:var(--mono);font-size:22px;font-weight:800;color:var(--graphite,#2A2F3E);margin-bottom:6px;">1</div>
-                  <div style="font-size:13px;font-weight:700;color:var(--ink);">Концепции проекта</div>
-                </div>
-                <div class="card" style="text-align:center;padding:16px 12px;">
-                  <div style="font-family:var(--mono);font-size:22px;font-weight:800;color:var(--graphite,#2A2F3E);margin-bottom:6px;">2</div>
-                  <div style="font-size:13px;font-weight:700;color:var(--ink);">Генерального плана проекта</div>
-                </div>
-                <div class="card" style="text-align:center;padding:16px 12px;">
-                  <div style="font-family:var(--mono);font-size:22px;font-weight:800;color:var(--graphite,#2A2F3E);margin-bottom:6px;">3</div>
-                  <div style="font-size:13px;font-weight:700;color:var(--ink);">2–3 визуализаций проекта</div>
-                </div>
-              </div>
-              <p style="margin-top:14px;font-weight:700;color:var(--ink);">Материалы, подготовленные на основе заданных промптов, будут использованы в финальной презентации.</p>
-            </div>
-
-            <h3 id="example-elista">Пример задания: детская площадка в Элисте</h3>
-            <div class="card-grid">
-              <div class="card card-accent">
-                <h3>РОЛЬ</h3>
-                <p>Ты — архитектор и ландшафтный дизайнер с опытом создания общественных пространств и детских площадок.</p>
-              </div>
-              <div class="card card-accent">
-                <h3>КОНТЕКСТ</h3>
-                <p>Элиста, Республика Калмыкия. Континентальный климат: жаркое сухое лето, холодная зима, много солнечных дней. Локация — центральная городская зона, либо парк рядом с буддийским храмом (хурулом). Площадка для детей разного возраста (2–12 лет). Важно отразить культурный код региона и буддийскую эстетику.</p>
-              </div>
-              <div class="card card-accent">
-                <h3>ЗАДАЧА</h3>
-                <p>Разработай концепцию детской площадки в буддийском стиле для города Элиста. Предложи идею, которая связывает игровое пространство с калмыцкой культурой и буддийскими символами. Опиши основные зоны и сценарии использования, подбери материалы и элементы благоустройства. Предложи визуальный образ площадки.</p>
-              </div>
-              <div class="card card-accent">
-                <h3>ПРИМЕРЫ ДЛЯ ОРИЕНТИРА</h3>
-                <ul class="checklist" style="margin-top:8px;">
-                  <li><div class="chk">✓</div> Использование мандалы в планировке</li>
-                  <li><div class="chk">✓</div> Элементы буддийской символики (лотос, колесо Дхармы, ступы) в игровых формах</li>
-                  <li><div class="chk">✓</div> Калмыцкий орнамент в мощении и малых формах</li>
-                  <li><div class="chk">✓</div> Дерево, камень, природные материалы</li>
-                  <li><div class="chk">✓</div> Молитвенные флажки и ветряные колокольчики как часть среды</li>
-                  <li><div class="chk">✓</div> Зоны для тихих игр и медитации</li>
-                  <li><div class="chk">✓</div> Цветовая гамма: красный, жёлтый, синий, белый</li>
-                </ul>
-              </div>
-              <div class="card card-accent">
-                <h3>ФОРМАТ РЕЗУЛЬТАТА</h3>
-                <p>Общая концепция площадки (описание идеи и культурной отсылки).</p>
-              </div>
-              <div class="card card-accent">
-                <h3>ТОН</h3>
-                <p>Профессиональный, креативный, культурно-чувствительный. С акцентом на безопасность детей, экологичность, аутентичность и связь с буддийской традицией Калмыкии.</p>
-              </div>
-            </div>
-
-            <h3 style="margin-top:24px;">Как из этого промпта получить генплан?</h3>
-            <p>В пункте «Формат результата» отдельно пропишите генплан — и дополните запрос нужными подробностями (масштаб, экспликация зон, легенда).</p>
-            <div class="result-shot">
-              <img src="images/elista-mandala-genplan.jpg" alt="Генплан детской площадки «Мандала степи» в Элисте с функциональными зонами и легендой" loading="lazy">
-              <div class="result-caption">Детская площадка «Мандала степи», Элиста — генплан с 10 функциональными зонами и легендой, полученный из промпта выше.</div>
-            </div>
-
-            <h3 style="margin-top:24px;">Как из этого промпта получить визуализации?</h3>
-            <p>Так же — пропишите визуализации в «Формате результата» и дополните запрос нужными подробностями (ракурс, время суток, количество людей в кадре).</p>
-            <div class="result-shot">
-              <img src="images/elista-mandala-vizualizacii.jpg" alt="Визуализации детской площадки «Мандала степи» в Элисте с разных ракурсов" loading="lazy">
-              <div class="result-caption">Визуализации той же площадки с разных ракурсов — общий план, входная группа, амфитеатр.</div>
-            </div>
-
-            <div class="sec-divider"></div>
-
-            <h3 id="prompt-mistakes">Основные ошибки в промтинге</h3>
-            <div class="card-grid">
-              <div class="card" style="border-left:3px solid #E53E3E;">
-                <h3 style="color:#E53E3E;">✗ Слишком короткий запрос</h3>
-                <p>«Сделай презентацию.» — нейросеть не знает ни темы, ни стиля, ни аудитории.</p>
-              </div>
-              <div class="card" style="border-left:3px solid #E53E3E;">
-                <h3 style="color:#E53E3E;">✗ Нет контекста</h3>
-                <p>Нейросеть не знает, над каким проектом вы работаете.</p>
-              </div>
-              <div class="card" style="border-left:3px solid #E53E3E;">
-                <h3 style="color:#E53E3E;">✗ Ожидание идеального результата с первого раза</h3>
-                <p>Работа с нейросетью — это диалог и несколько итераций.</p>
-              </div>
-              <div class="card" style="border-left:3px solid #E53E3E;">
-                <h3 style="color:#E53E3E;">✗ Полное доверие нейросети</h3>
-                <p>Всегда проверяйте факты, нормативы и выводы.</p>
-              </div>
-            </div>
-
-            <div class="tip">
-              <div class="tip-i">💡</div>
-              <div><strong>Главное правило:</strong> Нейросеть не умеет читать мысли. Чем подробнее и понятнее вы объясните задачу, тем качественнее получите результат.</div>
-            </div>
-
-            <h3 id="photoshop-draft">Photoshop до генерации — подготовка драфта для нейросети</h3>
-            <p>Photoshop работает не только после генерации: качественный исходник, собранный вручную, значительно повышает точность и управляемость результата на выходе из нейросети.</p>
-            <div class="card-grid">
-              <div class="card card-accent"><div class="card-icon">✏️</div><h3>Скетч-основа композиции</h3><p>Быстрый набросок объёмов и расположения объекта на участке — задаёт нейросети правильную геометрию и пропорции сцены.</p></div>
-              <div class="card card-accent"><div class="card-icon">🖼️</div><h3>Коллаж из референсов</h3><p>Совмещение нескольких изображений-аналогов в один драфт — материалы, формы, окружение собираются в единую отправную точку.</p></div>
-              <div class="card card-accent"><div class="card-icon">🎭</div><h3>Маски для зон контроля</h3><p>Выделение областей, которые нейросеть должна изменить или, наоборот, сохранить без изменений — основа для inpainting.</p></div>
-              <div class="card card-accent"><div class="card-icon">📐</div><h3>Корректная перспектива</h3><p>Выравнивание линий и горизонта на исходнике — нейросеть точнее держит перспективу, если она задана корректно изначально.</p></div>
-            </div>
-            <ul class="checklist">
-              <li><div class="chk">✓</div> Чёрно-белый или плоско закрашенный драфт уже задаёт силуэт и масштаб будущего здания</li>
-              <li><div class="chk">✓</div> Грубая тоновая подкладка (light/shadow map) помогает нейросети выбрать верное освещение сцены</li>
-              <li><div class="chk">✓</div> Контекст участка (соседние здания, дорога, зелень) на драфте удерживает масштаб и не даёт сцене «потеряться»</li>
-              <li><div class="chk">✓</div> Чистый альфа-канал вокруг объекта упрощает дальнейшую замену фона при генерации</li>
-            </ul>
-
-            <h3>Postprocessing — на что обратить внимание в Photoshop</h3>
-            <div class="card-grid">
-              <div class="card card-accent"><div class="card-icon">🎨</div><h3>Цветокоррекция</h3><p>Баланс белого, контраст, насыщенность — приведение изображения к единому визуальному стилю.</p></div>
-              <div class="card card-accent"><div class="card-icon">🧹</div><h3>Устранение артефактов</h3><p>Исправление характерных ошибок генерации: искажённой геометрии, лишних деталей, швов.</p></div>
-              <div class="card card-accent"><div class="card-icon">🌳</div><h3>Добавление контекста</h3><p>Вставка людей, машин, растительности для повышения реалистичности сцены.</p></div>
-              <div class="card card-accent"><div class="card-icon">✨</div><h3>Финальная ретушь</h3><p>Резкость, виньетирование, итоговая компоновка для презентации проекта.</p></div>
-            </div>
-
-            <div class="sec-divider"></div>
-
-            <h3>Материалы занятия по Photoshop</h3>
-            <p>Референсы и примеры работ с занятия доступны по ссылке:</p>
-            <div class="links-row" style="margin-bottom:20px;">
-              <a class="qlink light" href="https://pin.it/69uNk7DuA" target="_blank" rel="noopener noreferrer">
-                <span>📌</span> Референсы с занятия — Pinterest
-                <span class="ql-badge light">Photoshop</span>
-              </a>
-            </div>
-
-            <div class="lesson-block" style="border-left-color:var(--green);">
-              <div class="lesson-header">
-                <div class="lesson-num" style="background:linear-gradient(135deg,var(--green),#5DDDB0);">PS</div>
-                <div>
-                  <div class="lesson-eyebrow le-green">Конспект занятия</div>
-                  <div class="lesson-title">Photoshop — базовые инструменты для архитектурного коллажа</div>
-                </div>
-              </div>
-
-              <div class="lesson-body">
-                <p style="margin-bottom:14px;">На этом занятии мы разобрали полный рабочий процесс от создания документа до финального экспорта:</p>
-                <ul class="checklist">
-                  <li><div class="chk">✓</div> Создали новый документ (<em>Файл → Создать</em>) с нужными размерами</li>
-                  <li><div class="chk">✓</div> Познакомились со слоями — загружали фото, меняли порядок слоёв, группировали их</li>
-                  <li><div class="chk">✓</div> Вырезали объекты с помощью быстрого выделения и прямолинейного лассо</li>
-                  <li><div class="chk">✓</div> Трансформировали элементы — масштабировали и поворачивали через <em>Ctrl+T</em></li>
-                  <li><div class="chk">✓</div> Собирали коллаж: фон, архитектура, детали (люди, деревья) на отдельных слоях</li>
-                  <li><div class="chk">✓</div> Корректировали цвет и тональность через корректирующие слои (Цветовой тон, Насыщенность, Кривые)</li>
-                  <li><div class="chk">✓</div> Добавляли тени и свет (применяли эффекты шума и движения)</li>
-                  <li><div class="chk">✓</div> Работали с текстом — редактировали параметры шрифта, загружали новый шрифт</li>
-                  <li><div class="chk">✓</div> Запомнили важные правила: как сохранять <em>.psd</em> и экспортировать в <em>JPG</em></li>
-                </ul>
-              </div>
-
-              <div class="video-embed">
-                <iframe src="https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239017&hash=dcff08884df56f92&hd=3" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>
-              </div>
-            </div>
-
-            <div class="tip">
-              <div class="tip-i">💡</div>
-              <div>Результат работы этого модуля — готовое визуализированное изображение — становится исходным материалом для Модуля 4, где собирается итоговая презентация проекта.</div>
-            </div>
-          </section>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════ MODULE PANEL: SYNTH (Модуль 4) ════════════ -->
-  <div class="module-panel" id="panel-pres">
-    <div class="guide-inner" style="padding-top:40px;">
-      <div class="author-strip">
-        <div class="av">КА</div>
-        <div>Автор раздела: <strong>Кулешов Александр Алексеевич</strong></div>
-      </div>
-
-      <div class="sec-label orange">Модуль 4</div>
-      <h2>Синтез и презентация</h2>
-      <p>Завершающий модуль курса посвящён сборке всех наработок — схем из QGIS, визуализаций и текстовых описаний — в единую презентацию проекта с помощью Gamma.app.</p>
-
-      <div class="content-gate" data-code="pres4">
-        <div class="video-gate-locked">
-          <span class="video-gate-badge">🔒 Модуль — по коду</span>
-          <div class="video-gate-text">Пока не открыто</div>
-          <div class="video-gate-form">
-            <input type="text" placeholder="Код доступа" onkeydown="if(event.key==='Enter'){this.nextElementSibling.click();}">
-            <button onclick="unlockContent(this)">Открыть</button>
-          </div>
-          <div class="video-gate-error">Неверный код — попробуйте ещё раз</div>
-        </div>
-        <div class="module-gate-preview">
-          <div class="preview-chip">📝 Этапы сборки, чек-лист презентации</div>
-        </div>
-
-        <div class="gated-content">
-          <h3>Что такое Gamma.app</h3>
-          <div class="card card-success" style="margin-bottom:20px;">
-            <h3>ИИ-сервис для сборки презентаций</h3>
-            <p>Gamma.app генерирует структуру и дизайн слайдов на основе текстового описания или плана проекта, избавляя от ручной вёрстки в PowerPoint и позволяя сосредоточиться на содержании.</p>
-          </div>
-
-          <h3>Этапы сборки презентации</h3>
-          <div class="steps">
-            <div class="step"><div class="step-num">1</div><div class="step-body"><h3>Сбор материалов проекта</h3><p>Схемы из QGIS (зонирование, транспорт, рельеф), визуализации из Модуля 3, текстовые описания и аналитика из ИИ-инструментов.</p></div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-body"><h3>Формирование структуры</h3><p>Составление текстового плана презентации: введение, анализ территории, концепция, визуализация, выводы.</p></div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-body"><h3>Генерация в Gamma.app</h3><p>Загрузка плана или текста в сервис, выбор шаблона и стиля оформления, автоматическая генерация слайдов.</p></div></div>
-            <div class="step"><div class="step-num">4</div><div class="step-body"><h3>Доработка и оформление</h3><p>Замена сгенерированных изображений на собственные схемы и визуализации, корректировка текста и порядка слайдов.</p></div></div>
-            <div class="step"><div class="step-num">5</div><div class="step-body"><h3>Экспорт презентации</h3><p>Сохранение готовой работы в PDF или PowerPoint для защиты проекта или отправки заказчику.</p></div></div>
-          </div>
-
-          <h3>Чек-лист готовой презентации</h3>
-          <ul class="checklist">
-            <li><div class="chk">✓</div> Ситуационная схема территории из QGIS, оформленная в макете</li>
-            <li><div class="chk">✓</div> Транспортная и/или функциональная схема (при наличии)</li>
-            <li><div class="chk">✓</div> Визуализация проекта после постобработки в Photoshop</li>
-            <li><div class="chk">✓</div> Текстовое обоснование решений, подготовленное с помощью ИИ</li>
-            <li><div class="chk">✓</div> Единый визуальный стиль слайдов (шрифты, цвета, отступы)</li>
-            <li><div class="chk">✓</div> Экспортированный итоговый файл в PDF</li>
-          </ul>
-
-          <div class="card card-warn">
-            <h3>Итог курса</h3>
-            <p>К завершению Модуля 4 у каждого слушателя есть готовая презентация проекта, собранная с использованием полного цикла инструментов курса: QGIS для пространственного анализа, нейросети для визуализации и текста, Gamma.app для финальной сборки.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-end">
-    <p>Остались вопросы по материалу этого раздела?</p>
-    <div class="section-end-row">
-      <a class="section-end-btn primary" href="https://t.me/alkuleshov" target="_blank" rel="noopener">Написать в Telegram →</a>
-      <span class="section-end-btn ghost" onclick="window.scrollTo({top:0, behavior:'smooth'});">↑ Наверх, к разделам</span>
-    </div>
-  </div>
-
-  <div class="guide-footer">
-    <div style="max-width:560px; margin:0 auto;">
-    <div class="footer-mark">ai2arch</div>
-    <div style="font-size:13px;color:var(--ink-muted);font-weight:500;margin-bottom:8px;letter-spacing:.01em;">
-      Мы объединяем архитектуру, данные и искусственный интеллект,<br>чтобы проектировать будущее городов и территорий.
-    </div>
-    <div style="font-size:10.5px;color:var(--ink-faint);letter-spacing:.08em;text-transform:uppercase;">
-      Курс дополнительного образования · ААИ ЮФУ · Ростов-на-Дону
-    </div>
-    </div>
-  </div>
-
-</div><!-- /view-guide -->
-
 <script>
-  function layoutStickyBars() {
-    const backBar = document.querySelector('.back-bar');
-    const moduleTabsWrap = document.getElementById('moduleTabsWrap');
-    const h1 = backBar ? backBar.offsetHeight : 0;
-    if (moduleTabsWrap) moduleTabsWrap.style.top = h1 + 'px';
-    const h2 = moduleTabsWrap ? moduleTabsWrap.offsetHeight : 0;
-    document.querySelectorAll('.module-panel .nav-wrap').forEach(function(nw) {
-      nw.style.top = (h1 + h2) + 'px';
-    });
-  }
-
-  function getOffset() {
-    const backBar = document.querySelector('.back-bar');
-    const navWraps = document.querySelectorAll('#view-guide .nav-wrap');
-    let total = backBar ? backBar.offsetHeight : 0;
-    navWraps.forEach(nw => {
-      if (nw.offsetParent !== null) total += nw.offsetHeight;
-    });
-    return total + 8;
-  }
-
-  function jumpTo(id) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const top = el.getBoundingClientRect().top + window.pageYOffset - getOffset();
-    window.scrollTo({ top: top, behavior: 'smooth' });
-  }
-
-  function switchModule(mod) {
-    document.querySelectorAll('.module-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.module-tab').forEach(t => t.classList.remove('active'));
-    const panel = document.getElementById('panel-' + mod);
-    const tab = document.getElementById('mtab-' + mod);
-    if (panel) panel.classList.add('active');
-    if (tab) tab.classList.add('active');
-    window.scrollTo(0, 0);
-    setTimeout(layoutStickyBars, 30);
-  }
-
-  function openGuide(anchor) {
-    document.getElementById('view-cover').classList.remove('active');
-    document.getElementById('view-guide').classList.add('active');
-    switchModule('sprint');
-    window.scrollTo(0, 0);
-    setTimeout(layoutStickyBars, 30);
-    if (anchor && anchor !== 'top') {
-      setTimeout(() => jumpTo(anchor), 140);
-    }
-    setTimeout(initScrollSpy, 200);
-  }
-
-  function goToRef(mod, anchor) {
-    document.getElementById('view-cover').classList.remove('active');
-    document.getElementById('view-guide').classList.add('active');
-    switchModule(mod);
-    window.scrollTo(0, 0);
-    setTimeout(layoutStickyBars, 30);
-    if (anchor) {
-      setTimeout(() => jumpTo(anchor), 140);
-    }
-    setTimeout(initScrollSpy, 200);
-  }
-
-  layoutStickyBars();
-
-  const HASH_MODULES = { sprint: true, qgis: true, ai: true, gen: true, pres: true };
-
-  function openByHash(hash) {
-    const mod = hash.replace('#', '');
-    if (!HASH_MODULES[mod]) return;
-    document.getElementById('view-cover').classList.remove('active');
-    document.getElementById('view-guide').classList.add('active');
-    switchModule(mod);
-    window.scrollTo(0, 0);
-    setTimeout(layoutStickyBars, 30);
-    setTimeout(initScrollSpy, 100);
-  }
-
-  if (window.location.hash && HASH_MODULES[window.location.hash.replace('#', '')]) {
-    openByHash(window.location.hash);
-  }
-
-  window.addEventListener('hashchange', function() {
-    openByHash(window.location.hash);
-  });
-
-  const _origSwitchForHash = switchModule;
-  switchModule = function(mod) {
-    _origSwitchForHash(mod);
-    if (document.getElementById('view-guide').classList.contains('active')) {
-      history.replaceState(null, '', '#' + mod);
-    }
-  };
-  window.addEventListener('resize', layoutStickyBars);
-
-  let scrollSpyObserver = null;
-  const spySectionIds = ['lesson1','lesson2','lesson3','overview','data','schemes','export','aicomp','prompts','workflow','gen-intro','prompt-formula','example-rostov','example-elista','prompt-mistakes','photoshop-draft','s0-network','s0-llm','s0-soft','s0-checklist'];
-
-  function setActivePill(id) {
-    document.querySelectorAll('.nav-pills .pill').forEach(p => p.classList.remove('active-scroll'));
-    if (!id) return;
-    const pill = document.querySelector('.nav-pills .pill[data-target="' + id + '"]');
-    if (pill) pill.classList.add('active-scroll');
-  }
-
-  function initScrollSpy() {
-    if (scrollSpyObserver) {
-      scrollSpyObserver.disconnect();
-      scrollSpyObserver = null;
-    }
-    const panel = document.querySelector('.module-panel.active');
-    const hasSubNav = panel ? panel.querySelector('.nav-wrap .nav-pills') : null;
-    if (!panel || !hasSubNav) {
-      setActivePill(null);
-      return;
-    }
-
-    const offset = getOffset();
-    scrollSpyObserver = new IntersectionObserver((entries) => {
-      let best = null;
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          if (!best || entry.boundingClientRect.top < best.boundingClientRect.top) {
-            best = entry;
-          }
-        }
-      });
-      if (best) setActivePill(best.target.id);
-    }, {
-      root: null,
-      rootMargin: `-${offset + 4}px 0px -70% 0px`,
-      threshold: 0
-    });
-
-    spySectionIds.forEach(id => {
-      const el = document.getElementById(id);
-      if (el && panel.contains(el)) scrollSpyObserver.observe(el);
-    });
-  }
-
-  const VIDEO_SOURCES = {
-    qgis1: 'https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239021&hash=10d57373894892c6&hd=3',
-    qgis2: 'https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239022&hash=0b309b8157578de9&hd=3',
-    qgis3: 'https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239020&hash=43d302046779cefa&hd=3',
-    ai1:   'https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239018&hash=dcd1af5d77f72ffe&hd=3',
-    ai2:   'https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239019&hash=544bb9860e7b9670&hd=3',
-    psh1:  'https://vkvideo.ru/video_ext.php?oid=-241362551&id=456239017&hash=dcff08884df56f92&hd=3'
-  };
-
-  function renderVideoGate(gate) {
-    const code = gate.dataset.code;
-    const src = VIDEO_SOURCES[code];
-    if (!src) return;
-    gate.innerHTML = '<iframe src="' + src + '" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe>';
-  }
-
-  function unlockVideo(btn) {
-    const gate = btn.closest('.video-gate');
-    const input = gate.querySelector('input');
-    const code = gate.dataset.code;
-    const entered = input.value.trim().toLowerCase();
-    if (entered === code) {
-      try { localStorage.setItem('unlocked_' + code, '1'); } catch(e) {}
-      renderVideoGate(gate);
-    } else {
-      gate.querySelector('.video-gate-error').style.display = 'block';
-      input.value = '';
-    }
-  }
-
-  function initVideoGates() {
-    document.querySelectorAll('.video-gate').forEach(function(gate) {
-      const code = gate.dataset.code;
-      let unlocked = false;
-      try { unlocked = localStorage.getItem('unlocked_' + code) === '1'; } catch(e) {}
-      if (unlocked) renderVideoGate(gate);
-    });
-  }
-
-  function revealGatedContent(gate) {
-    const bar = gate.querySelector('.video-gate-locked');
-    if (bar) bar.style.display = 'none';
-    const preview = gate.querySelector('.module-gate-preview');
-    if (preview) preview.style.display = 'none';
-    const content = gate.querySelector('.gated-content');
-    if (content) content.classList.add('unlocked');
-  }
-
-  function unlockContent(btn) {
-    const gate = btn.closest('.content-gate');
-    const input = gate.querySelector('input');
-    const code = gate.dataset.code;
-    const entered = input.value.trim().toLowerCase();
-    if (entered === code) {
-      try { localStorage.setItem('unlocked_' + code, '1'); } catch(e) {}
-      revealGatedContent(gate);
-      setTimeout(initScrollSpy, 30);
-    } else {
-      gate.querySelector('.video-gate-error').style.display = 'block';
-      input.value = '';
-    }
-  }
-
-  function initContentGates() {
-    document.querySelectorAll('.content-gate').forEach(function(gate) {
-      const code = gate.dataset.code;
-      let unlocked = false;
-      try { unlocked = localStorage.getItem('unlocked_' + code) === '1'; } catch(e) {}
-      if (unlocked) revealGatedContent(gate);
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    initVideoGates();
-    initContentGates();
-  });
-
-  function switchModuleWithSpy(mod) {
-    switchModule(mod);
-    setTimeout(initScrollSpy, 60);
-  }
-
-  function closeGuide() {
-    document.getElementById('view-guide').classList.remove('active');
-    document.getElementById('view-cover').classList.add('active');
-    history.replaceState(null, '', window.location.pathname + window.location.search);
-    window.scrollTo(0, 0);
-  }
-
-  function scrollToSection(id) {
-    jumpTo(id);
-  }
-
-  const CERT_ELIGIBLE_TEXT = '<strong>Сертификат о повышении квалификации</strong> будет доступен по итогам курса.';
-  const CERT_RULES = {
-    school:              { eligible: false, text: 'Школьники проходят курс на общих основаниях, но <strong>сертификат о повышении квалификации не выдаётся</strong>.' },
-    spo_studying:        { eligible: false, text: 'Пока вы учитесь в колледже, <strong>сертификат о повышении квалификации не выдаётся</strong> — он станет доступен после завершения обучения по программе СПО.' },
-    spo_done:            { eligible: true,  text: CERT_ELIGIBLE_TEXT },
-    university_studying: { eligible: false, text: 'Пока вы учитесь на бакалавриате или специалитете, <strong>сертификат о повышении квалификации не выдаётся</strong> — он станет доступен после защиты диплома.' },
-    bachelor_done:       { eligible: true,  text: CERT_ELIGIBLE_TEXT },
-    master_studying:     { eligible: true,  text: CERT_ELIGIBLE_TEXT },
-    master_done:         { eligible: true,  text: CERT_ELIGIBLE_TEXT },
-    higher_done:         { eligible: true,  text: CERT_ELIGIBLE_TEXT },
-  };
-
-  function updateCertNotice() {
-    const sel = document.getElementById('ef-education');
-    const notice = document.getElementById('cert-notice');
-    const rule = CERT_RULES[sel.value];
-    if (!rule) { notice.style.display = 'none'; return; }
-    notice.style.display = 'block';
-    notice.style.background = rule.eligible ? '#EDFAF4' : '#FFF6E8';
-    notice.style.color = rule.eligible ? '#0F6B4A' : '#8A5A0A';
-    notice.style.border = '1px solid ' + (rule.eligible ? '#B8E8D4' : '#F0D8A8');
-    notice.innerHTML = (rule.eligible ? '✅ ' : 'ℹ️ ') + rule.text;
-  }
-
-  function closeEnrollModal() {
-    document.getElementById('enroll-modal').style.display = 'none';
-    setTimeout(() => {
-      document.getElementById('enroll-form').style.display = 'block';
-      document.getElementById('enroll-success').style.display = 'none';
-      document.getElementById('enroll-error').style.display = 'none';
-    }, 300);
-  }
-
-  const ENROLL_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby1af9vPX9ucvhf1phoY_kr0BQ3q4YMAVVRNUMB0Y_xbYHxlhyp2ca69mpD3S7uTRY/exec';
-
-  function submitEnrollForm(e) {
-    e.preventDefault();
-    const btn = document.getElementById('ef-submit-btn');
-    const educationSel = document.getElementById('ef-education');
-    const educationLabel = educationSel.options[educationSel.selectedIndex].text;
-    const rule = CERT_RULES[educationSel.value];
-
-    const payload = {
-      name: document.getElementById('ef-name').value,
-      phone: document.getElementById('ef-phone').value,
-      email: document.getElementById('ef-email').value,
-      education: educationLabel,
-      certEligible: rule ? (rule.eligible ? 'Да' : 'Нет') : '',
-      comment: document.getElementById('ef-comment').value,
-      timestamp: new Date().toISOString(),
-      source: 'ai2arch.ru — сайт курса'
-    };
-
-    btn.disabled = true;
-    btn.textContent = 'Отправка...';
-
-    fetch(ENROLL_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(payload)
-    })
-    .then(() => {
-      document.getElementById('enroll-form').style.display = 'none';
-      document.getElementById('enroll-success').style.display = 'block';
-    })
-    .catch(() => {
-      document.getElementById('enroll-form').style.display = 'none';
-      document.getElementById('enroll-error').style.display = 'block';
-    })
-    .finally(() => {
-      btn.disabled = false;
-      btn.textContent = 'Отправить заявку';
-    });
-  }
-
-  window.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      const m = document.getElementById('enroll-modal');
-      if (m && m.style.display === 'flex') closeEnrollModal();
-    }
-  });
+// Старые ссылки вида ai2arch.ru/#qgis вели на пособие: переносим на его новый адрес
+(function(){var m={sprint:1,qgis:1,ai:1,gen:1,pres:1,neural:1,genviz:1,synth:1};var h=location.hash.slice(1);if(m[h]){location.replace('archi-guide.html#'+h);}})();
 </script>
 
-<!-- ═══════════ ENROLLMENT FORM MODAL ═══════════ -->
-<div id="enroll-modal" style="display:none;position:fixed;inset:0;background:rgba(10,15,26,.82);z-index:9999;align-items:center;justify-content:center;padding:20px;">
-  <div style="background:#fff;border-radius:14px;width:100%;max-width:560px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;">
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 24px;background:#0A0F1A;color:#fff;flex-shrink:0;">
-      <span style="font-weight:700;font-size:15px;">Запись на курс «ИИ в архитектуре»</span>
-      <button onclick="closeEnrollModal()" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer;line-height:1;">&times;</button>
-    </div>
+<div class="screen">
+  <img class="art" src="images/ai2arch-artifact.webp" width="960" height="960" alt="" aria-hidden="true" decoding="async">
 
-    <div style="overflow-y:auto;padding:24px;">
-      <form id="enroll-form" onsubmit="submitEnrollForm(event)">
-        <label style="display:block;font-size:13px;font-weight:700;color:#0A0F1A;margin-bottom:6px;">ФИО *</label>
-        <input required type="text" id="ef-name" placeholder="Иванова Мария Сергеевна"
-          style="width:100%;padding:11px 14px;border:1px solid #E2E5EF;border-radius:8px;font-size:14px;margin-bottom:16px;font-family:inherit;">
+  <header class="wrap top">
+    <h1 class="brand">
+      <img class="brand-sign" src="images/ai2arch-sign.png" width="60" height="60" alt="">
+      <span class="brand-text"><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span>
+    </h1>
+    <p class="lead">Исследуем, как ИИ работает в архитектуре и девелопменте, и учим этому на двух курсах.</p>
+  </header>
 
-        <label style="display:block;font-size:13px;font-weight:700;color:#0A0F1A;margin-bottom:6px;">Телефон *</label>
-        <input required type="tel" id="ef-phone" placeholder="+7 900 000-00-00"
-          style="width:100%;padding:11px 14px;border:1px solid #E2E5EF;border-radius:8px;font-size:14px;margin-bottom:16px;font-family:inherit;">
+  <main class="wrap">
+    <div class="cards">
 
-        <label style="display:block;font-size:13px;font-weight:700;color:#0A0F1A;margin-bottom:6px;">Email *</label>
-        <input required type="email" id="ef-email" placeholder="mail@example.com"
-          style="width:100%;padding:11px 14px;border:1px solid #E2E5EF;border-radius:8px;font-size:14px;margin-bottom:16px;font-family:inherit;">
-
-        <label style="display:block;font-size:13px;font-weight:700;color:#0A0F1A;margin-bottom:6px;">Текущий уровень образования *</label>
-        <select required id="ef-education" onchange="updateCertNotice()"
-          style="width:100%;padding:11px 14px;border:1px solid #E2E5EF;border-radius:8px;font-size:14px;margin-bottom:8px;font-family:inherit;background:#fff;">
-          <option value="">Выберите вариант</option>
-          <option value="school">Учусь в школе</option>
-          <option value="spo_studying">Учусь в колледже / СПО</option>
-          <option value="spo_done">Закончил(а) колледж / СПО</option>
-          <option value="university_studying">Учусь в вузе (бакалавриат/специалитет)</option>
-          <option value="bachelor_done">Закончил(а) бакалавриат, дальше не учусь</option>
-          <option value="master_studying">Учусь в магистратуре</option>
-          <option value="master_done">Закончил(а) магистратуру</option>
-          <option value="higher_done">Высшее образование (специалитет/иное), уже завершено</option>
-        </select>
-
-        <div id="cert-notice" style="display:none;padding:12px 14px;border-radius:8px;font-size:12.5px;line-height:1.5;margin-bottom:16px;"></div>
-
-        <label style="display:block;font-size:13px;font-weight:700;color:#0A0F1A;margin-bottom:6px;">Комментарий (необязательно)</label>
-        <textarea id="ef-comment" rows="2" placeholder="Например, подразделение ЮФУ или откуда узнали о курсе"
-          style="width:100%;padding:11px 14px;border:1px solid #E2E5EF;border-radius:8px;font-size:14px;margin-bottom:20px;font-family:inherit;resize:vertical;"></textarea>
-
-        <button type="submit" id="ef-submit-btn"
-          style="width:100%;padding:13px;background:linear-gradient(135deg,#111828,#4DA3FF 65%,#6DBEFF);color:#fff;border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">
-          Отправить заявку
-        </button>
-        <div style="font-size:11px;color:#7A849C;text-align:center;margin-top:10px;">
-          Отправляя форму, вы соглашаетесь на обработку персональных данных
+      <article class="card card--open">
+        <p class="step">Первая ступень</p>
+        <h2>ИИ в архитектуре</h2>
+        <p class="official">«Современные инструменты проектного анализа: ИИ и мобильные сервисы в работе с архитектурной средой»</p>
+        <p class="desc">Цифровой двойник территории, анализ с помощью ИИ и презентация для заказчика. QGIS и нейросети разбираем с нуля.</p>
+        <ul class="facts">
+          <li>22 ак. часа</li>
+          <li>2,5 недели</li>
+          <li>5 000 ₽</li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn-primary" href="archi.html#enroll">Записаться</a>
+          <a class="btn btn-ghost" href="archi-guide.html">Учебное пособие</a>
         </div>
-      </form>
+      </article>
 
-      <div id="enroll-success" style="display:none;text-align:center;padding:20px 0;">
-        <div style="font-size:40px;margin-bottom:16px;">✅</div>
-        <div style="font-size:17px;font-weight:700;color:#0A0F1A;margin-bottom:8px;">Заявка отправлена</div>
-        <div style="font-size:13.5px;color:#3A4560;line-height:1.6;">Мы свяжемся с вами в ближайшее время для подтверждения записи и оформления договора с ЮФУ.</div>
-      </div>
+      <article class="card card--soon">
+        <p class="step">Вторая ступень</p>
+        <h2>ИИ в редевелопменте</h2>
+        <p class="official">«Современные инструменты развития территорий и объектов: аналитика данных и генеративный ИИ в разработке концепций»</p>
+        <p class="desc">Реальное здание или территория — до защищённой концепции: проверка идеи на данных, функции и площади, визуальное оформление.</p>
+        <div class="actions">
+          <span class="soon">Скоро</span>
+        </div>
+      </article>
 
-      <div id="enroll-error" style="display:none;text-align:center;padding:20px 0;">
-        <div style="font-size:40px;margin-bottom:16px;">⚠️</div>
-        <div style="font-size:15px;font-weight:700;color:#0A0F1A;margin-bottom:8px;">Не удалось отправить заявку</div>
-        <div style="font-size:13.5px;color:#3A4560;line-height:1.6;margin-bottom:16px;">Попробуйте ещё раз, либо напишите руководителю курса напрямую в Telegram.</div>
-        <a href="https://t.me/alkuleshov" target="_blank" style="color:#4DA3FF;font-weight:700;font-size:13.5px;text-decoration:none;">Написать в Telegram →</a>
-      </div>
     </div>
-  </div>
-</div>
 
+    <section class="person" aria-label="Руководитель программ">
+      <img src="images/kuleshov.jpg" width="76" height="76" alt="Кулешов Александр Алексеевич">
+      <div>
+        <p class="person-role">Руководитель программ</p>
+        <p class="person-name">Кулешов Александр Алексеевич</p>
+        <p class="person-about">AI Product &amp; Spatial Intelligence Strategist · 15+ лет в архитектуре, КРТ и редевелопменте · Основатель ai2arch</p>
+        <p class="person-links"><a href="https://ku1eshov.ru" target="_blank" rel="noopener">Подробнее на ku1eshov.ru</a><a href="https://t.me/alkuleshov" target="_blank" rel="noopener">Написать в Telegram</a></p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="tools-h">
+      <h2 id="tools-h">С чем вы будете работать</h2>
+      <p class="sec-sub">Программы и сервисы обеих ступеней. Под названием указано, где инструмент используется.</p>
+      <div class="tool-groups">
+        <div class="tool-group">
+          <h3>Данные и карты</h3>
+          <ul class="tools">
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/qgis.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>QGIS</b><small>1 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/openstreetmap.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>OpenStreetMap</b><small>1 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/nspd.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>НСПД (кадастр)</b><small>1 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/opentopography.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>OpenTopography</b><small>1 ступень</small></span></li>
+          </ul>
+        </div>
+        <div class="tool-group">
+          <h3>Языковые модели</h3>
+          <ul class="tools">
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/chatgpt.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>ChatGPT</b><small>обе ступени</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/claude.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Claude</b><small>обе ступени</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/gemini.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Gemini</b><small>обе ступени</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/alisa.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Алиса AI</b><small>1 ступень</small></span></li>
+          </ul>
+        </div>
+        <div class="tool-group">
+          <h3>Изображения: генерация и доработка</h3>
+          <ul class="tools">
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/stable-diffusion.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Stable Diffusion</b><small>2 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/comfyui.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>ComfyUI</b><small>2 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/controlnet.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>ControlNet</b><small>2 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/flux.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Flux</b><small>2 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/midjourney.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Midjourney</b><small>2 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/photoshop.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Photoshop</b><small>1 ступень</small></span></li>
+          </ul>
+        </div>
+        <div class="tool-group">
+          <h3>Презентации и документы</h3>
+          <ul class="tools">
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/gamma.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Gamma</b><small>обе ступени</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/notion.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Notion</b><small>2 ступень</small></span></li>
+          </ul>
+        </div>
+      </div>
+      <p class="fine">ComfyUI и ControlNet на второй ступени показываем обзорно: настраивать их самостоятельно не нужно. Названия и логотипы принадлежат их владельцам.</p>
+    </section>
+
+    <section class="sec" aria-labelledby="out-h">
+      <h2 id="out-h">Благодаря программам вы сможете</h2>
+      <div class="outcomes">
+        <div>
+          <h3>Первая ступень · ИИ в архитектуре</h3>
+          <ul>
+            <li>Строить «цифрового двойника» территории — точную модель участка, готовую к любому анализу</li>
+            <li>За минуты проводить ИИ-анализ территории и прогнозировать поведенческие сценарии — там, где раньше уходили дни</li>
+            <li>Генерировать десятки вариантов решений и визуализаций с помощью нейросетей — вместо одной ручной отрисовки</li>
+            <li>Собирать убедительную data-driven презентацию, которая выигрывает у заказчика и комиссии</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Вторая ступень · ИИ в редевелопменте</h3>
+          <ul>
+            <li>Делать экспресс-аудит городской среды и проверять идею объекта на данных</li>
+            <li>Проводить сценарное функциональное зонирование объектов в устаревших зданиях и считать функции и площади</li>
+            <li>Эскизировать фасады и интерьеры с нейросетями, не теряя конструктива</li>
+            <li>Защитить проект по реальному объекту — исследование или инвестиционный концепт-паспорт — и забрать библиотеку промптов и шаблонов для предпроектной аналитики</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">Всегда на шаг впереди рынка: самые актуальные нейросети и ИИ-инструменты для архитекторов — программы постоянно обновляются.</p>
+    </section>
+
+    <section class="sec" aria-labelledby="cmp-h">
+      <h2 id="cmp-h">Две ступени кратко</h2>
+      <p class="sec-sub">Первая ступень учит работать с данными и ИИ на участке, вторая доводит реальный объект до защищённой концепции.</p>
+      <table class="cmp">
+        <thead>
+          <tr><td></td><th scope="col">ИИ в архитектуре</th><th scope="col">ИИ в редевелопменте</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Для кого</th>
+            <td data-s="ИИ в архитектуре">Студенты и выпускники архитектуры, градостроительства и дизайна среды, начинающие и практикующие архитекторы, урбанисты</td>
+            <td data-s="ИИ в редевелопменте">Архитекторы и дизайнеры среды, специалисты аналитических, проектных и девелоперских отделов, собственники и инвесторы</td>
+          </tr>
+          <tr>
+            <th scope="row">Главное</th>
+            <td data-s="ИИ в архитектуре">QGIS и нейросети с нуля: специальная подготовка не нужна, достаточно уверенно пользоваться компьютером</td>
+            <td data-s="ИИ в редевелопменте">Реальное здание или территория до защищённой концепции. Рутину делает ИИ, решения остаются за вами</td>
+          </tr>
+          <tr>
+            <th scope="row">Результат</th>
+            <td data-s="ИИ в архитектуре">Готовый проект по вашему участку: от карт до интерактивной презентации</td>
+            <td data-s="ИИ в редевелопменте">Проект по реальному объекту: архитектурно-визуальное исследование или инвестиционный концепт-паспорт</td>
+          </tr>
+          <tr>
+            <th scope="row">Объём</th>
+            <td data-s="ИИ в архитектуре"><strong>22 ак. часа</strong>, 2,5 недели</td>
+            <td data-s="ИИ в редевелопменте"><strong>72 ак. часа</strong>, 4,5 недели</td>
+          </tr>
+          <tr>
+            <th scope="row">Формат</th>
+            <td data-s="ИИ в архитектуре">Видеоуроки, два онлайн-воркшопа, консультации и закрытый чат. В группе до 25 человек</td>
+            <td data-s="ИИ в редевелопменте">Короткие записи, три онлайн-воркшопа и защита, личный разбор проекта. Камерная группа из 5 человек</td>
+          </tr>
+          <tr>
+            <th scope="row">Документ</th>
+            <td data-s="ИИ в архитектуре">Удостоверение о повышении квалификации ЮФУ</td>
+            <td data-s="ИИ в редевелопменте">Удостоверение о повышении квалификации ЮФУ</td>
+          </tr>
+          <tr>
+            <th scope="row">Стоимость</th>
+            <td data-s="ИИ в архитектуре"><strong>5 000 ₽</strong>, для сотрудников ЮФУ 3 600 ₽</td>
+            <td data-s="ИИ в редевелопменте" class="soon-cell">Скоро</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="sec doc" aria-labelledby="doc-h">
+      <h2 id="doc-h">Удостоверение о повышении квалификации</h2>
+      <p>Программы реализует <strong>Южный федеральный университет</strong> — Академия архитектуры и искусств (Ростов-на-Дону). По итогам обучения выдаётся удостоверение установленного образца.</p>
+      <p>Студентам удостоверение выдаётся одновременно с дипломом об основном образовании, а участвовать и сдавать проект можно сразу. При записи форма подскажет, положено ли удостоверение именно вам.</p>
+    </section>
+
+    <section class="sec final" aria-label="Запись на курс">
+      <a class="btn btn-primary" href="archi.html#enroll">Записаться на «ИИ в архитектуре»</a>
+      <p>Стоимость 5 000 ₽, новый поток стартует в октябре 2026</p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot-brand">
+        <img src="images/ai2arch-tile.png" width="44" height="44" alt="">
+        <span><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span>
+      </div>
+      <p class="foot-tag">Мы объединяем архитектуру, данные и искусственный интеллект, чтобы проектировать будущее городов и территорий.</p>
+      <p class="foot-meta">Курсы дополнительного образования · ААИ ЮФУ · Ростов-на-Дону</p>
+    </div>
+  </footer>
+</div>
 </body>
 </html>
