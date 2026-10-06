@@ -46,9 +46,13 @@
   /* ── header ── */
   .head { position:sticky; top:0; z-index:60; background:rgba(10,15,26,.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(255,255,255,.08); }
   .head-in { display:flex; align-items:center; gap:20px; height:var(--nav-h); }
-  .brand { display:flex; align-items:baseline; gap:10px; text-decoration:none; color:#fff; flex-shrink:0; }
-  .brand b { font-family:var(--mono); font-size:16px; font-weight:700; color:var(--azure); letter-spacing:-.02em; }
-  .brand span { font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.45); }
+  /* логотип AI2ARCH: знак + надпись + дескриптор (брендбук, раздел 11) */
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; flex-shrink:0; }
+  .brand-sign { width:38px; height:38px; flex-shrink:0; }
+  .brand-text { display:flex; flex-direction:column; line-height:1.15; }
+  .brand-text b { font-family:var(--sans); font-size:17px; font-weight:600; letter-spacing:.02em; color:#fff; }
+  .brand-text small { font-family:var(--sans); font-size:10.5px; font-weight:400; color:rgba(255,255,255,.58); margin-top:2px; white-space:nowrap; }
+  .brand:focus-visible { outline:2px solid var(--azure); outline-offset:4px; border-radius:6px; }
   .nav { display:flex; gap:2px; flex:1; min-width:0; justify-content:flex-start; overflow-x:auto; scrollbar-width:none; }
   .nav::-webkit-scrollbar { display:none; }
   .nav a { flex:0 0 auto; font-size:13px; font-weight:600; color:rgba(255,255,255,.65); text-decoration:none; padding:8px 10px; border-radius:8px; white-space:nowrap; }
@@ -65,7 +69,8 @@
     .nav.open { display:flex; }
     .nav a { padding:13px 12px; font-size:16px; }
   }
-  @media (max-width:860px) { .brand span { display:none; } .head-in { gap:12px; } }
+  @media (max-width:860px) { .head-in { gap:12px; } }
+  @media (max-width:359px) { .brand-text small { display:none; } }
   @media (max-width:520px) { .head-apply { display:none; } .burger { margin-left:auto; } }
 
   /* ── hero ── */
@@ -243,7 +248,7 @@
 
 <header class="head">
   <div class="wrap head-in">
-    <a class="brand" href="index.html"><b>ai2arch</b><span>ААИ ЮФУ</span></a>
+    <a class="brand" href="index.html"><img class="brand-sign" src="images/ai2arch-sign.png" width="38" height="38" alt=""><span class="brand-text"><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
     <nav class="nav" id="nav">
       <a href="#audience">Для кого</a>
       <a href="#about">О программе</a>
@@ -265,7 +270,7 @@
     <div class="eyebrow">Программа повышения квалификации · ЮФУ · вторая ступень</div>
     <h1><em>ИИ</em> в редевелопменте<sup class="ast"><a href="#fn-redev" aria-label="Что такое редевелопмент">*</a></sup></h1>
     <p class="hero-sub">Берёте реальное здание или территорию и доводите до защищённой концепции: проверяете идею на данных, считаете функции и площади, оформляете визуально. Рутину делает ИИ, решения остаются за вами.</p>
-    <p class="hero-name">Полное название: «Современные инструменты развития территорий и объектов: аналитика данных и генеративный ИИ в разработке концепций»</p>
+    <p class="hero-name">Официальное название программы: «Современные инструменты развития территорий и объектов: аналитика данных и генеративный ИИ в разработке концепций»</p>
     <p class="hero-fn" id="fn-redev"><span>*</span> <b>Редевелопмент</b> (от англ. redevelopment, «повторное развитие») — обновление уже застроенной территории или здания с новым назначением, например превращение заброшенной фабрики в креативный кластер.</p>
     <div class="hero-cta">
       <button class="btn btn-primary" data-apply>Оставить заявку</button>
@@ -646,7 +651,7 @@
 
 <footer>
   <div class="wrap">
-    <a class="brand" href="index.html"><b>ai2arch</b><span>ААИ ЮФУ</span></a>
+    <a class="brand" href="index.html"><img class="brand-sign" src="images/ai2arch-sign.png" width="38" height="38" alt=""><span class="brand-text"><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
     <p>Программу реализует Южный федеральный университет, Академия архитектуры и искусств. Ростов-на-Дону.</p>
     <p>Лицензия на осуществление образовательной деятельности: <span class="todo">[номер и дата — уточнить]</span></p>
     <p><a href="#" onclick="return false"><span class="todo">[Политика обработки персональных данных]</span></a> · <a href="#" onclick="return false"><span class="todo">[Договор-оферта]</span></a> · <a href="archi.html">Первая ступень программы</a></p>
