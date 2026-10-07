@@ -536,6 +536,7 @@
         <div class="price-val">5 000 <small>₽</small></div>
         <div class="price-lab">стоимость курса, 22 ак. часа</div>
         <ul class="list">
+          <li>рассрочка в 2 этапа: 2 500 + 2 500 ₽</li>
           <li>видеоуроки и учебное пособие</li>
           <li>два живых воркшопа</li>
           <li>консультации по самостоятельной работе</li>
@@ -547,11 +548,16 @@
         <div class="price-val">3 600 <small>₽</small></div>
         <div class="price-lab">для сотрудников ЮФУ</div>
         <ul class="list">
+          <li>рассрочка в 2 этапа: 1 800 + 1 800 ₽</li>
           <li>состав курса тот же</li>
           <li>подтверждение статуса пришлёте после заявки</li>
         </ul>
         <button class="btn btn-dark" style="margin-top:22px;width:100%" data-apply>Оставить заявку как сотрудник ЮФУ</button>
       </div>
+    </div>
+    <div class="deduct">
+      <b aria-hidden="true">💳</b>
+      <p><strong>Рассрочка в 2 этапа.</strong> Первые 50% оплачиваются при зачислении: 2 500 ₽ при цене 5 000 ₽ и 1 800 ₽ при 3 600 ₽. Остаток вносится вторым траншем в середине обучения. Условия закрепляем при заключении договора с ЮФУ.</p>
     </div>
     <div class="deduct">
       <b>13%</b>
@@ -589,7 +595,7 @@
     <div class="grid4">
       <div class="card step"><div class="n">1</div><h3>Заявка</h3><p>Оставляете контакты и сведения об образовании. Это займёт две минуты.</p></div>
       <div class="card step"><div class="n">2</div><h3>Короткий разговор</h3><p>Отвечаем на вопросы и подтверждаем участие.</p></div>
-      <div class="card step"><div class="n">3</div><h3>Договор, оплата, зачисление</h3><p>Заключаем договор с ЮФУ, принимаем оплату и зачисляем вас на курс приказом.</p></div>
+      <div class="card step"><div class="n">3</div><h3>Договор, оплата, зачисление</h3><p>Заключаем договор с ЮФУ, принимаем оплату (можно в два этапа) и зачисляем вас на курс приказом.</p></div>
       <div class="card step"><div class="n">4</div><h3>Старт 6 октября</h3><p>Открываем доступ к пособию и чату группы в Яндекс Мессенджере, начинаем со Спринта 0.</p></div>
     </div>
     <div style="margin-top:28px"><button class="btn btn-primary" data-apply>Оставить заявку</button></div>
@@ -623,6 +629,9 @@
 
     <details class="q"><summary>Кто платит 3 600 ₽?<span class="mod-plus">+</span></summary>
       <div class="ans"><p>Сотрудники ЮФУ. Остальные слушатели платят 5 000 ₽. Подтверждение статуса пришлём после заявки.</p></div></details>
+
+    <details class="q"><summary>Можно ли платить частями?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Да, допускается рассрочка в 2 этапа: 50% при зачислении, оставшиеся 50% в середине обучения. Условия закрепляются при заключении договора с ЮФУ.</p></div></details>
 
     <details class="q"><summary>Можно ли вернуть часть денег налогом?<span class="mod-plus">+</span></summary>
       <div class="ans"><p>Да, если вы платите сами и у вас есть доход, облагаемый НДФЛ: вернуть можно 13% стоимости. Оформляется через налоговую или работодателя по договору и чеку об оплате.</p></div></details>
@@ -746,7 +755,7 @@
 
   var EDU = {
     has_diploma: { cert: 'Удостоверение', text: '', warn: false },
-    no_diploma: { cert: 'Справка, затем удостоверение после получения диплома', text: 'Участвовать и защищать проект можно сразу. После защиты выдадим справку, а удостоверение о повышении квалификации выдаётся после получения вами диплома.', warn: false }
+    no_diploma: { cert: 'Справка', text: 'Участвовать и защищать проект можно сразу. После защиты выдадим справку, а удостоверение о повышении квалификации выдаётся после получения вами диплома.', warn: false }
   };
   document.getElementById('f-edu').addEventListener('change', function () {
     var r = EDU[this.value];
@@ -771,7 +780,7 @@
       comment: 'Статус: ' + status + (comment ? '. ' + comment : ''),
       timestamp: new Date().toISOString(),
       course: 'ИИ в архитектуре',
-      source: 'ai2arch.ru — лендинг «ИИ в архитектуре»'
+      source: 'Архитектура'
     };
     btn.disabled = true; btn.textContent = 'Отправка...';
     fetch(ENROLL_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) })

@@ -90,9 +90,8 @@
   .official { font-size:13.5px; color:var(--faint); max-width:46ch; margin-bottom:16px; }
   .desc { font-size:15.5px; color:var(--muted); margin-bottom:18px; }
 
-  .facts { display:flex; flex-wrap:wrap; row-gap:4px; list-style:none; margin-bottom:22px; font-size:13.5px; font-weight:500; }
-  .facts li { padding:0 14px; border-left:1px solid var(--line); }
-  .facts li:first-child { padding-left:0; border-left:0; }
+  .facts { display:flex; flex-wrap:wrap; gap:8px; list-style:none; margin-bottom:22px; font-size:13.5px; font-weight:500; }
+  .facts li { padding:6px 12px; border:1px solid var(--line); border-radius:999px; background:rgba(26,130,255,.07); }
 
   .actions { margin-top:auto; display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
   .btn {
@@ -106,8 +105,10 @@
   .btn-ghost:hover { border-color:rgba(246,244,240,.60); }
   .btn:focus-visible { outline:2px solid var(--azure); outline-offset:3px; }
 
-  .soon { display:inline-flex; align-items:center; gap:10px; min-height:46px; font-size:15px; font-weight:600; color:var(--muted); }
-  .soon::before { content:''; width:8px; height:8px; border-radius:50%; background:var(--azure); flex-shrink:0; }
+  .soon { display:inline-flex; align-items:center; gap:8px; min-height:46px; font-size:15px; font-weight:600; color:var(--muted); }
+
+  /* пиктограмма-плашка: эмодзи в мягком квадрате */
+  .ico { display:inline-grid; place-items:center; width:34px; height:34px; flex-shrink:0; border-radius:9px; background:rgba(26,130,255,.12); font-size:17px; line-height:1; }
 
   /* ── разделы ниже карточек ── */
   .sec { margin-top:clamp(56px, 9vw, 96px); }
@@ -122,6 +123,7 @@
   .person-name { margin:2px 0 6px; font-size:19px; font-weight:600; line-height:1.25; }
   .person-links { display:flex; flex-wrap:wrap; gap:6px 22px; margin-top:12px; font-size:14px; font-weight:600; }
   .person-links a { color:var(--azure); text-decoration:none; }
+  .person-links span { margin-right:4px; }
   .person-links a:hover { text-decoration:underline; text-underline-offset:4px; }
   .person-links a:focus-visible { outline:2px solid var(--azure); outline-offset:3px; border-radius:4px; }
   .person-about { font-size:14px; color:var(--muted); max-width:62ch; }
@@ -129,10 +131,12 @@
   /* инструменты: логотип появляется сам, если файл лежит в images/tools/ */
   .tool-groups { display:grid; gap:28px; }
   .tool-group h3 { margin-bottom:12px; font-size:14px; font-weight:600; color:var(--muted); }
+  .tool-group h3 span { margin-right:4px; }
   .tools { display:grid; grid-template-columns:repeat(auto-fill, minmax(212px, 1fr)); gap:10px; list-style:none; }
   .tool { display:flex; align-items:center; gap:12px; min-height:58px; padding:11px 14px; border:1px solid var(--line-soft); border-radius:12px; background:rgba(15,22,36,.6); }
-  .tool-logo { display:none; width:34px; height:34px; flex-shrink:0; align-items:center; justify-content:center; border-radius:8px; background:var(--warm); }
-  .tool.has-logo .tool-logo { display:flex; }
+  .tool-logo { display:flex; width:34px; height:34px; flex-shrink:0; align-items:center; justify-content:center; border-radius:8px; background:rgba(26,130,255,.12); font-size:17px; line-height:1; }
+  .tool.has-logo .tool-logo { background:var(--warm); }
+  .tool.has-logo .emo { display:none; }
   .tool-logo img { width:22px; height:22px; object-fit:contain; }
   .tool > span:last-child { min-width:0; }
   .tool b { display:block; font-size:14.5px; font-weight:600; line-height:1.2; overflow-wrap:anywhere; }
@@ -143,7 +147,7 @@
   .outcomes { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:34px 44px; }
   .outcomes h3 { margin-bottom:6px; font-size:16px; font-weight:600; }
   .outcomes ul { list-style:none; }
-  .outcomes li { padding:14px 0; border-top:1px solid var(--line-soft); font-size:15.5px; color:#D5DAE4; }
+  .outcomes li { display:flex; align-items:center; gap:14px; padding:11px 0; border-top:1px solid var(--line-soft); font-size:15.5px; color:#D5DAE4; }
   .note { margin-top:30px; max-width:62ch; padding-left:16px; border-left:2px solid var(--azure); font-size:15px; color:var(--muted); }
 
   /* сводка по ступеням */
@@ -151,7 +155,8 @@
   .cmp th, .cmp td { padding:16px 18px 16px 0; border-top:1px solid var(--line-soft); text-align:left; vertical-align:top; }
   .cmp thead td { border-top:0; padding:0; }
   .cmp thead th { padding-top:0; border-top:0; font-size:17px; font-weight:600; color:var(--warm); }
-  .cmp tbody th { width:17%; font-size:13.5px; font-weight:500; color:var(--faint); }
+  .cmp tbody th { width:19%; font-size:13.5px; font-weight:500; color:var(--faint); }
+  .cmp tbody th span { margin-right:6px; }
   .cmp td { color:var(--muted); line-height:1.5; }
   .cmp td strong { font-weight:600; color:var(--warm); }
   .cmp .soon-cell { color:var(--faint); }
@@ -194,6 +199,7 @@
     .tool { gap:9px; padding:10px; }
     .tool-logo { width:28px; height:28px; }
     .tool-logo img { width:18px; height:18px; }
+    .tool-logo { font-size:15px; }
     .tool b { font-size:13px; }
     .doc { padding:22px 20px; }
     .final .btn { flex:1 1 100%; }
@@ -236,15 +242,16 @@
         <p class="step">Первая ступень</p>
         <h2>ИИ в архитектуре</h2>
         <p class="official">«Современные инструменты проектного анализа: ИИ и мобильные сервисы в работе с архитектурной средой»</p>
-        <p class="desc">Цифровой двойник территории, анализ с помощью ИИ и презентация для заказчика. QGIS и нейросети разбираем с нуля.</p>
+        <p class="desc">Цифровой двойник участка, ИИ-анализ и презентация для заказчика. С нуля.</p>
         <ul class="facts">
-          <li>22 ак. часа</li>
-          <li>2,5 недели</li>
-          <li>5 000 ₽</li>
+          <li>🕒 22 ак. часа</li>
+          <li>📅 2,5 недели</li>
+          <li>💳 5 000 ₽, рассрочка</li>
+          <li>🎓 Удостоверение ЮФУ</li>
         </ul>
         <div class="actions">
-          <a class="btn btn-primary" href="archi.html#enroll">Записаться</a>
-          <a class="btn btn-ghost" href="archi-guide.html">Учебное пособие</a>
+          <a class="btn btn-primary" href="archi.html#enroll">✍️ Записаться</a>
+          <a class="btn btn-ghost" href="archi-guide.html">📖 Учебное пособие</a>
         </div>
       </article>
 
@@ -252,9 +259,14 @@
         <p class="step">Вторая ступень</p>
         <h2>ИИ в редевелопменте</h2>
         <p class="official">«Современные инструменты развития территорий и объектов: аналитика данных и генеративный ИИ в разработке концепций»</p>
-        <p class="desc">Реальное здание или территория — до защищённой концепции: проверка идеи на данных, функции и площади, визуальное оформление.</p>
+        <p class="desc">Реальное здание или территория — до защищённой концепции.</p>
+        <ul class="facts">
+          <li>🕒 72 ак. часа</li>
+          <li>📅 4,5 недели</li>
+          <li>🎓 Удостоверение ЮФУ</li>
+        </ul>
         <div class="actions">
-          <span class="soon">Скоро</span>
+          <span class="soon">⏳ Скоро</span>
         </div>
       </article>
 
@@ -266,48 +278,48 @@
         <p class="person-role">Руководитель программ</p>
         <p class="person-name">Кулешов Александр Алексеевич</p>
         <p class="person-about">AI Product &amp; Spatial Intelligence Strategist · 15+ лет в архитектуре, КРТ и редевелопменте · Основатель ai2arch</p>
-        <p class="person-links"><a href="https://ku1eshov.ru" target="_blank" rel="noopener">Подробнее на ku1eshov.ru</a><a href="https://t.me/alkuleshov" target="_blank" rel="noopener">Написать в Telegram</a></p>
+        <p class="person-links"><a href="https://ku1eshov.ru" target="_blank" rel="noopener"><span aria-hidden="true">🌐</span>Подробнее на ku1eshov.ru</a><a href="https://t.me/alkuleshov" target="_blank" rel="noopener"><span aria-hidden="true">💬</span>Написать в Telegram</a></p>
       </div>
     </section>
 
     <section class="sec" aria-labelledby="tools-h">
       <h2 id="tools-h">С чем вы будете работать</h2>
-      <p class="sec-sub">Программы и сервисы обеих ступеней. Под названием указано, где инструмент используется.</p>
+      <p class="sec-sub">Под названием указано, на какой ступени инструмент используется.</p>
       <div class="tool-groups">
         <div class="tool-group">
-          <h3>Данные и карты</h3>
+          <h3><span aria-hidden="true">🗺️</span>Данные и карты</h3>
           <ul class="tools">
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/qgis.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>QGIS</b><small>1 ступень</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/openstreetmap.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>OpenStreetMap</b><small>1 ступень</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/nspd.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>НСПД (кадастр)</b><small>1 ступень</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/opentopography.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>OpenTopography</b><small>1 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🗺️</span><img src="images/tools/qgis.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>QGIS</b><small>1 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🧭</span><img src="images/tools/openstreetmap.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>OpenStreetMap</b><small>1 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">📜</span><img src="images/tools/nspd.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>НСПД (кадастр)</b><small>1 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">⛰️</span><img src="images/tools/opentopography.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>OpenTopography</b><small>1 ступень</small></span></li>
           </ul>
         </div>
         <div class="tool-group">
-          <h3>Языковые модели</h3>
+          <h3><span aria-hidden="true">💬</span>Языковые модели</h3>
           <ul class="tools">
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/chatgpt.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>ChatGPT</b><small>обе ступени</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/claude.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Claude</b><small>обе ступени</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/gemini.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Gemini</b><small>обе ступени</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/alisa.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Алиса AI</b><small>1 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">💬</span><img src="images/tools/chatgpt.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>ChatGPT</b><small>обе ступени</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🧠</span><img src="images/tools/claude.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Claude</b><small>обе ступени</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">✨</span><img src="images/tools/gemini.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Gemini</b><small>обе ступени</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🎙️</span><img src="images/tools/alisa.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Алиса AI</b><small>1 ступень</small></span></li>
           </ul>
         </div>
         <div class="tool-group">
-          <h3>Изображения: генерация и доработка</h3>
+          <h3><span aria-hidden="true">🎨</span>Изображения: генерация и доработка</h3>
           <ul class="tools">
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/stable-diffusion.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Stable Diffusion</b><small>2 ступень</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/comfyui.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>ComfyUI</b><small>2 ступень</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/controlnet.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>ControlNet</b><small>2 ступень</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/flux.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Flux</b><small>2 ступень</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/midjourney.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Midjourney</b><small>2 ступень</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/photoshop.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Photoshop</b><small>1 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🎨</span><img src="images/tools/stable-diffusion.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Stable Diffusion</b><small>2 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🔗</span><img src="images/tools/comfyui.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>ComfyUI</b><small>2 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🎛️</span><img src="images/tools/controlnet.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>ControlNet</b><small>2 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">⚡</span><img src="images/tools/flux.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Flux</b><small>2 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🖼️</span><img src="images/tools/midjourney.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Midjourney</b><small>2 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🖌️</span><img src="images/tools/photoshop.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Photoshop</b><small>1 ступень</small></span></li>
           </ul>
         </div>
         <div class="tool-group">
-          <h3>Презентации и документы</h3>
+          <h3><span aria-hidden="true">📑</span>Презентации и документы</h3>
           <ul class="tools">
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/gamma.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Gamma</b><small>обе ступени</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><img src="images/tools/notion.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Notion</b><small>2 ступень</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">📊</span><img src="images/tools/gamma.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Gamma</b><small>обе ступени</small></span></li>
+            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">📝</span><img src="images/tools/notion.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Notion</b><small>2 ступень</small></span></li>
           </ul>
         </div>
       </div>
@@ -320,81 +332,81 @@
         <div>
           <h3>Первая ступень · ИИ в архитектуре</h3>
           <ul>
-            <li>Строить «цифрового двойника» территории — точную модель участка, готовую к любому анализу</li>
-            <li>За минуты проводить ИИ-анализ территории и прогнозировать поведенческие сценарии — там, где раньше уходили дни</li>
-            <li>Генерировать десятки вариантов решений и визуализаций с помощью нейросетей — вместо одной ручной отрисовки</li>
-            <li>Собирать убедительную data-driven презентацию, которая выигрывает у заказчика и комиссии</li>
+            <li><span class="ico" aria-hidden="true">🗺️</span>Построите цифровой двойник участка</li>
+            <li><span class="ico" aria-hidden="true">⚡</span>Проведёте ИИ-анализ территории за минуты</li>
+            <li><span class="ico" aria-hidden="true">🎨</span>Сгенерируете десятки вариантов визуализаций</li>
+            <li><span class="ico" aria-hidden="true">📊</span>Соберёте презентацию на данных для заказчика</li>
           </ul>
         </div>
         <div>
           <h3>Вторая ступень · ИИ в редевелопменте</h3>
           <ul>
-            <li>Делать экспресс-аудит городской среды и проверять идею объекта на данных</li>
-            <li>Проводить сценарное функциональное зонирование объектов в устаревших зданиях и считать функции и площади</li>
-            <li>Эскизировать фасады и интерьеры с нейросетями, не теряя конструктива</li>
-            <li>Защитить проект по реальному объекту — исследование или инвестиционный концепт-паспорт — и забрать библиотеку промптов и шаблонов для предпроектной аналитики</li>
+            <li><span class="ico" aria-hidden="true">🔍</span>Проверите идею объекта на данных</li>
+            <li><span class="ico" aria-hidden="true">🏗️</span>Рассчитаете функции и площади</li>
+            <li><span class="ico" aria-hidden="true">🖼️</span>Нарисуете эскизы фасадов и интерьеров с ИИ</li>
+            <li><span class="ico" aria-hidden="true">🎯</span>Защитите проект по реальному объекту</li>
           </ul>
         </div>
       </div>
-      <p class="note">Всегда на шаг впереди рынка: самые актуальные нейросети и ИИ-инструменты для архитекторов — программы постоянно обновляются.</p>
+      <p class="note">🔄 Программы обновляются: берём самые актуальные ИИ-инструменты.</p>
     </section>
 
     <section class="sec" aria-labelledby="cmp-h">
       <h2 id="cmp-h">Две ступени кратко</h2>
-      <p class="sec-sub">Первая ступень учит работать с данными и ИИ на участке, вторая доводит реальный объект до защищённой концепции.</p>
+      <p class="sec-sub">Первая ступень: данные и ИИ на участке. Вторая: реальный объект до защиты концепции.</p>
       <table class="cmp">
         <thead>
           <tr><td></td><th scope="col">ИИ в архитектуре</th><th scope="col">ИИ в редевелопменте</th></tr>
         </thead>
         <tbody>
           <tr>
-            <th scope="row">Для кого</th>
-            <td data-s="ИИ в архитектуре">Архитекторы, урбанисты и дизайнеры среды: начинающие, практикующие и студенты</td>
-            <td data-s="ИИ в редевелопменте">Архитекторы и дизайнеры среды, специалисты аналитических, проектных и девелоперских отделов, собственники и инвесторы</td>
+            <th scope="row"><span aria-hidden="true">👥</span>Для кого</th>
+            <td data-s="ИИ в архитектуре">Архитекторы, урбанисты, дизайнеры среды, студенты</td>
+            <td data-s="ИИ в редевелопменте">Архитекторы, девелоперы, аналитики, собственники и инвесторы</td>
           </tr>
           <tr>
-            <th scope="row">Главное</th>
-            <td data-s="ИИ в архитектуре">QGIS и нейросети с нуля: специальная подготовка не нужна, достаточно уверенно пользоваться компьютером</td>
-            <td data-s="ИИ в редевелопменте">Реальное здание или территория до защищённой концепции. Рутину делает ИИ, решения остаются за вами</td>
+            <th scope="row"><span aria-hidden="true">🎯</span>Результат</th>
+            <td data-s="ИИ в архитектуре">Проект по вашему участку: от карт до презентации</td>
+            <td data-s="ИИ в редевелопменте">Проект по реальному объекту: исследование или концепт-паспорт</td>
           </tr>
           <tr>
-            <th scope="row">Результат</th>
-            <td data-s="ИИ в архитектуре">Готовый проект по вашему участку: от карт до интерактивной презентации</td>
-            <td data-s="ИИ в редевелопменте">Проект по реальному объекту: архитектурно-визуальное исследование или инвестиционный концепт-паспорт</td>
-          </tr>
-          <tr>
-            <th scope="row">Объём</th>
+            <th scope="row"><span aria-hidden="true">🕒</span>Объём</th>
             <td data-s="ИИ в архитектуре"><strong>22 ак. часа</strong>, 2,5 недели</td>
             <td data-s="ИИ в редевелопменте"><strong>72 ак. часа</strong>, 4,5 недели</td>
           </tr>
           <tr>
-            <th scope="row">Формат</th>
-            <td data-s="ИИ в архитектуре">Видеоуроки, два онлайн-воркшопа, консультации и закрытый чат. В группе до 25 человек</td>
-            <td data-s="ИИ в редевелопменте">Короткие записи, три онлайн-воркшопа и защита, личный разбор проекта. Камерная группа из 5 человек</td>
+            <th scope="row"><span aria-hidden="true">💻</span>Формат</th>
+            <td data-s="ИИ в архитектуре">Видеоуроки, 2 воркшопа, чат. До 25 человек</td>
+            <td data-s="ИИ в редевелопменте">Записи, 3 воркшопа, защита. Группа из 5 человек</td>
           </tr>
           <tr>
-            <th scope="row">Документ</th>
+            <th scope="row"><span aria-hidden="true">🎓</span>Документ</th>
             <td data-s="ИИ в архитектуре">Удостоверение о повышении квалификации ЮФУ</td>
             <td data-s="ИИ в редевелопменте">Удостоверение о повышении квалификации ЮФУ</td>
           </tr>
           <tr>
-            <th scope="row">Стоимость</th>
+            <th scope="row"><span aria-hidden="true">💳</span>Стоимость</th>
             <td data-s="ИИ в архитектуре"><strong>5 000 ₽</strong>, для сотрудников ЮФУ 3 600 ₽</td>
-            <td data-s="ИИ в редевелопменте" class="soon-cell">Скоро</td>
+            <td data-s="ИИ в редевелопменте" class="soon-cell">⏳ Скоро</td>
+          </tr>
+          <tr>
+            <th scope="row"><span aria-hidden="true">🧾</span>Оплата</th>
+            <td data-s="ИИ в архитектуре">Рассрочка в 2 этапа, налоговый вычет 13%</td>
+            <td data-s="ИИ в редевелопменте" class="soon-cell">⏳ Скоро</td>
           </tr>
         </tbody>
       </table>
     </section>
 
     <section class="sec doc" aria-labelledby="doc-h">
-      <h2 id="doc-h">Удостоверение о повышении квалификации</h2>
-      <p>Программы реализует <strong>Южный федеральный университет</strong> — Академия архитектуры и искусств (Ростов-на-Дону). По итогам обучения выдаётся удостоверение установленного образца.</p>
-      <p>Если диплома пока нет, участвовать и сдавать проект можно сразу: после итоговой аттестации выдаётся справка, а удостоверение — после получения диплома.</p>
+      <h2 id="doc-h">🎓 Удостоверение о повышении квалификации</h2>
+      <p>Программы реализует <strong>Южный федеральный университет</strong>, Академия архитектуры и искусств. Удостоверение установленного образца выдаётся после итоговой аттестации.</p>
+      <p>📄 Диплома пока нет? Участвуйте сразу: после защиты выдадим справку, а удостоверение — после получения диплома.</p>
     </section>
 
     <section class="sec final" aria-label="Запись на курс">
-      <a class="btn btn-primary" href="archi.html#enroll">Записаться на «ИИ в архитектуре»</a>
-      <p>Стоимость 5 000 ₽, новый поток стартует в октябре 2026</p>
+      <a class="btn btn-primary" href="archi.html#enroll">✍️ Записаться на «ИИ в архитектуре»</a>
+      <p>💳 5 000 ₽, рассрочка в 2 этапа · 📅 поток стартует в октябре 2026</p>
     </section>
   </main>
 
