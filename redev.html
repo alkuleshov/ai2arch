@@ -249,6 +249,19 @@
   .done-ico { width:56px; height:56px; margin:0 auto 14px; border-radius:50%; background:var(--green-l); color:var(--green); font-size:30px; font-weight:800; line-height:56px; }
   .done-close { margin-top:22px; }
 </style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113526373', 'ym');
+
+    ym(113526373, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113526373" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </head>
 <body>
 
@@ -743,6 +756,7 @@
 
   function openModal(track) {
     form.style.display = 'block'; done.style.display = 'none'; fail.style.display = 'none';
+    if (typeof ym === 'function') ym(113526373, 'reachGoal', 'form_open', { course: 'ИИ в редевелопменте' });
     var sel = document.getElementById('f-track');
     if (track === 'a') sel.value = 'Трек А · Проектировщик';
     if (track === 'b') sel.value = 'Трек Б · Девелопер и инвестор';
@@ -802,6 +816,7 @@
       form.style.display = 'none';
       if (ok) {
         document.getElementById('doneEmail').textContent = payload.email;
+        if (typeof ym === 'function') ym(113526373, 'reachGoal', 'form_submit', { course: payload.course });
         form.reset(); notice.style.display = 'none';
         done.style.display = 'block';
       } else { fail.style.display = 'block'; }
@@ -837,6 +852,16 @@
     Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
   }
 })();
+</script>
+
+<script>
+  // Цели Метрики: клики по пособию и Telegram — считаем везде на сайте по адресу ссылки
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a'); if (!a) return;
+    if (typeof ym !== 'function') return;
+    if (a.href.indexOf('archi-guide.html') !== -1) ym(113526373, 'reachGoal', 'guide_click');
+    else if (a.href.indexOf('t.me/alkuleshov') !== -1) ym(113526373, 'reachGoal', 'telegram_click');
+  }, true);
 </script>
 </body>
 </html>

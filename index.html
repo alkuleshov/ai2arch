@@ -76,6 +76,12 @@
 
   /* карточки курсов */
   .cards { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:20px; margin-top:clamp(26px, 5vh, 46px); }
+  @media (min-width:861px) {
+    @supports (grid-template-rows: subgrid) {
+      .cards { row-gap:0; }
+      .cards > .card { display:grid; grid-template-rows:subgrid; grid-row:span 6; row-gap:0; }
+    }
+  }
   .card {
     display:flex; flex-direction:column; padding:28px; border-radius:14px;
     background:var(--card); border:1px solid var(--line);
@@ -128,38 +134,32 @@
   .person-links a:focus-visible { outline:2px solid var(--azure); outline-offset:3px; border-radius:4px; }
   .person-about { font-size:14px; color:var(--muted); max-width:62ch; }
 
-  /* инструменты: логотип появляется сам, если файл лежит в images/tools/ */
-  .tool-groups { display:grid; gap:28px; }
-  .tool-group h3 { margin-bottom:12px; font-size:14px; font-weight:600; color:var(--muted); }
-  .tool-group h3 span { margin-right:4px; }
-  .tools { display:grid; grid-template-columns:repeat(auto-fill, minmax(212px, 1fr)); gap:10px; list-style:none; }
-  .tool { display:flex; align-items:center; gap:12px; min-height:58px; padding:11px 14px; border:1px solid var(--line-soft); border-radius:12px; background:rgba(15,22,36,.6); }
-  .tool-logo { display:flex; width:34px; height:34px; flex-shrink:0; align-items:center; justify-content:center; border-radius:8px; background:rgba(26,130,255,.12); font-size:17px; line-height:1; }
+  /* инструменты: чипы; логотип появляется сам, если файл лежит в images/tools/ */
+  .tools { display:flex; flex-wrap:wrap; gap:10px; list-style:none; }
+  .tool { display:flex; align-items:center; gap:10px; min-height:46px; padding:6px 16px 6px 8px; border:1px solid var(--line-soft); border-radius:999px; background:rgba(15,22,36,.6); }
+  .tool-logo { display:flex; width:30px; height:30px; flex-shrink:0; align-items:center; justify-content:center; border-radius:50%; background:rgba(26,130,255,.12); font-size:16px; line-height:1; }
   .tool.has-logo .tool-logo { background:var(--warm); }
   .tool.has-logo .emo { display:none; }
-  .tool-logo img { width:22px; height:22px; object-fit:contain; }
-  .tool > span:last-child { min-width:0; }
-  .tool b { display:block; font-size:14.5px; font-weight:600; line-height:1.2; overflow-wrap:anywhere; }
-  .tool small { display:block; margin-top:3px; font-size:12px; color:var(--faint); }
+  .tool-logo img { width:20px; height:20px; object-fit:contain; }
+  .tool b { font-size:14.5px; font-weight:600; line-height:1.2; }
 
-  /* результаты */
-  .sec h2 + .outcomes { margin-top:22px; }
-  .outcomes { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:34px 44px; }
-  .outcomes h3 { margin-bottom:6px; font-size:16px; font-weight:600; }
-  .outcomes ul { list-style:none; }
-  .outcomes li { display:flex; align-items:center; gap:14px; padding:11px 0; border-top:1px solid var(--line-soft); font-size:15.5px; color:#D5DAE4; }
-  .note { margin-top:30px; max-width:62ch; padding-left:16px; border-left:2px solid var(--azure); font-size:15px; color:var(--muted); }
-
-  /* сводка по ступеням */
-  .cmp { width:100%; border-collapse:collapse; font-size:14.5px; }
-  .cmp th, .cmp td { padding:16px 18px 16px 0; border-top:1px solid var(--line-soft); text-align:left; vertical-align:top; }
-  .cmp thead td { border-top:0; padding:0; }
-  .cmp thead th { padding-top:0; border-top:0; font-size:17px; font-weight:600; color:var(--warm); }
-  .cmp tbody th { width:19%; font-size:13.5px; font-weight:500; color:var(--faint); }
-  .cmp tbody th span { margin-right:6px; }
-  .cmp td { color:var(--muted); line-height:1.5; }
-  .cmp td strong { font-weight:600; color:var(--warm); }
-  .cmp .soon-cell { color:var(--faint); }
+  /* две ступени: одна общая ось по центру, как у карточек выше */
+  .duo { position:relative; margin-top:20px; }
+  .duo::before { content:''; position:absolute; left:50%; top:0; bottom:0; width:1px; background:var(--line); }
+  .duo-head, .duo-row { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+  .duo-head > div { padding:0 28px; font-size:18px; font-weight:600; line-height:1.2; }
+  .duo-head > div:first-child, .duo-cell:nth-of-type(1) { padding-left:0; padding-right:28px; }
+  .duo-head > div:last-child, .duo-cell:nth-of-type(2) { padding-right:0; padding-left:28px; }
+  .duo-head > div:first-child { padding-right:28px; }
+  .duo-head > div:last-child { padding-left:28px; }
+  .duo-row { padding-bottom:0; }
+  .duo-label { grid-column:1 / -1; position:relative; z-index:1; justify-self:center; margin:16px 0 8px; padding:3px 14px; font-size:12.5px; font-weight:500; color:var(--muted); background:var(--night); border:1px solid var(--line); border-radius:999px; }
+  .duo-cell { font-size:15px; line-height:1.5; color:var(--muted); }
+  .duo-cell strong { font-weight:600; color:var(--warm); }
+  .duo-cell.soon-cell { color:var(--faint); }
+  .duo-list { display:grid; gap:9px; list-style:none; }
+  .duo-list li { display:flex; align-items:center; gap:12px; color:#D5DAE4; }
+  .duo-list .ico { width:28px; height:28px; border-radius:8px; font-size:15px; }
 
   /* удостоверение */
   .doc { padding:26px 28px; border:1px solid var(--line); border-top:2px solid var(--azure); border-radius:14px; background:var(--card); }
@@ -182,7 +182,6 @@
 
   @media (max-width:860px) {
     .cards { grid-template-columns:minmax(0,1fr); gap:14px; }
-    .outcomes { grid-template-columns:minmax(0,1fr); }
   }
   @media (max-width:760px) {
     .wrap { padding:0 20px; }
@@ -195,28 +194,38 @@
     .actions .btn { flex:1 1 auto; }
     .person { align-items:flex-start; padding:18px; gap:16px; }
     .person img { width:60px; height:60px; }
-    .tools { grid-template-columns:repeat(2, minmax(0,1fr)); gap:8px; }
-    .tool { gap:9px; padding:10px; }
-    .tool-logo { width:28px; height:28px; }
-    .tool-logo img { width:18px; height:18px; }
-    .tool-logo { font-size:15px; }
-    .tool b { font-size:13px; }
+    .tools { gap:8px; }
+    .tool { min-height:42px; padding:5px 13px 5px 6px; gap:8px; }
+    .tool-logo { width:28px; height:28px; font-size:15px; }
+    .tool b { font-size:13.5px; }
     .doc { padding:22px 20px; }
     .final .btn { flex:1 1 100%; }
-    .cmp, .cmp tbody, .cmp tr, .cmp th, .cmp td { display:block; width:auto; }
-    .cmp thead { display:none; }
-    .cmp tr { padding:16px 0; border-top:1px solid var(--line-soft); }
-    .cmp tbody th { width:auto; padding:0 0 8px; border:0; }
-    .cmp td { padding:6px 0; border:0; }
-    .cmp td::before { content:attr(data-s); display:block; margin-bottom:2px; font-size:12px; color:var(--faint); }
+    .duo::before, .duo-head { display:none; }
+    .duo-row { grid-template-columns:minmax(0,1fr); }
+    .duo-label { justify-self:start; margin:22px 0 10px; }
+    .duo-cell:nth-of-type(n) { padding:0; }
+    .duo-cell + .duo-cell { margin-top:14px; }
+    .duo-cell::before { content:attr(data-s); display:block; margin-bottom:3px; font-size:12px; color:var(--faint); }
   }
   @media (max-width:359px) {
-    .tools { grid-template-columns:minmax(0,1fr); }
     .brand-text small { font-size:12.5px; }
     .card h2 { font-size:23px; }
   }
   @media (prefers-reduced-motion:reduce) { .art { animation:none; } .btn { transition:none; } }
 </style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113526373', 'ym');
+
+    ym(113526373, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113526373" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </head>
 <body>
 <script>
@@ -250,7 +259,7 @@
           <li>🎓 Удостоверение ЮФУ</li>
         </ul>
         <div class="actions">
-          <a class="btn btn-primary" href="archi.html#enroll">✍️ Записаться</a>
+          <a class="btn btn-primary" href="archi.html#enroll" onclick="typeof ym==='function'&&ym(113526373,'reachGoal','enroll_click',{course:'ИИ в архитектуре'})">✍️ Записаться</a>
           <a class="btn btn-ghost" href="archi-guide.html">📖 Учебное пособие</a>
         </div>
       </article>
@@ -284,128 +293,70 @@
 
     <section class="sec" aria-labelledby="tools-h">
       <h2 id="tools-h">С чем вы будете работать</h2>
-      <p class="sec-sub">Под названием указано, на какой ступени инструмент используется.</p>
-      <div class="tool-groups">
-        <div class="tool-group">
-          <h3><span aria-hidden="true">🗺️</span>Данные и карты</h3>
-          <ul class="tools">
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🗺️</span><img src="images/tools/qgis.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>QGIS</b><small>1 ступень</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🧭</span><img src="images/tools/openstreetmap.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>OpenStreetMap</b><small>1 ступень</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">📜</span><img src="images/tools/nspd.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>НСПД (кадастр)</b><small>1 ступень</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">⛰️</span><img src="images/tools/opentopography.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>OpenTopography</b><small>1 ступень</small></span></li>
-          </ul>
-        </div>
-        <div class="tool-group">
-          <h3><span aria-hidden="true">💬</span>Языковые модели</h3>
-          <ul class="tools">
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">💬</span><img src="images/tools/chatgpt.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>ChatGPT</b><small>обе ступени</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🧠</span><img src="images/tools/claude.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Claude</b><small>обе ступени</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">✨</span><img src="images/tools/gemini.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Gemini</b><small>обе ступени</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🎙️</span><img src="images/tools/alisa.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Алиса AI</b><small>1 ступень</small></span></li>
-          </ul>
-        </div>
-        <div class="tool-group">
-          <h3><span aria-hidden="true">🎨</span>Изображения: генерация и доработка</h3>
-          <ul class="tools">
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🎨</span><img src="images/tools/stable-diffusion.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Stable Diffusion</b><small>2 ступень</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🔗</span><img src="images/tools/comfyui.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>ComfyUI</b><small>2 ступень</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🎛️</span><img src="images/tools/controlnet.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>ControlNet</b><small>2 ступень</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">⚡</span><img src="images/tools/flux.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Flux</b><small>2 ступень</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🖼️</span><img src="images/tools/midjourney.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Midjourney</b><small>2 ступень</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🖌️</span><img src="images/tools/photoshop.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Photoshop</b><small>1 ступень</small></span></li>
-          </ul>
-        </div>
-        <div class="tool-group">
-          <h3><span aria-hidden="true">📑</span>Презентации и документы</h3>
-          <ul class="tools">
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">📊</span><img src="images/tools/gamma.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Gamma</b><small>обе ступени</small></span></li>
-            <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">📝</span><img src="images/tools/notion.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Notion</b><small>2 ступень</small></span></li>
-          </ul>
-        </div>
-      </div>
-      <p class="fine">ComfyUI и ControlNet на второй ступени показываем обзорно: настраивать их самостоятельно не нужно. Названия и логотипы принадлежат их владельцам.</p>
+      <p class="sec-sub">Программы и сервисы обеих ступеней.</p>
+      <ul class="tools">
+        <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🗺️</span><img src="images/tools/qgis.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>QGIS</b></span></li>
+        <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🧭</span><img src="images/tools/openstreetmap.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>OpenStreetMap</b></span></li>
+        <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">📜</span><img src="images/tools/nspd.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>НСПД (кадастр)</b></span></li>
+        <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">⛰️</span><img src="images/tools/opentopography.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>OpenTopography</b></span></li>
+        <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">💬</span><img src="images/tools/chatgpt.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>ChatGPT</b></span></li>
+        <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🧠</span><img src="images/tools/claude.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Claude</b></span></li>
+        <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">✨</span><img src="images/tools/gemini.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Gemini</b></span></li>
+        <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🎙️</span><img src="images/tools/alisa.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Алиса AI</b></span></li>
+        <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🎨</span><img src="images/tools/stable-diffusion.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Stable Diffusion</b></span></li>
+        <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🔗</span><img src="images/tools/comfyui.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>ComfyUI</b></span></li>
+        <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🎛️</span><img src="images/tools/controlnet.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>ControlNet</b></span></li>
+        <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">⚡</span><img src="images/tools/flux.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Flux</b></span></li>
+        <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🖼️</span><img src="images/tools/midjourney.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Midjourney</b></span></li>
+        <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">🖌️</span><img src="images/tools/photoshop.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Photoshop</b></span></li>
+        <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">📊</span><img src="images/tools/gamma.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Gamma</b></span></li>
+        <li class="tool"><span class="tool-logo" aria-hidden="true"><span class="emo">📝</span><img src="images/tools/notion.svg" alt="" width="22" height="22" onload="this.closest('.tool').classList.add('has-logo')" onerror="this.remove()"></span><span><b>Notion</b></span></li>
+      </ul>
+      <p class="fine">ComfyUI и ControlNet показываем обзорно: настраивать их самостоятельно не нужно. Названия и логотипы принадлежат их владельцам.</p>
     </section>
 
-    <section class="sec" aria-labelledby="out-h">
-      <h2 id="out-h">Благодаря программам вы сможете</h2>
-      <div class="outcomes">
-        <div>
-          <h3>Первая ступень · ИИ в архитектуре</h3>
-          <ul>
-            <li><span class="ico" aria-hidden="true">🗺️</span>Построите цифровой двойник участка</li>
-            <li><span class="ico" aria-hidden="true">⚡</span>Проведёте ИИ-анализ территории за минуты</li>
-            <li><span class="ico" aria-hidden="true">🎨</span>Сгенерируете десятки вариантов визуализаций</li>
-            <li><span class="ico" aria-hidden="true">📊</span>Соберёте презентацию на данных для заказчика</li>
-          </ul>
+    <section class="sec" aria-labelledby="duo-h">
+      <h2 id="duo-h">Две ступени кратко</h2>
+      <div class="duo">
+        <div class="duo-head"><div>ИИ в архитектуре</div><div>ИИ в редевелопменте</div></div>
+        <div class="duo-row">
+          <p class="duo-label"><span aria-hidden="true">👥</span> Для кого</p>
+          <div class="duo-cell" data-s="ИИ в архитектуре">Архитекторы, урбанисты, дизайнеры среды, студенты</div>
+          <div class="duo-cell" data-s="ИИ в редевелопменте">Девелоперы, аналитики, собственники, инвесторы, архитекторы</div>
         </div>
-        <div>
-          <h3>Вторая ступень · ИИ в редевелопменте</h3>
-          <ul>
-            <li><span class="ico" aria-hidden="true">🔍</span>Проверите идею объекта на данных</li>
-            <li><span class="ico" aria-hidden="true">🏗️</span>Рассчитаете функции и площади</li>
-            <li><span class="ico" aria-hidden="true">🖼️</span>Нарисуете эскизы фасадов и интерьеров с ИИ</li>
-            <li><span class="ico" aria-hidden="true">🎯</span>Защитите проект по реальному объекту</li>
-          </ul>
+        <div class="duo-row">
+          <p class="duo-label"><span aria-hidden="true">🎯</span> Вы сможете</p>
+          <div class="duo-cell" data-s="ИИ в архитектуре"><ul class="duo-list">
+            <li><span class="ico" aria-hidden="true">🗺️</span>Построить цифровой двойник участка</li>
+            <li><span class="ico" aria-hidden="true">⚡</span>Провести ИИ-анализ за минуты</li>
+            <li><span class="ico" aria-hidden="true">🎨</span>Собрать визуализации и презентацию</li>
+          </ul></div>
+          <div class="duo-cell" data-s="ИИ в редевелопменте"><ul class="duo-list">
+            <li><span class="ico" aria-hidden="true">🔍</span>Проверить идею объекта на данных</li>
+            <li><span class="ico" aria-hidden="true">🏗️</span>Рассчитать функции и площади</li>
+            <li><span class="ico" aria-hidden="true">🏁</span>Защитить проект по реальному объекту</li>
+          </ul></div>
+        </div>
+        <div class="duo-row">
+          <p class="duo-label"><span aria-hidden="true">🕒</span> Объём</p>
+          <div class="duo-cell" data-s="ИИ в архитектуре"><strong>22 ак. часа</strong>, 2,5 недели</div>
+          <div class="duo-cell" data-s="ИИ в редевелопменте"><strong>72 ак. часа</strong>, 4,5 недели</div>
+        </div>
+        <div class="duo-row">
+          <p class="duo-label"><span aria-hidden="true">💳</span> Стоимость</p>
+          <div class="duo-cell" data-s="ИИ в архитектуре"><strong>5 000 ₽</strong>, рассрочка в 2 этапа</div>
+          <div class="duo-cell soon-cell" data-s="ИИ в редевелопменте">⏳ Скоро</div>
         </div>
       </div>
-      <p class="note">🔄 Программы обновляются: берём самые актуальные ИИ-инструменты.</p>
-    </section>
-
-    <section class="sec" aria-labelledby="cmp-h">
-      <h2 id="cmp-h">Две ступени кратко</h2>
-      <p class="sec-sub">Первая ступень: данные и ИИ на участке. Вторая: реальный объект до защиты концепции.</p>
-      <table class="cmp">
-        <thead>
-          <tr><td></td><th scope="col">ИИ в архитектуре</th><th scope="col">ИИ в редевелопменте</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row"><span aria-hidden="true">👥</span>Для кого</th>
-            <td data-s="ИИ в архитектуре">Архитекторы, урбанисты, дизайнеры среды, студенты</td>
-            <td data-s="ИИ в редевелопменте">Архитекторы, девелоперы, аналитики, собственники и инвесторы</td>
-          </tr>
-          <tr>
-            <th scope="row"><span aria-hidden="true">🎯</span>Результат</th>
-            <td data-s="ИИ в архитектуре">Проект по вашему участку: от карт до презентации</td>
-            <td data-s="ИИ в редевелопменте">Проект по реальному объекту: исследование или концепт-паспорт</td>
-          </tr>
-          <tr>
-            <th scope="row"><span aria-hidden="true">🕒</span>Объём</th>
-            <td data-s="ИИ в архитектуре"><strong>22 ак. часа</strong>, 2,5 недели</td>
-            <td data-s="ИИ в редевелопменте"><strong>72 ак. часа</strong>, 4,5 недели</td>
-          </tr>
-          <tr>
-            <th scope="row"><span aria-hidden="true">💻</span>Формат</th>
-            <td data-s="ИИ в архитектуре">Видеоуроки, 2 воркшопа, чат. До 25 человек</td>
-            <td data-s="ИИ в редевелопменте">Записи, 3 воркшопа, защита. Группа из 5 человек</td>
-          </tr>
-          <tr>
-            <th scope="row"><span aria-hidden="true">🎓</span>Документ</th>
-            <td data-s="ИИ в архитектуре">Удостоверение о повышении квалификации ЮФУ</td>
-            <td data-s="ИИ в редевелопменте">Удостоверение о повышении квалификации ЮФУ</td>
-          </tr>
-          <tr>
-            <th scope="row"><span aria-hidden="true">💳</span>Стоимость</th>
-            <td data-s="ИИ в архитектуре"><strong>5 000 ₽</strong>, для сотрудников ЮФУ 3 600 ₽</td>
-            <td data-s="ИИ в редевелопменте" class="soon-cell">⏳ Скоро</td>
-          </tr>
-          <tr>
-            <th scope="row"><span aria-hidden="true">🧾</span>Оплата</th>
-            <td data-s="ИИ в архитектуре">Рассрочка в 2 этапа, налоговый вычет 13%</td>
-            <td data-s="ИИ в редевелопменте" class="soon-cell">⏳ Скоро</td>
-          </tr>
-        </tbody>
-      </table>
     </section>
 
     <section class="sec doc" aria-labelledby="doc-h">
-      <h2 id="doc-h">🎓 Удостоверение о повышении квалификации</h2>
-      <p>Программы реализует <strong>Южный федеральный университет</strong>, Академия архитектуры и искусств. Удостоверение установленного образца выдаётся после итоговой аттестации.</p>
-      <p>📄 Диплома пока нет? Участвуйте сразу: после защиты выдадим справку, а удостоверение — после получения диплома.</p>
+      <h2 id="doc-h">🎓 Удостоверение ЮФУ у обеих программ</h2>
+      <p>Выдаёт Южный федеральный университет, Академия архитектуры и искусств. Диплома пока нет? Участвуйте сразу: справка после защиты, удостоверение после получения диплома.</p>
     </section>
 
     <section class="sec final" aria-label="Запись на курс">
-      <a class="btn btn-primary" href="archi.html#enroll">✍️ Записаться на «ИИ в архитектуре»</a>
+      <a class="btn btn-primary" href="archi.html#enroll" onclick="typeof ym==='function'&&ym(113526373,'reachGoal','enroll_click',{course:'ИИ в архитектуре'})">✍️ Записаться на «ИИ в архитектуре»</a>
       <p>💳 5 000 ₽, рассрочка в 2 этапа · 📅 старт потока 12 октября 2026</p>
     </section>
   </main>
@@ -421,5 +372,15 @@
     </div>
   </footer>
 </div>
+
+<script>
+  // Цели Метрики: клики по пособию и Telegram — считаем везде на сайте по адресу ссылки
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a'); if (!a) return;
+    if (typeof ym !== 'function') return;
+    if (a.href.indexOf('archi-guide.html') !== -1) ym(113526373, 'reachGoal', 'guide_click');
+    else if (a.href.indexOf('t.me/alkuleshov') !== -1) ym(113526373, 'reachGoal', 'telegram_click');
+  }, true);
+</script>
 </body>
 </html>
