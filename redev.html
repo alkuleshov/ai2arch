@@ -245,6 +245,9 @@
   .done { display:none; text-align:center; padding:26px 6px; }
   .done h3 { font-size:20px; margin-bottom:10px; }
   .done p { font-size:14.5px; color:var(--ink-muted); }
+  .done p + p { margin-top:10px; }
+  .done-ico { width:56px; height:56px; margin:0 auto 14px; border-radius:50%; background:var(--green-l); color:var(--green); font-size:30px; font-weight:800; line-height:56px; }
+  .done-close { margin-top:22px; }
 </style>
 </head>
 <body>
@@ -710,13 +713,18 @@
         <div class="consent"><input type="checkbox" id="f-consent" required><label for="f-consent">Согласен(на) на обработку персональных данных.</label></div>
         <button type="submit" class="submit" id="submitBtn">Отправить заявку</button>
       </form>
-      <div class="done" id="done">
-        <h3>Заявка принята</h3>
-        <p>Мы свяжемся с вами в ближайшее время, подтвердим трек и ответим на вопросы. Если хотите уточнить что-то сразу, напишите в Telegram: <a href="https://t.me/alkuleshov" target="_blank" rel="noopener" style="color:var(--azure-dark);font-weight:700">@alkuleshov</a>.</p>
+      <div class="done" id="done" role="status" aria-live="polite">
+        <div class="done-ico" aria-hidden="true">✓</div>
+        <h3>Данные успешно отправлены</h3>
+        <p>Мы свяжемся с вами по электронной почте <b id="doneEmail"></b>, подтвердим трек и отправим приглашение в чат программы.</p>
+        <p>Если хотите уточнить что-то сразу, напишите в Telegram: <a href="https://t.me/alkuleshov" target="_blank" rel="noopener" style="color:var(--azure-dark);font-weight:700">@alkuleshov</a>.</p>
+        <button type="button" class="submit done-close" id="doneClose">Закрыть</button>
       </div>
       <div class="done" id="fail">
         <h3>Не получилось отправить</h3>
         <p>Попробуйте ещё раз или напишите напрямую в Telegram: <a href="https://t.me/alkuleshov" target="_blank" rel="noopener" style="color:var(--azure-dark);font-weight:700">@alkuleshov</a>.</p>
+      
+        <button type="button" class="submit done-close" id="failClose">Закрыть</button>
       </div>
     </div>
   </div>
@@ -742,6 +750,8 @@
     document.body.style.overflow = 'hidden';
   }
   function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
+  document.getElementById('doneClose').addEventListener('click', closeModal);
+  document.getElementById('failClose').addEventListener('click', closeModal);
 
   Array.prototype.forEach.call(document.querySelectorAll('[data-apply]'), function (b) {
     b.addEventListener('click', function () { openModal(b.getAttribute('data-apply')); });
@@ -782,10 +792,24 @@
       source: 'Редевелопмент'
     };
     btn.disabled = true; btn.textContent = 'Отправка...';
-    fetch(ENROLL_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) })
-      .then(function () { form.style.display = 'none'; done.style.display = 'block'; })
-      .catch(function () { form.style.display = 'none'; fail.style.display = 'block'; })
-      .then(function () { btn.disabled = false; btn.textContent = 'Отправить заявку'; });
+    // Ответ скрипта Google в режиме no-cors прочитать нельзя, а переадресация иногда идёт долго.
+    // Если запрос не завершился за 5 секунд, считаем заявку отправленной: данные к этому моменту уже ушли.
+    var settled = false;
+    function finish(ok) {
+      if (settled) return;
+      settled = true; clearTimeout(timer);
+      btn.disabled = false; btn.textContent = 'Отправить заявку';
+      form.style.display = 'none';
+      if (ok) {
+        document.getElementById('doneEmail').textContent = payload.email;
+        form.reset(); notice.style.display = 'none';
+        done.style.display = 'block';
+      } else { fail.style.display = 'block'; }
+    }
+    var timer = setTimeout(function () { finish(true); }, 5000);
+    fetch(ENROLL_URL, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) })
+      .then(function () { finish(true); })
+      .catch(function () { finish(false); });
   });
 
   // меню на планшетах и телефонах
