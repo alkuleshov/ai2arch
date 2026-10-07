@@ -583,12 +583,19 @@
     background:var(--surface); border:1px solid var(--border);
     border-radius:8px; font-size:12.5px; color:var(--ink-muted);
   }
+  .author-strip { gap:14px; }
   .author-strip .av {
-    width:28px; height:28px; border-radius:50%; flex-shrink:0;
+    width:44px; height:44px; border-radius:50%; flex-shrink:0;
     display:flex; align-items:center; justify-content:center;
-    font-size:11px; font-weight:800; color:#fff;
+    font-size:14px; font-weight:800; color:#fff;
     background:linear-gradient(135deg, var(--ink-night) 0%, var(--azure,#4DA3FF) 100%);
   }
+  .author-strip .photos { display:flex; flex-shrink:0; }
+  .author-strip .ph {
+    display:block; width:44px; height:44px; border-radius:50%; object-fit:cover; flex-shrink:0;
+    border:2px solid var(--surface); box-shadow:0 0 0 1px var(--border); background:var(--border);
+  }
+  .author-strip .ph + .ph { margin-left:-14px; }
   .author-strip strong { color:var(--ink); font-weight:700; }
   section[id] { scroll-margin-top: 0; }
 
@@ -1380,7 +1387,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
   <div class="module-panel" id="panel-ai">
     <div class="guide-inner" style="padding-top:40px;">
       <div class="author-strip">
-        <div class="av">КА</div>
+        <div class="photos"><img class="ph" src="images/kuleshov.jpg" width="44" height="44" alt="Кулешов Александр Алексеевич" loading="lazy"></div>
         <div>Автор раздела: <strong>Кулешов Александр Алексеевич</strong></div>
       </div>
 
@@ -1477,7 +1484,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
 
     <div class="guide-inner" style="padding-top:40px;">
       <div class="author-strip">
-        <div class="av" style="background:linear-gradient(135deg, var(--green) 0%, #5DDDB0 100%);">ПП</div>
+        <div class="photos"><img class="ph" src="images/petrenko.jpg" width="44" height="44" alt="Петренко Екатерина Сергеевна" loading="lazy"><img class="ph" src="images/popova.jpg" width="44" height="44" alt="Попова Елизавета Андреевна" loading="lazy"></div>
         <div>Авторы раздела: <strong>Петренко Екатерина Сергеевна</strong> и <strong>Попова Елизавета Андреевна</strong></div>
       </div>
 
@@ -1875,7 +1882,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
   <div class="module-panel" id="panel-pres">
     <div class="guide-inner" style="padding-top:40px;">
       <div class="author-strip">
-        <div class="av">КА</div>
+        <div class="photos"><img class="ph" src="images/kuleshov.jpg" width="44" height="44" alt="Кулешов Александр Алексеевич" loading="lazy"></div>
         <div>Автор раздела: <strong>Кулешов Александр Алексеевич</strong></div>
       </div>
 
