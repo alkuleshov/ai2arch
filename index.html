@@ -43,7 +43,7 @@
   html { color-scheme:dark; background:var(--night); }
   body {
     font-family:var(--sans); background:var(--night); color:var(--warm);
-    line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:clip;
+    line-height:1.55; -webkit-font-smoothing:antialiased; overflow-x:hidden;
   }
   a { color:inherit; }
 
@@ -210,6 +210,7 @@
   @media (max-width:359px) {
     .brand-text small { font-size:12.5px; }
     .card h2 { font-size:23px; }
+    .art { right:-260px; }
   }
   @media (prefers-reduced-motion:reduce) { .art { animation:none; } .btn { transition:none; } }
 </style>
@@ -230,7 +231,7 @@
 <body>
 <script>
 // Старые ссылки вида ai2arch.ru/#qgis вели на пособие: переносим на его новый адрес
-(function(){var m={sprint:1,qgis:1,ai:1,gen:1,pres:1,neural:1,genviz:1,synth:1};var h=location.hash.slice(1);if(m[h]){location.replace('archi-guide.html#'+h);}})();
+(function(){var m={sprint:1,qgis:1,ai:1,gen:1,pres:1,neural:1,genviz:1,synth:1};var h=location.hash.slice(1);if(m[h]){location.replace('archi-guide.html?from=index#'+h);}})();
 </script>
 
 <div class="screen">
@@ -251,7 +252,7 @@
         <p class="step">Первая ступень</p>
         <h2>ИИ в архитектуре</h2>
         <p class="official">«Современные инструменты проектного анализа: ИИ и мобильные сервисы в работе с архитектурной средой»</p>
-        <p class="desc">Цифровой двойник участка, ИИ-анализ и презентация для заказчика. С нуля.</p>
+        <p class="desc">Базовый вводный курс: цифровой двойник участка, ИИ-анализ и презентация для заказчика. С нуля, два трека на выбор.</p>
         <ul class="facts">
           <li>🕒 22 ак. часа</li>
           <li>📅 2,5 недели</li>
@@ -260,7 +261,7 @@
         </ul>
         <div class="actions">
           <a class="btn btn-primary" href="archi.html#enroll" onclick="typeof ym==='function'&&ym(113526373,'reachGoal','enroll_click',{course:'ИИ в архитектуре'})">✍️ Записаться</a>
-          <a class="btn btn-ghost" href="archi-guide.html">📖 Учебное пособие</a>
+          <a class="btn btn-ghost" href="archi-guide.html?from=index">📖 Учебное пособие</a>
         </div>
       </article>
 
@@ -321,7 +322,7 @@
         <div class="duo-head"><div>ИИ в архитектуре</div><div>ИИ в редевелопменте</div></div>
         <div class="duo-row">
           <p class="duo-label"><span aria-hidden="true">👥</span> Для кого</p>
-          <div class="duo-cell" data-s="ИИ в архитектуре">Архитекторы, урбанисты, дизайнеры среды, студенты</div>
+          <div class="duo-cell" data-s="ИИ в архитектуре">Архитекторы, урбанисты, дизайнеры среды, студенты, преподаватели творческих специальностей</div>
           <div class="duo-cell" data-s="ИИ в редевелопменте">Девелоперы, аналитики, собственники, инвесторы, архитекторы</div>
         </div>
         <div class="duo-row">
@@ -357,7 +358,7 @@
 
     <section class="sec final" aria-label="Запись на курс">
       <a class="btn btn-primary" href="archi.html#enroll" onclick="typeof ym==='function'&&ym(113526373,'reachGoal','enroll_click',{course:'ИИ в архитектуре'})">✍️ Записаться на «ИИ в архитектуре»</a>
-      <p>💳 5 000 ₽, рассрочка в 2 этапа · 📅 старт потока 12 октября 2026</p>
+      <p>💳 5 000 ₽, рассрочка в 2 этапа · 📅 2,5 недели, расписание потока — после записи</p>
     </section>
   </main>
 
