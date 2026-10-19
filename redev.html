@@ -74,6 +74,13 @@
   @media (max-width:359px) { .brand-text small { display:none; } }
   @media (max-width:520px) { .head-apply { display:none; } .burger { margin-left:auto; } }
 
+  /* ── promo bar: набор на поток ── */
+  .promo-bar { background:linear-gradient(90deg, var(--orange), #F0A456); color:#fff; }
+  .promo-in { display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; padding:10px 20px; text-align:center; }
+  .promo-in span { font-size:14px; font-weight:700; letter-spacing:.01em; }
+  .promo-in .btn { flex-shrink:0; }
+  @media (max-width:520px) { .promo-in span { font-size:13px; } .promo-in { padding:9px 16px; gap:10px; } }
+
   /* ── hero ── */
   .hero { position:relative; background:var(--ink-night); color:#fff; overflow:hidden; }
   .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(60% 80% at 85% 0%, rgba(77,163,255,.2), transparent 70%); pointer-events:none; }
@@ -270,6 +277,13 @@
 </head>
 <body>
 
+<div class="promo-bar">
+  <div class="wrap promo-in">
+    <span>🔥 Открыт набор на пилотный поток «ИИ в редевелопменте» — старт 5 ноября</span>
+    <button class="btn btn-dark btn-sm" data-apply>Оставить заявку</button>
+  </div>
+</div>
+
 <header class="head">
   <div class="wrap head-in">
     <a class="brand" href="index.html"><img class="brand-sign" src="images/ai2arch-sign.png" width="38" height="38" alt=""><span class="brand-text"><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
@@ -283,6 +297,7 @@
       <a href="#faq">Вопросы</a>
     </nav>
     <button class="btn btn-primary btn-sm head-apply" data-apply>Оставить заявку</button>
+
     <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
   </div>
 </header>
