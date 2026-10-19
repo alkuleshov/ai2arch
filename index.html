@@ -54,18 +54,18 @@
 
   /* артефакт бренда: глубина на фоне, движение — одно, медленное */
   .art {
-    position:absolute; z-index:0; top:-110px; right:-3vw;
-    width:min(56vw, 640px); aspect-ratio:1/1;
+    position:absolute; z-index:0; top:-30px; left:1vw;
+    width:min(54vw, 600px); height:480px; opacity:.85;
     mix-blend-mode:screen; pointer-events:none; user-select:none;
-    -webkit-mask-image:radial-gradient(closest-side, #000 58%, transparent 100%);
-            mask-image:radial-gradient(closest-side, #000 58%, transparent 100%);
-    animation:drift 20s ease-in-out infinite alternate;
+    -webkit-mask-image:radial-gradient(70% 70% at 55% 48%, #000 62%, transparent 100%);
+            mask-image:radial-gradient(70% 70% at 55% 48%, #000 62%, transparent 100%);
+    animation:drift 24s ease-in-out infinite alternate;
   }
   @keyframes drift {
-    from { transform:translate3d(0,-6px,0) rotate(-1.5deg); }
-    to   { transform:translate3d(0,8px,0)  rotate(1.5deg); }
+    from { transform:translate3d(0,-4px,0); }
+    to   { transform:translate3d(0,6px,0); }
   }
-  /* ── частицы: генеративное поле, заменяет статичную картинку ── */
+  /* ── созвездие: переливающееся контурное поле, заменяет статичную картинку ── */
   .art canvas { display:block; width:100%; height:100%; }
   @media (prefers-reduced-motion:reduce) { .art { animation:none; } }
 
@@ -197,7 +197,7 @@
   }
   @media (max-width:760px) {
     .wrap { padding:0 20px; }
-    .art { top:-80px; right:-210px; width:420px; opacity:.5; }
+    .art { top:-10px; left:-14vw; width:90vw; height:360px; opacity:.45; }
     .top { padding-top:24px; }
     .brand-sign { width:52px; height:52px; }
     .brand-text b { font-size:24px; }
@@ -222,7 +222,6 @@
   @media (max-width:359px) {
     .brand-text small { font-size:12.5px; }
     .card h2 { font-size:23px; }
-    .art { right:-260px; }
   }
   @media (prefers-reduced-motion:reduce) { .art { animation:none; } .btn { transition:none; } }
 </style>
@@ -403,10 +402,10 @@
   }, true);
 </script>
 
-<!-- ── генеративное частичное поле (заменяет статичную картинку) ── -->
+<!-- ── созвездие: переливающийся контур из звёзд, фон позади заголовка ── -->
 <script>
 (function () {
-  function initParticleField(sel, colors) {
+  function initConstellation(sel, opts) {
     var host = document.querySelector(sel);
     if (!host) return;
     var canvas = host.querySelector('canvas');
@@ -414,7 +413,7 @@
     var ctx = canvas.getContext('2d');
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var W, H, cx, cy;
+    var W, H, cx, cy, R;
 
     function resize() {
       var r = host.getBoundingClientRect();
@@ -422,79 +421,109 @@
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      cx = W / 2; cy = H / 2;
+      cx = W * (opts.cx || 0.5); cy = H * (opts.cy || 0.5);
+      R = Math.min(W, H) * 0.44;
     }
     resize();
     window.addEventListener('resize', resize);
 
-    var N = 260;
-    var particles = [];
-
-    function spawn(p) {
-      var a = Math.random() * Math.PI * 2;
-      var speed = 0.6 + Math.random() * 2.0;
-      p.x = cx; p.y = cy;
-      p.vx = Math.cos(a) * speed; p.vy = Math.sin(a) * speed;
-      p.life = 0;
-      p.maxLife = 70 + Math.random() * 150;
-      p.size = 0.6 + Math.random() * 1.5;
-      p.color = colors[(Math.random() * colors.length) | 0];
-      return p;
+    var M = 40;
+    var nodes = [];
+    for (var i = 0; i < M; i++) {
+      nodes.push({
+        a: (i / M) * Math.PI * 2,
+        twinklePhase: Math.random() * Math.PI * 2,
+        twinkleSpeed: 0.5 + Math.random() * 0.9,
+        wobble: Math.random() * Math.PI * 2
+      });
     }
 
-    for (var i = 0; i < N; i++) {
-      var p = spawn({});
-      p.life = Math.random() * p.maxLife;
-      particles.push(p);
+    var links = [];
+    for (var k = 0; k < 22; k++) {
+      var i1 = (Math.random() * M) | 0;
+      var i2 = (i1 + 3 + ((Math.random() * (M - 6)) | 0)) % M;
+      links.push([i1, i2]);
     }
 
-    function advance() {
-      for (var i = 0; i < particles.length; i++) {
-        var p = particles[i];
-        p.x += p.vx; p.y += p.vy;
-        p.vx *= 1.012; p.vy *= 1.012;
-        p.life++;
-        if (p.life > p.maxLife || p.x < -30 || p.x > W + 30 || p.y < -30 || p.y > H + 30) spawn(p);
-      }
+    function contourPoint(a, t) {
+      var rr = R * (1
+        + 0.15 * Math.sin(3 * a + t * 0.55)
+        + 0.08 * Math.sin(5 * a - t * 0.8 + 1.3)
+        + 0.05 * Math.sin(8 * a + t * 0.35));
+      return { x: cx + Math.cos(a) * rr, y: cy + Math.sin(a) * rr * 0.82 };
     }
 
-    function draw() {
+    function hueAt(i, t) {
+      return (opts.hueBase + (i / M) * opts.hueSpan + t * opts.hueSpeed) % 360;
+    }
+
+    function frame(t) {
       ctx.clearRect(0, 0, W, H);
       ctx.globalCompositeOperation = 'lighter';
-      for (var i = 0; i < particles.length; i++) {
-        var p = particles[i];
-        var t = p.life / p.maxLife;
-        var alpha = Math.sin(Math.PI * Math.min(1, t));
-        if (alpha <= 0.02) continue;
-        var tx = p.x - p.vx * 9, ty = p.y - p.vy * 9;
-        var g = ctx.createLinearGradient(tx, ty, p.x, p.y);
-        g.addColorStop(0, 'rgba(0,0,0,0)');
-        g.addColorStop(1, p.color.replace('ALPHA', alpha.toFixed(3)));
-        ctx.strokeStyle = g;
-        ctx.lineWidth = p.size;
-        ctx.beginPath();
-        ctx.moveTo(tx, ty);
-        ctx.lineTo(p.x, p.y);
-        ctx.stroke();
 
+      var pts = [];
+      for (var i = 0; i < M; i++) {
+        pts.push(contourPoint(nodes[i].a + Math.sin(t * 0.12 + nodes[i].wobble) * 0.025, t));
+      }
+
+      for (var i = 0; i < M; i++) {
+        var p1 = pts[i], p2 = pts[(i + 1) % M];
+        var h1 = hueAt(i, t), h2 = hueAt(i + 1, t);
+        var tw = 0.5 + 0.5 * Math.sin(t * nodes[i].twinkleSpeed + nodes[i].twinklePhase);
+        var g = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
+        g.addColorStop(0, 'hsla(' + h1 + ',85%,66%,' + (0.22 + 0.32 * tw).toFixed(3) + ')');
+        g.addColorStop(1, 'hsla(' + h2 + ',85%,66%,' + (0.22 + 0.32 * tw).toFixed(3) + ')');
+        ctx.strokeStyle = g;
+        ctx.lineWidth = 1;
         ctx.beginPath();
-        ctx.fillStyle = 'rgba(255,255,255,' + (alpha * 0.85).toFixed(3) + ')';
-        ctx.arc(p.x, p.y, Math.max(0.5, p.size * 0.55), 0, Math.PI * 2);
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+
+      for (var l = 0; l < links.length; l++) {
+        var a1 = links[l][0], a2 = links[l][1];
+        var p1 = pts[a1], p2 = pts[a2];
+        var h = hueAt((a1 + a2) / 2, t);
+        var tw = 0.5 + 0.5 * Math.sin(t * 0.7 + l);
+        ctx.strokeStyle = 'hsla(' + h + ',80%,66%,' + (0.06 + 0.09 * tw).toFixed(3) + ')';
+        ctx.lineWidth = 0.7;
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+
+      for (var i = 0; i < M; i++) {
+        var p = pts[i];
+        var h = hueAt(i, t);
+        var tw = 0.35 + 0.65 * Math.max(0, Math.sin(t * nodes[i].twinkleSpeed + nodes[i].twinklePhase));
+        var rad = 1.1 + 1.7 * tw;
+        var glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rad * 4);
+        glow.addColorStop(0, 'hsla(' + h + ',90%,76%,' + (0.5 + 0.4 * tw).toFixed(3) + ')');
+        glow.addColorStop(1, 'hsla(' + h + ',90%,76%,0)');
+        ctx.fillStyle = glow;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, rad * 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = 'hsla(' + h + ',95%,90%,' + (0.65 + 0.35 * tw).toFixed(3) + ')';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, rad * 0.55, 0, Math.PI * 2);
         ctx.fill();
       }
+
       ctx.globalCompositeOperation = 'source-over';
     }
 
-    for (var w = 0; w < 160; w++) advance();
-
     if (reduced) {
-      draw();
+      frame(6);
       return;
     }
 
-    function loop() {
-      advance();
-      draw();
+    var t0 = performance.now();
+    function loop(now) {
+      frame((now - t0) / 1000);
       requestAnimationFrame(loop);
     }
     requestAnimationFrame(loop);
@@ -506,11 +535,7 @@
   }
 
   ready(function () {
-    initParticleField('.art', [
-      'rgba(26,130,255,ALPHA)',
-      'rgba(107,63,212,ALPHA)',
-      'rgba(255,255,255,ALPHA)'
-    ]);
+    initConstellation('.art', { cx: 0.56, cy: 0.52, hueBase: 205, hueSpan: 150, hueSpeed: 6 });
   });
 })();
 </script>
