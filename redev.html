@@ -84,7 +84,7 @@
   /* ── hero ── */
   .hero { position:relative; background:var(--ink-night); color:#fff; overflow:hidden; }
   .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(60% 80% at 85% 0%, rgba(77,163,255,.2), transparent 70%); pointer-events:none; }
-  .hero-mark { display:block; position:absolute; top:-30px; left:-2vw; right:-14vw; width:auto; height:560px; opacity:.85; mix-blend-mode:screen; pointer-events:none; z-index:0;
+  .hero-mark { display:block; position:absolute; top:-30px; left:4vw; right:-20vw; width:auto; height:560px; opacity:.85; mix-blend-mode:screen; pointer-events:none; z-index:0;
     -webkit-mask-image:radial-gradient(70% 70% at 58% 44%, #000 62%, transparent 100%); mask-image:radial-gradient(70% 70% at 58% 44%, #000 62%, transparent 100%); }
   @media (max-width:760px) { .hero-mark { top:-20px; left:-20vw; right:-20vw; height:420px; opacity:.55; } }
   @media (prefers-reduced-motion:no-preference) { .hero-mark { animation:drift 24s ease-in-out infinite alternate; } @keyframes drift { from { transform:translate3d(0,-4px,0); } to { transform:translate3d(0,6px,0); } } }
@@ -924,6 +924,19 @@
       links.push([i1, i2]);
     }
 
+    var IN = 30;
+    var inner = [];
+    for (var j = 0; j < IN; j++) {
+      inner.push({
+        a: Math.random() * Math.PI * 2,
+        rf: 0.1 + Math.random() * 0.7,
+        twinklePhase: Math.random() * Math.PI * 2,
+        twinkleSpeed: 0.6 + Math.random() * 1.1,
+        wobble: Math.random() * Math.PI * 2,
+        link: (Math.random() * M) | 0
+      });
+    }
+
     function contourPoint(a, t) {
       var rr = R * (1
         + 0.15 * Math.sin(3 * a + t * 0.55)
@@ -998,6 +1011,47 @@
         ctx.fillStyle = 'hsla(' + h + ',95%,90%,' + (0.7 + 0.3 * tw).toFixed(3) + ')';
         ctx.beginPath();
         ctx.arc(p.x, p.y, rad * 0.55, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      var ipts = [];
+      for (var j = 0; j < IN; j++) {
+        var n = inner[j];
+        var rr = R * n.rf * (1 + 0.06 * Math.sin(t * 0.3 + n.wobble));
+        var aa = n.a + Math.sin(t * 0.1 + n.wobble) * 0.05;
+        ipts.push({ x: cx + Math.cos(aa) * rr, y: cy + Math.sin(aa) * rr * 0.82 });
+      }
+
+      for (var j = 0; j < IN; j++) {
+        if (j % 2 === 1) continue;
+        var p1 = ipts[j], p2 = pts[inner[j].link];
+        var h = hueAt(inner[j].link, t);
+        var tw = 0.5 + 0.5 * Math.sin(t * 0.6 + j);
+        ctx.strokeStyle = 'hsla(' + h + ',80%,66%,' + (0.04 + 0.07 * tw).toFixed(3) + ')';
+        ctx.lineWidth = 0.6;
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+
+      for (var j = 0; j < IN; j++) {
+        var p = ipts[j];
+        var h = hueAt(inner[j].link, t);
+        var tw = 0.3 + 0.7 * Math.max(0, Math.sin(t * inner[j].twinkleSpeed + inner[j].twinklePhase));
+        var rad = 0.7 + 1.1 * tw;
+
+        var glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rad * 5);
+        glow.addColorStop(0, 'hsla(' + h + ',90%,76%,' + (0.4 + 0.35 * tw).toFixed(3) + ')');
+        glow.addColorStop(1, 'hsla(' + h + ',90%,76%,0)');
+        ctx.fillStyle = glow;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, rad * 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = 'hsla(' + h + ',95%,90%,' + (0.6 + 0.3 * tw).toFixed(3) + ')';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, rad * 0.5, 0, Math.PI * 2);
         ctx.fill();
       }
 
