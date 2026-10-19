@@ -74,6 +74,13 @@
   @media (max-width:359px) { .brand-text small { display:none; } }
   @media (max-width:520px) { .head-apply { display:none; } .burger { margin-left:auto; } }
 
+  /* ── promo bar: набор на поток ── */
+  .promo-bar { background:linear-gradient(90deg, var(--orange), #F0A456); color:#fff; }
+  .promo-in { display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; padding:10px 20px; text-align:center; }
+  .promo-in span { font-size:14px; font-weight:700; letter-spacing:.01em; }
+  .promo-in .btn { flex-shrink:0; }
+  @media (max-width:520px) { .promo-in span { font-size:13px; } .promo-in { padding:9px 16px; gap:10px; } }
+
   /* ── hero ── */
   .hero { position:relative; background:var(--ink-night); color:#fff; overflow:hidden; }
   .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(60% 80% at 85% 0%, rgba(77,163,255,.2), transparent 70%); pointer-events:none; }
@@ -273,6 +280,13 @@
 </head>
 <body>
 
+<div class="promo-bar">
+  <div class="wrap promo-in">
+    <span>🔥 Открыт набор на 3 поток «ИИ в архитектуре» — старт 17 ноября</span>
+    <button class="btn btn-dark btn-sm" data-apply>Записаться</button>
+  </div>
+</div>
+
 <header class="head">
   <div class="wrap head-in">
     <a class="brand" href="index.html"><img class="brand-sign" src="images/ai2arch-sign.png" width="38" height="38" alt=""><span class="brand-text"><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
@@ -302,7 +316,7 @@
       <button class="btn btn-primary" data-apply>Оставить заявку</button>
       <a class="btn btn-ghost" href="#program">Смотреть программу</a>
     </div>
-    <p class="hero-note">Дату старта нового потока и расписание присылаем после записи · <a href="archi-guide.html?from=archi" style="color:var(--azure-soft)">Уже записаны? Открыть учебное пособие →</a></p>
+    <p class="hero-note">Старт 3 потока — 17 ноября, точное расписание присылаем после записи · <a href="archi-guide.html?from=archi" style="color:var(--azure-soft)">Уже записаны? Открыть учебное пособие →</a></p>
 
     <div class="facts">
       <div class="fact"><b>22<small>ак. ч</small></b><span>10 часов практики на воркшопах, 12 часов консультаций и самостоятельной работы. Удостоверение ЮФУ</span></div>

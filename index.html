@@ -37,6 +37,7 @@
     --line-soft:#1A2131;
     --muted:#A3ACBD;
     --faint:#818A9D;
+    --orange:#E8862B;
     --sans:'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   }
 
@@ -88,6 +89,13 @@
     -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
   }
   .card--open { border-top:2px solid var(--azure); }
+
+  /* ── promo bar: набор на поток ── */
+  .promo-bar { position:relative; z-index:2; background:linear-gradient(90deg, var(--orange), #F0A456); color:#fff; }
+  .promo-in { display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; padding:10px 28px; text-align:center; font-size:14px; }
+  .promo-in b { font-weight:700; }
+  .promo-in a { flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; padding:8px 16px; border-radius:10px; background:var(--night); color:#fff; text-decoration:none; }
+  @media (max-width:520px) { .promo-in { font-size:13px; padding:9px 20px; gap:10px; } }
   .card--soon { background:var(--card-soon); border-color:var(--line-soft); }
 
   .step { font-size:13px; color:var(--faint); margin-bottom:8px; }
@@ -234,6 +242,13 @@
 (function(){var m={sprint:1,qgis:1,ai:1,gen:1,pres:1,neural:1,genviz:1,synth:1};var h=location.hash.slice(1);if(m[h]){location.replace('archi-guide.html?from=index#'+h);}})();
 </script>
 
+<div class="promo-bar">
+  <div class="wrap promo-in">
+    <span>🔥 Открыт набор на <b>3 поток «ИИ в архитектуре»</b> — старт 17 ноября</span>
+    <a href="archi.html#enroll" onclick="typeof ym==='function'&&ym(113526373,'reachGoal','enroll_click',{course:'ИИ в архитектуре', source:'promo_bar'})">Записаться</a>
+  </div>
+</div>
+
 <div class="screen">
   <img class="art" src="images/ai2arch-artifact.webp" width="960" height="960" alt="" aria-hidden="true" decoding="async">
 
@@ -249,7 +264,7 @@
     <div class="cards">
 
       <article class="card card--open">
-        <p class="step">Первая ступень</p>
+        <p class="step">Первая ступень · <span style="color:var(--orange);font-weight:700">старт 17 ноября</span></p>
         <h2>ИИ в архитектуре</h2>
         <p class="official">«Современные инструменты проектного анализа: ИИ и мобильные сервисы в работе с архитектурной средой»</p>
         <p class="desc">Базовый вводный курс: цифровой двойник участка, ИИ-анализ и презентация для заказчика. С нуля, два трека на выбор.</p>
