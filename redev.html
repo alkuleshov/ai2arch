@@ -88,11 +88,8 @@
     -webkit-mask-image:radial-gradient(closest-side, #000 58%, transparent 100%); mask-image:radial-gradient(closest-side, #000 58%, transparent 100%); }
   @media (max-width:760px) { .hero-mark { top:-70px; right:-200px; width:420px; opacity:.4; } }
   @media (prefers-reduced-motion:no-preference) { .hero-mark { animation:drift 20s ease-in-out infinite alternate; } @keyframes drift { from { transform:translate3d(0,-6px,0) rotate(-1.5deg); } to { transform:translate3d(0,8px,0) rotate(1.5deg); } } }
-  /* ── живой блоб: морф + вращение, заменяет статичную картинку ── */
-  .blob { width:100%; height:100%; background:conic-gradient(from 0deg, var(--azure-soft), var(--purple), var(--azure), var(--azure-soft)); filter:blur(1px) saturate(1.15); }
-  @media (prefers-reduced-motion:no-preference) { .blob { animation:blobMorph 9s ease-in-out infinite, blobSpin 26s linear infinite; } }
-  @keyframes blobMorph { 0%,100% { border-radius:58% 42% 55% 45% / 45% 55% 45% 55%; } 33% { border-radius:42% 58% 60% 40% / 55% 45% 65% 35%; } 66% { border-radius:60% 40% 42% 58% / 40% 65% 35% 60%; } }
-  @keyframes blobSpin { to { transform:rotate(360deg); } }
+  /* ── частицы: генеративное поле, заменяет статичную картинку ── */
+  .hero-mark canvas { display:block; width:100%; height:100%; }
   .hero-in { position:relative; padding-top:72px; }
   .eyebrow { font-size:12px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--azure-soft); margin-bottom:22px; }
   .hero h1 { font-size:clamp(30px, 8.4vw, 84px); line-height:1.02; font-weight:800; letter-spacing:-.03em; margin-bottom:22px; }
@@ -304,7 +301,7 @@
 
 <!-- ═══ HERO ═══ -->
 <div class="hero">
-  <div class="hero-mark" aria-hidden="true"><div class="blob"></div></div>
+  <div class="hero-mark" aria-hidden="true"><canvas></canvas></div>
   <div class="wrap hero-in">
     <div class="eyebrow">Программа повышения квалификации · ЮФУ · вторая ступень</div>
     <h1><em>ИИ</em> в редевелопменте<sup class="ast"><a href="#fn-redev" aria-label="Что такое редевелопмент">*</a></sup></h1>
@@ -882,6 +879,118 @@
     if (a.href.indexOf('archi-guide.html') !== -1) ym(113526373, 'reachGoal', 'guide_click');
     else if (a.href.indexOf('t.me/alkuleshov') !== -1) ym(113526373, 'reachGoal', 'telegram_click');
   }, true);
+</script>
+
+<!-- ── генеративное частичное поле (заменяет статичную картинку) ── -->
+<script>
+(function () {
+  function initParticleField(sel, colors) {
+    var host = document.querySelector(sel);
+    if (!host) return;
+    var canvas = host.querySelector('canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W, H, cx, cy;
+
+    function resize() {
+      var r = host.getBoundingClientRect();
+      W = Math.max(1, r.width); H = Math.max(1, r.height);
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cx = W / 2; cy = H / 2;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var N = 260;
+    var particles = [];
+
+    function spawn(p) {
+      var a = Math.random() * Math.PI * 2;
+      var speed = 0.6 + Math.random() * 2.0;
+      p.x = cx; p.y = cy;
+      p.vx = Math.cos(a) * speed; p.vy = Math.sin(a) * speed;
+      p.life = 0;
+      p.maxLife = 70 + Math.random() * 150;
+      p.size = 0.6 + Math.random() * 1.5;
+      p.color = colors[(Math.random() * colors.length) | 0];
+      return p;
+    }
+
+    for (var i = 0; i < N; i++) {
+      var p = spawn({});
+      p.life = Math.random() * p.maxLife;
+      particles.push(p);
+    }
+
+    function advance() {
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        p.x += p.vx; p.y += p.vy;
+        p.vx *= 1.012; p.vy *= 1.012;
+        p.life++;
+        if (p.life > p.maxLife || p.x < -30 || p.x > W + 30 || p.y < -30 || p.y > H + 30) spawn(p);
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'lighter';
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        var t = p.life / p.maxLife;
+        var alpha = Math.sin(Math.PI * Math.min(1, t));
+        if (alpha <= 0.02) continue;
+        var tx = p.x - p.vx * 9, ty = p.y - p.vy * 9;
+        var g = ctx.createLinearGradient(tx, ty, p.x, p.y);
+        g.addColorStop(0, 'rgba(0,0,0,0)');
+        g.addColorStop(1, p.color.replace('ALPHA', alpha.toFixed(3)));
+        ctx.strokeStyle = g;
+        ctx.lineWidth = p.size;
+        ctx.beginPath();
+        ctx.moveTo(tx, ty);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(255,255,255,' + (alpha * 0.85).toFixed(3) + ')';
+        ctx.arc(p.x, p.y, Math.max(0.5, p.size * 0.55), 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    for (var w = 0; w < 160; w++) advance();
+
+    if (reduced) {
+      draw();
+      return;
+    }
+
+    function loop() {
+      advance();
+      draw();
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  }
+
+  function ready(fn) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  ready(function () {
+    initParticleField('.hero-mark', [
+      'rgba(123,191,255,ALPHA)',
+      'rgba(107,63,212,ALPHA)',
+      'rgba(255,255,255,ALPHA)'
+    ]);
+  });
+})();
 </script>
 </body>
 </html>
