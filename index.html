@@ -54,8 +54,8 @@
 
   /* артефакт бренда: глубина на фоне, движение — одно, медленное */
   .art {
-    position:absolute; z-index:0; top:-50px; left:17vw;
-    width:min(54vw, 600px); height:480px; opacity:.85;
+    position:absolute; z-index:0; top:-50px; right:-6vw; left:auto;
+    width:560px; height:560px; opacity:.85;
     mix-blend-mode:screen; pointer-events:none; user-select:none;
     -webkit-mask-image:radial-gradient(70% 70% at 55% 48%, #000 62%, transparent 100%);
             mask-image:radial-gradient(70% 70% at 55% 48%, #000 62%, transparent 100%);
@@ -197,7 +197,7 @@
   }
   @media (max-width:760px) {
     .wrap { padding:0 20px; }
-    .art { top:-10px; left:-14vw; width:90vw; height:360px; opacity:.45; }
+    .art { top:-10px; right:-30vw; width:360px; height:360px; opacity:.4; }
     .top { padding-top:24px; }
     .brand-sign { width:52px; height:52px; }
     .brand-text b { font-size:24px; }
@@ -598,7 +598,7 @@
   }
 
   ready(function () {
-    initConstellation('.art', { cx: 0.5, cy: 0.4, hueBase: 196, hueSpan: 26, hueSpeed: 3 });
+    initConstellation('.art', { cx: 0.46, cy: 0.42, hueBase: 212, hueSpan: 0, hueSpeed: 0 });
   });
 })();
 </script>
