@@ -85,7 +85,7 @@
   .hero { position:relative; background:var(--ink-night); color:#fff; overflow:hidden; }
   .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(60% 80% at 85% 0%, rgba(77,163,255,.2), transparent 70%); pointer-events:none; }
   .hero-mark { display:block; position:absolute; top:-90px; right:-16vw; left:auto; width:1100px; height:820px; opacity:.85; mix-blend-mode:screen; pointer-events:none; z-index:0; }
-  @media (max-width:760px) { .hero-mark { top:-40px; right:-32vw; width:620px; height:560px; opacity:.5; } }
+  @media (max-width:760px) { .hero-mark { top:-20px; right:-40vw; width:560px; height:520px; opacity:.32; } }
   @media (prefers-reduced-motion:no-preference) { .hero-mark { animation:drift 24s ease-in-out infinite alternate; } @keyframes drift { from { transform:translate3d(0,-4px,0); } to { transform:translate3d(0,6px,0); } } }
   /* ── созвездие: переливающееся контурное поле, заменяет статичную картинку ── */
   .hero-mark canvas { display:block; width:100%; height:100%; }
@@ -924,7 +924,7 @@
     var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     var W, H, cx, cy;
-    var R = opts.R || 230;
+    var S = opts.R || 190;
     var HUE = opts.hueBase || 212;
 
     function resize() {
@@ -938,166 +938,119 @@
     resize();
     window.addEventListener('resize', resize);
 
-    var M = 46;
-    var nodes = [];
-    for (var i = 0; i < M; i++) {
-      nodes.push({
-        a: (i / M) * Math.PI * 2,
-        twinklePhase: Math.random() * Math.PI * 2,
-        twinkleSpeed: 0.5 + Math.random() * 0.9,
-        wobble: Math.random() * Math.PI * 2,
-        weight: 0.35 + Math.random() * Math.random() * 2.3
-      });
+    /* ── форма: гладкая лента-узел (torus knot), повторяющая референс ── */
+    function buildStrand(P, Q, TUBE, N) {
+      var pts = [];
+      for (var i = 0; i <= N; i++) {
+        var t = (i / N) * Math.PI * 2;
+        var rr = 1 + TUBE * Math.cos(Q * t);
+        pts.push({
+          x: Math.cos(P * t) * rr,
+          y: Math.sin(P * t) * rr,
+          z: Math.sin(Q * t) * TUBE,
+          t: t, Q: Q
+        });
+      }
+      return pts;
+    }
+    var N = 240;
+    var strands = [
+      { pts: buildStrand(opts.p || 2, opts.q || 3, 0.56, N), rotYoff: 0, scale: 1, op: 1 },
+      { pts: buildStrand(opts.p2 || 3, opts.q2 || 2, 0.42, N), rotYoff: 1.25, scale: 0.62, op: 0.85 }
+    ];
+
+    var rotX = (opts.rotX != null ? opts.rotX : 0.56);
+    var rotZ = (opts.rotZ != null ? opts.rotZ : 0.3);
+    var rotY0 = (opts.rotY != null ? opts.rotY : 0.62);
+    var focal = 3.1;
+
+    function project(p, rotY, scaleMul) {
+      var cy1 = Math.cos(rotY), sy1 = Math.sin(rotY);
+      var x1 = p.x * cy1 + p.z * sy1;
+      var z1 = -p.x * sy1 + p.z * cy1;
+      var y1 = p.y;
+      var cx1 = Math.cos(rotX), sx1 = Math.sin(rotX);
+      var y2 = y1 * cx1 - z1 * sx1;
+      var z2 = y1 * sx1 + z1 * cx1;
+      var x2 = x1;
+      var cz1 = Math.cos(rotZ), sz1 = Math.sin(rotZ);
+      var x3 = x2 * cz1 - y2 * sz1;
+      var y3 = x2 * sz1 + y2 * cz1;
+      var z3 = z2;
+      var sc = focal / (focal + z3);
+      var ss = S * scaleMul;
+      return { x: cx + x3 * sc * ss, y: cy + y3 * sc * ss * 0.94, sc: sc };
     }
 
-    var links = [];
-    for (var k = 0; k < 30; k++) {
-      var i1 = (Math.random() * M) | 0;
-      var i2 = (i1 + 3 + ((Math.random() * (M - 6)) | 0)) % M;
-      links.push([i1, i2]);
+    function seg(p1, p2, bright, lw) {
+      var a1 = Math.min(0.42, 0.045 + bright * 0.38);
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = 'hsla(' + HUE + ',85%,66%,' + (a1 * 0.4).toFixed(3) + ')';
+      ctx.lineWidth = lw * 2.6;
+      ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+
+      ctx.strokeStyle = 'hsla(' + HUE + ',88%,72%,' + Math.min(0.75, a1 * 1.1).toFixed(3) + ')';
+      ctx.lineWidth = lw * 1.15;
+      ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+
+      var coreA = Math.min(1, 0.08 + Math.pow(bright, 1.6) * 1.1);
+      ctx.strokeStyle = 'hsla(' + (HUE - 4) + ',65%,95%,' + coreA.toFixed(3) + ')';
+      ctx.lineWidth = Math.max(0.5, lw * 0.4);
+      ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
     }
 
-    var IN = 44;
-    var inner = [];
-    for (var j = 0; j < IN; j++) {
-      inner.push({
-        a: Math.random() * Math.PI * 2,
-        rf: 0.06 + Math.random() * 0.86,
-        twinklePhase: Math.random() * Math.PI * 2,
-        twinkleSpeed: 0.6 + Math.random() * 1.2,
-        wobble: Math.random() * Math.PI * 2,
-        weight: 0.3 + Math.random() * Math.random() * 2.6,
-        link: (Math.random() * M) | 0
-      });
-    }
-    for (var hb = 0; hb < 3; hb++) {
-      inner[(Math.random() * IN) | 0].weight = 2.4 + Math.random() * 0.8;
-    }
-
-    var innerLinks = [];
-    for (var k2 = 0; k2 < 40; k2++) {
-      var j1 = (Math.random() * IN) | 0;
-      var j2 = (Math.random() * IN) | 0;
-      if (j1 !== j2) innerLinks.push([j1, j2]);
-    }
-
-    function contourPoint(a, t) {
-      var rr = R * (1
-        + 0.15 * Math.sin(3 * a + t * 0.55)
-        + 0.08 * Math.sin(5 * a - t * 0.8 + 1.3)
-        + 0.05 * Math.sin(8 * a + t * 0.35));
-      return { x: cx + Math.cos(a) * rr, y: cy + Math.sin(a) * rr * 0.82 };
-    }
-
-    function star(p, tw, weight) {
-      var rad = (0.8 + 1.5 * tw) * weight;
-      var haloA = Math.min(0.5, (0.12 + 0.16 * tw) * weight);
-      var glowA = Math.min(0.95, (0.4 + 0.32 * tw) * weight);
-      var coreA = Math.min(1, (0.55 + 0.3 * tw) * Math.max(0.6, Math.min(1.3, weight)));
-
-      var halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rad * 8.5);
-      halo.addColorStop(0, 'hsla(' + HUE + ',88%,70%,' + haloA.toFixed(3) + ')');
-      halo.addColorStop(1, 'hsla(' + HUE + ',88%,70%,0)');
+    function glint(p, bright) {
+      var rad = (1.6 + 4.2 * bright);
+      var halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rad * 5);
+      halo.addColorStop(0, 'hsla(' + HUE + ',90%,76%,' + (0.42 * bright).toFixed(3) + ')');
+      halo.addColorStop(1, 'hsla(' + HUE + ',90%,76%,0)');
       ctx.fillStyle = halo;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, rad * 8.5, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x, p.y, rad * 5, 0, Math.PI * 2); ctx.fill();
 
-      var glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rad * 5);
-      glow.addColorStop(0, 'hsla(' + HUE + ',88%,76%,' + glowA.toFixed(3) + ')');
-      glow.addColorStop(1, 'hsla(' + HUE + ',88%,76%,0)');
-      ctx.fillStyle = glow;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, rad * 5, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = 'hsla(' + HUE + ',92%,92%,' + coreA.toFixed(3) + ')';
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, Math.max(0.5, rad * 0.5), 0, Math.PI * 2);
-      ctx.fill();
+      ctx.fillStyle = 'hsla(' + (HUE - 6) + ',55%,97%,' + Math.min(1, 0.7 + 0.3 * bright).toFixed(3) + ')';
+      ctx.beginPath(); ctx.arc(p.x, p.y, Math.max(0.7, rad * 0.42), 0, Math.PI * 2); ctx.fill();
     }
 
-    function frame(t) {
+    function frame(time) {
       ctx.clearRect(0, 0, W, H);
       ctx.globalCompositeOperation = 'lighter';
 
-      var pts = [];
-      for (var i = 0; i < M; i++) {
-        pts.push(contourPoint(nodes[i].a + Math.sin(t * 0.12 + nodes[i].wobble) * 0.025, t));
-      }
-      var ipts = [];
-      for (var j = 0; j < IN; j++) {
-        var n = inner[j];
-        var rr = R * n.rf * (1 + 0.07 * Math.sin(t * 0.3 + n.wobble));
-        var aa = n.a + Math.sin(t * 0.1 + n.wobble) * 0.06;
-        ipts.push({ x: cx + Math.cos(aa) * rr, y: cy + Math.sin(aa) * rr * 0.82 });
-      }
+      for (var s = 0; s < strands.length; s++) {
+        var strand = strands[s];
+        var pts3 = strand.pts;
+        var rotY = rotY0 + strand.rotYoff + time * 0.045;
 
-      for (var i = 0; i < M; i++) {
-        var p1 = pts[i], p2 = pts[(i + 1) % M];
-        var tw = 0.5 + 0.5 * Math.sin(t * nodes[i].twinkleSpeed + nodes[i].twinklePhase);
-        var a1 = (0.04 + 0.1 * tw) * Math.min(1.4, nodes[i].weight);
-        ctx.strokeStyle = 'hsla(' + HUE + ',75%,62%,' + a1.toFixed(3) + ')';
-        ctx.lineWidth = 0.8;
-        ctx.beginPath();
-        ctx.moveTo(p1.x, p1.y);
-        ctx.lineTo(p2.x, p2.y);
-        ctx.stroke();
-      }
+        var proj = [], light = [];
+        for (var i = 0; i <= N; i++) {
+          proj.push(project(pts3[i], rotY, strand.scale));
+          var l = Math.pow(Math.max(0, 0.5 + 0.5 * Math.cos(pts3[i].Q * pts3[i].t + 0.5)), 4.2);
+          light.push(l);
+        }
 
-      for (var l = 0; l < links.length; l++) {
-        var la = links[l][0], lb = links[l][1];
-        var p1 = pts[la], p2 = pts[lb];
-        var tw = 0.5 + 0.5 * Math.sin(t * 0.7 + l);
-        ctx.strokeStyle = 'hsla(' + HUE + ',70%,60%,' + (0.03 + 0.05 * tw).toFixed(3) + ')';
-        ctx.lineWidth = 0.6;
-        ctx.beginPath();
-        ctx.moveTo(p1.x, p1.y);
-        ctx.lineTo(p2.x, p2.y);
-        ctx.stroke();
-      }
+        var minSc = Infinity, maxSc = -Infinity;
+        for (var i = 0; i <= N; i++) { if (proj[i].sc < minSc) minSc = proj[i].sc; if (proj[i].sc > maxSc) maxSc = proj[i].sc; }
+        var span = Math.max(0.0001, maxSc - minSc);
 
-      for (var l2 = 0; l2 < innerLinks.length; l2++) {
-        var ja = innerLinks[l2][0], jb = innerLinks[l2][1];
-        var p1 = ipts[ja], p2 = ipts[jb];
-        var tw = 0.5 + 0.5 * Math.sin(t * 0.5 + l2 * 1.7);
-        var wmax = Math.max(inner[ja].weight, inner[jb].weight);
-        ctx.strokeStyle = 'hsla(' + HUE + ',75%,65%,' + (0.025 + 0.05 * tw * Math.min(1, wmax / 1.6)).toFixed(3) + ')';
-        ctx.lineWidth = 0.6;
-        ctx.beginPath();
-        ctx.moveTo(p1.x, p1.y);
-        ctx.lineTo(p2.x, p2.y);
-        ctx.stroke();
-      }
+        for (var i = 0; i < N; i++) {
+          var p1 = proj[i], p2 = proj[i + 1];
+          var depth = (p1.sc - minSc) / span;
+          var bright = strand.op * Math.min(1, 0.08 + 0.3 * depth + 0.85 * ((light[i] + light[i + 1]) * 0.5) * (0.4 + 0.6 * depth));
+          var lw = (1.0 + 6.2 * depth) * (0.65 + 0.35 * strand.scale);
+          seg(p1, p2, bright, lw);
+        }
 
-      for (var j = 0; j < IN; j++) {
-        if (j % 3 !== 0) continue;
-        var p1 = ipts[j], p2 = pts[inner[j].link];
-        var tw = 0.5 + 0.5 * Math.sin(t * 0.6 + j);
-        ctx.strokeStyle = 'hsla(' + HUE + ',75%,64%,' + (0.025 + 0.045 * tw).toFixed(3) + ')';
-        ctx.lineWidth = 0.6;
-        ctx.beginPath();
-        ctx.moveTo(p1.x, p1.y);
-        ctx.lineTo(p2.x, p2.y);
-        ctx.stroke();
-      }
-
-      for (var i = 0; i < M; i++) {
-        var tw = 0.3 + 0.7 * Math.max(0, Math.sin(t * nodes[i].twinkleSpeed + nodes[i].twinklePhase));
-        star(pts[i], tw, nodes[i].weight);
-      }
-      for (var j = 0; j < IN; j++) {
-        var tw = 0.25 + 0.75 * Math.max(0, Math.sin(t * inner[j].twinkleSpeed + inner[j].twinklePhase));
-        star(ipts[j], tw, inner[j].weight);
+        for (var i = 0; i <= N; i++) {
+          var depth = (proj[i].sc - minSc) / span;
+          if (light[i] > 0.5 && depth > 0.4) {
+            glint(proj[i], strand.op * Math.min(1, light[i] * (0.5 + 0.7 * depth)));
+          }
+        }
       }
 
       ctx.globalCompositeOperation = 'source-over';
     }
 
-    if (reduced) {
-      frame(6);
-      return;
-    }
+    if (reduced) { frame(4); return; }
 
     var t0 = performance.now();
     function loop(now) {
@@ -1114,7 +1067,7 @@
 
   ready(function () {
     var mob = window.innerWidth < 760;
-    initConstellation('.hero-mark', { cx: mob ? 0.4 : 0.54, cy: mob ? 0.4 : 0.42, R: mob ? 150 : 230, hueBase: 212 });
+    initConstellation('.hero-mark', { cx: mob ? 0.5 : 0.56, cy: mob ? 0.4 : 0.44, R: mob ? 110 : 190, hueBase: 212, p: 2, q: 3, p2: 3, q2: 2 });
   });
 })();
 </script>
