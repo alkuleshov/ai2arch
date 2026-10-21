@@ -311,7 +311,7 @@
       <button class="btn btn-primary" data-apply>Оставить заявку</button>
       <a class="btn btn-ghost" href="#program">Смотреть программу</a>
     </div>
-    <p class="hero-note">Приём заявок открыт · в пилотной группе 5 мест</p>
+    <p class="hero-note">Приём заявок открыт · в пилотной группе 5 мест · <a href="redev-guide.html?from=redev">Слушателям →</a></p>
 
     <div class="facts">
       <div class="fact"><b>5 ноября<small>2026</small></b><span>старт, финальная защита 6 декабря</span></div>
@@ -875,7 +875,7 @@
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a'); if (!a) return;
     if (typeof ym !== 'function') return;
-    if (a.href.indexOf('archi-guide.html') !== -1) ym(113526373, 'reachGoal', 'guide_click');
+    if ((a.href.indexOf('archi-guide.html') !== -1 || a.href.indexOf('redev-guide.html') !== -1)) ym(113526373, 'reachGoal', 'guide_click');
     else if (a.href.indexOf('t.me/alkuleshov') !== -1) ym(113526373, 'reachGoal', 'telegram_click');
   }, true);
 </script>
