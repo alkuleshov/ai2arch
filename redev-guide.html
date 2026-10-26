@@ -925,7 +925,7 @@
                 </div>
               </div>
               <div class="lesson-body">
-<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция</span><span class="lect-who">Лектор: <b>Кулешов Александр</b></span></div><h3>Что изучаем</h3><ul class="checklist"><li><div class="chk">✓</div> Типовые ошибки языковых моделей: выдуманные нормы, «плавающие» цифры, уверенный тон при неверном ответе</li><li><div class="chk">✓</div> Правило курса: <strong>источник на каждую цифру и норму</strong></li><li><div class="chk">✓</div> Сверка ответа по первоисточнику на примере ПЗЗ</li><li><div class="chk">✓</div> Суммы и площади считаются формулами в таблице — не в окне чата</li></ul><div class="tip"><div class="tip-i">💡</div><div>Протокол проверки применяется во всех модулях: это главный навык курса, а не «работа с промптами».</div></div><h3>Практикум</h3><p style="font-size:13px">Найдите ошибку языковой модели в готовом ответе по ПЗЗ и подтвердите находку ссылкой на пункт первоисточника. Результат входит в задание №1.</p><div class="ph-box ph-file"><div class="ph-ic">📎</div><div><div class="ph-t">Материал практикума</div><div class="ph-s">Ответ модели с ошибкой + фрагмент ПЗЗ — будут добавлены сюда.</div></div></div>
+<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция</span><span class="lect-who">Лектор: <b>Кулешов Александр</b></span></div><h3>Что изучаем</h3><ul class="checklist"><li><div class="chk">✓</div> Типовые ошибки языковых моделей: выдуманные нормы, «плавающие» цифры, уверенный тон при неверном ответе</li><li><div class="chk">✓</div> Правило курса: <strong>источник на каждую цифру и норму</strong></li><li><div class="chk">✓</div> <strong>RAG-связка для документов (расширенный контур):</strong> как загрузить базу PDF (ПЗЗ, СП, градрегламенты) в NotebookLM / Claude Projects для поиска ограничений без галлюцинаций</li><li><div class="chk">✓</div> Сверка ответа по первоисточнику на примере ПЗЗ и экспресс Due Diligence по НСПД</li><li><div class="chk">✓</div> Суммы и площади считаются формулами в таблице — не в окне чата</li></ul><div class="tip"><div class="tip-i">💡</div><div>Протокол проверки применяется во всех модулях: это главный навык курса, а не «работа с промптами».</div></div><h3>Практикум</h3><p style="font-size:13px">Найдите ошибку языковой модели в готовом ответе по ПЗЗ и подтвердите находку ссылкой на пункт первоисточника. Результат входит в задание №1.</p><div class="ph-box ph-file"><div class="ph-ic">📎</div><div><div class="ph-t">Материал практикума</div><div class="ph-s">Ответ модели с ошибкой + фрагмент ПЗЗ — будут добавлены сюда.</div></div></div>
               </div>
             </div>
           </section>
@@ -934,11 +934,11 @@
             <h3>Два контура инструментов</h3>
             <p>Курс показывает работу в двух контурах. <strong>Основной</strong> — российские сервисы, доступные без дополнительных условий. <strong>Расширенный («максимум»)</strong> — зарубежные модели с подключением к файлам и таблицам; его показывает преподаватель, а слушатель при желании повторяет сам.</p>
             <div class="ctr-wrap"><table class="ctr"><tr><th>Этап</th><th>Основной контур</th><th>Расширенный контур («максимум»)</th></tr>
-            <tr><td>Нормы, ПЗЗ, анализ текстов</td><td>Алиса AI, GigaChat + сверка по НСПД и сводам правил</td><td>Claude / Gemini / ChatGPT с загрузкой документов и поиском в сети</td></tr>
-            <tr><td>Рынок и окружение</td><td>2ГИС, ЦИАН, Яндекс Карты, Росстат + LLM для сводки</td><td>Deep Research в Claude / ChatGPT / Gemini, 3 независимых источника на тезис</td></tr>
-            <tr><td>Площади и экономика</td><td>Яндекс Таблицы / Excel, формулы</td><td>Claude с коннектором к Google Drive и таблицам: модель читает и правит файл</td></tr>
-            <tr><td>Визуализация</td><td>Шедеврум, Kandinsky</td><td>ChatGPT (изображения), Midjourney, Flux, ComfyUI + ControlNet</td></tr>
-            <tr><td>Сборка документа</td><td>Gamma, Notion, Яндекс Документы</td><td>Claude: документы, презентации; демонстрация связки с Blender / AutoCAD через MCP</td></tr>
+            <tr><td>Нормы, ПЗЗ, анализ текстов</td><td>Алиса AI, GigaChat + сверка по НСПД и сводам правил</td><td><strong>NotebookLM / Claude Projects</strong> (закрытая RAG-база знаний по ПЗЗ и СП без галлюцинаций), Gemini / ChatGPT с загрузкой документов</td></tr>
+            <tr><td>Рынок и окружение</td><td>2ГИС, ЦИАН, Яндекс Карты, Росстат + LLM для сводки</td><td><strong>Связка OSM (Overpass) → QGIS → LLM</strong> (морфология, графы, дефицит функций), Deep Research в Claude / ChatGPT / Gemini</td></tr>
+            <tr><td>Площади и экономика</td><td>Яндекс Таблицы / Excel, формулы</td><td><strong>Таблицы + Claude (коннектор)</strong> для расчётов и стресс-теста; обзор параметрического массинга и нарезки (<strong>Autodesk Forma / Finch 3D / TestFit</strong>)</td></tr>
+            <tr><td>Визуализация</td><td>Шедеврум, Kandinsky + базовый фотомонтаж</td><td><strong>Flux.1 Dev, ComfyUI + ControlNet</strong> (жёсткая фиксация конструктива старого здания), <strong>Inpainting</strong> (точечная замена деталей для серии «до/после»), Midjourney, ChatGPT</td></tr>
+            <tr><td>Сборка документа</td><td>Gamma, Notion, Яндекс Документы</td><td><strong>Gamma.app / Claude Artifacts</strong>: сборка инвест-паспорта и альбома АГР; демонстрация связки с Blender / AutoCAD через MCP</td></tr>
             </table></div>
             <div class="tip"><div class="tip-i">ℹ️</div><div>Доступ к зарубежным сервисам слушатель обеспечивает самостоятельно в соответствии с их пользовательскими соглашениями; организатор доступ не гарантирует. Все задания можно выполнить в основном контуре.</div></div>
             <h3>Сервисы основного контура</h3>
@@ -973,7 +973,7 @@
                 </div>
               </div>
               <div class="lesson-body">
-<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция</span><span class="lect-who">Лектор: <b>Кулешов Александр</b></span></div><h3>Что изучаем</h3><ul class="checklist"><li><div class="chk">✓</div> Загрузка текстов ПЗЗ и нормативных документов в языковую модель</li><li><div class="chk">✓</div> Извлечение параметров: виды разрешённого использования, высотность, плотность, ограничения</li><li><div class="chk">✓</div> Сверка с первоисточником; нормативная карточка объекта</li></ul><div class="res-links"><a class="res-link" href="https://nspd.gov.ru" target="_blank" rel="noopener"><div class="res-icon" style="background:#EEF1FD;">📍</div><div><div class="res-title">НСПД — кадастр, границы, ПЗЗ</div><div class="res-url">nspd.gov.ru</div></div><div class="res-arrow">↗</div></a><a class="res-link" href="https://docs.cntd.ru" target="_blank" rel="noopener"><div class="res-icon" style="background:#EEF1FD;">📚</div><div><div class="res-title">Своды правил и нормативы (ЦНТД)</div><div class="res-url">docs.cntd.ru</div></div><div class="res-arrow">↗</div></a></div><h3>Практика</h3><p style="font-size:13px">Извлеките параметры ПЗЗ объекта с помощью языковой модели и заполните нормативную карточку со ссылками на пункты. Самостоятельно: сверьте ответы модели с первоисточником.</p><div class="ph-box ph-file"><div class="ph-ic">📎</div><div><div class="ph-t">Шаблон нормативной карточки</div><div class="ph-s">Будет добавлен сюда.</div></div></div>
+<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция</span><span class="lect-who">Лектор: <b>Кулешов Александр</b></span></div><h3>Что изучаем</h3><ul class="checklist"><li><div class="chk">✓</div> Загрузка текстов ПЗЗ и нормативных документов в языковую модель и закрытую базу (NotebookLM / Claude)</li><li><div class="chk">✓</div> Извлечение параметров: виды разрешённого использования (ВРИ), высотность, плотность, охранные ограничения</li><li><div class="chk">✓</div> Трек А — проверка ограничений реконструкции и СП; Трек Б — быстрый Due Diligence участка до входа в сделку</li><li><div class="chk">✓</div> Сверка с первоисточником; нормативная карточка объекта</li></ul><div class="res-links"><a class="res-link" href="https://nspd.gov.ru" target="_blank" rel="noopener"><div class="res-icon" style="background:#EEF1FD;">📍</div><div><div class="res-title">НСПД — кадастр, границы, ПЗЗ</div><div class="res-url">nspd.gov.ru</div></div><div class="res-arrow">↗</div></a><a class="res-link" href="https://docs.cntd.ru" target="_blank" rel="noopener"><div class="res-icon" style="background:#EEF1FD;">📚</div><div><div class="res-title">Своды правил и нормативы (ЦНТД)</div><div class="res-url">docs.cntd.ru</div></div><div class="res-arrow">↗</div></a></div><h3>Практика</h3><p style="font-size:13px">Извлеките параметры ПЗЗ объекта с помощью языковой модели и заполните нормативную карточку со ссылками на пункты. Самостоятельно: сверьте ответы модели с первоисточником.</p><div class="ph-box ph-file"><div class="ph-ic">📎</div><div><div class="ph-t">Шаблон нормативной карточки</div><div class="ph-s">Будет добавлен сюда.</div></div></div>
               </div>
             </div>
           </section>
@@ -988,7 +988,7 @@
                 </div>
               </div>
               <div class="lesson-body">
-<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция</span><span class="lect-who">Лектор: <b>Екатерина Петренко</b></span></div><div class="lect-q">❓ Уточнить: Рынок: Екатерина знает рынок «процентов на 25» — делим? (окружение, 2ГИС, аудитория — Екатерина; ценовые ориентиры и аналитика — ?)</div><h3>Что изучаем</h3><ul class="checklist"><li><div class="chk">✓</div> Анализ окружения и конкурентов; ценовые ориентиры</li><li><div class="chk">✓</div> Правило «три независимых источника на каждый тезис»</li><li><div class="chk">✓</div> Профиль аудитории места: 2–3 персоны</li><li><div class="chk">✓</div> Поиск неудовлетворённого спроса</li></ul><div class="res-links"><a class="res-link" href="https://2gis.ru" target="_blank" rel="noopener"><div class="res-icon" style="background:#EEF1FD;">📌</div><div><div class="res-title">2ГИС</div><div class="res-url">2gis.ru</div></div><div class="res-arrow">↗</div></a><a class="res-link" href="https://www.cian.ru" target="_blank" rel="noopener"><div class="res-icon" style="background:#EEF1FD;">🏢</div><div><div class="res-title">ЦИАН</div><div class="res-url">www.cian.ru</div></div><div class="res-arrow">↗</div></a><a class="res-link" href="https://rosstat.gov.ru" target="_blank" rel="noopener"><div class="res-icon" style="background:#EEF1FD;">📊</div><div><div class="res-title">Росстат</div><div class="res-url">rosstat.gov.ru</div></div><div class="res-arrow">↗</div></a><a class="res-link" href="https://www.openstreetmap.org" target="_blank" rel="noopener"><div class="res-icon" style="background:#EEF1FD;">🗺️</div><div><div class="res-title">OpenStreetMap</div><div class="res-url">www.openstreetmap.org</div></div><div class="res-arrow">↗</div></a></div><h3>Практика</h3><p style="font-size:13px">Анализ окружения и конкурентов, профиль аудитории (2–3 персоны). Самостоятельно: сбор данных по рынку — три источника на тезис.</p><div class="ph-box ph-file"><div class="ph-ic">📎</div><div><div class="ph-t">Таблица источников</div><div class="ph-s">Шаблон «тезис → 3 источника» — будет добавлен сюда.</div></div></div>
+<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция (совместный блок)</span><span class="lect-who">Лекторы: <b>Екатерина Петренко</b> (аудитория, 2ГИС, сценарии) · <b>Кулешов Александр</b> (ГИС-связка, ЦИАН, ставки)</span></div><h3>Что изучаем</h3><ul class="checklist"><li><div class="chk">✓</div> <strong>Связка ГИС + Парсинг + LLM:</strong> выгрузка данных из 2ГИС, ЦИАН и OpenStreetMap (Overpass → QGIS → LLM)</li><li><div class="chk">✓</div> <strong>Трек А (Проектировщик):</strong> морфология ткани, пешеходные графы и дефицит городских функций вокруг кейса «C52»</li><li><div class="chk">✓</div> <strong>Трек Б (Девелопер):</strong> оцифровка конкурентов и ставок аренды/продажи в таблицу для поиска пустых рыночных ниш</li><li><div class="chk">✓</div> Профиль аудитории места (2–3 персоны) и правило «три независимых источника на каждый тезис»</li></ul><div class="res-links"><a class="res-link" href="https://2gis.ru" target="_blank" rel="noopener"><div class="res-icon" style="background:#EEF1FD;">📌</div><div><div class="res-title">2ГИС</div><div class="res-url">2gis.ru</div></div><div class="res-arrow">↗</div></a><a class="res-link" href="https://www.cian.ru" target="_blank" rel="noopener"><div class="res-icon" style="background:#EEF1FD;">🏢</div><div><div class="res-title">ЦИАН</div><div class="res-url">www.cian.ru</div></div><div class="res-arrow">↗</div></a><a class="res-link" href="https://rosstat.gov.ru" target="_blank" rel="noopener"><div class="res-icon" style="background:#EEF1FD;">📊</div><div><div class="res-title">Росстат</div><div class="res-url">rosstat.gov.ru</div></div><div class="res-arrow">↗</div></a><a class="res-link" href="https://www.openstreetmap.org" target="_blank" rel="noopener"><div class="res-icon" style="background:#EEF1FD;">🗺️</div><div><div class="res-title">OpenStreetMap</div><div class="res-url">www.openstreetmap.org</div></div><div class="res-arrow">↗</div></a></div><h3>Практика</h3><p style="font-size:13px">Анализ окружения и конкурентов, профиль аудитории (2–3 персоны). Самостоятельно: сбор данных по рынку — три источника на тезис.</p><div class="ph-box ph-file"><div class="ph-ic">📎</div><div><div class="ph-t">Таблица источников</div><div class="ph-s">Шаблон «тезис → 3 источника» — будет добавлен сюда.</div></div></div>
               </div>
             </div>
           </section>
@@ -1003,7 +1003,7 @@
                 </div>
               </div>
               <div class="lesson-body">
-<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция</span><span class="lect-who">Лектор: <b>Кулешов Александр</b></span></div><div class="lect-q">❓ Уточнить: Кто ведёт: трек А (контекст, смыслы) и трек Б (рынок, гипотеза) — один лектор или делим по трекам?</div><div class="card-grid">
+<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция</span><span class="lect-who">Лекторы: <b>Кулешов Александр</b> (Трек Б — рынок и продукт) · <b>Екатерина Петренко</b> (Трек А — контекст и смыслы)</span></div><div class="card-grid">
   <div class="card card-a only-a"><h3><span class="trk a">ТРЕК А</span>Проектировщик</h3><p style="font-size:13px">Контекст места, смыслы, метафоры: из чего складывается идентичность объекта и района.</p></div>
   <div class="card card-b only-b"><h3><span class="trk b">ТРЕК Б</span>Девелопер / инвестор</h3><p style="font-size:13px">Рыночные тренды и продуктовая гипотеза: что именно строится и для кого.</p></div>
 </div><p style="font-size:13px">Результат обоих треков — сформулированная продуктовая гипотеза и сценарии использования. Самостоятельно: доработка гипотезы по замечаниям наставника.</p>
@@ -1021,7 +1021,7 @@
                 </div>
               </div>
               <div class="lesson-body">
-<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция</span><span class="lect-who">Лектор: <b>Екатерина Петренко</b></span></div><div class="lect-q">❓ Уточнить: Сборка досье отдана Екатерине — подтвердить</div><ul class="checklist"><li><div class="chk">✓</div> Структура досье контекста (2–3 страницы)</li><li><div class="chk">✓</div> Самопроверка по чек-листу</li></ul><div class="ph-box ph-file"><div class="ph-ic">📎</div><div><div class="ph-t">Чек-лист досье</div><div class="ph-s">Будет добавлен сюда.</div></div></div><div class="card card-success"><h3>📝 Задание №2. Досье контекста</h3><p style="font-size:13px">Досье контекста на 2–3 страницах. Входит в список «любые 3 из заданий 1–4».</p></div>
+<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция</span><span class="lect-who">Лектор: <b>Екатерина Петренко</b></span></div><ul class="checklist"><li><div class="chk">✓</div> Структура досье контекста (2–3 страницы)</li><li><div class="chk">✓</div> Самопроверка по чек-листу</li></ul><div class="ph-box ph-file"><div class="ph-ic">📎</div><div><div class="ph-t">Чек-лист досье</div><div class="ph-s">Будет добавлен сюда.</div></div></div><div class="card card-success"><h3>📝 Задание №2. Досье контекста</h3><p style="font-size:13px">Досье контекста на 2–3 страницах. Входит в список «любые 3 из заданий 1–4».</p></div>
               </div>
             </div>
           </section>
@@ -1066,8 +1066,8 @@
               </div>
               <div class="lesson-body">
 <div class="lect"><span class="lect-fmt">🎙 Синхронная лекция</span><span class="lect-who">Лектор: <b>Кулешов Александр</b></span></div><div class="card-grid">
-  <div class="card card-a only-a"><h3><span class="trk a">ТРЕК А</span>Проектировщик</h3><p style="font-size:13px">Матрица функционального зонирования; предпроверка норм (инсоляция, пожарные требования, эвакуация) со ссылками на пункты СП; ограничения конструктива.</p><div class="depth">Модуль глубже для трека Б — финансовая модель.</div></div>
-  <div class="card card-b only-b"><h3><span class="trk b">ТРЕК Б</span>Девелопер / инвестор</h3><p style="font-size:13px">Доходная база (ставки, загрузка, эффективная площадь); CAPEX и OPEX; окупаемость, NPV и IRR; сценарии.</p><div class="depth">Для трека А — обзорно: см. тему 2.4.</div></div>
+  <div class="card card-a only-a"><h3><span class="trk a">ТРЕК А</span>Проектировщик</h3><p style="font-size:13px"><strong>Умное зонирование старого корпуса:</strong> вписывание 5–7 сценариев (коворкинг, гастрохолл, офисы) в существующую сетку колонн; предпроверка норм (инсоляция, пожарные требования, эвакуация) со ссылками на пункты СП. Обзор генеративного массинга и нарезки (<strong>Autodesk Forma / Finch 3D / TestFit</strong>).</p><div class="depth">Модуль глубже для трека Б — финансовая модель.</div></div>
+  <div class="card card-b only-b"><h3><span class="trk b">ТРЕК Б</span>Девелопер / инвестор</h3><p style="font-size:13px"><strong>Динамическая финмодель:</strong> доходная база (ставки, загрузка, GLA/GBA), CAPEX и OPEX, окупаемость, NPV и IRR. Связка таблиц с языковой моделью (Claude-коннектор) для быстрой пересборки сценариев.</p><div class="depth">Для трека А — обзорно: см. тему 2.4.</div></div>
 </div>
               </div>
             </div>
@@ -1116,7 +1116,7 @@
                 </div>
               </div>
               <div class="lesson-body">
-<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция</span><span class="lect-who">Лектор: <b>Екатерина Петренко</b></span></div><div class="lect-q">❓ Уточнить: Сборка артефакта 2: у трека Б внутри расчёты (экономика) — кто проверяет?</div><ul class="checklist"><li><div class="chk">✓</div> Сборка и самопроверка артефакта 2 по карте своего трека</li><li><div class="chk">✓</div> Доработка по замечаниям наставника</li></ul><div class="card card-success"><h3>📝 Задание №3. Артефакт 2 (по треку)</h3><p style="font-size:13px">Трек А: матрица зонирования + предпроверка норм. Трек Б: базовая финансовая модель. Входит в список «любые 3 из заданий 1–4».</p></div>
+<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция</span><span class="lect-who">Лекторы: <b>Екатерина Петренко</b> (упаковка и Трек А) · <b>Кулешов Александр</b> (валидация финмодели Трека Б)</span></div><ul class="checklist"><li><div class="chk">✓</div> Сборка и самопроверка артефакта 2 по карте своего трека</li><li><div class="chk">✓</div> Доработка по замечаниям наставника</li></ul><div class="card card-success"><h3>📝 Задание №3. Артефакт 2 (по треку)</h3><p style="font-size:13px">Трек А: матрица зонирования + предпроверка норм. Трек Б: базовая финансовая модель. Входит в список «любые 3 из заданий 1–4».</p></div>
               </div>
             </div>
           </section>
@@ -1160,10 +1160,97 @@
                 </div>
               </div>
               <div class="lesson-body">
-<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция</span><span class="lect-who">Лектор: <b>Екатерина Петренко</b></span></div><div class="card-grid">
-  <div class="card card-a only-a"><h3><span class="trk a">ТРЕК А</span>Проектировщик</h3><p style="font-size:13px">Контролируемое эскизирование по фото-основе (обзор ControlNet, редактирование изображений); серия «до/после» на одном ракурсе.</p><div class="depth">Модуль глубже для трека А.</div></div>
-  <div class="card card-b only-b"><h3><span class="trk b">ТРЕК Б</span>Девелопер / инвестор</h3><p style="font-size:13px">Обзорно: шаблоны промптов, концепт-иллюстрации под выбранные функции, проверка изображений на «честность».</p></div>
-</div><div class="res-links"><a class="res-link" href="https://www.comfy.org" target="_blank" rel="noopener"><div class="res-icon" style="background:#EEF1FD;">🧩</div><div><div class="res-title">ComfyUI</div><div class="res-url">www.comfy.org</div></div><div class="res-arrow">↗</div></a></div>
+<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция + Live-демо</span><span class="lect-who">Лекторы: <b>Екатерина Петренко</b> · <b>Кулешов Александр</b> (демо связки Flux.1 + ControlNet)</span></div>
+<div class="card-grid">
+  <div class="card card-a only-a">
+    <h3><span class="trk a">ТРЕК А</span>Проектировщик</h3>
+    <p style="font-size:13px">
+      <strong>Регенерация без потери геометрии:</strong> работа по реальному фото объекта или 3D-болванке. Удержание несущего конструктива, ритма окон и перспективы через связку <strong>Flux.1 Dev + ControlNet (Depth / Canny)</strong>. Точечная замена элементов (витрины, кровля, благоустройство, свет) через <strong>Inpainting</strong> для сборки честной серии «до/после» на одном ракурсе.
+    </p>
+    <div class="depth">Модуль глубже для трека А.</div>
+  </div>
+  <div class="card card-b only-b">
+    <h3><span class="trk b">ТРЕК Б</span>Девелопер / инвестор</h3>
+    <p style="font-size:13px">
+      <strong>Визуализация под экономику:</strong> шаблоны промптов для концепт-иллюстраций под выбранные функции из HBU. Критерии проверки рендеров на «инженерную и финансовую честность» — чтобы картинка в тизере не расходилась с реальными габаритами здания и заложенным CAPEX.
+    </p>
+  </div>
+</div>
+
+<div class="tip">
+  <div class="tip-i">🏗️</div>
+  <div>
+    <strong>Главный принцип визуализации в редевелопменте:</strong> мы не генерируем новое здание «с нуля». Связка <em>Фото объекта → ControlNet (каркас) → Flux.1 / Inpainting (материалы и среда)</em> позволяет менять функцию и эстетику, сохраняя 100% узнаваемости и реальный конструктив исходного корпуса.
+  </div>
+</div>
+
+<h3>Как устроена связка: 4 шага цифровой реконструкции</h3>
+<div class="steps">
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <h3>Исходник и «рентген здания» (ControlNet Depth + Canny)</h3>
+      <p>Загружаем реальное фото корпуса «C52» или серый скриншот 3D-болванки. Препроцессоры ControlNet снимают с кадра жёсткий чертёж граней (<code>Canny / Lineart</code>) и 3D-карту глубины (<code>Depth</code>). Несущие стены, шаг колонн и габариты оконных проёмов блокируются от изменений.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <h3>Ползунок «Свобода архитектора» (ControlNet Strength)</h3>
+      <p>Управляем балансом между точностью конструктива и новой архитектурой: значение <code>1.0</code> намертво фиксирует каждый кирпич (меняется только свет и текстура), а диапазон <code>0.65–0.80</code> сохраняет объём и проёмы здания, но позволяет аккуратно добавить козырьки, террасы, вывески и озеленение.</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <h3>Сборка серии «До / После» по алгоритму слоёного пирога</h3>
+      <p><strong>Кадр 0 («До»):</strong> исходное фото площадки. <strong>Кадр 1 («Капстрой»):</strong> прогон через Flux.1 + ControlNet (расчистка кирпича, новые витражи и кровля — визуализация базового CAPEX). <strong>Кадр 2 («Продукт и жизнь»):</strong> доработка двора и первых этажей через маску <strong>Inpainting</strong> (летние веранды, малые архитектурные формы, сценарии и люди из Модуля 1).</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <h3>Промпт по материалам из сметы, а не «абстрактной красоте»</h3>
+      <p>В текстовом задании для Flux.1 указываем конкретные строительные решения, заложенные в таблицу расчётов: тип кирпичной кладки, профиль остекления, покрытие двора и сценарий освещения.</p>
+    </div>
+  </div>
+</div>
+
+<div class="prompt-box">
+  <div class="prompt-hdr">Пример структурного промпта · Flux.1 Dev + ControlNet (Кейс «C52»)</div>
+  <div class="prompt-body">
+    Architectural photography of a revitalized industrial red-brick factory courtyard, adaptive reuse into a creative cluster. <span class="prompt-hl">Preserved original historic brick facade and window rhythm</span>, sandblasted clean red brick, new black aluminum floor-to-ceiling storefront glazing on the ground floor, warm interior cafe lighting visible inside. Courtyard paved with large-format light grey granite slabs, corten steel planters with ornamental grasses, wooden outdoor seating, subtle warm architectural uplighting on brick piers, dusk atmosphere, photorealistic, 35mm architectural lens.
+  </div>
+</div>
+
+<h3>Три способа выполнить практику дома (по вашему контуру)</h3>
+<div class="card-grid card-grid-3col">
+  <div class="card">
+    <div class="card-icon">🟢</div>
+    <h3>1. Базовый (без установок)</h3>
+    <p>Грубый фотоколлаж поверх исходного фото + генерация в основном контуре или точечное редактирование по маске (Inpainting) в браузерных ИИ-редакторах.</p>
+  </div>
+  <div class="card card-accent">
+    <div class="card-icon">⚡</div>
+    <h3>2. Облачный профи</h3>
+    <p>Работа в веб-интерфейсах с поддержкой Flux.1, ControlNet и кисти Inpainting (Krea.ai, Fal.ai, специализированные Telegram-боты на движке Flux) — без нагрузки на видеокарту.</p>
+  </div>
+  <div class="card">
+    <div class="card-icon">🧩</div>
+    <h3>3. Максимум (ComfyUI)</h3>
+    <p>Запуск готового преднастроенного шаблона нод для ComfyUI: перетащите файл <code>redev_c52_workflow.json</code> в окно программы и подставьте своё фото.</p>
+  </div>
+</div>
+
+<div class="ph-box ph-file">
+  <div class="ph-ic">📎</div>
+  <div>
+    <div class="ph-t">Готовый шаблон связки ComfyUI (redev_c52_workflow.json) + инструкция</div>
+    <div class="ph-s">Собранная схема с подписанными блоками на русском языке — будет добавлена сюда перед уроком.</div>
+  </div>
+</div>
+
+<div class="res-links"><a class="res-link" href="https://www.comfy.org" target="_blank" rel="noopener"><div class="res-icon" style="background:#EEF1FD;">🧩</div><div><div class="res-title">ComfyUI — нодовый интерфейс для связки Flux.1 + ControlNet</div><div class="res-url">www.comfy.org</div></div><div class="res-arrow">↗</div></a></div>
               </div>
             </div>
           </section>
@@ -1211,7 +1298,7 @@
                 </div>
               </div>
               <div class="lesson-body">
-<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция</span><span class="lect-who">Лектор: <b>Екатерина Петренко</b></span></div><div class="lect-q">❓ Уточнить: Согласованность изображений, площадей и расчётов: визуал — Екатерина, площади и расчёты — Александр; кто ведёт?</div><ul class="checklist"><li><div class="chk">✓</div> Согласованность изображений, площадей и расчётов</li><li><div class="chk">✓</div> Самопроверка по чек-листу трека; подготовка черновика</li><li><div class="chk">✓</div> Отзыв на работу напарника</li></ul>
+<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция (формат краш-теста)</span><span class="lect-who">Лекторы: <b>Екатерина Петренко</b> (визуальный аудит) · <b>Кулешов Александр</b> (аудит площадей, норм СП и CAPEX)</span></div><ul class="checklist"><li><div class="chk">✓</div> <strong>Краш-тест согласованности:</strong> проверка того, чтобы нарисованные на рендерах конструкции (антресоли, витражи, благоустройство) бились с таблицей CAPEX и нормами СП</li><li><div class="chk">✓</div> Самопроверка по чек-листу трека; подготовка черновика</li><li><div class="chk">✓</div> Перекрёстное ревью: отзыв на работу напарника из смежного трека</li></ul>
               </div>
             </div>
           </section>
@@ -1254,7 +1341,7 @@
                 </div>
               </div>
               <div class="lesson-body">
-<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция</span><span class="lect-who">Лектор: <b>Екатерина Петренко</b></span></div><div class="lect-q">❓ Уточнить: Итоговый документ: сборка — Екатерина, содержание по нормам и экономике — Александр; кто ведёт?</div><div class="card-grid">
+<div class="lect"><span class="lect-fmt">🎙 Синхронная лекция</span><span class="lect-who">Лекторы: <b>Екатерина Петренко</b> (структура и визуальная сборка в Gamma / Claude) · <b>Кулешов Александр</b> (нормы и экономика)</span></div><div class="card-grid">
   <div class="card card-a only-a"><h3><span class="trk a">ТРЕК А</span>Проектировщик</h3><p style="font-size:13px">Архитектурно-визуальное исследование.</p></div>
   <div class="card card-b only-b"><h3><span class="trk b">ТРЕК Б</span>Девелопер / инвестор</h3><p style="font-size:13px">Инвестиционный концепт-паспорт.</p></div>
 </div><div class="card card-success"><h3>📝 Задание №5. Черновик итогового документа и видеопитч (обязательное)</h3><p style="font-size:13px">Черновик итогового документа и видеопитч 5 минут. Обязателен для всех — допуск к защите.</p></div>
