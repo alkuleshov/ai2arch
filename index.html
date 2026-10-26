@@ -296,6 +296,7 @@
         </ul>
         <div class="actions">
           <a class="btn btn-primary" href="redev.html#apply" onclick="typeof ym==='function'&&ym(113526373,'reachGoal','enroll_click',{course:'ИИ в редевелопменте'})">✍️ Оставить заявку</a>
+          <a class="btn btn-ghost" href="redev-guide.html?from=index">📖 Учебное пособие</a>
         </div>
       </article>
 
@@ -398,7 +399,7 @@
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a'); if (!a) return;
     if (typeof ym !== 'function') return;
-    if (a.href.indexOf('archi-guide.html') !== -1) ym(113526373, 'reachGoal', 'guide_click');
+    if (a.href.indexOf('archi-guide.html') !== -1 || a.href.indexOf('redev-guide.html') !== -1) ym(113526373, 'reachGoal', 'guide_click');
     else if (a.href.indexOf('t.me/alkuleshov') !== -1) ym(113526373, 'reachGoal', 'telegram_click');
   }, true);
 </script>

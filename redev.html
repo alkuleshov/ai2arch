@@ -311,7 +311,7 @@
       <button class="btn btn-primary" data-apply>Оставить заявку</button>
       <a class="btn btn-ghost" href="#program">Смотреть программу</a>
     </div>
-    <p class="hero-note">Приём заявок открыт · в пилотной группе 5 мест</p>
+    <p class="hero-note">Приём заявок открыт · в пилотной группе 5 мест · <a href="redev-guide.html?from=redev">Слушателям →</a></p>
 
     <div class="facts">
       <div class="fact"><b>5 ноября<small>2026</small></b><span>старт, финальная защита 6 декабря</span></div>
@@ -409,7 +409,7 @@
           <div class="role">Руководитель программы, ведущий эксперт-практик</div>
           <ul class="list">
             <li>15 лет практики в средовом проектировании и редевелопменте</li>
-            <li>Создатель первого креативного кластера на Юге России («С52», Ростов-на-Дону)</li>
+            <li>Создатель первого креативного кластера на Юге России («C52», Ростов-на-Дону)</li>
             <li>Руководитель программы ДПО по ИИ в архитектуре в ЮФУ</li>
             <li>Ведёт воркшопы, разбирает проекты слушателей, отвечает за методику и техническую часть</li>
           </ul>
@@ -448,7 +448,7 @@
     <details class="mod">
       <summary><span class="mod-dot c0"></span><span class="mod-t"><small>Вводный модуль</small><strong>Введение в развитие территорий и объектов</strong></span><span class="mod-h">6 ч</span><span class="mod-plus">+</span></summary>
       <div class="mod-body"><ul class="list">
-        <li><span class="tag all">ВСЕМ</span>Жизненный цикл объекта: от заброшенного здания к креативному кластеру. Разбор кейса «С52».</li>
+        <li><span class="tag all">ВСЕМ</span>Жизненный цикл объекта: от заброшенного здания к креативному кластеру. Разбор кейса «C52».</li>
         <li><span class="tag all">ВСЕМ</span>Роли: архитектор отвечает за форму и функцию, девелопер за инвестиции и продукт. Выбор трека.</li>
         <li><span class="tag all">ВСЕМ</span>Обзор рабочей цепочки курса и инструментов.</li>
       </ul></div>
@@ -545,7 +545,7 @@
     <div class="kicker">Кейсы</div>
     <h2>Опыт, на котором построена программа</h2>
     <div class="grid2">
-      <div class="card"><h3>Готовый кейс</h3><p>Если своего объекта нет, вы получаете готовый учебный кейс. А на вводном модуле жизненный цикл объекта разбираем на примере «С52»: первого креативного кластера на Юге России, который создал руководитель программы.</p></div>
+      <div class="card"><h3>Готовый кейс</h3><p>Если своего объекта нет, вы получаете готовый учебный кейс. А на вводном модуле жизненный цикл объекта разбираем на примере «C52»: первого креативного кластера на Юге России, который создал руководитель программы.</p></div>
       <div class="card"><h3>Первая ступень</h3><p>Программу «Современные инструменты проектного анализа» прошли 11 слушателей, все дошли до защиты. <a href="archi.html" style="color:var(--azure-dark);font-weight:700">Посмотреть первую ступень →</a></p></div>
     </div>
   </div>
@@ -875,7 +875,7 @@
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a'); if (!a) return;
     if (typeof ym !== 'function') return;
-    if (a.href.indexOf('archi-guide.html') !== -1) ym(113526373, 'reachGoal', 'guide_click');
+    if ((a.href.indexOf('archi-guide.html') !== -1 || a.href.indexOf('redev-guide.html') !== -1)) ym(113526373, 'reachGoal', 'guide_click');
     else if (a.href.indexOf('t.me/alkuleshov') !== -1) ym(113526373, 'reachGoal', 'telegram_click');
   }, true);
 </script>
