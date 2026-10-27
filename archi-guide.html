@@ -2203,7 +2203,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
     const code = gate.dataset.code;
     const entered = input.value.trim().toLowerCase();
     if (entered === code) {
-      try { localStorage.setItem('unlocked_' + code, '1'); } catch(e) {}
+      try { localStorage.setItem('unlocked_v_' + code, '1'); } catch(e) {}
       renderVideoGate(gate);
     } else {
       gate.querySelector('.video-gate-error').style.display = 'block';
@@ -2215,7 +2215,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
     document.querySelectorAll('.video-gate').forEach(function(gate) {
       const code = gate.dataset.code;
       let unlocked = false;
-      try { unlocked = localStorage.getItem('unlocked_' + code) === '1'; } catch(e) {}
+      try { unlocked = localStorage.getItem('unlocked_v_' + code) === '1'; } catch(e) {}
       if (unlocked) renderVideoGate(gate);
     });
   }
@@ -2235,7 +2235,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
     const code = gate.dataset.code;
     const entered = input.value.trim().toLowerCase();
     if (entered === code) {
-      try { localStorage.setItem('unlocked_' + code, '1'); } catch(e) {}
+      try { localStorage.setItem('unlocked_m_' + code, '1'); } catch(e) {}
       revealGatedContent(gate);
       setTimeout(initScrollSpy, 30);
     } else {
@@ -2248,7 +2248,7 @@ exporter.exportToImage(<span class="vv">"/output/scheme.png"</span>, settings)
     document.querySelectorAll('.content-gate').forEach(function(gate) {
       const code = gate.dataset.code;
       let unlocked = false;
-      try { unlocked = localStorage.getItem('unlocked_' + code) === '1'; } catch(e) {}
+      try { unlocked = localStorage.getItem('unlocked_m_' + code) === '1'; } catch(e) {}
       if (unlocked) revealGatedContent(gate);
     });
   }
