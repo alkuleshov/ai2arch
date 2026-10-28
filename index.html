@@ -109,6 +109,7 @@
   .desc { font-size:15.5px; color:var(--muted); margin-bottom:18px; }
 
   .facts { display:flex; flex-wrap:wrap; align-items:flex-start; align-content:flex-start; gap:8px; list-style:none; margin-bottom:22px; font-size:13.5px; font-weight:500; }
+  .facts li.br { flex-basis:100%; height:0; padding:0; border:0; background:none; margin:-8px 0 0; }
   .facts li { padding:6px 12px; border:1px solid var(--line); border-radius:999px; background:rgba(26,130,255,.07); }
 
   .actions { margin-top:auto; display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
@@ -274,7 +275,9 @@
         <ul class="facts">
           <li>🕒 22 ак. часа</li>
           <li>📅 2,5 недели</li>
+          <li class="br" aria-hidden="true"></li>
           <li>💳 5 000 ₽, рассрочка</li>
+          <li class="br" aria-hidden="true"></li>
           <li>🎓 Удостоверение ЮФУ</li>
         </ul>
         <div class="actions">
@@ -291,7 +294,9 @@
         <ul class="facts">
           <li>🕒 72 ак. часа</li>
           <li>📅 4,5 недели</li>
+          <li class="br" aria-hidden="true"></li>
           <li>💳 18 900 ₽, выпускникам 1 ступени — 14 900 ₽</li>
+          <li class="br" aria-hidden="true"></li>
           <li>🎓 Удостоверение ЮФУ</li>
         </ul>
         <div class="actions">
