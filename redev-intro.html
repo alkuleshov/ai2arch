@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Вводная · Что мы делаем на курсе · ИИ в редевелопменте</title>
+<style>
+:root{
+  --navy:#0A0F1A; --graphite:#2A2F3E; --azure:#1A6BFF;
+  --azure2:#EAF1FF; --azure3:#BFD3FF; --soft:#F6F8FC; --line:#E1E5EE; --muted:#5B6475; --faint:#9AA4B8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#fff;color:var(--navy);font-family:Manrope,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.deck{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:8px 0 10px}
+.viewport{position:relative;flex:1 1 auto;width:100%;display:flex;align-items:center;justify-content:center;min-height:0}
+.stage{width:1280px;height:720px;position:relative;flex:none;transform-origin:center center;background:#fff;overflow:hidden;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 30px rgba(10,15,26,.06)}
+.progress{position:absolute;left:0;top:0;height:5px;background:var(--azure);width:0;transition:width .35s ease;z-index:5}
+
+.slide{position:absolute;inset:0;padding:50px 72px 74px;display:none;flex-direction:column}
+.slide.active{display:flex;animation:in .4s ease both}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.kick{font-size:14px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--azure);margin-bottom:12px}
+h1{font-size:58px;line-height:1.04;font-weight:800;letter-spacing:-.02em}
+h2{font-size:44px;line-height:1.12;font-weight:800;letter-spacing:-.015em}
+h1 em,h2 em{font-style:normal;color:var(--azure)}
+.lead{font-size:22px;line-height:1.5;color:var(--muted);margin-top:12px;max-width:1040px}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;margin-top:14px}
+.foot{position:absolute;left:72px;right:72px;bottom:24px;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--faint);letter-spacing:.03em}
+.foot a{color:var(--azure);font-weight:700;text-decoration:none}
+.foot a:hover{text-decoration:underline}
+.foot .num{font-weight:800;color:var(--navy)}
+svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.note{font-size:18px;color:var(--muted);margin-top:14px;line-height:1.45}
+.note b{color:var(--navy)}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--azure2);color:var(--azure);font-weight:800;font-size:16px}
+.chip.g{background:var(--soft);color:var(--graphite);border:1px solid var(--line)}
+.pill{display:inline-block;padding:6px 12px;border-radius:8px;background:var(--azure2);color:var(--azure);font-weight:800;font-size:15px;line-height:1.25}
+
+/* 1 титул */
+.s1{flex-direction:row;align-items:center;gap:30px}
+.s1 .l{flex:1.2}
+.s1 .r{flex:1}
+.s1 .chips{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.s1 .how{margin-top:26px;font-size:15px;color:var(--faint)}
+
+/* 2 цепочка */
+.chain{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:6px}
+.chain:before{content:"";position:absolute;left:8%;right:8%;top:45px;height:3px;background:var(--azure3);z-index:0}
+.node{position:relative;z-index:1;text-align:center}
+.node .c{width:92px;height:92px;border-radius:50%;margin:0 auto 16px;background:#fff;border:3px solid var(--azure);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:42px}
+.node:last-child .c{background:var(--azure);color:#fff}
+.node .n{font-size:14px;font-weight:800;color:var(--faint);letter-spacing:.1em}
+.node h3{font-size:25px;font-weight:800;margin:2px 0 10px}
+.node p{font-size:17.5px;line-height:1.4;color:var(--muted);min-height:112px}
+.node .pill{margin-top:8px;font-size:16px}
+
+/* 3 жизненный цикл */
+.stages{display:grid;grid-template-columns:1fr 36px 1fr 36px 1fr 36px 1fr;align-items:stretch;margin-top:10px}
+.st{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:24px 22px}
+.st .ic{width:60px;height:60px;border-radius:14px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:16px}
+.st:nth-child(7) .ic{background:var(--azure);color:#fff}
+.st h3{font-size:24px;font-weight:800;margin-bottom:8px;white-space:nowrap}
+.st p{font-size:17.5px;line-height:1.45;color:var(--muted)}
+.arr{display:flex;align-items:center;justify-content:center;color:var(--azure)}
+.arr svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.band{margin-top:6px;background:var(--azure2);border-radius:14px;padding:16px 26px;font-size:20px;color:var(--navy);display:flex;gap:14px;align-items:center}
+.band b{color:var(--azure)}
+
+/* 4 сравнение */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:6px}
+.pn{border:1px solid var(--line);border-radius:18px;padding:24px 30px;background:#fff}
+.pn.hi{border-color:var(--azure);background:linear-gradient(180deg,var(--azure2),#fff 60%)}
+.pn h3{font-size:28px;font-weight:800;margin-bottom:4px}
+.pn .sub{font-size:15px;color:var(--faint);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.pn svg.ill{width:100%;height:180px;display:block;margin:2px 0 8px}
+.pn ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.pn li{font-size:19.5px;line-height:1.4;color:var(--graphite);padding-left:24px;position:relative}
+.pn li:before{content:"";position:absolute;left:0;top:.6em;width:12px;height:3px;border-radius:2px;background:var(--faint)}
+.pn.hi li:before{background:var(--azure)}
+
+/* 5 ИИ */
+.flow{display:grid;grid-template-columns:1fr 50px 1fr 50px 1fr 50px 1fr;align-items:stretch}
+.fl{border:2px solid var(--line);border-radius:16px;padding:22px 16px 20px;background:#fff;text-align:center}
+.fl .ic{width:60px;height:60px;border-radius:50%;margin:0 auto 12px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:31px}
+.fl.you{border-color:var(--azure3)}
+.fl.ai{background:var(--azure);border-color:var(--azure);color:#fff}
+.fl.ai .ic{background:#fff;color:var(--azure)}
+.fl.ai p{color:rgba(255,255,255,.85)}
+.fl h3{font-size:23px;font-weight:800;margin-bottom:6px}
+.fl p{font-size:17.5px;line-height:1.35;color:var(--muted)}
+.back{display:block;width:100%;height:auto;margin:6px 0 16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:4px}
+.bx{background:var(--soft);border-radius:16px;padding:22px 28px}
+.bx h4{font-size:16px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--azure);margin-bottom:10px}
+.bx.you h4{color:var(--graphite)}
+.bx li{list-style:none;font-size:19.5px;line-height:1.4;padding-left:26px;position:relative;margin-bottom:7px;color:var(--graphite)}
+.bx li:before{content:"";position:absolute;left:0;top:.35em;width:14px;height:14px;border-radius:50%;background:var(--azure2);border:3px solid var(--azure);box-sizing:border-box}
+.bx.you li:before{border-color:var(--graphite);background:#fff}
+
+/* 6 модули */
+.segbar{display:flex;height:14px;border-radius:7px;overflow:hidden;gap:3px;margin:4px 0 18px}
+.segbar i{display:block;background:var(--azure)}
+.segbar i:nth-child(odd){background:var(--azure)}
+.segbar i:nth-child(even){background:var(--azure3)}
+.mods{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.md{border:1px solid var(--line);border-radius:14px;padding:20px 17px 18px;background:#fff;display:flex;flex-direction:column}
+.md .tp{font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.md .h{font-size:42px;font-weight:800;color:var(--azure);line-height:1;margin:6px 0 8px}
+.md .h small{font-size:16px;font-weight:700;color:var(--muted);margin-left:3px}
+.md h3{font-size:20px;font-weight:800;line-height:1.2;margin-bottom:10px;min-height:50px}
+.md p{font-size:16px;line-height:1.4;color:var(--muted);flex:1}
+.md .res{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-size:14px;color:var(--faint);font-weight:700}
+.md .res b{display:block;color:var(--navy);font-size:16.5px;margin-top:3px}
+.md:last-child{background:var(--azure);border-color:var(--azure)}
+.md:last-child .tp,.md:last-child .h,.md:last-child .h small,.md:last-child p,.md:last-child .res,.md:last-child .res b,.md:last-child h3{color:#fff}
+.md:last-child .res{border-color:rgba(255,255,255,.4)}
+
+/* 7 треки */
+.fork{display:grid;grid-template-columns:300px 80px 1fr;align-items:center;margin-top:6px}
+.trunk{background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:22px 22px 18px}
+.trunk h3{font-size:25px;font-weight:800;margin-bottom:12px}
+.trunk .it{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;background:#fff;border:1px solid var(--line);font-size:18px;font-weight:700;margin-bottom:8px}
+.trunk .it svg{color:var(--azure);font-size:22px}
+.forkarr{width:80px;height:300px}
+.lanes{display:flex;flex-direction:column;gap:18px}
+.ln{border:2px solid var(--line);border-radius:18px;padding:18px 24px;display:grid;grid-template-columns:1fr 250px;gap:20px;align-items:center;background:#fff}
+.ln.a{border-color:var(--azure3)}
+.ln.b{border-color:var(--azure);background:linear-gradient(90deg,var(--azure2),#fff 70%)}
+.ln .t{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--azure)}
+.ln h3{font-size:27px;font-weight:800;margin:2px 0 4px}
+.ln .who{font-size:17px;color:var(--muted);line-height:1.35;margin-bottom:8px}
+.ln .fo{font-size:17px;color:var(--graphite);line-height:1.4}
+.ln .fo b{color:var(--navy)}
+.ln .doc{background:var(--azure);color:#fff;border-radius:14px;padding:16px 18px;text-align:center}
+.ln.a .doc{background:var(--graphite)}
+.ln .doc svg{font-size:30px;margin-bottom:6px}
+.ln .doc small{display:block;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;font-weight:700}
+.ln .doc b{font-size:19px;line-height:1.25;font-weight:800}
+
+/* 8 результат */
+.res8{display:grid;grid-template-columns:540px 1fr;gap:40px;align-items:center;margin-top:6px}
+.cert{margin:0}
+.cert img{width:100%;display:block;border-radius:10px;border:1px solid var(--line);box-shadow:0 10px 30px rgba(10,15,26,.12)}
+.cert figcaption{margin-top:10px;font-size:14.5px;color:var(--faint);text-align:center}
+.outs{display:flex;flex-direction:column;gap:18px}
+.out{display:flex;gap:18px;align-items:flex-start;padding:18px 20px;border-radius:16px;background:var(--soft);border:1px solid var(--line)}
+.out .ic{width:54px;height:54px;border-radius:14px;background:var(--azure);color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;flex:none}
+.out h3{font-size:23px;font-weight:800;margin-bottom:4px}
+.out p{font-size:18px;line-height:1.42;color:var(--muted)}
+
+/* 9 примеры */
+.gal{display:grid;grid-template-columns:430px 1fr;grid-template-rows:1fr 1fr;gap:14px;height:412px;margin-top:4px}
+.gal figure{position:relative;margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--soft)}
+.gal figure.big{grid-row:1/3}
+.gal img{width:100%;height:100%;object-fit:cover;display:block}
+.gal figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.94);padding:7px 12px;border-radius:8px;font-size:14.5px;font-weight:800;color:var(--navy)}
+
+/* 10 формат */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:6px}
+.tl{border:1px solid var(--line);border-radius:18px;padding:28px 22px;background:#fff;display:flex;flex-direction:column}
+.tl .ic{width:66px;height:66px;border-radius:16px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:34px;margin-bottom:18px}
+.tl h3{font-size:24px;font-weight:800;margin-bottom:8px}
+.tl p{font-size:18px;line-height:1.45;color:var(--muted);flex:1}
+.tl a{margin-top:12px;color:var(--azure);font-weight:800;font-size:17px;text-decoration:none}
+.tl a:hover{text-decoration:underline}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
+.sb{background:var(--soft);border-radius:14px;padding:20px 22px;display:flex;align-items:baseline;gap:10px}
+.sb b{font-size:42px;font-weight:800;color:var(--azure)}
+.sb span{font-size:17px;color:var(--muted);line-height:1.25}
+
+/* 11 инструменты */
+.tools{display:grid;grid-template-columns:390px 1fr;gap:34px;align-items:center;margin-top:4px}
+.tools svg.rings{width:390px;height:390px}
+.tc{border:1px solid var(--line);border-radius:16px;padding:18px 24px;margin-bottom:12px}
+.tc.main{border-color:var(--azure);background:linear-gradient(90deg,var(--azure2),#fff 80%)}
+.tc h3{font-size:23px;font-weight:800;margin-bottom:4px}
+.tc .sub{font-size:17px;color:var(--muted);margin-bottom:10px;line-height:1.4}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips .chip{font-size:16px;padding:7px 13px}
+
+/* 12 проверка */
+.checks{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:6px}
+.ck{border:1px solid var(--line);border-radius:18px;padding:32px 22px;background:#fff;text-align:center}
+.ck .ic{width:78px;height:78px;border-radius:50%;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 18px}
+.ck h3{font-size:26px;font-weight:800;margin-bottom:8px}
+.ck p{font-size:19px;line-height:1.45;color:var(--muted)}
+.rule{margin-top:20px;background:var(--navy);color:#fff;border-radius:16px;padding:24px 30px;font-size:26px;font-weight:800;display:flex;gap:16px;align-items:center}
+.rule svg{color:#6FA3FF;font-size:32px}
+
+/* 13 шаг */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.sp{border-top:5px solid var(--azure);background:var(--soft);border-radius:0 0 16px 16px;padding:30px 28px 34px}
+.sp .n{font-size:76px;font-weight:800;color:var(--azure);line-height:1;margin-bottom:12px}
+.sp h3{font-size:28px;font-weight:800;margin-bottom:8px}
+.sp p{font-size:20.5px;line-height:1.45;color:var(--muted)}
+.sp a{display:inline-block;margin-top:14px;background:var(--azure);color:#fff;text-decoration:none;font-weight:800;font-size:17px;padding:12px 18px;border-radius:10px}
+.sp a:hover{background:#0f56d6}
+
+/* 14 ссылки */
+.links{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.lk{display:flex;flex-direction:column;border:2px solid var(--line);border-radius:20px;padding:38px 32px;text-decoration:none;background:#fff;transition:.15s}
+.lk:hover{border-color:var(--azure);box-shadow:0 10px 30px rgba(26,107,255,.14);transform:translateY(-2px)}
+.lk .ic{width:76px;height:76px;border-radius:18px;background:var(--azure);color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:22px}
+.lk h3{font-size:30px;font-weight:800;margin-bottom:8px}
+.lk p{font-size:19.5px;line-height:1.45;color:var(--muted);flex:1}
+.lk .go{margin-top:16px;color:var(--azure);font-weight:800;font-size:19px}
+.lk.nolink{cursor:default}
+.lk.nolink:hover{border-color:var(--line);box-shadow:none;transform:none}
+
+/* управление */
+.controls{display:flex;align-items:center;gap:10px;user-select:none}
+.controls button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);font-family:inherit;font-size:20px;font-weight:700;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.controls button:hover{border-color:var(--azure);color:var(--azure)}
+.controls button:disabled{opacity:.3;cursor:default;border-color:var(--line);color:var(--navy)}
+.counter{min-width:70px;text-align:center;font-size:15px;font-weight:800;color:var(--muted)}
+.dots{display:flex;gap:6px;margin:0 6px}
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--line);cursor:pointer;transition:.2s}
+.dots i.on{background:var(--azure);transform:scale(1.3)}
+.hint{font-size:12px;color:var(--faint);margin-left:8px}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12M3 21h18M9 21v-5h6v5M8 11.5h.01M12 11.5h.01M16 11.5h.01"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.8 10.6c.7.7 1 1.4 1 2.4h5.6c0-1 .3-1.7 1-2.4A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M3 17l5-5 4 4 3-3 6 6"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM15 3v4h4M10 12h6M10 16h6"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h12l-2.5 4L17 12H5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.2l3 3 5-6"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-5 4v-4H4z"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4h12a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2zM5 18a2 2 0 0 1 2-2h12"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6zM9 12l2 2 4-4"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.6"/><path d="M10.7 12.4L20 3M16 7l3 3"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"/></symbol>
+    <symbol id="i-source" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 4v16M5 20h14M4 8h16M4 8l-2 7a3 3 0 0 0 6 0zM20 8l-2 7a3 3 0 0 0 6 0z"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7.5h7M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"/></symbol>
+    <symbol id="i-logic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.6 2.6 0 1 1 3.6 2.4c-.7.4-1.1.9-1.1 1.8M12 17h.01"/></symbol>
+  </defs>
+</svg>
+
+<div class="deck" id="deck">
+ <div class="viewport" id="viewport">
+  <div class="stage" id="stage">
+   <div class="progress" id="progress"></div>
+
+   <!-- 1 ТИТУЛ -->
+   <section class="slide s1 active">
+     <div class="l">
+       <div class="kick">Вводная · ИИ в редевелопменте</div>
+       <h1>Что мы делаем<br>на <em>курсе</em></h1>
+       <p class="lead">Вы берёте существующее здание или территорию и за 4,5 недели доводите их до защищённой концепции. ИИ ускоряет работу, решения принимаете вы.</p>
+       <div class="chips"><span class="chip">72 академических часа</span><span class="chip">4,5 недели</span><span class="chip g">дистанционно</span></div>
+       <p class="how">Презентация самостоятельная: листайте стрелками, ⤢ — на весь экран.</p>
+     </div>
+     <div class="r">
+       <svg viewBox="0 0 590 380" width="100%" aria-label="Из заброшенного здания — в обновлённое место">
+         <line x1="0" y1="320" x2="560" y2="320" stroke="#D5DBE6" stroke-width="3"/>
+         <!-- было -->
+         <g stroke="#9AA4B8" stroke-width="3" fill="#F1F3F8" stroke-linejoin="round">
+           <rect x="170" y="92" width="22" height="120"/><rect x="165" y="84" width="32" height="9"/>
+           <rect x="20" y="210" width="190" height="110"/>
+           <path d="M20 210V168l50 42V168l50 42V168l50 42V168l40 42z"/>
+         </g>
+         <g stroke="#9AA4B8" stroke-width="2.5" fill="#fff">
+           <rect x="38" y="240" width="28" height="38"/><rect x="78" y="240" width="28" height="38"/><rect x="118" y="240" width="28" height="38"/><rect x="158" y="240" width="28" height="38"/>
+         </g>
+         <g stroke="#9AA4B8" stroke-width="2.5" stroke-linecap="round"><path d="M38 240l28 38M106 240l-28 38M118 258l28-18M186 278l-28-20"/></g>
+         <!-- стрелка -->
+         <path d="M228 252H296" stroke="#1A6BFF" stroke-width="5" stroke-linecap="round"/>
+         <path d="M284 240l14 12-14 12" fill="none" stroke="#1A6BFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+         <text x="262" y="228" text-anchor="middle" font-size="17" font-weight="800" fill="#1A6BFF" font-family="inherit">курс</text>
+         <!-- стало -->
+         <g transform="translate(330,0)" stroke="#1A6BFF" stroke-width="3" fill="#EAF1FF" stroke-linejoin="round">
+           <rect x="170" y="92" width="22" height="120" fill="#BFD3FF"/><rect x="165" y="84" width="32" height="9" fill="#1A6BFF"/>
+           <rect x="20" y="210" width="190" height="110"/>
+           <path d="M20 210V168l50 42V168l50 42V168l50 42V168l40 42z" fill="#BFD3FF"/>
+           <g fill="#1A6BFF" stroke="none"><rect x="38" y="240" width="28" height="38"/><rect x="78" y="240" width="28" height="38"/><rect x="118" y="240" width="28" height="38"/><rect x="158" y="240" width="28" height="38"/></g>
+         </g>
+         <!-- деревья и люди -->
+         <g stroke="none"><circle cx="322" cy="276" r="24" fill="#9FD0B0"/><circle cx="548" cy="282" r="20" fill="#9FD0B0"/></g>
+         <g stroke="#7A9C86" stroke-width="4" stroke-linecap="round"><path d="M322 300v20M548 302v18"/></g>
+         <g fill="#0A0F1A"><circle cx="420" cy="296" r="6"/><circle cx="446" cy="298" r="6"/><circle cx="472" cy="295" r="6"/></g>
+         <g stroke="#0A0F1A" stroke-width="5" stroke-linecap="round"><path d="M420 304v16M446 306v14M472 303v17"/></g>
+         <text x="115" y="356" text-anchor="middle" font-size="18" font-weight="700" fill="#5B6475" font-family="inherit">Объект сегодня</text>
+         <text x="440" y="356" text-anchor="middle" font-size="18" font-weight="800" fill="#1A6BFF" font-family="inherit">Концепция</text>
+       </svg>
+     </div>
+   </section>
+
+   <!-- 2 ЦЕПОЧКА -->
+   <section class="slide">
+     <div class="kick">01 · Главная идея</div>
+     <h2>Из объекта — в <em>защищённую концепцию</em></h2>
+     <p class="lead">Курс — это шесть шагов. На каждом вы получаете готовый рабочий документ, и из них складывается итоговый проект.</p>
+     <div class="body">
+       <div class="chain">
+         <div class="node"><div class="c"><svg class="i"><use href="#i-building"/></svg></div><div class="n">ШАГ 1</div><h3>Объект</h3><p>Берём реальное здание или территорию: свою или учебный кейс</p><span class="pill">Паспорт объекта</span></div>
+         <div class="node"><div class="c"><svg class="i"><use href="#i-search"/></svg></div><div class="n">ШАГ 2</div><h3>Контекст</h3><p>Что можно, а что нельзя: нормы (ПЗЗ), окружение, аудитория</p><span class="pill">Досье территории</span></div>
+         <div class="node"><div class="c"><svg class="i"><use href="#i-bulb"/></svg></div><div class="n">ШАГ 3</div><h3>Идея</h3><p>5–7 сценариев использования, площади и базовая экономика</p><span class="pill">Выбранный сценарий</span></div>
+         <div class="node"><div class="c"><svg class="i"><use href="#i-image"/></svg></div><div class="n">ШАГ 4</div><h3>Образ</h3><p>Мудборд, схемы, визуализации концепции</p><span class="pill">Визуальный ряд</span></div>
+         <div class="node"><div class="c"><svg class="i"><use href="#i-doc"/></svg></div><div class="n">ШАГ 5</div><h3>Документ</h3><p>Собираем всё в итоговый документ вашего трека</p><span class="pill">Итоговый документ</span></div>
+         <div class="node"><div class="c"><svg class="i"><use href="#i-flag"/></svg></div><div class="n">ШАГ 6</div><h3>Защита</h3><p>Показываем концепцию экспертному жюри</p><span class="pill">Защищённая концепция</span></div>
+       </div>
+       <p class="note"><b>ПЗЗ</b> — правила землепользования и застройки: документ, который определяет, что на участке разрешено.</p>
+     </div>
+   </section>
+
+   <!-- 3 РЕДЕВЕЛОПМЕНТ -->
+   <section class="slide">
+     <div class="kick">02 · Что такое редевелопмент</div>
+     <h2>Новая жизнь для уже <em>построенного</em></h2>
+     <p class="lead">Здание или территория получают новое назначение и начинают работать иначе. Это путь из четырёх стадий.</p>
+     <div class="body">
+       <div class="stages">
+         <div class="st"><div class="ic"><svg class="i"><use href="#i-building"/></svg></div><h3>Объект сегодня</h3><p>Здание простаивает, устарело или используется не по назначению</p></div>
+         <div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+         <div class="st"><div class="ic"><svg class="i"><use href="#i-search"/></svg></div><h3>Диагноз</h3><p>Что можно сохранить и изменить: нормы, конструктив, спрос</p></div>
+         <div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+         <div class="st"><div class="ic"><svg class="i"><use href="#i-bulb"/></svg></div><h3>Концепция</h3><p>Новая функция, площади и образ места</p></div>
+         <div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+         <div class="st"><div class="ic"><svg class="i"><use href="#i-key"/></svg></div><h3>Продукт</h3><p>Аренда, продажа или эксплуатация обновлённого объекта</p></div>
+       </div>
+       <svg viewBox="0 0 1136 60" width="100%" style="margin:8px 0 14px;display:block" aria-hidden="true">
+         <path d="M1008 4V36q0 12-12 12H140q-12 0-12-12V12" fill="none" stroke="#BFD3FF" stroke-width="3" stroke-dasharray="7 7" stroke-linecap="round"/>
+         <path d="M120 18l8-10 8 10" fill="none" stroke="#BFD3FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+         <rect x="450" y="34" width="236" height="26" fill="#fff"/>
+         <text x="568" y="53" text-anchor="middle" font-size="16" font-weight="700" fill="#9AA4B8" font-family="inherit">и снова новый цикл жизни объекта</text>
+       </svg>
+       <div class="band"><svg class="i" style="font-size:28px;color:#1A6BFF"><use href="#i-building"/></svg><div><b>Пример:</b> заброшенная фабрика становится креативным кластером, как в кейсе «C52», который мы разбираем на курсе.</div></div>
+     </div>
+   </section>
+
+   <!-- 4 СРАВНЕНИЕ -->
+   <section class="slide">
+     <div class="kick">03 · Чем отличается</div>
+     <h2>Не новое строительство: <em>сначала диагноз</em></h2>
+     <div class="body">
+       <div class="cmp">
+         <div class="pn">
+           <div class="sub">Новое строительство</div><h3>Чистый участок</h3>
+           <svg class="ill" viewBox="0 0 440 200" aria-hidden="true">
+             <line x1="0" y1="170" x2="440" y2="170" stroke="#D5DBE6" stroke-width="3"/>
+             <rect x="50" y="50" width="340" height="120" fill="none" stroke="#9AA4B8" stroke-width="3" stroke-dasharray="10 8" rx="4"/>
+             <path d="M220 90v60M190 120h60" stroke="#9AA4B8" stroke-width="6" stroke-linecap="round"/>
+             <text x="220" y="40" text-anchor="middle" font-size="16" font-weight="700" fill="#9AA4B8" font-family="inherit">пустой участок</text>
+           </svg>
+           <ul><li>Начинаем с пустого места</li><li>Ограничения в основном нормативные</li><li>Решения свободнее, привязка к месту слабее</li></ul>
+         </div>
+         <div class="pn hi">
+           <div class="sub" style="color:#1A6BFF">Редевелопмент</div><h3>Объект с историей</h3>
+           <svg class="ill" viewBox="0 0 440 200" aria-hidden="true">
+             <line x1="0" y1="178" x2="440" y2="178" stroke="#D5DBE6" stroke-width="3"/>
+             <path d="M160 178V86l60-34 60 34v92z" fill="#EAF1FF" stroke="#1A6BFF" stroke-width="3" stroke-linejoin="round"/>
+             <rect x="188" y="110" width="24" height="30" fill="#1A6BFF"/><rect x="228" y="110" width="24" height="30" fill="#1A6BFF"/><rect x="204" y="148" width="32" height="30" fill="#fff" stroke="#1A6BFF" stroke-width="3"/>
+             <g font-size="15" font-weight="800" font-family="inherit" fill="#0A0F1A">
+               <rect x="6" y="16" width="108" height="30" rx="8" fill="#fff" stroke="#BFD3FF" stroke-width="2"/><text x="60" y="37" text-anchor="middle">ПЗЗ</text>
+               <rect x="298" y="16" width="136" height="30" rx="8" fill="#fff" stroke="#BFD3FF" stroke-width="2"/><text x="366" y="37" text-anchor="middle">Конструктив</text>
+               <rect x="6" y="136" width="126" height="30" rx="8" fill="#fff" stroke="#BFD3FF" stroke-width="2"/><text x="69" y="157" text-anchor="middle">Собственники</text>
+               <rect x="312" y="136" width="122" height="30" rx="8" fill="#fff" stroke="#BFD3FF" stroke-width="2"/><text x="373" y="157" text-anchor="middle">Окружение</text>
+             </g>
+             <g stroke="#BFD3FF" stroke-width="2.5" stroke-linecap="round"><path d="M114 38L170 80M298 38L270 80M132 150L164 140M312 150L276 140"/></g>
+           </svg>
+           <ul><li>Есть здание, собственник и история места</li><li>Есть ПЗЗ, конструктив и сложившаяся среда</li><li>Начинаем с диагноза, а не с картинки</li></ul>
+         </div>
+       </div>
+       <p class="note" style="text-align:center"><b>Поэтому на курсе мы сначала разбираем контекст, и только потом рисуем.</b></p>
+     </div>
+   </section>
+
+   <!-- 5 ИИ -->
+   <section class="slide">
+     <div class="kick">04 · Роль ИИ</div>
+     <h2>ИИ <em>предлагает</em>, вы решаете</h2>
+     <div class="body">
+       <div class="flow">
+         <div class="fl you"><div class="ic"><svg class="i"><use href="#i-user"/></svg></div><h3>Вы ставите задачу</h3><p>Объект, цель, ограничения</p></div>
+         <div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+         <div class="fl ai"><div class="ic"><svg class="i"><use href="#i-chat"/></svg></div><h3>ИИ делает черновик</h3><p>Анализ, сценарии, тексты, картинки</p></div>
+         <div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+         <div class="fl you"><div class="ic"><svg class="i"><use href="#i-check"/></svg></div><h3>Вы проверяете</h3><p>Нормы, цифры, логику</p></div>
+         <div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+         <div class="fl you"><div class="ic"><svg class="i"><use href="#i-flag"/></svg></div><h3>Решение ваше</h3><p>В документ идёт только проверенное</p></div>
+       </div>
+       <svg class="back" viewBox="0 0 1136 60" aria-hidden="true">
+         <path d="M716 2V28q0 12-12 12H135q-12 0-12-12V10" fill="none" stroke="#BFD3FF" stroke-width="3" stroke-dasharray="7 7" stroke-linecap="round"/>
+         <path d="M115 18l8-10 8 10" fill="none" stroke="#BFD3FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+         <rect x="318" y="26" width="212" height="26" fill="#fff"/>
+         <text x="424" y="46" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA4B8" font-family="inherit">не подходит — уточняем задачу</text>
+       </svg>
+       <div class="two">
+         <div class="bx"><h4>ИИ хорошо делает</h4><ul><li>Быстро собирает и сводит информацию</li><li>Предлагает варианты и сценарии</li><li>Готовит черновые тексты и визуалы</li></ul></div>
+         <div class="bx you"><h4>Только вы отвечаете за</h4><ul><li>Нормы и юридические ограничения</li><li>Цифры и расчёты</li><li>Выбор сценария и итоговый вывод</li></ul></div>
+       </div>
+     </div>
+   </section>
+
+   <!-- 6 ПУТЬ -->
+   <section class="slide">
+     <div class="kick">05 · Путь курса</div>
+     <h2>72 часа: <em>старт, четыре модуля, защита</em></h2>
+     <div class="body">
+       <div class="segbar" aria-hidden="true"><i style="flex:6"></i><i style="flex:16"></i><i style="flex:20"></i><i style="flex:16"></i><i style="flex:10"></i><i style="flex:4"></i></div>
+       <div class="mods">
+         <div class="md"><div class="tp">Вводный</div><div class="h">6<small>ч</small></div><h3>Старт</h3><p>Жизненный цикл объекта, кейс «C52», выбор трека</p><div class="res">Результат<b>Паспорт объекта</b></div></div>
+         <div class="md"><div class="tp">Модуль 1</div><div class="h">16<small>ч</small></div><h3>Контекст территории</h3><p>ПЗЗ через языковые модели, профиль аудитории, гипотеза</p><div class="res">Результат<b>Досье территории</b></div></div>
+         <div class="md"><div class="tp">Модуль 2</div><div class="h">20<small>ч</small></div><h3>Функции и экономика</h3><p>HBU, 5–7 сценариев, расчёты, стресс-тест</p><div class="res">Результат<b>Сценарий и экономика</b></div></div>
+         <div class="md"><div class="tp">Модуль 3</div><div class="h">16<small>ч</small></div><h3>Визуальная упаковка</h3><p>Мудборд, генерация, контролируемый редизайн, сториборд</p><div class="res">Результат<b>Визуальный ряд</b></div></div>
+         <div class="md"><div class="tp">Модуль 4</div><div class="h">10<small>ч</small></div><h3>Синтез</h3><p>Сборка концепции и итогового документа, питч</p><div class="res">Результат<b>Итоговый документ</b></div></div>
+         <div class="md"><div class="tp">Защита</div><div class="h">4<small>ч</small></div><h3>Demo Day</h3><p>Защита проекта перед экспертным жюри</p><div class="res">Результат<b>Защищённая концепция</b></div></div>
+       </div>
+       <p class="note"><b>HBU</b> — наилучшее и наиболее эффективное использование объекта: какая функция даст месту максимальную пользу и доход.</p>
+     </div>
+   </section>
+
+   <!-- 7 ТРЕКИ -->
+   <section class="slide">
+     <div class="kick">06 · Два трека</div>
+     <h2>Основа общая, <em>трек — по вашей роли</em></h2>
+     <p class="lead">Различаются глубина и итоговый документ. Цена от трека не зависит.</p>
+     <div class="body">
+       <div class="fork">
+         <div class="trunk"><h3>Общая основа</h3>
+           <div class="it"><svg class="i"><use href="#i-search"/></svg>Контекст и ПЗЗ</div>
+           <div class="it"><svg class="i"><use href="#i-bulb"/></svg>HBU и сценарии</div>
+           <div class="it"><svg class="i"><use href="#i-image"/></svg>Визуализация</div>
+           <div class="it" style="margin-bottom:0"><svg class="i"><use href="#i-flag"/></svg>Защита проекта</div>
+         </div>
+         <svg class="forkarr" viewBox="0 0 80 300" aria-hidden="true">
+           <path d="M0 150H30M30 150V70H66M30 150V230H66" fill="none" stroke="#1A6BFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+           <path d="M56 60l12 10-12 10M56 220l12 10-12 10" fill="none" stroke="#1A6BFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+         </svg>
+         <div class="lanes">
+           <div class="ln a"><div><div class="t">Трек А</div><h3>Проектировщик</h3><div class="who">Архитекторы, урбанисты, дизайнеры</div><div class="fo"><b>Фокус:</b> функциональное зонирование, баланс площадей, редизайн фасадов, визуальный ряд</div></div>
+             <div class="doc"><svg class="i"><use href="#i-doc"/></svg><small>Итог</small><b>Архитектурно-визуальное исследование</b></div></div>
+           <div class="ln b"><div><div class="t">Трек Б</div><h3>Девелопер и инвестор</h3><div class="who">Девелоперы, инвесторы, собственники, риелторы, аналитики, экономисты</div><div class="fo"><b>Фокус:</b> продуктовая гипотеза, CAPEX/OPEX и окупаемость, инвестиционный тизер</div></div>
+             <div class="doc"><svg class="i"><use href="#i-doc"/></svg><small>Итог</small><b>Инвестиционный концепт-паспорт</b></div></div>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- 8 РЕЗУЛЬТАТ -->
+   <section class="slide">
+     <div class="kick">07 · Результат</div>
+     <h2>Что <em>остаётся у вас</em> после курса</h2>
+     <div class="body">
+       <div class="res8">
+         <figure class="cert"><img src="images/certificate-sample.jpg" alt="Образец удостоверения о повышении квалификации ЮФУ"><figcaption>Образец удостоверения о повышении квалификации ЮФУ</figcaption></figure>
+         <div class="outs">
+           <div class="out"><div class="ic"><svg class="i"><use href="#i-doc"/></svg></div><div><h3>Итоговый документ</h3><p>Архитектурно-визуальное исследование или инвестиционный концепт-паспорт, по вашему треку.</p></div></div>
+           <div class="out"><div class="ic"><svg class="i"><use href="#i-flag"/></svg></div><div><h3>Защита проекта</h3><p>Опыт презентации концепции перед экспертным жюри.</p></div></div>
+           <div class="out"><div class="ic"><svg class="i"><use href="#i-shield"/></svg></div><div><h3>Удостоверение ЮФУ</h3><p>О повышении квалификации установленного образца, 72 часа. Тем, кто ещё учится, сначала выдаётся справка, удостоверение — после диплома.</p></div></div>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- 9 ПРИМЕРЫ -->
+   <section class="slide">
+     <div class="kick">08 · Как выглядит результат</div>
+     <h2>Из <em>контекста</em> — к генплану и визуализациям</h2>
+     <p class="lead">Примеры из материалов AI2ARCH. Ваш итоговый документ собирается из тех же элементов.</p>
+     <div class="body" style="justify-content:flex-start">
+       <div class="gal">
+         <figure class="big"><img src="images/case-greenpocket-genplan.jpg" alt="Пример генплана концепции"><figcaption>Генплан концепции</figcaption></figure>
+         <figure><img src="images/rostov-naberezhnaya-gallery.jpg" alt="Пример подачи проекта" style="object-position:center"><figcaption>Подача проекта: визуализации, схема, материалы</figcaption></figure>
+         <figure><img src="images/case-anapa-park-vizualizacii.jpg" alt="Пример визуализаций" style="object-position:center"><figcaption>Визуализации концепции</figcaption></figure>
+       </div>
+     </div>
+   </section>
+
+   <!-- 10 ФОРМАТ -->
+   <section class="slide">
+     <div class="kick">09 · Формат</div>
+     <h2>Как <em>устроено</em> обучение</h2>
+     <div class="body">
+       <div class="tiles">
+         <div class="tl"><div class="ic"><svg class="i"><use href="#i-book"/></svg></div><h3>Материалы</h3><p>Учебное пособие с разбором модулей и заданий. Смотрите в удобное время.</p><a href="https://ai2arch.ru/redev-guide.html" target="_blank" rel="noopener">Открыть пособие ↗</a></div>
+         <div class="tl"><div class="ic"><svg class="i"><use href="#i-video"/></svg></div><h3>Живые встречи</h3><p>Онлайн в Яндекс Телемосте: разбираем ваши материалы вместе с группой.</p><a href="https://ai2arch.ru/redev-schedule.html" target="_blank" rel="noopener">Расписание встреч ↗</a></div>
+         <div class="tl"><div class="ic"><svg class="i"><use href="#i-folder"/></svg></div><h3>Свой проект</h3><p>Объект ведёте между занятиями. Наставник разбирает ваши материалы.</p></div>
+         <div class="tl"><div class="ic"><svg class="i"><use href="#i-chat"/></svg></div><h3>Чат группы</h3><p>Объявления, ссылки на подключение, разбор заданий.</p></div>
+       </div>
+       <div class="stats">
+         <div class="sb"><b>72</b><span>академических часа</span></div>
+         <div class="sb"><b>4,5</b><span>недели обучения</span></div>
+         <div class="sb"><b>≈12</b><span>часов в неделю</span></div>
+         <div class="sb"><b>≤2</b><span>академических часов одно занятие</span></div>
+       </div>
+     </div>
+   </section>
+
+   <!-- 11 ИНСТРУМЕНТЫ -->
+   <section class="slide">
+     <div class="kick">10 · Инструменты</div>
+     <h2>Два контура: <em>основной и расширенный</em></h2>
+     <div class="body">
+       <div class="tools">
+         <svg class="rings" viewBox="0 0 400 400" aria-hidden="true">
+           <circle cx="200" cy="200" r="190" fill="#EAF1FF" stroke="#BFD3FF" stroke-width="3" stroke-dasharray="9 8"/>
+           <circle cx="200" cy="215" r="118" fill="#1A6BFF"/>
+           <text x="200" y="205" text-anchor="middle" font-size="28" font-weight="800" fill="#fff" font-family="inherit">Основной</text>
+           <text x="200" y="238" text-anchor="middle" font-size="28" font-weight="800" fill="#fff" font-family="inherit">контур</text>
+           <text x="200" y="266" text-anchor="middle" font-size="16" font-weight="700" fill="#BFD3FF" font-family="inherit">все задания</text>
+           <text x="200" y="52" text-anchor="middle" font-size="21" font-weight="800" fill="#0A0F1A" font-family="inherit">Расширенный контур</text>
+           <text x="200" y="76" text-anchor="middle" font-size="16" font-weight="700" fill="#5B6475" font-family="inherit">по желанию</text>
+         </svg>
+         <div>
+           <div class="tc main"><h3>Основной контур</h3><div class="sub">Доступен без дополнительных условий. Все задания курса выполняются здесь.</div>
+             <div class="chips"><span class="chip">Алиса AI</span><span class="chip">GigaChat</span><span class="chip">2ГИС</span><span class="chip">ЦИАН</span><span class="chip">Яндекс Карты</span><span class="chip">Яндекс Таблицы</span><span class="chip">Шедеврум</span><span class="chip">Kandinsky</span><span class="chip">Gamma</span><span class="chip">Notion</span></div></div>
+           <div class="tc"><h3>Расширенный контур</h3><div class="sub">Зарубежные модели. Показывает преподаватель, повторять можно по желанию. Доступ к ним слушатель обеспечивает самостоятельно.</div>
+             <div class="chips"><span class="chip g">Claude</span><span class="chip g">ChatGPT</span><span class="chip g">Gemini</span><span class="chip g">NotebookLM</span><span class="chip g">Flux</span><span class="chip g">Midjourney</span></div></div>
+           <p class="note" style="margin-top:6px"><b>Платные подписки не нужны.</b></p>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- 12 ПРОВЕРКА -->
+   <section class="slide">
+     <div class="kick">11 · Правило курса</div>
+     <h2>Проверяем <em>всё</em>, что дал ИИ</h2>
+     <p class="lead">Любой результат ИИ проходит четыре вопроса. Только после этого он попадает в итоговый документ.</p>
+     <div class="body">
+       <div class="checks">
+         <div class="ck"><div class="ic"><svg class="i"><use href="#i-source"/></svg></div><h3>Источник</h3><p>Откуда взят факт? Есть документ или ссылка?</p></div>
+         <div class="ck"><div class="ic"><svg class="i"><use href="#i-scale"/></svg></div><h3>Норма</h3><p>Подтверждена ли она в ПЗЗ или нормативе?</p></div>
+         <div class="ck"><div class="ic"><svg class="i"><use href="#i-calc"/></svg></div><h3>Цифра</h3><p>Пересчитана ли она другим способом?</p></div>
+         <div class="ck"><div class="ic"><svg class="i"><use href="#i-logic"/></svg></div><h3>Логика</h3><p>Выдерживает ли вывод вопрос «почему»?</p></div>
+       </div>
+       <div class="rule"><svg class="i"><use href="#i-shield"/></svg>Непроверенное в итоговый документ не попадает.</div>
+     </div>
+   </section>
+
+   <!-- 13 ШАГ -->
+   <section class="slide">
+     <div class="kick">12 · Первый шаг</div>
+     <h2>Что сделать <em>до следующей встречи</em></h2>
+     <p class="lead">Три действия, чтобы на встрече сразу перейти к делу.</p>
+     <div class="body">
+       <div class="steps">
+         <div class="sp"><div class="n">1</div><h3>Выберите объект</h3><p>Свой или готовый учебный кейс. Если сомневаетесь, берите кейс.</p></div>
+         <div class="sp"><div class="n">2</div><h3>Запишите три факта</h3><p>Где он находится, что с ним происходит сейчас и какой у вас запрос.</p></div>
+         <div class="sp"><div class="n">3</div><h3>Отправьте в чат</h3><p>Напишите в чат группы, чтобы мы разобрали это на встрече. Дату следующей встречи смотрите в расписании.</p><a href="https://ai2arch.ru/redev-schedule.html" target="_blank" rel="noopener">Расписание встреч ↗</a></div>
+       </div>
+     </div>
+   </section>
+
+   <!-- 14 ССЫЛКИ -->
+   <section class="slide">
+     <div class="kick">13 · Где что найти</div>
+     <h2>Всё в <em>трёх местах</em></h2>
+     <div class="body">
+       <div class="links">
+         <a class="lk" href="https://ai2arch.ru/redev-schedule.html" target="_blank" rel="noopener"><div class="ic"><svg class="i"><use href="#i-cal"/></svg></div><h3>Расписание</h3><p>Даты и время всех встреч, темы и лекторы. Здесь видно, когда следующая.</p><div class="go">Открыть расписание ↗</div></a>
+         <a class="lk" href="https://ai2arch.ru/redev-guide.html" target="_blank" rel="noopener"><div class="ic"><svg class="i"><use href="#i-book"/></svg></div><h3>Учебное пособие</h3><p>Материалы модулей, задания и записи. Можно проходить в удобное время.</p><div class="go">Открыть пособие ↗</div></a>
+         <div class="lk nolink"><div class="ic"><svg class="i"><use href="#i-chat"/></svg></div><h3>Чат группы</h3><p>Яндекс Телемост: объявления, ссылки на подключение и ответы на вопросы. Ссылку-приглашение присылаем после зачисления.</p><div class="go" style="color:#5B6475">Для участников</div></div>
+       </div>
+     </div>
+   </section>
+
+   <div class="foot" id="foot"><span>Вводная · ИИ в редевелопменте</span><span><a href="https://ai2arch.ru/redev-schedule.html" target="_blank" rel="noopener">Расписание ↗</a> &nbsp; <span class="num" id="num"></span></span></div>
+  </div>
+ </div>
+ <div class="controls">
+   <button id="prev" aria-label="Назад">‹</button>
+   <div class="dots" id="dots"></div>
+   <button id="next" aria-label="Вперёд">›</button>
+   <div class="counter" id="counter"></div>
+   <button id="fs" aria-label="Развернуть на весь экран" title="На весь экран (F)">⤢</button>
+   <span class="hint">← → листать · F — полный экран</span>
+ </div>
+</div>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  var slides=[].slice.call(stage.querySelectorAll('.slide'));
+  var dotsBox=document.getElementById('dots'), counter=document.getElementById('counter'), num=document.getElementById('num');
+  var prev=document.getElementById('prev'), next=document.getElementById('next'), fs=document.getElementById('fs'), prog=document.getElementById('progress');
+  var cur=0, total=slides.length;
+  slides.forEach(function(_,i){var d=document.createElement('i');d.onclick=function(){go(i)};dotsBox.appendChild(d);});
+  var dots=[].slice.call(dotsBox.children);
+  function go(i){
+    if(i<0||i>=total) return;
+    slides[cur].classList.remove('active'); dots[cur].classList.remove('on');
+    cur=i; slides[cur].classList.add('active'); dots[cur].classList.add('on');
+    counter.textContent=(cur+1)+' / '+total; num.textContent=(cur+1)+' / '+total;
+    prev.disabled=cur===0; next.disabled=cur===total-1;
+    prog.style.width=((cur+1)/total*100)+'%';
+    try{history.replaceState(null,'','#'+(cur+1));}catch(e){}
+  }
+  prev.onclick=function(){go(cur-1)}; next.onclick=function(){go(cur+1)};
+  function fit(){
+    var vp=document.getElementById('viewport');
+    var s=Math.min((vp.clientWidth-8)/1280,(vp.clientHeight-8)/720);
+    stage.style.transform='scale('+s+')';
+  }
+  window.addEventListener('resize',fit);
+  function toggleFs(){
+    var el=document.documentElement;
+    if(!document.fullscreenElement&&!document.webkitFullscreenElement){(el.requestFullscreen||el.webkitRequestFullscreen||function(){}).call(el);}
+    else{(document.exitFullscreen||document.webkitExitFullscreen||function(){}).call(document);}
+  }
+  fs.onclick=toggleFs;
+  document.addEventListener('fullscreenchange',function(){setTimeout(fit,60)});
+  document.addEventListener('keydown',function(e){
+    if(['ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(cur+1);}
+    else if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(cur-1);}
+    else if(e.key==='Home'){go(0);} else if(e.key==='End'){go(total-1);}
+    else if(e.key==='f'||e.key==='F'){toggleFs();}
+  });
+  var tx=null;
+  stage.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  stage.addEventListener('touchend',function(e){
+    if(tx===null)return; var dx=e.changedTouches[0].clientX-tx; tx=null;
+    if(Math.abs(dx)>50) go(dx<0?cur+1:cur-1);
+  });
+  window.addEventListener('hashchange',function(){
+    var h=parseInt((location.hash||'').replace('#',''),10);
+    if(!isNaN(h)&&h-1!==cur) go(Math.min(Math.max(h-1,0),total-1));
+  });
+  var start=parseInt((location.hash||'').replace('#',''),10);
+  go(isNaN(start)?0:Math.min(Math.max(start-1,0),total-1));
+  fit();
+})();
+</script>
+</body>
+</html>
