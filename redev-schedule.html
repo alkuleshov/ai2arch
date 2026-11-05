@@ -80,6 +80,26 @@
   .cal-bar .section-end-btn:hover { text-decoration:none; opacity:.9; }
   .cal-bar .section-end-btn:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
 
+  .cal-info { width:38px; height:38px; flex:0 0 38px; padding:0; display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--border); border-radius:50%; background:var(--surface); color:var(--accent); font-family:var(--sans); font-size:18px; font-weight:800; line-height:1; cursor:pointer; }
+  .cal-info:hover { border-color:var(--accent); background:var(--accent-l); }
+  .cal-info:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+
+  .cal-modal { display:none; position:fixed; inset:0; z-index:200; background:rgba(10,15,26,.72); align-items:center; justify-content:center; padding:16px; }
+  .cal-modal.open { display:flex; }
+  .cal-modal-box { width:100%; max-width:620px; max-height:88vh; overflow-y:auto; background:var(--surface); border-radius:14px; box-shadow:0 20px 60px rgba(10,15,26,.3); }
+  .cal-modal-top { position:sticky; top:0; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 20px; background:var(--ink-night); color:#fff; font-size:15px; font-weight:800; }
+  .cal-modal-x { background:none; border:none; color:#fff; font-size:26px; line-height:1; padding:0 4px; cursor:pointer; }
+  .cal-modal-body { padding:20px 24px 26px; }
+  .cal-modal-body h3 { font-size:17px; font-weight:800; margin:20px 0 8px; color:var(--ink); }
+  .cal-modal-body h3:first-of-type { margin-top:0; }
+  .cal-modal-body h4 { font-size:14px; font-weight:800; margin:14px 0 6px; color:var(--ink-muted); }
+  .cal-modal-body p { font-size:13px; line-height:1.5; color:var(--ink-muted); margin-bottom:8px; }
+  .cal-modal-body ol { margin:0 0 8px 18px; padding:0; }
+  .cal-modal-body li { font-size:13px; line-height:1.5; color:var(--ink-muted); margin-bottom:8px; }
+  .cal-modal-body li b { color:var(--ink); }
+  .cal-modal-lead { background:var(--surface2); border:1px solid var(--border); border-radius:9px; padding:10px 12px; margin-bottom:16px; }
+  .cal-modal-note { font-size:12px; color:var(--ink-faint); }
+
   .guide-footer { background:transparent; color:var(--ink-faint); text-align:center; padding:28px 24px; font-size:11.5px; border-top:1px solid var(--border); margin-top:20px; }
 
   @media (max-width:640px) {
@@ -89,8 +109,10 @@
     tbody td { border-bottom:none; padding:2px 0; }
     .date-cell { font-size:14px; }
     .cal-bar { margin-top:-4px; }
-    .cal-bar .section-end-btn { width:100%; justify-content:center; }
+    .cal-bar .section-end-btn { flex:1 1 auto; width:auto; justify-content:center; }
     .cal-bar span { display:none; }
+    .cal-modal-box { max-height:92vh; }
+    .cal-modal-body { padding:16px 18px 22px; }
   }
 </style>
 </head>
@@ -119,6 +141,7 @@
 
   <div class="cal-bar">
     <button class="section-end-btn primary" id="calBtn" type="button">📅 Скачать в календарь</button>
+    <button class="cal-info" id="calInfo" type="button" aria-label="Как добавить события в календарь" aria-haspopup="dialog" aria-controls="calModal" aria-expanded="false" title="Как добавить в календарь">i</button>
     <span id="calHint" aria-live="polite">Все встречи потока — одним файлом .ics, время московское</span>
   </div>
 
@@ -187,6 +210,43 @@
   </div>
 
   <div class="guide-footer">Курс дополнительного образования · ААИ ЮФУ · Ростов-на-Дону</div>
+</div>
+
+<div class="cal-modal" id="calModal" aria-hidden="true">
+  <div class="cal-modal-box" role="dialog" aria-modal="true" aria-labelledby="calModalTitle">
+    <div class="cal-modal-top">
+      <span id="calModalTitle">Как добавить события в календарь</span>
+      <button class="cal-modal-x" id="calModalX" type="button" aria-label="Закрыть">&times;</button>
+    </div>
+    <div class="cal-modal-body">
+      <p class="cal-modal-lead">Файл <b>.ics</b> можно добавить в Google Календарь или iCloud. Ниже — короткая инструкция.</p>
+
+      <h3>Google Календарь (через браузер)</h3>
+      <p>Удобнее всего с компьютера — Windows или Mac.</p>
+      <ol>
+        <li><b>Откройте настройки.</b> Перейдите на <a href="https://calendar.google.com" target="_blank" rel="noopener">calendar.google.com</a>, нажмите на шестерёнку в правом верхнем углу и выберите «Настройки».</li>
+        <li><b>Перейдите к импорту.</b> В левом боковом меню откройте «Импорт и экспорт».</li>
+        <li><b>Загрузите файл.</b> Нажмите «Выбрать файл на компьютере», укажите скачанный .ics и выберите календарь в списке «Добавить в календарь».</li>
+        <li><b>Завершите добавление.</b> Нажмите «Импорт». Появится окно с количеством успешно добавленных событий.</li>
+      </ol>
+
+      <h3>iCloud Календарь (Apple)</h3>
+      <p>В веб-версии <a href="https://www.icloud.com" target="_blank" rel="noopener">iCloud.com</a> нет прямой загрузки файла, поэтому добавляем через устройства, привязанные к Apple ID.</p>
+      <h4>На iPhone или iPad</h4>
+      <ol>
+        <li>Найдите скачанный .ics в «Файлах», почте или мессенджере и нажмите на него.</li>
+        <li>В окне просмотра событий нажмите «Добавить все» в правом верхнем углу.</li>
+        <li>Выберите календарь iCloud — не «На моём iPhone» — и нажмите «Готово». События синхронизируются с облаком.</li>
+      </ol>
+      <h4>На компьютере Mac</h4>
+      <ol>
+        <li>Дважды кликните по скачанному .ics.</li>
+        <li>Откроется стандартное приложение «Календарь».</li>
+        <li>Выберите календарь iCloud в выпадающем списке и нажмите «ОК».</li>
+      </ol>
+      <p class="cal-modal-note">Если события не появились, проверьте, что выбран нужный календарь и включена синхронизация.</p>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -380,6 +440,41 @@
     document.body.removeChild(link);
     setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
     if (hint) hint.textContent = 'Файл .ics скачан — откройте его в календаре';
+  });
+})();
+</script>
+
+<script>
+(function () {
+  var openBtn = document.getElementById('calInfo');
+  var modal = document.getElementById('calModal');
+  var closeBtn = document.getElementById('calModalX');
+  if (!openBtn || !modal || !closeBtn) return;
+
+  var lastFocus = null;
+
+  function openModal() {
+    lastFocus = document.activeElement;
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    openBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    openBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+  }
+
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
   });
 })();
 </script>
