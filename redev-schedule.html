@@ -39,6 +39,8 @@
   body { font-family:var(--sans); background:var(--bg); color:var(--ink); width:100%; }
   a { color:var(--accent); text-decoration:none; }
   a:hover { text-decoration:underline; }
+  .topic-link { color:inherit; text-decoration:none; border-bottom:1px dotted rgba(77,163,255,.55); transition:color .15s, border-color .15s; }
+  .topic-link:hover { color:var(--accent); border-bottom-color:var(--accent); text-decoration:none; }
 
   .back-bar { position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:14px; padding:12px 20px; background:rgba(246,244,240,0.92); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
   .back-btn { display:inline-flex; align-items:center; gap:6px; font-size:13px; font-weight:700; color:var(--ink-muted); }
@@ -127,7 +129,7 @@
 
 <div class="wrap">
   <h1>Расписание потока</h1>
-  <p class="lead">5 ноября — 6 декабря 2026. Все встречи — синхронные созвоны прямо в чате потока в Телемосте, в назначенное время. Отдельная ссылка не нужна. Время московское.</p>
+  <p class="lead">5 ноября — 6 декабря 2026. Все встречи — синхронные созвоны прямо в чате потока в Телемосте, в назначенное время. Отдельная ссылка не нужна. Время московское. Названия тем ведут в соответствующий раздел пособия.</p>
 
   <div class="notice">
     <div>📎</div>
@@ -149,8 +151,8 @@
   <table>
     <thead><tr><th>Дата</th><th>Время</th><th>Тема</th><th>Лектор</th></tr></thead>
     <tbody>
-      <tr><td class="date-cell">5 ноя <span class="wd">чт</span></td><td class="time-cell">18:00–19:30</td><td>Встреча 1 — жизненный цикл объекта, кейс «C52»</td><td class="who-k">Кулешов</td></tr>
-      <tr><td class="date-cell">7 ноя <span class="wd">сб</span></td><td class="time-cell">18:00–19:30</td><td>0.2 Роли и трек</td><td class="who-k">Кулешов</td></tr>
+      <tr><td class="date-cell">5 ноя <span class="wd">чт</span></td><td class="time-cell">18:00–19:30</td><td><a class="topic-link" href="redev-guide.html#t01">Встреча 1 — жизненный цикл объекта, кейс «C52»</a></td><td class="who-k">Кулешов</td></tr>
+      <tr><td class="date-cell">7 ноя <span class="wd">сб</span></td><td class="time-cell">18:00–19:30</td><td><a class="topic-link" href="redev-guide.html#t02">0.2 Роли и трек</a></td><td class="who-k">Кулешов</td></tr>
     </tbody>
   </table>
 
@@ -158,10 +160,10 @@
   <table>
     <thead><tr><th>Дата</th><th>Время</th><th>Тема</th><th>Лектор</th></tr></thead>
     <tbody>
-      <tr><td class="date-cell">8 ноя <span class="wd">вс</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td>1.2 Рынок, окружение (аудитория)<br>1.2 Рынок, окружение (2ГИС, сценарии)</td><td class="who-p">Петренко</td></tr>
-      <tr><td class="date-cell">10 ноя <span class="wd">вт</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td>1.2 Рынок, окружение (ГИС-связка, ЦИАН, ставки)<br>1.3 Продуктовая гипотеза — Трек А</td><td><span class="who-k">Кулешов</span><br><span class="who-p">Петренко</span></td></tr>
-      <tr><td class="date-cell">11 ноя <span class="wd">ср</span></td><td class="time-cell">18:00–19:30</td><td>1.3 Продуктовая гипотеза — Трек Б</td><td class="who-k">Кулешов</td></tr>
-      <tr><td class="date-cell">15 ноя <span class="wd">вс</span></td><td class="time-cell">18:00–19:30</td><td>1.4 Сборка досье контекста</td><td class="who-p">Петренко</td></tr>
+      <tr><td class="date-cell">8 ноя <span class="wd">вс</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td><a class="topic-link" href="redev-guide.html#t12">1.2 Рынок, окружение (аудитория)</a><br><a class="topic-link" href="redev-guide.html#t12">1.2 Рынок, окружение (2ГИС, сценарии)</a></td><td class="who-p">Петренко</td></tr>
+      <tr><td class="date-cell">10 ноя <span class="wd">вт</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td><a class="topic-link" href="redev-guide.html#t12">1.2 Рынок, окружение (ГИС-связка, ЦИАН, ставки)</a><br><a class="topic-link" href="redev-guide.html#t13">1.3 Продуктовая гипотеза — Трек А</a></td><td><span class="who-k">Кулешов</span><br><span class="who-p">Петренко</span></td></tr>
+      <tr><td class="date-cell">11 ноя <span class="wd">ср</span></td><td class="time-cell">18:00–19:30</td><td><a class="topic-link" href="redev-guide.html#t13">1.3 Продуктовая гипотеза — Трек Б</a></td><td class="who-k">Кулешов</td></tr>
+      <tr><td class="date-cell">15 ноя <span class="wd">вс</span></td><td class="time-cell">18:00–19:30</td><td><a class="topic-link" href="redev-guide.html#t14">1.4 Сборка досье контекста</a></td><td class="who-p">Петренко</td></tr>
     </tbody>
   </table>
 
@@ -169,14 +171,14 @@
   <table>
     <thead><tr><th>Дата</th><th>Время</th><th>Тема</th><th>Лектор</th></tr></thead>
     <tbody>
-      <tr><td class="date-cell">16 ноя <span class="wd">пн</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td>2.1 HBU, 5–7 сценариев, ч.1<br>2.1 HBU, 5–7 сценариев, ч.2</td><td class="who-k">Кулешов</td></tr>
-      <tr><td class="date-cell">17 ноя <span class="wd">вт</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td>2.1 HBU, ч.3<br>2.2 Доходная база, CAPEX/OPEX (начало)</td><td class="who-k">Кулешов</td></tr>
-      <tr><td class="date-cell">18 ноя <span class="wd">ср</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td>Встреча 2 — разбор досье, вопросы<br>2.2 Доходная база, CAPEX/OPEX (продолжение)</td><td class="who-k">Кулешов</td></tr>
-      <tr><td class="date-cell">19 ноя <span class="wd">чт</span></td><td class="time-cell">18:00–18:45</td><td>2.5 Артефакт 2 — упаковка, Трек А</td><td class="who-p">Петренко</td></tr>
-      <tr><td class="date-cell">20 ноя <span class="wd">пт</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td>3.1 Мудборд, референсы, промпт-схема, ч.1 <span style="color:var(--ink-faint);font-weight:400">(тема Модуля 3, проводится раньше остальных)</span><br>3.1 Мудборд, референсы, промпт-схема, ч.2</td><td class="who-p">Петренко</td></tr>
-      <tr><td class="date-cell">21 ноя <span class="wd">сб</span></td><td class="time-cell">18:00–19:30</td><td>2.2 Доходная база, ч.2</td><td class="who-k">Кулешов</td></tr>
-      <tr><td class="date-cell">22 ноя <span class="wd">вс</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td>2.4 Стресс-тест финмодели, ч.1<br>2.4 Стресс-тест финмодели, ч.2</td><td class="who-k">Кулешов</td></tr>
-      <tr><td class="date-cell">23 ноя <span class="wd">пн</span></td><td class="time-cell">18:00–18:45</td><td>2.5 Артефакт 2 — финмодель, Трек Б</td><td class="who-k">Кулешов</td></tr>
+      <tr><td class="date-cell">16 ноя <span class="wd">пн</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td><a class="topic-link" href="redev-guide.html#t21">2.1 HBU, 5–7 сценариев, ч.1</a><br><a class="topic-link" href="redev-guide.html#t21">2.1 HBU, 5–7 сценариев, ч.2</a></td><td class="who-k">Кулешов</td></tr>
+      <tr><td class="date-cell">17 ноя <span class="wd">вт</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td><a class="topic-link" href="redev-guide.html#t21">2.1 HBU, ч.3</a><br><a class="topic-link" href="redev-guide.html#t22">2.2 Доходная база, CAPEX/OPEX (начало)</a></td><td class="who-k">Кулешов</td></tr>
+      <tr><td class="date-cell">18 ноя <span class="wd">ср</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td><a class="topic-link" href="redev-guide.html#t23">Встреча 2 — разбор досье, вопросы</a><br><a class="topic-link" href="redev-guide.html#t22">2.2 Доходная база, CAPEX/OPEX (продолжение)</a></td><td class="who-k">Кулешов</td></tr>
+      <tr><td class="date-cell">19 ноя <span class="wd">чт</span></td><td class="time-cell">18:00–18:45</td><td><a class="topic-link" href="redev-guide.html#t25">2.5 Артефакт 2 — упаковка, Трек А</a></td><td class="who-p">Петренко</td></tr>
+      <tr><td class="date-cell">20 ноя <span class="wd">пт</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td><a class="topic-link" href="redev-guide.html#t31">3.1 Мудборд, референсы, промпт-схема, ч.1</a> <span style="color:var(--ink-faint);font-weight:400">(тема Модуля 3, проводится раньше остальных)</span><br><a class="topic-link" href="redev-guide.html#t31">3.1 Мудборд, референсы, промпт-схема, ч.2</a></td><td class="who-p">Петренко</td></tr>
+      <tr><td class="date-cell">21 ноя <span class="wd">сб</span></td><td class="time-cell">18:00–19:30</td><td><a class="topic-link" href="redev-guide.html#t22">2.2 Доходная база, ч.2</a></td><td class="who-k">Кулешов</td></tr>
+      <tr><td class="date-cell">22 ноя <span class="wd">вс</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td><a class="topic-link" href="redev-guide.html#t24">2.4 Стресс-тест финмодели, ч.1</a><br><a class="topic-link" href="redev-guide.html#t24">2.4 Стресс-тест финмодели, ч.2</a></td><td class="who-k">Кулешов</td></tr>
+      <tr><td class="date-cell">23 ноя <span class="wd">пн</span></td><td class="time-cell">18:00–18:45</td><td><a class="topic-link" href="redev-guide.html#t25">2.5 Артефакт 2 — финмодель, Трек Б</a></td><td class="who-k">Кулешов</td></tr>
     </tbody>
   </table>
 
@@ -185,8 +187,8 @@
     <thead><tr><th>Дата</th><th>Время</th><th>Тема</th><th>Лектор</th></tr></thead>
     <tbody>
       <tr class="pause-row"><td colspan="4">25–29 ноября — пауза (время на домашние задания)</td></tr>
-      <tr><td class="date-cell">30 ноя <span class="wd">пн</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td>3.2 Live-демо — генерация<br>3.2 Live-демо — Flux.1 + ControlNet</td><td><span class="who-p">Петренко</span><br><span class="who-k">Кулешов</span></td></tr>
-      <tr><td class="date-cell">1 дек <span class="wd">вт</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td>3.5 Краш-тест — визуальный аудит<br>3.5 Краш-тест — CAPEX и нормы СП</td><td><span class="who-p">Петренко</span><br><span class="who-k">Кулешов</span></td></tr>
+      <tr><td class="date-cell">30 ноя <span class="wd">пн</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td><a class="topic-link" href="redev-guide.html#t32">3.2 Live-демо — генерация</a><br><a class="topic-link" href="redev-guide.html#t32">3.2 Live-демо — Flux.1 + ControlNet</a></td><td><span class="who-p">Петренко</span><br><span class="who-k">Кулешов</span></td></tr>
+      <tr><td class="date-cell">1 дек <span class="wd">вт</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td><a class="topic-link" href="redev-guide.html#t35">3.5 Краш-тест — визуальный аудит</a><br><a class="topic-link" href="redev-guide.html#t35">3.5 Краш-тест — CAPEX и нормы СП</a></td><td><span class="who-p">Петренко</span><br><span class="who-k">Кулешов</span></td></tr>
     </tbody>
   </table>
 
@@ -194,10 +196,10 @@
   <table>
     <thead><tr><th>Дата</th><th>Время</th><th>Тема</th><th>Лектор</th></tr></thead>
     <tbody>
-      <tr><td class="date-cell">2 дек <span class="wd">ср</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td>Встреча 3 — итоги Модуля 3<br>Начало Модуля 4 — структура документа</td><td><span class="who-k">Кулешов</span><br><span class="who-p">Петренко</span></td></tr>
-      <tr><td class="date-cell">3 дек <span class="wd">чт</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td>Сборка в Gamma / Claude<br>Нормы и экономика</td><td><span class="who-p">Петренко</span><br><span class="who-k">Кулешов</span></td></tr>
-      <tr><td class="date-cell">5 дек <span class="wd">сб</span></td><td class="time-cell">18:00–19:30<br>19:30–20:30</td><td>Черновик итогового документа<br>Видеопитч</td><td><span class="who-p">Петренко</span> + <span class="who-k">Кулешов</span></td></tr>
-      <tr><td class="date-cell">6 дек <span class="wd">вс</span></td><td class="time-cell">по расписанию дня</td><td>Demo Day — питч и разбор результатов экспертизы</td><td class="who-k">Кулешов</td></tr>
+      <tr><td class="date-cell">2 дек <span class="wd">ср</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td><a class="topic-link" href="redev-guide.html#t36">Встреча 3 — итоги Модуля 3</a><br><a class="topic-link" href="redev-guide.html#t41">Начало Модуля 4 — структура документа</a></td><td><span class="who-k">Кулешов</span><br><span class="who-p">Петренко</span></td></tr>
+      <tr><td class="date-cell">3 дек <span class="wd">чт</span></td><td class="time-cell">18:00–19:30<br>19:30–21:00</td><td><a class="topic-link" href="redev-guide.html#t41">Сборка в Gamma / Claude</a><br><a class="topic-link" href="redev-guide.html#t41">Нормы и экономика</a></td><td><span class="who-p">Петренко</span><br><span class="who-k">Кулешов</span></td></tr>
+      <tr><td class="date-cell">5 дек <span class="wd">сб</span></td><td class="time-cell">18:00–19:30<br>19:30–20:30</td><td><a class="topic-link" href="redev-guide.html#t41">Черновик итогового документа</a><br><a class="topic-link" href="redev-guide.html#t41">Видеопитч</a></td><td><span class="who-p">Петренко</span> + <span class="who-k">Кулешов</span></td></tr>
+      <tr><td class="date-cell">6 дек <span class="wd">вс</span></td><td class="time-cell">по расписанию дня</td><td><a class="topic-link" href="redev-guide.html#t42">Demo Day — питч и разбор результатов экспертизы</a></td><td class="who-k">Кулешов</td></tr>
     </tbody>
   </table>
 
