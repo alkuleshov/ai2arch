@@ -218,6 +218,52 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 .dots i{width:8px;height:8px;border-radius:50%;background:var(--line);cursor:pointer;transition:.2s}
 .dots i.on{background:var(--azure);transform:scale(1.3)}
 .hint{font-size:12px;color:var(--faint);margin-left:8px}
+
+  /* nav-v2: единая панель навигации */
+  .controls{width:100%;max-width:1280px;margin:0 auto;padding:0 12px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:nowrap;position:relative;z-index:100;user-select:none}
+  .controls button{width:44px;height:44px;min-width:44px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);font-family:inherit;font-size:20px;font-weight:700;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .controls button:hover{border-color:var(--azure);color:var(--azure)}
+  .controls button:disabled{opacity:.3;cursor:default;border-color:var(--line);color:var(--navy)}
+  .controls button:focus-visible{outline:2px solid var(--azure);outline-offset:3px}
+  .nav-progress{flex:1 1 auto;min-width:70px;display:flex;gap:4px;height:10px;align-items:stretch}
+  .nav-seg{width:auto;min-width:0;height:10px;border:0;border-radius:999px;background:var(--line);padding:0;cursor:pointer;position:relative;overflow:hidden;flex-basis:0;flex-shrink:1;flex-grow:1}
+  .nav-seg-fill{display:block;height:100%;width:0;background:var(--azure);border-radius:999px;transition:width .25s ease}
+  .controls .nav-seg{width:auto;min-width:0;height:10px;padding:0;border-radius:999px;flex-basis:0;flex-shrink:1;flex-grow:1}
+  .nav-seg:hover{background:#D6DDEA}
+  .nav-seg.active{background:#E4EBF8}
+  .counter{min-width:64px;text-align:center;font-size:14px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc-btn{font-size:20px}
+  .toc-menu{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);width:min(760px,calc(100vw - 24px));max-height:min(70vh,540px);overflow:auto;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 50px rgba(10,15,26,.18);padding:10px;z-index:1000;display:none}
+  .toc-menu.open{display:block}
+  .toc-part{display:flex;align-items:baseline;gap:8px;width:100%;border:0;background:transparent;text-align:left;padding:8px 10px;margin:2px 0;font:inherit;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--azure);cursor:pointer;border-top:1px solid var(--line)}
+  .toc-part:first-child{border-top:0}
+  .toc-part:hover{background:var(--azure2)}
+  .toc-part .range{font-size:10px;letter-spacing:.04em;color:var(--faint);font-weight:600;text-transform:none}
+  .toc-link{display:flex;gap:10px;align-items:baseline;width:100%;border:0;background:transparent;text-align:left;padding:7px 10px;border-radius:8px;font:inherit;font-size:15px;color:var(--graphite);cursor:pointer;line-height:1.3}
+  .toc-link:hover{background:var(--azure2);color:var(--navy)}
+  .toc-link .n{font-size:12px;font-weight:800;color:var(--faint);min-width:28px;flex:none}
+  .controls .toc-link{width:100%;height:auto;min-width:0;border:0;border-radius:8px;background:transparent;color:var(--graphite);font-size:15px;font-weight:400;line-height:1.3;justify-content:flex-start;align-items:baseline;padding:7px 10px}
+  .controls .toc-part{width:100%;height:auto;min-width:0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;color:var(--azure);font-size:12px;font-weight:800;line-height:1.3;justify-content:flex-start;align-items:baseline;padding:8px 10px}
+  .controls .toc-link:hover{background:var(--azure2);color:var(--navy)}
+  .controls .toc-part:hover{background:var(--azure2)}
+  .hint{font-size:11px;color:var(--faint);margin-left:4px;white-space:nowrap}
+  .slide{font-size:18px}
+  .slide .lead{font-size:23px;line-height:1.45}
+  .slide .bx li{font-size:20px}
+  .slide .body p{font-size:18px}
+  .slide .note{font-size:18px}
+  .slide .datatable{font-size:18px}
+  .plan-six{grid-template-columns:1fr;height:100%;align-content:stretch;margin-top:0}
+  .plan-six .nl{height:100%;align-items:center;padding:0}
+  .plan-six .nl p{font-size:22px;line-height:1.35}
+  @media (max-width:640px){
+    .controls{gap:6px;padding:0 8px}
+    .controls button{width:44px;height:44px;min-width:44px}
+    .counter{min-width:48px;font-size:12px}
+    .nav-progress{min-width:44px;gap:3px}
+    .hint{display:none}
+    .toc-menu{width:calc(100vw - 16px);max-height:60vh}
+  }
 </style>
 </head>
 <body>
@@ -594,16 +640,18 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
      </div>
    </section>
 
-   <div class="foot" id="foot"><span>Вводная · ИИ в редевелопменте</span><span><a href="https://ai2arch.ru/redev-schedule.html" target="_blank" rel="noopener">Расписание ↗</a> &nbsp; <span class="num" id="num"></span></span></div>
+   <div class="foot" id="foot"><span>Вводная · ИИ в редевелопменте</span><span><a href="https://ai2arch.ru/redev-schedule.html" target="_blank" rel="noopener">Расписание ↗</a></span></div>
   </div>
  </div>
  <div class="controls">
-   <button id="prev" aria-label="Назад">‹</button>
-   <div class="dots" id="dots"></div>
-   <button id="next" aria-label="Вперёд">›</button>
+   <button id="prev" aria-label="Назад" title="Назад">‹</button>
+   <div class="nav-progress" id="navProgress" aria-label="Прогресс по частям презентации"></div>
    <div class="counter" id="counter"></div>
+   <button id="tocBtn" class="toc-btn" type="button" aria-label="Содержание" title="Содержание" aria-haspopup="true" aria-expanded="false">☰</button>
+   <button id="next" aria-label="Вперёд" title="Вперёд">›</button>
    <button id="fs" aria-label="Развернуть на весь экран" title="На весь экран (F)">⤢</button>
    <span class="hint">← → листать · F — полный экран</span>
+   <div class="toc-menu" id="tocMenu" role="menu" aria-label="Содержание"></div>
  </div>
 </div>
 
@@ -611,19 +659,114 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 (function(){
   var stage=document.getElementById('stage');
   var slides=[].slice.call(stage.querySelectorAll('.slide'));
-  var dotsBox=document.getElementById('dots'), counter=document.getElementById('counter'), num=document.getElementById('num');
-  var prev=document.getElementById('prev'), next=document.getElementById('next'), fs=document.getElementById('fs'), prog=document.getElementById('progress');
-  var cur=0, total=slides.length;
-  slides.forEach(function(_,i){var d=document.createElement('i');d.onclick=function(){go(i)};dotsBox.appendChild(d);});
-  var dots=[].slice.call(dotsBox.children);
+  var total=slides.length;
+  var prev=document.getElementById('prev'), next=document.getElementById('next'), fs=document.getElementById('fs');
+  var prog=document.getElementById('progress'), counter=document.getElementById('counter');
+  var footText=document.getElementById('footText');
+  var navProgress=document.getElementById('navProgress');
+  var tocBtn=document.getElementById('tocBtn'), tocMenu=document.getElementById('tocMenu');
+  var cur=0;
+
+  function clean(s){return String(s||'').replace(/\s+/g,' ').trim();}
+  function slideTitle(s){
+    var h=s.querySelector('h1,h2');
+    return h?clean(h.textContent):'Слайд';
+  }
+  function buildParts(){
+    var divs=[];
+    slides.forEach(function(s,i){ if(s.classList.contains('part-divider')) divs.push(i); });
+    var parts=[];
+    if(!divs.length){
+      parts.push({title:'Презентация',start:0,end:total-1});
+    }else{
+      if(divs[0]>0) parts.push({title:'Введение',start:0,end:divs[0]-1});
+      divs.forEach(function(d,idx){
+        var end=idx+1<divs.length?divs[idx+1]-1:total-1;
+        var num=slides[d].querySelector('.num');
+        var kick=slides[d].querySelector('.kick');
+        var title=(num?clean(num.textContent):'Часть')+(kick?' · '+clean(kick.textContent):'');
+        parts.push({title:title,start:d,end:end,divider:true});
+      });
+    }
+    return parts;
+  }
+  var parts=buildParts();
+  var segs=[];
+
+  function buildProgress(){
+    navProgress.innerHTML='';
+    parts.forEach(function(p){
+      var b=document.createElement('button');
+      b.type='button'; b.className='nav-seg';
+      b.style.flexGrow=String(p.end-p.start+1);
+      b.title=p.title+' · слайды '+(p.start+1)+'–'+(p.end+1);
+      b.setAttribute('aria-label',b.title);
+      var f=document.createElement('span'); f.className='nav-seg-fill'; b.appendChild(f);
+      b.addEventListener('click',function(){go(p.start);});
+      navProgress.appendChild(b); segs.push(b);
+    });
+  }
+
+  function updateProgress(){
+    parts.forEach(function(p,i){
+      var f=segs[i].querySelector('.nav-seg-fill');
+      var pct=0;
+      if(cur>=p.end) pct=100;
+      else if(cur>=p.start) pct=((cur-p.start+1)/(p.end-p.start+1))*100;
+      f.style.width=pct+'%';
+      segs[i].classList.toggle('active',cur>=p.start&&cur<=p.end);
+    });
+  }
+
+  function buildToc(){
+    tocMenu.innerHTML='';
+    parts.forEach(function(p){
+      var head=document.createElement('button');
+      head.type='button'; head.className='toc-part';
+      var t=document.createElement('span'); t.textContent=p.title;
+      var r=document.createElement('span'); r.className='range'; r.textContent='слайды '+(p.start+1)+'–'+(p.end+1);
+      head.appendChild(t); head.appendChild(r);
+      head.addEventListener('click',function(){go(p.start);closeToc();});
+      tocMenu.appendChild(head);
+      for(var i=p.start;i<=p.end;i++){
+        if(p.divider && i===p.start) continue;
+        var b=document.createElement('button');
+        b.type='button'; b.className='toc-link'; b.setAttribute('role','menuitem');
+        var n=document.createElement('span'); n.className='n'; n.textContent=(i+1);
+        var tx=document.createElement('span'); tx.textContent=slideTitle(slides[i]);
+        b.appendChild(n); b.appendChild(tx);
+        (function(idx){b.addEventListener('click',function(){go(idx);closeToc();});})(i);
+        tocMenu.appendChild(b);
+      }
+    });
+  }
+
+  function openToc(){
+    tocMenu.classList.add('open'); tocBtn.setAttribute('aria-expanded','true');
+  }
+  function closeToc(){
+    tocMenu.classList.remove('open'); tocBtn.setAttribute('aria-expanded','false');
+  }
+  tocBtn.addEventListener('click',function(e){
+    e.stopPropagation();
+    if(tocMenu.classList.contains('open')) closeToc(); else openToc();
+  });
+  document.addEventListener('click',function(e){
+    if(!tocMenu.classList.contains('open')) return;
+    if(tocMenu.contains(e.target)||tocBtn.contains(e.target)) return;
+    closeToc();
+  });
+
   function go(i){
     if(i<0||i>=total) return;
-    slides[cur].classList.remove('active'); dots[cur].classList.remove('on');
-    cur=i; slides[cur].classList.add('active'); dots[cur].classList.add('on');
-    counter.textContent=(cur+1)+' / '+total; num.textContent=(cur+1)+' / '+total;
+    slides[cur].classList.remove('active');
+    cur=i; slides[cur].classList.add('active');
+    counter.textContent=(cur+1)+' / '+total;
+    if(footText) footText.textContent=slides[cur].getAttribute('data-foot')||'Презентация';
     prev.disabled=cur===0; next.disabled=cur===total-1;
     prog.style.width=((cur+1)/total*100)+'%';
-    try{history.replaceState(null,'','#'+(cur+1));}catch(e){}
+    updateProgress();
+    try{history.replaceState(null,'','#slide-'+(cur+1));}catch(e){}
   }
   prev.onclick=function(){go(cur-1)}; next.onclick=function(){go(cur+1)};
   function fit(){
@@ -640,10 +783,11 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
   fs.onclick=toggleFs;
   document.addEventListener('fullscreenchange',function(){setTimeout(fit,60)});
   document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){closeToc();return;}
     if(['ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(cur+1);}
     else if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(cur-1);}
-    else if(e.key==='Home'){go(0);} else if(e.key==='End'){go(total-1);}
-    else if(e.key==='f'||e.key==='F'){toggleFs();}
+    else if(e.key==='Home'){e.preventDefault();go(0);} else if(e.key==='End'){e.preventDefault();go(total-1);}
+    else if(e.key==='f'||e.key==='F'){e.preventDefault();toggleFs();}
   });
   var tx=null;
   stage.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
@@ -651,12 +795,19 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     if(tx===null)return; var dx=e.changedTouches[0].clientX-tx; tx=null;
     if(Math.abs(dx)>50) go(dx<0?cur+1:cur-1);
   });
+  function parseHash(){
+    var m=(location.hash||'').match(/^#(?:slide-)?(\d+)$/);
+    if(!m) return 0;
+    return Math.min(Math.max(parseInt(m[1],10)-1,0),total-1);
+  }
   window.addEventListener('hashchange',function(){
-    var h=parseInt((location.hash||'').replace('#',''),10);
-    if(!isNaN(h)&&h-1!==cur) go(Math.min(Math.max(h-1,0),total-1));
+    var idx=parseHash();
+    if(idx!==cur) go(idx);
   });
-  var start=parseInt((location.hash||'').replace('#',''),10);
-  go(isNaN(start)?0:Math.min(Math.max(start-1,0),total-1));
+
+  buildProgress();
+  buildToc();
+  go(parseHash());
   fit();
 })();
 </script>
