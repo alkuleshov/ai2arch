@@ -250,6 +250,31 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 .steps.six .sp p{font-size:16.5px;line-height:1.4}
 .controls{flex-wrap:wrap;justify-content:center}
 .dots{flex-wrap:wrap;justify-content:center;max-width:100%}
+
+.part-divider{justify-content:center;align-items:flex-start;padding-top:96px}
+.part-divider .kick{margin-bottom:18px}
+.part-divider h1{font-size:54px;line-height:1.06;max-width:1050px}
+.part-divider .meta{font-size:22px;color:var(--muted);margin-top:18px;line-height:1.4}
+.part-divider .num{font-size:15px;font-weight:800;color:var(--azure);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.img-ph{border:1.5px dashed #9DB8E8;border-radius:14px;padding:20px 22px;background:#F4F8FF;display:flex;gap:16px;align-items:flex-start;margin-top:12px}
+.img-ph .ic{font-size:32px;flex-shrink:0}
+.img-ph b{display:block;font-size:18px;color:var(--navy);margin-bottom:6px}
+.img-ph p{font-size:15px;line-height:1.45;color:var(--muted)}
+.img-ph .src{font-size:12.5px;color:var(--faint);margin-top:6px}
+.fig{margin:8px 0 0}
+.fig img{width:100%;max-height:360px;object-fit:cover;border-radius:12px;display:block;border:1px solid var(--line)}
+.fig svg{width:100%;display:block}
+.figcap{font-size:13px;color:var(--faint);margin-top:6px}
+.checkpoint{background:var(--azure2);border:1px solid var(--azure3);border-radius:16px;padding:22px 26px;margin-top:12px}
+.checkpoint .lab{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--azure);margin-bottom:8px}
+.checkpoint h3{font-size:24px;font-weight:800;margin-bottom:6px}
+.checkpoint p{font-size:18px;line-height:1.45;color:var(--graphite)}
+.qa{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.qa .q{font-size:19px;font-weight:800;color:var(--navy)}
+.qa .a{font-size:17px;line-height:1.45;color:var(--muted);margin-bottom:8px}
+.contour{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:5px;background:var(--soft);color:var(--graphite);border:1px solid var(--line);margin-left:6px}
+.contour.main{background:var(--azure2);color:var(--azure);border-color:var(--azure3)}
+.contour.ext{background:#F3F0FF;color:#6B3FD4;border-color:#DCD3FF}
 </style>
 </head>
 <body>
@@ -286,577 +311,169 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
   <div class="stage" id="stage">
    <div class="progress" id="progress"></div>
 
+<section class="slide s1 active" data-foot="Ч.0 · карта темы"><div class="l"><div class="kick">1.2 · Рынок, окружение</div><h1>Рынок,<br><em>окружение</em></h1><p class="lead">Тема 1.2: три части, данные по C52 и переход к трекам.</p><div class="chips"><span class="chip">6 академических часов</span><span class="chip">3 части</span><span class="chip g">Петренко · Кулешов</span></div><p class="how">Листайте стрелками; ⤢ — на весь экран.</p></div><div class="r"><figure class="fig"><svg viewBox="0 0 560 380" role="img" aria-label="Схема: окружение, аудитория и активность вокруг C52">
+  <rect x="8" y="12" width="544" height="356" rx="26" fill="#F6F8FC" stroke="#E1E5EE" stroke-width="2"/>
+  <path d="M48 310 C110 250 150 210 215 220 S330 275 390 205 S470 110 520 95" fill="none" stroke="#BFD3FF" stroke-width="18" stroke-linecap="round"/>
+  <path d="M48 310 C110 250 150 210 215 220 S330 275 390 205 S470 110 520 95" fill="none" stroke="#1A6BFF" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 10"/>
+  <g fill="#fff" stroke="#BFD3FF" stroke-width="2"><rect x="70" y="70" width="78" height="58" rx="8"/><rect x="165" y="55" width="56" height="88" rx="8"/><rect x="245" y="75" width="92" height="52" rx="8"/><rect x="365" y="65" width="66" height="74" rx="8"/><rect x="452" y="58" width="64" height="56" rx="8"/><rect x="90" y="215" width="86" height="58" rx="8"/><rect x="205" y="160" width="70" height="44" rx="8"/><rect x="300" y="235" width="86" height="62" rx="8"/><rect x="420" y="230" width="70" height="58" rx="8"/></g>
+  <g fill="#EAF1FF" stroke="#1A6BFF" stroke-width="2"><rect x="285" y="120" width="36" height="36" rx="8"/><rect x="350" y="170" width="30" height="30" rx="7"/><rect x="145" y="150" width="30" height="30" rx="7"/></g>
+  <g fill="#1A6BFF"><circle cx="215" cy="220" r="7"/><circle cx="390" cy="205" r="7"/><circle cx="520" cy="95" r="7"/></g>
+  <g><circle cx="332" cy="228" r="58" fill="#1A6BFF" opacity=".08"/><circle cx="332" cy="228" r="44" fill="none" stroke="#1A6BFF" stroke-width="4"/><path d="M364 260l30 30" stroke="#1A6BFF" stroke-width="8" stroke-linecap="round"/><circle cx="318" cy="216" r="5" fill="#1A6BFF"/><circle cx="344" cy="234" r="5" fill="#1A6BFF"/><circle cx="326" cy="246" r="5" fill="#1A6BFF"/></g>
+  <text x="280" y="340" text-anchor="middle" font-size="17" font-weight="800" fill="#0A0F1A" font-family="inherit">Окружение · аудитория · активность</text>
+</svg><figcaption class="figcap">Схема AI2ARCH</figcaption></figure></div></section>
 
-   <!-- 1 ТИТУЛ -->
-   <section class="slide s1 active">
-     <div class="l">
-       <div class="kick">1.2 · Рынок, окружение · Трек А</div>
-       <h1>Рынок,<br><em>окружение</em></h1>
-       <p class="lead">Как понять, какие функции и сценарии использования могут быть обоснованы окружением и аудиторией C52.</p>
-       <div class="chips"><span class="chip">6 академических часов</span><span class="chip">Трек А</span><span class="chip g">Петренко Екатерина Сергеевна</span></div>
-       <p class="how">Презентация самостоятельная: листайте стрелками, ⤢ — на весь экран.</p>
-     </div>
-     <div class="r">
-       <svg viewBox="0 0 560 380" width="100%" aria-label="Карта территории, аудитория и аналитика">
-         <rect x="8" y="12" width="544" height="356" rx="26" fill="#F6F8FC" stroke="#E1E5EE" stroke-width="2"/>
-         <path d="M48 310 C110 250 150 210 215 220 S330 275 390 205 S470 110 520 95" fill="none" stroke="#BFD3FF" stroke-width="18" stroke-linecap="round"/>
-         <path d="M48 310 C110 250 150 210 215 220 S330 275 390 205 S470 110 520 95" fill="none" stroke="#1A6BFF" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 10"/>
-         <g fill="#fff" stroke="#BFD3FF" stroke-width="2">
-           <rect x="70" y="70" width="78" height="58" rx="8"/>
-           <rect x="165" y="55" width="56" height="88" rx="8"/>
-           <rect x="245" y="75" width="92" height="52" rx="8"/>
-           <rect x="365" y="65" width="66" height="74" rx="8"/>
-           <rect x="452" y="58" width="64" height="56" rx="8"/>
-           <rect x="90" y="215" width="86" height="58" rx="8"/>
-           <rect x="205" y="160" width="70" height="44" rx="8"/>
-           <rect x="300" y="235" width="86" height="62" rx="8"/>
-           <rect x="420" y="230" width="70" height="58" rx="8"/>
-         </g>
-         <g fill="#EAF1FF" stroke="#1A6BFF" stroke-width="2">
-           <rect x="285" y="120" width="36" height="36" rx="8"/>
-           <rect x="350" y="170" width="30" height="30" rx="7"/>
-           <rect x="145" y="150" width="30" height="30" rx="7"/>
-         </g>
-         <g fill="#1A6BFF"><circle cx="215" cy="220" r="7"/><circle cx="390" cy="205" r="7"/><circle cx="520" cy="95" r="7"/></g>
-         <g>
-           <circle cx="332" cy="228" r="58" fill="#1A6BFF" opacity=".08"/>
-           <circle cx="332" cy="228" r="44" fill="none" stroke="#1A6BFF" stroke-width="4"/>
-           <path d="M364 260l30 30" stroke="#1A6BFF" stroke-width="8" stroke-linecap="round"/>
-           <circle cx="318" cy="216" r="5" fill="#1A6BFF"/><circle cx="344" cy="234" r="5" fill="#1A6BFF"/><circle cx="326" cy="246" r="5" fill="#1A6BFF"/>
-         </g>
-         <text x="280" y="340" text-anchor="middle" font-size="17" font-weight="800" fill="#0A0F1A" font-family="inherit">Окружение · аудитория · активность</text>
-       </svg>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.0 · карта темы"><div class="kick">Карта темы</div><h2>Три части — <em>три результата</em></h2><div class="body"><div class="plan"><div class="pl"><div class="n">Ч.1</div><h3>Окружение и источники данных</h3><p>Петренко · 90 мин<br>Результат: карта источников и первичная систематизация</p></div><div class="pl"><div class="n">Ч.2</div><h3>ИИ-обработка, аудитория, сценарии</h3><p>Петренко · 90 мин<br>Результат: профиль персоны и три предварительных сценария</p></div><div class="pl"><div class="n">Ч.3</div><h3>ГИС-связка, ЦИАН, ставки</h3><p>Кулешов · 90 мин<br>Результат: проверенные тезисы и материалы трека</p></div></div><div class="band" style="margin-top:18px"><b>Сквозная логика:</b> данные → интерпретация → проверка → трек.</div></div></section>
 
-   <!-- 2 ПЛАН -->
-   <section class="slide">
-     <div class="kick">01 · План занятия</div>
-     <h2>Что разберём на <em>встрече</em></h2>
-     <div class="body">
-       <div class="numlist">
-         <div class="nl"><div class="n">1</div><p>Рыночный контекст локации.</p></div>
-         <div class="nl"><div class="n">2</div><p>Источники информации и цифровые инструменты.</p></div>
-         <div class="nl"><div class="n">3</div><p>Сбор и систематизация данных.</p></div>
-         <div class="nl"><div class="n">4</div><p>Работа с ИИ и аналитическими промптами.</p></div>
-         <div class="nl"><div class="n">5</div><p>Анализ аудитории и выявление потребностей.</p></div>
-         <div class="nl"><div class="n">6</div><p>Проверка информации и формирование выводов.</p></div>
-       </div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.0 · карта темы"><div class="kick">План занятия</div><h2>Что разберём</h2><div class="body"><div class="numlist"><div class="nl"><div class="n">1</div><p>Рыночный контекст локации.</p></div><div class="nl"><div class="n">2</div><p>Источники информации и цифровые инструменты.</p></div><div class="nl"><div class="n">3</div><p>Сбор и систематизация данных.</p></div><div class="nl"><div class="n">4</div><p>Работа с ИИ и аналитическими промптами.</p></div><div class="nl"><div class="n">5</div><p>Анализ аудитории и выявление потребностей.</p></div><div class="nl"><div class="n">6</div><p>Проверка информации и формирование выводов.</p></div></div></div></section>
 
-   <!-- 3 АНАЛИТИКА -->
-   <section class="slide">
-     <div class="kick">02 · Аналитика</div>
-     <h2>Три оптики <em>территории</em></h2>
-     <p class="lead">Чтобы понять потенциал объекта, смотрим на окружение, людей и их активность.</p>
-     <div class="body">
-       <div class="tiles three">
-         <div class="tl"><div class="ic"><svg class="i"><use href="#i-building"/></svg></div><h3>Окружение</h3><p><b>Средовой контекст.</b> Какие объекты, функции и виды деятельности уже существуют на территории и рядом с ней.</p></div>
-         <div class="tl"><div class="ic"><svg class="i"><use href="#i-user"/></svg></div><h3>Аудитория</h3><p><b>Человеческий фактор.</b> Кто живёт, работает, учится и проводит время в этой локации.</p></div>
-         <div class="tl"><div class="ic"><svg class="i"><use href="#i-chart"/></svg></div><h3>Активность</h3><p><b>Пространственная динамика.</b> Как люди используют территорию, какие маршруты и сценарии посещения формируются.</p></div>
-       </div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.0 · карта темы"><div class="kick">Формат</div><h2>3 лекции по 90 минут, <em>6 ак. часов</em></h2><div class="body"><div class="plan"><div class="pl"><div class="n">01</div><h3>3 лекции</h3><p>по 90 минут</p></div><div class="pl"><div class="n">02</div><h3>6 ак. часов</h3><p>общий объём темы</p></div><div class="pl"><div class="n">03</div><h3>Задание №2</h3><p>досье контекста</p></div></div><div class="band" style="margin-top:18px"><b>Формат:</b> 3 лекции по 90 минут, 6 ак. часов, задание №2.</div></div></section>
 
-   <!-- 4 ЧТО ДАЁТ -->
-   <section class="slide">
-     <div class="kick">03 · Зачем это нужно</div>
-     <h2>Что даёт <em>анализ</em></h2>
-     <div class="body">
-       <div class="numlist">
-         <div class="nl"><div class="n">1</div><p>Определить существующие и недостающие функции.</p></div>
-         <div class="nl"><div class="n">2</div><p>Выявить потенциальные пользовательские группы.</p></div>
-         <div class="nl"><div class="n">3</div><p>Установить потребности разных групп.</p></div>
-         <div class="nl"><div class="n">4</div><p>Определить возможности использования объекта.</p></div>
-         <div class="nl"><div class="n">5</div><p>Сформировать предварительные функциональные сценарии.</p></div>
-       </div>
-       <div class="band" style="margin-top:18px"><svg class="i"><use href="#i-bulb"/></svg><div><b>Важно:</b> чтобы не проектировать функции только потому, что они хорошо смотрятся на рендере.</div></div>
-     </div>
-   </section>
+<section class="slide part-divider" data-foot="Ч.1 · Петренко"><div class="num">Часть 1</div><div class="kick">Тема 1.2 · Рынок, окружение</div><h1>Окружение и<br>источники данных</h1><p class="meta">8 ноября · Петренко · 90 мин</p></section>
 
-   <!-- 5 ОШИБКИ -->
-   <section class="slide">
-     <div class="kick">04 · Риски</div>
-     <h2>Что ломается без <em>предварительного анализа</em></h2>
-     <div class="body">
-       <div class="two">
-         <div class="bx">
-           <h4>Типичные ошибки</h4>
-           <ul>
-             <li>выбор функций без учёта существующего окружения;</li>
-             <li>ориентация на абстрактную целевую аудиторию;</li>
-             <li>дублирование уже существующих услуг;</li>
-             <li>игнорирование реальных маршрутов и активности;</li>
-             <li>формирование невостребованных пространств.</li>
-           </ul>
-         </div>
-         <div class="bx">
-           <h4>Цепочка рисков</h4>
-           <p style="font-size:22px;line-height:1.55;color:var(--graphite)">Решение без анализа →<br>возможная ошибка →<br><b style="color:var(--navy)">последствия для объекта</b></p>
-         </div>
-       </div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Результат части</div><h2>Карта источников и <em>первичная систематизация</em></h2><div class="body"><div class="band"><b>К концу части:</b> собраны данные по C52 из основных и расширенных источников, сведены в таблицу, отмечены пробелы.</div></div></section>
 
-   <!-- 6 КЕЙС C52 -->
-   <section class="slide">
-     <div class="kick">05 · Кейс C52</div>
-     <h2>Знакомство с <em>объектом</em></h2>
-     <p class="lead">Исходное положение, особенности территории и постановка исследовательской задачи.</p>
-     <div class="body">
-       <div class="two" style="align-items:center">
-         <div class="pn hi" style="text-align:center;padding:38px 30px">
-           <div class="sub">Объект курса</div>
-           <h3 style="font-size:84px;line-height:1;margin:14px 0 8px">C52</h3>
-           <p style="font-size:18px;color:var(--muted)">Кластер в Ростове-на-Дону</p>
-         </div>
-         <div>
-           <div class="rule" style="font-size:22px;line-height:1.4"><svg class="i"><use href="#i-search"/></svg>Какие функции и сценарии использования могут быть обоснованы с учётом окружения и аудитории C52?</div>
-           <p class="note">Разбираем вместе на встрече 1.2, до выбора трека и кейса.</p>
-         </div>
-       </div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Три оптики</div><h2>Окружение, аудитория, <em>активность</em></h2><div class="body"><div class="tiles three"><div class="tl"><div class="ic"><svg class="i"><use href="#i-building"/></svg></div><h3>Окружение</h3><p><b>Средовой контекст.</b> Какие объекты, функции и виды деятельности уже существуют на территории и рядом с ней.</p></div><div class="tl"><div class="ic"><svg class="i"><use href="#i-user"/></svg></div><h3>Аудитория</h3><p><b>Человеческий фактор.</b> Кто живёт, работает, учится и проводит время в этой локации.</p></div><div class="tl"><div class="ic"><svg class="i"><use href="#i-chart"/></svg></div><h3>Активность</h3><p><b>Пространственная динамика.</b> Как люди используют территорию, какие маршруты и сценарии посещения формируются.</p></div></div></div></section>
 
-   <!-- 7 ОКРУЖЕНИЕ -->
-   <section class="slide">
-     <div class="kick">06 · Окружение</div>
-     <h2>Что влияет на <em>потенциальный спрос</em></h2>
-     <div class="body">
-       <div class="numlist">
-         <div class="nl"><div class="n">1</div><p>Функциональное наполнение территории.</p></div>
-         <div class="nl"><div class="n">2</div><p>Характер окружающей застройки.</p></div>
-         <div class="nl"><div class="n">3</div><p>Существующие общественные, коммерческие и социальные функции.</p></div>
-         <div class="nl"><div class="n">4</div><p>Транспортная и пешеходная доступность.</p></div>
-         <div class="nl"><div class="n">5</div><p>Концентрация активности и объектов притяжения.</p></div>
-       </div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Зачем это нужно</div><h2>Что даёт <em>анализ</em></h2><div class="body"><div class="numlist"><div class="nl"><div class="n">1</div><p>Определить существующие и недостающие функции.</p></div><div class="nl"><div class="n">2</div><p>Выявить потенциальные пользовательские группы.</p></div><div class="nl"><div class="n">3</div><p>Установить потребности разных групп.</p></div><div class="nl"><div class="n">4</div><p>Определить возможности использования объекта.</p></div><div class="nl"><div class="n">5</div><p>Сформировать предварительные функциональные сценарии.</p></div></div><div class="band" style="margin-top:18px"><svg class="i"><use href="#i-bulb"/></svg><div><b>Важно:</b> чтобы не проектировать функции только потому, что они хорошо смотрятся на рендере.</div></div></div></section>
 
-   <!-- 8 АУДИТОРИЯ -->
-   <section class="slide">
-     <div class="kick">07 · Аудитория</div>
-     <h2>Кто, зачем и с <em>какими потребностями</em></h2>
-     <p class="lead">Три вопроса, которые помогают перейти от абстрактной аудитории к конкретным сценариям.</p>
-     <div class="body">
-       <div class="plan">
-         <div class="pl"><div class="n">01</div><h3>Кто эти люди?</h3></div>
-         <div class="pl"><div class="n">02</div><h3>С какой целью они посещают территорию?</h3></div>
-         <div class="pl"><div class="n">03</div><h3>Какие потребности и запросы могут быть связаны с их присутствием?</h3></div>
-       </div>
-       <div class="band" style="margin-top:18px"><b>Ответы на эти вопросы</b> — основа профиля аудитории и будущих сценариев.</div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Риски</div><h2>Что ломается без <em>анализа</em></h2><div class="body"><div class="two"><div class="bx"><h4>Типичные ошибки</h4><ul><li>выбор функций без учёта окружения;</li><li>ориентация на абстрактную аудиторию;</li><li>дублирование существующих услуг;</li><li>игнорирование реальных маршрутов;</li><li>невостребованные пространства.</li></ul></div><div class="bx"><h4>Цепочка рисков</h4><p style="font-size:22px;line-height:1.55;color:var(--graphite)">Решение без анализа →<br>возможная ошибка →<br><b style="color:var(--navy)">последствия для объекта</b></p></div></div></div></section>
 
-   <!-- 9 ИСТОЧНИКИ -->
-   <section class="slide">
-     <div class="kick">08 · Источники</div>
-     <h2>Где взять <em>информацию</em></h2>
-     <div class="body">
-       <div class="tiles">
-         <div class="tl"><div class="ic"><svg class="i"><use href="#i-layers"/></svg></div><h3>Картографические сервисы</h3><p>2ГИС, Яндекс Карты, OpenStreetMap.</p></div>
-         <div class="tl"><div class="ic"><svg class="i"><use href="#i-source"/></svg></div><h3>Геоданные</h3><p>Контуры зданий, дороги, пешеходные пути, инфраструктура.</p></div>
-         <div class="tl"><div class="ic"><svg class="i"><use href="#i-chart"/></svg></div><h3>Данные активности</h3><p>Strava и другие сервисы с пользовательскими маршрутами.</p></div>
-         <div class="tl"><div class="ic"><svg class="i"><use href="#i-doc"/></svg></div><h3>Статистика</h3><p>Росстат, демография, занятость, распределение населения.</p></div>
-       </div>
-       <div class="band" style="margin-top:18px"><svg class="i"><use href="#i-bulb"/></svg><div><b>Хорошая новость:</b> не всё придётся обходить пешком.</div></div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Кейс C52</div><h2>Объект: два адреса, <em>главное здание 52а</em></h2><div class="body"><div class="two"><div><p class="lead" style="margin-top:0">Главное здание — ул. Суворова, 52а; второй адрес — ул. Суворова, 52.</p><div class="band"><b>Что фиксируем:</b> два адреса, главное здание 52а, доступные данные и пробелы.</div></div><figure class="fig"><svg viewBox="0 0 620 300" role="img" aria-label="Схема двух адресов C52: главное здание 52а и второй адрес 52">
+  <rect x="10" y="10" width="600" height="270" rx="22" fill="#F6F8FC" stroke="#E1E5EE" stroke-width="2"/>
+  <path d="M40 240 C140 170 210 150 290 175 S430 235 570 120" fill="none" stroke="#BFD3FF" stroke-width="16" stroke-linecap="round"/>
+  <path d="M40 240 C140 170 210 150 290 175 S430 235 570 120" fill="none" stroke="#1A6BFF" stroke-width="4" stroke-dasharray="10 10" stroke-linecap="round"/>
+  <g fill="#fff" stroke="#BFD3FF" stroke-width="2"><rect x="70" y="60" width="90" height="55" rx="8"/><rect x="200" y="45" width="70" height="80" rx="8"/><rect x="330" y="65" width="95" height="60" rx="8"/><rect x="470" y="55" width="80" height="55" rx="8"/></g>
+  <circle cx="290" cy="175" r="18" fill="#1A6BFF"/><text x="290" y="181" text-anchor="middle" font-size="13" font-weight="800" fill="#fff" font-family="inherit">52а</text>
+  <circle cx="470" cy="120" r="16" fill="#fff" stroke="#E8862B" stroke-width="4"/><text x="470" y="126" text-anchor="middle" font-size="13" font-weight="800" fill="#E8862B" font-family="inherit">52</text>
+  <text x="290" y="225" text-anchor="middle" font-size="16" font-weight="700" fill="#0A0F1A" font-family="inherit">главное здание · ул. Суворова, 52а</text>
+  <text x="470" y="160" text-anchor="middle" font-size="14" font-weight="700" fill="#E8862B" font-family="inherit">второй адрес · ул. Суворова, 52</text>
+</svg><figcaption class="figcap">Схема расположения, не фото. Адреса — ул. Суворова, 52 и 52а; главное здание — 52а. Источник: AI2ARCH.</figcaption></figure></div></div></section>
 
-   <!-- 10 ИНСТРУМЕНТЫ -->
-   <section class="slide">
-     <div class="kick">09 · Инструменты</div>
-     <h2>У каждого инструмента <em>своя суперсила</em></h2>
-     <div class="body">
-       <div class="toolrows">
-         <div class="tr"><b>2ГИС</b><span>Поиск организаций и существующих функций</span></div>
-         <div class="tr"><b>OpenStreetMap</b><span>Получение пространственных данных</span></div>
-         <div class="tr"><b>Overpass Turbo</b><span>Выгрузка и фильтрация объектов OSM</span></div>
-         <div class="tr"><b>Strava</b><span>Анализ пользовательской активности</span></div>
-         <div class="tr"><b>LLM</b><span>Анализ, классификация и интерпретация информации</span></div>
-       </div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Фиксация</div><h2>Объект и <em>источники</em></h2><div class="body"><div class="checkpoint"><div class="lab">Фиксация 1</div><h3>Объект и источники</h3><p>Зафиксированы два адреса C52, главное здание 52а, список источников и пробелы.</p></div></div></section>
 
-   <!-- 11 ИИ -->
-   <section class="slide">
-     <div class="kick">10 · ИИ</div>
-     <h2>ИИ как <em>инструмент аналитика</em></h2>
-     <div class="body">
-       <div class="two">
-         <div class="bx">
-           <h4>Что умеет</h4>
-           <ul>
-             <li>обрабатывать большие массивы текстовой информации;</li>
-             <li>классифицировать объекты и данные;</li>
-             <li>сопоставлять информацию из разных источников;</li>
-             <li>выявлять закономерности;</li>
-             <li>формировать гипотезы и варианты сценариев.</li>
-           </ul>
-         </div>
-         <div class="bx">
-           <h4 style="color:var(--graphite)">Что важно помнить</h4>
-           <p style="font-size:20px;line-height:1.45;color:var(--graphite)">ИИ не заменяет первичные источники, не гарантирует достоверность фактов и может допускать ошибки.</p>
-         </div>
-       </div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Спрос</div><h2>Что влияет на <em>потенциальный спрос</em></h2><div class="body"><div class="numlist"><div class="nl"><div class="n">1</div><p>Функциональное наполнение территории.</p></div><div class="nl"><div class="n">2</div><p>Характер окружающей застройки.</p></div><div class="nl"><div class="n">3</div><p>Общественные, коммерческие и социальные функции.</p></div><div class="nl"><div class="n">4</div><p>Транспортная и пешеходная доступность.</p></div><div class="nl"><div class="n">5</div><p>Концентрация активности и объектов притяжения.</p></div></div></div></section>
 
-   <!-- 12 2ГИС -->
-   <section class="slide">
-     <div class="kick">11 · 2ГИС</div>
-     <h2>2ГИС: <em>базовый и расширенный</em> анализ</h2>
-     <div class="body">
-       <div class="two">
-         <div class="bx">
-           <h4>Базовый доступ</h4>
-           <p style="font-size:20px;font-weight:800;margin-bottom:8px">бесплатно</p>
-           <ul>
-             <li>поиск организаций по категориям;</li>
-             <li>отображение объектов на карте;</li>
-             <li>просмотр адресов и расположения;</li>
-             <li>изучение видов деятельности;</li>
-             <li>поиск объектов в заданном районе.</li>
-           </ul>
-         </div>
-         <div class="bx">
-           <h4>Расширенный анализ</h4>
-           <p style="font-size:20px;font-weight:800;margin-bottom:8px">2ГИС-ПРО</p>
-           <ul>
-             <li>функциональный анализ;</li>
-             <li>демографический анализ;</li>
-             <li>анализ трафика;</li>
-             <li>транспортная доступность;</li>
-             <li>анализ окружения;</li>
-             <li>геоаналитика.</li>
-           </ul>
-         </div>
-       </div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Источники</div><h2>Где брать <em>данные</em></h2><div class="body"><div class="tiles"><div class="tl"><div class="ic"><svg class="i"><use href="#i-layers"/></svg></div><h3>Картографические сервисы</h3><p>2ГИС, Яндекс Карты.</p></div><div class="tl"><div class="ic"><svg class="i"><use href="#i-source"/></svg></div><h3>Геоданные</h3><p>OSM, QuickOSM, Overpass.</p></div><div class="tl"><div class="ic"><svg class="i"><use href="#i-chart"/></svg></div><h3>Данные активности</h3><p>Strava.</p></div><div class="tl"><div class="ic"><svg class="i"><use href="#i-doc"/></svg></div><h3>Статистика</h3><p>Росстат.</p></div></div><div class="band" style="margin-top:18px"><svg class="i"><use href="#i-bulb"/></svg><div><b>Хорошая новость:</b> не всё придётся обходить пешком.</div></div></div></section>
 
-   <!-- 13 OSM -->
-   <section class="slide">
-     <div class="kick">12 · Пространственные данные</div>
-     <h2>OpenStreetMap: <em>картографическая основа</em></h2>
-     <p class="lead">Работа с пространственными данными, объектами картографической основы и извлечение геоданных.</p>
-     <div class="body">
-       <div class="two">
-         <div class="bx">
-           <h4>Что можно получить</h4>
-           <ul>
-             <li>здания и их контуры;</li>
-             <li>улично-дорожная сеть;</li>
-             <li>пешеходные пути;</li>
-             <li>объекты инфраструктуры;</li>
-             <li>общественные пространства;</li>
-             <li>отдельные элементы благоустройства.</li>
-           </ul>
-         </div>
-         <div class="pn hi" style="display:flex;align-items:center;justify-content:center;text-align:center">
-           <div><div class="pill">OSM</div><h3 style="font-size:34px;margin:12px 0 6px">Карта<br>территории</h3><p style="font-size:17px;color:var(--muted)">Здания, дороги, пешеходные пути, инфраструктура</p></div>
-         </div>
-       </div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Инструменты</div><h2>У каждого инструмента <em>своя роль</em></h2><div class="body"><table class="datatable"><thead><tr><th>Инструмент</th><th>Для чего</th><th>Контур</th></tr></thead><tbody>
+<tr><td>2ГИС</td><td>организации и функции</td><td><span class="contour main">основной контур</span></td></tr>
+<tr><td>ЦИАН</td><td>конкуренты и ставки</td><td><span class="contour main">основной контур</span></td></tr>
+<tr><td>Яндекс Карты</td><td>карта и организации</td><td><span class="contour main">основной контур</span></td></tr>
+<tr><td>Росстат</td><td>демография и статистика</td><td><span class="contour main">основной контур</span></td></tr>
+<tr><td>OSM</td><td>пространственные данные</td><td><span class="contour ext">расширенный контур</span></td></tr>
+<tr><td>QuickOSM</td><td>выгрузка OSM</td><td><span class="contour ext">расширенный контур</span></td></tr>
+<tr><td>Overpass</td><td>фильтрация OSM</td><td><span class="contour ext">расширенный контур</span></td></tr>
+<tr><td>QGIS</td><td>слои и таблица</td><td><span class="contour ext">расширенный контур</span></td></tr>
+<tr><td>Strava</td><td>активность</td><td><span class="contour ext">расширенный контур</span></td></tr>
+</tbody></table></div></section>
 
-   <!-- 14 OVERPASS -->
-   <section class="slide">
-     <div class="kick">13 · Алгоритм</div>
-     <h2>OpenStreetMap и Overpass Turbo: <em>семь шагов</em></h2>
-     <p class="lead">Здесь уже можно немного побыть хакером.</p>
-     <div class="body">
-       <div class="numlist">
-         <div class="nl"><div class="n">01</div><p>Найти территорию исследования.</p></div>
-         <div class="nl"><div class="n">02</div><p>Определить нужную категорию объектов.</p></div>
-         <div class="nl"><div class="n">03</div><p>Перейти в Overpass Turbo.</p></div>
-         <div class="nl"><div class="n">04</div><p>Сформировать запрос по соответствующим тегам OSM.</p></div>
-         <div class="nl"><div class="n">05</div><p>Ограничить запрос заданной территорией.</p></div>
-         <div class="nl"><div class="n">06</div><p>Запустить запрос и просмотреть результат.</p></div>
-         <div class="nl"><div class="n">07</div><p>Экспортировать данные, например, в формате GeoJSON.</p></div>
-       </div>
-       <div class="band" style="margin-top:18px"><b>Результат:</b> пространственные данные готовы к анализу.</div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">2ГИС</div><h2>Базовый и <em>расширенный анализ</em></h2><div class="body"><div class="two"><div class="bx"><h4>Базовый доступ · бесплатно</h4><ul><li>поиск организаций по категориям;</li><li>отображение объектов на карте;</li><li>просмотр адресов и расположения;</li><li>изучение видов деятельности;</li><li>поиск объектов в заданном районе.</li></ul></div><div class="bx"><h4>2ГИС-ПРО</h4><ul><li>функциональный анализ;</li><li>демографический анализ;</li><li>анализ трафика;</li><li>транспортная доступность;</li><li>анализ окружения;</li><li>геоаналитика.</li></ul></div></div></div></section>
 
-   <!-- 15 STRAVA -->
-   <section class="slide">
-     <div class="kick">14 · Активность</div>
-     <h2>Strava: <em>цифровые следы</em></h2>
-     <p class="lead">Анализ активности пользователей, популярных маршрутов и пространственных паттернов движения на основе доступных данных.</p>
-     <div class="body">
-       <div class="bx">
-         <h4>Люди оставляют цифровые следы. Попробуем их найти</h4>
-         <ul>
-           <li>наиболее популярные маршруты;</li>
-           <li>участки с высокой концентрацией активности;</li>
-           <li>направления движения;</li>
-           <li>распределение активности по территории;</li>
-           <li>потенциальные точки притяжения для пешеходов и велосипедистов.</li>
-         </ul>
-       </div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Скриншоты</div><h2>2ГИС и <em>Яндекс Карты</em></h2><div class="body"><div class="two"><div class="img-ph"><div class="ic">🖼️</div><div><b>2ГИС — будет добавлен</b><p>Открыть 2ГИС, найти C52 (ул. Суворова, 52а), масштаб 1:2000, включить категории общепита/торговли/услуг, выделить конкурентов в радиусе 500 м.</p><p class="src">Источник: © 2ГИС · скриншот будет добавлен</p></div></div><div class="img-ph"><div class="ic">🖼️</div><div><b>Яндекс Карты — будет добавлен</b><p>Открыть Яндекс Карты, найти C52, включить слой организаций, масштаб 1:2000, выделить ближайшие функции и маршруты.</p><p class="src">Источник: © Яндекс · скриншот будет добавлен</p></div></div></div></div></section>
 
-   <!-- 16 STRAVA МЕТОДИКА -->
-   <section class="slide">
-     <div class="kick">15 · Методика</div>
-     <h2>От территории — к <em>выводам</em></h2>
-     <div class="body">
-       <div class="steps six">
-         <div class="sp"><div class="n">1</div><h3>Территория</h3><p>Найти исследуемую территорию.</p></div>
-         <div class="sp"><div class="n">2</div><h3>Активность</h3><p>Выбрать нужный тип активности.</p></div>
-         <div class="sp"><div class="n">3</div><h3>Маршруты</h3><p>Рассмотреть распределение маршрутов.</p></div>
-         <div class="sp"><div class="n">4</div><h3>Концентрация</h3><p>Выявить участки с повышенной концентрацией активности.</p></div>
-         <div class="sp"><div class="n">5</div><h3>Сопоставление</h3><p>Сопоставить их с существующими объектами и пространственной структурой.</p></div>
-         <div class="sp"><div class="n">6</div><h3>Выводы</h3><p>Зафиксировать наблюдения и возможные гипотезы.</p></div>
-       </div>
-       <div class="band" style="margin-top:18px"><b>Результат:</b> схема пользовательской активности на территории и прилегающих маршрутах.</div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Развилка</div><h2>Что ищем <em>в данных</em></h2><div class="body"><div class="two"><div class="bx"><h4>Трек А · проектировщик</h4><ul><li>морфология ткани;</li><li>пешеходные графы;</li><li>дефицит городских функций вокруг C52.</li></ul></div><div class="bx"><h4>Трек Б · девелопер</h4><ul><li>конкуренты и ставки;</li><li>пустые рыночные ниши;</li><li>продуктовая гипотеза.</li></ul></div></div></div></section>
 
-   <!-- 17 LLM -->
-   <section class="slide">
-     <div class="kick">16 · Обработка данных</div>
-     <h2>LLM: <em>обработка и интерпретация</em></h2>
-     <p class="lead">Собрали данные. Теперь попробуем заставить их работать.</p>
-     <div class="body">
-       <div class="two">
-         <div class="bx">
-           <h4>Возможности языковых моделей</h4>
-           <ul>
-             <li>классификация объектов по функциональным категориям;</li>
-             <li>обработка таблиц;</li>
-             <li>подсчёт и группировка данных;</li>
-             <li>сопоставление нескольких источников;</li>
-             <li>анализ характеристик аудитории;</li>
-             <li>выявление возможных закономерностей.</li>
-           </ul>
-         </div>
-         <div class="bx">
-           <h4>Инструменты</h4>
-           <div class="chips"><span class="chip g">ChatGPT</span><span class="chip g">DeepSeek</span><span class="chip g">Алиса AI</span><span class="chip g">Gemini</span></div>
-           <p class="note">И большое множество других сервисов.</p>
-         </div>
-       </div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Два трека</div><h2>Основа общая, <em>трек — по роли</em></h2><div class="body"><div class="tiles three"><div class="tl"><div class="ic"><svg class="i"><use href="#i-search"/></svg></div><h3>Общая основа</h3><p>Контекст и ПЗЗ → HBU и сценарии → визуализация → Demo Day.</p></div><div class="tl"><div class="ic"><svg class="i"><use href="#i-doc"/></svg></div><h3>Трек А · проектировщик</h3><p>Итог: архитектурно-визуальное исследование.</p></div><div class="tl"><div class="ic"><svg class="i"><use href="#i-chart"/></svg></div><h3>Трек Б · девелопер</h3><p>Итог: инвестиционный концепт-паспорт.</p></div></div></div></section>
 
-   <!-- 18 СИСТЕМАТИЗАЦИЯ -->
-   <section class="slide">
-     <div class="kick">17 · Систематизация</div>
-     <h2>300 объектов — и пока <em>ни одного вывода</em></h2>
-     <p class="lead">Сначала данные нужно привести в порядок.</p>
-     <div class="body">
-       <table class="datatable">
-         <thead><tr><th>Название объекта</th><th>Категория</th><th>Адрес</th><th>Источник</th><th>Примечание</th></tr></thead>
-         <tbody>
-           <tr><td>Организация 1</td><td>Общественное питание</td><td>Адрес</td><td>2ГИС</td><td>Действующая</td></tr>
-           <tr><td>Объект 2</td><td>Спорт</td><td>Адрес</td><td>OSM</td><td>Требует проверки</td></tr>
-           <tr><td>Объект 3</td><td>Торговля</td><td>Адрес</td><td>2ГИС</td><td>—</td></tr>
-         </tbody>
-       </table>
-       <div class="band" style="margin-top:18px"><b>Цель:</b> из «300 объектов» сделать таблицу, с которой можно работать.</div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Пространственные данные</div><h2>OpenStreetMap</h2><div class="body"><div class="two"><div class="bx"><h4>Что можно получить</h4><ul><li>здания и контуры;</li><li>улично-дорожная сеть;</li><li>пешеходные пути;</li><li>объекты инфраструктуры;</li><li>общественные пространства;</li><li>элементы благоустройства.</li></ul></div><div class="img-ph"><div class="ic">🖼️</div><div><b>OSM — будет добавлен</b><p>Открыть OpenStreetMap, найти C52, включить слои зданий/дорог/пешеходных путей, масштаб 1:2000, выделить контуры зданий.</p><p class="src">Источник: © OpenStreetMap contributors · скриншот будет добавлен</p></div></div></div></div></section>
 
-   <!-- 19 ПРОМПТ -->
-   <section class="slide">
-     <div class="kick">18 · Промпт</div>
-     <h2>Структура <em>аналитического промпта</em></h2>
-     <p class="lead">«Проанализируй территорию» — и что именно мы хотим получить в ответ?</p>
-     <div class="body">
-       <div class="plan">
-         <div class="pl"><div class="n">1</div><h3>Роль</h3><p>В какой профессиональной роли должна работать модель.</p></div>
-         <div class="pl"><div class="n">2</div><h3>Контекст</h3><p>Что исследуется и для какой цели.</p></div>
-         <div class="pl"><div class="n">3</div><h3>Исходные данные</h3><p>Какие материалы передаются.</p></div>
-         <div class="pl"><div class="n">4</div><h3>Задача</h3><p>Что конкретно нужно выполнить.</p></div>
-         <div class="pl"><div class="n">5</div><h3>Ограничения</h3><p>Что нельзя предполагать или додумывать.</p></div>
-         <div class="pl"><div class="n">6</div><h3>Формат результата</h3><p>Таблица, список, классификация, аналитический текст.</p></div>
-       </div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Алгоритм</div><h2>QuickOSM и Overpass: <em>семь шагов</em></h2><div class="body"><div class="two"><div class="bx"><h4>Шаги</h4><ol style="font-size:16px;line-height:1.4;padding-left:20px;color:var(--muted)"><li>Найти территорию.</li><li>Определить категорию объектов.</li><li>Перейти в Overpass Turbo.</li><li>Сформировать запрос по тегам OSM.</li><li>Ограничить запрос территорией.</li><li>Запустить и просмотреть результат.</li><li>Экспортировать в GeoJSON.</li></ol></div><div class="img-ph"><div class="ic">🖼️</div><div><b>Overpass Turbo — будет добавлен</b><p>Overpass Turbo: запрос по тегам amenity/shop/leisure в радиусе 500 м; экспорт GeoJSON; скриншот запроса и результата.</p><p class="src">Источник: © OpenStreetMap contributors / Overpass Turbo · скриншот будет добавлен</p></div></div></div></div></section>
 
-   <!-- 20 КОНТЕКСТ И ДАННЫЕ -->
-   <section class="slide">
-     <div class="kick">19 · Данные для модели</div>
-     <h2>Что передавать <em>нейросети</em></h2>
-     <p class="lead">Таблицы, документы, ссылки, изображения и результаты предыдущих этапов.</p>
-     <div class="body">
-       <div class="plan">
-         <div class="pl"><div class="n">1</div><h3>Текстовые описания</h3></div>
-         <div class="pl"><div class="n">2</div><h3>Таблицы и документы</h3></div>
-         <div class="pl"><div class="n">3</div><h3>PDF и отчёты</h3></div>
-         <div class="pl"><div class="n">4</div><h3>Ссылки на источники</h3></div>
-         <div class="pl"><div class="n">5</div><h3>Изображения и скриншоты карт</h3></div>
-         <div class="pl"><div class="n">6</div><h3>Результаты предыдущих этапов</h3></div>
-       </div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Активность</div><h2>Strava: <em>цифровые следы</em></h2><div class="body"><div class="two"><div class="bx"><h4>Что можно получить</h4><ul><li>популярные маршруты;</li><li>концентрация активности;</li><li>направления движения;</li><li>распределение по территории;</li><li>точки притяжения.</li></ul></div><div class="img-ph"><div class="ic">🖼️</div><div><b>Strava — будет добавлен</b><p>Открыть Strava Global Heatmap, найти C52, выбрать пешеходный/велосипедный слой, масштаб города, выделить маршруты у объекта.</p><p class="src">Источник: © Strava · скриншот будет добавлен</p></div></div></div></div></section>
 
-   <!-- 21 ДЕКОМПОЗИЦИЯ -->
-   <section class="slide">
-     <div class="kick">20 · Декомпозиция</div>
-     <h2>Не одним запросом, а <em>цепочкой</em></h2>
-     <p class="lead">Разделение большой задачи на последовательные запросы, уточнение и корректировка результата.</p>
-     <div class="body">
-       <div class="numlist">
-         <div class="nl"><div class="n">1</div><p>Сначала классифицировать собранные организации.</p></div>
-         <div class="nl"><div class="n">2</div><p>Затем подсчитать количество объектов каждой категории.</p></div>
-         <div class="nl"><div class="n">3</div><p>После этого сопоставить категории с характеристиками территории.</p></div>
-         <div class="nl"><div class="n">4</div><p>Выявить закономерности.</p></div>
-         <div class="nl"><div class="n">5</div><p>Сформировать предварительные выводы.</p></div>
-       </div>
-       <div class="rule" style="margin-top:18px;font-size:22px"><svg class="i"><use href="#i-shield"/></svg>Один запрос на всё исследование — плохая идея.</div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Методика</div><h2>Strava: от территории к <em>выводам</em></h2><div class="body"><div class="steps six"><div class="sp"><div class="n">1</div><h3>Территория</h3><p>Найти исследуемую территорию.</p></div><div class="sp"><div class="n">2</div><h3>Активность</h3><p>Выбрать нужный тип активности.</p></div><div class="sp"><div class="n">3</div><h3>Маршруты</h3><p>Рассмотреть распределение маршрутов.</p></div><div class="sp"><div class="n">4</div><h3>Концентрация</h3><p>Выявить участки активности.</p></div><div class="sp"><div class="n">5</div><h3>Сопоставление</h3><p>Сопоставить с объектами и структурой.</p></div><div class="sp"><div class="n">6</div><h3>Выводы</h3><p>Зафиксировать наблюдения и гипотезы.</p></div></div></div></section>
 
-   <!-- 22 ПРАКТИЧЕСКИЙ ПРОМПТ -->
-   <section class="slide">
-     <div class="kick">21 · Практика</div>
-     <h2>Промпт для <em>таблицы организаций</em></h2>
-     <p class="lead">Распределение по категориям, подсчёт объектов, формирование сводных результатов.</p>
-     <div class="body">
-       <div class="two">
-         <div class="bx">
-           <h4>Задача модели</h4>
-           <ul>
-             <li>распределить объекты по функциональным категориям;</li>
-             <li>объединить похожие виды деятельности;</li>
-             <li>подсчитать количество организаций в каждой категории;</li>
-             <li>определить долю каждой категории в общем перечне;</li>
-             <li>сформировать сводную таблицу.</li>
-           </ul>
-         </div>
-         <div class="bx">
-           <h4>Исходные данные</h4>
-           <p style="font-size:17px;line-height:1.45;color:var(--graphite)">Таблица организаций: название, категория, адрес, источник.</p>
-           <h4 style="margin-top:18px">Результат</h4>
-           <p style="font-size:17px;line-height:1.45;color:var(--graphite)">Сводная таблица: категории, количество объектов, доля каждой категории.</p>
-         </div>
-       </div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Натурное наблюдение</div><h2>Что проверить <em>на месте</em></h2><div class="body"><div class="two"><div class="bx"><h4>Чек-лист</h4><ul><li>время и интенсивность потоков;</li><li>реальные маршруты;</li><li>точки притяжения;</li><li>барьеры и неудобства;</li><li>активность у соседних объектов.</li></ul></div><figure class="fig"><img src="images/rostov-naberezhnaya-gallery.jpg" alt="Пример учебного задания AI2ARCH: детская площадка на набережной" loading="lazy"><figcaption class="figcap">Иллюстрация из курса «ИИ в архитектуре». Не C52.</figcaption></figure></div></div></section>
 
-   <!-- 23 ДЕМОГРАФИЯ -->
-   <section class="slide">
-     <div class="kick">22 · Аудитория</div>
-     <h2>Демография и <em>статистика</em></h2>
-     <div class="body">
-       <div class="two">
-         <div class="bx">
-           <h4>Исходные данные</h4>
-           <ul>
-             <li>численность населения;</li>
-             <li>возрастная структура;</li>
-             <li>социально-демографические характеристики;</li>
-             <li>занятость;</li>
-             <li>распределение населения по территории.</li>
-           </ul>
-         </div>
-         <div class="bx">
-           <h4>Задачи ИИ</h4>
-           <ul>
-             <li>структурировать статистику;</li>
-             <li>выявить основные группы населения;</li>
-             <li>сравнить характеристики групп;</li>
-             <li>обозначить возможные особенности аудитории.</li>
-           </ul>
-         </div>
-       </div>
-       <div class="band" style="margin-top:18px"><b>Дальше:</b> от характеристик населения — к гипотезам о пользовательских группах.</div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Систематизация</div><h2>300 объектов — и пока <em>ни одного вывода</em></h2><div class="body"><table class="datatable"><thead><tr><th>Название</th><th>Категория</th><th>Адрес</th><th>Источник</th><th>Примечание</th></tr></thead><tbody><tr><td>Организация 1</td><td>Общественное питание</td><td>Адрес</td><td>2ГИС</td><td>Действующая</td></tr><tr><td>Объект 2</td><td>Спорт</td><td>Адрес</td><td>OSM</td><td>Требует проверки</td></tr><tr><td>Объект 3</td><td>Торговля</td><td>Адрес</td><td>2ГИС</td><td>—</td></tr></tbody></table></div></section>
 
-   <!-- 24 ПОТРЕБНОСТИ -->
-   <section class="slide">
-     <div class="kick">23 · Потребности</div>
-     <h2>Кто → зачем → <em>что нужно</em></h2>
-     <div class="body">
-       <div class="tiles three">
-         <div class="tl"><div class="ic"><svg class="i"><use href="#i-user"/></svg></div><h3>Характеристики пользователей</h3><p>Кто эти люди: возраст, занятость, роль в локации.</p></div>
-         <div class="tl"><div class="ic"><svg class="i"><use href="#i-flag"/></svg></div><h3>Цели посещения</h3><p>Зачем они приходят на территорию.</p></div>
-         <div class="tl"><div class="ic"><svg class="i"><use href="#i-building"/></svg></div><h3>Потребности</h3><p>Какие услуги и пространства им нужны.</p></div>
-       </div>
-       <div class="band" style="margin-top:18px"><b>Задача промпта:</b> сопоставить три слоя и объяснить, на каких данных основаны выводы.</div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Фиксация</div><h2>Данные сведены <em>в таблицу</em></h2><div class="body"><div class="checkpoint"><div class="lab">Фиксация 2</div><h3>Данные сведены в таблицу</h3><p>У каждой строки указан источник; пробелы отмечены.</p></div></div></section>
 
-   <!-- 25 СЦЕНАРИИ -->
-   <section class="slide">
-     <div class="kick">24 · Сценарии</div>
-     <h2>Три сценария — <em>три приоритета</em></h2>
-     <div class="body">
-       <div class="plan">
-         <div class="pl"><div class="n">01</div><h3>Приоритет общественных функций</h3></div>
-         <div class="pl"><div class="n">02</div><h3>Приоритет образовательных и культурных функций</h3></div>
-         <div class="pl"><div class="n">03</div><h3>Приоритет досуговых и коммерческих функций</h3></div>
-       </div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Частые вопросы</div><h2>Что обычно спрашивают</h2><div class="body"><div class="qa"><div><div class="q">Нужно ли обходить всё пешком?</div><div class="a">Нет. Часть данных берётся из 2ГИС, Яндекс Карт, OSM и Strava; натурное наблюдение уточняет то, чего нет в данных.</div></div><div><div class="q">Можно ли использовать только 2ГИС?</div><div class="a">Нет, для тезисов нужно минимум три независимых источника.</div></div><div><div class="q">Что делать, если данных мало?</div><div class="a">Зафиксировать пробел и дополнить натурным наблюдением или готовым кейсом.</div></div></div></div></section>
 
-   <!-- 26 ЧТО ДОЛЖЕН ИИ -->
-   <section class="slide">
-     <div class="kick">25 · Требования к сценариям</div>
-     <h2>Что должен сделать <em>ИИ</em></h2>
-     <div class="body">
-       <div class="numlist">
-         <div class="nl"><div class="n">01</div><p>Определить целевую аудиторию.</p></div>
-         <div class="nl"><div class="n">02</div><p>Предложить функциональные направления.</p></div>
-         <div class="nl"><div class="n">03</div><p>Объяснить, на каких данных основано предложение.</p></div>
-         <div class="nl"><div class="n">04</div><p>Обозначить предположения, требующие дополнительной проверки.</p></div>
-       </div>
-       <div class="band" style="margin-top:18px"><b>От того, кто здесь находится, —</b> к тому, что ему может быть нужно.</div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Самопроверка и задание</div><h2>Что сделать после Части 1</h2><div class="body"><div class="two"><div class="bx"><h4>Самопроверка</h4><ul><li>есть карта источников;</li><li>у каждой строки указан источник;</li><li>пробелы отмечены.</li></ul></div><div class="bx"><h4>Задание</h4><p>Собрать данные по C52 из 2ГИС/Яндекс Карт/OSM/Strava, заполнить таблицу и отметить источники.</p></div></div></div></section>
 
-   <!-- 27 ПРОВЕРКА -->
-   <section class="slide">
-     <div class="kick">26 · Проверка</div>
-     <h2>Как отличить <em>факт</em> от интерпретации</h2>
-     <div class="body">
-       <div class="two">
-         <div class="bx">
-           <h4>Что проверяем</h4>
-           <ul>
-             <li>проверка фактов по первоисточникам;</li>
-             <li>поиск подтверждения в независимых источниках;</li>
-             <li>проверка дат и актуальности информации;</li>
-             <li>сопоставление числовых значений;</li>
-             <li>выявление неподтверждённых утверждений;</li>
-             <li>отделение реальных данных от предположений модели.</li>
-           </ul>
-         </div>
-         <div class="stack">
-           <div class="it"><b>Факт</b><p>В исследуемой зоне выявлена определённая концентрация объектов конкретной категории.</p></div>
-           <div class="it"><b>Интерпретация</b><p>Данная функция занимает заметное место в существующем наполнении территории.</p></div>
-           <div class="it"><b>Гипотеза</b><p>При разработке концепции стоит проверить востребованность дополнительных функций, не представленных в текущем окружении.</p></div>
-         </div>
-       </div>
-       <div class="rule" style="margin-top:16px;font-size:20px"><svg class="i"><use href="#i-shield"/></svg>Звучит убедительно. Но это ещё не значит, что правда.</div>
-     </div>
-   </section>
+<section class="slide " data-foot="Ч.1 · Петренко"><div class="kick">Передача</div><h2>Что остаётся и <em>что берёт следующий лектор</em></h2><div class="body"><div class="two"><div class="bx"><h4>Остаётся слушателю</h4><p>Таблица источников, карта, отмеченные пробелы.</p></div><div class="bx"><h4>Берёт следующий лектор</h4><p>Данные для ИИ-обработки, классификации и профиля персоны.</p></div></div></div></section>
 
-   <!-- 28 СХЕМА -->
-   <section class="slide">
-     <div class="kick">27 · Итог</div>
-     <h2>Схема <em>исследования</em> локации</h2>
-     <div class="body">
-       <div class="steps six">
-         <div class="sp"><div class="n">1</div><h3>Постановка задачи</h3><p>Определение объекта, границ и целей исследования.</p></div>
-         <div class="sp"><div class="n">2</div><h3>Сбор информации</h3><p>2ГИС, OpenStreetMap, Overpass Turbo, Strava, статистические источники.</p></div>
-         <div class="sp"><div class="n">3</div><h3>Систематизация</h3><p>Формирование таблиц, классификация и объединение информации.</p></div>
-         <div class="sp"><div class="n">4</div><h3>Обработка с помощью ИИ</h3><p>Анализ организаций, аудитории и пользовательских потребностей.</p></div>
-         <div class="sp"><div class="n">5</div><h3>Проверка информации</h3><p>Сопоставление с первоисточниками и проверка достоверности.</p></div>
-         <div class="sp"><div class="n">6</div><h3>Формирование выводов</h3><p>Выявление закономерностей и разработка функциональных гипотез.</p></div>
-       </div>
-       <div class="band" style="margin-top:18px"><b>Результат:</b> данные собраны, проверены и превращены в функциональные гипотезы.</div>
-     </div>
-   </section>
+<section class="slide part-divider" data-foot="Ч.2 · Петренко"><div class="num">Часть 2</div><div class="kick">Тема 1.2 · Рынок, окружение</div><h1>ИИ-обработка,<br>аудитория, сценарии</h1><p class="meta">8 ноября · Петренко · 90 мин</p></section>
 
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Результат части</div><h2>Профиль персоны и <em>три предварительных сценария</em></h2><div class="body"><div class="band"><b>К концу части:</b> данные обработаны, собран профиль персоны, сформулированы три предварительных сценария.</div></div></section>
 
-   <div class="foot" id="foot"><span>1.2 · Рынок, окружение · ИИ в редевелопменте</span><span><a href="https://ai2arch.ru/redev-schedule.html" target="_blank" rel="noopener">Расписание ↗</a> &nbsp; <span class="num" id="num"></span></span></div>
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">ИИ</div><h2>ИИ как <em>инструмент аналитика</em></h2><div class="body"><div class="two"><div class="bx"><h4>Что умеет</h4><ul><li>обрабатывать большие тексты;</li><li>классифицировать объекты и данные;</li><li>сопоставлять источники;</li><li>выявлять закономерности;</li><li>формировать гипотезы.</li></ul></div><div class="bx"><h4>Что важно помнить</h4><p style="font-size:20px;line-height:1.45;color:var(--graphite)">ИИ не заменяет первичные источники, не гарантирует достоверность фактов и может допускать ошибки.</p></div></div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">LLM</div><h2>Обработка, классификация, <em>интерпретация</em></h2><div class="body"><div class="two"><div class="bx"><h4>Возможности</h4><ul><li>классификация объектов по категориям;</li><li>обработка таблиц;</li><li>классификация; подсчёт формулой в таблице;</li><li>сопоставление источников;</li><li>анализ аудитории;</li><li>выявление закономерностей.</li></ul></div><div class="bx"><h4>Инструменты</h4><div class="chips"><span class="chip g">ChatGPT</span><span class="chip g">DeepSeek</span><span class="chip g">Алиса AI</span><span class="chip g">Gemini</span></div></div></div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Промпт</div><h2>Структура <em>аналитического промпта</em></h2><div class="body"><div class="plan"><div class="pl"><div class="n">1</div><h3>Роль</h3><p>В какой роли работает модель.</p></div><div class="pl"><div class="n">2</div><h3>Контекст</h3><p>Что исследуется и для чего.</p></div><div class="pl"><div class="n">3</div><h3>Исходные данные</h3><p>Какие материалы передаются.</p></div><div class="pl"><div class="n">4</div><h3>Задача</h3><p>Что нужно выполнить.</p></div><div class="pl"><div class="n">5</div><h3>Ограничения</h3><p>Что нельзя додумывать.</p></div><div class="pl"><div class="n">6</div><h3>Формат результата</h3><p>Таблица, список, классификация, текст.</p></div></div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Данные для модели</div><h2>Что передавать <em>нейросети</em></h2><div class="body"><div class="plan"><div class="pl"><div class="n">1</div><h3>Текстовые описания</h3></div><div class="pl"><div class="n">2</div><h3>Таблицы и документы</h3></div><div class="pl"><div class="n">3</div><h3>PDF и отчёты</h3></div><div class="pl"><div class="n">4</div><h3>Ссылки на источники</h3></div><div class="pl"><div class="n">5</div><h3>Изображения и скриншоты</h3></div><div class="pl"><div class="n">6</div><h3>Результаты прошлых этапов</h3></div></div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Декомпозиция</div><h2>Не одним запросом, а <em>цепочкой</em></h2><div class="body"><div class="numlist"><div class="nl"><div class="n">1</div><p>Классифицировать организации.</p></div><div class="nl"><div class="n">2</div><p>Посчитать объекты по категориям.</p></div><div class="nl"><div class="n">3</div><p>Сопоставить категории с территорией.</p></div><div class="nl"><div class="n">4</div><p>Выявить закономерности.</p></div><div class="nl"><div class="n">5</div><p>Сформировать выводы.</p></div></div><div class="rule" style="margin-top:18px;font-size:22px"><svg class="i"><use href="#i-shield"/></svg>Один запрос на всё исследование — плохая идея.</div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Демо</div><h2>Модель против <em>формулы</em></h2><div class="body"><div class="two"><div class="bx"><h4>Модель</h4><ul><li>классифицирует;</li><li>интерпретирует;</li><li>предлагает гипотезы.</li></ul></div><div class="bx"><h4>Формула в таблице</h4><ul><li>суммы;</li><li>доли;</li><li>проценты.</li></ul></div></div><div class="band" style="margin-top:18px"><b>Правило:</b> считаем формулами, интерпретируем моделью.</div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Практика</div><h2>Таблица <em>организаций</em></h2><div class="body"><div class="two"><div class="bx"><h4>Задача модели</h4><ul><li>распределить по категориям;</li><li>объединить похожие виды;</li><li>посчитать количество;</li><li>определить долю;</li><li>сформировать сводную таблицу.</li></ul></div><div class="bx"><h4>Результат</h4><p>Сводная таблица: категории, количество, доли — формулами в таблице.</p></div></div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Аудитория</div><h2>Демография и <em>статистика</em></h2><div class="body"><div class="two"><div class="bx"><h4>Исходные данные</h4><ul><li>численность;</li><li>возрастная структура;</li><li>социально-демографические характеристики;</li><li>занятость;</li><li>распределение по территории.</li></ul></div><div class="bx"><h4>Задачи ИИ</h4><ul><li>структурировать статистику;</li><li>выявить группы;</li><li>сравнить характеристики;</li><li>обозначить особенности.</li></ul></div></div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Потребности</div><h2>Кто → зачем → <em>что нужно</em></h2><div class="body"><div class="tiles three"><div class="tl"><div class="ic"><svg class="i"><use href="#i-user"/></svg></div><h3>Характеристики</h3><p>Кто эти люди: возраст, занятость, роль в локации.</p></div><div class="tl"><div class="ic"><svg class="i"><use href="#i-flag"/></svg></div><h3>Цели посещения</h3><p>Зачем они приходят на территорию.</p></div><div class="tl"><div class="ic"><svg class="i"><use href="#i-building"/></svg></div><h3>Потребности</h3><p>Какие услуги и пространства нужны.</p></div></div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Профиль персоны</div><h2>Шаблон <em>профиля персоны</em></h2><div class="body"><table class="datatable"><thead><tr><th>Персона (кто)</th><th>Зачем приходит на территорию</th><th>Потребности и запросы</th><th>Чем подтверждено (источники)</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr></tbody></table><p class="figcap">Третья строка — необязательная.</p><div class="checkpoint"><div class="lab">Фиксация 3</div><h3>Профиль персоны</h3><p>Заполнен профиль персоны; указано, чем подтверждены потребности.</p></div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Сценарии</div><h2>Три <em>предварительных</em> сценария</h2><div class="body"><div class="plan"><div class="pl"><div class="n">01</div><h3>Приоритет общественных функций</h3></div><div class="pl"><div class="n">02</div><h3>Приоритет образовательных и культурных функций</h3></div><div class="pl"><div class="n">03</div><h3>Приоритет досуговых и коммерческих функций</h3></div></div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Фильтр</div><h2>Юридически <em>допустимо?</em></h2><div class="body"><div class="two"><div class="bx"><h4>Что проверяем</h4><ul><li>ПЗЗ и ВРИ;</li><li>СП и ограничения;</li><li>охранные зоны;</li><li>пожарные и иные требования.</li></ul></div><div class="bx"><h4>Что делаем</h4><ul><li>отсекаем недопустимое;</li><li>уточняем спорное;</li><li>фиксируем допущения.</li></ul></div></div><div class="band" style="margin-top:18px"><b>Сценарий без юридической проверки</b> — не сценарий, а гипотеза.</div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Передача</div><h2>Что берут <em>1.3 и 2.1</em></h2><div class="body"><div class="two"><div class="bx"><h4>Остаётся слушателю</h4><p>Профиль персоны, три предварительных сценария, таблица источников.</p></div><div class="bx"><h4>Берёт следующий лектор</h4><p>1.3 — продуктовая гипотеза; 2.1 — HBU, функции и площади.</p></div></div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Проверка</div><h2>Проверка: <em>снижаем и проверяем</em></h2><div class="body"><div class="two"><div class="bx"><h4>Что проверяем</h4><ul><li>факты по первоисточникам;</li><li>независимые источники;</li><li>даты и актуальность;</li><li>числа и расчёты;</li><li>неподтверждённые утверждения;</li><li>данные и предположения.</li></ul></div><div class="stack"><div class="it"><b>Факт</b><p>В зоне выявлена концентрация объектов категории.</p></div><div class="it"><b>Интерпретация</b><p>Функция занимает заметное место в наполнении территории.</p></div><div class="it"><b>Гипотеза</b><p>Стоит проверить востребованность дополнительных функций.</p></div></div></div><div class="rule" style="margin-top:16px;font-size:20px"><svg class="i"><use href="#i-shield"/></svg>Звучит убедительно. Но это ещё не значит, что правда.</div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Источники</div><h2>Тезис → <em>3 источника</em></h2><div class="body"><table class="datatable"><thead><tr><th>Тезис</th><th>Источник 1</th><th>Источник 2</th><th>Источник 3</th></tr></thead><tbody><tr><td>Напр.: «в районе дефицит коворкингов»</td><td>2ГИС — число точек рядом</td><td>ЦИАН — ставки аренды</td><td>Росстат / опрос</td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr></tbody></table></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Фиксация</div><h2>Тезисы <em>подтверждены</em></h2><div class="body"><div class="checkpoint"><div class="lab">Фиксация 4</div><h3>Тезисы подтверждены</h3><p>Каждый тезис — минимум 3 независимых источника; факты отделены от интерпретаций.</p></div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Частые вопросы</div><h2>Что обычно спрашивают</h2><div class="body"><div class="qa"><div><div class="q">Можно ли доверить модели подсчёт?</div><div class="a">Нет. Суммы и доли считаются формулами в таблице; модель классифицирует и интерпретирует.</div></div><div><div class="q">Сколько сценариев нужно?</div><div class="a">Три предварительных сценария.</div></div><div><div class="q">Что делать с юридическими ограничениями?</div><div class="a">Проверить сценарии фильтром «юридически допустимо».</div></div></div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Самопроверка и задание</div><h2>Что сделать после Части 2</h2><div class="body"><div class="two"><div class="bx"><h4>Самопроверка</h4><ul><li>профиль персоны заполнен;</li><li>три сценария сформулированы;</li><li>юридический фильтр пройден.</li></ul></div><div class="bx"><h4>Задание</h4><p>Собрать профиль персоны и три предварительных сценария; проверить их юридическую допустимость.</p></div></div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Итог</div><h2>Шесть действий <em>исследования локации</em></h2><div class="body"><div class="steps six"><div class="sp"><div class="n">1</div><h3>Постановка задачи</h3><p>Объект, границы, цели.</p></div><div class="sp"><div class="n">2</div><h3>Сбор информации</h3><p>2ГИС, Яндекс Карты, OSM, Strava, статистика.</p></div><div class="sp"><div class="n">3</div><h3>Систематизация</h3><p>Таблицы, классификация, объединение.</p></div><div class="sp"><div class="n">4</div><h3>Обработка ИИ</h3><p>Анализ организаций и аудитории.</p></div><div class="sp"><div class="n">5</div><h3>Проверка</h3><p>Первоисточники и достоверность.</p></div><div class="sp"><div class="n">6</div><h3>Выводы</h3><p>Закономерности и гипотезы.</p></div></div></div></section>
+
+<section class="slide " data-foot="Ч.2 · Петренко"><div class="kick">Передача</div><h2>Что берёт <em>Часть 3</em></h2><div class="body"><div class="two"><div class="bx"><h4>Остаётся слушателю</h4><p>Профиль персоны, сценарии, тезисы и таблица источников.</p></div><div class="bx"><h4>Берёт следующий лектор</h4><p>Данные для ГИС-связки, проверки тезисов и работы по треку.</p></div></div></div></section>
+
+<section class="slide part-divider" data-foot="Ч.3 · Кулешов"><div class="num">Часть 3</div><div class="kick">Тема 1.2 · Рынок, окружение</div><h1>ГИС-связка,<br>ЦИАН, ставки</h1><p class="meta">10 ноября · Кулешов · 90 мин</p></section>
+
+<section class="slide " data-foot="Ч.3 · Кулешов"><div class="kick">Вход</div><h2>Что у вас <em>на входе</em></h2><div class="body"><table class="datatable"><thead><tr><th>Категории</th><th>Персоны</th><th>3 тезиса</th></tr></thead><tbody><tr><td>Таблица категорий из Части 2</td><td>Профиль персоны</td><td>Тезисы, подтверждённые 3 источниками</td></tr></tbody></table><div class="band" style="margin-top:18px"><b>Проверяем:</b> всё ли готово для ГИС-связки и работы по треку.</div></div></section>
+
+<section class="slide " data-foot="Ч.3 · Кулешов"><div class="kick">Результат части</div><h2>Проверенные тезисы и <em>материалы трека</em></h2><div class="body"><div class="band"><b>К концу части:</b> собрана ГИС-связка, проверены тезисы, подготовлены материалы для трека А или Б.</div></div></section>
+
+<section class="slide " data-foot="Ч.3 · Кулешов"><div class="kick">Развилка</div><h2>Трек А / <em>Трек Б</em></h2><div class="body"><div class="two"><div class="bx"><h4>Трек А · проектировщик</h4><ul><li>морфология;</li><li>пешеходные графы;</li><li>дефицит функций.</li></ul></div><div class="bx"><h4>Трек Б · девелопер</h4><ul><li>ЦИАН и ставки;</li><li>конкуренты;</li><li>ниши и продукт.</li></ul></div></div></div></section>
+
+<section class="slide " data-foot="Ч.3 · Кулешов"><div class="kick">ГИС-связка</div><h2>OSM → QGIS → таблица → <em>LLM</em></h2><div class="body"><div class="stages"><div class="st"><div class="ic"><svg class="i"><use href="#i-layers"/></svg></div><h3>OSM</h3><p>Пространственные данные</p></div><div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div><div class="st"><div class="ic"><svg class="i"><use href="#i-layers"/></svg></div><h3>QGIS</h3><p>Слои и атрибуты</p></div><div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div><div class="st"><div class="ic"><svg class="i"><use href="#i-calc"/></svg></div><h3>Таблица</h3><p>Категории и расчёты</p></div><div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div><div class="st"><div class="ic"><svg class="i"><use href="#i-bulb"/></svg></div><h3>LLM</h3><p>Интерпретация</p></div></div></div></section>
+
+<section class="slide " data-foot="Ч.3 · Кулешов"><div class="kick">Слои и атрибуты</div><h2>QGIS: слои и <em>таблица атрибутов</em></h2><div class="body"><div class="two"><div class="img-ph"><div class="ic">🖼️</div><div><b>QGIS: слои — будет добавлен</b><p>Открыть QGIS, загрузить OSM/GeoJSON по C52, включить слои зданий, дорог, пешеходных путей; масштаб 1:2000; панель слоёв.</p><p class="src">Источник: © AI2ARCH / QGIS · скриншот будет добавлен</p></div></div><div class="img-ph"><div class="ic">🖼️</div><div><b>QGIS: таблица — будет добавлен</b><p>Открыть таблицу атрибутов; показать поля name, category, source; отфильтровать категории; без персональных данных.</p><p class="src">Источник: © AI2ARCH / QGIS · скриншот будет добавлен</p></div></div></div></div></section>
+
+<section class="slide " data-foot="Ч.3 · Кулешов"><div class="kick">Vision-модель</div><h2>Схемы PNG для <em>vision-модели</em></h2><div class="body"><div class="two"><div class="bx"><h4>Что готовим</h4><ul><li>экспорт схемы в PNG;</li><li>300 DPI;</li><li>подписи на русском;</li><li>без лишних слоёв.</li></ul></div><figure class="fig"><svg viewBox="0 0 420 220" role="img" aria-label="Схема: схема участка экспортируется в PNG и передаётся vision-модели"><rect x="8" y="8" width="404" height="204" rx="16" fill="#F6F8FC" stroke="#E1E5EE" stroke-width="2"/><rect x="30" y="60" width="90" height="70" rx="8" fill="#EAF1FF" stroke="#1A6BFF" stroke-width="2"/><path d="M150 95h70" stroke="#1A6BFF" stroke-width="4" stroke-linecap="round"/><path d="M210 85l12 10-12 10" fill="none" stroke="#1A6BFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><rect x="250" y="50" width="120" height="90" rx="8" fill="#fff" stroke="#BFD3FF" stroke-width="2"/><text x="310" y="100" text-anchor="middle" font-size="16" font-weight="800" fill="#0A0F1A" font-family="inherit">PNG</text></svg><figcaption class="figcap">Схема AI2ARCH</figcaption></figure></div></div></section>
+
+<section class="slide " data-foot="Ч.3 · Кулешов"><div class="kick">Трек А · проектировщик</div><h2>Морфология, пешеходные графы, <em>дефицит функций</em></h2><div class="body"><div class="two"><div class="bx"><h4>Что делаем</h4><ul><li>морфология ткани;</li><li>пешеходные графы;</li><li>дефицит городских функций вокруг C52.</li></ul></div><figure class="fig"><img src="images/case-greenpocket-genplan.jpg" alt="Пример учебного проекта AI2ARCH: генплан парка" loading="lazy"><figcaption class="figcap">Иллюстрация из курса «ИИ в архитектуре». Не C52.</figcaption></figure></div></div></section>
+
+<section class="slide " data-foot="Ч.3 · Кулешов"><div class="kick">Фиксация</div><h2>Трек А <em>зафиксирован</em></h2><div class="body"><div class="checkpoint"><div class="lab">Фиксация 5А</div><h3>Трек А</h3><p>Схема морфологии, пешеходные графы и дефицит функций зафиксированы.</p></div></div></section>
+
+<section class="slide " data-foot="Ч.3 · Кулешов"><div class="kick">Трек Б · девелопер</div><h2>ЦИАН, ставки, <em>ниши</em></h2><div class="body"><div class="two"><div class="bx"><h4>Что делаем</h4><ul><li>конкуренты рядом;</li><li>ставки аренды и продажи;</li><li>пустые рыночные ниши.</li></ul></div><div class="img-ph"><div class="ic">🖼️</div><div><b>ЦИАН — будет добавлен</b><p>Открыть ЦИАН, найти C52, выгрузить ставки аренды/продажи по конкурентам в радиусе 500 м; категории офис/торговля/общепит; скриншот таблицы.</p><p class="src">Источник: © ЦИАН · скриншот будет добавлен</p></div></div></div></div></section>
+
+<section class="slide " data-foot="Ч.3 · Кулешов"><div class="kick">Фиксация</div><h2>Трек Б <em>зафиксирован</em></h2><div class="body"><div class="checkpoint"><div class="lab">Фиксация 5Б</div><h3>Трек Б</h3><p>Конкуренты, ставки и ниши зафиксированы.</p></div></div></section>
+
+<section class="slide " data-foot="Ч.3 · Кулешов"><div class="kick">Проверка</div><h2>Тезис → <em>3 источника</em></h2><div class="body"><table class="datatable"><thead><tr><th>Тезис</th><th>Источник 1</th><th>Источник 2</th><th>Источник 3</th></tr></thead><tbody><tr><td>Напр.: «нужна функция X»</td><td>2ГИС</td><td>ЦИАН</td><td>Росстат / наблюдение</td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr></tbody></table></div></section>
+
+<section class="slide " data-foot="Ч.3 · Кулешов"><div class="kick">Частые вопросы</div><h2>Что обычно спрашивают</h2><div class="body"><div class="qa"><div><div class="q">Обязательно ли использовать QGIS?</div><div class="a">QGIS — расширенный контур; данные можно подготовить и без него.</div></div><div><div class="q">Что остаётся после части?</div><div class="a">ГИС-связка, таблица, проверенные тезисы и материалы трека.</div></div><div><div class="q">Как выбрать трек?</div><div class="a">По роли: трек А — проектировщик, трек Б — девелопер.</div></div></div></div></section>
+
+<section class="slide " data-foot="Ч.3 · Кулешов"><div class="kick">Самопроверка и задание</div><h2>Что сделать после Части 3</h2><div class="body"><div class="two"><div class="bx"><h4>Самопроверка</h4><ul><li>ГИС-связка собрана;</li><li>тезисы подтверждены;</li><li>материалы трека готовы.</li></ul></div><div class="bx"><h4>Задание</h4><p>Собрать ГИС-связку/таблицу, подтвердить тезисы тремя источниками и оформить результат трека.</p></div></div></div></section>
+
+<section class="slide " data-foot="Ч.3 · Кулешов"><div class="kick">Примеры работ</div><h2>Примеры учебных проектов <em>AI2ARCH</em></h2><div class="body"><div class="gal"><figure class="big"><img src="images/case-greenpocket-hero.jpg" alt="Пример учебного проекта AI2ARCH: концепция парка" loading="lazy"><figcaption>Иллюстрация из курса «ИИ в архитектуре». Не C52.</figcaption></figure><figure><img src="images/case-winery-vizualizacii.jpg" alt="Пример учебного проекта AI2ARCH: визуализация винодельни" loading="lazy"><figcaption>Иллюстрация из курса «ИИ в архитектуре». Не C52.</figcaption></figure><figure><img src="images/case-anapa-park-vizualizacii.jpg" alt="Пример учебного проекта AI2ARCH: благоустройство набережной" loading="lazy"><figcaption>Иллюстрация из курса «ИИ в архитектуре». Не C52.</figcaption></figure></div><p class="figcap">Источник: AI2ARCH.</p></div></section>
+
+<section class="slide " data-foot="Ч.3 · Кулешов"><div class="kick">Что дальше</div><h2>До следующей <em>встречи</em></h2><div class="body"><div class="two"><div class="bx"><h4>Три действия</h4><ul><li>выберите объект;</li><li>запишите три факта о нём;</li><li>отправьте в чат группы.</li></ul></div><div class="bx"><h4>Где что найти</h4><ul><li><a href="https://ai2arch.ru/redev-schedule.html" target="_blank" rel="noopener">Расписание</a></li><li><a href="https://ai2arch.ru/redev-guide.html" target="_blank" rel="noopener">Учебное пособие</a></li><li>Чат группы — Яндекс Телемост.</li></ul></div></div></div></section>
+
+<section class="slide " data-foot="Ч.3 · Кулешов"><div class="kick">Переход</div><h2>К теме <em>1.3</em></h2><div class="body"><div class="two"><div class="bx"><h4>Остаётся слушателю</h4><p>ГИС-связка, таблица, проверенные тезисы и материалы трека.</p></div><div class="bx"><h4>Берёт следующий лектор</h4><p>Тема 1.3: продуктовая гипотеза и сценарии на основе собранных данных.</p></div></div></div></section>
+
+   <div class="foot" id="foot"><span id="footText">Ч.0 · карта темы</span><span><a href="https://ai2arch.ru/redev-schedule.html" target="_blank" rel="noopener">Расписание ↗</a> &nbsp; <span class="num" id="num"></span></span></div>
   </div>
  </div>
  <div class="controls">
@@ -875,6 +492,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
   var slides=[].slice.call(stage.querySelectorAll('.slide'));
   var dotsBox=document.getElementById('dots'), counter=document.getElementById('counter'), num=document.getElementById('num');
   var prev=document.getElementById('prev'), next=document.getElementById('next'), fs=document.getElementById('fs'), prog=document.getElementById('progress');
+  var footText=document.getElementById('footText');
   var cur=0, total=slides.length;
   slides.forEach(function(_,i){var d=document.createElement('i');d.onclick=function(){go(i)};dotsBox.appendChild(d);});
   var dots=[].slice.call(dotsBox.children);
@@ -883,6 +501,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     slides[cur].classList.remove('active'); dots[cur].classList.remove('on');
     cur=i; slides[cur].classList.add('active'); dots[cur].classList.add('on');
     counter.textContent=(cur+1)+' / '+total; num.textContent=(cur+1)+' / '+total;
+    if(footText) footText.textContent=slides[cur].getAttribute('data-foot')||'Тема 1.2';
     prev.disabled=cur===0; next.disabled=cur===total-1;
     prog.style.width=((cur+1)/total*100)+'%';
     try{history.replaceState(null,'','#'+(cur+1));}catch(e){}
