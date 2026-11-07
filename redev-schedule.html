@@ -150,6 +150,13 @@
     .cal-modal-box { max-height:92vh; }
     .cal-modal-body { padding:16px 18px 22px; }
   }
+
+  /* Спокойные бейджи форматов */
+  .meet-badge{display:inline-flex;align-items:center;font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:6px;white-space:nowrap;line-height:1.35;margin-right:6px}
+  .meet-badge.meeting{background:#E8F1FF;color:#0F3D91;border:1px solid #BFD3FF}
+  .meet-badge.lecture{background:#F3F2EE;color:#1F2430;border:1px solid #CFC9BC}
+  .slot .meet-badge{flex:none;min-width:5.5rem;justify-content:center;text-align:center;margin-right:0}
+  @media (max-width:640px){ .schedule .slot .meet-badge{min-width:5.5rem} }
 </style>
 </head>
 <body>
@@ -164,11 +171,6 @@
 <div class="wrap">
   <h1>Расписание потока</h1>
   <p class="lead">5 ноября — 6 декабря 2026. Все встречи — синхронные созвоны прямо в чате потока в Яндекс Телемосте, в назначенное время. Отдельная ссылка не нужна. Время московское. Названия тем ведут в соответствующий раздел пособия.</p>
-
-  <div class="meet-legend" aria-label="Форматы занятий">
-    <div class="meet-legend-row"><span class="meet-badge meeting">Встреча · присутствие обязательно</span><span>Синхронный видеозвонок в Телемосте. На встрече разбираем вопросы и работы группы, присутствие обязательно.</span></div>
-    <div class="meet-legend-row"><span class="meet-badge lecture">Лекция · присутствие по возможности</span><span>Если вопросов к лектору нет, лекцию можно посмотреть в записи, когда она появится в пособии.</span></div>
-  </div>
 
   <div class="notice">
     <div>📎</div>
@@ -193,129 +195,129 @@
       <tr class="slot-row day-start" data-date="5 ноя · чт" data-iso="2026-11-05" data-time="18:00–19:30">
         <td class="date-cell">5 ноя <span class="wd">чт</span></td>
         <td class="time-cell">18:00–19:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge meeting">Встреча</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t01">Встреча 1 — жизненный цикл объекта, кейс «C52»</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge meeting" title="Встреча: присутствие обязательно" aria-label="Встреча: присутствие обязательно">Встреча</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t01">Встреча 1 — жизненный цикл объекта, кейс «C52»</a></div></div></td>
         <td class="who-cell">Кулешов</td>
       </tr>
       <tr class="slot-row day-start" data-date="7 ноя · сб" data-iso="2026-11-07" data-time="18:00–19:30">
         <td class="date-cell">7 ноя <span class="wd">сб</span></td>
         <td class="time-cell">18:00–19:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge meeting">Встреча</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t02">0.2 Роли и трек</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge meeting" title="Встреча: присутствие обязательно" aria-label="Встреча: присутствие обязательно">Встреча</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t02">0.2 Роли и трек</a></div></div></td>
         <td class="who-cell">Кулешов</td>
       </tr>
       <tr class="module-row"><td colspan="4"><span class="mod-title">Модуль 1 · Контекст территории</span><span class="mod-dates">8–15 ноября</span></td></tr>
       <tr class="slot-row day-start" data-date="8 ноя · вс" data-iso="2026-11-08" data-time="18:00–19:30">
         <td class="date-cell">8 ноя <span class="wd">вс</span></td>
         <td class="time-cell">18:00–19:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t12-1">1.2 ч.1 Окружение и источники данных</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t12-1">1.2 ч.1 Окружение и источники данных</a></div></div></td>
         <td class="who-cell">Петренко</td>
       </tr>
       <tr class="slot-row" data-date="8 ноя · вс" data-iso="2026-11-08" data-time="19:30–21:00">
         <td class="date-cell date-empty"><span class="sr-only">8 ноя · вс</span></td>
         <td class="time-cell">19:30–21:00</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t12-2">1.2 ч.2 ИИ-обработка, аудитория, сценарии</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t12-2">1.2 ч.2 ИИ-обработка, аудитория, сценарии</a></div></div></td>
         <td class="who-cell">Петренко</td>
       </tr>
       <tr class="slot-row day-start" data-date="10 ноя · вт" data-iso="2026-11-10" data-time="18:00–19:30">
         <td class="date-cell">10 ноя <span class="wd">вт</span></td>
         <td class="time-cell">18:00–19:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t12-3">1.2 ч.3 ГИС-связка, ЦИАН, ставки</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t12-3">1.2 ч.3 ГИС-связка, ЦИАН, ставки</a></div></div></td>
         <td class="who-cell"><span class="who-k">Кулешов</span></td>
       </tr>
       <tr class="slot-row" data-date="10 ноя · вт" data-iso="2026-11-10" data-time="19:30–21:00">
         <td class="date-cell date-empty"><span class="sr-only">10 ноя · вт</span></td>
         <td class="time-cell">19:30–21:00</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t13">1.3 Продуктовая гипотеза — Трек А</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t13">1.3 Продуктовая гипотеза — Трек А</a></div></div></td>
         <td class="who-cell"><span class="who-p">Петренко</span></td>
       </tr>
       <tr class="slot-row day-start" data-date="11 ноя · ср" data-iso="2026-11-11" data-time="18:00–19:30">
         <td class="date-cell">11 ноя <span class="wd">ср</span></td>
         <td class="time-cell">18:00–19:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t13">1.3 Продуктовая гипотеза — Трек Б</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t13">1.3 Продуктовая гипотеза — Трек Б</a></div></div></td>
         <td class="who-cell">Кулешов</td>
       </tr>
       <tr class="slot-row day-start" data-date="15 ноя · вс" data-iso="2026-11-15" data-time="18:00–19:30">
         <td class="date-cell">15 ноя <span class="wd">вс</span></td>
         <td class="time-cell">18:00–19:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t14">1.4 Сборка досье контекста</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t14">1.4 Сборка досье контекста</a></div></div></td>
         <td class="who-cell">Петренко</td>
       </tr>
       <tr class="module-row"><td colspan="4"><span class="mod-title">Модуль 2 · Функции и экономика</span><span class="mod-dates">16–23 ноября</span></td></tr>
       <tr class="slot-row day-start" data-date="16 ноя · пн" data-iso="2026-11-16" data-time="18:00–19:30">
         <td class="date-cell">16 ноя <span class="wd">пн</span></td>
         <td class="time-cell">18:00–19:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t21">2.1 HBU, 5–7 сценариев, ч.1</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t21">2.1 HBU, 5–7 сценариев, ч.1</a></div></div></td>
         <td class="who-cell">Кулешов</td>
       </tr>
       <tr class="slot-row" data-date="16 ноя · пн" data-iso="2026-11-16" data-time="19:30–21:00">
         <td class="date-cell date-empty"><span class="sr-only">16 ноя · пн</span></td>
         <td class="time-cell">19:30–21:00</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t21">2.1 HBU, 5–7 сценариев, ч.2</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t21">2.1 HBU, 5–7 сценариев, ч.2</a></div></div></td>
         <td class="who-cell">Кулешов</td>
       </tr>
       <tr class="slot-row day-start" data-date="17 ноя · вт" data-iso="2026-11-17" data-time="18:00–19:30">
         <td class="date-cell">17 ноя <span class="wd">вт</span></td>
         <td class="time-cell">18:00–19:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t21">2.1 HBU, ч.3</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t21">2.1 HBU, ч.3</a></div></div></td>
         <td class="who-cell">Кулешов</td>
       </tr>
       <tr class="slot-row" data-date="17 ноя · вт" data-iso="2026-11-17" data-time="19:30–21:00">
         <td class="date-cell date-empty"><span class="sr-only">17 ноя · вт</span></td>
         <td class="time-cell">19:30–21:00</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t22">2.2 Доходная база, CAPEX/OPEX (начало)</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t22">2.2 Доходная база, CAPEX/OPEX (начало)</a></div></div></td>
         <td class="who-cell">Кулешов</td>
       </tr>
       <tr class="slot-row day-start" data-date="18 ноя · ср" data-iso="2026-11-18" data-time="18:00–19:30">
         <td class="date-cell">18 ноя <span class="wd">ср</span></td>
         <td class="time-cell">18:00–19:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge meeting">Встреча</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t23">Встреча 2 — разбор досье, вопросы</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge meeting" title="Встреча: присутствие обязательно" aria-label="Встреча: присутствие обязательно">Встреча</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t23">Встреча 2 — разбор досье, вопросы</a></div></div></td>
         <td class="who-cell">Кулешов</td>
       </tr>
       <tr class="slot-row" data-date="18 ноя · ср" data-iso="2026-11-18" data-time="19:30–21:00">
         <td class="date-cell date-empty"><span class="sr-only">18 ноя · ср</span></td>
         <td class="time-cell">19:30–21:00</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t22">2.2 Доходная база, CAPEX/OPEX (продолжение)</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t22">2.2 Доходная база, CAPEX/OPEX (продолжение)</a></div></div></td>
         <td class="who-cell">Кулешов</td>
       </tr>
       <tr class="slot-row day-start" data-date="19 ноя · чт" data-iso="2026-11-19" data-time="18:00–18:45">
         <td class="date-cell">19 ноя <span class="wd">чт</span></td>
         <td class="time-cell">18:00–18:45</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t25">2.5 Артефакт 2 — упаковка, Трек А</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t25">2.5 Артефакт 2 — упаковка, Трек А</a></div></div></td>
         <td class="who-cell">Петренко</td>
       </tr>
       <tr class="slot-row day-start" data-date="20 ноя · пт" data-iso="2026-11-20" data-time="18:00–19:30">
         <td class="date-cell">20 ноя <span class="wd">пт</span></td>
         <td class="time-cell">18:00–19:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t31">3.1 Мудборд, референсы, промпт-схема, ч.1</a> <span style="color:var(--ink-faint);font-weight:400">(тема Модуля 3, проводится раньше остальных)</span></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t31">3.1 Мудборд, референсы, промпт-схема, ч.1</a> <span style="color:var(--ink-faint);font-weight:400">(тема Модуля 3, проводится раньше остальных)</span></div></div></td>
         <td class="who-cell">Петренко</td>
       </tr>
       <tr class="slot-row" data-date="20 ноя · пт" data-iso="2026-11-20" data-time="19:30–21:00">
         <td class="date-cell date-empty"><span class="sr-only">20 ноя · пт</span></td>
         <td class="time-cell">19:30–21:00</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t31">3.1 Мудборд, референсы, промпт-схема, ч.2</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t31">3.1 Мудборд, референсы, промпт-схема, ч.2</a></div></div></td>
         <td class="who-cell">Петренко</td>
       </tr>
       <tr class="slot-row day-start" data-date="21 ноя · сб" data-iso="2026-11-21" data-time="18:00–19:30">
         <td class="date-cell">21 ноя <span class="wd">сб</span></td>
         <td class="time-cell">18:00–19:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t22">2.2 Доходная база, ч.2</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t22">2.2 Доходная база, ч.2</a></div></div></td>
         <td class="who-cell">Кулешов</td>
       </tr>
       <tr class="slot-row day-start" data-date="22 ноя · вс" data-iso="2026-11-22" data-time="18:00–19:30">
         <td class="date-cell">22 ноя <span class="wd">вс</span></td>
         <td class="time-cell">18:00–19:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t24">2.4 Стресс-тест финмодели, ч.1</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t24">2.4 Стресс-тест финмодели, ч.1</a></div></div></td>
         <td class="who-cell">Кулешов</td>
       </tr>
       <tr class="slot-row" data-date="22 ноя · вс" data-iso="2026-11-22" data-time="19:30–21:00">
         <td class="date-cell date-empty"><span class="sr-only">22 ноя · вс</span></td>
         <td class="time-cell">19:30–21:00</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t24">2.4 Стресс-тест финмодели, ч.2</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t24">2.4 Стресс-тест финмодели, ч.2</a></div></div></td>
         <td class="who-cell">Кулешов</td>
       </tr>
       <tr class="slot-row day-start" data-date="23 ноя · пн" data-iso="2026-11-23" data-time="18:00–18:45">
         <td class="date-cell">23 ноя <span class="wd">пн</span></td>
         <td class="time-cell">18:00–18:45</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t25">2.5 Артефакт 2 — финмодель, Трек Б</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t25">2.5 Артефакт 2 — финмодель, Трек Б</a></div></div></td>
         <td class="who-cell">Кулешов</td>
       </tr>
       <tr class="module-row"><td colspan="4"><span class="mod-title">Модуль 3 · Визуальная упаковка</span><span class="mod-dates">25 ноября – 1 декабря</span></td></tr>
@@ -323,68 +325,68 @@
       <tr class="slot-row day-start" data-date="30 ноя · пн" data-iso="2026-11-30" data-time="18:00–19:30">
         <td class="date-cell">30 ноя <span class="wd">пн</span></td>
         <td class="time-cell">18:00–19:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t32">3.2 Live-демо — генерация</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t32">3.2 Live-демо — генерация</a></div></div></td>
         <td class="who-cell"><span class="who-p">Петренко</span></td>
       </tr>
       <tr class="slot-row" data-date="30 ноя · пн" data-iso="2026-11-30" data-time="19:30–21:00">
         <td class="date-cell date-empty"><span class="sr-only">30 ноя · пн</span></td>
         <td class="time-cell">19:30–21:00</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t32">3.2 Live-демо — Flux.1 + ControlNet</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t32">3.2 Live-демо — Flux.1 + ControlNet</a></div></div></td>
         <td class="who-cell"><span class="who-k">Кулешов</span></td>
       </tr>
       <tr class="slot-row day-start" data-date="1 дек · вт" data-iso="2026-12-01" data-time="18:00–19:30">
         <td class="date-cell">1 дек <span class="wd">вт</span></td>
         <td class="time-cell">18:00–19:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge meeting">Встреча</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t35">3.5 Краш-тест — визуальный аудит</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge meeting" title="Встреча: присутствие обязательно" aria-label="Встреча: присутствие обязательно">Встреча</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t35">3.5 Краш-тест — визуальный аудит</a></div></div></td>
         <td class="who-cell"><span class="who-p">Петренко</span></td>
       </tr>
       <tr class="slot-row" data-date="1 дек · вт" data-iso="2026-12-01" data-time="19:30–21:00">
         <td class="date-cell date-empty"><span class="sr-only">1 дек · вт</span></td>
         <td class="time-cell">19:30–21:00</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge meeting">Встреча</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t35">3.5 Краш-тест — CAPEX и нормы СП</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge meeting" title="Встреча: присутствие обязательно" aria-label="Встреча: присутствие обязательно">Встреча</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t35">3.5 Краш-тест — CAPEX и нормы СП</a></div></div></td>
         <td class="who-cell"><span class="who-k">Кулешов</span></td>
       </tr>
       <tr class="module-row"><td colspan="4"><span class="mod-title">Модуль 4 · Синтез и защита</span><span class="mod-dates">2–6 декабря</span></td></tr>
       <tr class="slot-row day-start" data-date="2 дек · ср" data-iso="2026-12-02" data-time="18:00–19:30">
         <td class="date-cell">2 дек <span class="wd">ср</span></td>
         <td class="time-cell">18:00–19:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge meeting">Встреча</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t36">Встреча 3 — итоги Модуля 3</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge meeting" title="Встреча: присутствие обязательно" aria-label="Встреча: присутствие обязательно">Встреча</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t36">Встреча 3 — итоги Модуля 3</a></div></div></td>
         <td class="who-cell"><span class="who-k">Кулешов</span></td>
       </tr>
       <tr class="slot-row" data-date="2 дек · ср" data-iso="2026-12-02" data-time="19:30–21:00">
         <td class="date-cell date-empty"><span class="sr-only">2 дек · ср</span></td>
         <td class="time-cell">19:30–21:00</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t41">Начало Модуля 4 — структура документа</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t41">Начало Модуля 4 — структура документа</a></div></div></td>
         <td class="who-cell"><span class="who-p">Петренко</span></td>
       </tr>
       <tr class="slot-row day-start" data-date="3 дек · чт" data-iso="2026-12-03" data-time="18:00–19:30">
         <td class="date-cell">3 дек <span class="wd">чт</span></td>
         <td class="time-cell">18:00–19:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t41">Сборка в Gamma / Claude</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t41">Сборка в Gamma / Claude</a></div></div></td>
         <td class="who-cell"><span class="who-p">Петренко</span></td>
       </tr>
       <tr class="slot-row" data-date="3 дек · чт" data-iso="2026-12-03" data-time="19:30–21:00">
         <td class="date-cell date-empty"><span class="sr-only">3 дек · чт</span></td>
         <td class="time-cell">19:30–21:00</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t41">Нормы и экономика</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t41">Нормы и экономика</a></div></div></td>
         <td class="who-cell"><span class="who-k">Кулешов</span></td>
       </tr>
       <tr class="slot-row day-start" data-date="5 дек · сб" data-iso="2026-12-05" data-time="18:00–19:30">
         <td class="date-cell">5 дек <span class="wd">сб</span></td>
         <td class="time-cell">18:00–19:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t41">Черновик итогового документа</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t41">Черновик итогового документа</a></div></div></td>
         <td class="who-cell"><span class="who-p">Петренко</span> + <span class="who-k">Кулешов</span></td>
       </tr>
       <tr class="slot-row" data-date="5 дек · сб" data-iso="2026-12-05" data-time="19:30–20:30">
         <td class="date-cell date-empty"><span class="sr-only">5 дек · сб</span></td>
         <td class="time-cell">19:30–20:30</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t41">Видеопитч</a> <span class="task-chip">Задание №5 обязательно</span></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t41">Видеопитч</a> <span class="task-chip">Задание №5 обязательно</span></div></div></td>
         <td class="who-cell"><span class="who-p">Петренко</span> + <span class="who-k">Кулешов</span></td>
       </tr>
       <tr class="slot-row day-start" data-date="6 дек · вс" data-iso="2026-12-06" data-time="по расписанию дня">
         <td class="date-cell">6 дек <span class="wd">вс</span></td>
         <td class="time-cell">по расписанию дня</td>
-        <td class="topic-cell"><div class="slot"><span class="meet-badge meeting">Встреча</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t42">Demo Day — питч и разбор результатов экспертизы</a></div></div></td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge meeting" title="Встреча: присутствие обязательно" aria-label="Встреча: присутствие обязательно">Встреча</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t42">Demo Day — питч и разбор результатов экспертизы</a></div></div></td>
         <td class="who-cell">Кулешов</td>
       </tr>
     </tbody>
