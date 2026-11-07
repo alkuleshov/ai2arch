@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>0.2 · Роли и паспорт объекта · ИИ в редевелопменте</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+:root{
+  --navy:#0A0F1A; --graphite:#2A2F3E; --azure:#1A6BFF;
+  --azure2:#EAF1FF; --azure3:#BFD3FF; --soft:#F6F8FC; --line:#E1E5EE; --muted:#5B6475; --faint:#9AA4B8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#fff;color:var(--navy);font-family:Manrope,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.deck{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:8px 0 10px}
+.viewport{position:relative;flex:1 1 auto;width:100%;display:flex;align-items:center;justify-content:center;min-height:0}
+.stage{width:1280px;height:720px;position:relative;flex:none;transform-origin:center center;background:#fff;overflow:hidden;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 30px rgba(10,15,26,.06)}
+.progress{position:absolute;left:0;top:0;height:5px;background:var(--azure);width:0;transition:width .35s ease;z-index:5}
+
+.slide{position:absolute;inset:0;padding:50px 72px 74px;display:none;flex-direction:column}
+.slide.active{display:flex;animation:in .4s ease both}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.kick{font-size:14px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--azure);margin-bottom:12px}
+h1{font-size:58px;line-height:1.04;font-weight:800;letter-spacing:-.02em}
+h2{font-size:44px;line-height:1.12;font-weight:800;letter-spacing:-.015em}
+h1 em,h2 em{font-style:normal;color:var(--azure)}
+.lead{font-size:22px;line-height:1.5;color:var(--muted);margin-top:12px;max-width:1040px}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;margin-top:14px}
+.foot{position:absolute;left:72px;right:72px;bottom:24px;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--faint);letter-spacing:.03em}
+.foot a{color:var(--azure);font-weight:700;text-decoration:none}
+.foot a:hover{text-decoration:underline}
+.foot .num{font-weight:800;color:var(--navy)}
+svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.note{font-size:18px;color:var(--muted);margin-top:14px;line-height:1.45}
+.note b{color:var(--navy)}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--azure2);color:var(--azure);font-weight:800;font-size:16px}
+.chip.g{background:var(--soft);color:var(--graphite);border:1px solid var(--line)}
+.pill{display:inline-block;padding:6px 12px;border-radius:8px;background:var(--azure2);color:var(--azure);font-weight:800;font-size:15px;line-height:1.25}
+
+/* 1 титул */
+.s1{flex-direction:row;align-items:center;gap:30px}
+.s1 .l{flex:1.2}
+.s1 .r{flex:1}
+.s1 .chips{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.s1 .how{margin-top:26px;font-size:15px;color:var(--faint)}
+
+/* 2 цепочка */
+.chain{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:6px}
+.chain:before{content:"";position:absolute;left:8%;right:8%;top:45px;height:3px;background:var(--azure3);z-index:0}
+.node{position:relative;z-index:1;text-align:center}
+.node .c{width:92px;height:92px;border-radius:50%;margin:0 auto 16px;background:#fff;border:3px solid var(--azure);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:42px}
+.node:last-child .c{background:var(--azure);color:#fff}
+.node .n{font-size:14px;font-weight:800;color:var(--faint);letter-spacing:.1em}
+.node h3{font-size:25px;font-weight:800;margin:2px 0 10px}
+.node p{font-size:17.5px;line-height:1.4;color:var(--muted);min-height:112px}
+.node .pill{margin-top:8px;font-size:16px}
+
+/* 3 жизненный цикл */
+.stages{display:grid;grid-template-columns:1fr 36px 1fr 36px 1fr 36px 1fr;align-items:stretch;margin-top:10px}
+.st{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:24px 22px}
+.st .ic{width:60px;height:60px;border-radius:14px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:16px}
+.st:nth-child(7) .ic{background:var(--azure);color:#fff}
+.st h3{font-size:24px;font-weight:800;margin-bottom:8px;white-space:nowrap}
+.st p{font-size:17.5px;line-height:1.45;color:var(--muted)}
+.arr{display:flex;align-items:center;justify-content:center;color:var(--azure)}
+.arr svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.band{margin-top:6px;background:var(--azure2);border-radius:14px;padding:16px 26px;font-size:20px;color:var(--navy);display:flex;gap:14px;align-items:center}
+.band b{color:var(--azure)}
+
+/* 4 сравнение */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:6px}
+.pn{border:1px solid var(--line);border-radius:18px;padding:24px 30px;background:#fff}
+.pn.hi{border-color:var(--azure);background:linear-gradient(180deg,var(--azure2),#fff 60%)}
+.pn h3{font-size:28px;font-weight:800;margin-bottom:4px}
+.pn .sub{font-size:15px;color:var(--faint);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.pn svg.ill{width:100%;height:180px;display:block;margin:2px 0 8px}
+.pn ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.pn li{font-size:19.5px;line-height:1.4;color:var(--graphite);padding-left:24px;position:relative}
+.pn li:before{content:"";position:absolute;left:0;top:.6em;width:12px;height:3px;border-radius:2px;background:var(--faint)}
+.pn.hi li:before{background:var(--azure)}
+
+/* 5 ИИ */
+.flow{display:grid;grid-template-columns:1fr 50px 1fr 50px 1fr 50px 1fr;align-items:stretch}
+.fl{border:2px solid var(--line);border-radius:16px;padding:22px 16px 20px;background:#fff;text-align:center}
+.fl .ic{width:60px;height:60px;border-radius:50%;margin:0 auto 12px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:31px}
+.fl.you{border-color:var(--azure3)}
+.fl.ai{background:var(--azure);border-color:var(--azure);color:#fff}
+.fl.ai .ic{background:#fff;color:var(--azure)}
+.fl.ai p{color:rgba(255,255,255,.85)}
+.fl h3{font-size:23px;font-weight:800;margin-bottom:6px}
+.fl p{font-size:17.5px;line-height:1.35;color:var(--muted)}
+.back{display:block;width:100%;height:auto;margin:6px 0 16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:4px}
+.bx{background:var(--soft);border-radius:16px;padding:22px 28px}
+.bx h4{font-size:16px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--azure);margin-bottom:10px}
+.bx.you h4{color:var(--graphite)}
+.bx li{list-style:none;font-size:19.5px;line-height:1.4;padding-left:26px;position:relative;margin-bottom:7px;color:var(--graphite)}
+.bx li:before{content:"";position:absolute;left:0;top:.35em;width:14px;height:14px;border-radius:50%;background:var(--azure2);border:3px solid var(--azure);box-sizing:border-box}
+.bx.you li:before{border-color:var(--graphite);background:#fff}
+
+/* 6 модули */
+.segbar{display:flex;height:14px;border-radius:7px;overflow:hidden;gap:3px;margin:4px 0 18px}
+.segbar i{display:block;background:var(--azure)}
+.segbar i:nth-child(odd){background:var(--azure)}
+.segbar i:nth-child(even){background:var(--azure3)}
+.mods{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.md{border:1px solid var(--line);border-radius:14px;padding:20px 17px 18px;background:#fff;display:flex;flex-direction:column}
+.md .tp{font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.md .h{font-size:42px;font-weight:800;color:var(--azure);line-height:1;margin:6px 0 8px}
+.md .h small{font-size:16px;font-weight:700;color:var(--muted);margin-left:3px}
+.md h3{font-size:20px;font-weight:800;line-height:1.2;margin-bottom:10px;min-height:50px}
+.md p{font-size:16px;line-height:1.4;color:var(--muted);flex:1}
+.md .res{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-size:14px;color:var(--faint);font-weight:700}
+.md .res b{display:block;color:var(--navy);font-size:16.5px;margin-top:3px}
+.md:last-child{background:var(--azure);border-color:var(--azure)}
+.md:last-child .tp,.md:last-child .h,.md:last-child .h small,.md:last-child p,.md:last-child .res,.md:last-child .res b,.md:last-child h3{color:#fff}
+.md:last-child .res{border-color:rgba(255,255,255,.4)}
+
+/* 7 треки */
+.fork{display:grid;grid-template-columns:300px 80px 1fr;align-items:center;margin-top:6px}
+.trunk{background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:22px 22px 18px}
+.trunk h3{font-size:25px;font-weight:800;margin-bottom:12px}
+.trunk .it{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;background:#fff;border:1px solid var(--line);font-size:18px;font-weight:700;margin-bottom:8px}
+.trunk .it svg{color:var(--azure);font-size:22px}
+.forkarr{width:80px;height:300px}
+.lanes{display:flex;flex-direction:column;gap:18px}
+.ln{border:2px solid var(--line);border-radius:18px;padding:18px 24px;display:grid;grid-template-columns:1fr 250px;gap:20px;align-items:center;background:#fff}
+.ln.a{border-color:var(--azure3)}
+.ln.b{border-color:var(--azure);background:linear-gradient(90deg,var(--azure2),#fff 70%)}
+.ln .t{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--azure)}
+.ln h3{font-size:27px;font-weight:800;margin:2px 0 4px}
+.ln .who{font-size:17px;color:var(--muted);line-height:1.35;margin-bottom:8px}
+.ln .fo{font-size:17px;color:var(--graphite);line-height:1.4}
+.ln .fo b{color:var(--navy)}
+.ln .doc{background:var(--azure);color:#fff;border-radius:14px;padding:16px 18px;text-align:center}
+.ln.a .doc{background:var(--graphite)}
+.ln .doc svg{font-size:30px;margin-bottom:6px}
+.ln .doc small{display:block;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;font-weight:700}
+.ln .doc b{font-size:19px;line-height:1.25;font-weight:800}
+
+/* 8 результат */
+.res8{display:grid;grid-template-columns:540px 1fr;gap:40px;align-items:center;margin-top:6px}
+.cert{margin:0}
+.cert img{width:100%;display:block;border-radius:10px;border:1px solid var(--line);box-shadow:0 10px 30px rgba(10,15,26,.12)}
+.cert figcaption{margin-top:10px;font-size:14.5px;color:var(--faint);text-align:center}
+.outs{display:flex;flex-direction:column;gap:18px}
+.out{display:flex;gap:18px;align-items:flex-start;padding:18px 20px;border-radius:16px;background:var(--soft);border:1px solid var(--line)}
+.out .ic{width:54px;height:54px;border-radius:14px;background:var(--azure);color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;flex:none}
+.out h3{font-size:23px;font-weight:800;margin-bottom:4px}
+.out p{font-size:18px;line-height:1.42;color:var(--muted)}
+
+/* 9 примеры */
+.gal{display:grid;grid-template-columns:430px 1fr;grid-template-rows:1fr 1fr;gap:14px;height:412px;margin-top:4px}
+.gal figure{position:relative;margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--soft)}
+.gal figure.big{grid-row:1/3}
+.gal img{width:100%;height:100%;object-fit:cover;display:block}
+.gal figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.94);padding:7px 12px;border-radius:8px;font-size:14.5px;font-weight:800;color:var(--navy)}
+
+/* 10 формат */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:6px}
+.tl{border:1px solid var(--line);border-radius:18px;padding:28px 22px;background:#fff;display:flex;flex-direction:column}
+.tl .ic{width:66px;height:66px;border-radius:16px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:34px;margin-bottom:18px}
+.tl h3{font-size:24px;font-weight:800;margin-bottom:8px}
+.tl p{font-size:18px;line-height:1.45;color:var(--muted);flex:1}
+.tl a{margin-top:12px;color:var(--azure);font-weight:800;font-size:17px;text-decoration:none}
+.tl a:hover{text-decoration:underline}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
+.sb{background:var(--soft);border-radius:14px;padding:20px 22px;display:flex;align-items:baseline;gap:10px}
+.sb b{font-size:42px;font-weight:800;color:var(--azure)}
+.sb span{font-size:17px;color:var(--muted);line-height:1.25}
+
+/* 11 инструменты */
+.tools{display:grid;grid-template-columns:390px 1fr;gap:34px;align-items:center;margin-top:4px}
+.tools svg.rings{width:390px;height:390px}
+.tc{border:1px solid var(--line);border-radius:16px;padding:18px 24px;margin-bottom:12px}
+.tc.main{border-color:var(--azure);background:linear-gradient(90deg,var(--azure2),#fff 80%)}
+.tc h3{font-size:23px;font-weight:800;margin-bottom:4px}
+.tc .sub{font-size:17px;color:var(--muted);margin-bottom:10px;line-height:1.4}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips .chip{font-size:16px;padding:7px 13px}
+
+/* 12 проверка */
+.checks{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:6px}
+.ck{border:1px solid var(--line);border-radius:18px;padding:32px 22px;background:#fff;text-align:center}
+.ck .ic{width:78px;height:78px;border-radius:50%;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 18px}
+.ck h3{font-size:26px;font-weight:800;margin-bottom:8px}
+.ck p{font-size:19px;line-height:1.45;color:var(--muted)}
+.rule{margin-top:20px;background:var(--navy);color:#fff;border-radius:16px;padding:24px 30px;font-size:26px;font-weight:800;display:flex;gap:16px;align-items:center}
+.rule svg{color:#6FA3FF;font-size:32px}
+
+/* 13 шаг */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.sp{border-top:5px solid var(--azure);background:var(--soft);border-radius:0 0 16px 16px;padding:30px 28px 34px}
+.sp .n{font-size:76px;font-weight:800;color:var(--azure);line-height:1;margin-bottom:12px}
+.sp h3{font-size:28px;font-weight:800;margin-bottom:8px}
+.sp p{font-size:20.5px;line-height:1.45;color:var(--muted)}
+.sp a{display:inline-block;margin-top:14px;background:var(--azure);color:#fff;text-decoration:none;font-weight:800;font-size:17px;padding:12px 18px;border-radius:10px}
+.sp a:hover{background:#0f56d6}
+
+/* 14 ссылки */
+.links{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.lk{display:flex;flex-direction:column;border:2px solid var(--line);border-radius:20px;padding:38px 32px;text-decoration:none;background:#fff;transition:.15s}
+.lk:hover{border-color:var(--azure);box-shadow:0 10px 30px rgba(26,107,255,.14);transform:translateY(-2px)}
+.lk .ic{width:76px;height:76px;border-radius:18px;background:var(--azure);color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:22px}
+.lk h3{font-size:30px;font-weight:800;margin-bottom:8px}
+.lk p{font-size:19.5px;line-height:1.45;color:var(--muted);flex:1}
+.lk .go{margin-top:16px;color:var(--azure);font-weight:800;font-size:19px}
+.lk.nolink{cursor:default}
+.lk.nolink:hover{border-color:var(--line);box-shadow:none;transform:none}
+
+/* управление */
+.controls{display:flex;align-items:center;gap:10px;user-select:none}
+.controls button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);font-family:inherit;font-size:20px;font-weight:700;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.controls button:hover{border-color:var(--azure);color:var(--azure)}
+.controls button:disabled{opacity:.3;cursor:default;border-color:var(--line);color:var(--navy)}
+.counter{min-width:70px;text-align:center;font-size:15px;font-weight:800;color:var(--muted)}
+.dots{display:flex;gap:6px;margin:0 6px}
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--line);cursor:pointer;transition:.2s}
+.dots i.on{background:var(--azure);transform:scale(1.3)}
+.hint{font-size:12px;color:var(--faint);margin-left:8px}
+
+/* дополнительные раскладки для презентации 1.2 */
+.tiles.three{grid-template-columns:repeat(3,1fr)}
+.plan{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px}
+.pl{border:1px solid var(--line);border-radius:16px;padding:20px 22px;background:#fff}
+.pl .n{font-size:34px;font-weight:800;color:var(--azure);line-height:1;margin-bottom:8px}
+.pl h3{font-size:20px;font-weight:800;margin-bottom:6px;line-height:1.2}
+.pl p{font-size:16.5px;line-height:1.4;color:var(--muted)}
+.numlist{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;margin-top:6px}
+.nl{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+.nl .n{font-size:18px;font-weight:800;color:var(--azure);min-width:24px}
+.nl p{font-size:18px;line-height:1.4;color:var(--graphite)}
+.toolrows{margin-top:6px;border-top:1px solid var(--line)}
+.tr{display:grid;grid-template-columns:260px 1fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.tr b{font-size:20px;font-weight:800}
+.tr span{font-size:18px;color:var(--muted);line-height:1.4}
+.datatable{width:100%;border-collapse:collapse;margin-top:6px;font-size:16px}
+.datatable th{text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:8px 10px;border-bottom:1px solid var(--line)}
+.datatable td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--graphite)}
+.datatable td:first-child{font-weight:700;color:var(--navy)}
+.stack{display:flex;flex-direction:column;gap:12px}
+.stack .it{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px}
+.stack .it b{display:block;font-size:17px;color:var(--azure);margin-bottom:3px}
+.stack .it p{font-size:16px;line-height:1.4;color:var(--muted)}
+.steps.six{grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px}
+.steps.six .sp{padding:18px 20px 20px}
+.steps.six .sp .n{font-size:48px;margin-bottom:6px}
+.steps.six .sp h3{font-size:21px;margin-bottom:6px}
+.steps.six .sp p{font-size:16.5px;line-height:1.4}
+.controls{flex-wrap:wrap;justify-content:center}
+.dots{flex-wrap:wrap;justify-content:center;max-width:100%}
+
+.part-divider{justify-content:center;align-items:flex-start;padding-top:96px}
+.part-divider .kick{margin-bottom:18px}
+.part-divider h1{font-size:54px;line-height:1.06;max-width:1050px}
+.part-divider .meta{font-size:22px;color:var(--muted);margin-top:18px;line-height:1.4}
+.part-divider .num{font-size:15px;font-weight:800;color:var(--azure);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.img-ph{border:1.5px dashed #9DB8E8;border-radius:14px;padding:20px 22px;background:#F4F8FF;display:flex;gap:16px;align-items:flex-start;margin-top:12px}
+.img-ph .ic{font-size:32px;flex-shrink:0}
+.img-ph b{display:block;font-size:18px;color:var(--navy);margin-bottom:6px}
+.img-ph p{font-size:15px;line-height:1.45;color:var(--muted)}
+.img-ph .src{font-size:12.5px;color:var(--faint);margin-top:6px}
+.fig{margin:8px 0 0}
+.fig img{width:100%;max-height:360px;object-fit:cover;border-radius:12px;display:block;border:1px solid var(--line)}
+.fig svg{width:100%;display:block}
+.figcap{font-size:13px;color:var(--faint);margin-top:6px}
+.checkpoint{background:var(--azure2);border:1px solid var(--azure3);border-radius:16px;padding:22px 26px;margin-top:12px}
+.checkpoint .lab{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--azure);margin-bottom:8px}
+.checkpoint h3{font-size:24px;font-weight:800;margin-bottom:6px}
+.checkpoint p{font-size:18px;line-height:1.45;color:var(--graphite)}
+.qa{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.qa .q{font-size:19px;font-weight:800;color:var(--navy)}
+.qa .a{font-size:17px;line-height:1.45;color:var(--muted);margin-bottom:8px}
+.contour{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:5px;background:var(--soft);color:var(--graphite);border:1px solid var(--line);margin-left:6px}
+.contour.main{background:var(--azure2);color:var(--azure);border-color:var(--azure3)}
+.contour.ext{background:#F3F0FF;color:#6B3FD4;border-color:#DCD3FF}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12M3 21h18M9 21v-5h6v5M8 11.5h.01M12 11.5h.01M16 11.5h.01"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.8 10.6c.7.7 1 1.4 1 2.4h5.6c0-1 .3-1.7 1-2.4A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M3 17l5-5 4 4 3-3 6 6"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM15 3v4h4M10 12h6M10 16h6"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h12l-2.5 4L17 12H5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.2l3 3 5-6"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-5 4v-4H4z"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4h12a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2zM5 18a2 2 0 0 1 2-2h12"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6zM9 12l2 2 4-4"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.6"/><path d="M10.7 12.4L20 3M16 7l3 3"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"/></symbol>
+    <symbol id="i-source" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 4v16M5 20h14M4 8h16M4 8l-2 7a3 3 0 0 0 6 0zM20 8l-2 7a3 3 0 0 0 6 0z"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7.5h7M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"/></symbol>
+    <symbol id="i-logic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.6 2.6 0 1 1 3.6 2.4c-.7.4-1.1.9-1.1 1.8M12 17h.01"/></symbol>
+  </defs>
+</svg>
+
+<div class="deck" id="deck">
+ <div class="viewport" id="viewport">
+  <div class="stage" id="stage">
+   <div class="progress" id="progress"></div>
+
+
+<section class="slide s1 active" data-foot="0.2 · роль и паспорт">
+  <div class="l">
+    <div class="kick">0.2 · Роли и паспорт</div>
+    <h1>Кто вы в проекте<br>и с чем <em>работаете</em></h1>
+    <p class="lead">На встрече фиксируем роль, трек и объект. Паспорт собираем по первичным данным, а не по презентации.</p>
+    <div class="chips"><span class="chip">Встреча 0.2</span><span class="chip">90 минут</span><span class="chip g">Кулешов</span></div>
+    <p class="how">Листайте стрелками; ⤢ — на весь экран.</p>
+  </div>
+  <div class="r">
+    <figure class="fig">
+      <svg viewBox="0 0 560 380" role="img" aria-label="Схема: роль, трек и паспорт объекта">
+        <rect x="8" y="12" width="544" height="356" rx="26" fill="#F6F8FC" stroke="#E1E5EE" stroke-width="2"/>
+        <g font-family="inherit" text-anchor="middle">
+          <rect x="55" y="60" width="450" height="64" rx="14" fill="#fff" stroke="#BFD3FF" stroke-width="2"/>
+          <text x="280" y="99" font-size="22" font-weight="800" fill="#0A0F1A">РОЛЬ</text>
+          <rect x="55" y="158" width="450" height="64" rx="14" fill="#fff" stroke="#BFD3FF" stroke-width="2"/>
+          <text x="280" y="197" font-size="22" font-weight="800" fill="#0A0F1A">ТРЕК</text>
+          <rect x="55" y="256" width="450" height="64" rx="14" fill="#EAF1FF" stroke="#1A6BFF" stroke-width="2"/>
+          <text x="280" y="295" font-size="22" font-weight="800" fill="#1A6BFF">ПАСПОРТ ОБЪЕКТА</text>
+        </g>
+        <path d="M280 124v24M280 222v24" stroke="#1A6BFF" stroke-width="4" stroke-linecap="round"/>
+        <path d="M272 140l8 10 8-10M272 238l8 10 8-10" fill="none" stroke="#1A6BFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <figcaption class="figcap">Схема AI2ARCH</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · три решения">
+  <div class="kick">Главное</div>
+  <h2>Три решения <em>встречи</em></h2>
+  <div class="body">
+    <div class="plan">
+      <div class="pl"><div class="n">01</div><h3>Роль</h3><p>Понять, какую работу вы ведёте в проекте редевелопмента.</p></div>
+      <div class="pl"><div class="n">02</div><h3>Трек</h3><p>Выбрать трек А или Б и результат, который собираете.</p></div>
+      <div class="pl"><div class="n">03</div><h3>Объект</h3><p>Зафиксировать C52 или свой объект и собрать паспорт.</p></div>
+    </div>
+    <div class="band" style="margin-top:18px"><b>Итог встречи:</b> роль, трек и объект зафиксированы до темы 1.1.</div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · роли">
+  <div class="kick">Роли</div>
+  <h2>Редевелопмент — <em>командная работа</em></h2>
+  <div class="body">
+    <div class="two">
+      <div class="bx"><h4>Архитектор</h4><ul><li>читает контекст и ограничения;</li><li>предлагает функции и сценарии;</li><li>собирает архитектурно-визуальное исследование.</li></ul></div>
+      <div class="bx"><h4>Девелопер</h4><ul><li>проверяет спрос и экономику;</li><li>собирает продукт и расчёты;</li><li>готовит инвестиционный концепт-паспорт.</li></ul></div>
+    </div>
+    <div class="band" style="margin-top:18px"><b>Общее:</b> объект, контекст, HBU и итоговый документ. Разное — фокус и результат.</div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · трек А">
+  <div class="kick">Трек А · проектировщик</div>
+  <h2>Архитектурно-визуальное <em>исследование</em></h2>
+  <div class="body">
+    <div class="two">
+      <div class="bx"><h4>Что делаете</h4><ul><li>контекст места и смыслы;</li><li>функциональные сценарии;</li><li>баланс площадей;</li><li>визуальный ряд и адаптация объекта.</li></ul></div>
+      <div class="bx"><h4>Что сдаёте</h4><ul><li>исследование по вашему объекту;</li><li>сценарии и обоснование;</li><li>визуальную упаковку;</li><li>итоговый документ трека А.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · трек Б">
+  <div class="kick">Трек Б · девелопер</div>
+  <h2>Инвестиционный <em>концепт-паспорт</em></h2>
+  <div class="body">
+    <div class="two">
+      <div class="bx"><h4>Что делаете</h4><ul><li>рынок и конкурентов;</li><li>продуктовую гипотезу;</li><li>баланс площадей и экономику;</li><li>риски и сценарии.</li></ul></div>
+      <div class="bx"><h4>Что сдаёте</h4><ul><li>концепт-паспорт по вашему объекту;</li><li>финансовую модель;</li><li>тизер для партнёра или инвестора;</li><li>итоговый документ трека Б.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · общая база">
+  <div class="kick">Общая база</div>
+  <h2>Одна логика, <em>разные результаты</em></h2>
+  <div class="body">
+    <div class="tiles">
+      <div class="tl"><div class="ic"><svg class="i"><use href="#i-search"/></svg></div><h3>Контекст</h3><p>ПЗЗ, окружение, аудитория.</p></div>
+      <div class="tl"><div class="ic"><svg class="i"><use href="#i-bulb"/></svg></div><h3>HBU</h3><p>5–7 сценариев и выбор.</p></div>
+      <div class="tl"><div class="ic"><svg class="i"><use href="#i-chart"/></svg></div><h3>Экономика</h3><p>Площади, расчёты, проверка.</p></div>
+      <div class="tl"><div class="ic"><svg class="i"><use href="#i-doc"/></svg></div><h3>Документ</h3><p>Итог вашего трека.</p></div>
+    </div>
+    <div class="band" style="margin-top:18px"><b>Выбор трека не меняет объект.</b> Он меняет вашу роль и итоговый документ.</div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · выбор трека">
+  <div class="kick">Выбор</div>
+  <h2>Как выбрать <em>трек</em></h2>
+  <div class="body">
+    <div class="numlist">
+      <div class="nl"><div class="n">1</div><p><b>Что вам ближе:</b> исследовать место и образ или считать продукт и экономику?</p></div>
+      <div class="nl"><div class="n">2</div><p><b>Какой результат нужен:</b> архитектурно-визуальное исследование или инвестиционный паспорт?</p></div>
+      <div class="nl"><div class="n">3</div><p><b>Какую роль вы играете в реальном проекте?</b> От этого зависит фокус работы.</p></div>
+    </div>
+    <div class="band" style="margin-top:18px"><b>Если сомневаетесь:</b> выбирайте трек по своей роли, а не по картинке.</div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · ошибки">
+  <div class="kick">Ошибки</div>
+  <h2>Что мешает <em>выбору</em></h2>
+  <div class="body">
+    <div class="qa">
+      <div><div class="q">«Возьму оба трека»</div><div class="a">Нет. Один трек и один итоговый документ. Иначе не хватит времени на глубину.</div></div>
+      <div><div class="q">«Сначала выберу объект, потом трек»</div><div class="a">Объект и трек фиксируются вместе: от роли зависит, какие данные вам нужны.</div></div>
+      <div><div class="q">«Потом поменяю объект»</div><div class="a">Объект выбирается до темы 1.1 и не меняется до Demo Day.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · паспорт">
+  <div class="kick">Паспорт объекта</div>
+  <h2>Зачем нужен <em>паспорт</em></h2>
+  <div class="body">
+    <div class="plan">
+      <div class="pl"><div class="n">01</div><h3>Фиксация</h3><p>Один объект и его исходные данные.</p></div>
+      <div class="pl"><div class="n">02</div><h3>Проверка</h3><p>Что подтверждено документами, а что гипотеза.</p></div>
+      <div class="pl"><div class="n">03</div><h3>Старт</h3><p>С паспортом начинается тема 1.1 и вся дальнейшая работа.</p></div>
+    </div>
+    <div class="band" style="margin-top:18px"><b>Паспорт — не презентация.</b> Это рабочая карточка объекта на одной странице.</div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · состав паспорта">
+  <div class="kick">Состав</div>
+  <h2>Что входит в <em>паспорт</em></h2>
+  <div class="body">
+    <div class="plan">
+      <div class="pl"><div class="n">01</div><h3>Объект</h3><p>Адрес, кадастровый номер, тип, назначение.</p></div>
+      <div class="pl"><div class="n">02</div><h3>Физика</h3><p>Площадь, этажность, конструктив — только из документов.</p></div>
+      <div class="pl"><div class="n">03</div><h3>Права</h3><p>Кто владеет и какие данные можно использовать.</p></div>
+      <div class="pl"><div class="n">04</div><h3>Гипотеза</h3><p>Что хотите проверить на этом объекте.</p></div>
+      <div class="pl"><div class="n">05</div><h3>Пробелы</h3><p>Что неизвестно и где это проверить.</p></div>
+      <div class="pl"><div class="n">06</div><h3>Источники</h3><p>Ссылки на выписку, карточку НСПД, фото и план.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · первичные данные">
+  <div class="kick">Источники</div>
+  <h2>Сначала <em>первичные данные</em></h2>
+  <div class="body">
+    <div class="tiles">
+      <div class="tl"><div class="ic"><svg class="i"><use href="#i-source"/></svg></div><h3>НСПД / ЕГРН</h3><p>Карточка объекта, кадастровый номер, площадь, стоимость.</p></div>
+      <div class="tl"><div class="ic"><svg class="i"><use href="#i-doc"/></svg></div><h3>Выписка</h3><p>Права, ограничения, актуальные сведения.</p></div>
+      <div class="tl"><div class="ic"><svg class="i"><use href="#i-image"/></svg></div><h3>Фото и план</h3><p>Что видно на объекте и как он устроен.</p></div>
+      <div class="tl"><div class="ic"><svg class="i"><use href="#i-logic"/></svg></div><h3>Проверка</h3><p>Каждая цифра — со ссылкой на источник.</p></div>
+    </div>
+    <div class="band" style="margin-top:18px"><b>Правило:</b> физические параметры берём только из документов, не из памяти и не из презентации.</div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · гипотеза">
+  <div class="kick">Гипотеза</div>
+  <h2>Рабочая гипотеза <em>на одной странице</em></h2>
+  <div class="body">
+    <div class="plan">
+      <div class="pl"><div class="n">01</div><h3>Что меняем</h3><p>Функция, продукт или сценарий использования.</p></div>
+      <div class="pl"><div class="n">02</div><h3>Для кого</h3><p>Аудитория и её запрос.</p></div>
+      <div class="pl"><div class="n">03</div><h3>Почему</h3><p>Какие данные и ограничения это подтверждают.</p></div>
+    </div>
+    <div class="band" style="margin-top:18px"><b>Проверяемость:</b> гипотезу можно подтвердить или опровергнуть данными, а не вкусом.</div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · пример C52 · адреса">
+  <div class="kick">Пример на C52</div>
+  <h2>Объект: два адреса, <em>главное здание 52а</em></h2>
+  <div class="body">
+    <div class="two">
+      <div>
+        <p class="lead" style="margin-top:0;font-size:19px">Базовый объект — склад на ул. Суворова, 52а. Территория кластера — Суворова, 52 и 52а.</p>
+        <div class="band"><b>Что фиксируем:</b> адрес, кадастровый номер, тип и назначение.</div>
+        <p class="figcap">Пример на C52; для своего объекта тот же алгоритм.</p>
+      </div>
+      <figure class="fig">
+        <svg viewBox="0 0 620 300" role="img" aria-label="Схема двух адресов C52: главное здание 52а и второй адрес 52">
+          <rect x="10" y="10" width="600" height="270" rx="22" fill="#F6F8FC" stroke="#E1E5EE" stroke-width="2"/>
+          <path d="M40 240 C140 170 210 150 290 175 S430 235 570 120" fill="none" stroke="#BFD3FF" stroke-width="16" stroke-linecap="round"/>
+          <path d="M40 240 C140 170 210 150 290 175 S430 235 570 120" fill="none" stroke="#1A6BFF" stroke-width="4" stroke-dasharray="10 10" stroke-linecap="round"/>
+          <g fill="#fff" stroke="#BFD3FF" stroke-width="2"><rect x="70" y="60" width="90" height="55" rx="8"/><rect x="200" y="45" width="70" height="80" rx="8"/><rect x="330" y="65" width="95" height="60" rx="8"/><rect x="470" y="55" width="80" height="55" rx="8"/></g>
+          <circle cx="290" cy="175" r="18" fill="#1A6BFF"/><text x="290" y="181" text-anchor="middle" font-size="13" font-weight="800" fill="#fff" font-family="inherit">52а</text>
+          <circle cx="470" cy="120" r="16" fill="#fff" stroke="#E8862B" stroke-width="4"/><text x="470" y="126" text-anchor="middle" font-size="13" font-weight="800" fill="#E8862B" font-family="inherit">52</text>
+          <text x="290" y="225" text-anchor="middle" font-size="16" font-weight="700" fill="#0A0F1A" font-family="inherit">главное здание · ул. Суворова, 52а</text>
+          <text x="470" y="160" text-anchor="middle" font-size="14" font-weight="700" fill="#E8862B" font-family="inherit">второй адрес · ул. Суворова, 52</text>
+        </svg>
+        <figcaption class="figcap">Схема расположения, не фото. Источник: AI2ARCH.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · пример C52 · карточка">
+  <div class="kick">Пример на C52</div>
+  <h2>Что известно <em>из карточки</em></h2>
+  <div class="body">
+    <table class="datatable">
+      <tbody>
+        <tr><td>Адрес</td><td>ул. Суворова, 52 и 52а; главное здание — 52а</td></tr>
+        <tr><td>Кадастровый номер</td><td>61:44:0040713:43 (для 52а)</td></tr>
+        <tr><td>Тип</td><td>объект капитального строительства</td></tr>
+        <tr><td>Наименование</td><td>«Склад»</td></tr>
+        <tr><td>Статус</td><td>активный, есть зарегистрированные права</td></tr>
+      </tbody>
+    </table>
+    <p class="figcap">Пример на C52; для своего объекта тот же алгоритм.</p>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · пример C52 · пробелы">
+  <div class="kick">Пример на C52</div>
+  <h2>Что проверить <em>до старта</em></h2>
+  <div class="body">
+    <div class="two">
+      <div class="bx"><h4>Подтверждено</h4><ul><li>адрес и кадастровый номер;</li><li>назначение и тип объекта;</li><li>площадь по ЕГРН.</li></ul></div>
+      <div class="bx"><h4>Не подтверждено</h4><ul><li>год постройки;</li><li>этажность и конструктив;</li><li>границы участка.</li></ul></div>
+    </div>
+    <div class="band" style="margin-top:18px"><b>Пробел — не ошибка.</b> Его нужно зафиксировать и указать, где вы будете его закрывать.</div>
+    <p class="figcap">Пример на C52; для своего объекта тот же алгоритм.</p>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · развилка">
+  <div class="kick">Развилка</div>
+  <h2>C52 или <em>свой объект</em></h2>
+  <div class="body">
+    <div class="two">
+      <div class="bx"><h4>Базовый объект C52</h4><ul><li>если своего объекта нет;</li><li>готовая карточка и понятный кейс;</li><li>для обоих треков.</li></ul></div>
+      <div class="bx"><h4>Свой объект</h4><ul><li>если отвечает требованиям;</li><li>нужны первичные документы;</li><li>фиксируется до темы 1.1.</li></ul></div>
+    </div>
+    <div class="band" style="margin-top:18px"><b>Один слушатель — один объект.</b> C52 или свой, но не оба и не «поменяю позже».</div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · свой объект">
+  <div class="kick">Свой объект</div>
+  <h2>Три проверки <em>до выбора</em></h2>
+  <div class="body">
+    <div class="plan">
+      <div class="pl"><div class="n">01</div><h3>Существующее</h3><p>Здание или территория с постройками. Редевелопмент, не новое строительство.</p></div>
+      <div class="pl"><div class="n">02</div><h3>Документы</h3><p>Есть кадастровый номер или адрес, выписка и фото или план.</p></div>
+      <div class="pl"><div class="n">03</div><h3>Права</h3><p>Вы вправе использовать данные. Закрытые сведения можно обезличить.</p></div>
+    </div>
+    <div class="band" style="margin-top:18px"><b>Если хотя бы одного пункта нет</b> — берите C52, а не рискуйте паспортом.</div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · данные и окружение">
+  <div class="kick">Свой объект</div>
+  <h2>Данные и <em>окружение</em></h2>
+  <div class="body">
+    <div class="two">
+      <div class="bx"><h4>Что нужно</h4><ul><li>карточка в НСПД;</li><li>выписка из реестра;</li><li>фото или план;</li><li>данные по окружению.</li></ul></div>
+      <div class="bx"><h4>Что можно открыто</h4><ul><li>2ГИС — функции и конкуренты;</li><li>OSM — контуры и маршруты;</li><li>Росстат — демография и статистика.</li></ul></div>
+    </div>
+    <div class="band" style="margin-top:18px"><b>Закрытые сведения заказчика</b> обезличьте; в паспорт и презентацию они не попадают.</div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · фиксация 0">
+  <div class="kick">Фиксация</div>
+  <h2>Роль, трек и <em>ваш объект</em></h2>
+  <div class="body">
+    <div class="checkpoint">
+      <div class="lab">Фиксация 0</div>
+      <h3>Выбор зафиксирован</h3>
+      <p>Выбрана роль, трек и ваш объект: C52 или собственный. Для C52 указан адрес и кадастровый номер; для своего объекта — адрес или кадастровый номер и источник карточки.</p>
+    </div>
+    <div class="band" style="margin-top:18px"><b>Дальше:</b> тема 1.1 и паспорт объекта. Объект не меняется до Demo Day.</div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · чек-лист">
+  <div class="kick">Проверка</div>
+  <h2>Чек-лист <em>перед выбором</em></h2>
+  <div class="body">
+    <div class="two">
+      <div class="bx"><ul>
+        <li>Существующее здание или территория с постройками.</li>
+        <li>Объект в РФ.</li>
+        <li>Есть кадастровый номер или адрес для НСПД.</li>
+      </ul></div>
+      <div class="bx"><ul>
+        <li>Есть выписка и фото или план.</li>
+        <li>Вы вправе использовать данные.</li>
+        <li>Окружение и аудиторию можно проверить по открытым данным.</li>
+      </ul></div>
+    </div>
+    <div class="band" style="margin-top:18px"><b>Шесть пунктов.</b> Если хотя бы один не выполняется — берите C52.</div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · если не проходит">
+  <div class="kick">Развилка</div>
+  <h2>Если объект <em>не проходит</em></h2>
+  <div class="body">
+    <div class="two">
+      <div class="bx"><h4>Вариант 1</h4><p style="font-size:21px;line-height:1.45;color:var(--graphite)">Работать с базовым объектом C52. Он уже проверен и подходит обоим трекам.</p></div>
+      <div class="bx"><h4>Вариант 2</h4><p style="font-size:21px;line-height:1.45;color:var(--graphite)">Найти другой собственный объект и проверить его по тем же шести пунктам до темы 1.1.</p></div>
+    </div>
+    <div class="band" style="margin-top:18px"><b>Нельзя:</b> начать с одним объектом, а потом заменить его в середине курса.</div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · требования">
+  <div class="kick">Требования</div>
+  <h2>Требования к <em>собственному объекту</em></h2>
+  <div class="body">
+    <div class="two">
+      <div class="bx"><ul style="font-size:16px;line-height:1.35">
+        <li>Существующее здание или территория с постройками: редевелопмент, а не новое строительство.</li>
+        <li>Объект в РФ: есть кадастровый номер или адрес, по которым в НСПД находится карточка.</li>
+        <li>Минимум документов: выписка из реестра и фото или план; физические параметры только из документов.</li>
+      </ul></div>
+      <div class="bx"><ul style="font-size:16px;line-height:1.35">
+        <li>Вы вправе использовать данные объекта; закрытые сведения обезличьте.</li>
+        <li>Окружение и аудиторию можно проанализировать по открытым данным: 2ГИС, OSM, Росстат.</li>
+        <li>Объект выбирается до темы 1.1 и не меняется до Demo Day (пилот).</li>
+      </ul></div>
+    </div>
+    <div class="band" style="margin-top:14px"><b>Если объект не проходит проверку</b> — работайте с базовым C52.</div>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · фиксация 1">
+  <div class="kick">Фиксация</div>
+  <h2>Объект и <em>источники</em></h2>
+  <div class="body">
+    <div class="checkpoint">
+      <div class="lab">Фиксация 1</div>
+      <h3>Ваш объект и источники</h3>
+      <p>Выбран ваш объект. Указаны адрес и кадастровый номер (для C52 — 61:44:0040713:43), отмечены источники карточки и пробелы.</p>
+    </div>
+    <p class="note"><b>Куда сдавать:</b> уточняется — чат потока или шаблон Notion.</p>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · фиксация 2">
+  <div class="kick">Фиксация</div>
+  <h2>Паспорт <em>вашего объекта</em></h2>
+  <div class="body">
+    <div class="checkpoint">
+      <div class="lab">Фиксация 2</div>
+      <h3>Паспорт на одной странице</h3>
+      <p>Объект, первичные данные, физические параметры из документов, рабочая гипотеза и пробелы. Для C52 используем карточку НСПД и ЕГРН.</p>
+    </div>
+    <p class="note"><b>Куда сдавать:</b> уточняется — чат потока или шаблон Notion.</p>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · НСПД 1/2">
+  <div class="kick">НСПД · пример на C52</div>
+  <h2>Карточка объекта: <em>что известно</em></h2>
+  <div class="body">
+    <div class="two">
+      <table class="datatable">
+        <tbody>
+          <tr><td>Вид</td><td>здание</td></tr>
+          <tr><td>Кадастровый номер</td><td>61:44:0040713:43</td></tr>
+          <tr><td>Дата присвоения</td><td>16.05.2011 — не год постройки</td></tr>
+          <tr><td>Кадастровый квартал</td><td>61:44:0040713</td></tr>
+          <tr><td>Наименование</td><td>«Склад»</td></tr>
+          <tr><td>Назначение</td><td>«Нежилое»</td></tr>
+        </tbody>
+      </table>
+      <div class="img-ph"><div class="ic">🖼️</div><div><b>Скриншот НСПД — будет добавлен</b><p>Карточка объекта, обрезать плавающие кнопки портала.</p><p class="src">Источник: НСПД / ЕГРН</p></div></div>
+    </div>
+    <p class="figcap">Пример на C52; для своего объекта тот же алгоритм.</p>
+  </div>
+</section>
+
+<section class="slide" data-foot="0.2 · НСПД 2/2">
+  <div class="kick">НСПД · пример на C52</div>
+  <h2>Что известно и <em>чего нет</em></h2>
+  <div class="body">
+    <table class="datatable">
+      <tbody>
+        <tr><td>Площадь общая</td><td>1 959,2 м² по ЕГРН — это не GLA</td></tr>
+        <tr><td>Кадастровая стоимость</td><td>17 265 371,63 ₽</td></tr>
+        <tr><td>Границы</td><td>«Без координат границ»</td></tr>
+        <tr><td>Год постройки</td><td>нет в карточке — нужен запрос в БТИ</td></tr>
+        <tr><td>Этажность</td><td>нет в карточке — нужен запрос в БТИ</td></tr>
+        <tr><td>Материал стен</td><td>нет в карточке — нужен запрос в БТИ</td></tr>
+      </tbody>
+    </table>
+    <div class="band" style="margin-top:14px"><b>Что не знаем:</b> границы в реестре не заданы; год постройки, этажность и конструктив нужно уточнить в БТИ.</div>
+    <p class="figcap">Пример на C52; для своего объекта тот же алгоритм.</p>
+  </div>
+</section>
+
+<div class="foot" id="foot"><span id="footText">0.2 · роль и паспорт</span><span><a href="https://ai2arch.ru/redev-schedule.html" target="_blank" rel="noopener">Расписание ↗</a> &nbsp; <span class="num" id="num"></span></span></div>
+  </div>
+ </div>
+ <div class="controls">
+   <button id="prev" aria-label="Назад">‹</button>
+   <div class="dots" id="dots"></div>
+   <button id="next" aria-label="Вперёд">›</button>
+   <div class="counter" id="counter"></div>
+   <button id="fs" aria-label="Развернуть на весь экран" title="На весь экран (F)">⤢</button>
+   <span class="hint">← → листать · F — полный экран</span>
+ </div>
+</div>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  var slides=[].slice.call(stage.querySelectorAll('.slide'));
+  var dotsBox=document.getElementById('dots'), counter=document.getElementById('counter'), num=document.getElementById('num');
+  var prev=document.getElementById('prev'), next=document.getElementById('next'), fs=document.getElementById('fs'), prog=document.getElementById('progress');
+  var footText=document.getElementById('footText');
+  var cur=0, total=slides.length;
+  slides.forEach(function(_,i){var d=document.createElement('i');d.onclick=function(){go(i)};dotsBox.appendChild(d);});
+  var dots=[].slice.call(dotsBox.children);
+  function go(i){
+    if(i<0||i>=total) return;
+    slides[cur].classList.remove('active'); dots[cur].classList.remove('on');
+    cur=i; slides[cur].classList.add('active'); dots[cur].classList.add('on');
+    counter.textContent=(cur+1)+' / '+total; num.textContent=(cur+1)+' / '+total;
+    if(footText) footText.textContent=slides[cur].getAttribute('data-foot')||'Тема 1.2';
+    prev.disabled=cur===0; next.disabled=cur===total-1;
+    prog.style.width=((cur+1)/total*100)+'%';
+    try{history.replaceState(null,'','#'+(cur+1));}catch(e){}
+  }
+  prev.onclick=function(){go(cur-1)}; next.onclick=function(){go(cur+1)};
+  function fit(){
+    var vp=document.getElementById('viewport');
+    var s=Math.min((vp.clientWidth-8)/1280,(vp.clientHeight-8)/720);
+    stage.style.transform='scale('+s+')';
+  }
+  window.addEventListener('resize',fit);
+  function toggleFs(){
+    var el=document.documentElement;
+    if(!document.fullscreenElement&&!document.webkitFullscreenElement){(el.requestFullscreen||el.webkitRequestFullscreen||function(){}).call(el);}
+    else{(document.exitFullscreen||document.webkitExitFullscreen||function(){}).call(document);}
+  }
+  fs.onclick=toggleFs;
+  document.addEventListener('fullscreenchange',function(){setTimeout(fit,60)});
+  document.addEventListener('keydown',function(e){
+    if(['ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(cur+1);}
+    else if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(cur-1);}
+    else if(e.key==='Home'){go(0);} else if(e.key==='End'){go(total-1);}
+    else if(e.key==='f'||e.key==='F'){toggleFs();}
+  });
+  var tx=null;
+  stage.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  stage.addEventListener('touchend',function(e){
+    if(tx===null)return; var dx=e.changedTouches[0].clientX-tx; tx=null;
+    if(Math.abs(dx)>50) go(dx<0?cur+1:cur-1);
+  });
+  window.addEventListener('hashchange',function(){
+    var h=parseInt((location.hash||'').replace('#',''),10);
+    if(!isNaN(h)&&h-1!==cur) go(Math.min(Math.max(h-1,0),total-1));
+  });
+  var start=parseInt((location.hash||'').replace('#',''),10);
+  go(isNaN(start)?0:Math.min(Math.max(start-1,0),total-1));
+  fit();
+})();
+</script>
+</body>
+</html>
