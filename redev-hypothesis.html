@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1.3 · Продуктовая гипотеза · ИИ в редевелопменте</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+:root{
+  --navy:#0A0F1A; --graphite:#2A2F3E; --azure:#1A6BFF;
+  --azure2:#EAF1FF; --azure3:#BFD3FF; --soft:#F6F8FC; --line:#E1E5EE; --muted:#5B6475; --faint:#9AA4B8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#fff;color:var(--navy);font-family:Manrope,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.deck{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:8px 0 10px}
+.viewport{position:relative;flex:1 1 auto;width:100%;display:flex;align-items:center;justify-content:center;min-height:0}
+.stage{width:1280px;height:720px;position:relative;flex:none;transform-origin:center center;background:#fff;overflow:hidden;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 30px rgba(10,15,26,.06)}
+.progress{position:absolute;left:0;top:0;height:5px;background:var(--azure);width:0;transition:width .35s ease;z-index:5}
+
+.slide{position:absolute;inset:0;padding:50px 72px 74px;display:none;flex-direction:column}
+.slide.active{display:flex;animation:in .4s ease both}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.kick{font-size:14px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--azure);margin-bottom:12px}
+h1{font-size:58px;line-height:1.04;font-weight:800;letter-spacing:-.02em}
+h2{font-size:44px;line-height:1.12;font-weight:800;letter-spacing:-.015em}
+h1 em,h2 em{font-style:normal;color:var(--azure)}
+.lead{font-size:22px;line-height:1.5;color:var(--muted);margin-top:12px;max-width:1040px}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;margin-top:14px}
+.foot{position:absolute;left:72px;right:72px;bottom:24px;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--faint);letter-spacing:.03em}
+.foot a{color:var(--azure);font-weight:700;text-decoration:none}
+.foot a:hover{text-decoration:underline}
+.slide.has-terms{padding-bottom:118px}
+.terms{position:absolute;left:72px;right:72px;bottom:50px;border-top:1px solid var(--line);padding-top:6px;font-size:11.5px;line-height:1.32;color:var(--faint);display:flex;gap:14px;flex-wrap:wrap}
+.terms .lab{flex:none;font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--azure);padding-top:2px}
+.terms span{flex:1 1 280px;min-width:220px}
+.terms b{color:var(--navy);font-weight:800}
+.foot .num{font-weight:800;color:var(--navy)}
+svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.note{font-size:18px;color:var(--muted);margin-top:14px;line-height:1.45}
+.note b{color:var(--navy)}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--azure2);color:var(--azure);font-weight:800;font-size:16px}
+.chip.g{background:var(--soft);color:var(--graphite);border:1px solid var(--line)}
+.pill{display:inline-block;padding:6px 12px;border-radius:8px;background:var(--azure2);color:var(--azure);font-weight:800;font-size:15px;line-height:1.25}
+
+/* 1 титул */
+.s1{flex-direction:row;align-items:center;gap:30px}
+.s1 .l{flex:1.2}
+.s1 .r{flex:1}
+.s1 .chips{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.s1 .how{margin-top:26px;font-size:15px;color:var(--faint)}
+
+/* 2 цепочка */
+.chain{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:6px}
+.chain:before{content:"";position:absolute;left:8%;right:8%;top:45px;height:3px;background:var(--azure3);z-index:0}
+.node{position:relative;z-index:1;text-align:center}
+.node .c{width:92px;height:92px;border-radius:50%;margin:0 auto 16px;background:#fff;border:3px solid var(--azure);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:42px}
+.node:last-child .c{background:var(--azure);color:#fff}
+.node .n{font-size:14px;font-weight:800;color:var(--faint);letter-spacing:.1em}
+.node h3{font-size:25px;font-weight:800;margin:2px 0 10px}
+.node p{font-size:17.5px;line-height:1.4;color:var(--muted);min-height:112px}
+.node .pill{margin-top:8px;font-size:16px}
+
+/* 3 жизненный цикл */
+.stages{display:grid;grid-template-columns:1fr 36px 1fr 36px 1fr 36px 1fr;align-items:stretch;margin-top:10px}
+.st{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:24px 22px}
+.st .ic{width:60px;height:60px;border-radius:14px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:16px}
+.st:nth-child(7) .ic{background:var(--azure);color:#fff}
+.st h3{font-size:24px;font-weight:800;margin-bottom:8px;white-space:nowrap}
+.st p{font-size:17.5px;line-height:1.45;color:var(--muted)}
+.arr{display:flex;align-items:center;justify-content:center;color:var(--azure)}
+.arr svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.band{margin-top:6px;background:var(--azure2);border-radius:14px;padding:16px 26px;font-size:20px;color:var(--navy);display:flex;gap:14px;align-items:center}
+.band b{color:var(--azure)}
+
+/* 4 сравнение */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:6px}
+.pn{border:1px solid var(--line);border-radius:18px;padding:24px 30px;background:#fff}
+.pn.hi{border-color:var(--azure);background:linear-gradient(180deg,var(--azure2),#fff 60%)}
+.pn h3{font-size:28px;font-weight:800;margin-bottom:4px}
+.pn .sub{font-size:15px;color:var(--faint);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.pn svg.ill{width:100%;height:180px;display:block;margin:2px 0 8px}
+.pn ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.pn li{font-size:19.5px;line-height:1.4;color:var(--graphite);padding-left:24px;position:relative}
+.pn li:before{content:"";position:absolute;left:0;top:.6em;width:12px;height:3px;border-radius:2px;background:var(--faint)}
+.pn.hi li:before{background:var(--azure)}
+
+/* 5 ИИ */
+.flow{display:grid;grid-template-columns:1fr 50px 1fr 50px 1fr 50px 1fr;align-items:stretch}
+.fl{border:2px solid var(--line);border-radius:16px;padding:22px 16px 20px;background:#fff;text-align:center}
+.fl .ic{width:60px;height:60px;border-radius:50%;margin:0 auto 12px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:31px}
+.fl.you{border-color:var(--azure3)}
+.fl.ai{background:var(--azure);border-color:var(--azure);color:#fff}
+.fl.ai .ic{background:#fff;color:var(--azure)}
+.fl.ai p{color:rgba(255,255,255,.85)}
+.fl h3{font-size:23px;font-weight:800;margin-bottom:6px}
+.fl p{font-size:17.5px;line-height:1.35;color:var(--muted)}
+.back{display:block;width:100%;height:auto;margin:6px 0 16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:4px}
+.bx{background:var(--soft);border-radius:16px;padding:22px 28px}
+.bx h4{font-size:16px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--azure);margin-bottom:10px}
+.bx.you h4{color:var(--graphite)}
+.bx li{list-style:none;font-size:19.5px;line-height:1.4;padding-left:26px;position:relative;margin-bottom:7px;color:var(--graphite)}
+.bx li:before{content:"";position:absolute;left:0;top:.35em;width:14px;height:14px;border-radius:50%;background:var(--azure2);border:3px solid var(--azure);box-sizing:border-box}
+.bx.you li:before{border-color:var(--graphite);background:#fff}
+
+/* 6 модули */
+.segbar{display:flex;height:14px;border-radius:7px;overflow:hidden;gap:3px;margin:4px 0 18px}
+.segbar i{display:block;background:var(--azure)}
+.segbar i:nth-child(odd){background:var(--azure)}
+.segbar i:nth-child(even){background:var(--azure3)}
+.mods{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.md{border:1px solid var(--line);border-radius:14px;padding:20px 17px 18px;background:#fff;display:flex;flex-direction:column}
+.md .tp{font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.md .h{font-size:42px;font-weight:800;color:var(--azure);line-height:1;margin:6px 0 8px}
+.md .h small{font-size:16px;font-weight:700;color:var(--muted);margin-left:3px}
+.md h3{font-size:20px;font-weight:800;line-height:1.2;margin-bottom:10px;min-height:50px}
+.md p{font-size:16px;line-height:1.4;color:var(--muted);flex:1}
+.md .res{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-size:14px;color:var(--faint);font-weight:700}
+.md .res b{display:block;color:var(--navy);font-size:16.5px;margin-top:3px}
+.md:last-child{background:var(--azure);border-color:var(--azure)}
+.md:last-child .tp,.md:last-child .h,.md:last-child .h small,.md:last-child p,.md:last-child .res,.md:last-child .res b,.md:last-child h3{color:#fff}
+.md:last-child .res{border-color:rgba(255,255,255,.4)}
+
+/* 7 треки */
+.fork{display:grid;grid-template-columns:300px 80px 1fr;align-items:center;margin-top:6px}
+.trunk{background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:22px 22px 18px}
+.trunk h3{font-size:25px;font-weight:800;margin-bottom:12px}
+.trunk .it{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;background:#fff;border:1px solid var(--line);font-size:18px;font-weight:700;margin-bottom:8px}
+.trunk .it svg{color:var(--azure);font-size:22px}
+.forkarr{width:80px;height:300px}
+.lanes{display:flex;flex-direction:column;gap:18px}
+.ln{border:2px solid var(--line);border-radius:18px;padding:18px 24px;display:grid;grid-template-columns:1fr 250px;gap:20px;align-items:center;background:#fff}
+.ln.a{border-color:var(--azure3)}
+.ln.b{border-color:var(--azure);background:linear-gradient(90deg,var(--azure2),#fff 70%)}
+.ln .t{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--azure)}
+.ln h3{font-size:27px;font-weight:800;margin:2px 0 4px}
+.ln .who{font-size:17px;color:var(--muted);line-height:1.35;margin-bottom:8px}
+.ln .fo{font-size:17px;color:var(--graphite);line-height:1.4}
+.ln .fo b{color:var(--navy)}
+.ln .doc{background:var(--azure);color:#fff;border-radius:14px;padding:16px 18px;text-align:center}
+.ln.a .doc{background:var(--graphite)}
+.ln .doc svg{font-size:30px;margin-bottom:6px}
+.ln .doc small{display:block;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;font-weight:700}
+.ln .doc b{font-size:19px;line-height:1.25;font-weight:800}
+
+/* 8 результат */
+.res8{display:grid;grid-template-columns:540px 1fr;gap:40px;align-items:center;margin-top:6px}
+.cert{margin:0}
+.cert img{width:100%;display:block;border-radius:10px;border:1px solid var(--line);box-shadow:0 10px 30px rgba(10,15,26,.12)}
+.cert figcaption{margin-top:10px;font-size:14.5px;color:var(--faint);text-align:center}
+.outs{display:flex;flex-direction:column;gap:18px}
+.out{display:flex;gap:18px;align-items:flex-start;padding:18px 20px;border-radius:16px;background:var(--soft);border:1px solid var(--line)}
+.out .ic{width:54px;height:54px;border-radius:14px;background:var(--azure);color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;flex:none}
+.out h3{font-size:23px;font-weight:800;margin-bottom:4px}
+.out p{font-size:18px;line-height:1.42;color:var(--muted)}
+
+/* 9 примеры */
+.gal{display:grid;grid-template-columns:430px 1fr;grid-template-rows:1fr 1fr;gap:14px;height:412px;margin-top:4px}
+.gal figure{position:relative;margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--soft)}
+.gal figure.big{grid-row:1/3}
+.gal img{width:100%;height:100%;object-fit:cover;display:block}
+.gal figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.94);padding:7px 12px;border-radius:8px;font-size:14.5px;font-weight:800;color:var(--navy)}
+
+/* 10 формат */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:6px}
+.tl{border:1px solid var(--line);border-radius:18px;padding:28px 22px;background:#fff;display:flex;flex-direction:column}
+.tl .ic{width:66px;height:66px;border-radius:16px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:34px;margin-bottom:18px}
+.tl h3{font-size:24px;font-weight:800;margin-bottom:8px}
+.tl p{font-size:18px;line-height:1.45;color:var(--muted);flex:1}
+.tl a{margin-top:12px;color:var(--azure);font-weight:800;font-size:17px;text-decoration:none}
+.tl a:hover{text-decoration:underline}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
+.sb{background:var(--soft);border-radius:14px;padding:20px 22px;display:flex;align-items:baseline;gap:10px}
+.sb b{font-size:42px;font-weight:800;color:var(--azure)}
+.sb span{font-size:17px;color:var(--muted);line-height:1.25}
+
+/* 11 инструменты */
+.tools{display:grid;grid-template-columns:390px 1fr;gap:34px;align-items:center;margin-top:4px}
+.tools svg.rings{width:390px;height:390px}
+.tc{border:1px solid var(--line);border-radius:16px;padding:18px 24px;margin-bottom:12px}
+.tc.main{border-color:var(--azure);background:linear-gradient(90deg,var(--azure2),#fff 80%)}
+.tc h3{font-size:23px;font-weight:800;margin-bottom:4px}
+.tc .sub{font-size:17px;color:var(--muted);margin-bottom:10px;line-height:1.4}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips .chip{font-size:16px;padding:7px 13px}
+
+/* 12 проверка */
+.checks{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:6px}
+.ck{border:1px solid var(--line);border-radius:18px;padding:32px 22px;background:#fff;text-align:center}
+.ck .ic{width:78px;height:78px;border-radius:50%;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 18px}
+.ck h3{font-size:26px;font-weight:800;margin-bottom:8px}
+.ck p{font-size:19px;line-height:1.45;color:var(--muted)}
+.rule{margin-top:20px;background:var(--navy);color:#fff;border-radius:16px;padding:24px 30px;font-size:26px;font-weight:800;display:flex;gap:16px;align-items:center}
+.rule svg{color:#6FA3FF;font-size:32px}
+
+/* 13 шаг */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.sp{border-top:5px solid var(--azure);background:var(--soft);border-radius:0 0 16px 16px;padding:30px 28px 34px}
+.sp .n{font-size:76px;font-weight:800;color:var(--azure);line-height:1;margin-bottom:12px}
+.sp h3{font-size:28px;font-weight:800;margin-bottom:8px}
+.sp p{font-size:20.5px;line-height:1.45;color:var(--muted)}
+.sp a{display:inline-block;margin-top:14px;background:var(--azure);color:#fff;text-decoration:none;font-weight:800;font-size:17px;padding:12px 18px;border-radius:10px}
+.sp a:hover{background:#0f56d6}
+
+/* 14 ссылки */
+.links{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.lk{display:flex;flex-direction:column;border:2px solid var(--line);border-radius:20px;padding:38px 32px;text-decoration:none;background:#fff;transition:.15s}
+.lk:hover{border-color:var(--azure);box-shadow:0 10px 30px rgba(26,107,255,.14);transform:translateY(-2px)}
+.lk .ic{width:76px;height:76px;border-radius:18px;background:var(--azure);color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:22px}
+.lk h3{font-size:30px;font-weight:800;margin-bottom:8px}
+.lk p{font-size:19.5px;line-height:1.45;color:var(--muted);flex:1}
+.lk .go{margin-top:16px;color:var(--azure);font-weight:800;font-size:19px}
+.lk.nolink{cursor:default}
+.lk.nolink:hover{border-color:var(--line);box-shadow:none;transform:none}
+
+/* управление */
+.controls{display:flex;align-items:center;gap:10px;user-select:none}
+.controls button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);font-family:inherit;font-size:20px;font-weight:700;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.controls button:hover{border-color:var(--azure);color:var(--azure)}
+.controls button:disabled{opacity:.3;cursor:default;border-color:var(--line);color:var(--navy)}
+.counter{min-width:70px;text-align:center;font-size:15px;font-weight:800;color:var(--muted)}
+.dots{display:flex;gap:6px;margin:0 6px}
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--line);cursor:pointer;transition:.2s}
+.dots i.on{background:var(--azure);transform:scale(1.3)}
+.hint{font-size:12px;color:var(--faint);margin-left:8px}
+
+/* дополнительные раскладки для презентации 1.2 */
+.tiles.three{grid-template-columns:repeat(3,1fr)}
+.plan{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px}
+.pl{border:1px solid var(--line);border-radius:16px;padding:20px 22px;background:#fff}
+.pl .n{font-size:34px;font-weight:800;color:var(--azure);line-height:1;margin-bottom:8px}
+.pl h3{font-size:20px;font-weight:800;margin-bottom:6px;line-height:1.2}
+.pl p{font-size:16.5px;line-height:1.4;color:var(--muted)}
+.numlist{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;margin-top:6px}
+.nl{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+.nl .n{font-size:18px;font-weight:800;color:var(--azure);min-width:24px}
+.nl p{font-size:18px;line-height:1.4;color:var(--graphite)}
+.toolrows{margin-top:6px;border-top:1px solid var(--line)}
+.tr{display:grid;grid-template-columns:260px 1fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.tr b{font-size:20px;font-weight:800}
+.tr span{font-size:18px;color:var(--muted);line-height:1.4}
+.datatable{width:100%;border-collapse:collapse;margin-top:6px;font-size:16px}
+.datatable th{text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:8px 10px;border-bottom:1px solid var(--line)}
+.datatable td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--graphite)}
+.datatable td:first-child{font-weight:700;color:var(--navy)}
+.stack{display:flex;flex-direction:column;gap:12px}
+.stack .it{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px}
+.stack .it b{display:block;font-size:17px;color:var(--azure);margin-bottom:3px}
+.stack .it p{font-size:16px;line-height:1.4;color:var(--muted)}
+.steps.six{grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px}
+.steps.six .sp{padding:18px 20px 20px}
+.steps.six .sp .n{font-size:48px;margin-bottom:6px}
+.steps.six .sp h3{font-size:21px;margin-bottom:6px}
+.steps.six .sp p{font-size:16.5px;line-height:1.4}
+.controls{flex-wrap:wrap;justify-content:center}
+.dots{flex-wrap:wrap;justify-content:center;max-width:100%}
+
+.part-divider{justify-content:center;align-items:flex-start;padding-top:96px}
+.part-divider .kick{margin-bottom:18px}
+.part-divider h1{font-size:54px;line-height:1.06;max-width:1050px}
+.part-divider .meta{font-size:22px;color:var(--muted);margin-top:18px;line-height:1.4}
+.part-divider .num{font-size:15px;font-weight:800;color:var(--azure);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.img-ph{border:1.5px dashed #9DB8E8;border-radius:14px;padding:20px 22px;background:#F4F8FF;display:flex;gap:16px;align-items:flex-start;margin-top:12px}
+.img-ph .ic{font-size:32px;flex-shrink:0}
+.img-ph b{display:block;font-size:18px;color:var(--navy);margin-bottom:6px}
+.img-ph p{font-size:15px;line-height:1.45;color:var(--muted)}
+.img-ph .src{font-size:12.5px;color:var(--faint);margin-top:6px}
+.fig{margin:8px 0 0}
+.fig img{width:100%;max-height:360px;object-fit:cover;border-radius:12px;display:block;border:1px solid var(--line)}
+.fig svg{width:100%;display:block}
+.figcap{font-size:13px;color:var(--faint);margin-top:6px}
+.checkpoint{background:var(--azure2);border:1px solid var(--azure3);border-radius:16px;padding:22px 26px;margin-top:12px}
+.checkpoint .lab{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--azure);margin-bottom:8px}
+.checkpoint h3{font-size:24px;font-weight:800;margin-bottom:6px}
+.checkpoint p{font-size:18px;line-height:1.45;color:var(--graphite)}
+.qa{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.qa .q{font-size:19px;font-weight:800;color:var(--navy)}
+.qa .a{font-size:17px;line-height:1.45;color:var(--muted);margin-bottom:8px}
+.contour{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:5px;background:var(--soft);color:var(--graphite);border:1px solid var(--line);margin-left:6px}
+.contour.main{background:var(--azure2);color:var(--azure);border-color:var(--azure3)}
+.contour.ext{background:#F3F0FF;color:#6B3FD4;border-color:#DCD3FF}
+
+  /* nav-v2: единая панель навигации */
+  .controls{width:100%;max-width:1280px;margin:0 auto;padding:0 12px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:nowrap;position:relative;z-index:100;user-select:none}
+  .controls button{width:44px;height:44px;min-width:44px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);font-family:inherit;font-size:20px;font-weight:700;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .controls button:hover{border-color:var(--azure);color:var(--azure)}
+  .controls button:disabled{opacity:.3;cursor:default;border-color:var(--line);color:var(--navy)}
+  .controls button:focus-visible{outline:2px solid var(--azure);outline-offset:3px}
+  .nav-progress{flex:1 1 auto;min-width:70px;display:flex;gap:4px;height:10px;align-items:stretch}
+  .nav-seg{width:auto;min-width:0;height:10px;border:0;border-radius:999px;background:var(--line);padding:0;cursor:pointer;position:relative;overflow:hidden;flex-basis:0;flex-shrink:1;flex-grow:1}
+  .nav-seg-fill{display:block;height:100%;width:0;background:var(--azure);border-radius:999px;transition:width .25s ease}
+  .controls .nav-seg{width:auto;min-width:0;height:10px;padding:0;border-radius:999px;flex-basis:0;flex-shrink:1;flex-grow:1}
+  .nav-seg:hover{background:#D6DDEA}
+  .nav-seg.active{background:#E4EBF8}
+  .counter{min-width:64px;text-align:center;font-size:14px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc-btn{font-size:20px}
+  .toc-menu{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);width:min(760px,calc(100vw - 24px));max-height:min(70vh,540px);overflow:auto;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 50px rgba(10,15,26,.18);padding:10px;z-index:1000;display:none}
+  .toc-menu.open{display:block}
+  .toc-part{display:flex;align-items:baseline;gap:8px;width:100%;border:0;background:transparent;text-align:left;padding:8px 10px;margin:2px 0;font:inherit;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--azure);cursor:pointer;border-top:1px solid var(--line)}
+  .toc-part:first-child{border-top:0}
+  .toc-part:hover{background:var(--azure2)}
+  .toc-part .range{font-size:10px;letter-spacing:.04em;color:var(--faint);font-weight:600;text-transform:none}
+  .toc-link{display:flex;gap:10px;align-items:baseline;width:100%;border:0;background:transparent;text-align:left;padding:7px 10px;border-radius:8px;font:inherit;font-size:15px;color:var(--graphite);cursor:pointer;line-height:1.3}
+  .toc-link:hover{background:var(--azure2);color:var(--navy)}
+  .toc-link .n{font-size:12px;font-weight:800;color:var(--faint);min-width:28px;flex:none}
+  .controls .toc-link{width:100%;height:auto;min-width:0;border:0;border-radius:8px;background:transparent;color:var(--graphite);font-size:15px;font-weight:400;line-height:1.3;justify-content:flex-start;align-items:baseline;padding:7px 10px}
+  .controls .toc-part{width:100%;height:auto;min-width:0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;color:var(--azure);font-size:12px;font-weight:800;line-height:1.3;justify-content:flex-start;align-items:baseline;padding:8px 10px}
+  .controls .toc-link:hover{background:var(--azure2);color:var(--navy)}
+  .controls .toc-part:hover{background:var(--azure2)}
+  .hint{font-size:11px;color:var(--faint);margin-left:4px;white-space:nowrap}
+  .slide{font-size:18px}
+  .slide .lead{font-size:23px;line-height:1.45}
+  .slide .bx li{font-size:20px}
+  .slide .body p{font-size:18px}
+  .slide .note{font-size:18px}
+  .slide .datatable{font-size:18px}
+  .plan-six{grid-template-columns:1fr;height:100%;align-content:stretch;margin-top:0}
+  .plan-six .nl{height:100%;align-items:center;padding:0}
+  .plan-six .nl p{font-size:22px;line-height:1.35}
+  @media (max-width:640px){
+    .controls{gap:6px;padding:0 8px}
+    .controls button{width:44px;height:44px;min-width:44px}
+    .counter{min-width:48px;font-size:12px}
+    .nav-progress{min-width:44px;gap:3px}
+    .hint{display:none}
+    .toc-menu{width:calc(100vw - 16px);max-height:60vh}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12M3 21h18M9 21v-5h6v5M8 11.5h.01M12 11.5h.01M16 11.5h.01"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.8 10.6c.7.7 1 1.4 1 2.4h5.6c0-1 .3-1.7 1-2.4A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M3 17l5-5 4 4 3-3 6 6"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM15 3v4h4M10 12h6M10 16h6"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h12l-2.5 4L17 12H5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.2l3 3 5-6"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-5 4v-4H4z"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4h12a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2zM5 18a2 2 0 0 1 2-2h12"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6zM9 12l2 2 4-4"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.6"/><path d="M10.7 12.4L20 3M16 7l3 3"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"/></symbol>
+    <symbol id="i-source" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 4v16M5 20h14M4 8h16M4 8l-2 7a3 3 0 0 0 6 0zM20 8l-2 7a3 3 0 0 0 6 0z"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7.5h7M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"/></symbol>
+    <symbol id="i-logic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.6 2.6 0 1 1 3.6 2.4c-.7.4-1.1.9-1.1 1.8M12 17h.01"/></symbol>
+  </defs>
+</svg>
+
+<div class="deck" id="deck">
+ <div class="viewport" id="viewport">
+  <div class="stage" id="stage">
+   <div class="progress" id="progress"></div>
+
+<section class="slide has-terms" data-part="Трек А · проектировщик" data-foot="Тема 1.3 · Трек А"><div class="kick">Трек А · проектировщик</div><h2>Введение в смысловой контекст и <em>цели гипотезы</em></h2><div class="body"><div class="bx"><h4>Что делаем</h4><ul><li>переводим статистику в архитектурную форму через поиск смыслов;</li><li>анализируем скрытые нарративы для позиционирования объекта на рынке коммерческой недвижимости;</li><li>обосновываем капитальные вложения через идентичность объекта;</li><li>отказываемся от рисования планировок без анализа ради устойчивой экономики.</li></ul></div><p class="note"><b>Пример:</b> водонапорная башня как концептуальный музей воды, а не типовой офис (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> поиск смыслового контекста влияет на рентабельность и жизнеспособность концепции.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: инвестиции в стройку и ремонт.</span></span><span><b>OPEX</b> — операционные расходы: регулярные платежи за содержание объекта.<br><span style="color:var(--muted)">Проще: ежемесячные счета за эксплуатацию здания.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 1.3 · Трек А"><div class="kick">Исторические смыслы</div><h2>Зачем архитектору искать <em>исторические смыслы</em></h2><div class="body"><div class="bx"><h4>Задачи анализа</h4><ul><li>формировать добавочную стоимость через историю и память места;</li><li>защищать объект от конкуренции с новыми типовыми зданиями и торговыми центрами;</li><li>сохранять облик фасада и масштаб застройки;</li><li>отказываться от буквального цитирования стилей и имитации недорогими материалами.</li></ul></div><p class="note"><b>Пример:</b> дореволюционное трамвайное депо, очищенное до кирпича, с отсылками к рельсам (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> исторические смыслы формируют концептуальное ядро для современного архитектурного языка.</div></div><div class="terms"><span class="lab">Термины</span><span><b>АГО</b> — архитектурно-градостроительный облик.<br><span style="color:var(--muted)">Проще: то, как здание выглядит снаружи и вписано в улицу.</span></span><span><b>Морфология городской ткани</b> — форма и устройство застройки: плотность, высотность, сетка улиц.<br><span style="color:var(--muted)">Проще: физический каркас района, его масштаб и ритм.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 1.3 · Трек А"><div class="kick">Инструментарий</div><h2>Краткая адаптация <em>текстовой аналитики</em></h2><div class="body"><div class="bx"><h4>Что делаем</h4><ul><li>анализируем массивы исторических документов с помощью нейросетей;</li><li>используем модели основного контура для быстрых задач и локального контекста;</li><li>используем модели расширенного контура для объёмных исторических справок;</li><li>фокусируемся на управлении контекстным окном, а не на поиске новых сервисов.</li></ul><p class="note"><b>Контуры:</b> Алиса AI, DeepSeek <span class="contour main">основной контур</span>; Claude, ChatGPT, Gemini <span class="contour ext">расширенный контур</span>.</p></div><div class="band" style="margin-top:12px"><b>Вывод:</b> поиск смыслов зависит от навыка работы с контекстным окном изученных моделей.</div></div><div class="terms"><span class="lab">Термины</span><span><b>LLM</b> — большая языковая модель, например ChatGPT, DeepSeek, Алиса AI.<br><span style="color:var(--muted)">Проще: алгоритм для анализа и генерации текста.</span></span><span><b>Промпт</b> — текстовая инструкция модели.<br><span style="color:var(--muted)">Проще: ваш приказ нейросети.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 1.3 · Трек А"><div class="kick">Достоверность</div><h2>Поиск достоверных смыслов <em>через RAG</em></h2><div class="body"><div class="bx"><h4>Как работает</h4><ul><li>исключаем не подтверждённые данными факты загрузкой документов в закрытый контур;</li><li>ограничиваем ответы загруженными документами;</li><li>получаем ответы со сносками на конкретные абзацы архивов;</li><li>удаляем конфиденциальные и финансовые данные заказчика до анализа.</li></ul><p class="note"><b>Контур:</b> NotebookLM <span class="contour ext">расширенный контур</span>.</p></div><p class="note"><b>Пример:</b> анализ сканов рабочих журналов ткацкой фабрики для выявления недостатка освещения в цехах (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> закрытые системы с RAG анализируют краеведческие материалы по подтверждённым документам.</div></div><div class="terms"><span class="lab">Термины</span><span><b>RAG</b> — режим, когда модель отвечает по найденным фрагментам загруженных документов.<br><span style="color:var(--muted)">Проще: нейросеть ищет ответы только в ваших текстах, игнорируя базу.</span></span></div></section>
+
+<section class="slide" data-foot="Тема 1.3 · Трек А"><div class="kick">Облик и соседи</div><h2>Анализ облика и <em>значимых соседей</em></h2><div class="body"><div class="bx"><h4>Что анализируем</h4><ul><li>высотность, ритм, материалы и цвет фасада;</li><li>значимых соседей как генераторов поведения аудитории;</li><li>связь облика здания, магнитов трафика и дефицитов функций;</li><li>отказ от материала фасада, не связанного с масштабом улицы.</li></ul></div><p class="note"><b>Пример:</b> одноэтажный тёмный склад XIX века среди стеклянных небоскрёбов как тихое убежище (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> анализ ритма, материалов и масштаба вместе с точками притяжения обеспечивает визуальную интеграцию функций.</div></div></section>
+
+<section class="slide has-terms" data-foot="Тема 1.3 · Трек А"><div class="kick">Проверка</div><h2>Риски галлюцинаций и <em>независимая проверка</em></h2><div class="body"><div class="bx"><h4>Правила</h4><ul><li>вручную проверяем сгенерированные даты, имена и события;</li><li>понимаем нейросети как системы предсказания текста, а не базы истины;</li><li>используем три независимых источника для количественного тезиса;</li><li>контролируем когнитивное искажение подтверждения при работе с нарративами ИИ.</li></ul></div><p class="note"><b>Пример:</b> разрушение концепции литературного коворкинга из-за ошибки нейросети в адресе писателя (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> ИИ генерирует гипотезы, проверка фактов остаётся за архитектором.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Галлюцинация</b> — уверенно звучащий, но не подтверждённый данными ответ.<br><span style="color:var(--muted)">Проще: нейросеть выдаёт правдоподобный, но не подтверждённый ответ.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 1.3 · Трек А"><div class="kick">Промпт</div><h2>Адаптация шестичастного промпта <em>для смыслов</em></h2><div class="body"><div class="bx"><h4>Что задаём</h4><ul><li>роль историка архитектуры для извлечения идентичности;</li><li>контекстные границы редевелопмента;</li><li>задачу выделить пять ключевых исторических смыслов из текста;</li><li>ограничения на неподтверждённые утверждения и проверку ВРИ.</li></ul></div><p class="note"><b>Пример:</b> отклонение концепции жилого комплекса на территории промышленных складов из-за нормативных ограничений (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> структура запроса даёт релевантные смыслы, не противоречащие закону.</div></div><div class="terms"><span class="lab">Термины</span><span><b>ВРИ</b> — вид разрешённого использования земельного участка.<br><span style="color:var(--muted)">Проще: что по закону можно строить.</span></span></div></section>
+
+<section class="slide" data-foot="Тема 1.3 · Трек А"><div class="kick">Практикум</div><h2>Пошаговое извлечение <em>смыслов на объекте</em></h2><div class="body"><div class="bx"><h4>Шаги</h4><ul><li>используем модели с глубоким поиском для анализа краеведческих архивов;</li><li>загружаем заранее проверенные исторические факты в контекстное окно;</li><li>отправляем шестичастный промпт с запретом на поиск в интернете;</li><li>копируем сгенерированные смыслы только после оценки адекватности.</li></ul><p class="note"><b>Контуры:</b> Claude, ChatGPT, Gemini <span class="contour ext">расширенный контур</span>.</p></div><p class="note"><b>Пример:</b> извлечение смысла «территория скрытого кустарного производства» из архивных справок (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> навык управления контекстным окном позволяет извлекать смыслы и оставлять время на осмысление.</div></div></section>
+
+<section class="slide has-terms" data-foot="Тема 1.3 · Трек А"><div class="kick">Метафора</div><h2>Перевод смысла <em>в архитектурную метафору</em></h2><div class="body"><div class="bx"><h4>Что делаем</h4><ul><li>трансформируем идею в объём, материалы и свет;</li><li>готовим концепцию к защите перед городом в формате АГР;</li><li>ищем читаемые решения без прямых ассоциаций;</li><li>отказываемся от буквального цитирования исторических фактов через декорации.</li></ul></div><p class="note"><b>Пример:</b> геометрия кровли для сбора дождевой воды вместо круглого фонтана (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> переход от текста к пространственной метафоре формирует долговечную архитектуру.</div></div><div class="terms"><span class="lab">Термины</span><span><b>АГР</b> — архитектурно-градостроительное решение.<br><span style="color:var(--muted)">Проще: официальный документ с чертежами и визуализациями.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 1.3 · Трек А"><div class="kick">Алгоритм</div><h2>Четыре шага <em>построения метафоры</em></h2><div class="body"><div class="two"><div class="bx"><h4>Шаги</h4><ul><li>изолируем корневой смысл или короткое словосочетание;</li><li>ищем природный или физический аналог;</li><li>абстрагируем форму до геометрии и пропорций;</li><li>проецируем абстрактную графику на чертежи здания в САПР.</li></ul></div><figure class="fig"><svg viewBox="0 0 420 220" role="img" aria-label="Схема четырёх шагов метафоры: смысл, аналог, геометрия, проекция"><rect x="8" y="10" width="404" height="200" rx="16" fill="#F6F8FC" stroke="#E1E5EE" stroke-width="2"/><g font-family="inherit" font-size="13" font-weight="700" fill="#0A0F1A"><rect x="26" y="38" width="78" height="58" rx="10" fill="#fff" stroke="#BFD3FF" stroke-width="2"/><text x="65" y="72" text-anchor="middle">смысл</text><rect x="126" y="38" width="78" height="58" rx="10" fill="#fff" stroke="#BFD3FF" stroke-width="2"/><text x="165" y="72" text-anchor="middle">аналог</text><rect x="226" y="38" width="78" height="58" rx="10" fill="#EAF1FF" stroke="#1A6BFF" stroke-width="2"/><text x="265" y="72" text-anchor="middle">геометрия</text><rect x="326" y="38" width="68" height="58" rx="10" fill="#fff" stroke="#BFD3FF" stroke-width="2"/><text x="360" y="72" text-anchor="middle">проекция</text></g><g stroke="#1A6BFF" stroke-width="3" fill="none"><path d="M104 67h14"/><path d="M204 67h14"/><path d="M304 67h14"/></g><g fill="#1A6BFF"><path d="M118 62l8 5-8 5z"/><path d="M218 62l8 5-8 5z"/><path d="M318 62l8 5-8 5z"/></g><text x="210" y="135" text-anchor="middle" font-size="14" font-weight="700" fill="#5B6475" font-family="inherit">текст → форма → чертёж → объём</text></svg><figcaption class="figcap">Схема AI2ARCH</figcaption></figure></div><p class="note"><b>Пример:</b> смысл «пересечение транзитов» через речную дельту в рисунок несущих пандусов атриума (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> четыре шага дают логичные объёмно-пространственные решения без декорирования.</div></div><div class="terms"><span class="lab">Термины</span><span><b>САПР</b> — система автоматизированного проектирования, AutoCAD и аналоги.<br><span style="color:var(--muted)">Проще: программы для чертежей и 3D-моделей.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 1.3 · Трек А"><div class="kick">Гипотеза</div><h2>Формирование <em>архитектурной гипотезы</em></h2><div class="body"><div class="bx"><h4>Что связываем</h4><ul><li>форму, аудиторию и исторический смысл в единый манифест;</li><li>концепцию вокруг максимальной коммерческой пользы объекта;</li><li>формулу: форма X, для аудитории Y, с опорой на смысл Z;</li><li>обоснование первоначальных инвестиций через идентичность и спрос.</li></ul></div><p class="note"><b>Пример:</b> проницаемый первый этаж для фрилансеров на основе смысла открытой торговой площади (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> формулировка гипотезы связывает форму, людей и историю для защиты перед заказчиком.</div></div><div class="terms"><span class="lab">Термины</span><span><b>HBU</b> — наилучшее и наиболее эффективное использование.<br><span style="color:var(--muted)">Проще: какая функция даст объекту максимум пользы и дохода, не нарушая закон.</span></span></div></section>
+
+<section class="slide" data-foot="Тема 1.3 · Трек А"><div class="kick">Сценарии</div><h2>Поведенческие <em>сценарии использования</em></h2><div class="body"><div class="bx"><h4>Что описываем</h4><ul><li>раскладываем гипотезу на суточные циклы эксплуатации разными группами;</li><li>обеспечиваем непрерывную загрузку площадей для покрытия круглосуточных затрат;</li><li>описываем сценарий: кто, когда, зачем и как работает здание;</li><li>отказываемся от монофункционального пространства, не использующегося в нерабочие часы.</li></ul></div><p class="note"><b>Пример:</b> утренний фермерский рынок и вечерняя площадка для инди-концертов в старом ангаре (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> 2–3 перекрестных сценария повышают эксплуатационную эффективность и устойчивость проекта.</div></div></section>
+
+<section class="slide has-terms" data-foot="Тема 1.3 · Трек А"><div class="kick">Данные</div><h2>Синхронизация гипотезы <em>с пространственными данными</em></h2><div class="body"><div class="bx"><h4>Что проверяем</h4><ul><li>совместимость метафоры с графами перемещений людей;</li><li>исключаем конфликт эстетического сценария, не подтверждённого данными, с демографией района;</li><li>оцениваем интенсивность и качество трафика до утверждения функций;</li><li>адаптируем смысл под ритм современного пользователя.</li></ul></div><p class="note"><b>Пример:</b> конфликт концепции тихой почтовой станции с интенсивным трафиком курьеров и таксистов (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> концепция жизнеспособна, когда синхронизирована с поведением людей и подтверждена пространственными данными.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Пешеходный граф</b> — упрощённая схема связей: точки притяжения (узлы) и маршруты между ними (рёбра).<br><span style="color:var(--muted)">Проще: сетка перемещений людей.</span></span><span><b>Транзитный и целевой трафик</b> — транзитный — люди проходят мимо; целевой — идут именно к объекту.<br><span style="color:var(--muted)">Проще: проходящие мимо и идущие к объекту.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 1.3 · Трек А"><div class="kick">Ограничения</div><h2>Метафора и <em>ограничения конструктива</em></h2><div class="body"><div class="bx"><h4>Что проверяем</h4><ul><li>проводим аудит технических планов здания до визуализаций;</li><li>трансформируем идею при столкновении с сеткой массивных колонн;</li><li>блокируем несовместимые функции из-за санитарных зон;</li><li>исключаем финансовые потери из-за игнорирования состояния грунтов.</li></ul></div><p class="note"><b>Пример:</b> остановка проекта стеклянного облака над гаражом из-за 70% износа бетонных фундаментов (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> существующий конструктив и градостроительные ограничения задают рамку для жизнеспособной метафоры.</div></div><div class="terms"><span class="lab">Термины</span><span><b>ОКС</b> — объект капитального строительства.<br><span style="color:var(--muted)">Проще: здание, которое нельзя передвинуть без согласования.</span></span><span><b>БТИ</b> — бюро технической инвентаризации: технический паспорт и поэтажные планы.<br><span style="color:var(--muted)">Проще: официальные чертежи здания.</span></span><span><b>СЗЗ</b> — санитарно-защитная зона.<br><span style="color:var(--muted)">Проще: юридическая территория, где нельзя строить жильё.</span></span></div></section>
+
+<section class="slide" data-foot="Тема 1.3 · Трек А"><div class="kick">Итог</div><h2>Итоги смыслового блока <em>и переход к темам</em></h2><div class="body"><div class="bx"><h4>Что дальше</h4><ul><li>завершаем аналитический этап формирования архитектурной гипотезы;</li><li><b>Тема 1.4:</b> сборка досье контекста из схем, расчётов и смыслов;</li><li><b>Тема 2.1:</b> принцип HBU, функциональные сценарии, баланс площадей;</li><li>проверьте, что у каждой цифры и факта в гипотезе указан источник.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> смысловой фундамент позволяет защищать концепцию перед инвестором.</div></div></section>
+
+<section class="slide has-terms" data-part="Трек Б · девелопер" data-foot="Тема 1.3 · Трек Б"><div class="kick">Трек Б · девелопер</div><h2>Цели блока и <em>входные данные</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>коммерческий проект опирается на проверенные данные, а не на интуицию;</li><li>база — паспорт объекта, нормативная карточка и таблицы окружения;</li><li>результат — продуктовая гипотеза, портрет арендатора и сценарии;</li><li>капитальные вложения обосновываются просчитанной концепцией.</li></ul></div><p class="note"><b>Пример:</b> строительство премиального ТЦ на месте автобазы без сбора профилей аудитории (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> гипотеза опирается на полный пакет входных документов и цифр.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: инвестиции в стройку и ремонт.</span></span><span><b>OPEX</b> — операционные расходы: регулярные платежи за содержание объекта.<br><span style="color:var(--muted)">Проще: ежемесячные счета за эксплуатацию здания.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 1.3 · Трек Б"><div class="kick">Формула</div><h2>Понятие и <em>формула гипотезы</em></h2><div class="body"><div class="bx"><h4>Что формулируем</h4><ul><li>концепцию в виде проверяемого логического утверждения;</li><li>формулу: «Функция X для аудитории Y, потому что фактор Z (источник)»;</li><li>проверенный источник данных для фактора Z;</li><li>прозрачность концепции для команды и инвестора.</li></ul></div><p class="note"><b>Пример:</b> гипотеза о коворкинге с привязкой к муниципальной статистике и таблице окружения (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> формула с источником позволяет проверять каждое решение по данным.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Продуктовая гипотеза</b> — проверяемое утверждение «функция X для аудитории Y, потому что фактор Z».<br><span style="color:var(--muted)">Проще: кому, что и почему вы предлагаете.</span></span></div></section>
+
+<section class="slide" data-foot="Тема 1.3 · Трек Б"><div class="kick">Идея и гипотеза</div><h2>Идея и <em>проверяемая гипотеза</em></h2><div class="body"><div class="bx"><h4>В чём разница</h4><ul><li>бизнес-идея отличается от гипотезы привязкой к пользователю и доказательствам;</li><li>популярные форматы без локального обоснования создают риск;</li><li>идея становится инструментом с добавлением аудитории и фактора дефицита;</li><li>идеи без подтверждения отсеиваются на раннем этапе.</li></ul></div><p class="note"><b>Пример:</b> трансформация идеи «фудхолла» в гипотезу с расчётом транзитного трафика и дефицита услуг (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> формализованная гипотеза — фильтр коммерческих рисков.</div></div></section>
+
+<section class="slide has-terms" data-foot="Тема 1.3 · Трек Б"><div class="kick">Тренды</div><h2>Рыночные тренды <em>в девелопменте</em></h2><div class="body"><div class="bx"><h4>Что учитываем</h4><ul><li>тренды помогают прогнозировать спрос к вводу объекта;</li><li>тренд — макроэкономическая гипотеза, а не гарантия успеха;</li><li>копирование форматов из других городов без локальной специфики создаёт риск;</li><li>тренд проходит фильтр локальной реальности.</li></ul></div><p class="note"><b>Пример:</b> реконструкция здания под даркстор на центральной пешеходной улице с потерей трафика (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> тренд задаёт вектор спроса, но проверяется ограничениями объекта.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Рыночный тренд</b> — устойчивое изменение спроса или предложения на рынке.<br><span style="color:var(--muted)">Проще: направление, в котором меняется рынок.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 1.3 · Трек Б"><div class="kick">Поиск трендов</div><h2>Нейросети для поиска <em>рыночных трендов</em></h2><div class="body"><div class="bx"><h4>Как ищем</h4><ul><li>агрегируем актуальную аналитику рынка недвижимости с помощью языковых моделей;</li><li>используем инструменты глубокого поиска для актуальных публикаций;</li><li>на каждую цифру и процент роста указываем проверяемый источник;</li><li>применяем правило трёх источников для подтверждения гипотез.</li></ul><p class="note"><b>Контуры:</b> Алиса AI, DeepSeek <span class="contour main">основной контур</span>; Claude, ChatGPT, Gemini <span class="contour ext">расширенный контур</span>.</p></div><p class="note"><b>Пример:</b> поиск трендов стрит-ритейла с указанием деловых изданий (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> глубокий поиск ускоряет сбор трендов, но требует ручной статистической проверки.</div></div><div class="terms"><span class="lab">Термины</span><span><b>LLM</b> — большая языковая модель, например ChatGPT, DeepSeek, Алиса AI.<br><span style="color:var(--muted)">Проще: алгоритм для анализа и генерации текста.</span></span><span><b>Промпт</b> — текстовая инструкция модели.<br><span style="color:var(--muted)">Проще: ваш приказ нейросети.</span></span><span><b>Deep Research</b> — режим модели, которая собирает и сопоставляет источники и выдаёт отчёт со ссылками.<br><span style="color:var(--muted)">Проще: поиск с обзором источников.</span></span></div></section>
+
+<section class="slide" data-foot="Тема 1.3 · Трек Б"><div class="kick">Локация</div><h2>Приземление тренда <em>на локальные данные</em></h2><div class="body"><div class="bx"><h4>Что проверяем</h4><ul><li>совместимость тренда с физическими и коммерческими данными локации;</li><li>нормативная карточка и таблицы окружения сужают воронку поиска;</li><li>запрашиваемая ставка — цена в объявлении; фактическая — цена сделки;</li><li>тренды без поддержки плотностью населения и экономикой района отклоняются.</li></ul><p class="note"><b>Контур:</b> ЦИАН <span class="contour main">основной контур</span>.</p></div><p class="note"><b>Пример:</b> отклонение гипотезы дарккитчена из-за высокой аренды и низкой плотности аудитории (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> локальные данные защищают от инвестиций в неработающие форматы.</div></div></section>
+
+<section class="slide" data-foot="Тема 1.3 · Трек Б"><div class="kick">Промпт</div><h2>Шестичастный промпт <em>для гипотез</em></h2><div class="body"><div class="bx"><h4>Что задаём</h4><ul><li>структурированный запрос для пересборки данных;</li><li>роль инвестиционного аналитика и брокера коммерческой недвижимости;</li><li>параметры объекта и цель поиска функций;</li><li>запрет на неподтверждённые знания и несуществующие цифры.</li></ul></div><p class="note"><b>Пример:</b> концепция галереи искусств с пропуском блока ограничений и формата (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> шестичастный промпт даёт прагматичные гипотезы в табличном виде.</div></div></section>
+
+<section class="slide" data-foot="Тема 1.3 · Трек Б"><div class="kick">Данные</div><h2>Пакет исходных данных <em>для анализа</em></h2><div class="body"><div class="bx"><h4>Что загружаем</h4><ul><li>качество гипотез зависит от чистоты и полноты данных;</li><li>паспорт и нормативная карточка фиксируют ограничения;</li><li>очищенная таблица конкурентов, профили персон и запрашиваемые ставки;</li><li>суммы и доли считаются формулами в таблицах до загрузки в нейросеть.</li></ul><p class="note"><b>Контуры:</b> 2ГИС, ЦИАН, Excel, Яндекс Таблицы <span class="contour main">основной контур</span>.</p></div><p class="note"><b>Пример:</b> предложение детского сада в санитарной зоне из-за незагруженной карточки (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> полный и чистый пакет данных — условие жизнеспособных гипотез.</div></div></section>
+
+<section class="slide" data-foot="Тема 1.3 · Трек Б"><div class="kick">Практикум</div><h2>Генерация гипотез <em>в таблице</em></h2><div class="body"><div class="bx"><h4>Шаги</h4><ul><li>генерируем структурированные гипотезы из сырых данных;</li><li>копируем массив расчётных данных в блок исходных данных промпта;</li><li>получаем таблицу: Функция, Аудитория, Фактор, Источник;</li><li>отбраковываем строки без ссылки на источник.</li></ul><p class="note"><b>Контуры:</b> Алиса AI, DeepSeek, Яндекс Таблицы, Excel <span class="contour main">основной контур</span>.</p></div><p class="note"><b>Пример:</b> гипотеза фермерского магазина с привязкой к дефициту и окупаемой ставке (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> табличный формат позволяет быстро перебирать концептуальные варианты.</div></div></section>
+
+<section class="slide has-terms" data-foot="Тема 1.3 · Трек Б"><div class="kick">Проверка</div><h2>Четыре вопроса <em>жизнеспособности</em></h2><div class="body"><div class="bx"><h4>Что проверяем</h4><ul><li>проводим первичный стресс-тест идей до финансового моделирования;</li><li>оцениваем готовность рынка платить за функцию;</li><li>проверяем физическое присутствие целевой аудитории;</li><li>контролируем вместимость здания и соблюдение норм.</li></ul></div><p class="note"><b>Пример:</b> отклонение медицинского центра из-за нехватки электрических мощностей и инсоляции (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> четыре вопроса сохраняют капитал на этапе бумажного проектирования.</div></div><div class="terms"><span class="lab">Термины</span><span><b>ВРИ</b> — вид разрешённого использования земельного участка.<br><span style="color:var(--muted)">Проще: что по закону можно строить.</span></span></div></section>
+
+<section class="slide" data-foot="Тема 1.3 · Трек Б"><div class="kick">Источники</div><h2>Правило <em>трёх источников</em></h2><div class="body"><div class="bx"><h4>Как подтверждаем</h4><ul><li>любая гипотеза подтверждается тремя независимыми источниками;</li><li>сочетаем картографические, экономические и статистические данные;</li><li>при совпадении источников гипотеза переходит в доказанный факт;</li><li>не используем источники, перепечатывающие данные друг у друга.</li></ul></div><p class="note"><b>Пример:</b> дефицит качественных офисов подтверждён выгрузками карт, прайсов и статистики (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> последовательное применение правила переводит гипотезу в инвестиционный аргумент.</div></div></section>
+
+<section class="slide has-terms" data-foot="Тема 1.3 · Трек Б"><div class="kick">Арендатор</div><h2>Профиль <em>целевого арендатора</em></h2><div class="body"><div class="bx"><h4>Что описываем</h4><ul><li>профиль бизнеса, который арендует площади и генерирует доход;</li><li>тип операционной модели и технологические потребности к зданию;</li><li>оценка предельной ставки по данным таблицы; суммы и доли считаются формулами;</li><li>источник клиентов арендатора.</li></ul></div><p class="note"><b>Пример:</b> фитнес-студия с требованиями к усиленным перекрытиям и вентиляции (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> портрет арендатора корректирует техническое задание проектировщикам.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Целевой арендатор</b> — тип бизнеса или организации, которая арендует площади и платит ставку.<br><span style="color:var(--muted)">Проще: кто будет снимать площадь.</span></span></div></section>
+
+<section class="slide" data-foot="Тема 1.3 · Трек Б"><div class="kick">Сценарии</div><h2>Поведенческие <em>сценарии гипотезы</em></h2><div class="body"><div class="bx"><h4>Что описываем</h4><ul><li>разворачиваем гипотезу во времени для отдачи площади;</li><li>составляем расписание работы для покрытия круглосуточных затрат;</li><li>описываем сценарий: кто, когда, зачем и что платит;</li><li>создаём 2–3 перекрывающихся сценария для утра, дня и вечера.</li></ul></div><p class="note"><b>Пример:</b> утром транзитный кофе, днём коворкинг, вечером концерты (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> подробная проработка сценариев повышает экономическую устойчивость.</div></div></section>
+
+<section class="slide" data-foot="Тема 1.3 · Трек Б"><div class="kick">Конфликты</div><h2>Проверка гипотезы <em>на конфликты</em></h2><div class="body"><div class="bx"><h4>Что проверяем</h4><ul><li>тестируем гипотезу на отсутствие конфликтов с аналитикой;</li><li>проверяем способность закрывать реальный дефицит функций;</li><li>сопоставляем бизнес-модель со ставками конкурентов;</li><li>отклоняем гипотезы, не подтверждённые цифрами.</li></ul><p class="note"><b>Контуры:</b> ЦИАН, Excel <span class="contour main">основной контур</span>.</p></div><p class="note"><b>Пример:</b> отклонение детского центра из-за невозможности оплаты медианных ставок (учебный пример, не данные C52).</p><div class="band" style="margin-top:12px"><b>Вывод:</b> сопоставление с цифрами дефицитов и ставок страхует от убыточных решений.</div></div></section>
+
+<section class="slide has-terms" data-foot="Тема 1.3 · Трек Б"><div class="kick">Итог</div><h2>Итоги гипотезы <em>и переход к балансу</em></h2><div class="body"><div class="bx"><h4>Что дальше</h4><ul><li>завершаем блок гипотез и формируем управленческий документ;</li><li><b>Тема 1.4:</b> сборка досье контекста из таблиц, расчётов и гипотез;</li><li><b>Тема 2.1:</b> принцип HBU, 5–7 сценариев, баланс площадей;</li><li>проверьте, что у каждой цифры и факта в гипотезе указан источник.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> управленческий документ готов к финансовому моделированию.</div></div><div class="terms"><span class="lab">Термины</span><span><b>HBU</b> — наилучшее и наиболее эффективное использование.<br><span style="color:var(--muted)">Проще: функция с максимумом пользы и дохода.</span></span></div></section>
+
+   <div class="foot" id="foot"><span id="footText">Тема 1.3 · Продуктовая гипотеза</span><span><a href="https://ai2arch.ru/redev-schedule.html" target="_blank" rel="noopener">Расписание ↗</a></span></div>
+  </div>
+ </div>
+ <div class="controls">
+   <button id="prev" aria-label="Назад" title="Назад">‹</button>
+   <div class="nav-progress" id="navProgress" aria-label="Прогресс по частям презентации"></div>
+   <div class="counter" id="counter"></div>
+   <button id="tocBtn" class="toc-btn" type="button" aria-label="Содержание" title="Содержание" aria-haspopup="true" aria-expanded="false">☰</button>
+   <button id="next" aria-label="Вперёд" title="Вперёд">›</button>
+   <button id="fs" aria-label="Развернуть на весь экран" title="На весь экран (F)">⤢</button>
+   <span class="hint">← → листать · F — полный экран</span>
+   <div class="toc-menu" id="tocMenu" role="menu" aria-label="Содержание"></div>
+ </div>
+</div>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  var slides=[].slice.call(stage.querySelectorAll('.slide'));
+  var total=slides.length;
+  var prev=document.getElementById('prev'), next=document.getElementById('next'), fs=document.getElementById('fs');
+  var prog=document.getElementById('progress'), counter=document.getElementById('counter');
+  var footText=document.getElementById('footText');
+  var navProgress=document.getElementById('navProgress');
+  var tocBtn=document.getElementById('tocBtn'), tocMenu=document.getElementById('tocMenu');
+  var cur=0;
+
+  function clean(s){return String(s||'').replace(/\s+/g,' ').trim();}
+  function slideTitle(s){
+    var h=s.querySelector('h1,h2');
+    return h?clean(h.textContent):'Слайд';
+  }
+  function buildParts(){
+    var divs=[], marks=[];
+    slides.forEach(function(s,i){
+      if(s.classList.contains('part-divider')) divs.push(i);
+      if(s.hasAttribute('data-part')) marks.push(i);
+    });
+    var parts=[];
+    if(divs.length){
+      if(divs[0]>0) parts.push({title:'Введение',start:0,end:divs[0]-1});
+      divs.forEach(function(d,idx){
+        var end=idx+1<divs.length?divs[idx+1]-1:total-1;
+        var num=slides[d].querySelector('.num');
+        var kick=slides[d].querySelector('.kick');
+        var title=(num?clean(num.textContent):'Часть')+(kick?' · '+clean(kick.textContent):'');
+        parts.push({title:title,start:d,end:end,divider:true});
+      });
+    }else if(marks.length){
+      marks.forEach(function(m,idx){
+        var end=idx+1<marks.length?marks[idx+1]-1:total-1;
+        if(idx===0 && m>0) parts.push({title:'Введение',start:0,end:m-1});
+        parts.push({title:slides[m].getAttribute('data-part'),start:m,end:end});
+      });
+    }else{
+      parts.push({title:'Тема 1.3 · Продуктовая гипотеза',start:0,end:total-1});
+    }
+    return parts;
+  }
+  var parts=buildParts();
+  var segs=[];
+
+  function buildProgress(){
+    navProgress.innerHTML='';
+    parts.forEach(function(p){
+      var b=document.createElement('button');
+      b.type='button'; b.className='nav-seg';
+      b.style.flexGrow=String(p.end-p.start+1);
+      b.title=p.title+' · слайды '+(p.start+1)+'–'+(p.end+1);
+      b.setAttribute('aria-label',b.title);
+      var f=document.createElement('span'); f.className='nav-seg-fill'; b.appendChild(f);
+      b.addEventListener('click',function(){go(p.start);});
+      navProgress.appendChild(b); segs.push(b);
+    });
+  }
+
+  function updateProgress(){
+    parts.forEach(function(p,i){
+      var f=segs[i].querySelector('.nav-seg-fill');
+      var pct=0;
+      if(cur>=p.end) pct=100;
+      else if(cur>=p.start) pct=((cur-p.start+1)/(p.end-p.start+1))*100;
+      f.style.width=pct+'%';
+      segs[i].classList.toggle('active',cur>=p.start&&cur<=p.end);
+    });
+  }
+
+  function buildToc(){
+    tocMenu.innerHTML='';
+    parts.forEach(function(p){
+      var head=document.createElement('button');
+      head.type='button'; head.className='toc-part';
+      var t=document.createElement('span'); t.textContent=p.title;
+      var r=document.createElement('span'); r.className='range'; r.textContent='слайды '+(p.start+1)+'–'+(p.end+1);
+      head.appendChild(t); head.appendChild(r);
+      head.addEventListener('click',function(){go(p.start);closeToc();});
+      tocMenu.appendChild(head);
+      for(var i=p.start;i<=p.end;i++){
+        if(p.divider && i===p.start) continue;
+        var b=document.createElement('button');
+        b.type='button'; b.className='toc-link'; b.setAttribute('role','menuitem');
+        var n=document.createElement('span'); n.className='n'; n.textContent=(i+1);
+        var tx=document.createElement('span'); tx.textContent=slideTitle(slides[i]);
+        b.appendChild(n); b.appendChild(tx);
+        (function(idx){b.addEventListener('click',function(){go(idx);closeToc();});})(i);
+        tocMenu.appendChild(b);
+      }
+    });
+  }
+
+  function openToc(){
+    tocMenu.classList.add('open'); tocBtn.setAttribute('aria-expanded','true');
+  }
+  function closeToc(){
+    tocMenu.classList.remove('open'); tocBtn.setAttribute('aria-expanded','false');
+  }
+  tocBtn.addEventListener('click',function(e){
+    e.stopPropagation();
+    if(tocMenu.classList.contains('open')) closeToc(); else openToc();
+  });
+  document.addEventListener('click',function(e){
+    if(!tocMenu.classList.contains('open')) return;
+    if(tocMenu.contains(e.target)||tocBtn.contains(e.target)) return;
+    closeToc();
+  });
+
+  function go(i){
+    if(i<0||i>=total) return;
+    slides[cur].classList.remove('active');
+    cur=i; slides[cur].classList.add('active');
+    counter.textContent=(cur+1)+' / '+total;
+    if(footText) footText.textContent=slides[cur].getAttribute('data-foot')||'Презентация';
+    prev.disabled=cur===0; next.disabled=cur===total-1;
+    prog.style.width=((cur+1)/total*100)+'%';
+    updateProgress();
+    try{history.replaceState(null,'','#slide-'+(cur+1));}catch(e){}
+  }
+  prev.onclick=function(){go(cur-1)}; next.onclick=function(){go(cur+1)};
+  function fit(){
+    var vp=document.getElementById('viewport');
+    var s=Math.min((vp.clientWidth-8)/1280,(vp.clientHeight-8)/720);
+    stage.style.transform='scale('+s+')';
+  }
+  window.addEventListener('resize',fit);
+  function toggleFs(){
+    var el=document.documentElement;
+    if(!document.fullscreenElement&&!document.webkitFullscreenElement){(el.requestFullscreen||el.webkitRequestFullscreen||function(){}).call(el);}
+    else{(document.exitFullscreen||document.webkitExitFullscreen||function(){}).call(document);}
+  }
+  fs.onclick=toggleFs;
+  document.addEventListener('fullscreenchange',function(){setTimeout(fit,60)});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){closeToc();return;}
+    if(['ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(cur+1);}
+    else if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(cur-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);} else if(e.key==='End'){e.preventDefault();go(total-1);}
+    else if(e.key==='f'||e.key==='F'){e.preventDefault();toggleFs();}
+  });
+  var tx=null;
+  stage.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  stage.addEventListener('touchend',function(e){
+    if(tx===null)return; var dx=e.changedTouches[0].clientX-tx; tx=null;
+    if(Math.abs(dx)>50) go(dx<0?cur+1:cur-1);
+  });
+  function parseHash(){
+    var m=(location.hash||'').match(/^#(?:slide-)?(\d+)$/);
+    if(!m) return 0;
+    return Math.min(Math.max(parseInt(m[1],10)-1,0),total-1);
+  }
+  window.addEventListener('hashchange',function(){
+    var idx=parseHash();
+    if(idx!==cur) go(idx);
+  });
+
+  buildProgress();
+  buildToc();
+  go(parseHash());
+  fit();
+})();
+</script>
+</body>
+</html>
