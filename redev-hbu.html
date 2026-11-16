@@ -11,9 +11,10 @@
   --azure2:#EAF1FF; --azure3:#BFD3FF; --soft:#F6F8FC; --line:#E1E5EE; --muted:#5B6475; --faint:#9AA4B8;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:#fff;color:var(--navy);font-family:Manrope,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+html,body{min-height:100%;background:#fff;color:var(--navy);font-family:Manrope,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;overflow-x:hidden;overflow-y:auto;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth}
 a{color:inherit}
-.deck{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:8px 0 10px}
+.deck{position:relative;height:100vh;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:8px 0 10px;overflow:hidden}
 .viewport{position:relative;flex:1 1 auto;width:100%;display:flex;align-items:center;justify-content:center;min-height:0}
 .stage{width:1280px;height:720px;position:relative;flex:none;transform-origin:center center;background:#fff;overflow:hidden;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 30px rgba(10,15,26,.06)}
 .progress{position:absolute;left:0;top:0;height:5px;background:var(--azure);width:0;transition:width .35s ease;z-index:5}
@@ -330,6 +331,53 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     .hint{display:none}
     .toc-menu{width:calc(100vw - 16px);max-height:60vh}
   }
+
+  .prompts-link{height:44px;display:inline-flex;align-items:center;justify-content:center;padding:0 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--navy);font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap}
+  .prompts-link:hover{border-color:var(--azure);color:var(--azure)}
+  .prompts-link:focus-visible{outline:2px solid var(--azure);outline-offset:3px}
+  .prompts-section{background:var(--soft);border-top:1px solid var(--line);padding:52px 24px 64px;color:var(--navy);scroll-margin-top:16px}
+  .prompts-inner{max-width:980px;margin:0 auto}
+  .prompts-section h2{font-size:34px;line-height:1.12;letter-spacing:-.015em}
+  .prompts-lead{font-size:15px;line-height:1.5;color:var(--muted);margin-top:10px;max-width:860px}
+  .prompts-grid{display:flex;flex-direction:column;gap:18px;margin-top:24px}
+  .prompt-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;min-width:0}
+  .prompt-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+  .prompt-part{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--azure);margin-bottom:3px}
+  .prompt-card h3{font-size:22px;line-height:1.2}
+  .prompt-flagship{font-size:12px;font-weight:700;color:var(--graphite);background:var(--azure2);border:1px solid var(--azure3);border-radius:7px;padding:5px 9px;white-space:nowrap}
+  .prompt-text{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:15px;line-height:1.5;color:var(--graphite);white-space:pre-wrap;overflow-wrap:anywhere}
+  .prompt-toolbar{display:flex;justify-content:flex-end;margin-bottom:8px}
+  .copy-btn{min-height:36px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--navy);font:700 12px var(--sans);padding:0 12px;cursor:pointer}
+  .copy-btn:hover{border-color:var(--azure);color:var(--azure)}
+  .copy-btn:focus-visible{outline:2px solid var(--azure);outline-offset:3px}
+  .copy-btn.copied{background:var(--azure);border-color:var(--azure);color:#fff}
+  .prompt-fill{font-size:13px;line-height:1.45;color:var(--muted);margin-top:10px}
+  .prompt-fill b{color:var(--navy)}
+  @media(max-width:640px){
+    .prompts-link{padding:0 9px;font-size:11px}
+    .prompts-section{padding:36px 16px 48px}
+    .prompts-section h2{font-size:27px}
+    .prompt-card{padding:16px}
+    .prompt-card h3{font-size:20px}
+    .prompt-text{font-size:14px;padding:12px}
+    .prompt-flagship{white-space:normal}
+  }
+  @media(max-width:400px){
+    .controls{gap:4px;padding:0 6px}
+    .counter{min-width:44px}
+    .nav-progress{min-width:36px}
+    .prompts-link{padding:0 7px;font-size:10.5px}
+  }
+  @media(prefers-color-scheme:dark){
+    .prompts-section{background:#101827;color:#F3F6FC;border-top-color:#2A3550}
+    .prompts-section h2,.prompt-fill b{color:#F3F6FC}
+    .prompts-lead,.prompt-fill{color:#B6C2D9}
+    .prompt-card{background:#162033;border-color:#2A3550}
+    .prompt-text{background:#0D1421;border-color:#2A3550;color:#E2E9F6}
+    .prompt-flagship{background:#1B2A45;border-color:#355078;color:#D9E5FA}
+    .copy-btn{background:#162033;border-color:#355078;color:#F3F6FC}
+    .prompt-card h3{color:#F3F6FC}
+  }
 </style>
 </head>
 <body>
@@ -438,10 +486,47 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
    <button id="tocBtn" class="toc-btn" type="button" aria-label="Содержание" title="Содержание" aria-haspopup="true" aria-expanded="false">☰</button>
    <button id="next" aria-label="Вперёд" title="Вперёд">›</button>
    <button id="fs" aria-label="Развернуть на весь экран" title="На весь экран (F)">⤢</button>
+   <a class="prompts-link" href="#prompts">Промпты</a>
    <span class="hint">← → листать · F — полный экран</span>
    <div class="toc-menu" id="tocMenu" role="menu" aria-label="Содержание"></div>
  </div>
 </div>
+
+<section class="prompts-section" id="prompts">
+  <div class="prompts-inner">
+    <h2>Промпты темы 2.1</h2>
+    <p class="prompts-lead">Скопируйте промпт, подставьте свои данные вместо значений в квадратных скобках и проверьте результат по первоисточнику</p>
+    <div class="prompts-grid">
+      <article class="prompt-card">
+        <div class="prompt-card-head">
+          <div><div class="prompt-part">Часть 1</div><h3>Тесты 1–2</h3></div>
+          <span class="prompt-flagship">Флагман: NotebookLM</span>
+        </div>
+        <div class="prompt-toolbar"><button class="copy-btn" type="button" data-copy="prompt-1">Копировать</button></div>
+        <div class="prompt-text" id="prompt-1">Опираясь только на загруженные документы, сгенерируй [5] функциональных сценариев для этого здания. Для каждого проведи два теста. 1. Юридическая допустимость: процитируй пункт ПЗЗ и страницу; если пункта нет, напиши «не подтверждено». 2. Физическая осуществимость: сопоставь требования функции с данными документов (площади, высоты, этажность, конструктив); если данных нет, напиши «нужно обследование конструкций». Выведи таблицу: сценарий, тест 1, тест 2, цитата и страница, предварительный вывод. Решение принимаю я.</div>
+        <p class="prompt-fill"><b>Что подставить:</b> [5] число сценариев</p>
+      </article>
+      <article class="prompt-card">
+        <div class="prompt-card-head">
+          <div><div class="prompt-part">Часть 2</div><h3>Экономика (тесты 3–4)</h3></div>
+          <span class="prompt-flagship">Флагман: ChatGPT</span>
+        </div>
+        <div class="prompt-toolbar"><button class="copy-btn" type="button" data-copy="prompt-2">Копировать</button></div>
+        <div class="prompt-text" id="prompt-2">Я загрузил таблицу: ставки аренды, загрузка, укрупнённый CAPEX и OPEX по функциям, площади (все с источниками). Напиши формулы для Excel (или код) и рассчитай для каждого из [N] сценариев: годовой арендный доход = площадь × ставка × загрузка; операционные расходы; NOI = доход − OPEX. Покажи формулы и допущения. Отранжируй по NOI на м². Не используй чисел, которых нет в таблице.</div>
+        <p class="prompt-fill"><b>Что подставить:</b> [N] число сценариев</p>
+      </article>
+      <article class="prompt-card">
+        <div class="prompt-card-head">
+          <div><div class="prompt-part">Часть 3</div><h3>Баланс площадей</h3></div>
+          <span class="prompt-flagship">Флагман: Claude Artifacts</span>
+        </div>
+        <div class="prompt-toolbar"><button class="copy-btn" type="button" data-copy="prompt-3">Копировать</button></div>
+        <div class="prompt-text" id="prompt-3">Действуй как аналитик-планировщик. Дано: GBA = [площадь по документу] м²; сценарий: [функция]. Составь шаблон баланса площадей: помещения, площадь, доля, формулы для МОП и GLA. Коэффициенты потерь не назначай: оставь ячейки-допущения со ссылкой на источник и предложи, какие нормативы и отраслевые стандарты проверить.</div>
+        <p class="prompt-fill"><b>Что подставить:</b> [площадь по документу] и [функция]</p>
+      </article>
+    </div>
+  </div>
+</section>
 
 <script>
 (function(){
@@ -545,7 +630,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     closeToc();
   });
 
-  function go(i){
+  function go(i, writeHash){
     if(i<0||i>=total) return;
     slides[cur].classList.remove('active');
     cur=i; slides[cur].classList.add('active');
@@ -554,7 +639,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     prev.disabled=cur===0; next.disabled=cur===total-1;
     prog.style.width=((cur+1)/total*100)+'%';
     updateProgress();
-    try{history.replaceState(null,'','#slide-'+(cur+1));}catch(e){}
+    if(writeHash!==false){try{history.replaceState(null,'','#slide-'+(cur+1));}catch(e){}}
   }
   prev.onclick=function(){go(cur-1)}; next.onclick=function(){go(cur+1)};
   function fit(){
@@ -571,6 +656,9 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
   fs.onclick=toggleFs;
   document.addEventListener('fullscreenchange',function(){setTimeout(fit,60)});
   document.addEventListener('keydown',function(e){
+    var prompts=document.getElementById('prompts');
+    if(prompts && (e.target.closest && e.target.closest('#prompts'))) return;
+    if(prompts && prompts.getBoundingClientRect().top < window.innerHeight - 40) return;
     if(e.key==='Escape'){closeToc();return;}
     if(['ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(cur+1);}
     else if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(cur-1);}
@@ -589,14 +677,46 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     return Math.min(Math.max(parseInt(m[1],10)-1,0),total-1);
   }
   window.addEventListener('hashchange',function(){
+    if(location.hash==='#prompts'){
+      var p=document.getElementById('prompts'); if(p) p.scrollIntoView();
+      return;
+    }
     var idx=parseHash();
     if(idx!==cur) go(idx);
   });
 
   buildProgress();
   buildToc();
-  go(parseHash());
+  var initialPrompts=location.hash==='#prompts';
+  go(parseHash(),!initialPrompts);
+  if(initialPrompts){setTimeout(function(){var p=document.getElementById('prompts');if(p)p.scrollIntoView();},0);}
   fit();
+})();
+</script>
+<script>
+(function(){
+  function fallback(text){
+    var ta=document.createElement('textarea');
+    ta.value=text; ta.setAttribute('readonly','');
+    ta.style.position='fixed'; ta.style.left='-9999px';
+    document.body.appendChild(ta); ta.select();
+    try{document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);
+  }
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var el=document.getElementById(btn.getAttribute('data-copy'));
+      if(!el) return;
+      var text=el.textContent;
+      var done=function(){
+        btn.textContent='Скопировано'; btn.classList.add('copied');
+        setTimeout(function(){btn.textContent='Копировать';btn.classList.remove('copied');},2000);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){fallback(text);done();});
+      }else{fallback(text);done();}
+    });
+  });
 })();
 </script>
 </body>
