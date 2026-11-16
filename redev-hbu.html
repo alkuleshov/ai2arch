@@ -695,6 +695,12 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 </script>
 <script>
 (function(){
+  if (window.self !== window.top) {
+    var embeddedPrompts = document.getElementById('prompts');
+    var embeddedLink = document.querySelector('.prompts-link');
+    if (embeddedPrompts) embeddedPrompts.style.display = 'none';
+    if (embeddedLink) embeddedLink.style.display = 'none';
+  }
   function fallback(text){
     var ta=document.createElement('textarea');
     ta.value=text; ta.setAttribute('readonly','');
