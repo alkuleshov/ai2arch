@@ -828,6 +828,31 @@
   .meet-badge{font-size:10px;font-weight:500;letter-spacing:.03em;padding:2px 6px;border-radius:5px}
   .meet-badge.meeting{background:#D6E9FF;color:#0B3A82;border:1px solid #8DBBFF}
   .meet-badge.lecture{background:#E9EDF5;color:#243A5E;border:1px solid #B9C7DE}
+
+  .t21-prompts{margin:24px 0 28px;padding:22px;scroll-margin-top:170px;border:1px solid var(--border);border-radius:12px;background:var(--surface2)}
+  .t21-prompts h3{font-size:20px;margin:0 0 8px}
+  .t21-prompts-lead{font-size:13px;line-height:1.5;color:var(--ink-muted);margin:0 0 18px}
+  .t21-prompts-grid{display:flex;flex-direction:column;gap:14px}
+  .t21-prompt-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;min-width:0}
+  .t21-prompt-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+  .t21-prompt-part{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+  .t21-prompt-card h4{font-size:16px;line-height:1.25;margin:0}
+  .t21-flagship{font-size:11px;font-weight:700;color:var(--ink-muted);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px;white-space:nowrap}
+  .t21-prompt-text{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:13.5px;line-height:1.55;color:var(--ink-muted);white-space:pre-wrap;overflow-wrap:anywhere}
+  .t21-prompt-toolbar{display:flex;justify-content:flex-end;margin-bottom:7px}
+  .t21-copy{min-height:34px;border:1px solid var(--border);border-radius:7px;background:var(--surface);color:var(--ink);font:700 11.5px var(--sans);padding:0 11px;cursor:pointer}
+  .t21-copy:hover{border-color:var(--accent);color:var(--accent)}
+  .t21-copy:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .t21-copy.copied{background:var(--accent);border-color:var(--accent);color:#fff}
+  .t21-prompt-fill{font-size:12px;line-height:1.45;color:var(--ink-faint);margin:9px 0 0}
+  .t21-prompt-fill b{color:var(--ink)}
+  @media(max-width:640px){
+    .t21-prompts{padding:16px;margin:20px 0 24px}
+    .t21-prompts h3{font-size:18px}
+    .t21-prompt-card{padding:14px}
+    .t21-prompt-text{font-size:13px;padding:11px}
+    .t21-flagship{white-space:normal}
+  }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -1176,7 +1201,32 @@
                 </div>
               </div>
               <div class="lesson-body">
-<div class="lect"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span></div><div class="video-lecture" hidden><h3>Видеолекция</h3><div class="video-embed"><!-- Вставьте сюда iframe VK: <iframe src="https://vkvideo.ru/video_ext.php?oid=&id=&hash=" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe> --></div></div><h3>Презентация темы</h3><iframe src="redev-hbu.html" title="2.1 HBU, сценарии и баланс площадей — презентация" style="width:100%;aspect-ratio:16/9;min-height:420px;border:1px solid var(--border);border-radius:12px;background:#fff;display:block;margin-bottom:20px;" allow="fullscreen" allowfullscreen loading="lazy"></iframe><h3>Что изучаем</h3><ul class="checklist"><li><div class="chk">✓</div> Метод наилучшего и наиболее эффективного использования (HBU), четыре теста</li><li><div class="chk">✓</div> Генерация и оценка 5–7 функциональных сценариев</li><li><div class="chk">✓</div> Баланс площадей, экспликация в электронной таблице</li><li><div class="chk">✓</div> Проверка расчётов формулами, а не моделью</li></ul><p style="font-size:13px"><strong>Практика:</strong> оценка 5–7 сценариев по четырём тестам HBU. <strong>Самостоятельно:</strong> экспликация и баланс площадей в таблице.</p><h4 style="font-size:13px;margin:16px 0 6px">Шаблон: оценка сценариев по 4 тестам HBU</h4><p class="tpl-note">Образец заполнен по данным C52. Для вашего объекта впишите свои данные и источники. Заполняйте в рабочей тетради (Notion), <a href="https://fortune-swing-02e.notion.site/41112bb3b5cd81839661da69963a035b" target="_blank" rel="noopener">страница 8</a>.</p>
+<div class="lect"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span></div><div class="video-lecture" hidden><h3>Видеолекция</h3><div class="video-embed"><!-- Вставьте сюда iframe VK: <iframe src="https://vkvideo.ru/video_ext.php?oid=&id=&hash=" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe> --></div></div><h3>Презентация темы</h3><iframe src="redev-hbu.html" title="2.1 HBU, сценарии и баланс площадей — презентация" style="width:100%;aspect-ratio:16/9;min-height:420px;border:1px solid var(--border);border-radius:12px;background:#fff;display:block;margin-bottom:20px;" allow="fullscreen" allowfullscreen loading="lazy"></iframe>
+<div class="t21-prompts" id="prompts">
+  <h3>Промпты темы 2.1</h3>
+  <p class="t21-prompts-lead">Скопируйте промпт, подставьте свои данные вместо значений в квадратных скобках и проверьте результат по первоисточнику</p>
+  <div class="t21-prompts-grid">
+    <article class="t21-prompt-card">
+      <div class="t21-prompt-head"><div><div class="t21-prompt-part">Часть 1</div><h4>Тесты 1–2</h4></div><span class="t21-flagship">Флагман: NotebookLM</span></div>
+      <div class="t21-prompt-toolbar"><button class="t21-copy" type="button" data-copy="t21-prompt-1">Копировать</button></div>
+      <div class="t21-prompt-text" id="t21-prompt-1">Опираясь только на загруженные документы, сгенерируй [5] функциональных сценариев для этого здания. Для каждого проведи два теста. 1. Юридическая допустимость: процитируй пункт ПЗЗ и страницу; если пункта нет, напиши «не подтверждено». 2. Физическая осуществимость: сопоставь требования функции с данными документов (площади, высоты, этажность, конструктив); если данных нет, напиши «нужно обследование конструкций». Выведи таблицу: сценарий, тест 1, тест 2, цитата и страница, предварительный вывод. Решение принимаю я.</div>
+      <p class="t21-prompt-fill"><b>Что подставить:</b> [5] число сценариев</p>
+    </article>
+    <article class="t21-prompt-card">
+      <div class="t21-prompt-head"><div><div class="t21-prompt-part">Часть 2</div><h4>Экономика (тесты 3–4)</h4></div><span class="t21-flagship">Флагман: ChatGPT</span></div>
+      <div class="t21-prompt-toolbar"><button class="t21-copy" type="button" data-copy="t21-prompt-2">Копировать</button></div>
+      <div class="t21-prompt-text" id="t21-prompt-2">Я загрузил таблицу: ставки аренды, загрузка, укрупнённый CAPEX и OPEX по функциям, площади (все с источниками). Напиши формулы для Excel (или код) и рассчитай для каждого из [N] сценариев: годовой арендный доход = площадь × ставка × загрузка; операционные расходы; NOI = доход − OPEX. Покажи формулы и допущения. Отранжируй по NOI на м². Не используй чисел, которых нет в таблице.</div>
+      <p class="t21-prompt-fill"><b>Что подставить:</b> [N] число сценариев</p>
+    </article>
+    <article class="t21-prompt-card">
+      <div class="t21-prompt-head"><div><div class="t21-prompt-part">Часть 3</div><h4>Баланс площадей</h4></div><span class="t21-flagship">Флагман: Claude Artifacts</span></div>
+      <div class="t21-prompt-toolbar"><button class="t21-copy" type="button" data-copy="t21-prompt-3">Копировать</button></div>
+      <div class="t21-prompt-text" id="t21-prompt-3">Действуй как аналитик-планировщик. Дано: GBA = [площадь по документу] м²; сценарий: [функция]. Составь шаблон баланса площадей: помещения, площадь, доля, формулы для МОП и GLA. Коэффициенты потерь не назначай: оставь ячейки-допущения со ссылкой на источник и предложи, какие нормативы и отраслевые стандарты проверить.</div>
+      <p class="t21-prompt-fill"><b>Что подставить:</b> [площадь по документу] и [функция]</p>
+    </article>
+  </div>
+</div>
+<h3>Что изучаем</h3><ul class="checklist"><li><div class="chk">✓</div> Метод наилучшего и наиболее эффективного использования (HBU), четыре теста</li><li><div class="chk">✓</div> Генерация и оценка 5–7 функциональных сценариев</li><li><div class="chk">✓</div> Баланс площадей, экспликация в электронной таблице</li><li><div class="chk">✓</div> Проверка расчётов формулами, а не моделью</li></ul><p style="font-size:13px"><strong>Практика:</strong> оценка 5–7 сценариев по четырём тестам HBU. <strong>Самостоятельно:</strong> экспликация и баланс площадей в таблице.</p><h4 style="font-size:13px;margin:16px 0 6px">Шаблон: оценка сценариев по 4 тестам HBU</h4><p class="tpl-note">Образец заполнен по данным C52. Для вашего объекта впишите свои данные и источники. Заполняйте в рабочей тетради (Notion), <a href="https://fortune-swing-02e.notion.site/41112bb3b5cd81839661da69963a035b" target="_blank" rel="noopener">страница 8</a>.</p>
 <div class="ctr-wrap"><table class="ctr tpl"><tr><th>Сценарий</th><th>Физически возможно</th><th>Юридически допустимо (ПЗЗ, СП)</th><th>Финансово осуществимо</th><th>Максимально эффективно</th><th>Итог</th></tr><tr class="sample"><td><span class="sample-tag">Образец на C52</span>Текущее использование C52 (базовый вариант «как есть»): креативный бизнес, образование, гастро-концепции, события</td><td>подтверждено фактом эксплуатации; параметры из техпаспорта — нет данных</td><td>нет данных: нужна выписка ПЗЗ</td><td>нет данных: нужна таблица ставок, CAPEX и OPEX</td><td>не оценивается без расчёта таблицы</td><td>нужны данные</td></tr><tr class="fill hint"><td>2. впишите: сценарий</td><td>впишите: физическая проверка</td><td>впишите: пункт ПЗЗ/СП</td><td>впишите: расчёт</td><td>впишите: проверка</td><td>впишите: вердикт</td></tr><tr class="fill hint"><td>3. впишите: сценарий</td><td>впишите: физическая проверка</td><td>впишите: пункт ПЗЗ/СП</td><td>впишите: расчёт</td><td>впишите: проверка</td><td>впишите: вердикт</td></tr></table></div><p class="src" style="font-size:12px;color:var(--ink-faint)">Сценарии, не прошедшие тесты 1–2, отсекаются до экономики.</p><h4 style="font-size:13px;margin:16px 0 6px">Шаблон: экспликация и баланс площадей (для выбранного сценария)</h4><p class="tpl-note">Образец заполнен по данным C52. Для вашего объекта впишите свои данные и источники. Заполняйте в рабочей тетради (Notion), <a href="https://fortune-swing-02e.notion.site/41112bb3b5cd81839661da69963a035b" target="_blank" rel="noopener">страница 9</a>.</p>
 <div class="ctr-wrap"><table class="ctr tpl"><tr><th>№</th><th>Помещение или функция</th><th>Площадь, м²</th><th>Доля, % (формула)</th><th>Комментарий</th></tr><tr class="sample"><td>—</td><td><span class="sample-tag">Образец на C52</span>Общая площадь здания (GBA) по ЕГРН</td><td>1 959,2</td><td>100</td><td>источник ЕГРН</td></tr><tr class="fill hint"><td>1</td><td>впишите помещение и площадь из плана БТИ</td><td>впишите: площадь</td><td>доля = площадь / итого, формулой</td><td>впишите: источник</td></tr><tr class="fill hint"><td>2</td><td>впишите помещение и площадь из плана БТИ</td><td>впишите: площадь</td><td>доля = площадь / итого, формулой</td><td>впишите: источник</td></tr><tr class="fill hint"><td>3</td><td>впишите помещение и площадь из плана БТИ</td><td>впишите: площадь</td><td>доля = площадь / итого, формулой</td><td>впишите: источник</td></tr></table></div><p class="src" style="font-size:12px;color:var(--ink-faint)">У C52 помещений по планам БТИ нет в наших данных: это ваша первая задача.</p>
               </div>
@@ -1794,6 +1844,32 @@
     else if (a.href.indexOf('t.me/alkuleshov') !== -1) ym(113526373, 'reachGoal', 'telegram_click');
     else if (a.href.indexOf('telemost.yandex.ru') !== -1) ym(113526373, 'reachGoal', 'telemost_click');
   }, true);
+</script>
+<script>
+(function(){
+  function fallback(text){
+    var ta=document.createElement('textarea');
+    ta.value=text; ta.setAttribute('readonly','');
+    ta.style.position='fixed'; ta.style.left='-9999px';
+    document.body.appendChild(ta); ta.select();
+    try{document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);
+  }
+  document.querySelectorAll('.t21-copy').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var el=document.getElementById(btn.getAttribute('data-copy'));
+      if(!el) return;
+      var text=el.textContent;
+      var done=function(){
+        btn.textContent='Скопировано'; btn.classList.add('copied');
+        setTimeout(function(){btn.textContent='Копировать';btn.classList.remove('copied');},2000);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){fallback(text);done();});
+      }else{fallback(text);done();}
+    });
+  });
+})();
 </script>
 </body>
 </html>
