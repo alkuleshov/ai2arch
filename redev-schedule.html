@@ -103,6 +103,16 @@
   .cal-bar .section-end-btn { font-family:var(--sans); }
   .cal-bar .section-end-btn:hover { text-decoration:none; opacity:.9; }
   .cal-bar .section-end-btn:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+  .cal-subscribe { border:1px solid var(--border); border-radius:12px; padding:16px 18px; margin:-14px 0 26px; background:var(--surface2); }
+  .cal-subscribe h3 { font-size:14px; margin:0 0 10px; }
+  .cal-subscribe-actions { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+  .cal-subscribe .section-end-btn { font-family:var(--sans); }
+  .cal-subscribe .section-end-btn:hover { text-decoration:none; opacity:.9; }
+  .cal-subscribe-note { font-size:12px; line-height:1.45; color:var(--ink-faint); margin:10px 0 0; max-width:820px; }
+  .cal-how { margin-top:12px; border-top:1px solid var(--border); padding-top:10px; }
+  .cal-how summary { cursor:pointer; font-size:12.5px; font-weight:700; color:var(--accent); }
+  .cal-how ol { margin:8px 0 0 18px; font-size:12.5px; line-height:1.5; color:var(--ink-muted); }
+  .cal-how-note { font-size:11.5px; color:var(--ink-faint); margin-top:6px; }
 
   .cal-info { width:34px; height:34px; flex:0 0 34px; padding:0; display:inline-flex; align-items:center; justify-content:center; border:1px solid rgba(10,15,26,.16); border-radius:50%; background:transparent; color:var(--ink-faint); font-family:var(--sans); font-size:16px; font-weight:600; line-height:1; cursor:pointer; transition:border-color .15s, color .15s, background-color .15s; }
   .cal-info:hover { border-color:var(--accent); color:var(--accent); background:rgba(77,163,255,.07); }
@@ -192,6 +202,24 @@
     <button class="section-end-btn primary" id="calBtn" type="button">📅 Скачать в календарь</button>
     <button class="cal-info" id="calInfo" type="button" aria-label="Как добавить события в календарь" aria-haspopup="dialog" aria-controls="calModal" aria-expanded="false" title="Как добавить в календарь">i</button>
     <span id="calHint" aria-live="polite">Все встречи потока — одним файлом .ics, время московское</span>
+  </div>
+
+  <div class="cal-subscribe" id="calSubscribe">
+    <h3>Календарь потока</h3>
+    <div class="cal-subscribe-actions">
+      <a class="section-end-btn primary" href="webcal://ai2arch.ru/redev-calendar.ics" aria-label="Подписаться на календарь">Подписаться</a>
+      <a class="section-end-btn ghost" id="calCopy" href="https://ai2arch.ru/redev-calendar.ics">Скопировать адрес</a>
+    </div>
+    <p class="cal-subscribe-note">Подписка обновляется сама, скачанный файл — нет. Если расписание уже добавляли файлом, удалите старые события.</p>
+    <details class="cal-how">
+      <summary>Как подписаться</summary>
+      <ol>
+        <li><b>Google Календарь:</b> «Другие календари» → «Добавить по URL» → вставить https-адрес.</li>
+        <li><b>Apple Календарь:</b> «Файл» → «Новая подписка на календарь» → вставить адрес.</li>
+        <li><b>Яндекс Календарь:</b> «Добавить календарь» → «Подписаться по ссылке».</li>
+      </ol>
+      <p class="cal-how-note">Названия пунктов в разных приложениях могут отличаться.</p>
+    </details>
   </div>
 
     <table class="schedule">
@@ -429,214 +457,17 @@
 </div>
 
 <script>
-// Собираем .ics прямо из таблиц расписания, чтобы даты и темы не дублировались вручную.
 (function () {
-  var YEAR = 2026;
-  var MONTHS = { янв:1, фев:2, мар:3, апр:4, мая:5, май:5, июн:6, июл:7, авг:8, сен:9, окт:10, ноя:11, дек:12 };
   var btn = document.getElementById('calBtn');
   var hint = document.getElementById('calHint');
   if (!btn) return;
-
-  function pad(n) { return (n < 10 ? '0' : '') + n; }
-
-  function parseDate(text) {
-    var m = text.match(/(\d{1,2})\s+([а-яё]{3})/i);
-    if (!m) return null;
-    var month = MONTHS[m[2].toLowerCase()];
-    if (!month) return null;
-    return { y: YEAR, m: month, d: parseInt(m[1], 10) };
-  }
-
-  function parseRange(text) {
-    var m = text.match(/(\d{1,2}):(\d{2})\s*[–\-]\s*(\d{1,2}):(\d{2})/);
-    if (!m) return null;
-    return { sh: +m[1], sm: +m[2], eh: +m[3], em: +m[4] };
-  }
-
-  function cellLines(cell) {
-    var box = document.createElement('div');
-    box.innerHTML = cell.innerHTML.replace(/<br\s*\/?>/gi, '\n');
-    Array.prototype.forEach.call(box.querySelectorAll('.meet-badge, .task-chip'), function (el) {
-      el.parentNode.removeChild(el);
-    });
-    return box.textContent.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
-  }
-
-  function parseIso(text) {
-    var m = String(text || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
-    if (!m) return null;
-    return { y: +m[1], m: +m[2], d: +m[3] };
-  }
-
-  function icsDateTime(date) {
-    return date.getUTCFullYear() + pad(date.getUTCMonth() + 1) + pad(date.getUTCDate()) +
-      'T' + pad(date.getUTCHours()) + pad(date.getUTCMinutes()) + '00Z';
-  }
-
-  function moscowDate(y, m, d, hh, mm) {
-    return new Date(Date.UTC(y, m - 1, d, hh - 3, mm, 0));
-  }
-
-  function icsDate(y, m, d) {
-    return String(y) + pad(m) + pad(d);
-  }
-
-  function nextDate(y, m, d) {
-    var date = new Date(Date.UTC(y, m - 1, d + 1));
-    return icsDate(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate());
-  }
-
-  function esc(text) {
-    return String(text).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
-  }
-
-  function utf8Size(ch) {
-    if (ch.charCodeAt(0) < 128) return 1;
-    return encodeURIComponent(ch).replace(/%[0-9A-F]{2}/gi, 'x').length;
-  }
-
-  function fold(line) {
-    var out = '', current = '', bytes = 0;
-    for (var i = 0; i < line.length; i++) {
-      var ch = line.charAt(i);
-      var size = utf8Size(ch);
-      if (bytes + size > 73) {
-        out += current + '\r\n ';
-        current = '';
-        bytes = 0;
-      }
-      current += ch;
-      bytes += size;
-    }
-    return out + current;
-  }
-
-  function eventLines(ev) {
-    var lines = [
-      'BEGIN:VEVENT',
-      'UID:' + ev.uid,
-      'DTSTAMP:' + icsDateTime(new Date()),
-      'SUMMARY:' + esc(ev.summary),
-      'DESCRIPTION:' + esc(ev.description),
-      'LOCATION:' + esc(ev.location),
-      'STATUS:CONFIRMED',
-      'TRANSP:OPAQUE'
-    ];
-    if (ev.allDay) {
-      lines.push('DTSTART;VALUE=DATE:' + ev.startDate);
-      lines.push('DTEND;VALUE=DATE:' + ev.endDate);
-    } else {
-      lines.push('DTSTART:' + ev.start);
-      lines.push('DTEND:' + ev.end);
-    }
-    lines.push('END:VEVENT');
-    return lines;
-  }
-
-  var MEETING_TEXT = 'Встреча · присутствие обязательно. Синхронный видеозвонок в Телемосте. На встрече разбираем вопросы и работы группы, присутствие обязательно.';
-  var LECTURE_TEXT = 'Лекция · присутствие по возможности. Если вопросов к лектору нет, лекцию можно посмотреть в записи, когда она появится в пособии.';
-
-  function isMeetingTitle(title) {
-    return /^(Встреча 1|Встреча 2|Встреча 3|0\.2|3\.5|Demo Day)/.test(title);
-  }
-
-  function collectEvents() {
-    var events = [];
-    var seq = 0;
-    var moduleName = '';
-    var table = document.querySelector('table');
-    if (!table) return events;
-
-    Array.prototype.forEach.call(table.querySelectorAll('tbody tr'), function (row) {
-      if (row.classList.contains('module-row')) {
-        var moduleTitle = row.querySelector('.mod-title');
-        moduleName = moduleTitle ? moduleTitle.textContent.trim() : '';
-        return;
-      }
-      if (row.classList.contains('pause-row')) return;
-      var cells = row.querySelectorAll('td');
-      if (cells.length < 4) return;
-
-      var date = parseIso(row.getAttribute('data-iso')) || parseDate(cells[0].textContent);
-      if (!date) return;
-
-      var times = cellLines(cells[1]);
-      var titles = cellLines(cells[2]);
-      var lecturers = cellLines(cells[3]);
-      var hasTime = times.some(function (time) { return parseRange(time); });
-
-      if (!hasTime) {
-        var allTitle = titles.join(' / ');
-        var allType = isMeetingTitle(allTitle) ? 'meeting' : 'lecture';
-        seq++;
-        events.push({
-          uid: 'redev-2026-' + icsDate(date.y, date.m, date.d) + '-allday-' + seq + '@ai2arch.ru',
-          summary: (allType === 'meeting' ? 'Встреча: ' : 'Лекция: ') + allTitle,
-          description: (allType === 'meeting' ? MEETING_TEXT : LECTURE_TEXT) + '\nМодуль: ' + moduleName + '\nЛектор: ' + lecturers.join(', ') + '\nВремя — по расписанию дня.',
-          location: 'Яндекс Телемост',
-          allDay: true,
-          startDate: icsDate(date.y, date.m, date.d),
-          endDate: nextDate(date.y, date.m, date.d)
-        });
-        return;
-      }
-
-      times.forEach(function (time, index) {
-        var range = parseRange(time);
-        if (!range) return;
-
-        var start = moscowDate(date.y, date.m, date.d, range.sh, range.sm);
-        var end = moscowDate(date.y, date.m, date.d, range.eh, range.em);
-        if (end <= start) end = new Date(end.getTime() + 86400000);
-
-        var eventTitle = titles[index] || titles[0] || 'Встреча';
-        var eventType = isMeetingTitle(eventTitle) ? 'meeting' : 'lecture';
-        seq++;
-        events.push({
-          uid: 'redev-2026-' + icsDateTime(start) + '-' + seq + '@ai2arch.ru',
-          summary: (eventType === 'meeting' ? 'Встреча: ' : 'Лекция: ') + eventTitle,
-          description: (eventType === 'meeting' ? MEETING_TEXT : LECTURE_TEXT) + '\nМодуль: ' + moduleName + '\nЛектор: ' + (lecturers[index] || lecturers.join(', ')) + '\nВремя московское.',
-          location: 'Яндекс Телемост',
-          allDay: false,
-          start: icsDateTime(start),
-          end: icsDateTime(end)
-        });
-      });
-    });
-
-    return events;
-  }
-
-  function buildCalendar(events) {
-    var lines = [
-      'BEGIN:VCALENDAR',
-      'VERSION:2.0',
-      'PRODID:-//AI2ARCH//Redev Schedule//RU',
-      'CALSCALE:GREGORIAN',
-      'METHOD:PUBLISH',
-      'X-WR-CALNAME:' + esc('ИИ в редевелопменте — расписание'),
-      'X-WR-TIMEZONE:Europe/Moscow'
-    ];
-    events.forEach(function (ev) {
-      lines = lines.concat(eventLines(ev));
-    });
-    lines.push('END:VCALENDAR');
-    return lines.map(fold).join('\r\n') + '\r\n';
-  }
-
   btn.addEventListener('click', function () {
-    var events = collectEvents();
-    if (!events.length) return;
-
-    var blob = new Blob([buildCalendar(events)], { type: 'text/calendar;charset=utf-8' });
-    var url = URL.createObjectURL(blob);
     var link = document.createElement('a');
-    link.href = url;
+    link.href = 'redev-calendar.ics';
     link.download = 'ai2arch-redev-2026.ics';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
     if (hint) hint.textContent = 'Файл .ics скачан — откройте его в календаре';
   });
 })();
@@ -677,5 +508,21 @@
 })();
 </script>
 
+<script>
+(function () {
+  var copy = document.getElementById('calCopy');
+  if (!copy) return;
+  copy.addEventListener('click', function (event) {
+    if (!navigator.clipboard) return;
+    event.preventDefault();
+    navigator.clipboard.writeText(copy.href).then(function () {
+      copy.textContent = 'Адрес скопирован';
+      setTimeout(function () { copy.textContent = 'Скопировать адрес'; }, 2500);
+    }).catch(function () {
+      window.location.href = copy.href;
+    });
+  });
+})();
+</script>
 </body>
 </html>
