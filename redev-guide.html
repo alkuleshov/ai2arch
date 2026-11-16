@@ -780,12 +780,26 @@
   .card-a{border-left:3px solid #1A6BFF;background:#EBF4FF}.card-a h3{color:#1A6BFF}
   .card-b{border-left:3px solid #E8862B;background:#FDF3EE}.card-b h3{color:#C26A12}
   .depth{font-size:11.5px;color:var(--ink-faint);margin-top:6px}
-  .trackbar{background:#fff;border-bottom:1px solid var(--border);padding:8px 16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--ink-faint)}
-  .trackbar b{color:var(--ink);margin-right:4px}
+  .trackbar{background:#fff;border-bottom:1px solid var(--border);padding:8px 16px;display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--ink-faint)}
+  .trackbar-row{display:flex;align-items:center;gap:8px;min-width:0;flex-wrap:wrap}
+  .trackbar-buttons{display:flex;align-items:center;gap:8px;min-width:0;flex-wrap:wrap}
+  .trackbar b{color:var(--ink);margin-right:4px;flex:none}
   .trackbar button{border:1px solid var(--border);background:#fff;border-radius:999px;padding:5px 13px;font:700 12px var(--sans);cursor:pointer;color:var(--ink-muted)}
   .trackbar button.on{background:#0F1B3D;color:#fff;border-color:#0F1B3D}
   .trackbar button[data-v="A"].on{background:#1A6BFF;border-color:#1A6BFF}
   .trackbar button[data-v="B"].on{background:#E8862B;border-color:#E8862B}
+  .trackbar-note{font-size:11.5px;line-height:1.35;color:var(--ink-faint)}
+  .tb-short{display:none}
+  @media (max-width:640px){
+    .trackbar{padding:8px 12px}
+    .trackbar-row{flex-wrap:nowrap;gap:8px}
+    .trackbar b{font-size:12px}
+    .trackbar-buttons{flex:1 1 auto;gap:8px;flex-wrap:nowrap}
+    .trackbar button{flex:1 1 0;min-width:0;min-height:40px;padding:0 6px;font-size:11.5px;white-space:nowrap}
+    .trackbar .tb-full{display:none}
+    .trackbar .tb-short{display:inline}
+    .trackbar-note{font-size:11px;line-height:1.35}
+  }
   .only-a, .only-b{transition:opacity .2s, filter .2s}
   body[data-view="A"] .only-b, body[data-view="B"] .only-a{opacity:.5;filter:saturate(.45)}
   .ctr{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0 18px;background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;display:table}
@@ -865,11 +879,15 @@
   </div>
 
   <div class="trackbar" id="trackbar">
-    <b>Мой трек:</b>
-    <button class="on" data-v="all" onclick="setView('all')">Все</button>
-    <button data-v="A" onclick="setView('A')">А · Проектировщик</button>
-    <button data-v="B" onclick="setView('B')">Б · Девелопер</button>
-    <span>Все проходят все модули; различаются задания и глубина.</span>
+    <div class="trackbar-row">
+      <b>Мой трек:</b>
+      <div class="trackbar-buttons" role="group" aria-label="Мой трек">
+        <button class="on" data-v="all" aria-label="Все" onclick="setView('all')">Все</button>
+        <button data-v="A" aria-label="А · Проектировщик" onclick="setView('A')"><span class="tb-full">А · Проектировщик</span><span class="tb-short">А · Проект.</span></button>
+        <button data-v="B" aria-label="Б · Девелопер" onclick="setView('B')"><span class="tb-full">Б · Девелопер</span><span class="tb-short">Б · Девелоп.</span></button>
+      </div>
+    </div>
+    <span class="trackbar-note">Все проходят все модули; различаются задания и глубина.</span>
   </div>
 
   <div class="nav-wrap" id="moduleTabsWrap" style="top:0;">
