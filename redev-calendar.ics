@@ -235,28 +235,9 @@ DTEND:20261117T180000Z
 END:VEVENT
 BEGIN:VEVENT
 UID:redev-2026-20261118T150000Z-12@ai2arch.ru
-DTSTAMP:20261116T081619Z
-LAST-MODIFIED:20261116T081619Z
-SEQUENCE:0
-SUMMARY:Встреча: Встреча 2 — разбор досье\, в
- опросы
-DESCRIPTION:Встреча · присутствие обязательн
- о. Синхронный видеозвонок в Телемосте. 
- На встрече разбираем вопросы и работы г
- руппы\, присутствие обязательно.\nМодул
- ь: Модуль 2 · Функции и экономика\nЛектор
- : Кулешов\nВремя московское.
-LOCATION:Яндекс Телемост
-STATUS:CONFIRMED
-TRANSP:OPAQUE
-DTSTART:20261118T150000Z
-DTEND:20261118T163000Z
-END:VEVENT
-BEGIN:VEVENT
-UID:redev-2026-20261118T163000Z-13@ai2arch.ru
-DTSTAMP:20261116T081619Z
-LAST-MODIFIED:20261116T081619Z
-SEQUENCE:0
+DTSTAMP:20261117T170525Z
+LAST-MODIFIED:20261117T170525Z
+SEQUENCE:1
 SUMMARY:Лекция: 2.2 Доходная база\, CAPEX/OPEX (про
  должение)
 DESCRIPTION:Лекция · присутствие по возможно
@@ -265,6 +246,25 @@ DESCRIPTION:Лекция · присутствие по возможно
  появится в пособии.\nМодуль: Модуль 2 · Ф
  ункции и экономика\nЛектор: Кулешов\nВре
  мя московское.
+LOCATION:Яндекс Телемост
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+DTSTART:20261118T150000Z
+DTEND:20261118T163000Z
+END:VEVENT
+BEGIN:VEVENT
+UID:redev-2026-20261118T163000Z-13@ai2arch.ru
+DTSTAMP:20261117T170525Z
+LAST-MODIFIED:20261117T170525Z
+SEQUENCE:1
+SUMMARY:Встреча: Встреча 2 — разбор досье\, в
+ опросы
+DESCRIPTION:Встреча · присутствие обязательн
+ о. Синхронный видеозвонок в Телемосте. 
+ На встрече разбираем вопросы и работы г
+ руппы\, присутствие обязательно.\nМодул
+ ь: Модуль 2 · Функции и экономика\nЛектор
+ : Кулешов\nВремя московское.
 LOCATION:Яндекс Телемост
 STATUS:CONFIRMED
 TRANSP:OPAQUE
