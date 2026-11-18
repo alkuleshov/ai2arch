@@ -11,9 +11,9 @@
   --azure2:#EAF1FF; --azure3:#BFD3FF; --soft:#F6F8FC; --line:#E1E5EE; --muted:#5B6475; --faint:#9AA4B8;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:#fff;color:var(--navy);font-family:Manrope,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+html,body{min-height:100%;background:#fff;color:var(--navy);font-family:Manrope,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;overflow-x:hidden;overflow-y:auto;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-.deck{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:8px 0 10px}
+.deck{position:relative;height:100vh;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:8px 0 10px;overflow:hidden}
 .viewport{position:relative;flex:1 1 auto;width:100%;display:flex;align-items:center;justify-content:center;min-height:0}
 .stage{width:1280px;height:720px;position:relative;flex:none;transform-origin:center center;background:#fff;overflow:hidden;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 30px rgba(10,15,26,.06)}
 .progress{position:absolute;left:0;top:0;height:5px;background:var(--azure);width:0;transition:width .35s ease;z-index:5}
@@ -338,6 +338,53 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 .prompt.tight{font-size:15.5px;line-height:1.34}
 .prompt.tight b{color:var(--navy)}
 .prompt + .prompt{margin-top:10px}
+
+  .scheme{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:4px 8px 2px;margin:6px 0 0}
+  .scheme-label{font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--azure);margin-bottom:2px}
+  .scheme svg{width:auto;height:115px;max-width:100%;display:block;margin:0 auto}
+  .scheme.compact svg{height:88px}
+  .scheme + .note{margin-top:4px}
+
+  .prompts-link{height:44px;display:inline-flex;align-items:center;justify-content:center;padding:0 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--navy);font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap}
+  .prompts-link:hover{border-color:var(--azure);color:var(--azure)}
+  .prompts-link:focus-visible{outline:2px solid var(--azure);outline-offset:3px}
+  .prompts-section{background:var(--soft);border-top:1px solid var(--line);padding:52px 24px 64px;color:var(--navy);scroll-margin-top:16px}
+  .prompts-inner{max-width:980px;margin:0 auto}
+  .prompts-section h2{font-size:34px;line-height:1.12;letter-spacing:-.015em}
+  .prompts-lead{font-size:15px;line-height:1.5;color:var(--muted);margin-top:10px;max-width:860px}
+  .prompts-grid{display:flex;flex-direction:column;gap:18px;margin-top:24px}
+  .prompt-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;min-width:0}
+  .prompt-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+  .prompt-part{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--azure);margin-bottom:3px}
+  .prompt-card h3{font-size:22px;line-height:1.2}
+  .prompt-flagship{font-size:12px;font-weight:700;color:var(--graphite);background:var(--azure2);border:1px solid var(--azure3);border-radius:7px;padding:5px 9px;white-space:nowrap}
+  .prompt-text{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:15px;line-height:1.5;color:var(--graphite);white-space:pre-wrap;overflow-wrap:anywhere}
+  .prompt-toolbar{display:flex;justify-content:flex-end;margin-bottom:8px}
+  .copy-btn{min-height:36px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--navy);font:700 12px var(--sans);padding:0 12px;cursor:pointer}
+  .copy-btn:hover{border-color:var(--azure);color:var(--azure)}
+  .copy-btn:focus-visible{outline:2px solid var(--azure);outline-offset:3px}
+  .copy-btn.copied{background:var(--azure);border-color:var(--azure);color:#fff}
+  .prompt-fill{font-size:13px;line-height:1.45;color:var(--muted);margin-top:10px}
+  .prompt-fill b{color:var(--navy)}
+  @media(max-width:640px){
+    .prompts-link{padding:0 9px;font-size:11px}
+    .prompts-section{padding:36px 16px 48px}
+    .prompts-section h2{font-size:27px}
+    .prompt-card{padding:16px}
+    .prompt-card h3{font-size:20px}
+    .prompt-text{font-size:14px;padding:12px}
+    .prompt-flagship{white-space:normal}
+  }
+  @media(prefers-color-scheme:dark){
+    .prompts-section{background:#101827;color:#F3F6FC;border-top-color:#2A3550}
+    .prompts-section h2,.prompt-fill b{color:#F3F6FC}
+    .prompts-lead,.prompt-fill{color:#B6C2D9}
+    .prompt-card{background:#162033;border-color:#2A3550}
+    .prompt-text{background:#0D1421;border-color:#2A3550;color:#E2E9F6}
+    .prompt-flagship{background:#1B2A45;border-color:#355078;color:#D9E5FA}
+    .copy-btn{background:#162033;border-color:#355078;color:#F3F6FC}
+    .prompt-card h3{color:#F3F6FC}
+  }
 </style>
 </head>
 <body>
@@ -376,7 +423,17 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 
 
 <section class="slide title-slide" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Тема 2.4 · Экономика</div><h1>Стресс-тест <em>финмодели</em></h1><p class="lead">Красная команда, чувствительность, юридический контур и экономика на одном листе. Расчёты — в таблице.</p><div class="chips"><span class="chip">Часть 1 · Красная команда</span><span class="chip">Часть 2 · Юридический контур</span><span class="chip">Оба трека</span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финансовой модели"><div class="kick">Зачем</div><h2>Стресс-тест против <em>самообмана</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>модель может сойтись, но держаться на одном допущении;</li><li>стресс-тест показывает, где решение ломается;</li><li>без шага риск ошибки виден только после вложений;</li><li>результат — список проверок и порогов, не новый расчёт.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> Стресс-тест снижает риск решения на одном допущении.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Стресс-тест</b> — проверка решения при ухудшении допущений.<br><span style="color:var(--muted)">Проще: что будет, если допущение не сбудется.</span></span><span><b>Допущение</b> — предположение, принятое в модели без подтверждения данными.<br><span style="color:var(--muted)">Проще: число, взятое без документа.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финансовой модели"><div class="kick">Контекст</div><h2>Откуда <em>стресс-тест</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>красная команда ищет слабые места, а не подтверждает решение;</li><li>анализ чувствительности меняет одно допущение и смотрит на результат;</li><li>на рынке так проверяют инвестиционные модели до решения;</li><li>выводы возвращаются в таблицу, а не остаются в чате.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> Проверка идёт от слабого допущения к его эффекту.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Красная команда</b> — роль, которая ищет слабые места решения.<br><span style="color:var(--muted)">Проще: тот, кто ищет, где решение сломается.</span></span><span><b>Чувствительность</b> — как меняется результат при изменении одного допущения.<br><span style="color:var(--muted)">Проще: насколько результат зависит от одного числа.</span></span></div></section>
+
 <section class="slide part-divider" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="num">Часть 1</div><div class="kick">Тема 2.4 · Стресс-тест финмодели</div><h1>Красная команда и чувствительность</h1><p class="meta">Слабые допущения, сценарии и проверка в таблице.</p></section>
+
+<section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финансовой модели"><div class="kick">Схема</div><h2>Допущение → сценарий → <em>эффект на NOI</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>берём одно допущение и его источник;</li><li>задаём сценарий ухудшения;</li><li>пересчитываем эффект в таблице;</li><li>сравниваем с порогом решения.</li></ul></div><div class="scheme"><div class="scheme-label">Схема</div><svg viewBox="0 0 1100 150" role="img" aria-label="Допущение, сценарий, эффект на NOI"><rect x="20" y="38" width="331" height="62" rx="9" fill="#EAF1FF" stroke="#BFD3FF" stroke-width="1.5"/><text x="185" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#0A0F1A">Допущение</text><path d="M355 69.0 H381" stroke="#1A6BFF" stroke-width="2"/><path d="M374 65.0 L381 69.0 L374 73.0" stroke="#1A6BFF" stroke-width="2" fill="none"/><rect x="385" y="38" width="331" height="62" rx="9" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="550" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#2A2F3E">Сценарий</text><path d="M719 69.0 H745" stroke="#1A6BFF" stroke-width="2"/><path d="M738 65.0 L745 69.0 L738 73.0" stroke="#1A6BFF" stroke-width="2" fill="none"/><rect x="749" y="38" width="331" height="62" rx="9" fill="#1A6BFF" stroke="#1A6BFF" stroke-width="1.5"/><text x="915" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#fff">Эффект на NOI</text></svg></div><div class="band" style="margin-top:12px"><b>Вывод:</b> Цепочка показывает, какое допущение меняет решение.</div></div><div class="terms"><span class="lab">Термины</span><span><b>NOI</b> — чистый операционный доход: доход от аренды минус операционные расходы.<br><span style="color:var(--muted)">Проще: доход от аренды минус расходы.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финансовой модели"><div class="kick">Схема</div><h2>Как ранжировать <em>допущения</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>влияние на результат;</li><li>неопределённость данных;</li><li>качество источника;</li><li>близость к порогу решения.</li></ul></div><div class="scheme"><div class="scheme-label">Схема</div><svg viewBox="0 0 1100 150" role="img" aria-label="Ранжирование допущений: влияние, неопределённость, источник, порог"><rect x="30" y="20" width="230" height="110" rx="10" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="145" y="48" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#1A6BFF">Влияние</text><text x="145" y="74" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">меняет NOI</text><text x="145" y="98" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">или решение</text><rect x="300" y="20" width="230" height="110" rx="10" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="415" y="48" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#1A6BFF">Неопределённость</text><text x="415" y="74" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">нет данных</text><text x="415" y="98" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">или широкий диапазон</text><rect x="570" y="20" width="230" height="110" rx="10" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="685" y="48" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#1A6BFF">Источник</text><text x="685" y="74" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">документ</text><text x="685" y="98" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">или допущение</text><rect x="840" y="20" width="230" height="110" rx="10" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="955" y="48" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#1A6BFF">Порог</text><text x="955" y="74" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">близко</text><text x="955" y="98" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">или далеко</text></svg></div><div class="band" style="margin-top:12px"><b>Вывод:</b> Ранжирование сужает проверку до нескольких допущений.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Допущение</b> — предположение, принятое в модели без подтверждения данными.<br><span style="color:var(--muted)">Проще: число, взятое без документа.</span></span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Термины</div><h2>Красная команда: <em>роль</em></h2><div class="body">
 <div class="bx"><h4>Что делает роль</h4><ul>
 <li>ищет слабые места решения, а не подтверждает его;</li>
@@ -384,6 +441,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>не пересчитывает модель и не добавляет цифры;</li>
 <li>результат — список проверок, а не заключение.</li></ul></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Красная команда повышает устойчивость модели; расчёт остаётся в таблице.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Красная команда</b> — роль, которая ищет слабые места решения.</span><span><b>Допущение</b> — предположение, принятое в модели без подтверждения данными.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача A · Часть 1 · оба трека</div><h2>Найти <em>слабые допущения</em></h2><div class="body">
 <div class="bx"><h4>Вход и результат</h4><ul>
 <li>вход: таблица доходов, CAPEX, OPEX и допущения;</li>
@@ -391,8 +449,11 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>ищем 5–7 слабых мест;</li>
 <li>результат: допущение, причина, проверка, направление изменения.</li></ul></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Слабое допущение становится задачей на проверку.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Допущение</b> — предположение, принятое в модели без подтверждения данными.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.<br><span style="color:var(--muted)">Проще: инвестиции в стройку и ремонт.</span></span><span><b>OPEX (operating expenses)</b> — операционные расходы.<br><span style="color:var(--muted)">Проще: регулярные платежи за содержание объекта.</span></span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача A · Сравнение</div><h2>Сервисы: <em>сравнение и флагман</em></h2><div class="body"><table class="datatable" style="font-size:13px"><thead><tr><th>Сервис</th><th>Контур</th><th>Сильные стороны</th><th>Ограничения</th><th>Когда выбирать</th></tr></thead><tbody><tr><td>Gemini</td><td><span class="contour ext">расширенный</span></td><td>анализ загруженной таблицы и поиск слабых допущений; при включённом поиске предлагает источники со ссылками</td><td>ссылки проверяются вручную; без загрузки нет привязки к таблице</td><td>красная команда</td></tr><tr><td>DeepSeek</td><td><span class="contour main">основной</span></td><td>структурирует перечень допущений</td><td>таблица вставляется текстом; ссылки проверяются вручную</td><td>основной контур</td></tr><tr><td>Алиса AI</td><td><span class="contour main">основной</span></td><td>структурирует перечень допущений</td><td>таблица вставляется текстом; ссылки проверяются вручную</td><td>запасной вариант</td></tr></tbody></table><p class="src">Проверить перед лекцией: функции и ограничения меняются</p><p class="note" style="margin-top:8px"><b>Флагман по критерию:</b> Gemini — анализирует загруженную таблицу и ищет слабые допущения; ссылки проверяются вручную.</p><div class="band" style="margin-top:12px"><b>Вывод:</b> Флагман выбирается по работе с загруженной таблицей; расчёт остаётся в таблице.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Допущение</b> — предположение, принятое в модели без подтверждения данными.</span><span><b>LLM (Large Language Model)</b> — большая языковая модель.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача A · Промпт</div><h2>Промпт <em>красной команды</em></h2><div class="body"><div class="prompt">Действуй как красная команда инвестиционного комитета. Я загрузил таблицу финансовой модели: доходы, CAPEX, OPEX, допущения с источниками. Найди 5–7 самых слабых допущений. Для каждого укажи: допущение, почему слабое, что нужно проверить и по какому источнику, как изменится результат (направление, не числа). Не пересчитывай модель и не придумывай новых цифр; не указывай значения, которых нет в таблице.</div><div class="band" style="margin-top:12px"><b>Вывод:</b> Промпт ограничивает модель поиском проверок, а не расчётом.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Красная команда</b> — роль, которая ищет слабые места решения.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span><span><b>OPEX (operating expenses)</b> — операционные расходы.</span><span><b>Промпт</b> — текстовая инструкция модели.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача A · Клики и проверка</div><h2>Шаги <em>и проверка</em></h2><div class="body">
 <div class="numlist">
 <div class="nl"><div class="n">1</div><p>Загрузить таблицу доходов, капитальных и операционных расходов, допущений.</p></div>
@@ -402,6 +463,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <div class="nl"><div class="n">5</div><p>Сохранить список проверок в рабочей тетради.</p></div>
 </div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Проверка принимается после сверки с таблицей и источниками.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Допущение</b> — предположение, принятое в модели без подтверждения данными.</span><span><b>Промпт</b> — текстовая инструкция модели.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача A · Сбой и контур</div><h2>Путь в <em>основном контуре</em></h2><div class="body">
 <div class="two">
 <div class="bx"><h4>Типичный сбой</h4><ul>
@@ -413,11 +475,15 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>таблица вставляется текстом;</li>
 <li>расчёт и проверка остаются в таблице.</li></ul></div></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Основной контур даёт список проверок, но не расчёт.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Допущение</b> — предположение, принятое в модели без подтверждения данными.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача B · Часть 1 · оба трека</div><h2>Проверить <em>чувствительность</em></h2><div class="body">
 <table class="datatable" style="font-size:14px"><thead><tr><th>Сценарий</th><th>Что меняем</th><th>Формула в таблице</th></tr></thead><tbody><tr><td>Ставка аренды</td><td>допущение в строке</td><td>Годовой доход = площадь × ставка за м² в месяц × 12 × загрузка</td></tr><tr><td>Загрузка</td><td>допущение в строке</td><td>Годовой доход = площадь × ставка за м² в месяц × 12 × загрузка</td></tr><tr><td>Капитальные затраты</td><td>статьи затрат</td><td>Итог = сумма статей</td></tr><tr><td>Окупаемость</td><td>срок</td><td>считается формулой по вашей модели из темы 2.2</td></tr></tbody></table><p class="note" style="margin-top:8px"><b>Граница:</b> NPV и IRR — только если они уже есть в модели.</p>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Чувствительность показывает направление изменения, а не придумывает числа.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Чувствительность</b> — как меняется результат при изменении одного допущения.</span><span><b>NPV (Net Present Value)</b> — чистая приведённая стоимость.</span><span><b>IRR (Internal Rate of Return)</b> — внутренняя норма доходности.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача B · Сравнение</div><h2>Сервисы: <em>те же, расчёт в таблице</em></h2><div class="body"><table class="datatable" style="font-size:13px"><thead><tr><th>Сервис</th><th>Контур</th><th>Сильные стороны</th><th>Ограничения</th><th>Когда выбирать</th></tr></thead><tbody><tr><td>Gemini</td><td><span class="contour ext">расширенный</span></td><td>предлагает сценарии стресса по загруженной таблице</td><td>числа изменений задаются вручную; ссылки проверяются</td><td>сценарии</td></tr><tr><td>DeepSeek</td><td><span class="contour main">основной</span></td><td>структурирует перечень сценариев</td><td>таблица вставляется текстом; расчёт в таблице</td><td>основной контур</td></tr><tr><td>Алиса AI</td><td><span class="contour main">основной</span></td><td>структурирует перечень сценариев</td><td>таблица вставляется текстом; расчёт в таблице</td><td>запасной вариант</td></tr></tbody></table><p class="src">Проверить перед лекцией: функции и ограничения меняются</p><p class="note" style="margin-top:8px"><b>Флагман по критерию:</b> Gemini — предлагает сценарии стресса; расчёт выполняет таблица.</p><div class="band" style="margin-top:12px"><b>Вывод:</b> Модель предлагает сценарии; таблица считает результат.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Стресс-тест</b> — проверка решения при ухудшении допущений.</span><span><b>Чувствительность</b> — как меняется результат при изменении одного допущения.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача B · Промпт</div><h2>Промпт для <em>сценариев стресса</em></h2><div class="body"><div class="prompt">Предложи [5] сценариев стресса для моей модели: какое допущение менять, в какую сторону и почему. Числа изменений оставь полями для меня.</div><p class="note" style="margin-top:10px"><b>Проверка:</b> пересчитать 1–2 сценария в таблице; NPV и IRR — только если они уже есть в модели, формулой.</p><div class="band" style="margin-top:12px"><b>Вывод:</b> Промпт задаёт сценарии, а числа и расчёт остаются в таблице.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Промпт</b> — текстовая инструкция модели.</span><span><b>NPV (Net Present Value)</b> — чистая приведённая стоимость: будущие денежные потоки, пересчитанные на сегодня.</span><span><b>IRR (Internal Rate of Return)</b> — внутренняя норма доходности: ставка, при которой NPV равна нулю.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача B · Клики и проверка</div><h2>Шаги <em>и проверка</em></h2><div class="body">
 <div class="numlist">
 <div class="nl"><div class="n">1</div><p>Выбрать 1–2 сценария из предложенных.</p></div>
@@ -427,6 +493,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <div class="nl"><div class="n">5</div><p>Сохранить сценарий и вывод в рабочей тетради.</p></div>
 </div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Сценарий принимается после пересчёта в таблице.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Чувствительность</b> — как меняется результат при изменении одного допущения.</span><span><b>NPV (Net Present Value)</b> — чистая приведённая стоимость.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача B · Сбой и контур</div><h2>Путь в <em>основном контуре</em></h2><div class="body">
 <div class="two">
 <div class="bx"><h4>Типичный сбой</h4><ul>
@@ -438,7 +505,13 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>сценарии задаются в таблице;</li>
 <li>результат считается формулой и проверяется вручную.</li></ul></div></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Основной контур предлагает сценарии, а считает таблица.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Стресс-тест</b> — проверка решения при ухудшении допущений.</span><span><b>NPV (Net Present Value)</b> — чистая приведённая стоимость.</span><span><b>IRR (Internal Rate of Return)</b> — внутренняя норма доходности.</span></div></section>
+
 <section class="slide part-divider" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="num">Часть 2</div><div class="kick">Тема 2.4 · Стресс-тест финмодели</div><h1>Юридический контур и экономика на одном листе</h1><p class="meta">Для Трека Б — вопросы юристу; для Трека А — сводка и отзыв.</p></section>
+
+<section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финансовой модели"><div class="kick">Условия отказа</div><h2>Условия отказа и <em>чувствительность</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>условие отказа формулируется до расчёта;</li><li>порог вводит слушатель, колода его не задаёт;</li><li>меняем одно допущение за раз;</li><li>если порог перейдён — решение меняется.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> Стресс-тест отвечает, при каком изменении решение перестаёт работать.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Чувствительность</b> — как меняется результат при изменении одного допущения.<br><span style="color:var(--muted)">Проще: насколько результат зависит от одного числа.</span></span><span><b>Допущение</b> — предположение, принятое в модели без подтверждения данными.<br><span style="color:var(--muted)">Проще: число, взятое без документа.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финансовой модели"><div class="kick">Юрист</div><h2>Вопросы юристу: <em>что и зачем</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>ПЗЗ: какая функция допустима и на каком основании;</li><li>БТИ: какие площади и конструктив подтверждены;</li><li>ЗОУИТ: какие ограничения действуют на участке и здание;</li><li>ответ юриста возвращается в модель как допущение или запрет.</li></ul></div><p class="note"><b>Пример:</b> C52: ПЗЗ, БТИ, ЗОУИТ — нет данных: нужны выписка ПЗЗ, технический паспорт БТИ и сведения ЗОУИТ.</p><div class="band" style="margin-top:12px"><b>Вывод:</b> Вопрос к юристу закрывает пробел, а не заменяет документ.</div></div><div class="terms"><span class="lab">Термины</span><span><b>ПЗЗ</b> — правила землепользования и застройки города.<br><span style="color:var(--muted)">Проще: что можно строить на участке.</span></span><span><b>БТИ</b> — бюро технической инвентаризации: технический паспорт и поэтажные планы.<br><span style="color:var(--muted)">Проще: официальные технические чертежи здания.</span></span><span><b>ЗОУИТ</b> — зоны с особыми условиями использования территорий.<br><span style="color:var(--muted)">Проще: ограничения на участке.</span></span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача C · Часть 2 · Для Трека Б</div><h2>Собрать <em>вопросы юристу</em></h2><div class="body">
 <div class="bx"><h4>Вход и результат</h4><ul>
 <li>вход: форма реализации, тип объекта, функция;</li>
@@ -446,8 +519,11 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>права, вид использования, обременения, договоры аренды;</li>
 <li>юридическое заключение не формируется.</li></ul></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Перечень вопросов помогает подготовить консультацию с юристом.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Форма реализации</b> — способ получения дохода от объекта: аренда, продажа, смешанная.</span><span><b>ЕГРН</b> — Единый государственный реестр недвижимости.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача C · Сравнение · Для Трека Б</div><h2>Сервисы: <em>сравнение и флагман</em></h2><div class="body"><table class="datatable" style="font-size:13px"><thead><tr><th>Сервис</th><th>Контур</th><th>Сильные стороны</th><th>Ограничения</th><th>Когда выбирать</th></tr></thead><tbody><tr><td>Gemini</td><td><span class="contour ext">расширенный</span></td><td>структурирует перечень вопросов со ссылками на источники права</td><td>ссылки проверяются юристом; без загрузки нет привязки к объекту</td><td>вопросы юристу</td></tr><tr><td>DeepSeek</td><td><span class="contour main">основной</span></td><td>структурирует перечень вопросов</td><td>без загрузки документов нет привязки к объекту</td><td>основной контур</td></tr><tr><td>Алиса AI</td><td><span class="contour main">основной</span></td><td>структурирует перечень вопросов</td><td>без загрузки документов нет привязки к объекту</td><td>запасной вариант</td></tr></tbody></table><p class="src">Проверить перед лекцией: функции и ограничения меняются</p><p class="note" style="margin-top:8px"><b>Флагман по критерию:</b> Gemini — структурирует перечень вопросов со ссылками на источники права.</p><div class="band" style="margin-top:12px"><b>Вывод:</b> Флагман выбирается по структуре вопросов; заключение даёт юрист.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Форма реализации</b> — способ получения дохода от объекта: аренда, продажа, смешанная.</span><span><b>ПЗЗ</b> — правила землепользования и застройки города.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача C · Промпт · Для Трека Б</div><h2>Промпт для <em>вопросов юристу</em></h2><div class="body"><div class="prompt">Действуй как консультант по недвижимости. Дано: [форма реализации: аренда / продажа / смешанная], объект [тип], сценарий [функция]. Составь перечень вопросов, которые нужно задать юристу (права на объект, вид использования, обременения, договоры аренды). Ссылки на нормы указывай только если уверен; если нет, пиши «нужна проверка юристом». Не давай юридических заключений.</div><div class="band" style="margin-top:12px"><b>Вывод:</b> Промпт формирует вопросы, но не подменяет юридическое заключение.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Форма реализации</b> — способ получения дохода от объекта: аренда, продажа, смешанная.</span><span><b>ЕГРН</b> — Единый государственный реестр недвижимости.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача C · Клики и проверка · Для Трека Б</div><h2>Шаги <em>и проверка</em></h2><div class="body">
 <div class="numlist">
 <div class="nl"><div class="n">1</div><p>Загрузить вводные: форма реализации, объект, функция.</p></div>
@@ -457,6 +533,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <div class="nl"><div class="n">5</div><p>Сохранить перечень для консультации.</p></div>
 </div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Перечень принимается после проверки привязки к объекту.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Форма реализации</b> — способ получения дохода от объекта: аренда, продажа, смешанная.</span><span><b>ЕГРН</b> — Единый государственный реестр недвижимости.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача C · Сбой и контур · Для Трека Б</div><h2>Путь в <em>основном контуре</em></h2><div class="body">
 <div class="two">
 <div class="bx"><h4>Типичный сбой</h4><ul>
@@ -468,6 +545,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>вводные вставляются текстом;</li>
 <li>каждый вопрос и ссылка проверяются юристом.</li></ul></div></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Основной контур формирует вопросы; юридическую проверку делает юрист.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Форма реализации</b> — способ получения дохода от объекта: аренда, продажа, смешанная.</span><span><b>ПЗЗ</b> — правила землепользования и застройки города.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача D · Часть 2 · Для Трека А</div><h2>Собрать <em>экономику на одном листе</em></h2><div class="body">
 <div class="bx"><h4>Вход и результат</h4><ul>
 <li>вход: площади, доходы, CAPEX, OPEX;</li>
@@ -475,8 +553,11 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>модель только структурирует;</li>
 <li>отзыв — 5 замечаний на работу напарника.</li></ul></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Один лист показывает структуру; расчёт остаётся в таблице.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span><span><b>OPEX (operating expenses)</b> — операционные расходы.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача D · Сравнение · Для Трека А</div><h2>Сервисы: <em>сравнение и флагман</em></h2><div class="body"><table class="datatable" style="font-size:13px"><thead><tr><th>Сервис</th><th>Контур</th><th>Сильные стороны</th><th>Ограничения</th><th>Когда выбирать</th></tr></thead><tbody><tr><td>Gemini</td><td><span class="contour ext">расширенный</span></td><td>структурирует сводку и замечания по заданному шаблону</td><td>не пересчитывает таблицу; каждое замечание проверяется</td><td>сводка и отзыв</td></tr><tr><td>DeepSeek</td><td><span class="contour main">основной</span></td><td>структурирует текст по шаблону</td><td>таблица вставляется текстом; расчёт в таблице</td><td>основной контур</td></tr><tr><td>Алиса AI</td><td><span class="contour main">основной</span></td><td>структурирует текст по шаблону</td><td>таблица вставляется текстом; расчёт в таблице</td><td>запасной вариант</td></tr></tbody></table><p class="src">Проверить перед лекцией: функции и ограничения меняются</p><p class="note" style="margin-top:8px"><b>Флагман по критерию:</b> Gemini — структурирует сводку и замечания по заданному шаблону; расчёт остаётся в таблице.</p><div class="band" style="margin-top:12px"><b>Вывод:</b> Флагман выбирается по структуре; проверка остаётся за таблицей.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span><span><b>OPEX (operating expenses)</b> — операционные расходы.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача D · Промпт · Для Трека А</div><h2>Промпты <em>листа и отзыва</em></h2><div class="body"><div class="prompt tight"><b>Лист:</b> Собери одностраничную сводку из моей таблицы: площади, доходы, CAPEX, OPEX, ключевые допущения. Используй только данные таблицы.</div><div class="prompt tight"><b>Отзыв:</b> Вот модель напарника. Сформулируй 5 замечаний по схеме: что вижу, почему важно, что предлагаю проверить.</div><div class="band" style="margin-top:12px"><b>Вывод:</b> Оба промпта структурируют, но не пересчитывают модель.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Промпт</b> — текстовая инструкция модели.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span><span><b>OPEX (operating expenses)</b> — операционные расходы.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача D · Клики и проверка · Для Трека А</div><h2>Шаги <em>и проверка</em></h2><div class="body">
 <div class="numlist">
 <div class="nl"><div class="n">1</div><p>Выгрузить таблицу площадей, доходов, CAPEX и OPEX.</p></div>
@@ -486,6 +567,9 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <div class="nl"><div class="n">5</div><p>Сверить замечания с моделью напарника.</p></div>
 </div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Сводка и отзыв принимаются после сверки с таблицей.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Промпт</b> — текстовая инструкция модели.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span><span><b>OPEX (operating expenses)</b> — операционные расходы.</span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финансовой модели"><div class="kick">Ошибки</div><h2>Типичные <em>ошибки</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>модель пересчитала таблицу вместо проверки;</li><li>сценарий остался без допущения и источника;</li><li>порог решения не задан;</li><li>юридический ответ принят за заключение.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> Ошибки стресс-теста — это подмена проверки расчётом.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Красная команда</b> — роль, которая ищет слабые места решения.<br><span style="color:var(--muted)">Проще: тот, кто ищет, где решение сломается.</span></span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финмодели"><div class="kick">Задача D · Сбой и контур · Для Трека А</div><h2>Путь в <em>основном контуре</em></h2><div class="body">
 <div class="two">
 <div class="bx"><h4>Типичный сбой</h4><ul>
@@ -498,6 +582,8 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>каждая цифра и замечание проверяются вручную.</li></ul></div></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Основной контур структурирует, но не заменяет расчёт.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span><span><b>OPEX (operating expenses)</b> — операционные расходы.</span></div></section>
 
+<section class="slide has-terms" data-foot="Тема 2.4 · Стресс-тест финансовой модели"><div class="kick">Задание №3</div><h2>Что берём <em>в Задание №3</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>список слабых допущений с источниками;</li><li>сценарии стресса и пороги решения;</li><li>перечень вопросов юристу;</li><li>лист экономики и отзыв на работу.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> В Задание №3 уходит проверка модели, а не новая модель.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Допущение</b> — предположение, принятое в модели без подтверждения данными.<br><span style="color:var(--muted)">Проще: число, взятое без документа.</span></span></div></section>
+
 <div class="foot" id="foot"><span id="footText">Тема 2.4 · Стресс-тест финмодели</span><span><a href="https://ai2arch.ru/redev-schedule.html" target="_blank" rel="noopener">Расписание ↗</a></span></div>
   </div>
  </div>
@@ -508,10 +594,44 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
    <button id="tocBtn" class="toc-btn" type="button" aria-label="Содержание" title="Содержание" aria-haspopup="true" aria-expanded="false">☰</button>
    <button id="next" aria-label="Вперёд" title="Вперёд">›</button>
    <button id="fs" aria-label="Развернуть на весь экран" title="На весь экран (F)">⤢</button>
+   <a class="prompts-link" href="#prompts">Промпты</a>
    <span class="hint">← → листать · F — полный экран</span>
    <div class="toc-menu" id="tocMenu" role="menu" aria-label="Содержание"></div>
  </div>
 </div>
+
+<section class="prompts-section" id="prompts">
+  <div class="prompts-inner">
+    <h2>Промпты темы 2.4</h2>
+    <p class="prompts-lead">Скопируйте промпт, подставьте свои данные вместо значений в квадратных скобках и проверьте результат по первоисточнику</p>
+    <div class="prompts-grid">
+      <article class="prompt-card">
+        <div class="prompt-card-head"><div><div class="prompt-part">Часть 1</div><h3>Красная команда</h3></div></div>
+        <div class="prompt-toolbar"><button class="copy-btn" type="button" data-copy="st-prompt-1">Копировать</button></div>
+        <div class="prompt-text" id="st-prompt-1">Действуй как красная команда инвестиционного комитета. Я загрузил таблицу финансовой модели: доходы, CAPEX, OPEX, допущения с источниками. Найди 5–7 самых слабых допущений. Для каждого укажи: допущение, почему слабое, что нужно проверить и по какому источнику, как изменится результат (направление, не числа). Не пересчитывай модель и не придумывай новых цифр; не указывай значения, которых нет в таблице.</div>
+        <p class="prompt-fill"><b>Что подставить:</b> таблица доходов, CAPEX, OPEX и допущения</p>
+      </article>
+      <article class="prompt-card">
+        <div class="prompt-card-head"><div><div class="prompt-part">Часть 1</div><h3>Сценарии стресса</h3></div></div>
+        <div class="prompt-toolbar"><button class="copy-btn" type="button" data-copy="st-prompt-2">Копировать</button></div>
+        <div class="prompt-text" id="st-prompt-2">Предложи [5] сценариев стресса для моей модели: какое допущение менять, в какую сторону и почему. Числа изменений оставь полями для меня.</div>
+        <p class="prompt-fill"><b>Что подставить:</b> [5] сценариев</p>
+      </article>
+      <article class="prompt-card">
+        <div class="prompt-card-head"><div><div class="prompt-part">Часть 2</div><h3>Вопросы юристу</h3></div></div>
+        <div class="prompt-toolbar"><button class="copy-btn" type="button" data-copy="st-prompt-3">Копировать</button></div>
+        <div class="prompt-text" id="st-prompt-3">Действуй как консультант по недвижимости. Дано: [форма реализации: аренда / продажа / смешанная], объект [тип], сценарий [функция]. Составь перечень вопросов, которые нужно задать юристу (права на объект, вид использования, обременения, договоры аренды). Ссылки на нормы указывай только если уверен; если нет, пиши «нужна проверка юристом». Не давай юридических заключений.</div>
+        <p class="prompt-fill"><b>Что подставить:</b> форма реализации, тип объекта, функция</p>
+      </article>
+      <article class="prompt-card">
+        <div class="prompt-card-head"><div><div class="prompt-part">Часть 2</div><h3>Лист экономики и отзыв</h3></div></div>
+        <div class="prompt-toolbar"><button class="copy-btn" type="button" data-copy="st-prompt-4">Копировать</button></div>
+        <div class="prompt-text" id="st-prompt-4"><b>Лист:</b> Собери одностраничную сводку из моей таблицы: площади, доходы, CAPEX, OPEX, ключевые допущения. Используй только данные таблицы.<br><br><b>Отзыв:</b> <b>Отзыв:</b> Вот модель напарника. Сформулируй 5 замечаний по схеме: что вижу, почему важно, что предлагаю проверить.</div>
+        <p class="prompt-fill"><b>Что подставить:</b> таблица и модель напарника</p>
+      </article>
+    </div>
+  </div>
+</section>
 
 <script>
 (function(){
@@ -615,7 +735,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     closeToc();
   });
 
-  function go(i){
+  function go(i, writeHash){
     if(i<0||i>=total) return;
     slides[cur].classList.remove('active');
     cur=i; slides[cur].classList.add('active');
@@ -624,7 +744,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     prev.disabled=cur===0; next.disabled=cur===total-1;
     prog.style.width=((cur+1)/total*100)+'%';
     updateProgress();
-    try{history.replaceState(null,'','#slide-'+(cur+1));}catch(e){}
+    if(writeHash!==false){try{history.replaceState(null,'','#slide-'+(cur+1));}catch(e){}}
   }
   prev.onclick=function(){go(cur-1)}; next.onclick=function(){go(cur+1)};
   function fit(){
@@ -641,6 +761,9 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
   fs.onclick=toggleFs;
   document.addEventListener('fullscreenchange',function(){setTimeout(fit,60)});
   document.addEventListener('keydown',function(e){
+    var prompts=document.getElementById('prompts');
+    if(prompts && (e.target.closest && e.target.closest('#prompts'))) return;
+    if(prompts && prompts.getBoundingClientRect().top < window.innerHeight - 40) return;
     if(e.key==='Escape'){closeToc();return;}
     if(['ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(cur+1);}
     else if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(cur-1);}
@@ -659,14 +782,52 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     return Math.min(Math.max(parseInt(m[1],10)-1,0),total-1);
   }
   window.addEventListener('hashchange',function(){
+    if(location.hash==='#prompts'){
+      var p=document.getElementById('prompts'); if(p) p.scrollIntoView();
+      return;
+    }
     var idx=parseHash();
     if(idx!==cur) go(idx);
   });
 
   buildProgress();
   buildToc();
-  go(parseHash());
+  var initialPrompts=location.hash==='#prompts';
+  go(parseHash(),!initialPrompts);
+  if(initialPrompts){setTimeout(function(){var p=document.getElementById('prompts');if(p)p.scrollIntoView();},0);}
   fit();
+})();
+</script>
+<script>
+(function(){
+  if (window.self !== window.top) {
+    var embeddedPrompts = document.getElementById('prompts');
+    var embeddedLink = document.querySelector('.prompts-link');
+    if (embeddedPrompts) embeddedPrompts.style.display = 'none';
+    if (embeddedLink) embeddedLink.style.display = 'none';
+  }
+  function fallback(text){
+    var ta=document.createElement('textarea');
+    ta.value=text; ta.setAttribute('readonly','');
+    ta.style.position='fixed'; ta.style.left='-9999px';
+    document.body.appendChild(ta); ta.select();
+    try{document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);
+  }
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var el=document.getElementById(btn.getAttribute('data-copy'));
+      if(!el) return;
+      var text=el.textContent;
+      var done=function(){
+        btn.textContent='Скопировано'; btn.classList.add('copied');
+        setTimeout(function(){btn.textContent='Копировать';btn.classList.remove('copied');},2000);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){fallback(text);done();});
+      }else{fallback(text);done();}
+    });
+  });
 })();
 </script>
 </body>
