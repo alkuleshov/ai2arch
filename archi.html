@@ -258,6 +258,33 @@
   .shot figcaption { font-size:13px; color:var(--ink-faint); margin-top:8px; }
   @media (max-width:640px) { .shots { grid-template-columns:minmax(0,1fr); } }
 
+  /* отзывы и проекты */
+  .reviews-section { scroll-margin-top:calc(var(--nav-h) + 16px); }
+  .reviews-nav { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 4px; }
+  .reviews-nav a { display:inline-flex; align-items:center; min-height:36px; padding:7px 12px; border:1px solid var(--border); border-radius:9px; background:var(--surface); color:var(--ink-muted); font-size:12.5px; font-weight:700; text-decoration:none; }
+  .reviews-nav a:hover { border-color:var(--azure); color:var(--ink); }
+  .review-sub { margin-top:34px; scroll-margin-top:calc(var(--nav-h) + 18px); }
+  .review-sub h3 { margin:0 0 14px; font-size:clamp(21px,2.4vw,26px); }
+  .work-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; align-items:stretch; }
+  .work-card { display:flex; flex-direction:column; height:100%; background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:18px; }
+  .work-card h4 { font-size:18px; line-height:1.25; margin:0 0 5px; color:var(--ink); }
+  .work-author { font-size:12.5px; line-height:1.45; color:var(--ink-faint); margin:0 0 10px; }
+  .work-author b { color:var(--ink); }
+  .work-ai { font-size:13px; line-height:1.5; color:var(--ink-muted); margin:0 0 12px; }
+  .work-ai b, .work-result b { color:var(--ink); }
+  .work-media { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; margin:0 0 12px; }
+  .work-media.one { grid-template-columns:minmax(0,1fr); }
+  .work-media img { width:100%; height:104px; object-fit:cover; display:block; border:1px solid var(--border); border-radius:8px; background:var(--bg); }
+  .work-media.one img { height:190px; object-fit:cover; }
+  .work-result { font-size:13px; line-height:1.5; color:var(--ink-muted); margin:auto 0 0; }
+  .work-quote { margin:12px 0 0; padding:12px 14px; border-left:3px solid var(--azure); background:var(--bg); border-radius:0 9px 9px 0; font-size:13.5px; line-height:1.55; color:var(--ink); }
+  @media (max-width:760px) {
+    .work-grid { grid-template-columns:minmax(0,1fr); }
+    .work-media img { height:92px; }
+    .work-media.one img { height:170px; }
+    .reviews-nav a { width:100%; justify-content:center; }
+  }
+
   /* отзывы */
   .cases-h { margin:40px 0 14px; }
   .flow-tag { display:inline-flex; align-items:center; padding:3px 8px; border-radius:5px; background:var(--accent-l,#EBF4FF); color:var(--accent,#4DA3FF); font-size:11.5px; font-weight:800; letter-spacing:.02em; }
@@ -595,119 +622,105 @@
 </section>
 
 <!-- ═══ КЕЙСЫ И ОТЗЫВЫ ═══ -->
-<section class="sec alt" id="cases">
+<section class="sec alt reviews-section" id="reviews">
   <div class="wrap">
     <div class="kicker">Примеры работ</div>
     <h2>Что получается на выходе</h2>
     <p class="lead">Курс прошли 17 слушателей. Ниже — примеры их итоговых проектов и учебные задания курса.</p>
-    <div class="card"><h3>Итоговый проект</h3><p>К защите вы приходите с проектом по своему участку: цифровая модель территории в QGIS, ИИ-анализ с прогнозом сценариев, несколько вариантов решений с визуализациями и интерактивная презентация, собранная в Gamma.</p></div>
-    <h3 class="cases-h">Учебные задания курса</h3>
-    <div class="shots">
-      <figure class="shot wide"><img src="images/rostov-naberezhnaya-gallery.jpg" loading="lazy" alt="Детская площадка на набережной в Ростове-на-Дону: визуализации, генплан и список материалов"><figcaption>Учебное задание курса: детская площадка на набережной. Визуализации, генплан и список материалов получены по одному промпту.</figcaption></figure>
-      <figure class="shot"><img src="images/elista-mandala-genplan.jpg" loading="lazy" alt="Генплан детской площадки «Мандала степи» в Элисте"><figcaption>Генплан с функциональными зонами и легендой.</figcaption></figure>
-      <figure class="shot"><img src="images/elista-mandala-vizualizacii.jpg" loading="lazy" alt="Визуализации детской площадки «Мандала степи» с разных ракурсов"><figcaption>Визуализации той же площадки с разных ракурсов.</figcaption></figure>
-    </div>
 
-    <h3 class="cases-h">Итоговые проекты <span class="flow-tag">1 поток</span></h3>
-    <div class="shots">
-      <figure class="shot wide"><img src="images/case-greenpocket-hero.jpg" loading="lazy" alt="Концепция ревитализации гаражного кооператива в Ростове-на-Дону: пешеходный бульвар"><figcaption>Итоговый проект слушателя, трек А. Редевелопмент территории бывшего гаражного кооператива в Ростове-на-Дону — концепция парка «Зелёный карман».</figcaption></figure>
-      <figure class="shot"><img src="images/case-greenpocket-genplan.jpg" loading="lazy" alt="Генплан парка на месте гаражного кооператива"><figcaption>Генплан территории с функциональными зонами.</figcaption></figure>
-      <figure class="shot"><img src="images/case-greenpocket-fragment.jpg" loading="lazy" alt="Визуализация фрагмента парка"><figcaption>Визуализация одной из зон парка.</figcaption></figure>
-      <figure class="shot wide"><img src="images/case-winery-vizualizacii.jpg" loading="lazy" alt="Архитектурная визуализация концепции винодельни"><figcaption>Итоговый проект слушателя, трек Б. Концепция винодельни — визуализации собраны по промптам на основе данных анализа участка.</figcaption></figure>
-      <figure class="shot wide"><img src="images/case-anapa-park-vizualizacii.jpg" loading="lazy" alt="Визуализация благоустройства детской площадки на реке Анапка"><figcaption>Итоговый проект слушателя, трек А. Благоустройство прибрежной территории в Анапе — визуализации по итогам геоаналитики в QGIS.</figcaption></figure>
-    </div>
-    <div class="reviews-block" id="reviews">
-      <h3 class="cases-h">Отзывы слушателей</h3>
-      <p class="reviews-lead">Что слушатели хотели получить от курса, что получили и какой проект защитили.</p>
-      <div class="reviews">
-      <!--
-        Шаблон карточки отзыва. Новые потоки добавлять сверху.
-        <article class="review">
-          <div class="review-main">
-            <div class="review-head">
-              <div class="review-avatar" aria-hidden="true">И</div>
-              <div class="review-id">
-                <div class="review-name">Имя <span class="flow-tag">3 поток</span></div>
-                <div class="review-status">статус</div>
-                <a class="review-contact" href="…">@контакт</a>
-              </div>
-            </div>
-            <p class="review-request"><b>Запрос:</b> «…»</p>
-            <blockquote class="review-quote"><b>Отзыв:</b> «…»</blockquote>
-            <p class="review-project"><b>Проект:</b> …</p>
-          </div>
-          <div class="review-shots">
-            <figure class="shot"><img src="images/reviews/…" loading="lazy" alt="…"></figure>
-            <figure class="shot"><img src="images/reviews/…" loading="lazy" alt="…"></figure>
-            <figure class="shot"><img src="images/reviews/…" loading="lazy" alt="…"></figure>
-          </div>
+    <nav class="reviews-nav" aria-label="Разделы отзывов">
+      <a href="#student-projects">Итоговые проекты слушателей</a>
+      <a href="#course-tasks">Учебные задания курса</a>
+      <a href="#student-reviews">Что говорят слушатели</a>
+    </nav>
+
+    <div class="review-sub" id="student-projects">
+      <h3>Итоговые проекты слушателей</h3>
+      <div class="work-grid">
+        <article class="work-card">
+          <h4>«Катарсис»</h4>
+          <p class="work-author"><b>Анастасия</b> · студентка бакалавриата НИУ МГСУ</p>
+          <p class="work-ai"><b>С помощью ИИ:</b> промптинг, работа с иностранными сервисами, анализ среды.</p>
+          <div class="work-media"><img src="images/reviews/katarsis-4.jpg" loading="lazy" alt="Превью 1 проекта «Катарсис»"><img src="images/reviews/katarsis-6.jpg" loading="lazy" alt="Превью 2 проекта «Катарсис»"><img src="images/reviews/katarsis-10.jpg" loading="lazy" alt="Превью 3 проекта «Катарсис»"></div>
+          <p class="work-result"><b>Результат:</b> многофункциональный спортивно-игровой комплекс, Ейск.</p>
         </article>
-      -->
-      <article class="review">
-        <div class="review-main">
-          <div class="review-head">
-            <div class="review-avatar" aria-hidden="true">А</div>
-            <div class="review-id">
-              <div class="review-name">Анастасия <span class="flow-tag">2 поток</span></div>
-              <div class="review-status">студентка бакалавриата НИУ МГСУ</div>
-            </div>
-          </div>
-          <p class="review-request"><b>Запрос:</b> «Хотелось научиться работать с искусственным интеллектом, оптимизировать рутинные задачи и улучшить навыки создания визуализаций»</p>
-          <blockquote class="review-quote"><b>Отзыв:</b> «Освоила навыки промптинга, лучше понимаю работу с иностранными сервисами, углубилась в работу с анализом среды»</blockquote>
-          <p class="review-project"><b>Проект:</b> «Катарсис» — многофункциональный спортивно-игровой комплекс, Ейск</p>
-        </div>
-        <div class="review-shots"><figure class="shot"><img src="images/reviews/katarsis-4.jpg" loading="lazy" alt="Превью 1 проекта «Катарсис»"></figure><figure class="shot"><img src="images/reviews/katarsis-6.jpg" loading="lazy" alt="Превью 2 проекта «Катарсис»"></figure><figure class="shot"><img src="images/reviews/katarsis-10.jpg" loading="lazy" alt="Превью 3 проекта «Катарсис»"></figure></div>
-      </article>
-      <article class="review">
-        <div class="review-main">
-          <div class="review-head">
-            <div class="review-avatar" aria-hidden="true">А</div>
-            <div class="review-id">
-              <div class="review-name">Александра <span class="flow-tag">2 поток</span></div>
-              <div class="review-status">ЮФУ</div>
-            </div>
-          </div>
-          <p class="review-request"><b>Запрос:</b> «Хотелось освоить ИИ для подачи проекта, а также QGIS для разработки планов»</p>
-          <blockquote class="review-quote"><b>Отзыв:</b> «Например, ситуационную схему я брала в QGIS, так как он сохранял в нужном формате, а ИИ помог мне наложить текстуры на 3D-модель и развёртку»</blockquote>
-          <p class="review-project"><b>Проект:</b> «Донская природа» — концепция благоустройства общественного пространства и детского парка</p>
-        </div>
-        <div class="review-shots"><figure class="shot"><img src="images/reviews/donskaya-4.jpg" loading="lazy" alt="Превью 1 проекта «Донская природа»"></figure><figure class="shot"><img src="images/reviews/donskaya-7.jpg" loading="lazy" alt="Превью 2 проекта «Донская природа»"></figure><figure class="shot"><img src="images/reviews/donskaya-11.jpg" loading="lazy" alt="Превью 3 проекта «Донская природа»"></figure></div>
-      </article>
-      <article class="review">
-        <div class="review-main">
-          <div class="review-head">
-            <div class="review-avatar" aria-hidden="true">Т</div>
-            <div class="review-id">
-              <div class="review-name">Татьяна <span class="flow-tag">2 поток</span></div>
-              <div class="review-status">архитектор, «АСИ проект»</div>
-            </div>
-          </div>
-          <p class="review-request"><b>Запрос:</b> «Хотелось повысить свой уровень знаний, изучить новые программы и познакомиться с ИИ»</p>
-          <blockquote class="review-quote"><b>Отзыв:</b> «Прошла курс по ИИ в архитектуре. Освоила QGIS, научилась формировать и использовать референсы для ИИ, закрепила навыки постобработки в Photoshop. Теперь уверенно комбинирую генеративные методы и ручную доработку для качественных архитектурных визуализаций»</blockquote>
-          <p class="review-project"><b>Проект:</b> «Благоустройство Пионерской рощи», Новороссийск, концепция 2026</p>
-        </div>
-        <div class="review-shots"><figure class="shot"><img src="images/reviews/pionerskaya-1.jpg" loading="lazy" alt="Превью 1 проекта «Благоустройство Пионерской рощи»"></figure><figure class="shot"><img src="images/reviews/pionerskaya-5.jpg" loading="lazy" alt="Превью 2 проекта «Благоустройство Пионерской рощи»"></figure><figure class="shot"><img src="images/reviews/pionerskaya-7.jpg" loading="lazy" alt="Превью 3 проекта «Благоустройство Пионерской рощи»"></figure></div>
-      </article>
-
-      <article class="review">
-        <div class="review-main">
-          <div class="review-head">
-            <div class="review-avatar" aria-hidden="true">А</div>
-            <div class="review-id">
-              <div class="review-name">Ангелина <span class="flow-tag">2 поток</span></div>
-              <div class="review-status">студентка ЮФУ ААИ</div>
-            </div>
-          </div>
-          <p class="review-request"><b>Запрос:</b> «Хотела ещё глубже узнать ИИ и его возможности. Основной запрос — разобраться в правильном составлении промптов».</p>
-          <blockquote class="review-quote"><b>Отзыв:</b> «Научилась создавать правильные промпты, благодаря которым стало намного проще и быстрее работать».</blockquote>
-          <p class="review-project"><b>Проект:</b> «Парк виноделов «Вуаль»», Хутор Семигорский, Новороссийск.</p>
-        </div>
-        <div class="review-shots"><figure class="shot"><img src="images/reviews/vual-5.jpg" loading="lazy" alt="Визит-центр «Вуаль» в парке виноделов — архитектурная визуализация"></figure><figure class="shot"><img src="images/reviews/vual-4.jpg" loading="lazy" alt="Генеральный план и структура парка виноделов «Вуаль»"></figure><figure class="shot"><img src="images/reviews/vual-6.jpg" loading="lazy" alt="Визуализации павильонов парка виноделов «Вуаль»: пекарня, входная зона, фестивальная площадь"></figure></div>
-      </article>
+        <article class="work-card">
+          <h4>«Донская природа»</h4>
+          <p class="work-author"><b>Александра</b> · ЮФУ</p>
+          <p class="work-ai"><b>С помощью ИИ:</b> ситуационная схема в QGIS, текстуры на 3D-модели и развёртке.</p>
+          <div class="work-media"><img src="images/reviews/donskaya-4.jpg" loading="lazy" alt="Превью 1 проекта «Донская природа»"><img src="images/reviews/donskaya-7.jpg" loading="lazy" alt="Превью 2 проекта «Донская природа»"><img src="images/reviews/donskaya-11.jpg" loading="lazy" alt="Превью 3 проекта «Донская природа»"></div>
+          <p class="work-result"><b>Результат:</b> концепция благоустройства общественного пространства и детского парка.</p>
+        </article>
+        <article class="work-card">
+          <h4>«Благоустройство Пионерской рощи»</h4>
+          <p class="work-author"><b>Татьяна</b> · архитектор, «АСИ проект»</p>
+          <p class="work-ai"><b>С помощью ИИ:</b> QGIS, референсы для ИИ, постобработка в Photoshop.</p>
+          <div class="work-media"><img src="images/reviews/pionerskaya-1.jpg" loading="lazy" alt="Превью 1 проекта «Благоустройство Пионерской рощи»"><img src="images/reviews/pionerskaya-5.jpg" loading="lazy" alt="Превью 2 проекта «Благоустройство Пионерской рощи»"><img src="images/reviews/pionerskaya-7.jpg" loading="lazy" alt="Превью 3 проекта «Благоустройство Пионерской рощи»"></div>
+          <p class="work-result"><b>Результат:</b> Новороссийск, концепция 2026.</p>
+        </article>
+        <article class="work-card">
+          <h4>«Парк виноделов «Вуаль»»</h4>
+          <p class="work-author"><b>Ангелина</b> · студентка ЮФУ ААИ</p>
+          <p class="work-ai"><b>С помощью ИИ:</b> правильные промпты для более быстрой работы.</p>
+          <div class="work-media"><img src="images/reviews/vual-5.jpg" loading="lazy" alt="Визит-центр «Вуаль» в парке виноделов — архитектурная визуализация"><img src="images/reviews/vual-4.jpg" loading="lazy" alt="Генеральный план и структура парка виноделов «Вуаль»"><img src="images/reviews/vual-6.jpg" loading="lazy" alt="Визуализации павильонов парка виноделов «Вуаль»: пекарня, входная зона, фестивальная площадь"></div>
+          <p class="work-result"><b>Результат:</b> Хутор Семигорский, Новороссийск.</p>
+        </article>
       </div>
     </div>
+
+    <div class="review-sub" id="course-tasks">
+      <h3>Учебные задания курса</h3>
+      <div class="work-grid">
+        <article class="work-card">
+          <h4>Детская площадка на набережной</h4>
+          <p class="work-author"><b>Учебное задание</b></p>
+          <p class="work-ai"><b>С помощью ИИ:</b> визуализации, генплан и список материалов получены по одному промпту.</p>
+          <div class="work-media one"><img src="images/rostov-naberezhnaya-gallery.jpg" loading="lazy" alt="Детская площадка на набережной в Ростове-на-Дону: визуализации, генплан и список материалов"></div>
+          <p class="work-result"><b>Результат:</b> Ростов-на-Дону.</p>
+        </article>
+        <article class="work-card">
+          <h4>«Мандала степи»</h4>
+          <p class="work-author"><b>Учебное задание</b></p>
+          <p class="work-ai"><b>С помощью ИИ:</b> генплан с функциональными зонами и легендой; визуализации с разных ракурсов.</p>
+          <div class="work-media"><img src="images/elista-mandala-genplan.jpg" loading="lazy" alt="Генплан детской площадки «Мандала степи» в Элисте"><img src="images/elista-mandala-vizualizacii.jpg" loading="lazy" alt="Визуализации детской площадки «Мандала степи» с разных ракурсов"></div>
+          <p class="work-result"><b>Результат:</b> Элиста.</p>
+        </article>
+      </div>
     </div>
 
+    <div class="review-sub" id="student-reviews">
+      <h3>Что говорят слушатели</h3>
+      <div class="work-grid">
+        <article class="work-card quote-card">
+          <h4>Отзыв · «Катарсис»</h4>
+          <p class="work-author"><b>Анастасия</b> · студентка бакалавриата НИУ МГСУ</p>
+          <p class="work-ai"><b>С помощью ИИ:</b> промптинг, работа с иностранными сервисами, анализ среды.</p>
+          <p class="work-result"><b>Проект:</b> многофункциональный спортивно-игровой комплекс, Ейск.</p>
+          <blockquote class="work-quote">«Освоила навыки промптинга, лучше понимаю работу с иностранными сервисами, углубилась в работу с анализом среды»</blockquote>
+        </article>
+        <article class="work-card quote-card">
+          <h4>Отзыв · «Донская природа»</h4>
+          <p class="work-author"><b>Александра</b> · ЮФУ</p>
+          <p class="work-ai"><b>С помощью ИИ:</b> ситуационная схема в QGIS, текстуры на 3D-модели и развёртке.</p>
+          <p class="work-result"><b>Проект:</b> концепция благоустройства общественного пространства и детского парка.</p>
+          <blockquote class="work-quote">«Например, ситуационную схему я брала в QGIS, так как он сохранял в нужном формате, а ИИ помог мне наложить текстуры на 3D-модель и развёртку»</blockquote>
+        </article>
+        <article class="work-card quote-card">
+          <h4>Отзыв · «Благоустройство Пионерской рощи»</h4>
+          <p class="work-author"><b>Татьяна</b> · архитектор, «АСИ проект»</p>
+          <p class="work-ai"><b>С помощью ИИ:</b> QGIS, референсы для ИИ, постобработка в Photoshop.</p>
+          <p class="work-result"><b>Проект:</b> Новороссийск, концепция 2026.</p>
+          <blockquote class="work-quote">«Прошла курс по ИИ в архитектуре. Освоила QGIS, научилась формировать и использовать референсы для ИИ, закрепила навыки постобработки в Photoshop. Теперь уверенно комбинирую генеративные методы и ручную доработку для качественных архитектурных визуализаций»</blockquote>
+        </article>
+        <article class="work-card quote-card">
+          <h4>Отзыв · «Парк виноделов «Вуаль»»</h4>
+          <p class="work-author"><b>Ангелина</b> · студентка ЮФУ ААИ</p>
+          <p class="work-ai"><b>С помощью ИИ:</b> правильные промпты для более быстрой работы.</p>
+          <p class="work-result"><b>Проект:</b> Хутор Семигорский, Новороссийск.</p>
+          <blockquote class="work-quote">«Научилась создавать правильные промпты, благодаря которым стало намного проще и быстрее работать».</blockquote>
+        </article>
+      </div>
+    </div>
   </div>
 </section>
 
