@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>53 способа использовать ИИ для архитектора — бесплатный гайд · ai2arch</title>
+<meta name="description" content="Бесплатный гайд AI2ARCH: 53 способа применить нейросети в работе архитектора — концепция, визуализация, анализ территории, тексты, BIM и ГИС. Сервисы основного и расширенного контура и готовые промпты. Листайте на сайте или скачайте PDF.">
+<meta property="og:title" content="53 способа использовать ИИ для архитектора — бесплатный гайд AI2ARCH">
+<meta property="og:description" content="Промпт-шаблоны, сервисы и разделы, которые разбираем на курсах. Листайте на сайте или скачайте PDF для печати.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ai2arch.ru/53">
+<meta property="og:image" content="https://ai2arch.ru/guide/53/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ai2arch.ru/53">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preload" as="image" href="guide/53/p01.webp">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; overflow-x:hidden; }
+
+  :root {
+    --ink-night:#0A0F1A; --graphite:#2A2F3E;
+    --azure:#4DA3FF; --azure-dark:#2A7CE8; --azure-soft:#7BBFFF;
+    --bg:#F6F4F0; --surface:#FFFFFF; --surface2:#F2F0EB; --border:#E4E1D8;
+    --ink:#0A0F1A; --ink-muted:#2A2F3E; --ink-faint:#6A7080; --accent-l:#EBF4FF;
+    --green:#1A9E6E; --green-l:#EDFAF4;
+    --mono:'JetBrains Mono', monospace; --sans:'Manrope', sans-serif;
+    --nav-h:56px;
+  }
+  body { font-family:var(--sans); background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; }
+  img { max-width:100%; display:block; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 28px; }
+  @media (max-width:640px) { .wrap { padding:0 16px; } }
+
+  /* ── кнопки ── */
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:var(--sans); font-size:15px; font-weight:700; padding:14px 26px; border-radius:12px; border:1px solid transparent; cursor:pointer; text-decoration:none; transition:transform .15s, opacity .15s; }
+  .btn:hover { opacity:.92; transform:translateY(-1px); }
+  .btn-primary { background:linear-gradient(135deg, var(--azure-dark), var(--azure)); color:#fff; box-shadow:0 8px 24px rgba(77,163,255,.32); }
+  .btn-ghost { background:transparent; color:#fff; border-color:rgba(255,255,255,.28); }
+  .btn-line { background:var(--surface); color:var(--ink-muted); border-color:var(--border); }
+  .btn-sm { padding:9px 18px; font-size:13px; border-radius:10px; }
+
+  /* ── шапка ── */
+  .head { position:sticky; top:0; z-index:60; background:rgba(10,15,26,.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid rgba(255,255,255,.08); }
+  .head .wrap { max-width:1160px; }
+  .head-in { display:flex; align-items:center; gap:20px; height:var(--nav-h); }
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; flex-shrink:0; }
+  .brand-sign { width:38px; height:38px; flex-shrink:0; }
+  .brand-text { display:flex; flex-direction:column; line-height:1.15; }
+  .brand-text b { font-size:17px; font-weight:600; letter-spacing:.02em; color:#fff; }
+  .brand-text small { font-size:10.5px; font-weight:400; color:rgba(255,255,255,.58); margin-top:2px; white-space:nowrap; }
+  .nav { display:flex; gap:2px; flex:1; min-width:0; }
+  .nav a { font-size:13px; font-weight:600; color:rgba(255,255,255,.65); text-decoration:none; padding:8px 10px; border-radius:8px; white-space:nowrap; }
+  .nav a:hover { color:#fff; background:rgba(255,255,255,.08); }
+  .head-dl { margin-left:auto; }
+  @media (max-width:820px) { .nav { display:none; } }
+  @media (max-width:420px) { .brand-text small { display:none; } .head-dl { padding:8px 13px; } }
+
+  /* ── первый экран ── */
+  .hero { position:relative; background:var(--ink-night); color:#fff; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(60% 80% at 85% 0%, rgba(77,163,255,.22), transparent 70%); pointer-events:none; }
+  .hero-in { position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr); gap:48px; align-items:center; padding:64px 0 56px; }
+  .eyebrow { font-size:12px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--azure-soft); margin-bottom:20px; }
+  .hero h1 { font-size:clamp(34px, 6vw, 64px); line-height:1.04; font-weight:800; letter-spacing:-.03em; margin-bottom:20px; }
+  .hero h1 em { font-style:normal; color:var(--azure); }
+  .hero-sub { font-size:clamp(16px, 2vw, 19px); line-height:1.55; color:rgba(255,255,255,.78); max-width:600px; margin-bottom:30px; }
+  .hero-cta { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+  .hero-note { font-size:13px; color:rgba(255,255,255,.5); }
+  .hero-cover { display:block; position:relative; border-radius:10px; overflow:hidden; box-shadow:0 30px 70px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08); transform:rotate(2deg); transition:transform .25s; max-width:340px; justify-self:end; }
+  .hero-cover:hover { transform:rotate(0deg) translateY(-3px); }
+  .hero-cover img { width:100%; height:auto; }
+  .facts { position:relative; z-index:1; display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); border-top:1px solid rgba(255,255,255,.14); }
+  .fact { padding:22px 20px 26px 0; }
+  .fact + .fact { padding-left:24px; border-left:1px solid rgba(255,255,255,.1); }
+  .fact b { display:block; font-size:clamp(24px, 3.2vw, 34px); font-weight:800; letter-spacing:-.02em; line-height:1.1; }
+  .fact span { display:block; font-size:13px; color:rgba(255,255,255,.55); margin-top:6px; line-height:1.4; }
+  @media (max-width:820px) {
+    .hero-in { grid-template-columns:minmax(0,1fr); gap:32px; padding:44px 0 40px; }
+    .hero-cover { justify-self:start; max-width:220px; transform:none; }
+    .facts { grid-template-columns:repeat(2, minmax(0,1fr)); }
+    .fact, .fact + .fact { padding:18px 12px 18px 0; border-left:0; }
+    .fact:nth-child(even) { padding-left:18px; border-left:1px solid rgba(255,255,255,.1); }
+    .fact:nth-child(n+3) { border-top:1px solid rgba(255,255,255,.1); }
+  }
+
+  /* ── разделы ── */
+  section { scroll-margin-top:calc(var(--nav-h) + 4px); }
+  .sec { padding:80px 0; }
+  .sec.alt { background:var(--surface); }
+  .sec.dark { background:var(--ink-night); color:#fff; position:relative; overflow:hidden; }
+  .sec.dark::before { content:''; position:absolute; inset:0; background:radial-gradient(50% 70% at 10% 0%, rgba(77,163,255,.14), transparent 70%); pointer-events:none; }
+  .sec.dark > .wrap { position:relative; }
+  @media (max-width:640px) { .sec { padding:56px 0; } }
+  .kicker { font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--azure-dark); margin-bottom:12px; }
+  .dark .kicker { color:var(--azure-soft); }
+  h2 { font-size:clamp(26px, 4.2vw, 40px); line-height:1.12; font-weight:800; letter-spacing:-.02em; margin-bottom:16px; max-width:760px; }
+  .lead { font-size:17px; line-height:1.55; color:var(--ink-muted); max-width:720px; margin-bottom:32px; }
+  .dark .lead { color:rgba(255,255,255,.72); }
+  h3 { font-size:18px; line-height:1.25; font-weight:800; letter-spacing:-.01em; margin-bottom:8px; }
+
+  /* ── листалка ── */
+  #read { padding-top:56px; padding-bottom:64px; }
+  .viewer { position:relative; }
+  .stage { position:relative; width:min(100%, calc((100svh - var(--nav-h) - 120px) * .7071)); min-width:min(100%, 300px); aspect-ratio:1200 / 1696; margin:0 auto; background:#000C1F; border-radius:8px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08); touch-action:pan-y; user-select:none; -webkit-user-select:none; }
+  .stage img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; -webkit-user-drag:none; }
+  .zone { position:absolute; top:0; bottom:0; width:38%; background:none; border:0; cursor:pointer; z-index:2; }
+  .zone.prev { left:0; cursor:w-resize; }
+  .zone.next { right:0; cursor:e-resize; }
+  .zone:focus-visible { outline:2px solid var(--azure); outline-offset:-4px; }
+  .bar { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin:18px auto 0; max-width:860px; }
+  .ctrl { display:inline-flex; align-items:center; justify-content:center; gap:6px; min-width:44px; height:42px; padding:0 14px; border-radius:10px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); color:#fff; font-family:var(--sans); font-size:14px; font-weight:700; cursor:pointer; }
+  .ctrl:hover { background:rgba(255,255,255,.14); }
+  .ctrl:disabled { opacity:.35; cursor:default; }
+  .count { font-family:var(--mono); font-size:14px; color:rgba(255,255,255,.75); min-width:74px; text-align:center; }
+  .count b { color:#fff; }
+  .jump { max-width:250px; height:42px; border-radius:10px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); color:#fff; font-family:var(--sans); font-size:13.5px; font-weight:600; padding:0 12px; max-width:100%; cursor:pointer; }
+  .jump option { color:#0A0F1A; }
+  .progress { height:3px; background:rgba(255,255,255,.1); border-radius:3px; margin:16px auto 0; max-width:760px; overflow:hidden; }
+  .progress i { display:block; height:100%; width:0; background:var(--azure); transition:width .2s; }
+  .hint { text-align:center; font-size:12.5px; color:rgba(255,255,255,.45); margin-top:12px; }
+  /* полноэкранный режим (и запасной вариант для iPhone) */
+  .viewer.is-full { position:fixed; inset:0; z-index:300; background:#05080F; display:flex; flex-direction:column; justify-content:center; padding:14px; }
+  .viewer.is-full .stage { width:min(100%, calc((100svh - 110px) * .7071)); }
+  .viewer.is-full .hint { display:none; }
+  @media (max-width:640px) {
+    .bar { gap:8px; }
+    .jump { order:5; flex:1 1 100%; max-width:none; }
+    .ctrl.fs-txt span { display:none; }
+  }
+
+  /* ── что внутри ── */
+  .secs { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:14px; }
+  @media (max-width:960px) { .secs { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+  @media (max-width:560px) { .secs { grid-template-columns:minmax(0,1fr); } }
+  .sec-card { display:flex; flex-direction:column; text-align:left; background:var(--bg); border:1px solid var(--border); border-radius:16px; padding:20px 20px 18px; font-family:var(--sans); color:var(--ink); cursor:pointer; transition:border-color .15s, transform .15s; }
+  .sec-card:hover { border-color:var(--azure); transform:translateY(-2px); }
+  .sec-card .no { font-family:var(--mono); font-size:12px; font-weight:700; color:var(--azure-dark); margin-bottom:8px; }
+  .sec-card h3 { font-size:16.5px; margin-bottom:8px; }
+  .sec-card p { font-size:13.5px; line-height:1.5; color:var(--ink-faint); margin-bottom:14px; }
+  .sec-card .meta { margin-top:auto; display:flex; gap:6px; flex-wrap:wrap; }
+  .pill { font-size:11.5px; font-weight:700; padding:4px 9px; border-radius:999px; background:var(--surface); border:1px solid var(--border); color:var(--ink-muted); }
+  .pill.on { background:var(--accent-l); border-color:#CFE4FF; color:#1F4F8F; }
+  .pill.off { color:var(--ink-faint); }
+  .howto { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:14px; margin-top:28px; }
+  @media (max-width:760px) { .howto { grid-template-columns:minmax(0,1fr); } }
+  .how { background:var(--bg); border:1px solid var(--border); border-radius:16px; padding:18px 20px; font-size:14px; color:var(--ink-muted); }
+  .how b { display:flex; align-items:center; gap:8px; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink); margin-bottom:6px; }
+  .dot { width:9px; height:9px; border-radius:50%; display:inline-block; flex-shrink:0; }
+
+  /* ── курсы ── */
+  .courses { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; }
+  @media (max-width:760px) { .courses { grid-template-columns:minmax(0,1fr); } }
+  .course { display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--border); border-top:3px solid var(--azure); border-radius:18px; padding:26px 26px 24px; }
+  .course .step { font-size:12px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:8px; }
+  .course h3 { font-size:26px; margin-bottom:8px; }
+  .course .official { font-size:12.5px; color:var(--ink-faint); margin-bottom:14px; }
+  .course .desc { font-size:15px; color:var(--ink-muted); margin-bottom:16px; }
+  .course ul { list-style:none; display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+  .course li { font-size:13px; font-weight:600; padding:6px 12px; border-radius:999px; background:var(--accent-l); color:#1F4F8F; }
+  .course .ways { font-size:13px; color:var(--ink-faint); margin-bottom:20px; }
+  .course .ways b { color:var(--ink-muted); }
+  .course .actions { margin-top:auto; display:flex; gap:10px; flex-wrap:wrap; }
+
+  /* ── подвал ── */
+  footer { background:var(--ink-night); color:rgba(255,255,255,.6); padding:44px 0 52px; font-size:13px; }
+  footer .brand { margin-bottom:14px; }
+  footer p { max-width:760px; }
+  footer p + p { margin-top:8px; }
+  footer a { color:var(--azure-soft); }
+</style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113526373', 'ym');
+
+    ym(113526373, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113526373" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+
+<header class="head">
+  <div class="wrap head-in">
+    <a class="brand" href="index.html"><img class="brand-sign" src="images/ai2arch-sign.png" width="38" height="38" alt=""><span class="brand-text"><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
+    <nav class="nav" aria-label="Разделы страницы">
+      <a href="#read">Листать</a>
+      <a href="#inside">Что внутри</a>
+      <a href="#courses">Курсы</a>
+    </nav>
+    <a class="btn btn-primary btn-sm head-dl" href="guide/ai2arch-53-sposoba.pdf" download="AI2ARCH-53-sposoba-II-dlya-arhitektora.pdf" data-dl="header">Скачать PDF</a>
+  </div>
+</header>
+
+<main>
+<div class="hero">
+  <div class="wrap">
+    <div class="hero-in">
+      <div>
+        <div class="eyebrow">Бесплатный гайд AI2ARCH · ноябрь 2026</div>
+        <h1>53 способа использовать <em>ИИ</em> для архитектора</h1>
+        <p class="hero-sub">Практический гайд с промпт-шаблонами: концепция, визуализация, анализ территории, тексты, BIM и ГИС, работа с клиентом. У каждого способа — сервисы основного и расширенного контура и готовый промпт.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#read">Листать гайд</a>
+          <a class="btn btn-ghost" href="guide/ai2arch-53-sposoba.pdf" download="AI2ARCH-53-sposoba-II-dlya-arhitektora.pdf" data-dl="hero">Скачать PDF для печати</a>
+        </div>
+        <p class="hero-note">Бесплатно, без регистрации. Можно пересылать коллегам.</p>
+      </div>
+      <a class="hero-cover" href="#read" aria-label="Открыть гайд"><img src="guide/53/p01.webp" width="1200" height="1696" alt="Обложка гайда «53 способа использовать ИИ для архитектора»"></a>
+    </div>
+    <div class="facts">
+      <div class="fact"><b>53</b><span>способа с готовыми промптами</span></div>
+      <div class="fact"><b>8</b><span>разделов: от концепции до бизнеса</span></div>
+      <div class="fact"><b>25</b><span>способов разбираем на курсах AI2ARCH</span></div>
+      <div class="fact"><b>32</b><span>страницы, PDF 1,2 МБ, A4 для печати</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ЛИСТАЛКА ═══ -->
+<section class="sec dark" id="read" aria-label="Листать гайд">
+  <div class="wrap">
+    <div class="viewer" id="viewer">
+      <div class="stage" id="stage" aria-roledescription="листалка" aria-label="Страницы гайда">
+        <img id="pg" src="guide/53/p01.webp" width="1200" height="1696" alt="Страница 1 из 32">
+        <button class="zone prev" id="zPrev" aria-label="Предыдущая страница"></button>
+        <button class="zone next" id="zNext" aria-label="Следующая страница"></button>
+      </div>
+      <div class="bar">
+        <button class="ctrl" id="bPrev" aria-label="Предыдущая страница">←</button>
+        <span class="count" aria-live="polite"><b id="cur">1</b> / <span id="total">32</span></span>
+        <button class="ctrl" id="bNext" aria-label="Следующая страница">→</button>
+        <select class="jump" id="jump" aria-label="Перейти к разделу">
+          <option value="">Перейти к разделу…</option>
+          <option value="2">Содержание</option>
+          <option value="3">Как читать гайд</option>
+          <option value="4">01 · Концепция и генерация идей</option>
+          <option value="7">02 · Визуализация и графика</option>
+          <option value="11">03 · Анализ территории и контекста</option>
+          <option value="15">04 · Документация и тексты</option>
+          <option value="18">05 · BIM, ГИС и автоматизация</option>
+          <option value="22">06 · Работа с клиентом</option>
+          <option value="25">07 · Обучение и исследования</option>
+          <option value="28">08 · Бизнес и маркетинг</option>
+          <option value="32">Курсы AI2ARCH</option>
+        </select>
+        <button class="ctrl fs-txt" id="bFull" aria-label="На весь экран">⤢ <span>На весь экран</span></button>
+        <a class="btn btn-primary btn-sm" href="guide/ai2arch-53-sposoba.pdf" download="AI2ARCH-53-sposoba-II-dlya-arhitektora.pdf" data-dl="viewer">Скачать PDF</a>
+      </div>
+      <div class="progress" aria-hidden="true"><i id="prog"></i></div>
+      <p class="hint">Стрелки на клавиатуре, клик по краю страницы или свайп на телефоне. Ссылки на курсы работают в скачанном PDF.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ЧТО ВНУТРИ ═══ -->
+<section class="sec alt" id="inside">
+  <div class="wrap">
+    <div class="kicker">Что внутри</div>
+    <h2>Восемь разделов, 53 рабочих задачи</h2>
+    <p class="lead">Нажмите на раздел — гайд откроется на нужной странице. Синим отмечено, сколько способов раздела мы разбираем на курсах AI2ARCH.</p>
+    <div class="secs">
+      <button class="sec-card" data-page="4"><span class="no">01 · стр. 4</span><h3>Концепция и генерация идей</h3><p>Направления, нарратив, прецеденты, функциональная программа, зонирование.</p><span class="meta"><span class="pill">6 способов</span><span class="pill on">5 в курсах</span></span></button>
+      <button class="sec-card" data-page="7"><span class="no">02 · стр. 7</span><h3>Визуализация и графика</h3><p>Промпты для визуализаций, фасады, мудборды, постобработка, анализ эскиза.</p><span class="meta"><span class="pill">7 способов</span><span class="pill on">5 в курсах</span></span></button>
+      <button class="sec-card" data-page="11"><span class="no">03 · стр. 11</span><h3>Анализ территории и контекста</h3><p>Контекст, потоки, история места, инсоляция, SWOT, нормативы, типология.</p><span class="meta"><span class="pill">7 способов</span><span class="pill on">5 в курсах</span></span></button>
+      <button class="sec-card" data-page="15"><span class="no">04 · стр. 15</span><h3>Документация и тексты</h3><p>Пояснительная записка, ТЗ, конкурсная заявка, редактура, перевод, экспертиза.</p><span class="meta"><span class="pill">6 способов</span><span class="pill on">2 в курсах</span></span></button>
+      <button class="sec-card" data-page="18"><span class="no">05 · стр. 18</span><h3>BIM, ГИС и автоматизация</h3><p>Dynamo и Revit, QGIS + QuickOSM, Grasshopper, агенты, подготовка геоданных.</p><span class="meta"><span class="pill">7 способов</span><span class="pill on">2 в курсах</span><span class="pill off">вне программы</span></span></button>
+      <button class="sec-card" data-page="22"><span class="no">06 · стр. 22</span><h3>Работа с клиентом</h3><p>Сценарий презентации, КП, ответы на возражения, переписка, бриф.</p><span class="meta"><span class="pill">5 способов</span><span class="pill on">1 в курсах</span></span></button>
+      <button class="sec-card" data-page="25"><span class="no">07 · стр. 25</span><h3>Обучение и исследования</h3><p>Теория, ВКР, подготовка к защите, учебные материалы, критика проекта, 3D.</p><span class="meta"><span class="pill">6 способов</span><span class="pill on">3 в курсах</span></span></button>
+      <button class="sec-card" data-page="28"><span class="no">08 · стр. 28</span><h3>Бизнес и маркетинг</h3><p>Контент, сайт, рынок, продвижение, Telegram-канал, договоры, смета, питч-дек.</p><span class="meta"><span class="pill">9 способов</span><span class="pill on">2 в курсах</span><span class="pill off">вне программы</span></span></button>
+    </div>
+    <div class="howto">
+      <div class="how"><b><span class="dot" style="background:#1A9E6E"></span>Основной контур</b>Работает из России напрямую, оплата из РФ: Алиса AI, GigaChat, Шедеврум, DeepSeek, QGIS, Яндекс Геоаналитика, Gamma и другие.</div>
+      <div class="how"><b><span class="dot" style="background:#8A97AD"></span>Расширенный контур</b>Зарубежные сервисы с ограниченным доступом из России: ChatGPT, Claude, Gemini, Midjourney, Flux. Выбор сервиса — за вами.</div>
+      <div class="how"><b><span class="dot" style="background:#4DA3FF"></span>Значок курса</b>Способ разбирается на курсе AI2ARCH — рядом указаны модуль или тема. Таких способов 25 из 53.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ КУРСЫ ═══ -->
+<section class="sec" id="courses">
+  <div class="wrap">
+    <div class="kicker">Курсы AI2ARCH</div>
+    <h2>Хотите не читать, а делать — с разбором и обратной связью?</h2>
+    <p class="lead">На курсах эти способы проходим руками на вашем участке или объекте: от данных и анализа до итоговой презентации. Выпускникам с высшим образованием — удостоверение о повышении квалификации ЮФУ.</p>
+    <div class="courses">
+      <article class="course">
+        <p class="step">Первая ступень</p>
+        <h3>ИИ в архитектуре</h3>
+        <p class="official">«Современные инструменты проектного анализа: ИИ и мобильные сервисы в работе с архитектурной средой»</p>
+        <p class="desc">Базовый вводный курс: цифровой двойник участка, ИИ-анализ и презентация для заказчика. С нуля, два трека на выбор.</p>
+        <ul><li>22 ак. часа</li><li>2,5 недели</li><li>5 000 ₽, рассрочка</li><li>Удостоверение ЮФУ</li></ul>
+        <p class="ways"><b>Способы из гайда:</b> 01, 06–08, 10, 13–15, 22, 28, 33, 34, 41, 44</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="archi.html#enroll" data-course="ИИ в архитектуре">Оставить заявку</a>
+          <a class="btn btn-line" href="archi.html">О курсе</a>
+        </div>
+      </article>
+      <article class="course">
+        <p class="step">Вторая ступень</p>
+        <h3>ИИ в редевелопменте</h3>
+        <p class="official">«Современные инструменты развития территорий и объектов недвижимости: аналитика данных и генеративный ИИ в разработке концепций»</p>
+        <p class="desc">Реальное здание или территория — до защищённой концепции. Два трека: проектировщик и девелопер.</p>
+        <ul><li>72 ак. часа</li><li>4,5 недели</li><li>18 900 ₽, выпускникам первой ступени — 14 900 ₽</li><li>Удостоверение ЮФУ</li></ul>
+        <p class="ways"><b>Способы из гайда:</b> 01–03, 05, 07–10, 14–16, 18, 19, 21, 33, 34, 41, 43, 47, 52</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="redev.html#apply" data-course="ИИ в редевелопменте">Оставить заявку</a>
+          <a class="btn btn-line" href="redev.html">О курсе</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="index.html"><img class="brand-sign" src="images/ai2arch-sign.png" width="38" height="38" alt=""><span class="brand-text"><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
+    <p>Гайд «53 способа использовать ИИ для архитектора», редакция ноябрь 2026. Бесплатно, можно пересылать и печатать.</p>
+    <p><a href="index.html">Главная</a> · <a href="archi.html">ИИ в архитектуре</a> · <a href="redev.html">ИИ в редевелопменте</a></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var TOTAL = 32;
+  var SRC = function (n) { return 'guide/53/p' + (n < 10 ? '0' + n : n) + '.webp'; };
+  var cur = 1, readSent = false;
+  var img = document.getElementById('pg');
+  var curEl = document.getElementById('cur');
+  var prog = document.getElementById('prog');
+  var bPrev = document.getElementById('bPrev'), bNext = document.getElementById('bNext');
+  var jump = document.getElementById('jump');
+  var viewer = document.getElementById('viewer');
+  var cache = {};
+
+  function goal(name, params) { if (typeof ym === 'function') ym(113526373, 'reachGoal', name, params || {}); }
+  function preload(n) { if (n < 1 || n > TOTAL || cache[n]) return; var i = new Image(); i.src = SRC(n); cache[n] = i; }
+
+  function show(n, push) {
+    n = Math.max(1, Math.min(TOTAL, n));
+    cur = n;
+    img.src = SRC(n);
+    img.alt = 'Страница ' + n + ' из ' + TOTAL;
+    curEl.textContent = n;
+    bPrev.disabled = n === 1; bNext.disabled = n === TOTAL;
+    prog.style.width = (n / TOTAL * 100) + '%';
+    preload(n + 1); preload(n + 2); preload(n - 1);
+    if (push !== false) { try { history.replaceState(null, '', '#p' + n); } catch (e) {} }
+    if (!readSent && n >= 10) { readSent = true; goal('guide_read'); }
+  }
+  function next() { if (cur < TOTAL) show(cur + 1); }
+  function prev() { if (cur > 1) show(cur - 1); }
+
+  bNext.addEventListener('click', next); bPrev.addEventListener('click', prev);
+  document.getElementById('zNext').addEventListener('click', next);
+  document.getElementById('zPrev').addEventListener('click', prev);
+  jump.addEventListener('change', function () { if (this.value) { show(+this.value); this.value = ''; } });
+
+  // клавиатура — только когда листалка на экране
+  var inView = false;
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) { inView = es[0].isIntersecting; }, { threshold: .35 }).observe(viewer);
+  } else { inView = true; }
+  document.addEventListener('keydown', function (e) {
+    if (e.target && /INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
+    var full = viewer.classList.contains('is-full');
+    if (!inView && !full) return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    else if (e.key === 'Escape' && full) { exitFull(); }
+  });
+
+  // свайп
+  var sx = null, sy = null;
+  var stage = document.getElementById('stage');
+  stage.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  stage.addEventListener('touchend', function (e) {
+    if (sx === null) return;
+    var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.3) { dx < 0 ? next() : prev(); }
+    sx = sy = null;
+  }, { passive: true });
+
+  // полный экран (на iPhone — разворот внутри страницы)
+  var bFull = document.getElementById('bFull');
+  function enterFull() {
+    viewer.classList.add('is-full'); document.body.style.overflow = 'hidden';
+    if (viewer.requestFullscreen) { viewer.requestFullscreen().catch(function () {}); }
+    else if (viewer.webkitRequestFullscreen) { try { viewer.webkitRequestFullscreen(); } catch (e) {} }
+    bFull.setAttribute('aria-label', 'Свернуть'); bFull.firstChild.nodeValue = '✕ ';
+  }
+  function exitFull() {
+    viewer.classList.remove('is-full'); document.body.style.overflow = '';
+    if (document.fullscreenElement && document.exitFullscreen) { document.exitFullscreen().catch(function () {}); }
+    else if (document.webkitFullscreenElement && document.webkitExitFullscreen) { document.webkitExitFullscreen(); }
+    bFull.setAttribute('aria-label', 'На весь экран'); bFull.firstChild.nodeValue = '⤢ ';
+  }
+  bFull.addEventListener('click', function () { viewer.classList.contains('is-full') ? exitFull() : enterFull(); });
+  document.addEventListener('fullscreenchange', function () { if (!document.fullscreenElement && viewer.classList.contains('is-full')) exitFull(); });
+
+  // карточки разделов открывают нужную страницу
+  Array.prototype.forEach.call(document.querySelectorAll('.sec-card'), function (c) {
+    c.addEventListener('click', function () { show(+c.getAttribute('data-page')); document.getElementById('read').scrollIntoView({ behavior: 'smooth' }); });
+  });
+
+  // цели Метрики: скачивание и переход к заявке
+  Array.prototype.forEach.call(document.querySelectorAll('[data-dl]'), function (a) {
+    a.addEventListener('click', function () { goal('guide_download', { source: a.getAttribute('data-dl') }); });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-course]'), function (a) {
+    a.addEventListener('click', function () { goal('enroll_click', { course: a.getAttribute('data-course'), source: 'guide53' }); });
+  });
+
+  // ссылка вида ai2arch.ru/53#p12 открывает 12-ю страницу
+  var m = /^#p(\d{1,2})$/.exec(location.hash);
+  if (m) { show(+m[1], false); setTimeout(function () { document.getElementById('read').scrollIntoView(); }, 50); }
+  else { show(1, false); }
+})();
+</script>
+</body>
+</html>
