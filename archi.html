@@ -264,6 +264,33 @@
   .shot img { width:100%; height:auto; border-radius:14px; border:1px solid var(--border); background:var(--surface); }
   .shot figcaption { font-size:13px; color:var(--ink-faint); margin-top:8px; }
   @media (max-width:640px) { .shots { grid-template-columns:minmax(0,1fr); } }
+
+  /* отзывы второго потока */
+  .reviews-head { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:48px 0 6px; }
+  .reviews-head h3 { margin:0; }
+  .flow-tag { display:inline-flex; align-items:center; padding:4px 9px; border-radius:5px; background:var(--accent-l,#EBF4FF); color:var(--accent,#4DA3FF); font-size:11px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+  .reviews-lead { font-size:14px; line-height:1.5; color:var(--ink-muted); margin:0 0 16px; }
+  .reviews { display:flex; flex-direction:column; gap:18px; }
+  .review { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:22px 24px; }
+  .review-head { display:flex; align-items:flex-start; gap:14px; margin-bottom:14px; }
+  .review-avatar { width:48px; height:48px; border-radius:50%; background:var(--accent-l,#EBF4FF); color:var(--accent,#4DA3FF); display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:800; flex:none; }
+  .review-name { font-size:17px; font-weight:800; color:var(--ink); }
+  .review-status { font-size:13px; line-height:1.4; color:var(--ink-faint); margin-top:2px; }
+  .review-contact { display:inline-block; margin-top:4px; font-size:12.5px; font-weight:700; color:var(--accent,#4DA3FF); text-decoration:none; }
+  .review-contact:hover { text-decoration:underline; }
+  .review-request { font-size:14px; line-height:1.55; color:var(--ink-muted); margin:0 0 10px; overflow-wrap:anywhere; }
+  .review-request b { color:var(--ink); }
+  .review-quote { margin:0 0 12px; padding:14px 16px; border-left:3px solid var(--accent,#4DA3FF); background:var(--bg); border-radius:0 10px 10px 0; font-size:15px; line-height:1.6; color:var(--ink); overflow-wrap:anywhere; }
+  .review-project { font-size:14px; line-height:1.5; color:var(--ink-muted); overflow-wrap:anywhere; }
+  .review-project b { color:var(--ink); }
+  .review-shots { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; margin-top:14px; }
+  .review-shots .shot img { border-radius:10px; }
+  .review-shots .shot figcaption { font-size:12px; margin-top:5px; }
+  @media (max-width:760px) {
+    .review { padding:18px; }
+    .review-head { gap:10px; }
+    .review-shots { grid-template-columns:minmax(0,1fr); }
+  }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -597,6 +624,41 @@
       <figure class="shot wide"><img src="images/case-winery-vizualizacii.jpg" loading="lazy" alt="Архитектурная визуализация концепции винодельни"><figcaption>Итоговый проект слушателя, трек Б. Концепция винодельни — визуализации собраны по промптам на основе данных анализа участка.</figcaption></figure>
       <figure class="shot wide"><img src="images/case-anapa-park-vizualizacii.jpg" loading="lazy" alt="Визуализация благоустройства детской площадки на реке Анапка"><figcaption>Итоговый проект слушателя, трек А. Благоустройство прибрежной территории в Анапе — визуализации по итогам геоаналитики в QGIS.</figcaption></figure>
     </div>
+    <h3 class="reviews-head">Отзывы <span class="flow-tag">Второй поток</span></h3>
+    <p class="reviews-lead">Итоговые проекты второго потока</p>
+    <div class="reviews">
+      <article class="review">
+        <div class="review-head">
+          <div class="review-avatar" aria-hidden="true">А</div>
+          <div><div class="review-name">Анастасия</div><div class="review-status">студентка бакалавриата НИУ МГСУ</div><a class="review-contact" href="https://t.me/arroW2123" target="_blank" rel="noopener">@arroW2123</a></div>
+        </div>
+        <p class="review-request"><b>Запрос:</b> «Хотелось научиться работать с искусственным интеллектом, оптимизировать рутинные задачи и улучшить навыки создания визуализаций»</p>
+        <blockquote class="review-quote">«Освоила навыки промптинга, лучше понимаю работу с иностранными сервисами, углубилась в работу с анализом среды»</blockquote>
+        <p class="review-project"><b>Проект:</b> «Катарсис» — многофункциональный спортивно-игровой комплекс, Ейск</p>
+        <div class="review-shots"><figure class="shot"><img src="images/reviews/katarsis-4.jpg" loading="lazy" alt="Превью 1 проекта «Катарсис»"><figcaption>Превью 1 проекта</figcaption></figure><figure class="shot"><img src="images/reviews/katarsis-6.jpg" loading="lazy" alt="Превью 2 проекта «Катарсис»"><figcaption>Превью 2 проекта</figcaption></figure><figure class="shot"><img src="images/reviews/katarsis-10.jpg" loading="lazy" alt="Превью 3 проекта «Катарсис»"><figcaption>Превью 3 проекта</figcaption></figure></div>
+      </article>
+      <article class="review">
+        <div class="review-head">
+          <div class="review-avatar" aria-hidden="true">А</div>
+          <div><div class="review-name">Александра</div><div class="review-status">ЮФУ</div></div>
+        </div>
+        <p class="review-request"><b>Запрос:</b> «Хотелось освоить ИИ для подачи проекта, а также QGIS для разработки планов»</p>
+        <blockquote class="review-quote">«Например, ситуационную схему я брала в QGIS, так как он сохранял в нужном формате, а ИИ помог мне наложить текстуры на 3D-модель и развёртку»</blockquote>
+        <p class="review-project"><b>Проект:</b> «Донская природа» — концепция благоустройства общественного пространства и детского парка</p>
+        <div class="review-shots"><figure class="shot"><img src="images/reviews/donskaya-4.jpg" loading="lazy" alt="Превью 1 проекта «Донская природа»"><figcaption>Превью 1 проекта</figcaption></figure><figure class="shot"><img src="images/reviews/donskaya-7.jpg" loading="lazy" alt="Превью 2 проекта «Донская природа»"><figcaption>Превью 2 проекта</figcaption></figure><figure class="shot"><img src="images/reviews/donskaya-11.jpg" loading="lazy" alt="Превью 3 проекта «Донская природа»"><figcaption>Превью 3 проекта</figcaption></figure></div>
+      </article>
+      <article class="review">
+        <div class="review-head">
+          <div class="review-avatar" aria-hidden="true">Т</div>
+          <div><div class="review-name">Татьяна</div><div class="review-status">архитектор, «АСИ проект»</div></div>
+        </div>
+        <p class="review-request"><b>Запрос:</b> «Хотелось повысить свой уровень знаний, изучить новые программы и познакомиться с ИИ»</p>
+        <blockquote class="review-quote">«Прошла курс по ИИ в архитектуре. Освоила QGIS, научилась формировать и использовать референсы для ИИ, закрепила навыки постобработки в Photoshop. Теперь уверенно комбинирую генеративные методы и ручную доработку для качественных архитектурных визуализаций»</blockquote>
+        <p class="review-project"><b>Проект:</b> «Благоустройство Пионерской рощи», Новороссийск, концепция 2026</p>
+        <div class="review-shots"><figure class="shot"><img src="images/reviews/pionerskaya-1.jpg" loading="lazy" alt="Превью 1 проекта «Благоустройство Пионерской рощи»"><figcaption>Превью 1 проекта</figcaption></figure><figure class="shot"><img src="images/reviews/pionerskaya-5.jpg" loading="lazy" alt="Превью 2 проекта «Благоустройство Пионерской рощи»"><figcaption>Превью 2 проекта</figcaption></figure><figure class="shot"><img src="images/reviews/pionerskaya-7.jpg" loading="lazy" alt="Превью 3 проекта «Благоустройство Пионерской рощи»"><figcaption>Превью 3 проекта</figcaption></figure></div>
+      </article>
+    </div>
+
   </div>
 </section>
 
