@@ -74,13 +74,6 @@
   @media (max-width:359px) { .brand-text small { display:none; } }
   @media (max-width:520px) { .head-apply { display:none; } .burger { margin-left:auto; } }
 
-  /* ── promo bar: набор на поток ── */
-  .promo-bar { position:fixed; top:calc(var(--nav-h) + 12px); left:14px; z-index:55; max-width:min(90vw,380px); background:linear-gradient(90deg, var(--orange), #F0A456); color:#fff; border-radius:999px; box-shadow:0 10px 28px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.1) inset; }
-  .promo-in { display:flex; align-items:center; gap:10px; padding:8px 8px 8px 16px; }
-  .promo-in span { font-size:12.5px; font-weight:700; letter-spacing:.01em; line-height:1.25; }
-  .promo-in .btn { flex-shrink:0; }
-  @media (max-width:640px) { .promo-bar { top:calc(var(--nav-h) + 8px); right:10px; left:10px; max-width:none; } .promo-in span { font-size:12px; } .promo-in { padding:7px 7px 7px 14px; gap:8px; } }
-
   /* ── hero ── */
   .hero { position:relative; background:var(--ink-night); color:#fff; overflow:hidden; }
   .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(60% 80% at 85% 0%, rgba(77,163,255,.2), transparent 70%); pointer-events:none; }
@@ -265,32 +258,38 @@
   .shot figcaption { font-size:13px; color:var(--ink-faint); margin-top:8px; }
   @media (max-width:640px) { .shots { grid-template-columns:minmax(0,1fr); } }
 
-  /* отзывы второго потока */
-  .reviews-head { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:48px 0 6px; }
-  .reviews-head h3 { margin:0; }
-  .flow-tag { display:inline-flex; align-items:center; padding:4px 9px; border-radius:5px; background:var(--accent-l,#EBF4FF); color:var(--accent,#4DA3FF); font-size:11px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
-  .reviews-lead { font-size:14px; line-height:1.5; color:var(--ink-muted); margin:0 0 16px; }
-  .reviews { display:flex; flex-direction:column; gap:18px; }
-  .review { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:22px 24px; }
+  /* отзывы */
+  .cases-h { margin:40px 0 14px; }
+  .flow-tag { display:inline-flex; align-items:center; padding:3px 8px; border-radius:5px; background:var(--accent-l,#EBF4FF); color:var(--accent,#4DA3FF); font-size:11.5px; font-weight:800; letter-spacing:.02em; }
+  .reviews-block { margin-top:8px; scroll-margin-top:calc(var(--nav-h) + 20px); }
+  .reviews-lead { font-size:14px; line-height:1.5; color:var(--ink-muted); margin:0 0 16px; max-width:760px; }
+  .reviews { display:flex; flex-direction:column; gap:18px; margin-top:16px; }
+  .review { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:28px; align-items:start; background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:22px 24px; }
+  .review-main { min-width:0; }
   .review-head { display:flex; align-items:flex-start; gap:14px; margin-bottom:14px; }
   .review-avatar { width:48px; height:48px; border-radius:50%; background:var(--accent-l,#EBF4FF); color:var(--accent,#4DA3FF); display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:800; flex:none; }
-  .review-name { font-size:17px; font-weight:800; color:var(--ink); }
+  .review-name { display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-size:17px; font-weight:800; color:var(--ink); }
   .review-status { font-size:13px; line-height:1.4; color:var(--ink-faint); margin-top:2px; }
   .review-contact { display:inline-block; margin-top:4px; font-size:12.5px; font-weight:700; color:var(--accent,#4DA3FF); text-decoration:none; }
   .review-contact:hover { text-decoration:underline; }
   .review-request { font-size:14px; line-height:1.55; color:var(--ink-muted); margin:0 0 10px; overflow-wrap:anywhere; }
-  .review-request b { color:var(--ink); }
+  .review-request b, .review-quote b { color:var(--ink); }
   .review-quote { margin:0 0 12px; padding:14px 16px; border-left:3px solid var(--accent,#4DA3FF); background:var(--bg); border-radius:0 10px 10px 0; font-size:15px; line-height:1.6; color:var(--ink); overflow-wrap:anywhere; }
   .review-project { font-size:14px; line-height:1.5; color:var(--ink-muted); overflow-wrap:anywhere; }
   .review-project b { color:var(--ink); }
-  .review-shots { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; margin-top:14px; }
+  .review-shots { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; margin:0; align-content:start; }
+  .review-shots .shot:first-child { grid-column:1 / -1; }
   .review-shots .shot img { border-radius:10px; }
-  .review-shots .shot figcaption { font-size:12px; margin-top:5px; }
-  @media (max-width:760px) {
+  @media (max-width:860px) {
+    .review { grid-template-columns:minmax(0,1fr); gap:16px; }
+  }
+  @media (max-width:640px) {
     .review { padding:18px; }
     .review-head { gap:10px; }
     .review-shots { grid-template-columns:minmax(0,1fr); }
+    .review-shots .shot:first-child { grid-column:auto; }
   }
+
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -308,13 +307,6 @@
 </head>
 <body>
 
-<div class="promo-bar">
-  <div class="promo-in">
-    <span>🔥 3 поток «ИИ в архитектуре» — старт 16 ноября</span>
-    <button class="btn btn-dark btn-sm" data-apply>Записаться</button>
-  </div>
-</div>
-
 <header class="head">
   <div class="wrap head-in">
     <a class="brand" href="index.html"><img class="brand-sign" src="images/ai2arch-sign.png" width="38" height="38" alt=""><span class="brand-text"><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
@@ -323,6 +315,7 @@
       <a href="#about">О программе</a>
       <a href="#program">Программа</a>
       <a href="#team">Спикеры</a>
+      <a href="#reviews">Отзывы</a>
       <a href="#price">Стоимость</a>
       <a href="#faq">Вопросы</a>
       <a href="archi-guide.html?from=archi" style="color:var(--azure-soft)">Слушателям →</a>
@@ -606,17 +599,16 @@
   <div class="wrap">
     <div class="kicker">Примеры работ</div>
     <h2>Что получается на выходе</h2>
-    <div class="grid2">
-      <div class="card"><h3>Первый поток</h3><p>Курс прошли 11 слушателей, все дошли до защиты проекта. Ниже — примеры их итоговых проектов и учебные задания курса.</p></div>
-      <div class="card"><h3>Итоговый проект</h3><p>К защите вы приходите с проектом по своему участку: цифровая модель территории в QGIS, ИИ-анализ с прогнозом сценариев, несколько вариантов решений с визуализациями и интерактивная презентация, собранная в Gamma.</p></div>
-    </div>
+    <p class="lead">Курс прошли 17 слушателей. Ниже — примеры их итоговых проектов и учебные задания курса.</p>
+    <div class="card"><h3>Итоговый проект</h3><p>К защите вы приходите с проектом по своему участку: цифровая модель территории в QGIS, ИИ-анализ с прогнозом сценариев, несколько вариантов решений с визуализациями и интерактивная презентация, собранная в Gamma.</p></div>
+    <h3 class="cases-h">Учебные задания курса</h3>
     <div class="shots">
       <figure class="shot wide"><img src="images/rostov-naberezhnaya-gallery.jpg" loading="lazy" alt="Детская площадка на набережной в Ростове-на-Дону: визуализации, генплан и список материалов"><figcaption>Учебное задание курса: детская площадка на набережной. Визуализации, генплан и список материалов получены по одному промпту.</figcaption></figure>
       <figure class="shot"><img src="images/elista-mandala-genplan.jpg" loading="lazy" alt="Генплан детской площадки «Мандала степи» в Элисте"><figcaption>Генплан с функциональными зонами и легендой.</figcaption></figure>
       <figure class="shot"><img src="images/elista-mandala-vizualizacii.jpg" loading="lazy" alt="Визуализации детской площадки «Мандала степи» с разных ракурсов"><figcaption>Визуализации той же площадки с разных ракурсов.</figcaption></figure>
     </div>
 
-    <h3 style="margin:40px 0 14px">Итоговые проекты слушателей первого потока</h3>
+    <h3 class="cases-h">Итоговые проекты <span class="flow-tag">1 поток</span></h3>
     <div class="shots">
       <figure class="shot wide"><img src="images/case-greenpocket-hero.jpg" loading="lazy" alt="Концепция ревитализации гаражного кооператива в Ростове-на-Дону: пешеходный бульвар"><figcaption>Итоговый проект слушателя, трек А. Редевелопмент территории бывшего гаражного кооператива в Ростове-на-Дону — концепция парка «Зелёный карман».</figcaption></figure>
       <figure class="shot"><img src="images/case-greenpocket-genplan.jpg" loading="lazy" alt="Генплан парка на месте гаражного кооператива"><figcaption>Генплан территории с функциональными зонами.</figcaption></figure>
@@ -624,39 +616,80 @@
       <figure class="shot wide"><img src="images/case-winery-vizualizacii.jpg" loading="lazy" alt="Архитектурная визуализация концепции винодельни"><figcaption>Итоговый проект слушателя, трек Б. Концепция винодельни — визуализации собраны по промптам на основе данных анализа участка.</figcaption></figure>
       <figure class="shot wide"><img src="images/case-anapa-park-vizualizacii.jpg" loading="lazy" alt="Визуализация благоустройства детской площадки на реке Анапка"><figcaption>Итоговый проект слушателя, трек А. Благоустройство прибрежной территории в Анапе — визуализации по итогам геоаналитики в QGIS.</figcaption></figure>
     </div>
-    <h3 class="reviews-head">Отзывы <span class="flow-tag">Второй поток</span></h3>
-    <p class="reviews-lead">Итоговые проекты второго потока</p>
-    <div class="reviews">
+    <div class="reviews-block" id="reviews">
+      <h3 class="cases-h">Отзывы слушателей</h3>
+      <p class="reviews-lead">Что слушатели хотели получить от курса, что получили и какой проект защитили.</p>
+      <div class="reviews">
+      <!--
+        Шаблон карточки отзыва. Новые потоки добавлять сверху.
+        <article class="review">
+          <div class="review-main">
+            <div class="review-head">
+              <div class="review-avatar" aria-hidden="true">И</div>
+              <div class="review-id">
+                <div class="review-name">Имя <span class="flow-tag">3 поток</span></div>
+                <div class="review-status">статус</div>
+                <a class="review-contact" href="…">@контакт</a>
+              </div>
+            </div>
+            <p class="review-request"><b>Запрос:</b> «…»</p>
+            <blockquote class="review-quote"><b>Отзыв:</b> «…»</blockquote>
+            <p class="review-project"><b>Проект:</b> …</p>
+          </div>
+          <div class="review-shots">
+            <figure class="shot"><img src="images/reviews/…" loading="lazy" alt="…"></figure>
+            <figure class="shot"><img src="images/reviews/…" loading="lazy" alt="…"></figure>
+            <figure class="shot"><img src="images/reviews/…" loading="lazy" alt="…"></figure>
+          </div>
+        </article>
+      -->
       <article class="review">
-        <div class="review-head">
-          <div class="review-avatar" aria-hidden="true">А</div>
-          <div><div class="review-name">Анастасия</div><div class="review-status">студентка бакалавриата НИУ МГСУ</div><a class="review-contact" href="https://t.me/arroW2123" target="_blank" rel="noopener">@arroW2123</a></div>
+        <div class="review-main">
+          <div class="review-head">
+            <div class="review-avatar" aria-hidden="true">А</div>
+            <div class="review-id">
+              <div class="review-name">Анастасия <span class="flow-tag">2 поток</span></div>
+              <div class="review-status">студентка бакалавриата НИУ МГСУ</div><a class="review-contact" href="https://t.me/arroW2123" target="_blank" rel="noopener">@arroW2123</a>
+            </div>
+          </div>
+          <p class="review-request"><b>Запрос:</b> «Хотелось научиться работать с искусственным интеллектом, оптимизировать рутинные задачи и улучшить навыки создания визуализаций»</p>
+          <blockquote class="review-quote"><b>Отзыв:</b> «Освоила навыки промптинга, лучше понимаю работу с иностранными сервисами, углубилась в работу с анализом среды»</blockquote>
+          <p class="review-project"><b>Проект:</b> «Катарсис» — многофункциональный спортивно-игровой комплекс, Ейск</p>
         </div>
-        <p class="review-request"><b>Запрос:</b> «Хотелось научиться работать с искусственным интеллектом, оптимизировать рутинные задачи и улучшить навыки создания визуализаций»</p>
-        <blockquote class="review-quote">«Освоила навыки промптинга, лучше понимаю работу с иностранными сервисами, углубилась в работу с анализом среды»</blockquote>
-        <p class="review-project"><b>Проект:</b> «Катарсис» — многофункциональный спортивно-игровой комплекс, Ейск</p>
-        <div class="review-shots"><figure class="shot"><img src="images/reviews/katarsis-4.jpg" loading="lazy" alt="Превью 1 проекта «Катарсис»"><figcaption>Превью 1 проекта</figcaption></figure><figure class="shot"><img src="images/reviews/katarsis-6.jpg" loading="lazy" alt="Превью 2 проекта «Катарсис»"><figcaption>Превью 2 проекта</figcaption></figure><figure class="shot"><img src="images/reviews/katarsis-10.jpg" loading="lazy" alt="Превью 3 проекта «Катарсис»"><figcaption>Превью 3 проекта</figcaption></figure></div>
+        <div class="review-shots"><figure class="shot"><img src="images/reviews/katarsis-4.jpg" loading="lazy" alt="Превью 1 проекта «Катарсис»"></figure><figure class="shot"><img src="images/reviews/katarsis-6.jpg" loading="lazy" alt="Превью 2 проекта «Катарсис»"></figure><figure class="shot"><img src="images/reviews/katarsis-10.jpg" loading="lazy" alt="Превью 3 проекта «Катарсис»"></figure></div>
       </article>
       <article class="review">
-        <div class="review-head">
-          <div class="review-avatar" aria-hidden="true">А</div>
-          <div><div class="review-name">Александра</div><div class="review-status">ЮФУ</div></div>
+        <div class="review-main">
+          <div class="review-head">
+            <div class="review-avatar" aria-hidden="true">А</div>
+            <div class="review-id">
+              <div class="review-name">Александра <span class="flow-tag">2 поток</span></div>
+              <div class="review-status">ЮФУ</div>
+            </div>
+          </div>
+          <p class="review-request"><b>Запрос:</b> «Хотелось освоить ИИ для подачи проекта, а также QGIS для разработки планов»</p>
+          <blockquote class="review-quote"><b>Отзыв:</b> «Например, ситуационную схему я брала в QGIS, так как он сохранял в нужном формате, а ИИ помог мне наложить текстуры на 3D-модель и развёртку»</blockquote>
+          <p class="review-project"><b>Проект:</b> «Донская природа» — концепция благоустройства общественного пространства и детского парка</p>
         </div>
-        <p class="review-request"><b>Запрос:</b> «Хотелось освоить ИИ для подачи проекта, а также QGIS для разработки планов»</p>
-        <blockquote class="review-quote">«Например, ситуационную схему я брала в QGIS, так как он сохранял в нужном формате, а ИИ помог мне наложить текстуры на 3D-модель и развёртку»</blockquote>
-        <p class="review-project"><b>Проект:</b> «Донская природа» — концепция благоустройства общественного пространства и детского парка</p>
-        <div class="review-shots"><figure class="shot"><img src="images/reviews/donskaya-4.jpg" loading="lazy" alt="Превью 1 проекта «Донская природа»"><figcaption>Превью 1 проекта</figcaption></figure><figure class="shot"><img src="images/reviews/donskaya-7.jpg" loading="lazy" alt="Превью 2 проекта «Донская природа»"><figcaption>Превью 2 проекта</figcaption></figure><figure class="shot"><img src="images/reviews/donskaya-11.jpg" loading="lazy" alt="Превью 3 проекта «Донская природа»"><figcaption>Превью 3 проекта</figcaption></figure></div>
+        <div class="review-shots"><figure class="shot"><img src="images/reviews/donskaya-4.jpg" loading="lazy" alt="Превью 1 проекта «Донская природа»"></figure><figure class="shot"><img src="images/reviews/donskaya-7.jpg" loading="lazy" alt="Превью 2 проекта «Донская природа»"></figure><figure class="shot"><img src="images/reviews/donskaya-11.jpg" loading="lazy" alt="Превью 3 проекта «Донская природа»"></figure></div>
       </article>
       <article class="review">
-        <div class="review-head">
-          <div class="review-avatar" aria-hidden="true">Т</div>
-          <div><div class="review-name">Татьяна</div><div class="review-status">архитектор, «АСИ проект»</div></div>
+        <div class="review-main">
+          <div class="review-head">
+            <div class="review-avatar" aria-hidden="true">Т</div>
+            <div class="review-id">
+              <div class="review-name">Татьяна <span class="flow-tag">2 поток</span></div>
+              <div class="review-status">архитектор, «АСИ проект»</div>
+            </div>
+          </div>
+          <p class="review-request"><b>Запрос:</b> «Хотелось повысить свой уровень знаний, изучить новые программы и познакомиться с ИИ»</p>
+          <blockquote class="review-quote"><b>Отзыв:</b> «Прошла курс по ИИ в архитектуре. Освоила QGIS, научилась формировать и использовать референсы для ИИ, закрепила навыки постобработки в Photoshop. Теперь уверенно комбинирую генеративные методы и ручную доработку для качественных архитектурных визуализаций»</blockquote>
+          <p class="review-project"><b>Проект:</b> «Благоустройство Пионерской рощи», Новороссийск, концепция 2026</p>
         </div>
-        <p class="review-request"><b>Запрос:</b> «Хотелось повысить свой уровень знаний, изучить новые программы и познакомиться с ИИ»</p>
-        <blockquote class="review-quote">«Прошла курс по ИИ в архитектуре. Освоила QGIS, научилась формировать и использовать референсы для ИИ, закрепила навыки постобработки в Photoshop. Теперь уверенно комбинирую генеративные методы и ручную доработку для качественных архитектурных визуализаций»</blockquote>
-        <p class="review-project"><b>Проект:</b> «Благоустройство Пионерской рощи», Новороссийск, концепция 2026</p>
-        <div class="review-shots"><figure class="shot"><img src="images/reviews/pionerskaya-1.jpg" loading="lazy" alt="Превью 1 проекта «Благоустройство Пионерской рощи»"><figcaption>Превью 1 проекта</figcaption></figure><figure class="shot"><img src="images/reviews/pionerskaya-5.jpg" loading="lazy" alt="Превью 2 проекта «Благоустройство Пионерской рощи»"><figcaption>Превью 2 проекта</figcaption></figure><figure class="shot"><img src="images/reviews/pionerskaya-7.jpg" loading="lazy" alt="Превью 3 проекта «Благоустройство Пионерской рощи»"><figcaption>Превью 3 проекта</figcaption></figure></div>
+        <div class="review-shots"><figure class="shot"><img src="images/reviews/pionerskaya-1.jpg" loading="lazy" alt="Превью 1 проекта «Благоустройство Пионерской рощи»"></figure><figure class="shot"><img src="images/reviews/pionerskaya-5.jpg" loading="lazy" alt="Превью 2 проекта «Благоустройство Пионерской рощи»"></figure><figure class="shot"><img src="images/reviews/pionerskaya-7.jpg" loading="lazy" alt="Превью 3 проекта «Благоустройство Пионерской рощи»"></figure></div>
       </article>
+      </div>
+    </div>
     </div>
 
   </div>
@@ -1206,6 +1239,27 @@
   ready(function () {
     var mob = window.innerWidth < 760;
     initConstellation('.hero-mark', { cx: mob ? 0.4 : 0.54, cy: mob ? 0.4 : 0.42, R: mob ? 150 : 230, hueBase: 221 });
+  });
+})();
+</script>
+<script>
+(function(){
+  function jumpReviews(){
+    if (location.hash !== '#reviews') return;
+    var el = document.getElementById('reviews');
+    if (!el) return;
+    var root = document.documentElement;
+    var prev = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    el.scrollIntoView({block:'start'});
+    root.style.scrollBehavior = prev;
+  }
+  jumpReviews();
+  window.addEventListener('DOMContentLoaded', jumpReviews);
+  window.addEventListener('load', function(){
+    jumpReviews();
+    setTimeout(jumpReviews, 300);
+    setTimeout(jumpReviews, 1000);
   });
 })();
 </script>
