@@ -288,37 +288,6 @@
     background:rgba(42,47,62,.12); color:var(--graphite,#2A2F3E); padding:1px 5px; border-radius:3px; margin-left:1px;
   }
 
-  /* light variants for guide-ref-section (sits on light bg) */
-  .ref-eyebrow.light {
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-  .ref-eyebrow.light::after { background: var(--border); }
-  .qlink.light {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--ink-muted);
-  }
-  .qlink.light:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: var(--accent-l);
-  }
-  .ql-badge.light {
-    background: var(--accent-l);
-    color: var(--accent);
-  }
-
-  .guide-ref-section {
-    background: var(--surface);
-    border-bottom: 2px solid var(--border);
-    border-top: 2px solid var(--graphite,#2A2F3E);
-  }
-  .guide-ref-inner {
-    max-width: 920px; margin: 0 auto;
-    padding: 12px 32px 14px;
-  }
-
   /* CTA — главная кнопка открывает Guide-view */
   .cta-row { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
   .enroll-meta {
@@ -787,7 +756,7 @@
   .card-a{border-left:3px solid #1A6BFF;background:#EBF4FF}.card-a h3{color:#1A6BFF}
   .card-b{border-left:3px solid #E8862B;background:#FDF3EE}.card-b h3{color:#C26A12}
   .depth{font-size:11.5px;color:var(--ink-faint);margin-top:6px}
-  .trackbar{background:#fff;border-bottom:1px solid var(--border);padding:8px 16px;display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--ink-faint)}
+  .trackbar{background:#fff;border-bottom:1px solid var(--border);padding:10px 48px;display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--ink-faint)}
   .trackbar-row{display:flex;align-items:center;gap:8px;min-width:0;flex-wrap:wrap}
   .trackbar-buttons{display:flex;align-items:center;gap:8px;min-width:0;flex-wrap:wrap}
   .trackbar b{color:var(--ink);margin-right:4px;flex:none}
@@ -861,34 +830,20 @@
     .t21-flagship{white-space:normal}
   }
 
-  .workbook-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 14px;border-radius:10px;background:var(--ink-night,#0A0F1A);color:#fff;font-size:12.5px;font-weight:800;text-decoration:none;white-space:nowrap;flex:none}
-  .workbook-btn{background:#1A2333;border:1px solid rgba(255,255,255,.16)}
-  .workbook-btn:hover{background:#24314A;color:#fff;text-decoration:none}
-  .workbook-top{max-width:1120px;margin:22px auto 0;padding:0 20px}
-  .workbook-top h2{font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px}
-  .workbook-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .workbook-card{border:1px solid var(--border);border-radius:16px;background:#fff;padding:18px 20px;display:flex;flex-direction:column;gap:8px}
-  .workbook-card h3{font-size:16px;margin:0;color:var(--ink)}
-  .workbook-card p{font-size:13px;line-height:1.45;color:var(--ink-muted);margin:0}
-  .workbook-card .wb-status{font-size:12px;font-weight:800;color:var(--accent);margin-top:auto}
-  .workbook-card .wb-note{font-size:11.5px;color:var(--ink-faint)}
-  .workbook-card a.wb-link{font-size:13px;font-weight:800;color:var(--accent);text-decoration:none}
-  .workbook-card a.wb-link:hover{text-decoration:underline}
+  .workbook-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;border:0;background:transparent;color:rgba(255,255,255,.78);font-size:12.5px;font-weight:600;text-decoration:none;white-space:nowrap;flex:none}
+  .workbook-btn:hover{color:#fff;text-decoration:underline}
   @media(max-width:720px){
     .workbook-btn{padding:8px 10px;font-size:11px}
-    .workbook-grid{grid-template-columns:1fr}
-    .workbook-top{padding:0 14px;margin-top:16px}
   }
 
   .head-actions{display:flex;align-items:center;gap:8px;flex:none}
   .hs-short{display:none}
-  .track-schedule{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:0 14px;border-radius:999px;background:#0F1B3D;color:#fff;font:800 12px var(--sans);text-decoration:none;white-space:nowrap;flex:none}
-  .track-schedule:hover{background:#1A2A55;color:#fff;text-decoration:none}
-  .track-schedule .ts-short{display:none}
+  .trackbar .track-schedule{margin-left:auto;background:transparent;border:0;color:var(--accent,#1A6BFF);font:700 12.5px var(--sans);padding:5px 2px;min-height:0;flex:none;text-decoration:none}
+  .trackbar .track-schedule:hover{text-decoration:underline}
   @media(max-width:760px){
     .back-bar .guide-breadcrumb{display:none}
     .head-actions{gap:6px}
-    .workbook-btn{padding:8px 9px;font-size:10.5px}
+    .workbook-btn{padding:8px 10px;font-size:10.5px}
     .hs-full{display:none}.hs-short{display:inline}
   }
   @media(max-width:640px){
@@ -896,9 +851,34 @@
     .trackbar b{grid-row:1}
     .trackbar-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;min-width:0}
     .trackbar button{width:100%;min-width:0}
-    .track-schedule{grid-column:1/-1;width:100%;min-height:36px;margin-top:0}
-    .track-schedule .ts-full{display:none}
-    .track-schedule .ts-short{display:inline}
+  }
+
+  .kit{max-width:920px;margin:0 auto;padding:30px 32px 28px}
+  .kit-label{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 10px}
+  .kit-list{list-style:none;margin:0 0 26px;padding:0;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+  .kit-list li+li{border-top:1px solid var(--border)}
+  .kit-row{display:grid;grid-template-columns:230px 1fr auto;align-items:baseline;gap:20px;padding:16px 22px;text-decoration:none;color:inherit;transition:background .15s}
+  a.kit-row:hover{background:var(--bg);text-decoration:none}
+  a.kit-row:hover .kit-act{text-decoration:underline}
+  .kit-name{font-size:14.5px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+  .kit-tag{display:block;font-size:11.5px;font-weight:600;color:#C46A16;margin-top:3px;letter-spacing:0}
+  .kit-desc{font-size:13px;line-height:1.55;color:var(--ink-muted)}
+  .kit-desc small{display:block;font-size:11.5px;color:var(--ink-faint);margin-top:3px}
+  .kit-act{font-size:12.5px;font-weight:700;color:var(--accent,#1A6BFF);white-space:nowrap}
+  .kit-act.muted{color:var(--ink-faint);font-weight:600}
+  .kit-services{display:grid;grid-template-columns:110px 1fr;gap:8px 20px;margin:0;font-size:13px;line-height:1.5}
+  .kit-services dt{color:var(--ink-faint);font-weight:600}
+  .kit-services dd{margin:0;display:flex;flex-wrap:wrap;gap:4px 18px}
+  .kit-services a{color:var(--ink-muted);font-weight:600;text-decoration:none;white-space:nowrap;border-bottom:1px solid var(--border);padding-bottom:1px;transition:color .15s,border-color .15s}
+  .kit-services a:hover{color:var(--accent,#1A6BFF);border-color:var(--accent,#1A6BFF)}
+  @media(max-width:720px){
+    .kit{padding:20px 18px 18px}
+    .kit-row{grid-template-columns:1fr;gap:4px;padding:14px 16px}
+    .kit-tag{display:inline;margin:0 0 0 6px}
+    .kit-services{grid-template-columns:1fr;gap:2px}
+    .kit-services dd{margin-bottom:10px}
+    .trackbar{padding:8px 12px}
+    .trackbar .track-schedule{font-size:12px}
   }
 </style>
 <!-- Yandex.Metrika counter -->
@@ -930,7 +910,7 @@
     </div>
     <div class="head-actions">
       <a class="workbook-btn head-schedule" href="redev-schedule.html"><span class="hs-full">Расписание ↗</span><span class="hs-short">Расписание</span></a>
-      <a class="workbook-btn" href="https://fortune-swing-02e.notion.site/41112bb3b5cd81839661da69963a035b?source=copy_link" target="_blank" rel="noopener"><span class="hs-full">Рабочая тетрадь ↗</span><span class="hs-short">Тетрадь</span></a>
+      <a class="workbook-btn" href="https://fortune-swing-02e.notion.site/41112bb3b5cd81839661da69963a035b?source=copy_link" target="_blank" rel="noopener"><span class="hs-full">Рабочая тетрадь ↗</span><span class="hs-short">Рабочая тетрадь</span></a>
     </div>
     <a class="bar-brand" href="index.html" title="AI2ARCH — на главную" aria-label="AI2ARCH — на главную"><img src="images/ai2arch-sign.png" width="30" height="30" alt=""></a>
   </div>
@@ -947,30 +927,34 @@
     })();
   </script>
 
-  <div class="workbook-top">
-    <h2>Рабочие материалы</h2>
-    <div class="workbook-grid">
-      <div class="workbook-card">
-        <h3>Рабочая тетрадь</h3>
-        <p>Основной документ потока: страницы заданий, шаблоны и фиксации по вашему объекту.</p>
-        <a class="wb-link" href="https://fortune-swing-02e.notion.site/41112bb3b5cd81839661da69963a035b?source=copy_link" target="_blank" rel="noopener">Открыть рабочую тетрадь ↗</a>
+  <section class="kit" aria-label="Рабочие материалы и сервисы">
+  <div class="kit-label">Рабочие материалы</div>
+  <ul class="kit-list">
+    <li>
+      <a class="kit-row" href="https://fortune-swing-02e.notion.site/41112bb3b5cd81839661da69963a035b?source=copy_link" target="_blank" rel="noopener">
+        <span class="kit-name">Рабочая тетрадь</span>
+        <span class="kit-desc">Задания, шаблоны и фиксации по вашему объекту</span>
+        <span class="kit-act">Открыть ↗</span>
+      </a>
+    </li>
+    <li>
+      <div class="kit-row">
+        <span class="kit-name">Инструмент редевелопера<span class="kit-tag">трек Б</span></span>
+        <span class="kit-desc">Таблица-движок, инвестиционный паспорт, реестр пробелов и пакет запросов<small>Учебная методика, не заключение оценщика</small></span>
+        <span class="kit-act muted">Доступ — в чате потока</span>
       </div>
-      <div class="workbook-card">
-        <h3>Инструмент редевелопера (трек Б)</h3>
-        <p>Что внутри: таблица-движок, страница решения «Инвестиционный паспорт», реестр пробелов и пакет запросов.</p>
-        <p>Инструмент помогает собрать расчёт и решение, но не обещает результат.</p>
-        <p class="wb-note">Учебная методика, не заключение оценщика.</p>
-        <div class="wb-status">Доступ выдаётся в чате потока по e-mail</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="guide-ref-section">
-    <div class="guide-ref-inner">
-      <div class="ref-eyebrow light">Справочные материалы</div>
-      <div class="links-row"><a class="qlink light" href="https://alice.yandex.ru" target="_blank" rel="noopener noreferrer"><span>🟣</span> Алиса AI<span class="ql-badge light">ИИ</span></a><a class="qlink light" href="https://giga.chat" target="_blank" rel="noopener noreferrer"><span>🟢</span> GigaChat<span class="ql-badge light">ИИ</span></a><a class="qlink light" href="https://shedevrum.ai" target="_blank" rel="noopener noreferrer"><span>🎨</span> Шедеврум<span class="ql-badge light">ИИ</span></a><a class="qlink light" href="https://claude.ai" target="_blank" rel="noopener noreferrer"><span>✳️</span> Claude<span class="ql-badge light">ИИ</span></a><a class="qlink light" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer"><span>💬</span> ChatGPT<span class="ql-badge light">ИИ</span></a><a class="qlink light" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer"><span>♊</span> Gemini<span class="ql-badge light">ИИ</span></a><a class="qlink light" href="https://nspd.gov.ru" target="_blank" rel="noopener noreferrer"><span>📍</span> НСПД<span class="ql-badge light">Данные</span></a><a class="qlink light" href="https://2gis.ru" target="_blank" rel="noopener noreferrer"><span>📌</span> 2ГИС<span class="ql-badge light">Данные</span></a><a class="qlink light" href="https://www.cian.ru" target="_blank" rel="noopener noreferrer"><span>🏢</span> ЦИАН<span class="ql-badge light">Данные</span></a><a class="qlink light" href="https://gamma.app" target="_blank" rel="noopener noreferrer"><span>📊</span> Gamma.app<span class="ql-badge light">Синтез</span></a></div>
-    </div>
-  </div>
+    </li>
+  </ul>
+  <div class="kit-label">Сервисы курса</div>
+  <dl class="kit-services">
+    <dt>Нейросети</dt>
+    <dd><a href="https://alice.yandex.ru" target="_blank" rel="noopener noreferrer">Алиса AI</a><a href="https://giga.chat" target="_blank" rel="noopener noreferrer">GigaChat</a><a href="https://shedevrum.ai" target="_blank" rel="noopener noreferrer">Шедеврум</a><a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude</a><a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer">ChatGPT</a><a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">Gemini</a></dd>
+    <dt>Данные</dt>
+    <dd><a href="https://nspd.gov.ru" target="_blank" rel="noopener noreferrer">НСПД</a><a href="https://2gis.ru" target="_blank" rel="noopener noreferrer">2ГИС</a><a href="https://www.cian.ru" target="_blank" rel="noopener noreferrer">ЦИАН</a></dd>
+    <dt>Сборка</dt>
+    <dd><a href="https://gamma.app" target="_blank" rel="noopener noreferrer">Gamma</a></dd>
+  </dl>
+</section>
 
   <div class="trackbar" id="trackbar">
     <div class="trackbar-row">
@@ -979,8 +963,8 @@
         <button class="on" data-v="all" aria-label="Все" onclick="setView('all')">Все</button>
         <button data-v="A" aria-label="А · Проектировщик" onclick="setView('A')"><span class="tb-full">А · Проектировщик</span><span class="tb-short">А · Проект.</span></button>
         <button data-v="B" aria-label="Б · Девелопер" onclick="setView('B')"><span class="tb-full">Б · Девелопер</span><span class="tb-short">Б · Девелоп.</span></button>
-        <a class="track-schedule" href="redev-schedule.html"><span class="ts-full">Расписание ↗</span><span class="ts-short">Расписание</span></a>
       </div>
+      <a class="track-schedule" href="redev-schedule.html">Расписание ↗</a>
     </div>
     <span class="trackbar-note">Все слушатели проходят все модули; различаются задания и глубина.</span>
   </div>
