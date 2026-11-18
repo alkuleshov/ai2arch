@@ -11,9 +11,9 @@
   --azure2:#EAF1FF; --azure3:#BFD3FF; --soft:#F6F8FC; --line:#E1E5EE; --muted:#5B6475; --faint:#9AA4B8;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:#fff;color:var(--navy);font-family:Manrope,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+html,body{min-height:100%;background:#fff;color:var(--navy);font-family:Manrope,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;overflow-x:hidden;overflow-y:auto;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-.deck{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:8px 0 10px}
+.deck{position:relative;height:100vh;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:8px 0 10px;overflow:hidden}
 .viewport{position:relative;flex:1 1 auto;width:100%;display:flex;align-items:center;justify-content:center;min-height:0}
 .stage{width:1280px;height:720px;position:relative;flex:none;transform-origin:center center;background:#fff;overflow:hidden;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 30px rgba(10,15,26,.06)}
 .progress{position:absolute;left:0;top:0;height:5px;background:var(--azure);width:0;transition:width .35s ease;z-index:5}
@@ -336,6 +336,53 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 .title-slide .chips{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
 .prompt.tight{font-size:15px;line-height:1.34}
 .prompt + .note{margin-top:8px}
+
+  .scheme{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:4px 8px 2px;margin:6px 0 0}
+  .scheme-label{font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--azure);margin-bottom:2px}
+  .scheme svg{width:auto;height:115px;max-width:100%;display:block;margin:0 auto}
+  .scheme.compact svg{height:88px}
+  .scheme + .note{margin-top:4px}
+
+  .prompts-link{height:44px;display:inline-flex;align-items:center;justify-content:center;padding:0 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--navy);font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap}
+  .prompts-link:hover{border-color:var(--azure);color:var(--azure)}
+  .prompts-link:focus-visible{outline:2px solid var(--azure);outline-offset:3px}
+  .prompts-section{background:var(--soft);border-top:1px solid var(--line);padding:52px 24px 64px;color:var(--navy);scroll-margin-top:16px}
+  .prompts-inner{max-width:980px;margin:0 auto}
+  .prompts-section h2{font-size:34px;line-height:1.12;letter-spacing:-.015em}
+  .prompts-lead{font-size:15px;line-height:1.5;color:var(--muted);margin-top:10px;max-width:860px}
+  .prompts-grid{display:flex;flex-direction:column;gap:18px;margin-top:24px}
+  .prompt-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;min-width:0}
+  .prompt-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+  .prompt-part{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--azure);margin-bottom:3px}
+  .prompt-card h3{font-size:22px;line-height:1.2}
+  .prompt-flagship{font-size:12px;font-weight:700;color:var(--graphite);background:var(--azure2);border:1px solid var(--azure3);border-radius:7px;padding:5px 9px;white-space:nowrap}
+  .prompt-text{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:15px;line-height:1.5;color:var(--graphite);white-space:pre-wrap;overflow-wrap:anywhere}
+  .prompt-toolbar{display:flex;justify-content:flex-end;margin-bottom:8px}
+  .copy-btn{min-height:36px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--navy);font:700 12px var(--sans);padding:0 12px;cursor:pointer}
+  .copy-btn:hover{border-color:var(--azure);color:var(--azure)}
+  .copy-btn:focus-visible{outline:2px solid var(--azure);outline-offset:3px}
+  .copy-btn.copied{background:var(--azure);border-color:var(--azure);color:#fff}
+  .prompt-fill{font-size:13px;line-height:1.45;color:var(--muted);margin-top:10px}
+  .prompt-fill b{color:var(--navy)}
+  @media(max-width:640px){
+    .prompts-link{padding:0 9px;font-size:11px}
+    .prompts-section{padding:36px 16px 48px}
+    .prompts-section h2{font-size:27px}
+    .prompt-card{padding:16px}
+    .prompt-card h3{font-size:20px}
+    .prompt-text{font-size:14px;padding:12px}
+    .prompt-flagship{white-space:normal}
+  }
+  @media(prefers-color-scheme:dark){
+    .prompts-section{background:#101827;color:#F3F6FC;border-top-color:#2A3550}
+    .prompts-section h2,.prompt-fill b{color:#F3F6FC}
+    .prompts-lead,.prompt-fill{color:#B6C2D9}
+    .prompt-card{background:#162033;border-color:#2A3550}
+    .prompt-text{background:#0D1421;border-color:#2A3550;color:#E2E9F6}
+    .prompt-flagship{background:#1B2A45;border-color:#355078;color:#D9E5FA}
+    .copy-btn{background:#162033;border-color:#355078;color:#F3F6FC}
+    .prompt-card h3{color:#F3F6FC}
+  }
 </style>
 </head>
 <body>
@@ -374,6 +421,15 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 
 
 <section class="slide title-slide" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Тема 3.5 · Встреча</div><h1>Краш-тест <em>согласованности</em></h1><p class="lead">Сверка рендеров, капитальных затрат и норм СП; перекрёстное ревью.</p><div class="chips"><span class="chip">Для Трека А · визуальный аудит</span><span class="chip">Для Трека Б · нормы и смета</span><span class="chip">Беседа</span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Зачем</div><h2>Зачем <em>краш-тест</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>краш-тест проверяет, выдерживает ли решение сопоставление;</li><li>материалы и цифры могут расходиться между собой;</li><li>цена ошибки — решение, которое не пройдёт экспертизу;</li><li>результат — список несоответствий, а не новый проект.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> Краш-тест ловит расхождения до защиты документа.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Краш-тест</b> — проверка того, выдерживает ли решение сопоставление с нормами и расчётом.<br><span style="color:var(--muted)">Проще: проверка на прочность до защиты.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Контекст</div><h2>Перекрёстная <em>проверка</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>перекрёстная проверка пришла из практики ревью;</li><li>сравнивают рендер, таблицу, нормы и CAPEX;</li><li>на рынке так готовят документ к защите;</li><li>проверка не заменяет нормы и расчёт.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> Сверка идёт по нескольким осям одновременно.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Ревью</b> — проверка работы вторым взглядом по заданным критериям.<br><span style="color:var(--muted)">Проще: проверка работы напарником.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Схема</div><h2>Матрица <em>согласованности</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>рендер сверяется с площадью и конструктивом;</li><li>таблица сверяется с источниками;</li><li>нормы сверяются с документами объекта;</li><li>CAPEX сверяется со статьями и объёмами.</li></ul></div><div class="scheme"><div class="scheme-label">Схема</div><svg viewBox="0 0 1100 150" role="img" aria-label="Матрица согласованности: рендер, таблица, нормы, CAPEX"><rect x="30" y="20" width="230" height="110" rx="10" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="145" y="48" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#1A6BFF">Рендер</text><text x="145" y="74" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">площадь</text><text x="145" y="98" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">конструктив</text><rect x="300" y="20" width="230" height="110" rx="10" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="415" y="48" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#1A6BFF">Таблица</text><text x="415" y="74" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">цифры</text><text x="415" y="98" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">источники</text><rect x="570" y="20" width="230" height="110" rx="10" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="685" y="48" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#1A6BFF">Нормы</text><text x="685" y="74" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">ПЗЗ и СП</text><text x="685" y="98" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">документы</text><rect x="840" y="20" width="230" height="110" rx="10" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="955" y="48" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#1A6BFF">CAPEX</text><text x="955" y="74" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">статьи</text><text x="955" y="98" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">объёмы</text></svg></div><div class="band" style="margin-top:12px"><b>Вывод:</b> Матрица показывает, где решение расходится.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Краш-тест</b> — проверка того, выдерживает ли решение сопоставление с нормами и расчётом.<br><span style="color:var(--muted)">Проще: проверка на прочность до защиты.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Схема</div><h2>Порядок <em>сверки</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>сначала рендер и таблица;</li><li>затем нормы и документы;</li><li>потом CAPEX и объёмы;</li><li>в конце — вывод и список правок.</li></ul></div><div class="scheme"><div class="scheme-label">Схема</div><svg viewBox="0 0 1100 150" role="img" aria-label="Порядок сверки: рендер, таблица, нормы, CAPEX, вывод"><rect x="20" y="38" width="185" height="62" rx="9" fill="#EAF1FF" stroke="#BFD3FF" stroke-width="1.5"/><text x="112" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#0A0F1A">Рендер</text><path d="M209 69.0 H235" stroke="#1A6BFF" stroke-width="2"/><path d="M228 65.0 L235 69.0 L228 73.0" stroke="#1A6BFF" stroke-width="2" fill="none"/><rect x="239" y="38" width="185" height="62" rx="9" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="331" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#2A2F3E">Таблица</text><path d="M428 69.0 H454" stroke="#1A6BFF" stroke-width="2"/><path d="M447 65.0 L454 69.0 L447 73.0" stroke="#1A6BFF" stroke-width="2" fill="none"/><rect x="458" y="38" width="185" height="62" rx="9" fill="#EAF1FF" stroke="#BFD3FF" stroke-width="1.5"/><text x="550" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#0A0F1A">Нормы</text><path d="M646 69.0 H672" stroke="#1A6BFF" stroke-width="2"/><path d="M665 65.0 L672 69.0 L665 73.0" stroke="#1A6BFF" stroke-width="2" fill="none"/><rect x="676" y="38" width="185" height="62" rx="9" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="769" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#2A2F3E">CAPEX</text><path d="M865 69.0 H891" stroke="#1A6BFF" stroke-width="2"/><path d="M884 65.0 L891 69.0 L884 73.0" stroke="#1A6BFF" stroke-width="2" fill="none"/><rect x="895" y="38" width="185" height="62" rx="9" fill="#1A6BFF" stroke="#1A6BFF" stroke-width="1.5"/><text x="988" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#fff">Вывод</text></svg></div><div class="band" style="margin-top:12px"><b>Вывод:</b> Порядок не даёт пропустить ось проверки.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Краш-тест</b> — проверка того, выдерживает ли решение сопоставление с нормами и расчётом.<br><span style="color:var(--muted)">Проще: проверка на прочность до защиты.</span></span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Формат</div><h2>Формат: <em>беседа по краш-тесту</em></h2><div class="body">
 <div class="bx"><h4>Что делаем</h4><ul>
 <li>сопоставляем рендеры с таблицей CAPEX;</li>
@@ -381,6 +437,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>отмечаем неподтверждённые элементы;</li>
 <li>готовим 5 замечаний напарнику.</li></ul></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Беседа проверяет согласованность, а не добавляет новые данные.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Краш-тест</b> — проверка того, выдерживает ли решение сопоставление с нормами и расчётом.</span><span><b>Рендер</b> — изображение, созданное компьютером по проекту или описанию.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Темы для обсуждения</div><h2>Темы <em>краш-теста</em></h2><div class="body">
 <div class="stack">
 <div class="it"><b>Рендер и CAPEX</b><p>Что на рендере не подтверждается статьёй в таблице.</p></div>
@@ -388,6 +445,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <div class="it"><b>Замечания напарнику</b><p>Какие замечания проверяемы по таблице и рендеру.</p></div>
 </div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Обсуждение фиксирует только проверяемые расхождения.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Краш-тест</b> — проверка того, выдерживает ли решение сопоставление с нормами и расчётом.</span><span><b>СП</b> — свод правил, технические нормы строительства.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Задача A · Для Трека А</div><h2>Сверить <em>рендер с таблицей</em></h2><div class="body">
 <div class="bx"><h4>Вход и результат</h4><ul>
 <li>вход: рендеры серии;</li>
@@ -395,8 +453,11 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>баланс площадей;</li>
 <li>результат: перечень видимых элементов и проверка по таблице.</li></ul></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Аудит сопоставляет видимое на рендере с таблицей, а не с памятью.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Рендер</b> — изображение, созданное компьютером по проекту или описанию.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Задача A · Сравнение</div><h2>Сервисы: <em>сравнение и флагман</em></h2><div class="body"><table class="datatable" style="font-size:13px"><thead><tr><th>Сервис</th><th>Контур</th><th>Сильные стороны</th><th>Ограничения</th><th>Когда выбирать</th></tr></thead><tbody><tr><td>Gemini</td><td><span class="contour ext">расширенный</span></td><td>описывает объекты на изображении и сопоставляет их с загруженной таблицей</td><td>описание опирается на видимое; проверка вручную</td><td>визуальный аудит</td></tr><tr><td>Claude</td><td><span class="contour ext">расширенный</span></td><td>работает с изображением и таблицей в одном запросе</td><td>видимые элементы проверяются вручную</td><td>по задаче</td></tr><tr><td>Модель с распознаванием изображений</td><td><span class="contour main">основной</span></td><td>описывает видимые элементы</td><td>доступность распознавания проверяется; иначе описание вручную</td><td>основной контур</td></tr></tbody></table><p class="src">Проверить перед лекцией: функции и ограничения меняются</p><p class="note" style="margin-top:8px"><b>Флагман по критерию:</b> Gemini — описывает объекты на изображении и сопоставляет их с загруженной таблицей.</p><div class="band" style="margin-top:12px"><b>Вывод:</b> Флагман выбирается по сопоставлению изображения и таблицы.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Vision-модель</b> — модель, которая анализирует изображения.</span><span><b>Рендер</b> — изображение, созданное компьютером по проекту или описанию.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Задача A · Промпт</div><h2>Промпт для <em>визуального аудита</em></h2><div class="body"><div class="prompt">Я загрузил рендер и таблицу CAPEX. Перечисли конструкции и элементы, видимые на рендере (антресоли, витражи, благоустройство, инженерные элементы). Для каждого укажи: есть ли статья в таблице CAPEX; не противоречит ли баланс площадей. Описывай только видимое; если не уверен, пиши «нужна проверка человеком».</div><div class="band" style="margin-top:12px"><b>Вывод:</b> Промпт ограничивает ответ видимым и запрещает догадки.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Промпт</b> — текстовая инструкция модели.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Задача A · Клики и проверка</div><h2>Шаги <em>и проверка</em></h2><div class="body">
 <div class="numlist">
 <div class="nl"><div class="n">1</div><p>Загрузить рендер, таблицу CAPEX и баланс площадей.</p></div>
@@ -406,6 +467,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <div class="nl"><div class="n">5</div><p>Сохранить аудит в рабочей тетради.</p></div>
 </div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Аудит принимается после сверки каждого элемента с таблицей.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Рендер</b> — изображение, созданное компьютером по проекту или описанию.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Задача A · Сбой и контур</div><h2>Путь в <em>основном контуре</em></h2><div class="body">
 <div class="two">
 <div class="bx"><h4>Типичный сбой</h4><ul>
@@ -417,6 +479,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>если распознавания нет — описание рендера вручную;</li>
 <li>каждый элемент сверяется с таблицей.</li></ul></div></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Основной контур описывает рендер вручную и сохраняет проверяемость.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Vision-модель</b> — модель, которая анализирует изображения.</span><span><b>Рендер</b> — изображение, созданное компьютером по проекту или описанию.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Задача B · Для Трека Б</div><h2>Проверить <em>нормы СП и CAPEX</em></h2><div class="body">
 <div class="bx"><h4>Вход и результат</h4><ul>
 <li>вход: список конструкций с рендеров;</li>
@@ -424,8 +487,11 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>выписки СП;</li>
 <li>результат: норма, статья CAPEX и вердикт по каждому элементу.</li></ul></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Проверка связывает элемент, норму и затрату.</div></div><div class="terms"><span class="lab">Термины</span><span><b>СП</b> — свод правил, технические нормы строительства.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Задача B · Сравнение</div><h2>Сервисы: <em>сравнение и флагман</em></h2><div class="body"><table class="datatable" style="font-size:13px"><thead><tr><th>Сервис</th><th>Контур</th><th>Сильные стороны</th><th>Ограничения</th><th>Когда выбирать</th></tr></thead><tbody><tr><td>NotebookLM</td><td><span class="contour ext">расширенный</span></td><td>ответы со ссылками на загруженные своды правил</td><td>ссылки сверяются с оригиналом</td><td>нормы СП</td></tr><tr><td>Claude</td><td><span class="contour ext">расширенный</span></td><td>работает с документами и таблицей</td><td>каждую ссылку проверяем вручную</td><td>по задаче</td></tr><tr><td>DeepSeek</td><td><span class="contour main">основной</span></td><td>документ вставляется текстом</td><td>сверка норм вручную</td><td>основной контур</td></tr></tbody></table><p class="src">Проверить перед лекцией: функции и ограничения меняются</p><p class="note" style="margin-top:8px"><b>Флагман по критерию:</b> NotebookLM — ответы со ссылками на загруженные своды правил; ссылки сверяются с оригиналом.</p><div class="band" style="margin-top:12px"><b>Вывод:</b> Флагман выбирается по ссылкам на своды правил; оригинал проверяется вручную.</div></div><div class="terms"><span class="lab">Термины</span><span><b>СП</b> — свод правил, технические нормы строительства.</span><span><b>LLM (Large Language Model)</b> — большая языковая модель.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Задача B · Промпт</div><h2>Промпт для <em>норм и CAPEX</em></h2><div class="body"><div class="prompt">Опираясь только на загруженные своды правил и таблицу CAPEX, проверь для каждого элемента: есть ли норма, подтверждающая решение (укажи пункт и страницу), и есть ли затрата в CAPEX. Если нормы нет в загруженных документах, пиши «не подтверждено».</div><div class="band" style="margin-top:12px"><b>Вывод:</b> Промпт требует ссылку на пункт и не допускает норму без источника.</div></div><div class="terms"><span class="lab">Термины</span><span><b>СП</b> — свод правил, технические нормы строительства.</span><span><b>Промпт</b> — текстовая инструкция модели.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Задача B · Клики и проверка</div><h2>Шаги <em>и проверка</em></h2><div class="body">
 <div class="numlist">
 <div class="nl"><div class="n">1</div><p>Загрузить выписки СП и таблицу CAPEX.</p></div>
@@ -435,6 +501,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <div class="nl"><div class="n">5</div><p>Сохранить вердикты в рабочей тетради.</p></div>
 </div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Вердикт принимается после сверки пункта с оригиналом.</div></div><div class="terms"><span class="lab">Термины</span><span><b>СП</b> — свод правил, технические нормы строительства.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Задача B · Сбой и контур</div><h2>Путь в <em>основном контуре</em></h2><div class="body">
 <div class="two">
 <div class="bx"><h4>Типичный сбой</h4><ul>
@@ -446,7 +513,13 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>каждый пункт СП сверяется с оригиналом;</li>
 <li>вердикт фиксируется вручную.</li></ul></div></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Основной контур проверяет нормы вручную и фиксирует вердикт.</div></div><div class="terms"><span class="lab">Термины</span><span><b>СП</b> — свод правил, технические нормы строительства.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Шаблон</div><h2>Шаблон <em>краш-теста</em></h2><div class="body"><table class="datatable" style="font-size:14px"><thead><tr><th>Элемент на рендере</th><th>Статья CAPEX</th><th>Норма (пункт СП)</th><th>Вердикт</th></tr></thead><tbody><tr><td>нет данных</td><td>нет данных</td><td>нет данных</td><td>нет данных: нужны рендеры и CAPEX</td></tr></tbody></table><p class="note" style="margin-top:8px"><b>Образец на C52:</b> нет данных: нужны рендеры и CAPEX.</p><div class="band" style="margin-top:12px"><b>Вывод:</b> Шаблон фиксирует связку элемента, затраты, нормы и вердикта.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Краш-тест</b> — проверка того, выдерживает ли решение сопоставление с нормами и расчётом.</span><span><b>СП</b> — свод правил, технические нормы строительства.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">C52</div><h2>C52: <em>честный результат сверки</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>рендер — нет данных: нужна серия изображений;</li><li>таблица — нет данных: CAPEX и OPEX;</li><li>нормы — нет данных: ПЗЗ, СП и ЗОУИТ;</li><li>сверка не пройдена, пока нет данных.</li></ul></div><p class="note"><b>Пример:</b> C52: рендер, CAPEX, OPEX, ПЗЗ и ЗОУИТ — нет данных: нужны серия, сметы, выписка ПЗЗ и сведения ЗОУИТ.</p><div class="band" style="margin-top:12px"><b>Вывод:</b> Честный результат важнее зелёной галочки.</div></div><div class="terms"><span class="lab">Термины</span><span><b>ПЗЗ</b> — правила землепользования и застройки города.<br><span style="color:var(--muted)">Проще: что можно строить на участке.</span></span><span><b>СП</b> — свод правил, технические нормы строительства.<br><span style="color:var(--muted)">Проще: строительные нормы.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Ошибки</div><h2>Типичные <em>ошибки</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>рендер принят за проект;</li><li>нормы проверены по памяти;</li><li>CAPEX не связан с рендером;</li><li>замечания остались без источника.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> Ошибки краш-теста — это неподтверждённые выводы.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Краш-тест</b> — проверка того, выдерживает ли решение сопоставление с нормами и расчётом.<br><span style="color:var(--muted)">Проще: проверка на прочность до защиты.</span></span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Ревью</div><h2>Перекрёстное <em>ревью</em></h2><div class="body">
 <div class="bx"><h4>Пять замечаний по схеме</h4><ul>
 <li>что вижу на рендере или в таблице;</li>
@@ -455,6 +528,8 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>замечания формулируются по работе напарника из смежного трека;</li>
 <li>каждое замечание сверяется с таблицей.</li></ul></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Ревью проверяет работу напарника по таблице, а не по впечатлению.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Краш-тест</b> — проверка того, выдерживает ли решение сопоставление с нормами и расчётом.</span><span><b>Рендер</b> — изображение, созданное компьютером по проекту или описанию.</span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 3.5 · Краш-тест согласованности"><div class="kick">Задание №4</div><h2>Что берём <em>в Задание №4</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>таблица сверки по четырём осям;</li><li>список несоответствий с источниками;</li><li>отметка, где данных нет;</li><li>вывод: что исправить до сдачи.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> В Задание №4 уходит проверка, а не новый проект.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Ревью</b> — проверка работы вторым взглядом по заданным критериям.<br><span style="color:var(--muted)">Проще: проверка работы напарником.</span></span></div></section>
 
 <div class="foot" id="foot"><span id="footText">Тема 3.5 · Краш-тест согласованности</span><span><a href="https://ai2arch.ru/redev-schedule.html" target="_blank" rel="noopener">Расписание ↗</a></span></div>
   </div>
@@ -466,10 +541,32 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
    <button id="tocBtn" class="toc-btn" type="button" aria-label="Содержание" title="Содержание" aria-haspopup="true" aria-expanded="false">☰</button>
    <button id="next" aria-label="Вперёд" title="Вперёд">›</button>
    <button id="fs" aria-label="Развернуть на весь экран" title="На весь экран (F)">⤢</button>
+   <a class="prompts-link" href="#prompts">Промпты</a>
    <span class="hint">← → листать · F — полный экран</span>
    <div class="toc-menu" id="tocMenu" role="menu" aria-label="Содержание"></div>
  </div>
 </div>
+
+<section class="prompts-section" id="prompts">
+  <div class="prompts-inner">
+    <h2>Промпты темы 3.5</h2>
+    <p class="prompts-lead">Скопируйте промпт, подставьте свои данные вместо значений в квадратных скобках и проверьте результат по первоисточнику</p>
+    <div class="prompts-grid">
+      <article class="prompt-card">
+        <div class="prompt-card-head"><div><div class="prompt-part">Часть 1</div><h3>Визуальный аудит</h3></div></div>
+        <div class="prompt-toolbar"><button class="copy-btn" type="button" data-copy="ct-prompt-1">Копировать</button></div>
+        <div class="prompt-text" id="ct-prompt-1">Я загрузил рендер и таблицу CAPEX. Перечисли конструкции и элементы, видимые на рендере (антресоли, витражи, благоустройство, инженерные элементы). Для каждого укажи: есть ли статья в таблице CAPEX; не противоречит ли баланс площадей. Описывай только видимое; если не уверен, пиши «нужна проверка человеком».</div>
+        <p class="prompt-fill"><b>Что подставить:</b> рендер и таблица CAPEX</p>
+      </article>
+      <article class="prompt-card">
+        <div class="prompt-card-head"><div><div class="prompt-part">Часть 2</div><h3>Нормы и CAPEX</h3></div></div>
+        <div class="prompt-toolbar"><button class="copy-btn" type="button" data-copy="ct-prompt-2">Копировать</button></div>
+        <div class="prompt-text" id="ct-prompt-2">Опираясь только на загруженные своды правил и таблицу CAPEX, проверь для каждого элемента: есть ли норма, подтверждающая решение (укажи пункт и страницу), и есть ли затрата в CAPEX. Если нормы нет в загруженных документах, пиши «не подтверждено».</div>
+        <p class="prompt-fill"><b>Что подставить:</b> своды правил и таблица CAPEX</p>
+      </article>
+    </div>
+  </div>
+</section>
 
 <script>
 (function(){
@@ -573,7 +670,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     closeToc();
   });
 
-  function go(i){
+  function go(i, writeHash){
     if(i<0||i>=total) return;
     slides[cur].classList.remove('active');
     cur=i; slides[cur].classList.add('active');
@@ -582,7 +679,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     prev.disabled=cur===0; next.disabled=cur===total-1;
     prog.style.width=((cur+1)/total*100)+'%';
     updateProgress();
-    try{history.replaceState(null,'','#slide-'+(cur+1));}catch(e){}
+    if(writeHash!==false){try{history.replaceState(null,'','#slide-'+(cur+1));}catch(e){}}
   }
   prev.onclick=function(){go(cur-1)}; next.onclick=function(){go(cur+1)};
   function fit(){
@@ -599,6 +696,9 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
   fs.onclick=toggleFs;
   document.addEventListener('fullscreenchange',function(){setTimeout(fit,60)});
   document.addEventListener('keydown',function(e){
+    var prompts=document.getElementById('prompts');
+    if(prompts && (e.target.closest && e.target.closest('#prompts'))) return;
+    if(prompts && prompts.getBoundingClientRect().top < window.innerHeight - 40) return;
     if(e.key==='Escape'){closeToc();return;}
     if(['ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(cur+1);}
     else if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(cur-1);}
@@ -617,14 +717,52 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     return Math.min(Math.max(parseInt(m[1],10)-1,0),total-1);
   }
   window.addEventListener('hashchange',function(){
+    if(location.hash==='#prompts'){
+      var p=document.getElementById('prompts'); if(p) p.scrollIntoView();
+      return;
+    }
     var idx=parseHash();
     if(idx!==cur) go(idx);
   });
 
   buildProgress();
   buildToc();
-  go(parseHash());
+  var initialPrompts=location.hash==='#prompts';
+  go(parseHash(),!initialPrompts);
+  if(initialPrompts){setTimeout(function(){var p=document.getElementById('prompts');if(p)p.scrollIntoView();},0);}
   fit();
+})();
+</script>
+<script>
+(function(){
+  if (window.self !== window.top) {
+    var embeddedPrompts = document.getElementById('prompts');
+    var embeddedLink = document.querySelector('.prompts-link');
+    if (embeddedPrompts) embeddedPrompts.style.display = 'none';
+    if (embeddedLink) embeddedLink.style.display = 'none';
+  }
+  function fallback(text){
+    var ta=document.createElement('textarea');
+    ta.value=text; ta.setAttribute('readonly','');
+    ta.style.position='fixed'; ta.style.left='-9999px';
+    document.body.appendChild(ta); ta.select();
+    try{document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);
+  }
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var el=document.getElementById(btn.getAttribute('data-copy'));
+      if(!el) return;
+      var text=el.textContent;
+      var done=function(){
+        btn.textContent='Скопировано'; btn.classList.add('copied');
+        setTimeout(function(){btn.textContent='Копировать';btn.classList.remove('copied');},2000);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){fallback(text);done();});
+      }else{fallback(text);done();}
+    });
+  });
 })();
 </script>
 </body>
