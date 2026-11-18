@@ -288,6 +288,38 @@
     background:rgba(42,47,62,.12); color:var(--graphite,#2A2F3E); padding:1px 5px; border-radius:3px; margin-left:1px;
   }
 
+  /* light variants for guide-ref-section (sits on light bg) */
+  .ref-eyebrow.light {
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .ref-eyebrow.light::after { background: var(--border); }
+  .qlink.light {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--ink-muted);
+  }
+  .qlink.light:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-l);
+  }
+  .ql-badge.light {
+    background: var(--accent-l);
+    color: var(--accent);
+  }
+
+  .guide-ref-section {
+    background: var(--surface);
+    border-bottom: 2px solid var(--border);
+    border-top: 2px solid var(--graphite,#2A2F3E);
+  }
+  .guide-ref-inner {
+    max-width: 920px; margin: 0 auto;
+    padding: 12px 32px 14px;
+  }
+
+
   /* CTA — главная кнопка открывает Guide-view */
   .cta-row { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
   .enroll-meta {
@@ -853,33 +885,11 @@
     .trackbar button{width:100%;min-width:0}
   }
 
-  .kit{max-width:920px;margin:0 auto;padding:30px 32px 28px}
-  .kit-label{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 10px}
-  .kit-list{list-style:none;margin:0 0 26px;padding:0;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-  .kit-list li+li{border-top:1px solid var(--border)}
-  .kit-row{display:grid;grid-template-columns:230px 1fr auto;align-items:baseline;gap:20px;padding:16px 22px;text-decoration:none;color:inherit;transition:background .15s}
-  a.kit-row:hover{background:var(--bg);text-decoration:none}
-  a.kit-row:hover .kit-act{text-decoration:underline}
-  .kit-name{font-size:14.5px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
-  .kit-tag{display:block;font-size:11.5px;font-weight:600;color:#C46A16;margin-top:3px;letter-spacing:0}
-  .kit-desc{font-size:13px;line-height:1.55;color:var(--ink-muted)}
-  .kit-desc small{display:block;font-size:11.5px;color:var(--ink-faint);margin-top:3px}
-  .kit-act{font-size:12.5px;font-weight:700;color:var(--accent,#1A6BFF);white-space:nowrap}
-  .kit-act.muted{color:var(--ink-faint);font-weight:600}
-  .kit-services{display:grid;grid-template-columns:110px 1fr;gap:8px 20px;margin:0;font-size:13px;line-height:1.5}
-  .kit-services dt{color:var(--ink-faint);font-weight:600}
-  .kit-services dd{margin:0;display:flex;flex-wrap:wrap;gap:4px 18px}
-  .kit-services a{color:var(--ink-muted);font-weight:600;text-decoration:none;white-space:nowrap;border-bottom:1px solid var(--border);padding-bottom:1px;transition:color .15s,border-color .15s}
-  .kit-services a:hover{color:var(--accent,#1A6BFF);border-color:var(--accent,#1A6BFF)}
   @media(max-width:720px){
-    .kit{padding:20px 18px 18px}
-    .kit-row{grid-template-columns:1fr;gap:4px;padding:14px 16px}
-    .kit-tag{display:inline;margin:0 0 0 6px}
-    .kit-services{grid-template-columns:1fr;gap:2px}
-    .kit-services dd{margin-bottom:10px}
     .trackbar{padding:8px 12px}
     .trackbar .track-schedule{font-size:12px}
   }
+
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -927,34 +937,12 @@
     })();
   </script>
 
-  <section class="kit" aria-label="Рабочие материалы и сервисы">
-  <div class="kit-label">Рабочие материалы</div>
-  <ul class="kit-list">
-    <li>
-      <a class="kit-row" href="https://fortune-swing-02e.notion.site/41112bb3b5cd81839661da69963a035b?source=copy_link" target="_blank" rel="noopener">
-        <span class="kit-name">Рабочая тетрадь</span>
-        <span class="kit-desc">Задания, шаблоны и фиксации по вашему объекту</span>
-        <span class="kit-act">Открыть ↗</span>
-      </a>
-    </li>
-    <li>
-      <div class="kit-row">
-        <span class="kit-name">Инструмент редевелопера<span class="kit-tag">трек Б</span></span>
-        <span class="kit-desc">Таблица-движок, инвестиционный паспорт, реестр пробелов и пакет запросов<small>Учебная методика, не заключение оценщика</small></span>
-        <span class="kit-act muted">Доступ — в чате потока</span>
-      </div>
-    </li>
-  </ul>
-  <div class="kit-label">Сервисы курса</div>
-  <dl class="kit-services">
-    <dt>Нейросети</dt>
-    <dd><a href="https://alice.yandex.ru" target="_blank" rel="noopener noreferrer">Алиса AI</a><a href="https://giga.chat" target="_blank" rel="noopener noreferrer">GigaChat</a><a href="https://shedevrum.ai" target="_blank" rel="noopener noreferrer">Шедеврум</a><a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude</a><a href="https://chatgpt.com" target="_blank" rel="noopener noreferrer">ChatGPT</a><a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">Gemini</a></dd>
-    <dt>Данные</dt>
-    <dd><a href="https://nspd.gov.ru" target="_blank" rel="noopener noreferrer">НСПД</a><a href="https://2gis.ru" target="_blank" rel="noopener noreferrer">2ГИС</a><a href="https://www.cian.ru" target="_blank" rel="noopener noreferrer">ЦИАН</a></dd>
-    <dt>Сборка</dt>
-    <dd><a href="https://gamma.app" target="_blank" rel="noopener noreferrer">Gamma</a></dd>
-  </dl>
-</section>
+  <div class="guide-ref-section">
+    <div class="guide-ref-inner">
+      <div class="ref-eyebrow light">Справочные материалы</div>
+      <div class="links-row"><a class="qlink light" href="https://alice.yandex.ru" target="_blank" rel="noopener noreferrer"><span>🟣</span> Алиса AI<span class="ql-badge light">ИИ</span></a><a class="qlink light" href="https://giga.chat" target="_blank" rel="noopener noreferrer"><span>🟢</span> GigaChat<span class="ql-badge light">ИИ</span></a><a class="qlink light" href="https://shedevrum.ai" target="_blank" rel="noopener noreferrer"><span>🎨</span> Шедеврум<span class="ql-badge light">ИИ</span></a><a class="qlink light" href="https://claude.ai" target="_blank" rel="noopener noreferrer"><span>✳️</span> Claude<span class="ql-badge light">ИИ</span></a><a class="qlink light" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer"><span>💬</span> ChatGPT<span class="ql-badge light">ИИ</span></a><a class="qlink light" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer"><span>♊</span> Gemini<span class="ql-badge light">ИИ</span></a><a class="qlink light" href="https://nspd.gov.ru" target="_blank" rel="noopener noreferrer"><span>📍</span> НСПД<span class="ql-badge light">Данные</span></a><a class="qlink light" href="https://2gis.ru" target="_blank" rel="noopener noreferrer"><span>📌</span> 2ГИС<span class="ql-badge light">Данные</span></a><a class="qlink light" href="https://www.cian.ru" target="_blank" rel="noopener noreferrer"><span>🏢</span> ЦИАН<span class="ql-badge light">Данные</span></a><a class="qlink light" href="https://gamma.app" target="_blank" rel="noopener noreferrer"><span>📊</span> Gamma.app<span class="ql-badge light">Синтез</span></a></div>
+    </div>
+  </div>
 
   <div class="trackbar" id="trackbar">
     <div class="trackbar-row">
