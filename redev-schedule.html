@@ -182,6 +182,10 @@
   .workbook-btn:hover{background:#1A2333;color:#fff;text-decoration:none}
   .back-bar .guide-breadcrumb{margin-right:auto}
   @media(max-width:640px){.workbook-btn{padding:8px 10px;font-size:11px}}
+
+  .meet-badge.self{background:#F0EEFF;color:#5B34C0;border:1px solid #D8CFFB}
+  .time-cell.self-date{font-family:var(--sans);font-size:11.5px;font-style:italic;color:var(--ink-faint);white-space:normal;width:auto}
+  .schedule tr.self-row::before{display:none}
 </style>
 </head>
 <body>
@@ -196,17 +200,7 @@
 
 <div class="wrap">
   <h1>Расписание потока</h1>
-  <p class="lead">5 ноября — 6 декабря 2026. Все встречи — синхронные созвоны прямо в чате потока в Яндекс Телемосте, в назначенное время. Отдельная ссылка не нужна. Время московское. Названия тем ведут в соответствующий раздел пособия.</p>
-
-  <div class="notice">
-    <div>📎</div>
-    <div><b>Вопросы вне расписания</b> — личный Телемост автора курса: <a href="https://telemost.yandex.ru/p/4b6d1e0a-bf01-9ca7-56f6-4fc5975edc73?utm_source=invite" target="_blank" rel="noopener">перейти →</a></div>
-  </div>
-
-  <div class="notice">
-    <div>📖</div>
-    <div><b>Темы 0.3, 1.1, 3.3, 3.4 и блок «Два контура инструментов»</b> — в самостоятельном формате, без отдельной встречи. Материалы, ссылки и шаблоны — в <a href="redev-guide.html">учебном пособии</a>.</div>
-  </div>
+  <p class="lead">Все встречи — синхронные созвоны прямо в чате потока в Яндекс Телемосте, в назначенное время. Время московское. Названия тем ведут в соответствующий раздел пособия.</p>
 
   <div class="cal-subscribe" id="calSubscribe">
     <h3>Календарь потока</h3>
@@ -214,23 +208,23 @@
       <a class="section-end-btn primary" href="webcal://ai2arch.ru/redev-calendar.ics" aria-label="Подписаться на календарь">Подписаться на календарь</a>
       <a class="cal-copy-link" id="calCopy" href="https://ai2arch.ru/redev-calendar.ics">Скопировать адрес</a>
     </div>
-    <p class="cal-subscribe-note">Подписка обновляется сама, скачанный файл — нет. Если расписание уже добавляли файлом, удалите старые события.</p>
-    <details class="cal-how">
-      <summary>Как подписаться</summary>
-      <ol>
-        <li><b>Google Календарь:</b> «Другие календари» → «Добавить по URL» → вставить https-адрес.</li>
-        <li><b>Apple Календарь:</b> «Файл» → «Новая подписка на календарь» → вставить адрес.</li>
-        <li><b>Яндекс Календарь:</b> «Добавить календарь» → «Подписаться по ссылке».</li>
-      </ol>
-      <p class="cal-how-note">Названия пунктов в разных приложениях могут отличаться.</p>
-      <p class="cal-download"><a href="redev-calendar.ics" download="ai2arch-redev-2026.ics">Если подписка не работает: скачать файл (обновляться не будет)</a></p>
-    </details>
+    <p class="cal-subscribe-note">Подписка обновляется сама.</p>
   </div>
 
     <table class="schedule">
     <thead><tr><th>Дата</th><th>Время</th><th>Тема</th><th>Лектор</th></tr></thead>
     <tbody>
       <tr class="module-row"><td colspan="4"><span class="mod-title">Вводный модуль</span><span class="mod-dates">5–8 ноября</span></td></tr>
+      <tr class="slot-row self-row" data-date="Самостоятельно" data-time="в любое время до конца модуля">
+        <td class="time-cell self-date" colspan="2">в любое время до конца модуля</td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge self">Самостоятельно</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t03">0.3 Практикум: ошибка модели</a></div></div></td>
+        <td class="who-cell">Самостоятельная работа</td>
+      </tr>
+      <tr class="slot-row self-row" data-date="Самостоятельно" data-time="в любое время до конца модуля">
+        <td class="time-cell self-date" colspan="2">в любое время до конца модуля</td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge self">Самостоятельно</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#tools">Два контура инструментов</a></div></div></td>
+        <td class="who-cell">Самостоятельная работа</td>
+      </tr>
       <tr class="slot-row day-start" data-date="5 ноя · чт" data-iso="2026-11-05" data-time="18:00–19:30">
         <td class="date-cell">5 ноя <span class="wd">чт</span></td>
         <td class="time-cell">18:00–19:30</td>
@@ -244,6 +238,11 @@
         <td class="who-cell"><span class="who-k">Кулешов</span></td>
       </tr>
       <tr class="module-row"><td colspan="4"><span class="mod-title">Модуль 1 · Контекст территории</span><span class="mod-dates">8–15 ноября</span></td></tr>
+      <tr class="slot-row self-row" data-date="Самостоятельно" data-time="в любое время до конца модуля">
+        <td class="time-cell self-date" colspan="2">в любое время до конца модуля</td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge self">Самостоятельно</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t11">1.1 ПЗЗ и нормативная карточка</a></div></div></td>
+        <td class="who-cell">Самостоятельная работа</td>
+      </tr>
       <tr class="slot-row day-start" data-date="8 ноя · вс" data-iso="2026-11-08" data-time="18:00–19:30">
         <td class="date-cell">8 ноя <span class="wd">вс</span></td>
         <td class="time-cell">18:00–19:30</td>
@@ -348,6 +347,16 @@
         <td class="who-cell"><span class="who-k">Кулешов</span></td>
       </tr>
       <tr class="module-row"><td colspan="4"><span class="mod-title">Модуль 3 · Визуальная упаковка</span><span class="mod-dates">25 ноября – 1 декабря</span></td></tr>
+      <tr class="slot-row self-row" data-date="Самостоятельно" data-time="в любое время до конца модуля">
+        <td class="time-cell self-date" colspan="2">в любое время до конца модуля</td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge self">Самостоятельно</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t33">3.3 Доводка</a></div></div></td>
+        <td class="who-cell">Самостоятельная работа</td>
+      </tr>
+      <tr class="slot-row self-row" data-date="Самостоятельно" data-time="в любое время до конца модуля">
+        <td class="time-cell self-date" colspan="2">в любое время до конца модуля</td>
+        <td class="topic-cell"><div class="slot"><span class="meet-badge self">Самостоятельно</span><div class="slot-main"><a class="topic-link" href="redev-guide.html#t34">3.4 Сториборд</a></div></div></td>
+        <td class="who-cell">Самостоятельная работа</td>
+      </tr>
       <tr class="pause-row"><td colspan="4">25–29 ноября — пауза (время на домашние задания)</td></tr>
       <tr class="slot-row day-start" data-date="30 ноя · пн" data-iso="2026-11-30" data-time="18:00–19:30">
         <td class="date-cell">30 ноя <span class="wd">пн</span></td>
@@ -414,9 +423,8 @@
   </table>
 
   <div class="section-end">
-    <p>Нашли нестыковку в датах или не можете в указанное время?</p>
+    <p>Нашли нестыковку в датах — напишите в чат потока.</p>
     <div class="section-end-row">
-      <a class="section-end-btn primary" href="https://telemost.yandex.ru/p/4b6d1e0a-bf01-9ca7-56f6-4fc5975edc73?utm_source=invite" target="_blank" rel="noopener">🎙 Написать в Телемосте →</a>
       <a class="section-end-btn ghost" href="redev-guide.html">← К учебному пособию</a>
     </div>
   </div>
