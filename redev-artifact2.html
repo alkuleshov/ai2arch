@@ -11,9 +11,9 @@
   --azure2:#EAF1FF; --azure3:#BFD3FF; --soft:#F6F8FC; --line:#E1E5EE; --muted:#5B6475; --faint:#9AA4B8;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:#fff;color:var(--navy);font-family:Manrope,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+html,body{min-height:100%;background:#fff;color:var(--navy);font-family:Manrope,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;overflow-x:hidden;overflow-y:auto;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-.deck{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:8px 0 10px}
+.deck{position:relative;height:100vh;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:8px 0 10px;overflow:hidden}
 .viewport{position:relative;flex:1 1 auto;width:100%;display:flex;align-items:center;justify-content:center;min-height:0}
 .stage{width:1280px;height:720px;position:relative;flex:none;transform-origin:center center;background:#fff;overflow:hidden;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 30px rgba(10,15,26,.06)}
 .progress{position:absolute;left:0;top:0;height:5px;background:var(--azure);width:0;transition:width .35s ease;z-index:5}
@@ -336,6 +336,53 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 .title-slide .chips{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
 .prompt.tight{font-size:15px;line-height:1.34}
 .prompt + .note{margin-top:8px}
+
+  .scheme{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:4px 8px 2px;margin:6px 0 0}
+  .scheme-label{font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--azure);margin-bottom:2px}
+  .scheme svg{width:auto;height:115px;max-width:100%;display:block;margin:0 auto}
+  .scheme.compact svg{height:88px}
+  .scheme + .note{margin-top:4px}
+
+  .prompts-link{height:44px;display:inline-flex;align-items:center;justify-content:center;padding:0 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--navy);font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap}
+  .prompts-link:hover{border-color:var(--azure);color:var(--azure)}
+  .prompts-link:focus-visible{outline:2px solid var(--azure);outline-offset:3px}
+  .prompts-section{background:var(--soft);border-top:1px solid var(--line);padding:52px 24px 64px;color:var(--navy);scroll-margin-top:16px}
+  .prompts-inner{max-width:980px;margin:0 auto}
+  .prompts-section h2{font-size:34px;line-height:1.12;letter-spacing:-.015em}
+  .prompts-lead{font-size:15px;line-height:1.5;color:var(--muted);margin-top:10px;max-width:860px}
+  .prompts-grid{display:flex;flex-direction:column;gap:18px;margin-top:24px}
+  .prompt-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;min-width:0}
+  .prompt-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+  .prompt-part{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--azure);margin-bottom:3px}
+  .prompt-card h3{font-size:22px;line-height:1.2}
+  .prompt-flagship{font-size:12px;font-weight:700;color:var(--graphite);background:var(--azure2);border:1px solid var(--azure3);border-radius:7px;padding:5px 9px;white-space:nowrap}
+  .prompt-text{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:15px;line-height:1.5;color:var(--graphite);white-space:pre-wrap;overflow-wrap:anywhere}
+  .prompt-toolbar{display:flex;justify-content:flex-end;margin-bottom:8px}
+  .copy-btn{min-height:36px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--navy);font:700 12px var(--sans);padding:0 12px;cursor:pointer}
+  .copy-btn:hover{border-color:var(--azure);color:var(--azure)}
+  .copy-btn:focus-visible{outline:2px solid var(--azure);outline-offset:3px}
+  .copy-btn.copied{background:var(--azure);border-color:var(--azure);color:#fff}
+  .prompt-fill{font-size:13px;line-height:1.45;color:var(--muted);margin-top:10px}
+  .prompt-fill b{color:var(--navy)}
+  @media(max-width:640px){
+    .prompts-link{padding:0 9px;font-size:11px}
+    .prompts-section{padding:36px 16px 48px}
+    .prompts-section h2{font-size:27px}
+    .prompt-card{padding:16px}
+    .prompt-card h3{font-size:20px}
+    .prompt-text{font-size:14px;padding:12px}
+    .prompt-flagship{white-space:normal}
+  }
+  @media(prefers-color-scheme:dark){
+    .prompts-section{background:#101827;color:#F3F6FC;border-top-color:#2A3550}
+    .prompts-section h2,.prompt-fill b{color:#F3F6FC}
+    .prompts-lead,.prompt-fill{color:#B6C2D9}
+    .prompt-card{background:#162033;border-color:#2A3550}
+    .prompt-text{background:#0D1421;border-color:#2A3550;color:#E2E9F6}
+    .prompt-flagship{background:#1B2A45;border-color:#355078;color:#D9E5FA}
+    .copy-btn{background:#162033;border-color:#355078;color:#F3F6FC}
+    .prompt-card h3{color:#F3F6FC}
+  }
 </style>
 </head>
 <body>
@@ -374,6 +421,11 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 
 
 <section class="slide title-slide" data-foot="Тема 2.5 · Сборка артефакта 2"><div class="kick">Тема 2.5 · Артефакт 2</div><h1>Сборка <em>артефакта 2</em></h1><p class="lead">Две части: упаковка для Трека А и финансовая модель для Трека Б.</p><div class="chips"><span class="chip">Часть 1 · Трек А</span><span class="chip">Часть 2 · Трек Б</span><span class="chip">Задание №3</span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 2.5 · Артефакт 2"><div class="kick">Зачем</div><h2>Артефакт 2 как <em>проверяемый результат</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>артефакт 2 завершает модуль 2 и проверяется по составу;</li><li>без него итоговый документ собирать не из чего;</li><li>цена ошибки — вернуться к расчётам в конце курса;</li><li>результат: упаковка трека А или финмодель трека Б.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> Артефакт 2 фиксирует результат модуля до перехода к упаковке.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Артефакт</b> — готовый проверяемый результат этапа работы.<br><span style="color:var(--muted)">Проще: результат, который можно проверить.</span></span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: инвестиции в стройку и ремонт.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 2.5 · Артефакт 2"><div class="kick">Контекст</div><h2>Откуда <em>артефакт 2</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>артефакт собирается из заданий 1–2 и темы 2.1;</li><li>у трека А — упаковка решения, у трека Б — финмодель;</li><li>на рынке результат проверяют по составу и источникам;</li><li>новый расчёт при сборке не создаётся.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> Артефакт 2 продолжает HBU и расчёт, а не начинает тему заново.</div></div><div class="terms"><span class="lab">Термины</span><span><b>HBU (Highest and Best Use)</b> — наилучшее и наиболее эффективное использование.<br><span style="color:var(--muted)">Проще: какая функция даёт объекту максимум пользы.</span></span><span><b>Артефакт</b> — готовый проверяемый результат этапа работы.<br><span style="color:var(--muted)">Проще: результат, который можно проверить.</span></span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.5 · Сборка артефакта 2"><div class="kick">Карта</div><h2>Карта <em>артефакта 2</em></h2><div class="body">
 <div class="two">
 <div class="bx"><h4>Для Трека А</h4><ul>
@@ -386,7 +438,15 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>сборка по карте своего трека.</li></ul></div></div>
 <p class="note" style="margin-top:10px"><b>Задание №3</b> входит в список «любые 3 из заданий 1–4».</p>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Артефакт 2 собирается по карте своего трека, а не по общей схеме.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Артефакт</b> — готовый проверяемый результат этапа работы.</span><span><b>Матрица зонирования</b> — таблица, где помещениям и функциям сопоставлены зоны здания и нормативные требования.</span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 2.5 · Артефакт 2"><div class="kick">Схема</div><h2>Карта артефакта <em>по трекам</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>трек А собирает упаковку решения;</li><li>трек Б собирает финмодель;</li><li>у обоих треков — источники и допущения;</li><li>состав важнее объёма.</li></ul></div><div class="scheme"><div class="scheme-label">Схема</div><svg viewBox="0 0 1100 170" role="img" aria-label="Карта артефакта 2 по трекам А и Б"><rect x="30" y="20" width="500" height="130" rx="10" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="280" y="48" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#1A6BFF">Трек А · упаковка</text><text x="280" y="74" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">функция и сценарий</text><text x="280" y="98" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">визуальные материалы</text><text x="280" y="122" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">пояснение решений</text><rect x="570" y="20" width="500" height="130" rx="10" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="820" y="48" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#1A6BFF">Трек Б · финмодель</text><text x="820" y="74" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">доходы и OPEX</text><text x="820" y="98" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">CAPEX по фазам</text><text x="820" y="122" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">допущения и источники</text></svg></div><div class="band" style="margin-top:12px"><b>Вывод:</b> Карта задаёт, что именно сдаётся по треку.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Артефакт</b> — готовый проверяемый результат этапа работы.<br><span style="color:var(--muted)">Проще: результат, который можно проверить.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 2.5 · Артефакт 2"><div class="kick">Схема</div><h2>HBU → NOI → <em>финмодель → упаковка</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>HBU задаёт функцию и сценарий;</li><li>NOI показывает доход до CAPEX;</li><li>финмодель сводит статьи и допущения;</li><li>упаковка объясняет решение.</li></ul></div><div class="scheme"><div class="scheme-label">Схема</div><svg viewBox="0 0 1100 150" role="img" aria-label="Связь HBU, NOI, финмодели и упаковки"><rect x="20" y="38" width="240" height="62" rx="9" fill="#EAF1FF" stroke="#BFD3FF" stroke-width="1.5"/><text x="140" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#0A0F1A">HBU</text><path d="M264 69.0 H290" stroke="#1A6BFF" stroke-width="2"/><path d="M282 65.0 L290 69.0 L282 73.0" stroke="#1A6BFF" stroke-width="2" fill="none"/><rect x="294" y="38" width="240" height="62" rx="9" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="413" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#2A2F3E">NOI</text><path d="M537 69.0 H563" stroke="#1A6BFF" stroke-width="2"/><path d="M556 65.0 L563 69.0 L556 73.0" stroke="#1A6BFF" stroke-width="2" fill="none"/><rect x="567" y="38" width="240" height="62" rx="9" fill="#EAF1FF" stroke="#BFD3FF" stroke-width="1.5"/><text x="687" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#0A0F1A">Финмодель</text><path d="M810 69.0 H836" stroke="#1A6BFF" stroke-width="2"/><path d="M830 65.0 L836 69.0 L830 73.0" stroke="#1A6BFF" stroke-width="2" fill="none"/><rect x="840" y="38" width="240" height="62" rx="9" fill="#1A6BFF" stroke="#1A6BFF" stroke-width="1.5"/><text x="960" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#fff">Упаковка</text></svg></div><div class="band" style="margin-top:12px"><b>Вывод:</b> Порядок цепочки не переставляется.</div></div><div class="terms"><span class="lab">Термины</span><span><b>NOI</b> — чистый операционный доход: доход от аренды минус операционные расходы.<br><span style="color:var(--muted)">Проще: доход от аренды минус расходы.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 2.5 · Артефакт 2"><div class="kick">C52</div><h2>C52: <em>что уже есть для артефакта</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>функция и сценарий — из HBU; у C52 сценарий не выбран;</li><li>площадь 1 959,2 м² по ЕГРН — база расчёта;</li><li>CAPEX и OPEX — нет данных: нужны сметы и обследование;</li><li>упаковка без выбранной функции не собирается.</li></ul></div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; сценарий HBU не выбран; CAPEX и OPEX — нет данных: нужны сметы и обследование.</p><div class="band" style="margin-top:12px"><b>Вывод:</b> Артефакт 2 начинается с выбранной функции, а не с макета.</div></div><div class="terms"><span class="lab">Термины</span><span><b>HBU (Highest and Best Use)</b> — наилучшее и наиболее эффективное использование.<br><span style="color:var(--muted)">Проще: какая функция даёт объекту максимум пользы.</span></span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: инвестиции в стройку и ремонт.</span></span></div></section>
+
 <section class="slide part-divider" data-foot="Тема 2.5 · Сборка артефакта 2"><div class="num">Часть 1</div><div class="kick">Тема 2.5 · Сборка артефакта 2</div><h1>Для Трека А: упаковка</h1><p class="meta">Матрица зонирования, предпроверка норм и баланс площадей в одном документе.</p></section>
+
 <section class="slide has-terms" data-foot="Тема 2.5 · Сборка артефакта 2"><div class="kick">Задача A · Для Трека А</div><h2>Собрать <em>упаковку артефакта</em></h2><div class="body">
 <div class="bx"><h4>Вход и результат</h4><ul>
 <li>вход: матрица зонирования;</li>
@@ -394,8 +454,11 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>баланс площадей;</li>
 <li>результат: раздел «Артефакт 2» по заданной структуре.</li></ul></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Упаковка сводит решение, нормы и площади в проверяемый документ.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Артефакт</b> — готовый проверяемый результат этапа работы.</span><span><b>Матрица зонирования</b> — таблица, где помещениям и функциям сопоставлены зоны здания и нормативные требования.</span><span><b>Предпроверка норм</b> — предварительная сверка решения с нормами до детальной проработки.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.5 · Сборка артефакта 2"><div class="kick">Задача A · Сравнение</div><h2>Сервисы: <em>сравнение и флагман</em></h2><div class="body"><table class="datatable" style="font-size:12.5px"><thead><tr><th>Сервис</th><th>Контур</th><th>Сильные стороны</th><th>Ограничения</th><th>Когда выбирать</th></tr></thead><tbody><tr><td>Claude</td><td><span class="contour ext">расширенный</span></td><td>сборка длинного структурированного документа из нескольких загруженных материалов</td><td>структуру и источники проверяем вручную</td><td>сборка артефакта</td></tr><tr><td>Gamma</td><td><span class="contour main">основной</span></td><td>страница из блоков с таблицами и текстом</td><td>структура зависит от выбранного шаблона</td><td>упаковка раздела</td></tr><tr><td>Notion</td><td><span class="contour main">основной</span></td><td>документ и таблицы в одном рабочем пространстве</td><td>публичная ссылка требует настройки доступа</td><td>рабочий документ</td></tr><tr><td>Яндекс Документы</td><td><span class="contour main">основной</span></td><td>совместная работа с текстом и таблицами</td><td>совместный доступ требует настройки</td><td>основной контур</td></tr></tbody></table><p class="src">Проверить перед лекцией: функции и ограничения меняются</p><div class="band" style="margin-top:12px"><b>Вывод:</b> Флагман по критерию — Claude; проверка источников остаётся за автором.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Артефакт</b> — готовый проверяемый результат этапа работы.</span><span><b>LLM (Large Language Model)</b> — большая языковая модель.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.5 · Сборка артефакта 2"><div class="kick">Задача A · Промпт</div><h2>Промпт для <em>упаковки</em></h2><div class="body"><div class="prompt">Действуй как редактор проектной документации. Я загрузил: матрицу зонирования, предпроверку норм (с пунктами СП), баланс площадей. Собери раздел «Артефакт 2» по структуре: 1. Что вписываем и в какую сетку; 2. Матрица зонирования (таблица); 3. Нормы и пункты, по которым проверено; 4. Что не подтверждено. Используй только загруженные материалы; цифры и пункты не добавляй; на каждую цифру указывай файл-источник.</div><div class="band" style="margin-top:12px"><b>Вывод:</b> Промпт задаёт структуру и запрещает добавлять цифры и пункты.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Промпт</b> — текстовая инструкция модели.</span><span><b>СП</b> — свод правил, технические нормы строительства.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.5 · Сборка артефакта 2"><div class="kick">Задача A · Клики и проверка</div><h2>Шаги <em>и проверка</em></h2><div class="body">
 <div class="numlist">
 <div class="nl"><div class="n">1</div><p>Загрузить матрицу, предпроверку норм и баланс площадей.</p></div>
@@ -405,6 +468,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <div class="nl"><div class="n">5</div><p>Сохранить раздел в рабочей тетради.</p></div>
 </div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Раздел принимается после сверки пунктов, цифр и источников.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Артефакт</b> — готовый проверяемый результат этапа работы.</span><span><b>СП</b> — свод правил, технические нормы строительства.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.5 · Сборка артефакта 2"><div class="kick">Задача A · Сбой и контур</div><h2>Путь в <em>основном контуре</em></h2><div class="body">
 <div class="two">
 <div class="bx"><h4>Типичный сбой</h4><ul>
@@ -416,7 +480,9 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>перенос материалов вручную;</li>
 <li>проверка пунктов и источников.</li></ul></div></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Основной контур собирает документ вручную и сохраняет проверяемость.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Артефакт</b> — готовый проверяемый результат этапа работы.</span><span><b>Предпроверка норм</b> — предварительная сверка решения с нормами до детальной проработки.</span></div></section>
+
 <section class="slide part-divider" data-foot="Тема 2.5 · Сборка артефакта 2"><div class="num">Часть 2</div><div class="kick">Тема 2.5 · Сборка артефакта 2</div><h1>Для Трека Б: финмодель</h1><p class="meta">Проверка полноты и логики структуры финансовой модели.</p></section>
+
 <section class="slide has-terms" data-foot="Тема 2.5 · Сборка артефакта 2"><div class="kick">Задача B · Для Трека Б</div><h2>Проверить <em>структуру финмодели</em></h2><div class="body">
 <div class="bx"><h4>Вход и результат</h4><ul>
 <li>вход: таблица модели — доходы, CAPEX, OPEX;</li>
@@ -424,8 +490,11 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>проверяем полноту и логику структуры;</li>
 <li>результат: пропущенные статьи, допущения без источника, несовпадения единиц.</li></ul></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Проверка структуры показывает пробелы модели, не меняя расчёт.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Допущение</b> — предположение, принятое в модели без подтверждения данными.</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span><span><b>OPEX (operating expenses)</b> — операционные расходы.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.5 · Сборка артефакта 2"><div class="kick">Задача B · Сравнение</div><h2>Сервисы: <em>сравнение и флагман</em></h2><div class="body"><table class="datatable" style="font-size:13px"><thead><tr><th>Сервис</th><th>Контур</th><th>Сильные стороны</th><th>Ограничения</th><th>Когда выбирать</th></tr></thead><tbody><tr><td>Gemini</td><td><span class="contour ext">расширенный</span></td><td>анализ загруженной таблицы и поиск пропущенных статей</td><td>ссылки проверяются вручную; без загрузки нет привязки к таблице</td><td>проверка структуры</td></tr><tr><td>DeepSeek</td><td><span class="contour main">основной</span></td><td>структурирует перечень пропусков</td><td>таблица вставляется текстом; проверка вручную</td><td>основной контур</td></tr><tr><td>Алиса AI</td><td><span class="contour main">основной</span></td><td>структурирует перечень пропусков</td><td>таблица вставляется текстом; проверка вручную</td><td>запасной вариант</td></tr></tbody></table><p class="src">Проверить перед лекцией: функции и ограничения меняются</p><p class="note" style="margin-top:8px"><b>Флагман по критерию:</b> Gemini — анализ загруженной таблицы и поиск пропущенных статей.</p><div class="band" style="margin-top:12px"><b>Вывод:</b> Флагман выбирается по работе с таблицей; расчёт остаётся в таблице.</div></div><div class="terms"><span class="lab">Термины</span><span><b>LLM (Large Language Model)</b> — большая языковая модель.</span><span><b>Допущение</b> — предположение, принятое в модели без подтверждения данными.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.5 · Сборка артефакта 2"><div class="kick">Задача B · Промпт</div><h2>Промпт для <em>проверки структуры</em></h2><div class="body"><div class="prompt">Действуй как аналитик инвестиционного комитета. Я загрузил таблицу финансовой модели. Проверь только полноту и логику структуры: какие статьи доходов, CAPEX и OPEX отсутствуют; у каких допущений нет источника; где единицы измерения не совпадают. Не пересчитывай модель и не предлагай значений.</div><p class="note" style="margin-top:10px"><b>Граница:</b> расчёты остаются формулами в таблице; NPV и IRR — только если уже есть в модели.</p><div class="band" style="margin-top:12px"><b>Вывод:</b> Промпт проверяет структуру и не подменяет расчёт.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span><span><b>OPEX (operating expenses)</b> — операционные расходы.</span><span><b>NPV (Net Present Value)</b> — чистая приведённая стоимость.</span><span><b>IRR (Internal Rate of Return)</b> — внутренняя норма доходности.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.5 · Сборка артефакта 2"><div class="kick">Задача B · Клики и проверка</div><h2>Шаги <em>и проверка</em></h2><div class="body">
 <div class="numlist">
 <div class="nl"><div class="n">1</div><p>Загрузить таблицу доходов, капитальных и операционных расходов, допущений.</p></div>
@@ -435,6 +504,9 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <div class="nl"><div class="n">5</div><p>Сохранить список проверок в рабочей тетради.</p></div>
 </div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Проверка принимается после сверки каждого пункта с таблицей.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Допущение</b> — предположение, принятое в модели без подтверждения данными.</span><span><b>NPV (Net Present Value)</b> — чистая приведённая стоимость.</span></div></section>
+
+<section class="slide has-terms" data-foot="Тема 2.5 · Артефакт 2"><div class="kick">Ошибки</div><h2>Типичные <em>ошибки</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>артефакт собран без функции;</li><li>финмодель без источников и допущений;</li><li>упаковка не совпадает с расчётом;</li><li>в упаковке появились новые данные.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> Ошибки видны при сверке состава с расчётом.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Артефакт</b> — готовый проверяемый результат этапа работы.<br><span style="color:var(--muted)">Проще: результат, который можно проверить.</span></span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.5 · Сборка артефакта 2"><div class="kick">Задача B · Сбой и контур</div><h2>Путь в <em>основном контуре</em></h2><div class="body">
 <div class="two">
 <div class="bx"><h4>Типичный сбой</h4><ul>
@@ -446,6 +518,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <li>таблица вставляется текстом;</li>
 <li>каждый пункт проверяется вручную.</li></ul></div></div>
 <div class="band" style="margin-top:12px"><b>Вывод:</b> Основной контур проверяет структуру, но не меняет расчёт.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX (capital expenditures)</b> — капитальные затраты.</span><span><b>OPEX (operating expenses)</b> — операционные расходы.</span></div></section>
+
 <section class="slide has-terms" data-foot="Тема 2.5 · Сборка артефакта 2"><div class="kick">Задание №3</div><h2>Задание №3: <em>артефакт 2</em></h2><div class="body">
 <div class="stack">
 <div class="it"><b>Для Трека А</b><p>Матрица зонирования и предпроверка норм.</p></div>
@@ -464,10 +537,32 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
    <button id="tocBtn" class="toc-btn" type="button" aria-label="Содержание" title="Содержание" aria-haspopup="true" aria-expanded="false">☰</button>
    <button id="next" aria-label="Вперёд" title="Вперёд">›</button>
    <button id="fs" aria-label="Развернуть на весь экран" title="На весь экран (F)">⤢</button>
+   <a class="prompts-link" href="#prompts">Промпты</a>
    <span class="hint">← → листать · F — полный экран</span>
    <div class="toc-menu" id="tocMenu" role="menu" aria-label="Содержание"></div>
  </div>
 </div>
+
+<section class="prompts-section" id="prompts">
+  <div class="prompts-inner">
+    <h2>Промпты темы 2.5</h2>
+    <p class="prompts-lead">Скопируйте промпт, подставьте свои данные вместо значений в квадратных скобках и проверьте результат по первоисточнику</p>
+    <div class="prompts-grid">
+      <article class="prompt-card">
+        <div class="prompt-card-head"><div><div class="prompt-part">Трек А</div><h3>Упаковка артефакта</h3></div></div>
+        <div class="prompt-toolbar"><button class="copy-btn" type="button" data-copy="a2-prompt-1">Копировать</button></div>
+        <div class="prompt-text" id="a2-prompt-1">Действуй как редактор проектной документации. Я загрузил: матрицу зонирования, предпроверку норм (с пунктами СП), баланс площадей. Собери раздел «Артефакт 2» по структуре: 1. Что вписываем и в какую сетку; 2. Матрица зонирования (таблица); 3. Нормы и пункты, по которым проверено; 4. Что не подтверждено. Используй только загруженные материалы; цифры и пункты не добавляй; на каждую цифру указывай файл-источник.</div>
+        <p class="prompt-fill"><b>Что подставить:</b> матрица зонирования, предпроверка норм, баланс площадей</p>
+      </article>
+      <article class="prompt-card">
+        <div class="prompt-card-head"><div><div class="prompt-part">Трек Б</div><h3>Проверка структуры</h3></div></div>
+        <div class="prompt-toolbar"><button class="copy-btn" type="button" data-copy="a2-prompt-2">Копировать</button></div>
+        <div class="prompt-text" id="a2-prompt-2">Действуй как аналитик инвестиционного комитета. Я загрузил таблицу финансовой модели. Проверь только полноту и логику структуры: какие статьи доходов, CAPEX и OPEX отсутствуют; у каких допущений нет источника; где единицы измерения не совпадают. Не пересчитывай модель и не предлагай значений.</div>
+        <p class="prompt-fill"><b>Что подставить:</b> таблица финансовой модели</p>
+      </article>
+    </div>
+  </div>
+</section>
 
 <script>
 (function(){
@@ -571,7 +666,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     closeToc();
   });
 
-  function go(i){
+  function go(i, writeHash){
     if(i<0||i>=total) return;
     slides[cur].classList.remove('active');
     cur=i; slides[cur].classList.add('active');
@@ -580,7 +675,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     prev.disabled=cur===0; next.disabled=cur===total-1;
     prog.style.width=((cur+1)/total*100)+'%';
     updateProgress();
-    try{history.replaceState(null,'','#slide-'+(cur+1));}catch(e){}
+    if(writeHash!==false){try{history.replaceState(null,'','#slide-'+(cur+1));}catch(e){}}
   }
   prev.onclick=function(){go(cur-1)}; next.onclick=function(){go(cur+1)};
   function fit(){
@@ -597,6 +692,9 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
   fs.onclick=toggleFs;
   document.addEventListener('fullscreenchange',function(){setTimeout(fit,60)});
   document.addEventListener('keydown',function(e){
+    var prompts=document.getElementById('prompts');
+    if(prompts && (e.target.closest && e.target.closest('#prompts'))) return;
+    if(prompts && prompts.getBoundingClientRect().top < window.innerHeight - 40) return;
     if(e.key==='Escape'){closeToc();return;}
     if(['ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(cur+1);}
     else if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(cur-1);}
@@ -615,14 +713,52 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     return Math.min(Math.max(parseInt(m[1],10)-1,0),total-1);
   }
   window.addEventListener('hashchange',function(){
+    if(location.hash==='#prompts'){
+      var p=document.getElementById('prompts'); if(p) p.scrollIntoView();
+      return;
+    }
     var idx=parseHash();
     if(idx!==cur) go(idx);
   });
 
   buildProgress();
   buildToc();
-  go(parseHash());
+  var initialPrompts=location.hash==='#prompts';
+  go(parseHash(),!initialPrompts);
+  if(initialPrompts){setTimeout(function(){var p=document.getElementById('prompts');if(p)p.scrollIntoView();},0);}
   fit();
+})();
+</script>
+<script>
+(function(){
+  if (window.self !== window.top) {
+    var embeddedPrompts = document.getElementById('prompts');
+    var embeddedLink = document.querySelector('.prompts-link');
+    if (embeddedPrompts) embeddedPrompts.style.display = 'none';
+    if (embeddedLink) embeddedLink.style.display = 'none';
+  }
+  function fallback(text){
+    var ta=document.createElement('textarea');
+    ta.value=text; ta.setAttribute('readonly','');
+    ta.style.position='fixed'; ta.style.left='-9999px';
+    document.body.appendChild(ta); ta.select();
+    try{document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);
+  }
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var el=document.getElementById(btn.getAttribute('data-copy'));
+      if(!el) return;
+      var text=el.textContent;
+      var done=function(){
+        btn.textContent='Скопировано'; btn.classList.add('copied');
+        setTimeout(function(){btn.textContent='Копировать';btn.classList.remove('copied');},2000);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){fallback(text);done();});
+      }else{fallback(text);done();}
+    });
+  });
 })();
 </script>
 </body>
