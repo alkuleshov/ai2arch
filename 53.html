@@ -105,7 +105,7 @@
   h3 { font-size:18px; line-height:1.25; font-weight:800; letter-spacing:-.01em; margin-bottom:8px; }
 
   /* ── листалка ── */
-  #read { padding-top:56px; padding-bottom:64px; overflow:visible; overflow:clip; }
+  #read { padding-top:0; padding-bottom:64px; overflow:visible; overflow:clip; }
   .viewer { position:relative; --panel-h:76px; }
   .stage { position:relative; width:min(100%, calc((100svh - var(--nav-h) - 150px) * .7071)); min-width:min(100%, 300px); aspect-ratio:1200 / 1696; margin:0 auto; background:#000C1F; border-radius:8px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08); touch-action:pan-y; user-select:none; -webkit-user-select:none; }
   .stage img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; transform-origin:center center; will-change:transform; -webkit-user-drag:none; }
@@ -153,6 +153,71 @@
     .stage { width:100%; min-width:0; max-width:100%; border-radius:0; }
     .viewer.is-full .stage { width:100vw; height:auto; max-height:100%; }
   }
+
+  /* ── режим «По способам» ── */
+  .viewer.mode-ways { height:calc(100svh - var(--nav-h) - 18px); min-height:520px; display:flex; flex-direction:column; background:#000C1F; border-radius:14px; padding:10px; }
+  .viewer.mode-ways .stage,
+  .viewer.mode-ways .hint,
+  .viewer.mode-ways .progress { display:none; }
+  .viewer.mode-ways .ways-view { display:flex; flex-direction:column; flex:1; min-height:0; }
+  .viewer.mode-pdf .ways-view { display:none; }
+  .viewer.mode-ways .panel { position:static; margin-top:2px; padding:4px 0 0; background:none; }
+  .viewer.mode-ways .bar { gap:8px; }
+  .ways-view { display:none; min-height:0; }
+  .ways-loading[hidden], .ways-card[hidden] { display:none; }
+  .ways-loading { flex:1; display:flex; align-items:center; justify-content:center; min-height:320px; color:rgba(255,255,255,.65); font-size:15px; }
+  .ways-card { flex:1; min-height:0; display:flex; flex-direction:column; overflow:hidden; background:#0D1E35; border:1px solid rgba(77,163,255,.18); border-radius:14px; padding:clamp(20px,2.2vw,30px); color:#fff; }
+  .ways-meta { display:flex; align-items:baseline; justify-content:space-between; gap:16px; }
+  .ways-section { font-size:11.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#79B7FF; }
+  .ways-num { font-family:var(--mono); font-size:13px; color:rgba(255,255,255,.56); white-space:nowrap; }
+  .ways-card h2 { margin:10px 0 4px; font-size:clamp(26px,2.8vw,40px); line-height:1.07; letter-spacing:-.02em; color:#fff; }
+  .ways-sub { margin:0 0 12px; font-size:17px; line-height:1.35; font-weight:700; color:#4DA3FF; }
+  .ways-desc { max-width:70ch; margin:0 0 15px; font-size:clamp(18px,1.35vw,20px); line-height:1.55; color:#D7E0F0; }
+  .ways-tools { display:grid; gap:6px; margin:0 0 11px; }
+  .ways-tool { display:grid; grid-template-columns:112px minmax(0,1fr); gap:10px; align-items:baseline; font-size:13.5px; line-height:1.4; color:#C8D5E8; }
+  .ways-tool-label { display:flex; align-items:center; gap:7px; font-size:10.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.6); }
+  .ways-dot { width:7px; height:7px; border-radius:50%; flex:none; }
+  .ways-tool.main .ways-dot { background:#3DDC97; }
+  .ways-tool.ext { opacity:.58; }
+  .ways-tool.ext .ways-dot { background:#93A1B6; }
+  .ways-tool-list { overflow-wrap:anywhere; }
+  .ways-courses { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 12px; }
+  .ways-course { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border:1px solid rgba(77,163,255,.42); border-radius:999px; background:rgba(77,163,255,.11); color:#B9D9FF; font-size:12px; font-weight:700; text-decoration:none; line-height:1.3; }
+  .ways-course:hover { background:rgba(77,163,255,.2); color:#fff; }
+  .ways-course small { font-size:10.5px; font-weight:600; opacity:.72; }
+  .ways-prompt { margin-top:auto; background:#08172B; border-left:3px solid #4DA3FF; border-radius:0 10px 10px 0; padding:9px 12px 10px; }
+  .ways-prompt-head { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .ways-prompt-head span { font-family:var(--mono); font-size:10.5px; font-weight:700; letter-spacing:.12em; color:#79B7FF; text-transform:uppercase; }
+  .ways-copy { border:1px solid rgba(77,163,255,.45); border-radius:7px; background:rgba(77,163,255,.1); color:#CFE6FF; font-family:var(--sans); font-size:11.5px; font-weight:700; padding:4px 9px; cursor:pointer; }
+  .ways-copy:hover { background:rgba(77,163,255,.22); color:#fff; }
+  .ways-prompt pre { margin:6px 0 0; white-space:pre-wrap; overflow-wrap:anywhere; font-family:var(--mono); font-size:15px; line-height:1.5; color:#DCE7F7; }
+  .mode-switch { display:flex; justify-content:center; gap:3px; width:max-content; max-width:100%; margin:8px auto 6px; padding:3px; border:1px solid rgba(255,255,255,.14); border-radius:9px; background:rgba(255,255,255,.05); }
+  .mode-switch button { border:0; border-radius:6px; background:transparent; color:rgba(255,255,255,.62); font-family:var(--sans); font-size:12px; font-weight:700; padding:6px 11px; cursor:pointer; }
+  .mode-switch button.on { background:#4DA3FF; color:#04101F; }
+  .mode-switch button:disabled { opacity:.4; cursor:default; }
+  .mode-switch button:focus-visible, .ways-course:focus-visible, .ways-copy:focus-visible, .ctrl:focus-visible, .jump:focus-visible, .btn:focus-visible { outline:2px solid #BFD3FF; outline-offset:2px; }
+  @media (max-height:800px) and (min-width:641px) {
+    .ways-card { padding:18px 22px; }
+    .ways-card h2 { font-size:clamp(24px,2.4vw,34px); margin-top:7px; }
+    .ways-sub { font-size:16px; margin-bottom:8px; }
+    .ways-desc { font-size:18px; line-height:1.45; margin-bottom:10px; }
+    .ways-tools { gap:4px; margin-bottom:8px; }
+    .ways-courses { margin-bottom:8px; }
+    .ways-prompt { padding:7px 10px; }
+    .ways-prompt pre { font-size:15px; line-height:1.4; }
+  }
+  @media (max-width:640px) {
+    .viewer.mode-ways { height:calc(100svh - var(--nav-h) - 12px); min-height:0; padding:0; border-radius:0; }
+    .ways-card { overflow-y:auto; border-radius:0; padding:18px 16px; -webkit-overflow-scrolling:touch; }
+    .ways-card h2 { font-size:clamp(25px,7vw,32px); }
+    .ways-sub { font-size:17px; }
+    .ways-desc { font-size:18px; line-height:1.55; }
+    .ways-tool { grid-template-columns:100px minmax(0,1fr); font-size:13px; }
+    .ways-prompt pre { font-size:15px; }
+    .mode-switch { margin-top:6px; margin-bottom:4px; }
+    .viewer.mode-ways .panel { padding-bottom:0; }
+  }
+  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .viewer *, .mode-switch * { transition:none !important; scroll-behavior:auto !important; } }
 
   /* ── что внутри ── */
   .secs { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:14px; }
@@ -250,31 +315,50 @@
 <!-- ═══ ЛИСТАЛКА ═══ -->
 <section class="sec dark" id="read" aria-label="Листать гайд">
   <div class="wrap">
-    <div class="viewer" id="viewer">
+    <div class="viewer mode-ways" id="viewer">
+      <div class="ways-view" id="waysView">
+        <div class="ways-loading" id="waysLoading">Загрузка способов…</div>
+        <article class="ways-card" id="waysCard" hidden aria-labelledby="waysTitle">
+          <div class="ways-meta"><span class="ways-section" id="waysSection"></span><span class="ways-num" id="waysNum"></span></div>
+          <h2 id="waysTitle"></h2>
+          <p class="ways-sub" id="waysSub"></p>
+          <p class="ways-desc" id="waysDesc"></p>
+          <div class="ways-tools">
+            <div class="ways-tool main"><span class="ways-tool-label"><i class="ways-dot"></i>Основной</span><span class="ways-tool-list" id="waysMain"></span></div>
+            <div class="ways-tool ext"><span class="ways-tool-label"><i class="ways-dot"></i>Расширенный</span><span class="ways-tool-list" id="waysExt"></span></div>
+          </div>
+          <div class="ways-courses" id="waysCourses"></div>
+          <div class="ways-prompt" id="waysPromptBlock">
+            <div class="ways-prompt-head"><span>Промпт</span><button class="ways-copy" id="waysCopy" type="button">Копировать</button></div>
+            <pre id="waysPrompt"></pre>
+          </div>
+        </article>
+      </div>
       <div class="stage" id="stage" aria-roledescription="листалка" aria-label="Страницы гайда">
         <img id="pg" src="guide/53/p01.webp" width="1200" height="1696" alt="Страница 1 из 39">
         <button class="zone prev" id="zPrev" aria-label="Предыдущая страница"></button>
         <button class="zone next" id="zNext" aria-label="Следующая страница"></button>
         <div class="tap-hint" id="tapHint" role="status">Двойной тап — увеличить</div>
       </div>
+      <div class="mode-switch" role="group" aria-label="Режим просмотра гайда">
+        <button type="button" id="modeWays" class="on" aria-pressed="true">По способам</button>
+        <button type="button" id="modePdf" aria-pressed="false">Как в PDF</button>
+      </div>
       <div class="panel" id="panel">
         <div class="bar">
           <button class="ctrl" id="bPrev" aria-label="Предыдущая страница">←</button>
-          <span class="count" aria-live="polite"><b id="cur">1</b> / <span id="total">39</span></span>
+          <span class="count" aria-live="polite"><b id="cur">1</b> / <span id="total">53</span></span>
           <button class="ctrl" id="bNext" aria-label="Следующая страница">→</button>
           <select class="jump" id="jump" aria-label="Перейти к разделу">
-            <option value="">Перейти к разделу…</option>
-            <option value="2">Содержание</option>
-            <option value="3">Как читать гайд</option>
-            <option value="4">01 · Концепция и генерация идей</option>
-            <option value="8">02 · Визуализация и графика</option>
-            <option value="13">03 · Анализ территории и контекста</option>
-            <option value="18">04 · Документация и тексты</option>
-            <option value="22">05 · BIM, ГИС и автоматизация</option>
-            <option value="26">06 · Работа с клиентом</option>
-            <option value="29">07 · Обучение и исследования</option>
-            <option value="33">08 · Бизнес и маркетинг</option>
-            <option value="39">Курсы AI2ARCH</option>
+            <option value="all">Все способы</option>
+            <option value="01">01 · Концепция и генерация идей</option>
+            <option value="02">02 · Визуализация и графика</option>
+            <option value="03">03 · Анализ территории и контекста</option>
+            <option value="04">04 · Документация и тексты</option>
+            <option value="05">05 · BIM, ГИС и автоматизация</option>
+            <option value="06">06 · Работа с клиентом</option>
+            <option value="07">07 · Обучение и исследования</option>
+            <option value="08">08 · Бизнес и маркетинг</option>
           </select>
           <a class="btn btn-primary btn-sm" href="guide/ai2arch-53-sposoba.pdf" download="AI2ARCH-53-sposoba-II-dlya-arhitektora.pdf" data-dl="viewer">Скачать PDF</a>
         </div>
@@ -370,6 +454,18 @@
   var stub = function (t) { var b = document.createElement('button'); b.appendChild(document.createTextNode(t || '')); return b; };
   var bZoomIn = stub(), bZoomOut = stub(), bFit = stub(), zoomVal = stub(), bFull = stub('⤢ ');
   var cache = {}, cache2 = {};
+  var totalEl = document.getElementById('total');
+  var modeWays = document.getElementById('modeWays'), modePdf = document.getElementById('modePdf');
+  var waysView = document.getElementById('waysView'), waysLoading = document.getElementById('waysLoading');
+  var waysCard = document.getElementById('waysCard'), waysSection = document.getElementById('waysSection');
+  var waysNum = document.getElementById('waysNum'), waysTitle = document.getElementById('waysTitle');
+  var waysSub = document.getElementById('waysSub'), waysDesc = document.getElementById('waysDesc');
+  var waysMain = document.getElementById('waysMain'), waysExt = document.getElementById('waysExt');
+  var waysCourses = document.getElementById('waysCourses'), waysPrompt = document.getElementById('waysPrompt');
+  var waysCopy = document.getElementById('waysCopy');
+  var currentMode = 'ways', currentWay = 1, waysData = null, waysLoadingFlag = false, waysFailed = false;
+  var pdfJumpHTML = '<option value="">Перейти к разделу…</option><option value="2">Содержание</option><option value="3">Как читать гайд</option><option value="4">01 · Концепция и генерация идей</option><option value="8">02 · Визуализация и графика</option><option value="13">03 · Анализ территории и контекста</option><option value="18">04 · Документация и тексты</option><option value="22">05 · BIM, ГИС и автоматизация</option><option value="26">06 · Работа с клиентом</option><option value="29">07 · Обучение и исследования</option><option value="33">08 · Бизнес и маркетинг</option><option value="39">Курсы AI2ARCH</option>';
+  function esc(v) { return String(v == null ? '' : v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 
   var ZOOMS = [1, 1.5, 2, 3];
   var zoom = 1, tx = 0, ty = 0;
@@ -456,6 +552,7 @@
   function show(n, push) {
     n = Math.max(1, Math.min(TOTAL, n));
     cur = n;
+    totalEl.textContent = TOTAL;
     curEl.textContent = n;
     bPrev.disabled = n === 1; bNext.disabled = n === TOTAL;
     prog.style.width = (n / TOTAL * 100) + '%';
@@ -470,8 +567,116 @@
     }
     if (!readSent && n >= 10) { readSent = true; goal('guide_read'); }
   }
-  function next() { if (cur < TOTAL) show(cur + 1); }
-  function prev() { if (cur > 1) show(cur - 1); }
+  function pdfNext() { if (cur < TOTAL) show(cur + 1); }
+  function pdfPrev() { if (cur > 1) show(cur - 1); }
+  function next() { if (currentMode === 'ways') showWay(currentWay + 1); else pdfNext(); }
+  function prev() { if (currentMode === 'ways') showWay(currentWay - 1); else pdfPrev(); }
+
+  function updateModeButtons() {
+    var ways = currentMode === 'ways';
+    modeWays.classList.toggle('on', ways); modePdf.classList.toggle('on', !ways);
+    modeWays.setAttribute('aria-pressed', ways ? 'true' : 'false');
+    modePdf.setAttribute('aria-pressed', ways ? 'false' : 'true');
+  }
+  function renderWay(n, push) {
+    if (!waysData || !waysData.ways || !waysData.ways.length) return;
+    n = Math.max(1, Math.min(waysData.ways.length, n));
+    var way = waysData.ways[n - 1];
+    currentWay = way.n;
+    var sec = (waysData.sections || []).filter(function(s){ return s.no === way.section; })[0];
+    waysSection.textContent = sec ? (sec.no + ' · ' + sec.title) : 'Раздел ' + way.section;
+    waysNum.textContent = (way.n < 10 ? '0' + way.n : way.n) + ' / ' + waysData.ways.length;
+    waysTitle.textContent = way.title || '';
+    waysSub.textContent = way.sub || '';
+    waysDesc.textContent = way.desc || '';
+    waysMain.textContent = (way.main && way.main.length) ? way.main.join(' · ') : '—';
+    waysExt.textContent = (way.ext && way.ext.length) ? way.ext.join(' · ') : '—';
+    waysCourses.innerHTML = (way.courses || []).map(function(c){
+      return '<a class="ways-course" href="' + esc(c.url) + '" data-course="' + esc(c.course) + '" target="_blank" rel="noopener">' + esc(c.name) + ' <small>' + esc(c.label) + '</small></a>';
+    }).join('');
+    waysCourses.hidden = !(way.courses && way.courses.length);
+    waysPrompt.textContent = way.prompt || '';
+    waysCopy.textContent = 'Копировать';
+    waysCopy.disabled = !way.prompt;
+    waysPrompt.scrollTop = 0;
+    waysCard.scrollTop = 0;
+    totalEl.textContent = waysData.ways.length;
+    curEl.textContent = way.n;
+    bPrev.disabled = n === 1; bNext.disabled = n === waysData.ways.length;
+    jump.value = way.section;
+    if (!readSent && way.n >= 10) { readSent = true; goal('guide_read'); }
+    if (push !== false) { try { history.replaceState(null, '', '#w' + way.n); } catch (e) {} }
+  }
+  function showWay(n, push) { if (!waysData) return; renderWay(n, push); }
+  function loadWays() {
+    if (waysData || waysLoadingFlag || waysFailed) return Promise.resolve(waysData);
+    waysLoadingFlag = true;
+    waysLoading.hidden = false; waysCard.hidden = true;
+    return fetch('guide/53/ways.json').then(function(r){
+      if (!r.ok) throw new Error('ways.json');
+      return r.json();
+    }).then(function(data){
+      if (!data || !data.ways || !data.ways.length) throw new Error('ways empty');
+      waysData = data; waysLoading.hidden = true; waysCard.hidden = false;
+      waysLoadingFlag = false;
+      if (currentMode === 'ways') renderWay(currentWay, false);
+      return waysData;
+    }).catch(function(){
+      waysLoadingFlag = false; waysFailed = true;
+      modeWays.disabled = true;
+      setMode('pdf');
+      return null;
+    });
+  }
+  function setMode(mode, push) {
+    currentMode = (mode === 'pdf') ? 'pdf' : 'ways';
+    viewer.classList.toggle('mode-ways', currentMode === 'ways');
+    viewer.classList.toggle('mode-pdf', currentMode === 'pdf');
+    updateModeButtons();
+    if (currentMode === 'ways') {
+      jump.innerHTML = '<option value="all">Все способы</option>' + (waysData ? waysData.sections.map(function(s){ return '<option value="' + esc(s.no) + '">' + esc(s.no + ' · ' + s.title) + '</option>'; }).join('') : '');
+      if (waysData) renderWay(currentWay, push !== false);
+      else loadWays();
+    } else {
+      jump.innerHTML = pdfJumpHTML;
+      show(cur, push !== false);
+    }
+  }
+  modeWays.addEventListener('click', function(){ if (currentMode !== 'ways') setMode('ways', true); });
+  modePdf.addEventListener('click', function(){ if (currentMode !== 'pdf') setMode('pdf', true); });
+  waysCourses.addEventListener('click', function(e){
+    var a = e.target.closest ? e.target.closest('a[data-course]') : null;
+    if (a) goal('enroll_click', { course: a.getAttribute('data-course'), source: 'guide53' });
+  });
+  waysCopy.addEventListener('click', function(){
+    var text = waysPrompt.textContent || '';
+    var done = function(ok){
+      if (ok) { waysCopy.textContent = 'Скопировано'; }
+      else {
+        waysCopy.textContent = 'Текст выделен';
+        try {
+          var range = document.createRange(); range.selectNodeContents(waysPrompt);
+          var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+        } catch (e) {}
+      }
+      setTimeout(function(){ waysCopy.textContent = 'Копировать'; }, 1500);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){ done(true); }).catch(function(){ done(false); });
+    } else { done(false); }
+  });
+  // свайп по способам
+  var wsx = null, wsy = null;
+  waysView.addEventListener('touchstart', function(e){
+    if (e.touches.length !== 1) return;
+    wsx = e.touches[0].clientX; wsy = e.touches[0].clientY;
+  }, { passive: true });
+  waysView.addEventListener('touchend', function(e){
+    if (wsx === null) return;
+    var dx = e.changedTouches[0].clientX - wsx, dy = e.changedTouches[0].clientY - wsy;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.3) { dx < 0 ? next() : prev(); }
+    wsx = wsy = null;
+  }, { passive: true });
 
   if (img) img.addEventListener('error', function () {
     if (img.getAttribute('src') && img.getAttribute('src').indexOf('@2x') !== -1) img.src = SRC(cur);
@@ -495,7 +700,18 @@
       setZoom(zoom > 1.001 ? 1 : 2, e.clientX, e.clientY);
     }
   });
-  jump.addEventListener('change', function () { if (this.value) { show(+this.value); this.value = ''; } });
+  jump.addEventListener('change', function () {
+    if (!this.value) return;
+    if (currentMode === 'ways') {
+      if (!waysData) return;
+      if (this.value === 'all') { renderWay(1, true); return; }
+      var first = waysData.ways.filter(function(w){ return w.section === jump.value; })[0];
+      if (first) renderWay(first.n, true);
+    } else {
+      show(+this.value);
+      this.value = '';
+    }
+  });
   bZoomIn.addEventListener('click', function () { zoomStep(1); });
   bZoomOut.addEventListener('click', function () { zoomStep(-1); });
   bFit.addEventListener('click', function () { setZoom(1); });
@@ -523,6 +739,11 @@
     if (e.target && /INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
     var full = isFull();
     if (!inView && !full) return;
+    if (currentMode === 'ways') {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); next(); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+      return;
+    }
     if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); arrowRight(); }
     else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); arrowLeft(); }
     else if (e.key === '+' || e.key === '=' || e.code === 'NumpadAdd') { e.preventDefault(); zoomStep(1); }
@@ -639,7 +860,7 @@
 
   // карточки разделов открывают нужную страницу
   Array.prototype.forEach.call(document.querySelectorAll('.sec-card'), function (c) {
-    c.addEventListener('click', function () { show(+c.getAttribute('data-page')); document.getElementById('read').scrollIntoView({ behavior: 'smooth' }); });
+    c.addEventListener('click', function () { setMode('pdf', true); show(+c.getAttribute('data-page')); document.getElementById('read').scrollIntoView({ behavior: 'smooth' }); });
   });
 
   // цели Метрики: скачивание и переход к заявке
@@ -663,10 +884,33 @@
     }
   }
 
-  // ссылка вида ai2arch.ru/53#p12 открывает 12-ю страницу
-  var m = /^#p(\d{1,2})$/.exec(location.hash);
-  if (m) { show(+m[1], false); setTimeout(function () { document.getElementById('read').scrollIntoView(); }, 50); }
-  else { show(1, false); }
+  // deep links: #p12 — страница PDF, #w7 — способ
+  var mw = /^#w(\d{1,2})$/.exec(location.hash);
+  var mp = /^#p(\d{1,2})$/.exec(location.hash);
+  if (mp) {
+    currentMode = 'pdf';
+    viewer.classList.remove('mode-ways'); viewer.classList.add('mode-pdf');
+    updateModeButtons();
+    jump.innerHTML = pdfJumpHTML;
+    show(+mp[1], false);
+    setTimeout(function(){ document.getElementById('read').scrollIntoView(); }, 50);
+  } else {
+    if (mw) currentWay = +mw[1];
+    viewer.classList.remove('mode-pdf'); viewer.classList.add('mode-ways');
+    updateModeButtons();
+    loadWays().then(function(){
+      if (waysData) {
+        jump.innerHTML = '<option value="all">Все способы</option>' + waysData.sections.map(function(s){ return '<option value="' + esc(s.no) + '">' + esc(s.no + ' · ' + s.title) + '</option>'; }).join('');
+        renderWay(currentWay, false);
+      }
+    });
+    if (mw) setTimeout(function(){ document.getElementById('read').scrollIntoView(); }, 50);
+  }
+  window.addEventListener('hashchange', function(){
+    var w = /^#w(\d{1,2})$/.exec(location.hash), p = /^#p(\d{1,2})$/.exec(location.hash);
+    if (w && currentMode === 'ways' && waysData) renderWay(+w[1], false);
+    if (p) { setMode('pdf', false); show(+p[1], false); }
+  });
 })();
 </script>
 </body>
