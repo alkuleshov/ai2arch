@@ -890,6 +890,12 @@
     .trackbar .track-schedule{font-size:12px}
   }
 
+
+  .c52-plan-grid { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px; margin:14px 0 10px; }
+  .c52-plan-grid figure { margin:0; }
+  .c52-plan-grid img { width:100%; height:auto; display:block; border:1px solid var(--border); border-radius:8px; background:#fff; }
+  .c52-plan-grid figcaption { font-size:12px; line-height:1.4; color:var(--ink-faint); margin-top:6px; }
+  @media(max-width:720px){ .c52-plan-grid { grid-template-columns:minmax(0,1fr); } }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -1043,7 +1049,15 @@
   <p style="font-size:13px"><strong>Планы 2016 г.</strong> — по обмерам 2016 г.; максимальная по площади конфигурация комплекса. Актуальность на дату курса не подтверждена.</p>
   <p style="font-size:13px"><strong>Легенда плана «1 этаж, уровень 2»:</strong> серая заливка — зона на отметке 0,000; без заливки — антресоль.</p>
   <p style="font-size:13px"><strong>Сетка колонн:</strong> 4200×7200 мм по осям; в узкой части здания — 4200×6000 мм.</p>
-  <p style="font-size:13px">Планы выдаются как документ по запросу.</p>
+  <p style="font-size:13px">Планы БТИ 2005 г. выдаются отдельным документом по запросу.</p>
+  <div class="c52-plan-grid">
+    <figure><img src="images/c52/plan2016-1etazh-uroven1-fragment.jpg" loading="lazy" alt="План 1 этажа, уровень 1, фрагмент — по обмерам 2016 г."><figcaption>1 этаж, уровень 1 — фрагмент. По обмерам 2016 г.</figcaption></figure>
+    <figure><img src="images/c52/plan2016-1etazh-uroven1-s-okruzheniem.jpg" loading="lazy" alt="План 1 этажа, уровень 1, с окружением — по обмерам 2016 г."><figcaption>1 этаж, уровень 1 — с окружением. По обмерам 2016 г.</figcaption></figure>
+    <figure><img src="images/c52/plan2016-1etazh-uroven2.jpg" loading="lazy" alt="План 1 этажа, уровень 2: серая заливка — зона на отметке 0,000, без заливки — антресоль"><figcaption>1 этаж, уровень 2. Серая заливка — зона на отметке 0,000; без заливки — антресоль. По обмерам 2016 г.</figcaption></figure>
+    <figure><img src="images/c52/plan2016-2etazh.jpg" loading="lazy" alt="План 2 этажа — по обмерам 2016 г."><figcaption>2 этаж. По обмерам 2016 г.</figcaption></figure>
+    <figure><img src="images/c52/plan2016-3etazh.jpg" loading="lazy" alt="План 3 этажа — по обмерам 2016 г."><figcaption>3 этаж. По обмерам 2016 г.</figcaption></figure>
+    <figure><img src="images/c52/plan2016-4etazh.jpg" loading="lazy" alt="План 4 этажа — по обмерам 2016 г."><figcaption>4 этаж. По обмерам 2016 г.</figcaption></figure>
+  </div>
 </div>
 <h3>Что изучаем</h3><ul class="checklist"><li><div class="chk">✓</div> Роли архитектора и девелопера в проекте редевелопмента</li><li><div class="chk">✓</div> Различия треков А и Б — выберите свой (на Demo Day оба трека показывают результат своей роли)</li><li><div class="chk">✓</div> Требования к объекту; состав паспорта объекта и рабочая гипотеза</li></ul><div class="card-grid">
   <div class="card card-a only-a"><h3><span class="trk a">ТРЕК А</span>Проектировщик</h3><p style="font-size:13px">Вы собираете архитектурно-визуальное исследование: контекст места, смыслы, адаптация здания с сохранением конструктива.</p></div>
