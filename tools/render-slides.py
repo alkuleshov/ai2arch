@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Снимает слайды колоды в WebP 1600 и 800 px для лонгрида.
+"""Снимает слайды колоды в WebP 3200 и 1600 px для лонгрида.
 
 Требует Node.js и Playwright, установленный в общих node_modules проекта.
 По умолчанию снимает redev-income.html в images/slides/income.
@@ -23,7 +23,7 @@ const fs = require('fs');
   const deck = process.argv[1], out = process.argv[2], chromiumPath = process.argv[3];
   fs.mkdirSync(out, { recursive: true });
   const browser = await chromium.launch({ executablePath: chromiumPath });
-  const page = await browser.newPage({ viewport: { width: 1600, height: 1000 } });
+  const page = await browser.newPage({ viewport: { width: 3208, height: 1808 } });
   await page.goto('file://' + deck);
   await page.waitForTimeout(500);
   await page.evaluate(() => document.fonts.ready);
@@ -52,8 +52,8 @@ const fs = require('fs');
     const r = await page.evaluate(() => document.getElementById('stage').getBoundingClientRect().toJSON());
     const png = await page.screenshot({ clip: { x:r.x, y:r.y, width:r.width, height:r.height } }).then(b => Buffer.from(b).toString('base64'));
     const name = String(i+1).padStart(2,'0');
-    fs.writeFileSync(out + '/' + name + '.webp', Buffer.from(await webp(png,1600,900),'base64'));
-    fs.writeFileSync(out + '/' + name + '-800.webp', Buffer.from(await webp(png,800,450),'base64'));
+    fs.writeFileSync(out + '/' + name + '.webp', Buffer.from(await webp(png,3200,1800),'base64'));
+    fs.writeFileSync(out + '/' + name + '-1600.webp', Buffer.from(await webp(png,1600,900),'base64'));
     process.stdout.write(name + ' ');
   }
   await browser.close();
