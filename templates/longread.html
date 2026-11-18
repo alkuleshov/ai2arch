@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Урок 2.2 · Доходная база, CAPEX/OPEX · AI2ARCH</title>
+<meta name="description" content="Урок для чтения по теме 2.2: скелет финансовой модели, доходы, OPEX и CAPEX по фазам.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+:root{--navy:#0A0F1A;--ink:#1F2430;--muted:#5B6475;--faint:#8B94A6;--bg:#F6F4F0;--surface:#fff;--line:#E4E1D8;--accent:#1A6BFF;--accent-l:#EAF1FF;--accent-b:#BFD3FF;--orange:#C46A16;--orange-l:#FFF7EF;--orange-b:#F1D2BE;--sans:'Manrope','Segoe UI',system-ui,Arial,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;--fs:19px;--head:58px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:var(--fs);line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased}
+body.fs-1{--fs:18px} body.fs-2{--fs:19px} body.fs-3{--fs:21px}
+a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+.lr-head{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--head);display:flex;align-items:center;gap:10px;padding:0 18px;background:rgba(246,244,240,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);transition:transform .25s ease}
+.lr-head.hide{transform:translateY(-105%)}
+.lr-back{font-size:13px;font-weight:800;color:var(--ink);white-space:nowrap}
+.lr-name{font-size:13px;font-weight:600;color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.lr-head button{font:700 12px var(--sans);border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:7px 11px;cursor:pointer;white-space:nowrap}
+.lr-head button:hover{border-color:var(--accent);color:var(--accent)}
+.lr-progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:70;transition:width .1s linear}
+.lr-main{max-width:1180px;margin:0 auto;padding:calc(var(--head) + 26px) 20px 80px}
+.hero{max-width:820px;margin:20px auto 26px;padding:0 4px}
+.hero .kicker{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.hero h1{font-size:clamp(30px,5vw,52px);line-height:1.08;letter-spacing:-.02em;color:var(--navy);margin-bottom:14px}
+.hero p{font-size:15px;color:var(--muted);margin-bottom:18px}
+.hero .meta{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--faint);margin-bottom:18px}
+.start{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;border-radius:10px;padding:12px 20px;font-size:14px;font-weight:800}
+.start:hover{background:#1A2333;color:#fff;text-decoration:none}
+.glossary{max-width:820px;margin:0 auto 34px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:0 18px}
+.glossary summary{cursor:pointer;padding:14px 0;font-size:13px;font-weight:800;color:var(--muted);list-style:none}
+.glossary summary::-webkit-details-marker{display:none}
+.glossary dl{display:grid;gap:10px;padding:0 0 16px}
+.glossary dt{font-weight:800;font-size:14px;color:var(--navy)}
+.glossary dd{font-size:13px;color:var(--muted);margin:0}
+.lr-body{display:block;max-width:760px;margin:0 auto}
+.lr-text{min-width:0}
+.lesson-intro{scroll-margin-top:calc(var(--head) + 16px)}
+.chapter{margin:0 0 44px;scroll-margin-top:calc(var(--head) + 16px)}
+.chapter-head{padding-top:22px;margin-bottom:18px;border-top:1px solid var(--line)}
+.chapter-kicker{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.chapter h1{font-size:clamp(26px,4vw,36px);line-height:1.16;color:var(--navy)}
+.lesson-intro{font-size:var(--fs);color:var(--ink);margin:14px 0 22px}
+.lesson-intro p+p{margin-top:12px}
+.example-card{border:1px solid var(--orange-b);background:var(--orange-l);border-radius:14px;padding:18px 20px;margin:18px 0 30px}
+.example-mark{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
+.example-card p{font-size:14px;line-height:1.6;color:#4A3524}
+.slide-sec{position:relative;padding:26px 0 30px;border-top:1px solid var(--line);scroll-margin-top:calc(var(--head) + 14px)}
+.sec-kicker{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:5px}
+.slide-sec h2{font-size:clamp(23px,3.2vw,30px);line-height:1.2;letter-spacing:-.015em;color:var(--navy);margin-bottom:16px}
+.slide-inline{margin:0 0 20px}
+.slide-inline img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:zoom-in}
+.slide-inline figcaption{font-size:12px;color:var(--faint);margin-top:6px}
+.prose p{margin:0 0 14px}
+.prose p:last-child{margin-bottom:0}
+.prose strong{color:var(--navy)}
+.prose ul,.prose ol{margin:0 0 14px 22px}
+.prose li{margin:0 0 6px}
+.term{border-bottom:1px dashed var(--accent);cursor:pointer;color:inherit}
+.term:focus{outline:2px solid var(--accent-b);outline-offset:2px}
+.term-pop{position:fixed;z-index:120;max-width:280px;background:var(--navy);color:#fff;font-size:12.5px;line-height:1.45;padding:10px 12px;border-radius:9px;box-shadow:0 10px 30px rgba(10,15,26,.25);display:none}
+.term-pop.open{display:block}
+.c52-card{border:1px solid var(--orange-b);background:var(--orange-l);border-radius:14px;padding:16px 18px;margin:18px 0}
+.c52-mark{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+.c52-row{display:grid;grid-template-columns:130px 1fr;gap:10px;padding:7px 0;border-top:1px solid rgba(196,106,22,.18)}
+.c52-row:first-of-type{border-top:0}
+.c52-row span{font-size:12px;font-weight:800;color:var(--orange)}
+.c52-row p{font-size:13.5px;line-height:1.55;color:#4A3524;margin:0}
+.fold{border:1px solid var(--line);border-radius:12px;background:#fff;margin:12px 0;padding:0 16px}
+.fold summary{cursor:pointer;padding:13px 0;font-size:13px;font-weight:800;color:var(--muted);list-style:none}
+.fold summary::-webkit-details-marker{display:none}
+.fold summary:before{content:'◆ ';color:var(--accent)}
+.fold[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px}
+.fold .prose{padding-bottom:14px}
+.prompt-block{border:1px solid var(--line);border-radius:12px;background:#fff;margin:16px 0;overflow:hidden}
+.prompt-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;border-bottom:1px solid var(--line);background:var(--accent-l)}
+.prompt-bar span{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.copy{font:700 11.5px var(--sans);border:1px solid var(--accent-b);background:#fff;color:var(--accent);border-radius:7px;padding:5px 10px;cursor:pointer}
+.copy.copied{background:var(--accent);color:#fff;border-color:var(--accent)}
+.prompt-block pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.55 var(--mono);color:#2A2F3E;padding:14px;margin:0;background:#FBFCFE}
+.task-card{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;background:#fff;padding:14px 16px;margin:18px 0}
+.task-card label{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);cursor:pointer;margin-bottom:8px}
+.task-card input{width:16px;height:16px;accent-color:var(--accent)}
+.task-card p{font-size:13.5px;line-height:1.55;color:var(--muted);margin:0}
+.transition{font-size:13.5px;line-height:1.55;color:var(--faint);font-style:italic;margin:18px 0 0;padding-top:12px;border-top:1px dashed var(--line)}
+.chapter-end{border:1px solid var(--line);border-radius:16px;background:#fff;padding:20px 22px;margin:28px 0 10px}
+.chapter-end h2{font-size:24px;color:var(--navy);margin-bottom:14px}
+.end-card{border-top:1px solid var(--line);padding:14px 0}
+.end-card:first-of-type{border-top:0;padding-top:0}
+.end-card h3{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:8px}
+.end-card p,.end-card li{font-size:13.5px;line-height:1.55;color:var(--muted)}
+.end-card ol,.end-card ul{margin:0 0 0 18px}
+.caveats{margin-top:12px;border-top:1px solid var(--line);padding-top:12px}
+.caveats summary{cursor:pointer;font-size:13px;font-weight:800;color:var(--muted)}
+.caveats[open] summary{margin-bottom:10px}
+.table-wrap{width:100%;overflow-x:auto}
+.caveats table{width:100%;border-collapse:collapse;font-size:12.5px}
+.caveats th{text-align:left;padding:8px;background:var(--bg);border:1px solid var(--line);color:var(--navy)}
+.caveats td{padding:8px;border:1px solid var(--line);color:var(--muted);vertical-align:top}
+.lesson-end{border:1px solid var(--accent-b);background:var(--accent-l);border-radius:16px;padding:22px;margin:28px 0}
+.lesson-end h2{font-size:26px;color:var(--navy);margin-bottom:10px}
+.lesson-end p{font-size:15px;line-height:1.65;color:var(--ink)}
+.rail{display:none}
+.lr-toc{position:fixed;top:0;right:0;bottom:0;width:min(420px,92vw);z-index:100;background:#fff;border-left:1px solid var(--line);box-shadow:-20px 0 50px rgba(10,15,26,.12);transform:translateX(102%);transition:transform .22s ease;overflow-y:auto;padding:18px 18px 40px}
+.lr-toc.open{transform:none}
+.toc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.toc-top b{font-size:15px;color:var(--navy)}
+.toc-top button{border:0;background:transparent;font-size:24px;cursor:pointer;color:var(--muted)}
+.lr-toc a{display:block;color:var(--ink);text-decoration:none;border-radius:7px;padding:7px 8px}
+.lr-toc a:hover{background:var(--bg)}
+.toc-ch{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)!important;margin-top:12px}
+.toc-slide{font-size:13.5px;color:var(--muted)!important;padding-left:26px!important;position:relative}
+.toc-slide span{position:absolute;left:6px;color:var(--faint);font-size:11px}
+.toc-slide.current{background:var(--accent-l);color:var(--navy)!important;font-weight:700}
+.toc-slide.read:after{content:'✓';position:absolute;right:8px;color:var(--accent);font-size:11px}
+.continue{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:55;background:var(--navy);color:#fff;border-radius:999px;padding:9px 16px;font-size:12.5px;font-weight:700;box-shadow:0 8px 24px rgba(10,15,26,.22);display:none;max-width:calc(100vw - 24px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.continue.show{display:block}
+.continue:hover{color:#fff;text-decoration:none}
+.modal{position:fixed;inset:0;z-index:200;background:#060A12;display:none;align-items:center;justify-content:center;padding:20px;touch-action:none}
+.modal.open{display:flex}
+.modal img{max-width:100%;max-height:82vh;object-fit:contain;transition:transform .15s;transform-origin:center}
+.modal-top{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;color:#fff;font-size:13px}
+.modal-top a{color:#BFD3FF;font-weight:700}
+.modal-x{background:none;border:0;color:#fff;font-size:30px;cursor:pointer;line-height:1}
+.modal-nav{position:fixed;top:50%;transform:translateY(-50%);border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;border-radius:50%;width:46px;height:46px;font-size:24px;cursor:pointer}
+.modal-prev{left:14px}.modal-next{right:14px}
+.modal-zoom{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.modal-zoom button{border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;border-radius:8px;padding:7px 12px;font-size:14px;cursor:pointer}
+.no-slides .slide-inline,.no-slides .rail{display:none!important}
+@media(max-width:1099px){ body.fs-1{--fs:17px} body.fs-2{--fs:18px} body.fs-3{--fs:20px} }
+@media(min-width:1100px){
+  :root{--fs:19px}
+  body.fs-1{--fs:17px} body.fs-2{--fs:19px} body.fs-3{--fs:21px}
+  .lr-main{padding-left:30px;padding-right:30px}
+  .lr-body{display:grid;grid-template-columns:minmax(0,700px) minmax(300px,1fr);gap:40px;max-width:1120px;align-items:start}
+  .chapter{min-width:0}
+  .rail{display:block;position:sticky;top:calc(var(--head) + 18px);aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:#fff}
+  .rail img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .25s;background:#fff;pointer-events:none}
+  .rail img.active{opacity:1;pointer-events:auto}
+  .slide-inline{display:none}
+}
+@media(max-width:720px){
+  :root{--head:52px}
+  .lr-main{padding:calc(var(--head) + 18px) 16px 70px}
+  .lr-head{padding:0 12px;gap:7px}
+  .lr-name{display:none}
+  .lr-head button{padding:6px 9px;font-size:11px}
+  .c52-row{grid-template-columns:1fr;gap:2px}
+  .modal-nav{width:40px;height:40px}
+  .caveats .table-wrap{overflow:visible}
+  .caveats table,.caveats tbody,.caveats tr,.caveats td{display:block;width:100%}
+  .caveats thead{display:none}
+  .caveats tr{padding:9px 0;border-bottom:1px solid var(--line)}
+  .caveats td{border:0;padding:2px 0}
+  .caveats td:before{content:attr(data-label) ': ';font-weight:800;color:var(--navy)}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body class="fs-2">
+<div class="lr-progress" id="lrProgress"></div>
+<header class="lr-head" id="lrHead">
+  <a class="lr-back" href="redev-guide.html#t22">← Тема 2.2</a>
+  <div class="lr-name">Доходная база, CAPEX/OPEX</div>
+  <button id="tocBtn" type="button">Содержание</button>
+  <button id="fontBtn" type="button" aria-label="Размер шрифта">Aa</button>
+  <button id="slidesBtn" type="button">Слайды: показывать</button>
+</header>
+<nav class="lr-toc" id="lrToc" aria-label="Содержание урока">
+  <div class="toc-top"><b>Содержание</b><button id="tocClose" type="button" aria-label="Закрыть">×</button></div>
+  {{TOC}}
+</nav>
+
+<main class="lr-main">
+  <section class="hero" id="top">
+    <div class="kicker">Тема 2.2 · Доходная база, CAPEX/OPEX</div>
+    <h1>Скелет финансовой модели</h1>
+    <div class="meta"><span>20 слайдов</span><span>{{READ_TIME}} мин чтения</span><span>{{WORDS}} слов</span></div>
+    <p>Вертикальный урок по теме 2.2: как собрать структуру доходов, OPEX и CAPEX до появления цифр.</p>
+    <a class="start" href="#intro">Начать →</a>
+  </section>
+  <details class="glossary">
+    <summary>Термины урока</summary>
+    <dl>{{GLOSSARY}}</dl>
+  </details>
+  <div class="lr-body" id="lrBody">
+    <div class="lr-text">{{BODY}}</div>
+    <aside class="rail" id="rail" aria-label="Слайды урока">{{RAIL}}</aside>
+  </div>
+</main>
+<a class="continue" id="continue" href="#"></a>
+<div class="term-pop" id="termPop"></div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Просмотр слайда">
+  <div class="modal-top"><span id="modalCount"></span><a id="openDeck" href="redev-income.html" target="_blank" rel="noopener">Открыть в презентации ↗</a><button class="modal-x" id="modalX" type="button" aria-label="Закрыть">×</button></div>
+  <button class="modal-nav modal-prev" id="modalPrev" type="button" aria-label="Предыдущий слайд">‹</button>
+  <img id="modalImg" src="" alt="">
+  <button class="modal-nav modal-next" id="modalNext" type="button" aria-label="Следующий слайд">›</button>
+  <div class="modal-zoom"><button id="zoomOut" type="button">−</button><button id="zoomReset" type="button">100%</button><button id="zoomIn" type="button">+</button></div>
+</div>
+
+<script>
+const SLIDES = {{SLIDES_JSON}};
+const LS = {get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const body=document.body, head=document.getElementById('lrHead');
+const progress=document.getElementById('lrProgress');
+function onScroll(){
+  const h=document.documentElement.scrollHeight-innerHeight;
+  progress.style.width=(h>0?Math.min(100,scrollY/h*100):0)+'%';
+  if(innerWidth<=720){
+    if(scrollY>120 && scrollY>lastY) head.classList.add('hide');
+    else head.classList.remove('hide');
+  } else head.classList.remove('hide');
+  lastY=scrollY;
+}
+let lastY=scrollY; addEventListener('scroll',onScroll,{passive:true});
+onScroll();
+
+const toc=document.getElementById('lrToc');
+document.getElementById('tocBtn').onclick=()=>toc.classList.add('open');
+document.getElementById('tocClose').onclick=()=>toc.classList.remove('open');
+toc.addEventListener('click',e=>{if(e.target.closest('a')) toc.classList.remove('open')});
+
+const sizes=['fs-1','fs-2','fs-3']; let fsIndex=Math.max(0,sizes.indexOf(LS.get('lr-fs')||'fs-2'));
+body.classList.remove(...sizes); body.classList.add(sizes[fsIndex]);
+document.getElementById('fontBtn').onclick=()=>{fsIndex=(fsIndex+1)%3;body.classList.remove(...sizes);body.classList.add(sizes[fsIndex]);LS.set('lr-fs',sizes[fsIndex]);};
+
+const slidesBtn=document.getElementById('slidesBtn');
+function applySlides(on){body.classList.toggle('no-slides',!on);slidesBtn.textContent='Слайды: '+(on?'скрыть':'показывать');LS.set('lr-slides',on?'1':'0');}
+applySlides(LS.get('lr-slides')!=='0');
+slidesBtn.onclick=()=>applySlides(body.classList.contains('no-slides'));
+
+// чекбоксы заданий
+document.querySelectorAll('input[data-task]').forEach(cb=>{
+  const k='lr-task-'+cb.dataset.task; cb.checked=LS.get(k)==='1';
+  cb.addEventListener('change',()=>LS.set(k,cb.checked?'1':'0'));
+});
+
+// продолжение чтения
+const sections=[...document.querySelectorAll('.slide-sec')];
+const seen=new Set(JSON.parse(LS.get('lr-seen')||'[]'));
+sections.forEach(s=>{if(seen.has(s.id))s.classList.add('read')});
+let saveTimer=null;
+function savePos(){
+  const y=scrollY+innerHeight*0.35;
+  let cur=sections[0];
+  sections.forEach(s=>{if(s.offsetTop<=y)cur=s});
+  if(cur){LS.set('lr-last',cur.id);seen.add(cur.id);LS.set('lr-seen',JSON.stringify([...seen]));cur.classList.add('read');}
+  document.querySelectorAll('.toc-slide').forEach(a=>a.classList.toggle('read',seen.has(a.getAttribute('href').slice(1))));
+}
+addEventListener('scroll',()=>{clearTimeout(saveTimer);saveTimer=setTimeout(savePos,160)},{passive:true});
+const cont=document.getElementById('continue');
+const saved=LS.get('lr-last');
+if(saved){const el=document.getElementById(saved);if(el && scrollY<200){const t=el.querySelector('h2');cont.textContent='Продолжить: '+(t?t.textContent:el.id);cont.href='#'+saved;cont.classList.add('show');cont.onclick=()=>cont.classList.remove('show');}}
+
+// текущий раздел и правый слайд
+let current=null;
+if('IntersectionObserver' in window){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){
+      const id=e.target.id; current=id;
+      document.querySelectorAll('.toc-slide').forEach(a=>a.classList.toggle('current',a.getAttribute('href')==='#'+id));
+      const n=e.target.dataset.n; const img=document.querySelector('.rail img[data-rail="'+n+'"]');
+      if(img){document.querySelectorAll('.rail img').forEach(x=>x.classList.remove('active'));img.classList.add('active');}
+    }});
+  },{rootMargin:'-20% 0px -55% 0px',threshold:0});
+  sections.forEach(s=>obs.observe(s));
+}
+
+// поповер терминов
+const pop=document.getElementById('termPop');
+document.addEventListener('click',e=>{
+  const t=e.target.closest('.term');
+  if(t){const r=t.getBoundingClientRect();pop.textContent=t.dataset.def;pop.classList.add('open');
+    const top=Math.min(innerHeight-100,r.bottom+8); pop.style.top=top+'px'; pop.style.left=Math.max(10,Math.min(innerWidth-290,r.left))+'px'; e.stopPropagation(); return;}
+  if(!e.target.closest('.term-pop')) pop.classList.remove('open');
+});
+addEventListener('keydown',e=>{if(e.key==='Escape'){pop.classList.remove('open');closeModal();return;}if(modal.classList.contains('open')){if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1);}});
+
+// копирование промптов
+document.querySelectorAll('.copy').forEach(btn=>{
+  btn.onclick=()=>{const el=document.getElementById(btn.dataset.copy); if(!el)return; const text=el.textContent;
+    const done=()=>{btn.textContent='Скопировано';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Копировать';btn.classList.remove('copied')},1800)};
+    if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(done); else done();
+  };
+});
+
+// полноэкранный просмотр
+const modal=document.getElementById('modal'), mimg=document.getElementById('modalImg'), mcount=document.getElementById('modalCount');
+let mn=1, scale=1;
+function openModal(n){mn=n;scale=1;mimg.style.transform='scale(1)';mimg.src='images/slides/income/'+String(n).padStart(2,'0')+'.webp';mimg.alt='Слайд '+n;mcount.textContent='Слайд '+n+' из 20';document.getElementById('openDeck').href='redev-income.html#slide-'+n;modal.classList.add('open');body.style.overflow='hidden';mimg.style.touchAction='none';}
+function closeModal(){modal.classList.remove('open');body.style.overflow='';}
+document.getElementById('modalX').onclick=closeModal;
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+function step(d){mn=Math.min(20,Math.max(1,mn+d));openModal(mn);}
+document.getElementById('modalPrev').onclick=()=>step(-1);
+document.getElementById('modalNext').onclick=()=>step(1);
+document.getElementById('zoomIn').onclick=()=>{scale=Math.min(3,scale+0.25);mimg.style.transform='scale('+scale+')'};
+document.getElementById('zoomOut').onclick=()=>{scale=Math.max(1,scale-0.25);mimg.style.transform='scale('+scale+')'};
+document.getElementById('zoomReset').onclick=()=>{scale=1;mimg.style.transform='scale(1)'};
+document.querySelectorAll('.slide-inline img,.rail img').forEach(img=>{
+  img.addEventListener('click',()=>{const n=img.closest('[data-n]')?.dataset.n || img.dataset.rail; if(n)openModal(+n)});
+});
+let touchX=null, touchY=null, pinch=null, baseScale=1;
+modal.addEventListener('touchstart',e=>{if(e.touches.length===1){touchX=e.touches[0].clientX;touchY=e.touches[0].clientY;}if(e.touches.length===2){pinch=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);baseScale=scale;}},{passive:true});
+modal.addEventListener('touchmove',e=>{if(e.touches.length===2&&pinch){e.preventDefault();const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);scale=Math.max(1,Math.min(3,baseScale*d/pinch));mimg.style.transform='scale('+scale+')';}}, {passive:false});
+modal.addEventListener('touchend',e=>{if(touchX!==null && e.changedTouches.length){const dx=e.changedTouches[0].clientX-touchX, dy=e.changedTouches[0].clientY-touchY;if(Math.abs(dy)>70&&Math.abs(dy)>Math.abs(dx)&&scale===1)closeModal();else if(Math.abs(dx)>50&&scale===1)step(dx<0?1:-1);}touchX=null;touchY=null;if(!e.touches.length)pinch=null;},{passive:true});
+
+// закрыть меню по клику вне
+document.addEventListener('click',e=>{if(toc.classList.contains('open')&&!toc.contains(e.target)&&e.target.id!=='tocBtn')toc.classList.remove('open')});
+</script>
+</body>
+</html>
