@@ -424,15 +424,57 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 
 <section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Контекст</div><h2>Контекст: <em>CAPEX, OPEX и доходы</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>CAPEX — разовые вложения в реконструкцию;</li><li>OPEX — регулярные расходы на содержание;</li><li>доходы минус OPEX дают NOI; CAPEX учитывается отдельно;</li><li>расчёт окупаемости, NPV и IRR в этой теме не разбираем.</li></ul></div><div class="band" style="margin-top:10px"><b>Вывод:</b> В этой теме собирается структура, а не расчёт.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: вложения в стройку и ремонт.</span></span><span><b>OPEX</b> — операционные расходы: регулярные платежи за содержание объекта.<br><span style="color:var(--muted)">Проще: ежемесячные счета за эксплуатацию здания.</span></span><span><b>NOI</b> — чистый операционный доход: доход от аренды минус операционные расходы.<br><span style="color:var(--muted)">Проще: доход от аренды минус расходы.</span></span><span><b>NPV и IRR</b> — NPV — чистая приведённая стоимость; IRR — внутренняя норма доходности.<br><span style="color:var(--muted)">Проще: дисконтированные показатели проекта.</span></span></div></section>
 
-<section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Схема</div><h2>Скелет <em>финансовой модели</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>доходы → OPEX → NOI;</li><li>CAPEX — отдельно по фазам;</li><li>скелет задаёт статьи, а не суммы.</li></ul></div><div class="scheme"><div class="scheme-label">Схема</div><svg viewBox="0 0 1100 150" role="img" aria-label="Скелет модели: доходы, OPEX, NOI; CAPEX отдельно по фазам">
-<rect x="10" y="18" width="200" height="58" rx="9" fill="#EAF1FF" stroke="#BFD3FF" stroke-width="1.5"/><text x="110" y="52" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#2A2F3E">Доходы</text>
-<path d="M218 47 H258" stroke="#1A6BFF" stroke-width="2"/><path d="M251 43 L258 47 L251 51" stroke="#1A6BFF" stroke-width="2" fill="none"/>
-<rect x="266" y="18" width="200" height="58" rx="9" fill="#fff" stroke="#BFD3FF" stroke-width="1.5"/><text x="366" y="52" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#2A2F3E">OPEX</text>
-<path d="M474 47 H514" stroke="#1A6BFF" stroke-width="2"/><path d="M507 43 L514 47 L507 51" stroke="#1A6BFF" stroke-width="2" fill="none"/>
-<rect x="522" y="18" width="200" height="58" rx="9" fill="#1A6BFF" stroke="#1A6BFF" stroke-width="1.5"/><text x="622" y="52" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#fff">NOI</text>
-<rect x="10" y="96" width="712" height="42" rx="8" fill="#fff7ef" stroke="#F1D2BE" stroke-width="1.5"/><text x="366" y="123" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="700" fill="#8A4B12">CAPEX — отдельно по фазам; в NOI не входит</text>
-<text x="750" y="65" font-family="Manrope, sans-serif" font-size="13" fill="#5B6475">Скелет задаёт статьи,</text><text x="750" y="85" font-family="Manrope, sans-serif" font-size="13" fill="#5B6475">а не суммы.</text>
-</svg></div><div class="band" style="margin-top:10px"><b>Вывод:</b> Скелет разделяет доходы, OPEX и CAPEX по фазам.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: вложения в стройку и ремонт.</span></span><span><b>OPEX</b> — операционные расходы: регулярные платежи за содержание объекта.<br><span style="color:var(--muted)">Проще: ежемесячные счета за эксплуатацию здания.</span></span><span><b>NOI</b> — чистый операционный доход: доход от аренды минус операционные расходы.<br><span style="color:var(--muted)">Проще: доход от аренды минус расходы.</span></span></div></section>
+<section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Схема</div><h2>Скелет <em>финансовой модели</em></h2><div class="body"><div class="scheme" style="margin-top:0;padding:2px 4px 0"><div class="scheme-label">Схема</div><svg viewBox="0 0 1100 290" style="width:100%;height:auto;max-height:290px" role="img" aria-label="Скелет финансовой модели: операционная часть в год — доходы минус OPEX равно NOI; отдельно CAPEX по шести фазам реконструкции, в NOI не входит">
+  <text x="24" y="18" font-family="Manrope, sans-serif" font-size="13" font-weight="800" fill="#1A6BFF">Операционная часть · в год</text>
+  <text x="578" y="18" font-family="Manrope, sans-serif" font-size="13" font-weight="800" fill="#8A4B12">CAPEX · разово, по фазам</text>
+
+  <rect x="24" y="38" width="420" height="58" rx="9" fill="#EAF1FF" stroke="#BFD3FF" stroke-width="1.5"/>
+  <text x="42" y="62" font-family="Manrope, sans-serif" font-size="16" font-weight="800" fill="#0A0F1A">Доходы</text>
+  <text x="42" y="82" font-family="Manrope, sans-serif" font-size="12" fill="#5B6475">аренда · мероприятия · сервисы</text>
+
+  <text x="234" y="116" text-anchor="middle" font-family="Manrope, sans-serif" font-size="24" font-weight="800" fill="#1A6BFF">−</text>
+
+  <rect x="24" y="124" width="420" height="58" rx="9" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/>
+  <text x="42" y="148" font-family="Manrope, sans-serif" font-size="16" font-weight="800" fill="#0A0F1A">OPEX</text>
+  <text x="42" y="168" font-family="Manrope, sans-serif" font-size="12" fill="#5B6475">коммунальные · эксплуатация · налоги · управление</text>
+
+  <text x="234" y="203" text-anchor="middle" font-family="Manrope, sans-serif" font-size="24" font-weight="800" fill="#1A6BFF">=</text>
+
+  <rect x="24" y="211" width="420" height="58" rx="9" fill="#1A6BFF" stroke="#1A6BFF" stroke-width="1.5"/>
+  <text x="42" y="235" font-family="Manrope, sans-serif" font-size="16" font-weight="800" fill="#fff">NOI</text>
+  <text x="42" y="255" font-family="Manrope, sans-serif" font-size="12" fill="#EAF1FF">доходы − OPEX</text>
+
+  <path d="M500 34 V276" stroke="#9AA4B8" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <text x="488" y="155" text-anchor="middle" transform="rotate(-90 488 155)" font-family="Manrope, sans-serif" font-size="10" fill="#9AA4B8">в NOI не входит</text>
+
+  <path d="M548 42 V268" stroke="#C46A16" stroke-width="1.5"/>
+  <path d="M543 262 L548 270 L553 262" stroke="#C46A16" stroke-width="1.5" fill="none"/>
+  <text x="536" y="160" text-anchor="middle" transform="rotate(-90 536 160)" font-family="Manrope, sans-serif" font-size="10" fill="#C46A16">порядок работ</text>
+
+  <rect x="578" y="32" width="492" height="32" rx="6" fill="#fff7ef" stroke="#F1D2BE" stroke-width="1.2"/>
+  <circle cx="596" cy="48" r="9" fill="#F1D2BE"/><text x="596" y="52" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11" font-weight="800" fill="#8A4B12">1</text>
+  <text x="614" y="52" font-family="Manrope, sans-serif" font-size="13" font-weight="600" fill="#8A4B12">Обследование и проектирование</text>
+
+  <rect x="578" y="72" width="492" height="32" rx="6" fill="#fff7ef" stroke="#F1D2BE" stroke-width="1.2"/>
+  <circle cx="596" cy="88" r="9" fill="#F1D2BE"/><text x="596" y="92" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11" font-weight="800" fill="#8A4B12">2</text>
+  <text x="614" y="92" font-family="Manrope, sans-serif" font-size="13" font-weight="600" fill="#8A4B12">Конструктив</text>
+
+  <rect x="578" y="112" width="492" height="32" rx="6" fill="#fff7ef" stroke="#F1D2BE" stroke-width="1.2"/>
+  <circle cx="596" cy="128" r="9" fill="#F1D2BE"/><text x="596" y="132" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11" font-weight="800" fill="#8A4B12">3</text>
+  <text x="614" y="132" font-family="Manrope, sans-serif" font-size="13" font-weight="600" fill="#8A4B12">Инженерия</text>
+
+  <rect x="578" y="152" width="492" height="32" rx="6" fill="#fff7ef" stroke="#F1D2BE" stroke-width="1.2"/>
+  <circle cx="596" cy="168" r="9" fill="#F1D2BE"/><text x="596" y="172" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11" font-weight="800" fill="#8A4B12">4</text>
+  <text x="614" y="172" font-family="Manrope, sans-serif" font-size="13" font-weight="600" fill="#8A4B12">Отделка</text>
+
+  <rect x="578" y="192" width="492" height="32" rx="6" fill="#fff7ef" stroke="#F1D2BE" stroke-width="1.2"/>
+  <circle cx="596" cy="208" r="9" fill="#F1D2BE"/><text x="596" y="212" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11" font-weight="800" fill="#8A4B12">5</text>
+  <text x="614" y="212" font-family="Manrope, sans-serif" font-size="13" font-weight="600" fill="#8A4B12">Благоустройство</text>
+
+  <rect x="578" y="232" width="492" height="32" rx="6" fill="#fff7ef" stroke="#F1D2BE" stroke-width="1.2"/>
+  <circle cx="596" cy="248" r="9" fill="#F1D2BE"/><text x="596" y="252" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11" font-weight="800" fill="#8A4B12">6</text>
+  <text x="614" y="252" font-family="Manrope, sans-serif" font-size="13" font-weight="600" fill="#8A4B12">Согласования</text>
+</svg></div><p class="note" style="font-size:13px;margin-top:6px">В клетках — статьи, а не суммы.</p><div class="band" style="margin-top:10px"><b>Вывод:</b> Скелет разделяет доходы, OPEX и CAPEX по фазам до появления цифр.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: вложения в стройку и ремонт.</span></span><span><b>OPEX</b> — операционные расходы: регулярные платежи за содержание объекта.<br><span style="color:var(--muted)">Проще: ежемесячные счета за эксплуатацию здания.</span></span><span><b>NOI</b> — чистый операционный доход: доход от аренды минус операционные расходы.<br><span style="color:var(--muted)">Проще: доход от аренды минус расходы.</span></span></div></section>
 
 <section class="slide has-terms tight" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">C52</div><h2>C52: <em>что известно для модели</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>площадь 1 959,2 м², КН 61:44:0040713:43, нежилое, «склад» — по ЕГРН;</li><li>текущее использование — креативный бизнес, образование, гастро-концепции, события;</li><li>ставки — три случайных объявления ЦИАН: 650, ≈723, ≈911 ₽/м² в месяц, не выборка;</li><li>ТП и мощность — нет данных: нужны технические условия; дефицит мощности — лекция 0.1.</li></ul></div><div class="scheme compact"><div class="scheme-label">Схема</div><svg viewBox="0 0 1100 180" role="img" aria-label="C52: что есть и чего нет для модели">
 <rect x="410" y="8" width="280" height="48" rx="9" fill="#EAF1FF" stroke="#BFD3FF" stroke-width="1.5"/><text x="550" y="39" text-anchor="middle" font-family="Manrope, sans-serif" font-size="16" font-weight="800" fill="#2A2F3E">C52</text>
