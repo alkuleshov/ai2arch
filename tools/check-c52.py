@@ -42,6 +42,10 @@ for path in sorted(glob.glob(os.path.join(ROOT, 'redev-*.html'))):
         if abs(val - CANON_AREA) > 0.001:
             problems.append(f'{name}: площадь {m.group(1)} вместо 1 959,2')
 
+    for m in re.finditer(r'(?i)(упёрл|уперл|тупик)', text):
+        line = text[:m.start()].count('\n') + 1
+        problems.append(f'{name}:{line}: запрещённая формулировка «{m.group(0)}»')
+
     for m in re.finditer(r'(?<![\d\s])(\d{3,4})\s*₽/м²', text):
         val = int(m.group(1))
         if val in ALLOWED_RATES:
@@ -51,6 +55,14 @@ for path in sorted(glob.glob(os.path.join(ROOT, 'redev-*.html'))):
         if val in TEXTBOOK_RATES and 'учебный пример' in ctx:
             continue
         problems.append(f'{name}: ставка {val} ₽/м² не из проверенных данных C52')
+
+for path in sorted(glob.glob(os.path.join(ROOT, 'docs', 'conspekty', '*.md'))):
+    name = os.path.relpath(path, ROOT)
+    text = open(path, encoding='utf-8').read()
+    checked += 1
+    for m in re.finditer(r'(?i)(упёрл|уперл|тупик)', text):
+        line = text[:m.start()].count('\n') + 1
+        problems.append(f'{name}:{line}: запрещённая формулировка «{m.group(0)}»')
 
 if problems:
     print('Расхождения с docs/c52-facts.md:')
