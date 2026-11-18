@@ -105,9 +105,9 @@
   h3 { font-size:18px; line-height:1.25; font-weight:800; letter-spacing:-.01em; margin-bottom:8px; }
 
   /* ── листалка ── */
-  #read { padding-top:56px; padding-bottom:64px; }
+  #read { padding-top:56px; padding-bottom:64px; overflow:visible; overflow:clip; }
   .viewer { position:relative; --panel-h:76px; }
-  .stage { position:relative; width:min(100%, calc((100svh - var(--nav-h) - 120px) * .7071)); min-width:min(100%, 300px); aspect-ratio:1200 / 1696; margin:0 auto; background:#000C1F; border-radius:8px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08); touch-action:pan-y; user-select:none; -webkit-user-select:none; }
+  .stage { position:relative; width:min(100%, 880px); min-width:min(100%, 300px); aspect-ratio:1200 / 1696; margin:0 auto; background:#000C1F; border-radius:8px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08); touch-action:pan-y; user-select:none; -webkit-user-select:none; }
   .stage img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; transform-origin:center center; will-change:transform; -webkit-user-drag:none; }
   .viewer.is-zoomed .stage { cursor:grab; touch-action:none; }
   .viewer.is-zoomed .stage:active { cursor:grabbing; }
@@ -116,8 +116,8 @@
   .zone.prev { left:0; cursor:w-resize; }
   .zone.next { right:0; cursor:e-resize; }
   .zone:focus-visible { outline:2px solid var(--azure); outline-offset:-4px; }
-  .panel { transition:opacity .25s ease, transform .25s ease; }
-  .bar { display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap; margin:18px auto 0; max-width:1180px; }
+  .panel { position:sticky; bottom:0; z-index:10; margin-top:14px; padding:12px 0 calc(12px + env(safe-area-inset-bottom)); background:linear-gradient(to top, rgba(10,15,26,.97) 70%, rgba(10,15,26,0)); transition:opacity .25s ease, transform .25s ease; }
+  .bar { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin:0 auto; max-width:1180px; }
   .bar > * { flex:0 0 auto; }
   .ctrl { display:inline-flex; align-items:center; justify-content:center; gap:6px; min-width:42px; height:40px; padding:0 12px; border-radius:10px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); color:#fff; font-family:var(--sans); font-size:14px; font-weight:700; cursor:pointer; }
   .ctrl:hover { background:rgba(255,255,255,.14); }
@@ -128,7 +128,7 @@
   .count b { color:#fff; }
   .jump { width:240px; max-width:100%; height:40px; border-radius:10px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); color:#fff; font-family:var(--sans); font-size:13.5px; font-weight:600; padding:0 40px 0 14px; cursor:pointer; -webkit-appearance:none; -moz-appearance:none; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 5.5l4 4 4-4'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; background-size:14px 14px; text-overflow:ellipsis; }
   .jump option { color:#0A0F1A; }
-  .progress { height:3px; background:rgba(255,255,255,.1); border-radius:3px; margin:14px auto 0; max-width:760px; overflow:hidden; }
+  .progress { height:3px; background:rgba(255,255,255,.1); border-radius:3px; margin:10px auto 0; max-width:760px; overflow:hidden; }
   .progress i { display:block; height:100%; width:0; background:var(--azure); transition:width .2s; }
   .hint { text-align:center; font-size:12.5px; color:rgba(255,255,255,.45); margin-top:12px; }
   .tap-hint { position:absolute; left:50%; bottom:16px; transform:translateX(-50%); z-index:6; max-width:calc(100% - 24px); padding:9px 15px; border-radius:999px; background:rgba(10,15,26,.9); border:1px solid rgba(255,255,255,.2); color:#fff; font-size:13px; font-weight:700; text-align:center; display:none; box-shadow:0 8px 24px rgba(0,0,0,.35); }
@@ -242,7 +242,7 @@
       <div class="fact"><b>53</b><span>способа с готовыми промптами</span></div>
       <div class="fact"><b>8</b><span>разделов: от концепции до бизнеса</span></div>
       <div class="fact"><b>25</b><span>способов разбираем на курсах AI2ARCH</span></div>
-      <div class="fact"><b>32</b><span>страницы, PDF 1,2 МБ, A4 для печати</span></div>
+      <div class="fact"><b>39</b><span>страниц, PDF 1,2 МБ, A4 для печати</span></div>
     </div>
   </div>
 </div>
@@ -252,7 +252,7 @@
   <div class="wrap">
     <div class="viewer" id="viewer">
       <div class="stage" id="stage" aria-roledescription="листалка" aria-label="Страницы гайда">
-        <img id="pg" src="guide/53/p01.webp" width="1200" height="1696" alt="Страница 1 из 32">
+        <img id="pg" src="guide/53/p01.webp" width="1200" height="1696" alt="Страница 1 из 39">
         <button class="zone prev" id="zPrev" aria-label="Предыдущая страница"></button>
         <button class="zone next" id="zNext" aria-label="Следующая страница"></button>
         <div class="tap-hint" id="tapHint" role="status">Двойной тап — увеличить</div>
@@ -260,32 +260,27 @@
       <div class="panel" id="panel">
         <div class="bar">
           <button class="ctrl" id="bPrev" aria-label="Предыдущая страница">←</button>
-          <span class="count" aria-live="polite"><b id="cur">1</b> / <span id="total">32</span></span>
+          <span class="count" aria-live="polite"><b id="cur">1</b> / <span id="total">39</span></span>
           <button class="ctrl" id="bNext" aria-label="Следующая страница">→</button>
-          <button class="ctrl" id="bZoomOut" aria-label="Уменьшить масштаб">−</button>
-          <span class="zoom-val" id="zoomVal" aria-live="polite">100%</span>
-          <button class="ctrl" id="bZoomIn" aria-label="Увеличить масштаб">+</button>
-          <button class="ctrl wide" id="bFit" aria-label="По размеру страницы">По размеру</button>
           <select class="jump" id="jump" aria-label="Перейти к разделу">
             <option value="">Перейти к разделу…</option>
             <option value="2">Содержание</option>
             <option value="3">Как читать гайд</option>
             <option value="4">01 · Концепция и генерация идей</option>
-            <option value="7">02 · Визуализация и графика</option>
-            <option value="11">03 · Анализ территории и контекста</option>
-            <option value="15">04 · Документация и тексты</option>
-            <option value="18">05 · BIM, ГИС и автоматизация</option>
-            <option value="22">06 · Работа с клиентом</option>
-            <option value="25">07 · Обучение и исследования</option>
-            <option value="28">08 · Бизнес и маркетинг</option>
-            <option value="32">Курсы AI2ARCH</option>
+            <option value="8">02 · Визуализация и графика</option>
+            <option value="13">03 · Анализ территории и контекста</option>
+            <option value="18">04 · Документация и тексты</option>
+            <option value="22">05 · BIM, ГИС и автоматизация</option>
+            <option value="26">06 · Работа с клиентом</option>
+            <option value="29">07 · Обучение и исследования</option>
+            <option value="33">08 · Бизнес и маркетинг</option>
+            <option value="39">Курсы AI2ARCH</option>
           </select>
-          <button class="ctrl fs-txt" id="bFull" aria-label="На весь экран">⤢ <span>На весь экран</span></button>
           <a class="btn btn-primary btn-sm" href="guide/ai2arch-53-sposoba.pdf" download="AI2ARCH-53-sposoba-II-dlya-arhitektora.pdf" data-dl="viewer">Скачать PDF</a>
         </div>
         <div class="progress" aria-hidden="true"><i id="prog"></i></div>
       </div>
-      <p class="hint">Стрелки, + и −, двойной клик или свайп на телефоне. Ссылки на курсы работают в скачанном PDF.</p>
+      <p class="hint">Листайте стрелками, кликом по краю страницы или свайпом. Двойной клик — увеличить. Ссылки на курсы работают в скачанном PDF.</p>
     </div>
   </div>
 </section>
@@ -298,13 +293,13 @@
     <p class="lead">Нажмите на раздел — гайд откроется на нужной странице. Синим отмечено, сколько способов раздела мы разбираем на курсах AI2ARCH.</p>
     <div class="secs">
       <button class="sec-card" data-page="4"><span class="no">01 · стр. 4</span><h3>Концепция и генерация идей</h3><p>Направления, нарратив, прецеденты, функциональная программа, зонирование.</p><span class="meta"><span class="pill">6 способов</span><span class="pill on">5 в курсах</span></span></button>
-      <button class="sec-card" data-page="7"><span class="no">02 · стр. 7</span><h3>Визуализация и графика</h3><p>Промпты для визуализаций, фасады, мудборды, постобработка, анализ эскиза.</p><span class="meta"><span class="pill">7 способов</span><span class="pill on">5 в курсах</span></span></button>
-      <button class="sec-card" data-page="11"><span class="no">03 · стр. 11</span><h3>Анализ территории и контекста</h3><p>Контекст, потоки, история места, инсоляция, SWOT, нормативы, типология.</p><span class="meta"><span class="pill">7 способов</span><span class="pill on">5 в курсах</span></span></button>
-      <button class="sec-card" data-page="15"><span class="no">04 · стр. 15</span><h3>Документация и тексты</h3><p>Пояснительная записка, ТЗ, конкурсная заявка, редактура, перевод, экспертиза.</p><span class="meta"><span class="pill">6 способов</span><span class="pill on">2 в курсах</span></span></button>
-      <button class="sec-card" data-page="18"><span class="no">05 · стр. 18</span><h3>BIM, ГИС и автоматизация</h3><p>Dynamo и Revit, QGIS + QuickOSM, Grasshopper, агенты, подготовка геоданных.</p><span class="meta"><span class="pill">7 способов</span><span class="pill on">2 в курсах</span><span class="pill off">вне программы</span></span></button>
-      <button class="sec-card" data-page="22"><span class="no">06 · стр. 22</span><h3>Работа с клиентом</h3><p>Сценарий презентации, КП, ответы на возражения, переписка, бриф.</p><span class="meta"><span class="pill">5 способов</span><span class="pill on">1 в курсах</span></span></button>
-      <button class="sec-card" data-page="25"><span class="no">07 · стр. 25</span><h3>Обучение и исследования</h3><p>Теория, ВКР, подготовка к защите, учебные материалы, критика проекта, 3D.</p><span class="meta"><span class="pill">6 способов</span><span class="pill on">3 в курсах</span></span></button>
-      <button class="sec-card" data-page="28"><span class="no">08 · стр. 28</span><h3>Бизнес и маркетинг</h3><p>Контент, сайт, рынок, продвижение, Telegram-канал, договоры, смета, питч-дек.</p><span class="meta"><span class="pill">9 способов</span><span class="pill on">2 в курсах</span><span class="pill off">вне программы</span></span></button>
+      <button class="sec-card" data-page="8"><span class="no">02 · стр. 8</span><h3>Визуализация и графика</h3><p>Промпты для визуализаций, фасады, мудборды, постобработка, анализ эскиза.</p><span class="meta"><span class="pill">7 способов</span><span class="pill on">5 в курсах</span></span></button>
+      <button class="sec-card" data-page="13"><span class="no">03 · стр. 13</span><h3>Анализ территории и контекста</h3><p>Контекст, потоки, история места, инсоляция, SWOT, нормативы, типология.</p><span class="meta"><span class="pill">7 способов</span><span class="pill on">5 в курсах</span></span></button>
+      <button class="sec-card" data-page="18"><span class="no">04 · стр. 18</span><h3>Документация и тексты</h3><p>Пояснительная записка, ТЗ, конкурсная заявка, редактура, перевод, экспертиза.</p><span class="meta"><span class="pill">6 способов</span><span class="pill on">2 в курсах</span></span></button>
+      <button class="sec-card" data-page="22"><span class="no">05 · стр. 22</span><h3>BIM, ГИС и автоматизация</h3><p>Dynamo и Revit, QGIS + QuickOSM, Grasshopper, агенты, подготовка геоданных.</p><span class="meta"><span class="pill">7 способов</span><span class="pill on">2 в курсах</span><span class="pill off">вне программы</span></span></button>
+      <button class="sec-card" data-page="26"><span class="no">06 · стр. 26</span><h3>Работа с клиентом</h3><p>Сценарий презентации, КП, ответы на возражения, переписка, бриф.</p><span class="meta"><span class="pill">5 способов</span><span class="pill on">1 в курсах</span></span></button>
+      <button class="sec-card" data-page="29"><span class="no">07 · стр. 29</span><h3>Обучение и исследования</h3><p>Теория, ВКР, подготовка к защите, учебные материалы, критика проекта, 3D.</p><span class="meta"><span class="pill">6 способов</span><span class="pill on">3 в курсах</span></span></button>
+      <button class="sec-card" data-page="33"><span class="no">08 · стр. 33</span><h3>Бизнес и маркетинг</h3><p>Контент, сайт, рынок, продвижение, Telegram-канал, договоры, смета, питч-дек.</p><span class="meta"><span class="pill">9 способов</span><span class="pill on">2 в курсах</span><span class="pill off">вне программы</span></span></button>
     </div>
     <div class="howto">
       <div class="how"><b><span class="dot" style="background:#1A9E6E"></span>Основной контур</b>Работает из России напрямую, оплата из РФ: Алиса AI, GigaChat, Шедеврум, DeepSeek, QGIS, Яндекс Геоаналитика, Gamma и другие.</div>
@@ -360,7 +355,7 @@
 
 <script>
 (function () {
-  var TOTAL = 32;
+  var TOTAL = 39;
   var SRC = function (n) { return 'guide/53/p' + (n < 10 ? '0' + n : n) + '.webp'; };
   var SRC2 = function (n) { return 'guide/53/p' + (n < 10 ? '0' + n : n) + '@2x.webp'; };
   var cur = 1, readSent = false;
@@ -372,9 +367,8 @@
   var viewer = document.getElementById('viewer');
   var stage = document.getElementById('stage');
   var panel = document.getElementById('panel');
-  var bZoomIn = document.getElementById('bZoomIn'), bZoomOut = document.getElementById('bZoomOut');
-  var bFit = document.getElementById('bFit'), zoomVal = document.getElementById('zoomVal');
-  var bFull = document.getElementById('bFull');
+  var stub = function (t) { var b = document.createElement('button'); b.appendChild(document.createTextNode(t || '')); return b; };
+  var bZoomIn = stub(), bZoomOut = stub(), bFit = stub(), zoomVal = stub(), bFull = stub('⤢ ');
   var cache = {}, cache2 = {};
 
   var ZOOMS = [1, 1.5, 2, 3];
@@ -383,7 +377,7 @@
   function goal(name, params) { if (typeof ym === 'function') ym(113526373, 'reachGoal', name, params || {}); }
   function preload(n) { if (n < 1 || n > TOTAL || cache[n]) return; var i = new Image(); i.src = SRC(n); cache[n] = i; }
   function preloadHi(n) { if (n < 1 || n > TOTAL || cache2[n]) return; var i = new Image(); i.src = SRC2(n); cache2[n] = i; }
-  function highActive() { return viewer.classList.contains('is-full') || zoom > 1.001; }
+  function highActive() { return true; }
 
   function maxX() { return stage.clientWidth * (zoom - 1) / 2; }
   function maxY() { return stage.clientHeight * (zoom - 1) / 2; }
@@ -468,7 +462,12 @@
     applySource();
     resetPanForPage();
     preload(n + 1); preload(n + 2); preload(n - 1);
-    if (push !== false) { try { history.replaceState(null, '', '#p' + n); } catch (e) {} }
+    if (push !== false) {
+      try { history.replaceState(null, '', '#p' + n); } catch (e) {}
+      var r = stage.getBoundingClientRect();
+      var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 64;
+      if (r.top < navH || r.top > window.innerHeight * 0.5) window.scrollTo(0, window.pageYOffset + r.top - navH - 8);
+    }
     if (!readSent && n >= 10) { readSent = true; goal('guide_read'); }
   }
   function next() { if (cur < TOTAL) show(cur + 1); }
