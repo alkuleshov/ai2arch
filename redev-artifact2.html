@@ -725,7 +725,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
   buildToc();
   var initialPrompts=location.hash==='#prompts';
   go(parseHash(),!initialPrompts);
-  if(initialPrompts){setTimeout(function(){var p=document.getElementById('prompts');if(p)p.scrollIntoView();},0);}
+  if(initialPrompts){setTimeout(function(){var p=document.getElementById('prompts');if(p)p.scrollIntoView();},200);}
   fit();
 })();
 </script>
@@ -759,6 +759,15 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
       }else{fallback(text);done();}
     });
   });
+})();
+</script>
+<script>
+(function(){
+  function scrollPrompts(){
+    if(location.hash!=='#prompts') return;
+    var p=document.getElementById('prompts'); if(p) p.scrollIntoView();
+  }
+  window.addEventListener('load',function(){scrollPrompts();setTimeout(scrollPrompts,250);setTimeout(scrollPrompts,800);});
 })();
 </script>
 </body>
