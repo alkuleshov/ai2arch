@@ -11,9 +11,9 @@
   --azure2:#EAF1FF; --azure3:#BFD3FF; --soft:#F6F8FC; --line:#E1E5EE; --muted:#5B6475; --faint:#9AA4B8;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:#fff;color:var(--navy);font-family:Manrope,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+html,body{min-height:100%;background:#fff;color:var(--navy);font-family:Manrope,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;overflow-x:hidden;overflow-y:auto;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-.deck{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:8px 0 10px}
+.deck{position:relative;height:100vh;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:8px 0 10px;overflow:hidden}
 .viewport{position:relative;flex:1 1 auto;width:100%;display:flex;align-items:center;justify-content:center;min-height:0}
 .stage{width:1280px;height:720px;position:relative;flex:none;transform-origin:center center;background:#fff;overflow:hidden;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 30px rgba(10,15,26,.06)}
 .progress{position:absolute;left:0;top:0;height:5px;background:var(--azure);width:0;transition:width .35s ease;z-index:5}
@@ -338,6 +338,50 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
   .slide.tight .bx li{font-size:18px;line-height:1.32;margin-bottom:4px}
   .slide.tight .scheme.compact svg{height:74px}
   .scheme + .note{margin-top:4px}
+
+  .gap-table{font-size:14px}
+  .gap-table th{padding:6px 8px}
+  .gap-table td{padding:6px 8px;line-height:1.3}
+  .prompts-link{height:44px;display:inline-flex;align-items:center;justify-content:center;padding:0 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--navy);font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap}
+  .prompts-link:hover{border-color:var(--azure);color:var(--azure)}
+  .prompts-link:focus-visible{outline:2px solid var(--azure);outline-offset:3px}
+  .prompts-section{background:var(--soft);border-top:1px solid var(--line);padding:52px 24px 64px;color:var(--navy);scroll-margin-top:16px}
+  .prompts-inner{max-width:980px;margin:0 auto}
+  .prompts-section h2{font-size:34px;line-height:1.12;letter-spacing:-.015em}
+  .prompts-lead{font-size:15px;line-height:1.5;color:var(--muted);margin-top:10px;max-width:860px}
+  .prompts-grid{display:flex;flex-direction:column;gap:18px;margin-top:24px}
+  .prompt-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;min-width:0}
+  .prompt-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+  .prompt-part{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--azure);margin-bottom:3px}
+  .prompt-card h3{font-size:22px;line-height:1.2}
+  .prompt-flagship{font-size:12px;font-weight:700;color:var(--graphite);background:var(--azure2);border:1px solid var(--azure3);border-radius:7px;padding:5px 9px;white-space:nowrap}
+  .prompt-text{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:15px;line-height:1.5;color:var(--graphite);white-space:pre-wrap;overflow-wrap:anywhere}
+  .prompt-toolbar{display:flex;justify-content:flex-end;margin-bottom:8px}
+  .copy-btn{min-height:36px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--navy);font:700 12px var(--sans);padding:0 12px;cursor:pointer}
+  .copy-btn:hover{border-color:var(--azure);color:var(--azure)}
+  .copy-btn:focus-visible{outline:2px solid var(--azure);outline-offset:3px}
+  .copy-btn.copied{background:var(--azure);border-color:var(--azure);color:#fff}
+  .prompt-fill{font-size:13px;line-height:1.45;color:var(--muted);margin-top:10px}
+  .prompt-fill b{color:var(--navy)}
+  @media(max-width:640px){
+    .prompts-link{padding:0 9px;font-size:11px}
+    .prompts-section{padding:36px 16px 48px}
+    .prompts-section h2{font-size:27px}
+    .prompt-card{padding:16px}
+    .prompt-card h3{font-size:20px}
+    .prompt-text{font-size:14px;padding:12px}
+    .prompt-flagship{white-space:normal}
+  }
+  @media(prefers-color-scheme:dark){
+    .prompts-section{background:#101827;color:#F3F6FC;border-top-color:#2A3550}
+    .prompts-section h2,.prompt-fill b{color:#F3F6FC}
+    .prompts-lead,.prompt-fill{color:#B6C2D9}
+    .prompt-card{background:#162033;border-color:#2A3550}
+    .prompt-text{background:#0D1421;border-color:#2A3550;color:#E2E9F6}
+    .prompt-flagship{background:#1B2A45;border-color:#355078;color:#D9E5FA}
+    .copy-btn{background:#162033;border-color:#355078;color:#F3F6FC}
+    .prompt-card h3{color:#F3F6FC}
+  }
 </style>
 </head>
 <body>
@@ -374,11 +418,11 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
   <div class="stage" id="stage">
    <div class="progress" id="progress"></div>
 
-<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Задача</div><h2>Собрать скелет <em>финансовой модели</em></h2><div class="body"><div class="bx"><h4>Что делаем</h4><ul><li>формируем структуру доходов, CAPEX и OPEX;</li><li>не пропускаем статьи по фазам проекта;</li><li>считает таблица, модель помогает со структурой;</li><li>цены и суммы в модель не подставляем.</li></ul></div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; CAPEX и OPEX — нет данных: нужен [документ].</p><div class="band" style="margin-top:12px"><b>Вывод:</b> скелет модели фиксирует статьи до расчётов.</div></div></section>
+<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Задача</div><h2>Собрать скелет <em>финансовой модели</em></h2><div class="body"><div class="bx"><h4>Что делаем</h4><ul><li>формируем структуру доходов, CAPEX и OPEX;</li><li>не пропускаем статьи по фазам проекта;</li><li>считает таблица, модель помогает со структурой;</li><li>цены и суммы в модель не подставляем.</li></ul></div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; CAPEX и OPEX — нет данных: нужны сметы и обследование.</p><div class="band" style="margin-top:12px"><b>Вывод:</b> скелет модели фиксирует статьи до расчётов.</div></div></section>
 
-<section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Зачем</div><h2>Зачем скелет <em>модели</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>экономика: пропущенная статья искажает NOI и окупаемость;</li><li>риск скрытых затрат: они появляются позже и вне бюджета;</li><li>без скелета статьи теряются между фазами;</li><li>результат — структура статей до цифр.</li></ul></div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; CAPEX и OPEX — нет данных: нужен [документ].</p><div class="band" style="margin-top:10px"><b>Вывод:</b> Скелет фиксирует статьи до появления сумм.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: вложения в стройку и ремонт.</span></span><span><b>OPEX</b> — операционные расходы: регулярные платежи за содержание объекта.<br><span style="color:var(--muted)">Проще: регулярные счета за эксплуатацию.</span></span><span><b>WBS</b> — иерархический перечень работ или статей затрат.<br><span style="color:var(--muted)">Проще: структура статей затрат.</span></span></div></section>
+<section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Зачем</div><h2>Зачем скелет <em>модели</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>экономика: пропущенная статья искажает NOI и окупаемость;</li><li>риск скрытых затрат: они появляются позже и вне бюджета;</li><li>без скелета статьи теряются между фазами;</li><li>результат — структура статей до цифр.</li></ul></div><div class="band" style="margin-top:10px"><b>Вывод:</b> Скелет фиксирует статьи до появления сумм.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: вложения в стройку и ремонт.</span></span><span><b>OPEX</b> — операционные расходы: регулярные платежи за содержание объекта.<br><span style="color:var(--muted)">Проще: ежемесячные счета за эксплуатацию здания.</span></span></div></section>
 
-<section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Контекст</div><h2>Контекст: <em>CAPEX, OPEX и доходы</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>CAPEX — разовые вложения в реконструкцию;</li><li>OPEX — регулярные расходы на содержание;</li><li>доходы минус OPEX дают NOI; CAPEX учитывается отдельно;</li><li>окупаемость и NPV/IRR — следующая часть темы.</li></ul></div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; CAPEX и OPEX — нет данных: нужен [документ].</p><div class="band" style="margin-top:10px"><b>Вывод:</b> В этой теме собирается структура, а не расчёт.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: вложения в стройку и ремонт.</span></span><span><b>OPEX</b> — операционные расходы: регулярные платежи за содержание объекта.<br><span style="color:var(--muted)">Проще: регулярные счета за эксплуатацию.</span></span><span><b>NOI</b> — чистый операционный доход: доход от аренды минус операционные расходы.<br><span style="color:var(--muted)">Проще: доход от аренды минус расходы.</span></span><span><b>NPV и IRR</b> — NPV — чистая приведённая стоимость; IRR — внутренняя норма доходности.<br><span style="color:var(--muted)">Проще: дисконтированные показатели проекта.</span></span></div></section>
+<section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Контекст</div><h2>Контекст: <em>CAPEX, OPEX и доходы</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>CAPEX — разовые вложения в реконструкцию;</li><li>OPEX — регулярные расходы на содержание;</li><li>доходы минус OPEX дают NOI; CAPEX учитывается отдельно;</li><li>расчёт окупаемости, NPV и IRR в этой теме не разбираем.</li></ul></div><div class="band" style="margin-top:10px"><b>Вывод:</b> В этой теме собирается структура, а не расчёт.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: вложения в стройку и ремонт.</span></span><span><b>OPEX</b> — операционные расходы: регулярные платежи за содержание объекта.<br><span style="color:var(--muted)">Проще: ежемесячные счета за эксплуатацию здания.</span></span><span><b>NOI</b> — чистый операционный доход: доход от аренды минус операционные расходы.<br><span style="color:var(--muted)">Проще: доход от аренды минус расходы.</span></span><span><b>NPV и IRR</b> — NPV — чистая приведённая стоимость; IRR — внутренняя норма доходности.<br><span style="color:var(--muted)">Проще: дисконтированные показатели проекта.</span></span></div></section>
 
 <section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Схема</div><h2>Скелет <em>финансовой модели</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>доходы → OPEX → NOI;</li><li>CAPEX — отдельно по фазам;</li><li>скелет задаёт статьи, а не суммы.</li></ul></div><div class="scheme"><div class="scheme-label">Схема</div><svg viewBox="0 0 1100 150" role="img" aria-label="Скелет модели: доходы, OPEX, NOI; CAPEX отдельно по фазам">
 <rect x="10" y="18" width="200" height="58" rx="9" fill="#EAF1FF" stroke="#BFD3FF" stroke-width="1.5"/><text x="110" y="52" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#2A2F3E">Доходы</text>
@@ -388,7 +432,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <rect x="522" y="18" width="200" height="58" rx="9" fill="#1A6BFF" stroke="#1A6BFF" stroke-width="1.5"/><text x="622" y="52" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#fff">NOI</text>
 <rect x="10" y="96" width="712" height="42" rx="8" fill="#fff7ef" stroke="#F1D2BE" stroke-width="1.5"/><text x="366" y="123" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="700" fill="#8A4B12">CAPEX — отдельно по фазам; в NOI не входит</text>
 <text x="750" y="65" font-family="Manrope, sans-serif" font-size="13" fill="#5B6475">Скелет задаёт статьи,</text><text x="750" y="85" font-family="Manrope, sans-serif" font-size="13" fill="#5B6475">а не суммы.</text>
-</svg></div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; ставки — три объявления ЦИАН, не выборка; CAPEX и OPEX — нет данных: нужен [документ].</p><div class="band" style="margin-top:10px"><b>Вывод:</b> Скелет разделяет доходы, OPEX и CAPEX по фазам.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: вложения в стройку и ремонт.</span></span><span><b>OPEX</b> — операционные расходы: регулярные платежи за содержание объекта.<br><span style="color:var(--muted)">Проще: регулярные счета за эксплуатацию.</span></span><span><b>NOI</b> — чистый операционный доход: доход от аренды минус операционные расходы.<br><span style="color:var(--muted)">Проще: доход от аренды минус расходы.</span></span></div></section>
+</svg></div><div class="band" style="margin-top:10px"><b>Вывод:</b> Скелет разделяет доходы, OPEX и CAPEX по фазам.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: вложения в стройку и ремонт.</span></span><span><b>OPEX</b> — операционные расходы: регулярные платежи за содержание объекта.<br><span style="color:var(--muted)">Проще: ежемесячные счета за эксплуатацию здания.</span></span><span><b>NOI</b> — чистый операционный доход: доход от аренды минус операционные расходы.<br><span style="color:var(--muted)">Проще: доход от аренды минус расходы.</span></span></div></section>
 
 <section class="slide has-terms tight" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">C52</div><h2>C52: <em>что известно для модели</em></h2><div class="body"><div class="bx"><h4>Что важно</h4><ul><li>площадь 1 959,2 м², КН 61:44:0040713:43, нежилое, «склад» — по ЕГРН;</li><li>текущее использование — креативный бизнес, образование, гастро-концепции, события;</li><li>ставки — три случайных объявления ЦИАН: 650, ≈723, ≈911 ₽/м² в месяц, не выборка;</li><li>ТП и мощность — нет данных: нужны технические условия; дефицит мощности — лекция 0.1.</li></ul></div><div class="scheme compact"><div class="scheme-label">Схема</div><svg viewBox="0 0 1100 180" role="img" aria-label="C52: что есть и чего нет для модели">
 <rect x="410" y="8" width="280" height="48" rx="9" fill="#EAF1FF" stroke="#BFD3FF" stroke-width="1.5"/><text x="550" y="39" text-anchor="middle" font-family="Manrope, sans-serif" font-size="16" font-weight="800" fill="#2A2F3E">C52</text>
@@ -398,29 +442,35 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
 <rect x="630" y="90" width="440" height="76" rx="9" fill="#FFF4EC" stroke="#F1D2BE" stroke-width="1.5"/><text x="850" y="116" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#8A4B12">Нет данных</text><text x="850" y="137" text-anchor="middle" font-family="Manrope, sans-serif" font-size="12" fill="#5B6475">технические условия по ТП и мощности</text><text x="850" y="155" text-anchor="middle" font-family="Manrope, sans-serif" font-size="12" fill="#5B6475">CAPEX и OPEX</text>
 </svg></div><p class="note"><b>Пример:</b> C52: площадь и назначение — по ЕГРН; три объявления ЦИАН — не выборка; ТП и мощность — нет данных: нужны технические условия.</p><div class="band" style="margin-top:10px"><b>Вывод:</b> Для модели есть площадь и ориентиры; инженерия и расходы не подтверждены.</div></div><div class="terms"><span class="lab">Термины</span><span><b>ЕГРН</b> — Единый государственный реестр недвижимости.<br><span style="color:var(--muted)">Проще: реестр с данными об объекте.</span></span><span><b>ТП</b> — трансформаторная подстанция.<br><span style="color:var(--muted)">Проще: подстанция, дающая зданию электричество.</span></span></div></section>
 
-<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Входные данные</div><h2>Что нужно <em>на входе</em></h2><div class="body"><div class="bx"><h4>Документы</h4><ul><li>функция и сценарий использования;</li><li>документы объекта: площади, конструктив, инженерия, включая ТП;</li><li>ограничения и допущения по проекту;</li><li>перечень фаз реконструкции.</li></ul></div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; CAPEX и OPEX — нет данных: нужен [документ].</p><div class="band" style="margin-top:12px"><b>Вывод:</b> структура статей опирается на документы объекта и функцию.</div></div><div class="terms"><span class="lab">Термины</span><span><b>ТП</b> — трансформаторная подстанция.<br><span style="color:var(--muted)">Проще: подстанция, дающая зданию электричество.</span></span></div></section>
+<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Входные данные</div><h2>Что нужно <em>на входе</em></h2><div class="body"><div class="bx"><h4>Документы</h4><ul><li>функция и сценарий использования;</li><li>документы объекта: площади, конструктив, инженерия, включая ТП;</li><li>ограничения и допущения по проекту;</li><li>перечень фаз реконструкции.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> структура статей опирается на документы объекта и функцию.</div></div><div class="terms"><span class="lab">Термины</span><span><b>ТП</b> — трансформаторная подстанция.<br><span style="color:var(--muted)">Проще: подстанция, дающая зданию электричество.</span></span></div></section>
 
-<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Сервисы</div><h2>Сервисы: <em>сравнение</em></h2><div class="body"><table class="datatable" style="font-size:14px"><thead><tr><th>Сервис</th><th>Контур</th><th>Сильные стороны</th><th>Когда выбирать</th></tr></thead><tbody><tr><td>Алиса AI</td><td><span class="contour main">основной</span></td><td>структура и статьи по описанию</td><td>черновик структуры</td></tr><tr><td>DeepSeek</td><td><span class="contour main">основной</span></td><td>структура и статьи по описанию</td><td>черновик структуры</td></tr><tr><td>ChatGPT</td><td><span class="contour ext">расширенный</span></td><td>принимает загруженные файлы</td><td>по задаче</td></tr><tr><td>Claude</td><td><span class="contour ext">расширенный</span></td><td>принимает загруженные файлы</td><td>по задаче</td></tr><tr><td>Gemini</td><td><span class="contour ext">расширенный</span></td><td>при включённом поиске предлагает источники со ссылками</td><td>поиск статей и ориентиров</td></tr></tbody></table><div class="band" style="margin-top:8px"><b>Вывод:</b> сервис выбирается по критерию, а не по названию.</div></div></section>
+<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Сервисы</div><h2>Сервисы: <em>сравнение</em></h2><div class="body"><table class="datatable" style="font-size:14px"><thead><tr><th>Сервис</th><th>Контур</th><th>Когда выбирать</th></tr></thead><tbody><tr><td>Алиса AI</td><td><span class="contour main">основной</span></td><td>черновик структуры</td></tr><tr><td>DeepSeek</td><td><span class="contour main">основной</span></td><td>черновик структуры</td></tr><tr><td>ChatGPT</td><td><span class="contour ext">расширенный</span></td><td>по задаче</td></tr><tr><td>Claude</td><td><span class="contour ext">расширенный</span></td><td>по задаче</td></tr><tr><td>Gemini</td><td><span class="contour ext">расширенный</span></td><td>поиск статей и ориентиров</td></tr></tbody></table><div class="band" style="margin-top:8px"><b>Вывод:</b> сервис выбирается по критерию, а не по названию.</div></div></section>
 
-<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Флагман</div><h2>Флагман по критерию: <em>Gemini</em></h2><div class="body"><div class="bx"><h4>Почему Gemini</h4><ul><li>при включённом поиске предлагает источники со ссылками;</li><li>каждую ссылку проверяем вручную;</li><li>подходит для сбора статей и ориентиров;</li><li>цены и суммы в ответе не используем.</li></ul></div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; CAPEX и OPEX — нет данных: нужен [документ].</p><div class="band" style="margin-top:12px"><b>Вывод:</b> Gemini лучше подходит по критерию «источники со ссылками при поиске».</div></div></section>
+<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Флагман</div><h2>Флагман по критерию: <em>Gemini</em></h2><div class="body"><div class="bx"><h4>Почему Gemini</h4><ul><li>при включённом поиске предлагает источники со ссылками;</li><li>каждую ссылку проверяем вручную;</li><li>подходит для сбора статей и ориентиров;</li><li>цены и суммы в ответе не используем.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> Gemini лучше подходит по критерию «источники со ссылками при поиске».</div></div></section>
 
-<section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Промпт</div><h2>Промпт для структуры <em>CAPEX</em></h2><div class="body"><div class="prompt">Действуй как руководитель проектов в службе заказчика. Реконструкция [здание: тип] под [функция]. Составь структуру капитальных затрат (CAPEX) как перечень статей, сгруппированный по фазам (обследование и проектирование, конструктив, инженерия, отделка, благоустройство, согласования). Включи статьи, которые часто пропускают для этой функции. Для каждой статьи укажи единицу измерения, от чего зависит объём и какой документ нужен. Цен и сумм не указывай. Формат: таблица для переноса в Excel.</div><p class="note"><b>Структура запроса та же, группировка другая.</b> <b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; CAPEX и OPEX — нет данных: нужен [документ].</p><div class="band" style="margin-top:10px"><b>Вывод:</b> промпт даёт структуру статей без цен и сумм.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: инвестиции в стройку и ремонт.</span></span><span><b>OPEX</b> — операционные расходы: регулярные платежи за содержание объекта.<br><span style="color:var(--muted)">Проще: ежемесячные счета за эксплуатацию здания.</span></span><span><b>WBS</b> — иерархический перечень работ или статей затрат.<br><span style="color:var(--muted)">Проще: структура статей затрат.</span></span></div></section>
+<section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Промпт</div><h2>Промпт для структуры <em>CAPEX</em></h2><div class="body"><div class="prompt">Действуй как руководитель проектов в службе заказчика. Реконструкция [здание: тип] под [функция]. Составь структуру капитальных затрат (CAPEX) как перечень статей, сгруппированный по фазам (обследование и проектирование, конструктив, инженерия, отделка, благоустройство, согласования). Включи статьи, которые часто пропускают для этой функции. Для каждой статьи укажи единицу измерения, от чего зависит объём и какой документ нужен. Цен и сумм не указывай. Формат: таблица для переноса в Excel.</div><p class="note"><b>Структура запроса та же, группировка другая.</b></p><div class="band" style="margin-top:10px"><b>Вывод:</b> промпт даёт структуру статей без цен и сумм.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: инвестиции в стройку и ремонт.</span></span><span><b>OPEX</b> — операционные расходы: регулярные платежи за содержание объекта.<br><span style="color:var(--muted)">Проще: ежемесячные счета за эксплуатацию здания.</span></span></div></section>
 
-<section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Промпт</div><h2>Промпт для <em>OPEX</em></h2><div class="body"><div class="prompt">Действуй как руководитель проектов в службе заказчика. Здание [тип] после реконструкции под [функция]. Составь структуру операционных расходов (OPEX) как перечень статей, сгруппированный по группам эксплуатации (коммунальные услуги, обслуживание инженерных систем, уборка и охрана, управление и административные расходы, налоги и страхование, текущий ремонт). Включи статьи, которые часто пропускают для этой функции. Для каждой статьи укажи единицу измерения, от чего зависит объём и какой документ нужен. Цен и сумм не указывай. Формат: таблица для переноса в Excel.</div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; CAPEX и OPEX — нет данных: нужен [документ].</p><div class="band" style="margin-top:10px"><b>Вывод:</b> OPEX группируется по эксплуатации, доходы — по источникам; фазы реконструкции относятся к CAPEX.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Промпт</b> — текстовая инструкция модели.<br><span style="color:var(--muted)">Проще: запрос к нейросети.</span></span><span><b>OPEX</b> — операционные расходы: регулярные платежи за содержание объекта.<br><span style="color:var(--muted)">Проще: регулярные счета за эксплуатацию.</span></span><span><b>WBS</b> — иерархический перечень работ или статей затрат.<br><span style="color:var(--muted)">Проще: структура статей затрат.</span></span></div></section>
+<section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Промпт</div><h2>Промпт для <em>OPEX</em></h2><div class="body"><div class="prompt">Действуй как руководитель проектов в службе заказчика. Здание [тип] после реконструкции под [функция]. Составь структуру операционных расходов (OPEX) как перечень статей, сгруппированный по группам эксплуатации (коммунальные услуги, обслуживание инженерных систем, уборка и охрана, управление и административные расходы, налоги и страхование, текущий ремонт). Включи статьи, которые часто пропускают для этой функции. Для каждой статьи укажи единицу измерения, от чего зависит объём и какой документ нужен. Цен и сумм не указывай. Формат: таблица для переноса в Excel.</div><div class="band" style="margin-top:10px"><b>Вывод:</b> OPEX группируется по эксплуатации; фазы реконструкции относятся к CAPEX.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Промпт</b> — текстовая инструкция модели.<br><span style="color:var(--muted)">Проще: запрос к нейросети.</span></span><span><b>OPEX</b> — операционные расходы: регулярные платежи за содержание объекта.<br><span style="color:var(--muted)">Проще: ежемесячные счета за эксплуатацию здания.</span></span></div></section>
 
-<section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Промпт</div><h2>Промпт для <em>структуры доходов</em></h2><div class="body"><div class="prompt">Действуй как руководитель проектов в службе заказчика. Здание [тип] после реконструкции под [функция]. Составь структуру доходов как перечень статей, сгруппированный по источникам дохода (аренда по видам помещений, эксплуатационные и переменные платежи, парковка, мероприятия и аренда площадок, рекламные и прочие доходы). Включи статьи, которые часто пропускают для этой функции. Для каждой статьи укажи единицу измерения, от чего зависит объём и какой документ или источник нужен. Цен и сумм не указывай. Формат: таблица для переноса в Excel.</div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; CAPEX и OPEX — нет данных: нужен [документ].</p><div class="band" style="margin-top:10px"><b>Вывод:</b> OPEX группируется по эксплуатации, доходы — по источникам; фазы реконструкции относятся к CAPEX.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Промпт</b> — текстовая инструкция модели.<br><span style="color:var(--muted)">Проще: запрос к нейросети.</span></span><span><b>WBS</b> — иерархический перечень работ или статей затрат.<br><span style="color:var(--muted)">Проще: структура статей затрат.</span></span></div></section>
+<section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Промпт</div><h2>Промпт для <em>структуры доходов</em></h2><div class="body"><div class="prompt">Действуй как руководитель проектов в службе заказчика. Здание [тип] после реконструкции под [функция]. Составь структуру доходов как перечень статей, сгруппированный по источникам дохода (аренда по видам помещений, эксплуатационные и переменные платежи, парковка, мероприятия и аренда площадок, рекламные и прочие доходы). Включи статьи, которые часто пропускают для этой функции. Для каждой статьи укажи единицу измерения, от чего зависит объём и какой документ или источник нужен. Цен и сумм не указывай. Формат: таблица для переноса в Excel.</div><div class="band" style="margin-top:10px"><b>Вывод:</b> доходы группируются по источникам; фазы реконструкции к доходам не относятся.</div></div><div class="terms"><span class="lab">Термины</span><span><b>Промпт</b> — текстовая инструкция модели.<br><span style="color:var(--muted)">Проще: запрос к нейросети.</span></span></div></section>
 
-<section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Связка</div><h2>Как стыкуется <em>с таблицей NOI</em></h2><div class="body"><div class="plan"><div class="pl"><div class="n">1</div><h3>Скелет</h3><p>Статьи доходов, OPEX и CAPEX по фазам.</p></div><div class="pl"><div class="n">2</div><h3>Таблица</h3><p>Источники, допущения и формулы.</p></div><div class="pl"><div class="n">3</div><h3>NOI</h3><p>Доходы минус OPEX; CAPEX отдельно.</p></div></div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; CAPEX и OPEX — нет данных: нужен [документ].</p><div class="band" style="margin-top:10px"><b>Вывод:</b> Скелет переходит в таблицу, таблица считает NOI.</div></div><div class="terms"><span class="lab">Термины</span><span><b>NOI</b> — чистый операционный доход: доход от аренды минус операционные расходы.<br><span style="color:var(--muted)">Проще: доход от аренды минус расходы.</span></span><span><b>WBS</b> — иерархический перечень работ или статей затрат.<br><span style="color:var(--muted)">Проще: структура статей затрат.</span></span></div></section>
+<section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Связка</div><h2>Как стыкуется <em>с таблицей NOI</em></h2><div class="body"><div class="plan"><div class="pl"><div class="n">1</div><h3>Скелет</h3><p>Статьи доходов, OPEX и CAPEX по фазам.</p></div><div class="pl"><div class="n">2</div><h3>Таблица</h3><p>Источники, допущения и формулы.</p></div><div class="pl"><div class="n">3</div><h3>NOI</h3><p>Доходы минус OPEX; CAPEX отдельно.</p></div></div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; CAPEX и OPEX — нет данных: нужны сметы и обследование.</p><div class="band" style="margin-top:10px"><b>Вывод:</b> Скелет переходит в таблицу, таблица считает NOI.</div></div><div class="terms"><span class="lab">Термины</span><span><b>NOI</b> — чистый операционный доход: доход от аренды минус операционные расходы.<br><span style="color:var(--muted)">Проще: доход от аренды минус расходы.</span></span></div></section>
 
-<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Клики</div><h2>Клики: <em>по шагам</em></h2><div class="body"><div class="numlist"><div class="nl"><div class="n">1</div><p>Открыть Gemini и включить поиск, если он доступен.</p></div><div class="nl"><div class="n">2</div><p>Вставить промпт и указать тип здания и функцию.</p></div><div class="nl"><div class="n">3</div><p>Получить таблицу статей по фазам.</p></div><div class="nl"><div class="n">4</div><p>Проверить ссылки и перенести таблицу в Excel.</p></div></div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; CAPEX и OPEX — нет данных: нужен [документ].</p><div class="band" style="margin-top:12px"><b>Вывод:</b> поиск даёт источники, таблица фиксирует статьи.</div></div></section>
+<section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Пробелы</div><h2>Реестр пробелов: <em>документ → зависимость</em></h2><div class="body"><table class="datatable gap-table"><thead><tr><th>Документ</th><th>Кто выдаёт</th><th>Что в модели зависит</th></tr></thead><tbody><tr><td>Выписка ПЗЗ</td><td>орган местного самоуправления</td><td>допустимая функция и ограничения — доходы и CAPEX</td></tr><tr><td>Технический паспорт БТИ</td><td>БТИ</td><td>GBA, GLA, состав помещений — доходы и CAPEX</td></tr><tr><td>Технические условия по мощности</td><td>ресурсоснабжающая организация</td><td>инженерные статьи CAPEX и OPEX, доступная мощность</td></tr><tr><td>Обследование конструкций</td><td>проектная организация</td><td>несущая способность и усиление — CAPEX</td></tr></tbody></table><p class="note">C52: ПЗЗ, БТИ, технические условия и обследование — нет данных; запрашиваются у куратора-заказчика.</p><div class="band" style="margin-top:8px"><b>Вывод:</b> у каждого пробела есть владелец и статья модели.</div></div><div class="terms"><span class="lab">Термины</span><span><b>ПЗЗ</b> — правила землепользования и застройки города.</span><span><b>БТИ</b> — бюро технической инвентаризации: технический паспорт и поэтажные планы.<br><span style="color:var(--muted)">Проще: официальные технические чертежи здания.</span></span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: инвестиции в стройку и ремонт.</span></span></div></section>
 
-<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Проверка</div><h2>Как <em>проверить</em></h2><div class="body"><div class="bx"><h4>Чек-лист</h4><ul><li>каждую статью сопоставить с документами объекта;</li><li>проверить, что фазы не дублируются;</li><li>убрать цены и суммы из ответа модели;</li><li>суммы и доли потом считает таблица.</li></ul></div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; CAPEX и OPEX — нет данных: нужен [документ].</p><div class="band" style="margin-top:12px"><b>Вывод:</b> проверенная структура статей передаётся в таблицу.</div></div></section>
+<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Клики</div><h2>Клики: <em>по шагам</em></h2><div class="body"><div class="numlist"><div class="nl"><div class="n">1</div><p>Открыть Gemini и включить поиск, если он доступен.</p></div><div class="nl"><div class="n">2</div><p>Вставить промпт и указать тип здания и функцию.</p></div><div class="nl"><div class="n">3</div><p>Получить таблицу статей по фазам.</p></div><div class="nl"><div class="n">4</div><p>Проверить ссылки и перенести таблицу в Excel.</p></div></div><div class="band" style="margin-top:12px"><b>Вывод:</b> поиск даёт источники, таблица фиксирует статьи.</div></div></section>
 
-<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">В работу</div><h2>Как забрать <em>в работу</em></h2><div class="body"><div class="bx"><h4>Результат</h4><ul><li>перенести таблицу в Excel или Яндекс Таблицы;</li><li>добавить столбцы для источника и допущения;</li><li>проверить статьи по документу объекта;</li><li>суммы считать формулами.</li></ul></div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; CAPEX и OPEX — нет данных: нужен [документ].</p><div class="band" style="margin-top:12px"><b>Вывод:</b> структура становится рабочим каркасом финансовой модели.</div></div></section>
+<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Проверка</div><h2>Как <em>проверить</em></h2><div class="body"><div class="bx"><h4>Чек-лист</h4><ul><li>каждую статью сопоставить с документами объекта;</li><li>проверить, что фазы не дублируются;</li><li>убрать цены и суммы из ответа модели;</li><li>суммы и доли потом считает таблица.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> проверенная структура статей передаётся в таблицу.</div></div></section>
 
-<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Сбой</div><h2>Типичный сбой <em>и что делать</em></h2><div class="body"><div class="bx"><h4>Модель добавила цены</h4><ul><li>удалить цены и суммы из ответа;</li><li>вернуть запрос с запретом на цифры;</li><li>проверить статьи по документам;</li><li>расчёты оставить таблице.</li></ul></div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; CAPEX и OPEX — нет данных: нужен [документ].</p><div class="band" style="margin-top:12px"><b>Вывод:</b> модель структурирует статьи, но не считает экономику.</div></div></section>
+<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">В работу</div><h2>Как забрать <em>в работу</em></h2><div class="body"><div class="bx"><h4>Результат</h4><ul><li>перенести таблицу в Excel или Яндекс Таблицы;</li><li>добавить столбцы для источника и допущения;</li><li>проверить статьи по документу объекта;</li><li>суммы считать формулами.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> структура становится рабочим каркасом финансовой модели.</div></div></section>
 
-<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Основной контур</div><h2>Путь в <em>основном контуре</em></h2><div class="body"><div class="bx"><h4>Алиса AI или DeepSeek</h4><ul><li>дать описание здания и функции;</li><li>попросить структуру статей по фазам;</li><li>проверить каждую статью по документам;</li><li>перенести таблицу в Excel и считать формулами.</li></ul></div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; CAPEX и OPEX — нет данных: нужен [документ].</p><div class="band" style="margin-top:12px"><b>Вывод:</b> основной контур даёт структуру, но проверка остаётся ручной.</div></div></section>
+<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Сбой</div><h2>Типичный сбой <em>и что делать</em></h2><div class="body"><div class="bx"><h4>Модель добавила цены</h4><ul><li>удалить цены и суммы из ответа;</li><li>вернуть запрос с запретом на цифры;</li><li>проверить статьи по документам;</li><li>расчёты оставить таблице.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> модель структурирует статьи, но не считает экономику.</div></div></section>
+
+<section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Ошибки</div><h2>Типичные <em>ошибки</em></h2><div class="body"><div class="bx"><h4>Что проверяем</h4><ul><li>пропущена статья: доходы, OPEX или CAPEX неполные;</li><li>фазы реконструкции применили к OPEX или доходам;</li><li>в ответе модели появились цены и суммы;</li><li>группировка статей не совпадает с таблицей.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> ошибки ловятся сверкой группировки и источников.</div></div><div class="terms"><span class="lab">Термины</span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: инвестиции в стройку и ремонт.</span></span><span><b>OPEX</b> — операционные расходы: регулярные платежи за содержание объекта.<br><span style="color:var(--muted)">Проще: ежемесячные счета за эксплуатацию здания.</span></span></div></section>
+
+<section class="slide" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Основной контур</div><h2>Путь в <em>основном контуре</em></h2><div class="body"><div class="bx"><h4>Алиса AI или DeepSeek</h4><ul><li>дать описание здания и функции;</li><li>попросить структуру статей по фазам;</li><li>проверить каждую статью по документам;</li><li>перенести таблицу в Excel и считать формулами.</li></ul></div><p class="note"><b>Пример:</b> C52: площадь 1 959,2 м² по ЕГРН; CAPEX и OPEX — нет данных: нужны сметы и обследование.</p><div class="band" style="margin-top:12px"><b>Вывод:</b> основной контур даёт структуру, но проверка остаётся ручной.</div></div></section>
+
+<section class="slide has-terms" data-foot="Тема 2.2 · Доходная база, CAPEX/OPEX"><div class="kick">Задание №3</div><h2>Что берём <em>в Задание №3</em></h2><div class="body"><div class="bx"><h4>Состав артефакта</h4><ul><li>реестр статей доходов, OPEX и CAPEX по фазам;</li><li>реестр пробелов: документ, кто выдаёт, что зависит;</li><li>таблица источников и допущений без цен;</li><li>вывод: какие статьи готовы, какие ждут документов.</li></ul></div><div class="band" style="margin-top:12px"><b>Вывод:</b> в задание уходит структура с пробелами, а не расчёт.</div></div><div class="terms"><span class="lab">Термины</span><span><b>NOI</b> — чистый операционный доход: доход от аренды минус операционные расходы.<br><span style="color:var(--muted)">Проще: доход от аренды минус расходы.</span></span><span><b>CAPEX</b> — капитальные затраты: разовые вложения в создание или реконструкцию объекта.<br><span style="color:var(--muted)">Проще: инвестиции в стройку и ремонт.</span></span></div></section>
 
    <div class="foot" id="foot"><span id="footText">Тема 2.2 · Доходная база, CAPEX/OPEX</span><span><a href="https://ai2arch.ru/redev-schedule.html" target="_blank" rel="noopener">Расписание ↗</a></span></div>
   </div>
@@ -432,10 +482,38 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
    <button id="tocBtn" class="toc-btn" type="button" aria-label="Содержание" title="Содержание" aria-haspopup="true" aria-expanded="false">☰</button>
    <button id="next" aria-label="Вперёд" title="Вперёд">›</button>
    <button id="fs" aria-label="Развернуть на весь экран" title="На весь экран (F)">⤢</button>
+   <a class="prompts-link" href="#prompts">Промпты</a>
    <span class="hint">← → листать · F — полный экран</span>
    <div class="toc-menu" id="tocMenu" role="menu" aria-label="Содержание"></div>
  </div>
 </div>
+
+<section class="prompts-section" id="prompts">
+  <div class="prompts-inner">
+    <h2>Промпты темы 2.2</h2>
+    <p class="prompts-lead">Скопируйте промпт, подставьте свои данные вместо значений в квадратных скобках и проверьте результат по первоисточнику</p>
+    <div class="prompts-grid">
+      <article class="prompt-card">
+        <div class="prompt-card-head"><div><div class="prompt-part">CAPEX</div><h3>Структура CAPEX</h3></div></div>
+        <div class="prompt-toolbar"><button class="copy-btn" type="button" data-copy="inc-prompt-1">Копировать</button></div>
+        <div class="prompt-text" id="inc-prompt-1">Действуй как руководитель проектов в службе заказчика. Реконструкция [здание: тип] под [функция]. Составь структуру капитальных затрат (CAPEX) как перечень статей, сгруппированный по фазам (обследование и проектирование, конструктив, инженерия, отделка, благоустройство, согласования). Включи статьи, которые часто пропускают для этой функции. Для каждой статьи укажи единицу измерения, от чего зависит объём и какой документ нужен. Цен и сумм не указывай. Формат: таблица для переноса в Excel.</div>
+        <p class="prompt-fill"><b>Что подставить:</b> [здание: тип] и [функция]</p>
+      </article>
+      <article class="prompt-card">
+        <div class="prompt-card-head"><div><div class="prompt-part">OPEX</div><h3>Структура OPEX</h3></div></div>
+        <div class="prompt-toolbar"><button class="copy-btn" type="button" data-copy="inc-prompt-2">Копировать</button></div>
+        <div class="prompt-text" id="inc-prompt-2">Действуй как руководитель проектов в службе заказчика. Здание [тип] после реконструкции под [функция]. Составь структуру операционных расходов (OPEX) как перечень статей, сгруппированный по группам эксплуатации (коммунальные услуги, обслуживание инженерных систем, уборка и охрана, управление и административные расходы, налоги и страхование, текущий ремонт). Включи статьи, которые часто пропускают для этой функции. Для каждой статьи укажи единицу измерения, от чего зависит объём и какой документ нужен. Цен и сумм не указывай. Формат: таблица для переноса в Excel.</div>
+        <p class="prompt-fill"><b>Что подставить:</b> [тип] и [функция]</p>
+      </article>
+      <article class="prompt-card">
+        <div class="prompt-card-head"><div><div class="prompt-part">Доходы</div><h3>Структура доходов</h3></div></div>
+        <div class="prompt-toolbar"><button class="copy-btn" type="button" data-copy="inc-prompt-3">Копировать</button></div>
+        <div class="prompt-text" id="inc-prompt-3">Действуй как руководитель проектов в службе заказчика. Здание [тип] после реконструкции под [функция]. Составь структуру доходов как перечень статей, сгруппированный по источникам дохода (аренда по видам помещений, эксплуатационные и переменные платежи, парковка, мероприятия и аренда площадок, рекламные и прочие доходы). Включи статьи, которые часто пропускают для этой функции. Для каждой статьи укажи единицу измерения, от чего зависит объём и какой документ или источник нужен. Цен и сумм не указывай. Формат: таблица для переноса в Excel.</div>
+        <p class="prompt-fill"><b>Что подставить:</b> [тип] и [функция]</p>
+      </article>
+    </div>
+  </div>
+</section>
 
 <script>
 (function(){
@@ -539,7 +617,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     closeToc();
   });
 
-  function go(i){
+  function go(i, writeHash){
     if(i<0||i>=total) return;
     slides[cur].classList.remove('active');
     cur=i; slides[cur].classList.add('active');
@@ -548,7 +626,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     prev.disabled=cur===0; next.disabled=cur===total-1;
     prog.style.width=((cur+1)/total*100)+'%';
     updateProgress();
-    try{history.replaceState(null,'','#slide-'+(cur+1));}catch(e){}
+    if(writeHash!==false){try{history.replaceState(null,'','#slide-'+(cur+1));}catch(e){}}
   }
   prev.onclick=function(){go(cur-1)}; next.onclick=function(){go(cur+1)};
   function fit(){
@@ -565,6 +643,9 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
   fs.onclick=toggleFs;
   document.addEventListener('fullscreenchange',function(){setTimeout(fit,60)});
   document.addEventListener('keydown',function(e){
+    var prompts=document.getElementById('prompts');
+    if(prompts && (e.target.closest && e.target.closest('#prompts'))) return;
+    if(prompts && prompts.getBoundingClientRect().top < window.innerHeight - 40) return;
     if(e.key==='Escape'){closeToc();return;}
     if(['ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(cur+1);}
     else if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(cur-1);}
@@ -583,14 +664,61 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke
     return Math.min(Math.max(parseInt(m[1],10)-1,0),total-1);
   }
   window.addEventListener('hashchange',function(){
+    if(location.hash==='#prompts'){
+      var p=document.getElementById('prompts'); if(p) p.scrollIntoView();
+      return;
+    }
     var idx=parseHash();
     if(idx!==cur) go(idx);
   });
 
   buildProgress();
   buildToc();
-  go(parseHash());
+  var initialPrompts=location.hash==='#prompts';
+  go(parseHash(),!initialPrompts);
+  if(initialPrompts){setTimeout(function(){var p=document.getElementById('prompts');if(p)p.scrollIntoView();},200);}
   fit();
+})();
+</script>
+<script>
+(function(){
+  if (window.self !== window.top) {
+    var embeddedPrompts = document.getElementById('prompts');
+    var embeddedLink = document.querySelector('.prompts-link');
+    if (embeddedPrompts) embeddedPrompts.style.display = 'none';
+    if (embeddedLink) embeddedLink.style.display = 'none';
+  }
+  function fallback(text){
+    var ta=document.createElement('textarea');
+    ta.value=text; ta.setAttribute('readonly','');
+    ta.style.position='fixed'; ta.style.left='-9999px';
+    document.body.appendChild(ta); ta.select();
+    try{document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);
+  }
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var el=document.getElementById(btn.getAttribute('data-copy'));
+      if(!el) return;
+      var text=el.textContent;
+      var done=function(){
+        btn.textContent='Скопировано'; btn.classList.add('copied');
+        setTimeout(function(){btn.textContent='Копировать';btn.classList.remove('copied');},2000);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){fallback(text);done();});
+      }else{fallback(text);done();}
+    });
+  });
+})();
+</script>
+<script>
+(function(){
+  function scrollPrompts(){
+    if(location.hash!=='#prompts') return;
+    var p=document.getElementById('prompts'); if(p) p.scrollIntoView();
+  }
+  window.addEventListener('load',function(){scrollPrompts();setTimeout(scrollPrompts,250);setTimeout(scrollPrompts,800);});
 })();
 </script>
 </body>
