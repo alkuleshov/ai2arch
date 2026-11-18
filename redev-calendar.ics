@@ -216,11 +216,10 @@ DTEND:20261117T163000Z
 END:VEVENT
 BEGIN:VEVENT
 UID:redev-2026-20261117T163000Z-11@ai2arch.ru
-DTSTAMP:20261116T081619Z
-LAST-MODIFIED:20261116T081619Z
-SEQUENCE:0
-SUMMARY:Лекция: 2.2 Доходная база\, CAPEX/OPEX (нач
- ало)
+DTSTAMP:20261118T164931Z
+LAST-MODIFIED:20261118T164931Z
+SEQUENCE:1
+SUMMARY:Лекция: 2.2 Часть 1
 DESCRIPTION:Лекция · присутствие по возможно
  сти. Если вопросов к лектору нет\, лекци
  ю можно посмотреть в записи\, когда она 
@@ -235,11 +234,10 @@ DTEND:20261117T180000Z
 END:VEVENT
 BEGIN:VEVENT
 UID:redev-2026-20261118T150000Z-12@ai2arch.ru
-DTSTAMP:20261117T170525Z
-LAST-MODIFIED:20261117T170525Z
-SEQUENCE:1
-SUMMARY:Лекция: 2.2 Доходная база\, CAPEX/OPEX (про
- должение)
+DTSTAMP:20261118T164931Z
+LAST-MODIFIED:20261118T164931Z
+SEQUENCE:2
+SUMMARY:Лекция: 2.2 Часть 2
 DESCRIPTION:Лекция · присутствие по возможно
  сти. Если вопросов к лектору нет\, лекци
  ю можно посмотреть в записи\, когда она 
@@ -254,11 +252,10 @@ DTEND:20261118T163000Z
 END:VEVENT
 BEGIN:VEVENT
 UID:redev-2026-20261121T150000Z-16@ai2arch.ru
-DTSTAMP:20261118T164246Z
-LAST-MODIFIED:20261118T164246Z
-SEQUENCE:1
-SUMMARY:Лекция: 2.2 Доходная база\, CAPEX/OPEX (око
- нчание)
+DTSTAMP:20261118T164931Z
+LAST-MODIFIED:20261118T164931Z
+SEQUENCE:2
+SUMMARY:Лекция: 2.2 Часть 3
 DESCRIPTION:Лекция · присутствие по возможно
  сти. Если вопросов к лектору нет\, лекци
  ю можно посмотреть в записи\, когда она 
