@@ -100,7 +100,7 @@ EN = {
     # brand, header, footer
     "brand_descriptor": "PROJECT INTELLIGENCE LAB",
     "header_site": "AI2ARCH.RU",
-    "brand_url": "https://ai2arch.ru/en/",
+    "brand_url": "https://ai2arch.ru/",
     "footer_page": "page {n}",
     "footer_brand": "AI2ARCH  ·  PROJECT INTELLIGENCE LAB",
 
@@ -162,8 +162,8 @@ EN = {
             "official": "Modern Tools of Project Analysis: AI and Mobile Services for the Architectural Environment",
             "desc": "An introductory course: a digital site model, AI analysis, and a client presentation. From scratch, with two tracks to choose from.",
             "facts": ["22 academic hours", "2.5 weeks", "SFedU certificate"],
-            "link": "ai2arch.ru/en/archi",
-            "url": "https://ai2arch.ru/en/archi.html#enroll",
+            "link": "ai2arch.ru/archi",
+            "url": "https://ai2arch.ru/archi.html#enroll",
         },
         {
             "key": "redev",
@@ -172,8 +172,8 @@ EN = {
             "official": "Modern Tools for the Development of Territories and Real Estate: Data Analytics and Generative AI in Concept Development",
             "desc": "A real building or territory, carried through to a fully developed concept. Two tracks: designer and developer.",
             "facts": ["72 academic hours", "4.5 weeks", "SFedU certificate"],
-            "link": "ai2arch.ru/en/redev",
-            "url": "https://ai2arch.ru/en/redev.html#apply",
+            "link": "ai2arch.ru/redev",
+            "url": "https://ai2arch.ru/redev.html#apply",
         },
     ],
 }

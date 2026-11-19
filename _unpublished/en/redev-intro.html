@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Introduction · What we do on the course · AI in Redevelopment · AI2ARCH</title>
+<meta name="description" content="An introductory presentation on the six steps of the course, the redevelopment lifecycle, the C52 case, the two tracks, the learning format, and the first step before the next meeting.">
+<link rel="canonical" href="https://ai2arch.ru/en/redev-intro.html">
+<link rel="alternate" hreflang="ru" href="https://ai2arch.ru/redev-intro.html">
+<link rel="alternate" hreflang="en" href="https://ai2arch.ru/en/redev-intro.html">
+<link rel="alternate" hreflang="x-default" href="https://ai2arch.ru/redev-intro.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://ai2arch.ru/en/redev-intro.html">
+<meta property="og:title" content="Introduction · What we do on the course · AI in Redevelopment · AI2ARCH">
+<meta property="og:description" content="An introductory presentation on the six steps of the course, the redevelopment lifecycle, the C52 case, the two tracks, the learning format, and the first step before the next meeting.">
+<meta property="og:image" content="https://ai2arch.ru/images/og-ai2arch.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Introduction · What we do on the course · AI in Redevelopment · AI2ARCH">
+<meta name="twitter:description" content="An introductory presentation on the six steps of the course, the redevelopment lifecycle, the C52 case, the two tracks, the learning format, and the first step before the next meeting.">
+<meta name="twitter:image" content="https://ai2arch.ru/images/og-ai2arch.jpg">
+<link rel="stylesheet" href="../assets/lang-switch.css">
+<style>
+:root{
+  --navy:#0A0F1A; --graphite:#2A2F3E; --azure:#1A6BFF;
+  --azure2:#EAF1FF; --azure3:#BFD3FF; --soft:#F6F8FC; --line:#E1E5EE; --muted:#5B6475; --faint:#9AA4B8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#fff;color:var(--navy);font-family:Manrope,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.deck{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:8px 0 10px}
+.viewport{position:relative;flex:1 1 auto;width:100%;display:flex;align-items:center;justify-content:center;min-height:0}
+.stage{width:1280px;height:720px;position:relative;flex:none;transform-origin:center center;background:#fff;overflow:hidden;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 30px rgba(10,15,26,.06)}
+.progress{position:absolute;left:0;top:0;height:5px;background:var(--azure);width:0;transition:width .35s ease;z-index:5}
+
+.slide{position:absolute;inset:0;padding:50px 72px 74px;display:none;flex-direction:column}
+.slide.active{display:flex;animation:in .4s ease both}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.kick{font-size:14px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--azure);margin-bottom:12px}
+h1{font-size:58px;line-height:1.04;font-weight:800;letter-spacing:-.02em}
+h2{font-size:44px;line-height:1.12;font-weight:800;letter-spacing:-.015em}
+h1 em,h2 em{font-style:normal;color:var(--azure)}
+.lead{font-size:22px;line-height:1.5;color:var(--muted);margin-top:12px;max-width:1040px}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;margin-top:14px}
+.foot{position:absolute;left:72px;right:72px;bottom:24px;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--faint);letter-spacing:.03em}
+.foot a{color:var(--azure);font-weight:700;text-decoration:none}
+.foot a:hover{text-decoration:underline}
+.foot .num{font-weight:800;color:var(--navy)}
+svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.note{font-size:18px;color:var(--muted);margin-top:14px;line-height:1.45}
+.note b{color:var(--navy)}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--azure2);color:var(--azure);font-weight:800;font-size:16px}
+.chip.g{background:var(--soft);color:var(--graphite);border:1px solid var(--line)}
+.pill{display:inline-block;padding:6px 12px;border-radius:8px;background:var(--azure2);color:var(--azure);font-weight:800;font-size:15px;line-height:1.25}
+
+/* 1 title */
+.s1{flex-direction:row;align-items:center;gap:30px}
+.s1 .l{flex:1.2}
+.s1 .r{flex:1}
+.s1 .chips{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.s1 .how{margin-top:26px;font-size:15px;color:var(--faint)}
+
+/* 2 chain */
+.chain{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:6px}
+.chain:before{content:"";position:absolute;left:8%;right:8%;top:45px;height:3px;background:var(--azure3);z-index:0}
+.node{position:relative;z-index:1;text-align:center}
+.node .c{width:92px;height:92px;border-radius:50%;margin:0 auto 16px;background:#fff;border:3px solid var(--azure);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:42px}
+.node:last-child .c{background:var(--azure);color:#fff}
+.node .n{font-size:14px;font-weight:800;color:var(--faint);letter-spacing:.1em}
+.node h3{font-size:25px;font-weight:800;margin:2px 0 10px}
+.node p{font-size:17.5px;line-height:1.4;color:var(--muted);min-height:112px}
+.node .pill{margin-top:8px;font-size:16px}
+
+/* 3 lifecycle */
+.stages{display:grid;grid-template-columns:1fr 36px 1fr 36px 1fr 36px 1fr;align-items:stretch;margin-top:10px}
+.st{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:24px 22px}
+.st .ic{width:60px;height:60px;border-radius:14px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:16px}
+.st:nth-child(7) .ic{background:var(--azure);color:#fff}
+.st h3{font-size:24px;font-weight:800;margin-bottom:8px;white-space:nowrap}
+.st p{font-size:17.5px;line-height:1.45;color:var(--muted)}
+.arr{display:flex;align-items:center;justify-content:center;color:var(--azure)}
+.arr svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.band{margin-top:6px;background:var(--azure2);border-radius:14px;padding:16px 26px;font-size:20px;color:var(--navy);display:flex;gap:14px;align-items:center}
+.band b{color:var(--azure)}
+
+/* 4 comparison */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:6px}
+.pn{border:1px solid var(--line);border-radius:18px;padding:24px 30px;background:#fff}
+.pn.hi{border-color:var(--azure);background:linear-gradient(180deg,var(--azure2),#fff 60%)}
+.pn h3{font-size:28px;font-weight:800;margin-bottom:4px}
+.pn .sub{font-size:15px;color:var(--faint);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.pn svg.ill{width:100%;height:180px;display:block;margin:2px 0 8px}
+.pn ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.pn li{font-size:19.5px;line-height:1.4;color:var(--graphite);padding-left:24px;position:relative}
+.pn li:before{content:"";position:absolute;left:0;top:.6em;width:12px;height:3px;border-radius:2px;background:var(--faint)}
+.pn.hi li:before{background:var(--azure)}
+
+/* 5 AI */
+.flow{display:grid;grid-template-columns:1fr 50px 1fr 50px 1fr 50px 1fr;align-items:stretch}
+.fl{border:2px solid var(--line);border-radius:16px;padding:22px 16px 20px;background:#fff;text-align:center}
+.fl .ic{width:60px;height:60px;border-radius:50%;margin:0 auto 12px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:31px}
+.fl.you{border-color:var(--azure3)}
+.fl.ai{background:var(--azure);border-color:var(--azure);color:#fff}
+.fl.ai .ic{background:#fff;color:var(--azure)}
+.fl.ai p{color:rgba(255,255,255,.85)}
+.fl h3{font-size:23px;font-weight:800;margin-bottom:6px}
+.fl p{font-size:17.5px;line-height:1.35;color:var(--muted)}
+.back{display:block;width:100%;height:auto;margin:6px 0 16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:4px}
+.bx{background:var(--soft);border-radius:16px;padding:22px 28px}
+.bx h4{font-size:16px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--azure);margin-bottom:10px}
+.bx.you h4{color:var(--graphite)}
+.bx li{list-style:none;font-size:19.5px;line-height:1.4;padding-left:26px;position:relative;margin-bottom:7px;color:var(--graphite)}
+.bx li:before{content:"";position:absolute;left:0;top:.35em;width:14px;height:14px;border-radius:50%;background:var(--azure2);border:3px solid var(--azure);box-sizing:border-box}
+.bx.you li:before{border-color:var(--graphite);background:#fff}
+
+/* 6 modules */
+.segbar{display:flex;height:14px;border-radius:7px;overflow:hidden;gap:3px;margin:4px 0 18px}
+.segbar i{display:block;background:var(--azure)}
+.segbar i:nth-child(odd){background:var(--azure)}
+.segbar i:nth-child(even){background:var(--azure3)}
+.mods{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.md{border:1px solid var(--line);border-radius:14px;padding:20px 17px 18px;background:#fff;display:flex;flex-direction:column}
+.md .tp{font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.md .h{font-size:42px;font-weight:800;color:var(--azure);line-height:1;margin:6px 0 8px}
+.md .h small{font-size:16px;font-weight:700;color:var(--muted);margin-left:3px}
+.md h3{font-size:20px;font-weight:800;line-height:1.2;margin-bottom:10px;min-height:50px}
+.md p{font-size:16px;line-height:1.4;color:var(--muted);flex:1}
+.md .res{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-size:14px;color:var(--faint);font-weight:700}
+.md .res b{display:block;color:var(--navy);font-size:16.5px;margin-top:3px}
+.md:last-child{background:var(--azure);border-color:var(--azure)}
+.md:last-child .tp,.md:last-child .h,.md:last-child .h small,.md:last-child p,.md:last-child .res,.md:last-child .res b,.md:last-child h3{color:#fff}
+.md:last-child .res{border-color:rgba(255,255,255,.4)}
+
+/* 7 tracks */
+.fork{display:grid;grid-template-columns:300px 80px 1fr;align-items:center;margin-top:6px}
+.trunk{background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:22px 22px 18px}
+.trunk h3{font-size:25px;font-weight:800;margin-bottom:12px}
+.trunk .it{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;background:#fff;border:1px solid var(--line);font-size:18px;font-weight:700;margin-bottom:8px}
+.trunk .it svg{color:var(--azure);font-size:22px}
+.forkarr{width:80px;height:300px}
+.lanes{display:flex;flex-direction:column;gap:18px}
+.ln{border:2px solid var(--line);border-radius:18px;padding:18px 24px;display:grid;grid-template-columns:1fr 250px;gap:20px;align-items:center;background:#fff}
+.ln.a{border-color:var(--azure3)}
+.ln.b{border-color:var(--azure);background:linear-gradient(90deg,var(--azure2),#fff 70%)}
+.ln .t{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--azure)}
+.ln h3{font-size:27px;font-weight:800;margin:2px 0 4px}
+.ln .who{font-size:17px;color:var(--muted);line-height:1.35;margin-bottom:8px}
+.ln .fo{font-size:17px;color:var(--graphite);line-height:1.4}
+.ln .fo b{color:var(--navy)}
+.ln .doc{background:var(--azure);color:#fff;border-radius:14px;padding:16px 18px;text-align:center}
+.ln.a .doc{background:var(--graphite)}
+.ln .doc svg{font-size:30px;margin-bottom:6px}
+.ln .doc small{display:block;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;font-weight:700}
+.ln .doc b{font-size:19px;line-height:1.25;font-weight:800}
+
+/* 8 result */
+.res8{display:grid;grid-template-columns:540px 1fr;gap:40px;align-items:center;margin-top:6px}
+.cert{margin:0}
+.cert img{width:100%;display:block;border-radius:10px;border:1px solid var(--line);box-shadow:0 10px 30px rgba(10,15,26,.12)}
+.cert figcaption{margin-top:10px;font-size:14.5px;color:var(--faint);text-align:center}
+.outs{display:flex;flex-direction:column;gap:18px}
+.out{display:flex;gap:18px;align-items:flex-start;padding:18px 20px;border-radius:16px;background:var(--soft);border:1px solid var(--line)}
+.out .ic{width:54px;height:54px;border-radius:14px;background:var(--azure);color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;flex:none}
+.out h3{font-size:23px;font-weight:800;margin-bottom:4px}
+.out p{font-size:18px;line-height:1.42;color:var(--muted)}
+
+/* 9 examples */
+.gal{display:grid;grid-template-columns:430px 1fr;grid-template-rows:1fr 1fr;gap:14px;height:412px;margin-top:4px}
+.gal figure{position:relative;margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--soft)}
+.gal figure.big{grid-row:1/3}
+.gal img{width:100%;height:100%;object-fit:cover;display:block}
+.gal figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.94);padding:7px 12px;border-radius:8px;font-size:14.5px;font-weight:800;color:var(--navy)}
+
+/* 10 format */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:6px}
+.tl{border:1px solid var(--line);border-radius:18px;padding:28px 22px;background:#fff;display:flex;flex-direction:column}
+.tl .ic{width:66px;height:66px;border-radius:16px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:34px;margin-bottom:18px}
+.tl h3{font-size:24px;font-weight:800;margin-bottom:8px}
+.tl p{font-size:18px;line-height:1.45;color:var(--muted);flex:1}
+.tl a{margin-top:12px;color:var(--azure);font-weight:800;font-size:17px;text-decoration:none}
+.tl a:hover{text-decoration:underline}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
+.sb{background:var(--soft);border-radius:14px;padding:20px 22px;display:flex;align-items:baseline;gap:10px}
+.sb b{font-size:42px;font-weight:800;color:var(--azure)}
+.sb span{font-size:17px;color:var(--muted);line-height:1.25}
+
+/* 11 tools */
+.tools{display:grid;grid-template-columns:390px 1fr;gap:34px;align-items:center;margin-top:4px}
+.tools svg.rings{width:390px;height:390px}
+.tc{border:1px solid var(--line);border-radius:16px;padding:18px 24px;margin-bottom:12px}
+.tc.main{border-color:var(--azure);background:linear-gradient(90deg,var(--azure2),#fff 80%)}
+.tc h3{font-size:23px;font-weight:800;margin-bottom:4px}
+.tc .sub{font-size:17px;color:var(--muted);margin-bottom:10px;line-height:1.4}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips .chip{font-size:16px;padding:7px 13px}
+
+/* 12 review */
+.checks{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:6px}
+.ck{border:1px solid var(--line);border-radius:18px;padding:32px 22px;background:#fff;text-align:center}
+.ck .ic{width:78px;height:78px;border-radius:50%;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 18px}
+.ck h3{font-size:26px;font-weight:800;margin-bottom:8px}
+.ck p{font-size:19px;line-height:1.45;color:var(--muted)}
+.rule{margin-top:20px;background:var(--navy);color:#fff;border-radius:16px;padding:24px 30px;font-size:26px;font-weight:800;display:flex;gap:16px;align-items:center}
+.rule svg{color:#6FA3FF;font-size:32px}
+
+/* 13 step */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.sp{border-top:5px solid var(--azure);background:var(--soft);border-radius:0 0 16px 16px;padding:30px 28px 34px}
+.sp .n{font-size:76px;font-weight:800;color:var(--azure);line-height:1;margin-bottom:12px}
+.sp h3{font-size:28px;font-weight:800;margin-bottom:8px}
+.sp p{font-size:20.5px;line-height:1.45;color:var(--muted)}
+.sp a{display:inline-block;margin-top:14px;background:var(--azure);color:#fff;text-decoration:none;font-weight:800;font-size:17px;padding:12px 18px;border-radius:10px}
+.sp a:hover{background:#0f56d6}
+
+/* 14 links */
+.links{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.lk{display:flex;flex-direction:column;border:2px solid var(--line);border-radius:20px;padding:38px 32px;text-decoration:none;background:#fff;transition:.15s}
+.lk:hover{border-color:var(--azure);box-shadow:0 10px 30px rgba(26,107,255,.14);transform:translateY(-2px)}
+.lk .ic{width:76px;height:76px;border-radius:18px;background:var(--azure);color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:22px}
+.lk h3{font-size:30px;font-weight:800;margin-bottom:8px}
+.lk p{font-size:19.5px;line-height:1.45;color:var(--muted);flex:1}
+.lk .go{margin-top:16px;color:var(--azure);font-weight:800;font-size:19px}
+.lk.nolink{cursor:default}
+.lk.nolink:hover{border-color:var(--line);box-shadow:none;transform:none}
+
+/* controls */
+.controls{display:flex;align-items:center;gap:10px;user-select:none}
+.controls button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);font-family:inherit;font-size:20px;font-weight:700;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.controls button:hover{border-color:var(--azure);color:var(--azure)}
+.controls button:disabled{opacity:.3;cursor:default;border-color:var(--line);color:var(--navy)}
+.counter{min-width:70px;text-align:center;font-size:15px;font-weight:800;color:var(--muted)}
+.dots{display:flex;gap:6px;margin:0 6px}
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--line);cursor:pointer;transition:.2s}
+.dots i.on{background:var(--azure);transform:scale(1.3)}
+.hint{font-size:12px;color:var(--faint);margin-left:8px}
+
+  /* nav-v2: unified navigation bar */
+  .controls{width:100%;max-width:1280px;margin:0 auto;padding:0 12px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:nowrap;position:relative;z-index:100;user-select:none}
+  .controls button{width:44px;height:44px;min-width:44px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);font-family:inherit;font-size:20px;font-weight:700;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .controls button:hover{border-color:var(--azure);color:var(--azure)}
+  .controls button:disabled{opacity:.3;cursor:default;border-color:var(--line);color:var(--navy)}
+  .controls button:focus-visible{outline:2px solid var(--azure);outline-offset:3px}
+  .nav-progress{flex:1 1 auto;min-width:70px;display:flex;gap:4px;height:10px;align-items:stretch}
+  .nav-seg{width:auto;min-width:0;height:10px;border:0;border-radius:999px;background:var(--line);padding:0;cursor:pointer;position:relative;overflow:hidden;flex-basis:0;flex-shrink:1;flex-grow:1}
+  .nav-seg-fill{display:block;height:100%;width:0;background:var(--azure);border-radius:999px;transition:width .25s ease}
+  .controls .nav-seg{width:auto;min-width:0;height:10px;padding:0;border-radius:999px;flex-basis:0;flex-shrink:1;flex-grow:1}
+  .nav-seg:hover{background:#D6DDEA}
+  .nav-seg.active{background:#E4EBF8}
+  .counter{min-width:64px;text-align:center;font-size:14px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc-btn{font-size:20px}
+  .toc-menu{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);width:min(760px,calc(100vw - 24px));max-height:min(70vh,540px);overflow:auto;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 50px rgba(10,15,26,.18);padding:10px;z-index:1000;display:none}
+  .toc-menu.open{display:block}
+  .toc-part{display:flex;align-items:baseline;gap:8px;width:100%;border:0;background:transparent;text-align:left;padding:8px 10px;margin:2px 0;font:inherit;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--azure);cursor:pointer;border-top:1px solid var(--line)}
+  .toc-part:first-child{border-top:0}
+  .toc-part:hover{background:var(--azure2)}
+  .toc-part .range{font-size:10px;letter-spacing:.04em;color:var(--faint);font-weight:600;text-transform:none}
+  .toc-link{display:flex;gap:10px;align-items:baseline;width:100%;border:0;background:transparent;text-align:left;padding:7px 10px;border-radius:8px;font:inherit;font-size:15px;color:var(--graphite);cursor:pointer;line-height:1.3}
+  .toc-link:hover{background:var(--azure2);color:var(--navy)}
+  .toc-link .n{font-size:12px;font-weight:800;color:var(--faint);min-width:28px;flex:none}
+  .controls .toc-link{width:100%;height:auto;min-width:0;border:0;border-radius:8px;background:transparent;color:var(--graphite);font-size:15px;font-weight:400;line-height:1.3;justify-content:flex-start;align-items:baseline;padding:7px 10px}
+  .controls .toc-part{width:100%;height:auto;min-width:0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;color:var(--azure);font-size:12px;font-weight:800;line-height:1.3;justify-content:flex-start;align-items:baseline;padding:8px 10px}
+  .controls .toc-link:hover{background:var(--azure2);color:var(--navy)}
+  .controls .toc-part:hover{background:var(--azure2)}
+  .hint{font-size:11px;color:var(--faint);margin-left:4px;white-space:nowrap}
+  .slide{font-size:18px}
+  .slide .lead{font-size:23px;line-height:1.45}
+  .slide .bx li{font-size:20px}
+  .slide .body p{font-size:18px}
+  .slide .note{font-size:18px}
+  .slide .datatable{font-size:18px}
+  .plan-six{grid-template-columns:1fr;height:100%;align-content:stretch;margin-top:0}
+  .plan-six .nl{height:100%;align-items:center;padding:0}
+  .plan-six .nl p{font-size:22px;line-height:1.35}
+  @media (max-width:640px){
+    .controls{gap:6px;padding:0 8px}
+    .controls button{width:44px;height:44px;min-width:44px}
+    .counter{min-width:48px;font-size:12px}
+    .nav-progress{min-width:44px;gap:3px}
+    .hint{display:none}
+    .toc-menu{width:calc(100vw - 16px);max-height:60vh}
+  }
+</style>
+</head>
+<body>
+
+<span class="lang-switch deck-lang" aria-label="Language switcher"><a href="../redev-intro.html" hreflang="ru" lang="ru">RU</a><span class="sep" aria-hidden="true">|</span><span class="on" aria-current="true">EN</span></span>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12M3 21h18M9 21v-5h6v5M8 11.5h.01M12 11.5h.01M16 11.5h.01"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.8 10.6c.7.7 1 1.4 1 2.4h5.6c0-1 .3-1.7 1-2.4A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M3 17l5-5 4 4 3-3 6 6"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM15 3v4h4M10 12h6M10 16h6"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h12l-2.5 4L17 12H5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.2l3 3 5-6"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-5 4v-4H4z"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4h12a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2zM5 18a2 2 0 0 1 2-2h12"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6zM9 12l2 2 4-4"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.6"/><path d="M10.7 12.4L20 3M16 7l3 3"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"/></symbol>
+    <symbol id="i-source" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 4v16M5 20h14M4 8h16M4 8l-2 7a3 3 0 0 0 6 0zM20 8l-2 7a3 3 0 0 0 6 0z"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7.5h7M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"/></symbol>
+    <symbol id="i-logic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.6 2.6 0 1 1 3.6 2.4c-.7.4-1.1.9-1.1 1.8M12 17h.01"/></symbol>
+  </defs>
+</svg>
+
+<div class="deck" id="deck">
+ <div class="viewport" id="viewport">
+  <div class="stage" id="stage">
+   <div class="progress" id="progress"></div>
+
+   <!-- 1 TITLE -->
+   <section class="slide s1 active">
+     <div class="l">
+       <div class="kick">Introduction · AI in Redevelopment</div>
+       <h1>What we do<br>on the <em>course</em></h1>
+       <p class="lead">You take an existing building or site and, in 4.5 weeks, bring it to a concept ready for review. AI speeds up the work; you make the decisions.</p>
+       <div class="chips"><span class="chip">72 academic hours</span><span class="chip">4.5 weeks</span><span class="chip g">remote</span></div>
+       <p class="how">This is a self-guided presentation: use the arrow keys to navigate, ⤢ for full screen.</p>
+     </div>
+     <div class="r">
+       <svg viewBox="0 0 590 380" width="100%" aria-label="From an abandoned building to a renewed place">
+         <line x1="0" y1="320" x2="560" y2="320" stroke="#D5DBE6" stroke-width="3"/>
+         <!-- before -->
+         <g stroke="#9AA4B8" stroke-width="3" fill="#F1F3F8" stroke-linejoin="round">
+           <rect x="170" y="92" width="22" height="120"/><rect x="165" y="84" width="32" height="9"/>
+           <rect x="20" y="210" width="190" height="110"/>
+           <path d="M20 210V168l50 42V168l50 42V168l50 42V168l40 42z"/>
+         </g>
+         <g stroke="#9AA4B8" stroke-width="2.5" fill="#fff">
+           <rect x="38" y="240" width="28" height="38"/><rect x="78" y="240" width="28" height="38"/><rect x="118" y="240" width="28" height="38"/><rect x="158" y="240" width="28" height="38"/>
+         </g>
+         <g stroke="#9AA4B8" stroke-width="2.5" stroke-linecap="round"><path d="M38 240l28 38M106 240l-28 38M118 258l28-18M186 278l-28-20"/></g>
+         <!-- arrow -->
+         <path d="M228 252H296" stroke="#1A6BFF" stroke-width="5" stroke-linecap="round"/>
+         <path d="M284 240l14 12-14 12" fill="none" stroke="#1A6BFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+         <text x="262" y="228" text-anchor="middle" font-size="17" font-weight="800" fill="#1A6BFF" font-family="inherit">course</text>
+         <!-- after -->
+         <g transform="translate(330,0)" stroke="#1A6BFF" stroke-width="3" fill="#EAF1FF" stroke-linejoin="round">
+           <rect x="170" y="92" width="22" height="120" fill="#BFD3FF"/><rect x="165" y="84" width="32" height="9" fill="#1A6BFF"/>
+           <rect x="20" y="210" width="190" height="110"/>
+           <path d="M20 210V168l50 42V168l50 42V168l50 42V168l40 42z" fill="#BFD3FF"/>
+           <g fill="#1A6BFF" stroke="none"><rect x="38" y="240" width="28" height="38"/><rect x="78" y="240" width="28" height="38"/><rect x="118" y="240" width="28" height="38"/><rect x="158" y="240" width="28" height="38"/></g>
+         </g>
+         <!-- trees and people -->
+         <g stroke="none"><circle cx="322" cy="276" r="24" fill="#9FD0B0"/><circle cx="548" cy="282" r="20" fill="#9FD0B0"/></g>
+         <g stroke="#7A9C86" stroke-width="4" stroke-linecap="round"><path d="M322 300v20M548 302v18"/></g>
+         <g fill="#0A0F1A"><circle cx="420" cy="296" r="6"/><circle cx="446" cy="298" r="6"/><circle cx="472" cy="295" r="6"/></g>
+         <g stroke="#0A0F1A" stroke-width="5" stroke-linecap="round"><path d="M420 304v16M446 306v14M472 303v17"/></g>
+         <text x="115" y="356" text-anchor="middle" font-size="18" font-weight="700" fill="#5B6475" font-family="inherit">The property today</text>
+         <text x="440" y="356" text-anchor="middle" font-size="18" font-weight="800" fill="#1A6BFF" font-family="inherit">Concept</text>
+       </svg>
+     </div>
+   </section>
+
+   <!-- 2 CHAIN -->
+   <section class="slide">
+     <div class="kick">01 · The main idea</div>
+     <h2>From a property to <em>a concept ready for review</em></h2>
+     <p class="lead">The course is six steps. At each step you get a finished working document, and together they form the final project.</p>
+     <div class="body">
+       <div class="chain">
+         <div class="node"><div class="c"><svg class="i"><use href="#i-building"/></svg></div><div class="n">STEP 1</div><h3>Property</h3><p>Take a real building or site: your own property or the base case C52</p><span class="pill">Property data sheet</span></div>
+         <div class="node"><div class="c"><svg class="i"><use href="#i-search"/></svg></div><div class="n">STEP 2</div><h3>Context</h3><p>What is allowed and what is not: regulations (PZZ), surroundings, audience</p><span class="pill">Site dossier</span></div>
+         <div class="node"><div class="c"><svg class="i"><use href="#i-bulb"/></svg></div><div class="n">STEP 3</div><h3>Idea</h3><p>5–7 use scenarios, floor areas, and basic economics</p><span class="pill">Selected scenario</span></div>
+         <div class="node"><div class="c"><svg class="i"><use href="#i-image"/></svg></div><div class="n">STEP 4</div><h3>Image</h3><p>Mood board, diagrams, concept visualizations</p><span class="pill">Visual package</span></div>
+         <div class="node"><div class="c"><svg class="i"><use href="#i-doc"/></svg></div><div class="n">STEP 5</div><h3>Document</h3><p>Assemble everything into the final document for your track</p><span class="pill">Final document</span></div>
+         <div class="node"><div class="c"><svg class="i"><use href="#i-flag"/></svg></div><div class="n">STEP 6</div><h3>Demo Day</h3><p>Experts review the concept remotely</p><span class="pill">Expert review</span></div>
+       </div>
+       <p class="note"><b>PZZ</b> — land use and development rules: the document that determines what is permitted on the site.</p>
+     </div>
+   </section>
+
+   <!-- 3 REDEVELOPMENT -->
+   <section class="slide">
+     <div class="kick">02 · What redevelopment is</div>
+     <h2>A new life for what is <em>already built</em></h2>
+     <p class="lead">A building or site gets a new purpose and starts working differently. This is a path of four stages.</p>
+     <div class="body">
+       <div class="stages">
+         <div class="st"><div class="ic"><svg class="i"><use href="#i-building"/></svg></div><h3>The property today</h3><p>The building sits idle, is outdated, or is used for the wrong purpose</p></div>
+         <div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+         <div class="st"><div class="ic"><svg class="i"><use href="#i-search"/></svg></div><h3>Diagnosis</h3><p>What can be retained and changed: regulations, structure, demand</p></div>
+         <div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+         <div class="st"><div class="ic"><svg class="i"><use href="#i-bulb"/></svg></div><h3>Concept</h3><p>A new function, floor areas, and an image for the place</p></div>
+         <div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+         <div class="st"><div class="ic"><svg class="i"><use href="#i-key"/></svg></div><h3>Product</h3><p>Lease, sale, or operation of the renewed property</p></div>
+       </div>
+       <svg viewBox="0 0 1136 60" width="100%" style="margin:8px 0 14px;display:block" aria-hidden="true">
+         <path d="M1008 4V36q0 12-12 12H140q-12 0-12-12V12" fill="none" stroke="#BFD3FF" stroke-width="3" stroke-dasharray="7 7" stroke-linecap="round"/>
+         <path d="M120 18l8-10 8 10" fill="none" stroke="#BFD3FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+         <rect x="450" y="34" width="236" height="26" fill="#fff"/>
+         <text x="568" y="53" text-anchor="middle" font-size="13" font-weight="700" fill="#9AA4B8" font-family="inherit">and a new life cycle begins again</text>
+       </svg>
+       <div class="band"><svg class="i" style="font-size:28px;color:#1A6BFF"><use href="#i-building"/></svg><div><b>A property can go through this cycle more than once:</b> the course case “C52” went through it three times in a row, and we will examine it in detail later. <b>Example based on C52; the same algorithm applies to your own property.</b></div></div>
+     </div>
+   </section>
+
+   <!-- 3.5 C52 CASE -->
+   <section class="slide">
+     <div class="kick">03 · The course case</div>
+     <h2>The default course case: the <em>“C52”</em> cluster</h2>
+     <p class="lead">If you do not have your own property, take C52: we examine a real cluster that has gone through the path taught in the course three times.</p>
+     <div class="body">
+       <div class="stages">
+         <div class="st" style="padding:18px 20px;"><div class="ic" style="width:48px;height:48px;font-size:26px;margin-bottom:10px;"><svg class="i"><use href="#i-flag"/></svg></div><h3 style="font-size:21px;margin-bottom:6px;">2011</h3><p>The cluster opens, the first of its kind in southern Russia</p></div>
+         <div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+         <div class="st" style="padding:18px 20px;"><div class="ic" style="width:48px;height:48px;font-size:26px;margin-bottom:10px;"><svg class="i"><use href="#i-layers"/></svg></div><h3 style="font-size:21px;margin-bottom:6px;">2014</h3><p>The concept is rebuilt for updated lease terms and a new management structure</p></div>
+         <div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+         <div class="st" style="padding:18px 20px;"><div class="ic" style="width:48px;height:48px;font-size:26px;margin-bottom:10px;"><svg class="i"><use href="#i-search"/></svg></div><h3 style="font-size:21px;margin-bottom:6px;">Pandemic (2020)</h3><p>The concept is rebuilt for a new format of work and demand</p></div>
+         <div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+         <div class="st" style="padding:18px 20px;"><div class="ic" style="width:48px;height:48px;font-size:26px;margin-bottom:10px;"><svg class="i"><use href="#i-bulb"/></svg></div><h3 style="font-size:21px;margin-bottom:6px;">2022</h3><p>Another rebuild of the concept for a changed market</p></div>
+       </div>
+       <div class="chips" style="margin-top:16px;">
+         <span class="chip g">👤 Co-founder of AI2ARCH</span>
+         <span class="chip g">📐 2,500+ m² of cluster spaces</span>
+         <span class="chip g">🔁 3 redevelopment cycles in a row</span>
+       </div>
+       <p class="note">A clear teaching case: you see not only the result but also the initial diagnosis, and the concept changes are easy to trace over time. We examine it together before you choose a track and a property. <b>Example based on C52; the same algorithm applies to your own property.</b></p>
+       <a class="chip" href="https://c52.space" target="_blank" rel="noopener" style="margin-top:4px;text-decoration:none;display:inline-flex;">🔗 c52.space</a>
+     </div>
+   </section>
+
+   <!-- 4 COMPARISON -->
+   <section class="slide">
+     <div class="kick">04 · What makes it different</div>
+     <h2>Not new construction: <em>diagnosis first</em></h2>
+     <div class="body">
+       <div class="cmp">
+         <div class="pn">
+           <div class="sub">New construction</div><h3>A vacant site</h3>
+           <svg class="ill" viewBox="0 0 440 200" aria-hidden="true">
+             <line x1="0" y1="170" x2="440" y2="170" stroke="#D5DBE6" stroke-width="3"/>
+             <rect x="50" y="50" width="340" height="120" fill="none" stroke="#9AA4B8" stroke-width="3" stroke-dasharray="10 8" rx="4"/>
+             <path d="M220 90v60M190 120h60" stroke="#9AA4B8" stroke-width="6" stroke-linecap="round"/>
+             <text x="220" y="40" text-anchor="middle" font-size="16" font-weight="700" fill="#9AA4B8" font-family="inherit">vacant site</text>
+           </svg>
+           <ul><li>We start from an empty site</li><li>The constraints are mostly regulatory</li><li>Design is freer, but the connection to place is weaker</li></ul>
+         </div>
+         <div class="pn hi">
+           <div class="sub" style="color:#1A6BFF">Redevelopment</div><h3>A property with history</h3>
+           <svg class="ill" viewBox="0 0 440 200" aria-hidden="true">
+             <line x1="0" y1="178" x2="440" y2="178" stroke="#D5DBE6" stroke-width="3"/>
+             <path d="M160 178V86l60-34 60 34v92z" fill="#EAF1FF" stroke="#1A6BFF" stroke-width="3" stroke-linejoin="round"/>
+             <rect x="188" y="110" width="24" height="30" fill="#1A6BFF"/><rect x="228" y="110" width="24" height="30" fill="#1A6BFF"/><rect x="204" y="148" width="32" height="30" fill="#fff" stroke="#1A6BFF" stroke-width="3"/>
+             <g font-size="15" font-weight="800" font-family="inherit" fill="#0A0F1A">
+               <rect x="6" y="16" width="108" height="30" rx="8" fill="#fff" stroke="#BFD3FF" stroke-width="2"/><text x="60" y="37" text-anchor="middle">PZZ</text>
+               <rect x="298" y="16" width="136" height="30" rx="8" fill="#fff" stroke="#BFD3FF" stroke-width="2"/><text x="366" y="37" text-anchor="middle">Structure</text>
+               <rect x="6" y="136" width="126" height="30" rx="8" fill="#fff" stroke="#BFD3FF" stroke-width="2"/><text x="69" y="157" text-anchor="middle">Owners</text>
+               <rect x="312" y="136" width="122" height="30" rx="8" fill="#fff" stroke="#BFD3FF" stroke-width="2"/><text x="373" y="157" text-anchor="middle">Surroundings</text>
+             </g>
+             <g stroke="#BFD3FF" stroke-width="2.5" stroke-linecap="round"><path d="M114 38L170 80M298 38L270 80M132 150L164 140M312 150L276 140"/></g>
+           </svg>
+           <ul><li>There is a building, an owner, and the history of the place</li><li>There are the PZZ, the structure, and an established context</li><li>We start with a diagnosis, not with a picture</li></ul>
+         </div>
+       </div>
+       <p class="note" style="text-align:center"><b>That is why on the course we analyze the context first and only then draw.</b></p>
+     </div>
+   </section>
+
+   <!-- 5 AI -->
+   <section class="slide">
+     <div class="kick">05 · The role of AI</div>
+     <h2>AI <em>suggests</em>, you decide</h2>
+     <div class="body">
+       <div class="flow">
+         <div class="fl you"><div class="ic"><svg class="i"><use href="#i-user"/></svg></div><h3>You set the task</h3><p>Property, goal, constraints</p></div>
+         <div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+         <div class="fl ai"><div class="ic"><svg class="i"><use href="#i-chat"/></svg></div><h3>AI makes a draft</h3><p>Analysis, scenarios, texts, images</p></div>
+         <div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+         <div class="fl you"><div class="ic"><svg class="i"><use href="#i-check"/></svg></div><h3>You check</h3><p>Regulations, numbers, logic</p></div>
+         <div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div>
+         <div class="fl you"><div class="ic"><svg class="i"><use href="#i-flag"/></svg></div><h3>The decision is yours</h3><p>Only verified material goes into the document</p></div>
+       </div>
+       <svg class="back" viewBox="0 0 1136 60" aria-hidden="true">
+         <path d="M716 2V28q0 12-12 12H135q-12 0-12-12V10" fill="none" stroke="#BFD3FF" stroke-width="3" stroke-dasharray="7 7" stroke-linecap="round"/>
+         <path d="M115 18l8-10 8 10" fill="none" stroke="#BFD3FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+         <rect x="318" y="26" width="212" height="26" fill="#fff"/>
+         <text x="424" y="46" text-anchor="middle" font-size="15" font-weight="700" fill="#9AA4B8" font-family="inherit">not suitable: refine the task</text>
+       </svg>
+       <div class="two">
+         <div class="bx"><h4>AI does well</h4><ul><li>Gathers and consolidates information quickly</li><li>Suggests options and scenarios</li><li>Prepares draft texts and visuals</li></ul></div>
+         <div class="bx you"><h4>Only you are responsible for</h4><ul><li>Regulations and legal restrictions</li><li>Numbers and calculations</li><li>Choosing the scenario and the final conclusion</li></ul></div>
+       </div>
+     </div>
+   </section>
+
+   <!-- 6 PATH -->
+   <section class="slide">
+     <div class="kick">06 · The course path</div>
+     <h2>72 hours: <em>start, four modules, Demo Day</em></h2>
+     <div class="body">
+       <div class="segbar" aria-hidden="true"><i style="flex:6"></i><i style="flex:16"></i><i style="flex:20"></i><i style="flex:16"></i><i style="flex:10"></i><i style="flex:4"></i></div>
+       <div class="mods">
+         <div class="md"><div class="tp">Introductory</div><div class="h">6<small>h</small></div><h3>Start</h3><p>The property life cycle, the “C52” case, choosing a track</p><div class="res">Result<b>Property data sheet</b></div></div>
+         <div class="md"><div class="tp">Module 1</div><div class="h">16<small>h</small></div><h3>Site context</h3><p>The PZZ through language models, audience profile, hypothesis</p><div class="res">Result<b>Site dossier</b></div></div>
+         <div class="md"><div class="tp">Module 2</div><div class="h">20<small>h</small></div><h3>Functions and economics</h3><p>HBU, 5–7 scenarios, calculations, stress test</p><div class="res">Result<b>Scenario and economics</b></div></div>
+         <div class="md"><div class="tp">Module 3</div><div class="h">16<small>h</small></div><h3>Visual packaging</h3><p>Mood board, generation, controlled redesign, storyboard</p><div class="res">Result<b>Visual package</b></div></div>
+         <div class="md"><div class="tp">Module 4</div><div class="h">10<small>h</small></div><h3>Synthesis</h3><p>Assembling the concept and the final document, pitch</p><div class="res">Result<b>Final document</b></div></div>
+         <div class="md"><div class="tp">Assessment</div><div class="h">4<small>h</small></div><h3>Demo Day</h3><p>Experts review the project remotely</p><div class="res">Result<b>Expert review</b></div></div>
+       </div>
+       <p class="note"><b>HBU</b> — Highest and Best Use: which function will give the place the greatest value and income.</p>
+     </div>
+   </section>
+
+   <!-- 7 TRACKS -->
+   <section class="slide">
+     <div class="kick">07 · Two tracks</div>
+     <h2>A shared foundation, <em>a track for your role</em></h2>
+     <p class="lead">Depth and the final document differ. The price is the same for both tracks: 18,900 ₽; for graduates of the AI in Architecture course: 14,900 ₽.</p>
+     <div class="body">
+       <div class="fork">
+         <div class="trunk"><h3>Shared foundation</h3>
+           <div class="it"><svg class="i"><use href="#i-search"/></svg>Context and the PZZ</div>
+           <div class="it"><svg class="i"><use href="#i-bulb"/></svg>HBU and scenarios</div>
+           <div class="it"><svg class="i"><use href="#i-image"/></svg>Visualization</div>
+           <div class="it" style="margin-bottom:0"><svg class="i"><use href="#i-flag"/></svg>Demo Day</div>
+         </div>
+         <svg class="forkarr" viewBox="0 0 80 300" aria-hidden="true">
+           <path d="M0 150H30M30 150V70H66M30 150V230H66" fill="none" stroke="#1A6BFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+           <path d="M56 60l12 10-12 10M56 220l12 10-12 10" fill="none" stroke="#1A6BFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+         </svg>
+         <div class="lanes">
+           <div class="ln a"><div><div class="t">Track A</div><h3>Designer</h3><div class="who">Architects, urban planners, designers</div><div class="fo"><b>Focus:</b> functional zoning, floor-area balance, facade redesign, visual package</div></div>
+             <div class="doc"><svg class="i"><use href="#i-doc"/></svg><small>Outcome</small><b>Architectural and visual study</b></div></div>
+           <div class="ln b"><div><div class="t">Track B</div><h3>Developer and investor</h3><div class="who">Developers, investors, property owners, realtors, analysts, economists</div><div class="fo"><b>Focus:</b> product hypothesis, CAPEX/OPEX and payback, investment teaser</div></div>
+             <div class="doc"><svg class="i"><use href="#i-doc"/></svg><small>Outcome</small><b>Investment concept brief</b></div></div>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- 8 RESULT -->
+   <section class="slide">
+     <div class="kick">08 · Outcome</div>
+     <h2>What <em>you keep</em> after the course</h2>
+     <div class="body">
+       <div class="res8">
+         <figure class="cert"><img src="../images/certificate-sample.jpg" alt="Sample professional development certificate from Southern Federal University"><figcaption>Sample professional development certificate from Southern Federal University</figcaption></figure>
+         <div class="outs">
+           <div class="out"><div class="ic"><svg class="i"><use href="#i-doc"/></svg></div><div><h3>Final document</h3><p>An architectural and visual study or an investment concept brief, depending on your track.</p></div></div>
+           <div class="out"><div class="ic"><svg class="i"><use href="#i-flag"/></svg></div><div><h3>Expert review</h3><p>Experts review your project remotely, based on the final document and a video pitch.</p></div></div>
+           <div class="out"><div class="ic"><svg class="i"><use href="#i-shield"/></svg></div><div><h3>SFedU certificate</h3><p>A professional development certificate in the established format, 72 hours. Those still studying first receive a certificate of attendance; the professional development certificate follows after their higher-education diploma.</p></div></div>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- 9 EXAMPLES -->
+   <section class="slide">
+     <div class="kick">09 · What the result looks like</div>
+     <h2>From <em>context</em> to a master plan and visualizations</h2>
+     <p class="lead">Examples from AI2ARCH materials. Your final document is assembled from the same elements.</p>
+     <div class="body" style="justify-content:flex-start">
+       <div class="gal">
+         <figure class="big"><img src="../images/case-greenpocket-genplan.jpg" alt="Example of a concept master plan"><figcaption>Concept master plan</figcaption></figure>
+         <figure><img src="../images/rostov-naberezhnaya-gallery.jpg" alt="Example of a project presentation" style="object-position:center"><figcaption>Project presentation: visualizations, diagram, materials</figcaption></figure>
+         <figure><img src="../images/case-anapa-park-vizualizacii.jpg" alt="Example of visualizations" style="object-position:center"><figcaption>Concept visualizations</figcaption></figure>
+       </div>
+     </div>
+   </section>
+
+   <!-- 10 FORMAT -->
+   <section class="slide">
+     <div class="kick">10 · Format</div>
+     <h2>How the <em>course</em> is organized</h2>
+     <div class="body">
+       <div class="tiles">
+         <div class="tl"><div class="ic"><svg class="i"><use href="#i-book"/></svg></div><h3>Materials</h3><p>A course guide with module walkthroughs and assignments. Watch at a time that suits you.</p><a href="redev-guide.html" target="_blank" rel="noopener">Open the course guide ↗</a></div>
+         <div class="tl"><div class="ic"><svg class="i"><use href="#i-video"/></svg></div><h3>Live meetings</h3><p>Online in Yandex Telemost: we review your materials together with the group.</p><a href="redev-schedule.html" target="_blank" rel="noopener">Meeting schedule ↗</a></div>
+         <div class="tl"><div class="ic"><svg class="i"><use href="#i-folder"/></svg></div><h3>Your own project</h3><p>You work on the property between sessions. A mentor reviews your materials.</p></div>
+         <div class="tl"><div class="ic"><svg class="i"><use href="#i-chat"/></svg></div><h3>Group chat</h3><p>Announcements, joining links, assignment reviews.</p></div>
+       </div>
+       <div class="stats">
+         <div class="sb"><b>72</b><span>academic hours</span></div>
+         <div class="sb"><b>4.5</b><span>weeks of study</span></div>
+         <div class="sb"><b>≈12</b><span>hours per week</span></div>
+         <div class="sb"><b>≤2</b><span>academic hours per session</span></div>
+       </div>
+       </div></section>
+
+   <!-- 11 TOOLS -->
+   <section class="slide">
+     <div class="kick">11 · Tools</div>
+     <h2>Two toolsets: <em>core and extended</em></h2>
+     <div class="body">
+       <div class="tools">
+         <svg class="rings" viewBox="0 0 400 400" aria-hidden="true">
+           <circle cx="200" cy="200" r="190" fill="#EAF1FF" stroke="#BFD3FF" stroke-width="3" stroke-dasharray="9 8"/>
+           <circle cx="200" cy="215" r="118" fill="#1A6BFF"/>
+           <text x="200" y="205" text-anchor="middle" font-size="28" font-weight="800" fill="#fff" font-family="inherit">Core</text>
+           <text x="200" y="238" text-anchor="middle" font-size="28" font-weight="800" fill="#fff" font-family="inherit">toolset</text>
+           <text x="200" y="266" text-anchor="middle" font-size="16" font-weight="700" fill="#BFD3FF" font-family="inherit">all assignments</text>
+           <text x="200" y="52" text-anchor="middle" font-size="21" font-weight="800" fill="#0A0F1A" font-family="inherit">Extended toolset</text>
+           <text x="200" y="76" text-anchor="middle" font-size="16" font-weight="700" fill="#5B6475" font-family="inherit">optional</text>
+         </svg>
+         <div>
+           <div class="tc main"><h3>Core toolset</h3><div class="sub">Available without additional conditions. All course assignments are completed here.</div>
+             <div class="chips"><span class="chip">Alice AI</span><span class="chip">GigaChat</span><span class="chip">2GIS</span><span class="chip">CIAN</span><span class="chip">Yandex Maps</span><span class="chip">Yandex Sheets</span><span class="chip">Shedevrum</span><span class="chip">Kandinsky</span><span class="chip">Gamma</span><span class="chip">Notion</span></div></div>
+           <div class="tc"><h3>Extended toolset</h3><div class="sub">International models. The instructor demonstrates them; you may repeat the work optionally. Participants arrange access themselves.</div>
+             <div class="chips"><span class="chip g">Claude</span><span class="chip g">ChatGPT</span><span class="chip g">Gemini</span><span class="chip g">NotebookLM</span><span class="chip g">Flux</span><span class="chip g">Midjourney</span></div></div>
+           <p class="note" style="margin-top:6px"><b>No paid subscriptions are required.</b></p>
+         </div>
+       </div>
+     </div>
+   </section>
+
+   <!-- 12 REVIEW -->
+   <section class="slide">
+     <div class="kick">12 · Course rule</div>
+     <h2>We check <em>everything</em> AI produces</h2>
+     <p class="lead">Every AI result goes through four questions. Only then does it enter the final document.</p>
+     <div class="body">
+       <div class="checks">
+         <div class="ck"><div class="ic"><svg class="i"><use href="#i-source"/></svg></div><h3>Source</h3><p>Where does the fact come from? Is there a document or a link?</p></div>
+         <div class="ck"><div class="ic"><svg class="i"><use href="#i-scale"/></svg></div><h3>Regulation</h3><p>Is it confirmed in the PZZ or a regulation?</p></div>
+         <div class="ck"><div class="ic"><svg class="i"><use href="#i-calc"/></svg></div><h3>Number</h3><p>Has it been recalculated another way?</p></div>
+         <div class="ck"><div class="ic"><svg class="i"><use href="#i-logic"/></svg></div><h3>Logic</h3><p>Does the conclusion withstand the question “why?”</p></div>
+       </div>
+       <div class="rule"><svg class="i"><use href="#i-shield"/></svg>Unverified material does not enter the final document.</div>
+     </div>
+   </section>
+
+   <!-- 13 STEP -->
+   <section class="slide">
+     <div class="kick">13 · First step</div>
+     <h2>What to do <em>before the next meeting</em></h2>
+     <p class="lead">Three actions so we can get straight to work at the meeting.</p>
+     <div class="body">
+       <div class="steps">
+         <div class="sp"><div class="n">1</div><h3>Choose a property</h3><p>Your own property or the base case C52. If in doubt, take C52.</p></div>
+         <div class="sp"><div class="n">2</div><h3>Write down three facts</h3><p>Where it is, what is happening to it now, and what you need from the course.</p></div>
+         <div class="sp"><div class="n">3</div><h3>Send it to the chat</h3><p>Write in the group chat so we can review it at the meeting. Check the date of the next meeting in the schedule.</p><a href="redev-schedule.html" target="_blank" rel="noopener">Meeting schedule ↗</a></div>
+       </div>
+     </div>
+   </section>
+
+   <!-- 14 LINKS -->
+   <section class="slide">
+     <div class="kick">14 · Where to find everything</div>
+     <h2>Everything in <em>three places</em></h2>
+     <div class="body">
+       <div class="links">
+         <a class="lk" href="redev-schedule.html" target="_blank" rel="noopener"><div class="ic"><svg class="i"><use href="#i-cal"/></svg></div><h3>Schedule</h3><p>Dates, times, and topics of meetings. See when the next one is.</p><div class="go">Open the schedule ↗</div></a>
+         <a class="lk" href="redev-guide.html" target="_blank" rel="noopener"><div class="ic"><svg class="i"><use href="#i-book"/></svg></div><h3>Course guide</h3><p>Module materials, assignments, and recordings. Study at a time that suits you.</p><div class="go">Open the course guide ↗</div></a>
+         <div class="lk nolink"><div class="ic"><svg class="i"><use href="#i-chat"/></svg></div><h3>Group chat</h3><p>Yandex Telemost: announcements, joining links, and answers to questions. We send the invitation link after enrollment.</p><div class="go" style="color:#5B6475">For participants</div></div>
+       </div>
+     </div>
+   </section>
+
+   <div class="foot" id="foot"><span>Introduction · AI in Redevelopment</span><span><a href="redev-schedule.html" target="_blank" rel="noopener">Schedule ↗</a> · <a href="https://fortune-swing-02e.notion.site/41112bb3b5cd81839661da69963a035b?source=copy_link" target="_blank" rel="noopener">Workbook ↗</a></span></div>
+  </div>
+ </div>
+ <div class="controls">
+   <button id="prev" aria-label="Back" title="Back">‹</button>
+   <div class="nav-progress" id="navProgress" aria-label="Presentation part progress"></div>
+   <div class="counter" id="counter"></div>
+   <button id="tocBtn" class="toc-btn" type="button" aria-label="Contents" title="Contents" aria-haspopup="true" aria-expanded="false">☰</button>
+   <button id="next" aria-label="Next" title="Next">›</button>
+   <button id="fs" aria-label="Expand to full screen" title="Full screen (F)">⤢</button>
+   <span class="hint">← → to navigate · F — full screen</span>
+   <div class="toc-menu" id="tocMenu" role="menu" aria-label="Contents"></div>
+ </div>
+</div>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  var slides=[].slice.call(stage.querySelectorAll('.slide'));
+  var total=slides.length;
+  var prev=document.getElementById('prev'), next=document.getElementById('next'), fs=document.getElementById('fs');
+  var prog=document.getElementById('progress'), counter=document.getElementById('counter');
+  var footText=document.getElementById('footText');
+  var navProgress=document.getElementById('navProgress');
+  var tocBtn=document.getElementById('tocBtn'), tocMenu=document.getElementById('tocMenu');
+  var cur=0;
+
+  function clean(s){return String(s||'').replace(/\s+/g,' ').trim();}
+  function slideTitle(s){
+    var h=s.querySelector('h1,h2');
+    return h?clean(h.textContent):'Slide';
+  }
+  function buildParts(){
+    var divs=[];
+    slides.forEach(function(s,i){ if(s.classList.contains('part-divider')) divs.push(i); });
+    var parts=[];
+    if(!divs.length){
+      parts.push({title:'Presentation',start:0,end:total-1});
+    }else{
+      if(divs[0]>0) parts.push({title:'Introduction',start:0,end:divs[0]-1});
+      divs.forEach(function(d,idx){
+        var end=idx+1<divs.length?divs[idx+1]-1:total-1;
+        var num=slides[d].querySelector('.num');
+        var kick=slides[d].querySelector('.kick');
+        var title=(num?clean(num.textContent):'Part')+(kick?' · '+clean(kick.textContent):'');
+        parts.push({title:title,start:d,end:end,divider:true});
+      });
+    }
+    return parts;
+  }
+  var parts=buildParts();
+  var segs=[];
+
+  function buildProgress(){
+    navProgress.innerHTML='';
+    parts.forEach(function(p){
+      var b=document.createElement('button');
+      b.type='button'; b.className='nav-seg';
+      b.style.flexGrow=String(p.end-p.start+1);
+      b.title=p.title+' · slides '+(p.start+1)+'–'+(p.end+1);
+      b.setAttribute('aria-label',b.title);
+      var f=document.createElement('span'); f.className='nav-seg-fill'; b.appendChild(f);
+      b.addEventListener('click',function(){go(p.start);});
+      navProgress.appendChild(b); segs.push(b);
+    });
+  }
+
+  function updateProgress(){
+    parts.forEach(function(p,i){
+      var f=segs[i].querySelector('.nav-seg-fill');
+      var pct=0;
+      if(cur>=p.end) pct=100;
+      else if(cur>=p.start) pct=((cur-p.start+1)/(p.end-p.start+1))*100;
+      f.style.width=pct+'%';
+      segs[i].classList.toggle('active',cur>=p.start&&cur<=p.end);
+    });
+  }
+
+  function buildToc(){
+    tocMenu.innerHTML='';
+    parts.forEach(function(p){
+      var head=document.createElement('button');
+      head.type='button'; head.className='toc-part';
+      var t=document.createElement('span'); t.textContent=p.title;
+      var r=document.createElement('span'); r.className='range'; r.textContent='slides '+(p.start+1)+'–'+(p.end+1);
+      head.appendChild(t); head.appendChild(r);
+      head.addEventListener('click',function(){go(p.start);closeToc();});
+      tocMenu.appendChild(head);
+      for(var i=p.start;i<=p.end;i++){
+        if(p.divider && i===p.start) continue;
+        var b=document.createElement('button');
+        b.type='button'; b.className='toc-link'; b.setAttribute('role','menuitem');
+        var n=document.createElement('span'); n.className='n'; n.textContent=(i+1);
+        var tx=document.createElement('span'); tx.textContent=slideTitle(slides[i]);
+        b.appendChild(n); b.appendChild(tx);
+        (function(idx){b.addEventListener('click',function(){go(idx);closeToc();});})(i);
+        tocMenu.appendChild(b);
+      }
+    });
+  }
+
+  function openToc(){
+    tocMenu.classList.add('open'); tocBtn.setAttribute('aria-expanded','true');
+  }
+  function closeToc(){
+    tocMenu.classList.remove('open'); tocBtn.setAttribute('aria-expanded','false');
+  }
+  tocBtn.addEventListener('click',function(e){
+    e.stopPropagation();
+    if(tocMenu.classList.contains('open')) closeToc(); else openToc();
+  });
+  document.addEventListener('click',function(e){
+    if(!tocMenu.classList.contains('open')) return;
+    if(tocMenu.contains(e.target)||tocBtn.contains(e.target)) return;
+    closeToc();
+  });
+
+  function go(i){
+    if(i<0||i>=total) return;
+    slides[cur].classList.remove('active');
+    cur=i; slides[cur].classList.add('active');
+    counter.textContent=(cur+1)+' / '+total;
+    if(footText) footText.textContent=slides[cur].getAttribute('data-foot')||'Presentation';
+    prev.disabled=cur===0; next.disabled=cur===total-1;
+    prog.style.width=((cur+1)/total*100)+'%';
+    updateProgress();
+    try{history.replaceState(null,'','#slide-'+(cur+1));}catch(e){}
+  }
+  prev.onclick=function(){go(cur-1)}; next.onclick=function(){go(cur+1)};
+  function fit(){
+    var vp=document.getElementById('viewport');
+    var s=Math.min((vp.clientWidth-8)/1280,(vp.clientHeight-8)/720);
+    stage.style.transform='scale('+s+')';
+  }
+  window.addEventListener('resize',fit);
+  function toggleFs(){
+    var el=document.documentElement;
+    if(!document.fullscreenElement&&!document.webkitFullscreenElement){(el.requestFullscreen||el.webkitRequestFullscreen||function(){}).call(el);}
+    else{(document.exitFullscreen||document.webkitExitFullscreen||function(){}).call(document);}
+  }
+  fs.onclick=toggleFs;
+  document.addEventListener('fullscreenchange',function(){setTimeout(fit,60)});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){closeToc();return;}
+    if(['ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(cur+1);}
+    else if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(cur-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);} else if(e.key==='End'){e.preventDefault();go(total-1);}
+    else if(e.key==='f'||e.key==='F'){e.preventDefault();toggleFs();}
+  });
+  var tx=null;
+  stage.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  stage.addEventListener('touchend',function(e){
+    if(tx===null)return; var dx=e.changedTouches[0].clientX-tx; tx=null;
+    if(Math.abs(dx)>50) go(dx<0?cur+1:cur-1);
+  });
+  function parseHash(){
+    var m=(location.hash||'').match(/^#(?:slide-)?(\d+)$/);
+    if(!m) return 0;
+    return Math.min(Math.max(parseInt(m[1],10)-1,0),total-1);
+  }
+  window.addEventListener('hashchange',function(){
+    var idx=parseHash();
+    if(idx!==cur) go(idx);
+  });
+
+  buildProgress();
+  buildToc();
+  go(parseHash());
+  fit();
+})();
+</script>
+</body>
+</html>

@@ -103,7 +103,10 @@ def check_link(src_page, value, problems):
             problems.append(f"{src_page.relative_to(ROOT)}: cannot parse target {target}: {e}")
             return
         # archi.html#enroll is handled by JS (it opens the application modal and has no element id).
-        js_anchor = target.name == "archi.html" and frag == "enroll"
+        # Deck pages use #slide-N hashes handled by their own JS.
+        js_anchor = (target.name == "archi.html" and frag == "enroll") or \
+                    (re.fullmatch(r"slide-\d+", frag) is not None and
+                     "#slide-" in target.read_text(encoding="utf-8", errors="ignore"))
         if frag not in tp.ids and not js_anchor:
             problems.append(f"{src_page.relative_to(ROOT)}: missing anchor #{frag} in {target.relative_to(ROOT)}")
 

@@ -6,8 +6,8 @@ A = "archi"   # AI in Architecture
 R = "redev"   # AI in Redevelopment
 
 COURSES = {
-    A: ("AI in Architecture", "https://ai2arch.ru/en/archi.html#enroll"),
-    R: ("AI in Redevelopment", "https://ai2arch.ru/en/redev.html#apply"),
+    A: ("AI in Architecture", "https://ai2arch.ru/archi.html#enroll"),
+    R: ("AI in Redevelopment", "https://ai2arch.ru/redev.html#apply"),
 }
 
 TXT_O = ["Alice AI", "GigaChat"]

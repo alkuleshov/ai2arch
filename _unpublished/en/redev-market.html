@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1.2 · Market and surroundings · AI in Redevelopment · AI2ARCH</title>
+<meta name="description" content="Topic 1.2 of AI in Redevelopment: analyze the market and surroundings of a site, collect data from open sources, and turn it into verified points for Track A or Track B.">
+<link rel="canonical" href="https://ai2arch.ru/en/redev-market.html">
+<link rel="alternate" hreflang="ru" href="https://ai2arch.ru/redev-market.html">
+<link rel="alternate" hreflang="en" href="https://ai2arch.ru/en/redev-market.html">
+<link rel="alternate" hreflang="x-default" href="https://ai2arch.ru/redev-market.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://ai2arch.ru/en/redev-market.html">
+<meta property="og:title" content="1.2 · Market and surroundings">
+<meta property="og:description" content="Topic 1.2 of AI in Redevelopment: analyze the market and surroundings of a site, collect data from open sources, and turn it into verified points for Track A or Track B.">
+<meta property="og:image" content="https://ai2arch.ru/images/og-ai2arch.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="1.2 · Market and surroundings">
+<meta name="twitter:description" content="Topic 1.2 of AI in Redevelopment: analyze the market and surroundings of a site, collect data from open sources, and turn it into verified points for Track A or Track B.">
+<meta name="twitter:image" content="https://ai2arch.ru/images/og-ai2arch.jpg">
+<link rel="stylesheet" href="../assets/lang-switch.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+:root{
+  --navy:#0A0F1A; --graphite:#2A2F3E; --azure:#1A6BFF;
+  --azure2:#EAF1FF; --azure3:#BFD3FF; --soft:#F6F8FC; --line:#E1E5EE; --muted:#5B6475; --faint:#9AA4B8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#fff;color:var(--navy);font-family:Manrope,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.deck{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:8px 0 10px}
+.viewport{position:relative;flex:1 1 auto;width:100%;display:flex;align-items:center;justify-content:center;min-height:0}
+.stage{width:1280px;height:720px;position:relative;flex:none;transform-origin:center center;background:#fff;overflow:hidden;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 30px rgba(10,15,26,.06)}
+.progress{position:absolute;left:0;top:0;height:5px;background:var(--azure);width:0;transition:width .35s ease;z-index:5}
+
+.slide{position:absolute;inset:0;padding:50px 72px 74px;display:none;flex-direction:column}
+.slide.active{display:flex;animation:in .4s ease both}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.kick{font-size:14px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--azure);margin-bottom:12px}
+h1{font-size:58px;line-height:1.04;font-weight:800;letter-spacing:-.02em}
+h2{font-size:44px;line-height:1.12;font-weight:800;letter-spacing:-.015em}
+h1 em,h2 em{font-style:normal;color:var(--azure)}
+.lead{font-size:22px;line-height:1.5;color:var(--muted);margin-top:12px;max-width:1040px}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;margin-top:14px}
+.foot{position:absolute;left:72px;right:72px;bottom:24px;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--faint);letter-spacing:.03em}
+.foot a{color:var(--azure);font-weight:700;text-decoration:none}
+.foot a:hover{text-decoration:underline}
+.slide .body .src{font-size:12.5px}
+.slide.has-terms{padding-bottom:118px}
+.terms{position:absolute;left:72px;right:72px;bottom:50px;border-top:1px solid var(--line);padding-top:6px;font-size:11.5px;line-height:1.32;color:var(--faint);display:flex;gap:14px;flex-wrap:wrap}
+.terms .lab{flex:none;font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--azure);padding-top:2px}
+.terms span{flex:1 1 280px;min-width:220px}
+.terms b{color:var(--navy);font-weight:800}
+.foot .num{font-weight:800;color:var(--navy)}
+svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.note{font-size:18px;color:var(--muted);margin-top:14px;line-height:1.45}
+.note b{color:var(--navy)}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--azure2);color:var(--azure);font-weight:800;font-size:16px}
+.chip.g{background:var(--soft);color:var(--graphite);border:1px solid var(--line)}
+.pill{display:inline-block;padding:6px 12px;border-radius:8px;background:var(--azure2);color:var(--azure);font-weight:800;font-size:15px;line-height:1.25}
+
+/* 1 title */
+.s1{flex-direction:row;align-items:center;gap:30px}
+.s1 .l{flex:1.2}
+.s1 .r{flex:1}
+.s1 .chips{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.s1 .how{margin-top:26px;font-size:15px;color:var(--faint)}
+
+/* 2 chain */
+.chain{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:6px}
+.chain:before{content:"";position:absolute;left:8%;right:8%;top:45px;height:3px;background:var(--azure3);z-index:0}
+.node{position:relative;z-index:1;text-align:center}
+.node .c{width:92px;height:92px;border-radius:50%;margin:0 auto 16px;background:#fff;border:3px solid var(--azure);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:42px}
+.node:last-child .c{background:var(--azure);color:#fff}
+.node .n{font-size:14px;font-weight:800;color:var(--faint);letter-spacing:.1em}
+.node h3{font-size:25px;font-weight:800;margin:2px 0 10px}
+.node p{font-size:17.5px;line-height:1.4;color:var(--muted);min-height:112px}
+.node .pill{margin-top:8px;font-size:16px}
+
+/* 3 life cycle */
+.stages{display:grid;grid-template-columns:1fr 36px 1fr 36px 1fr 36px 1fr;align-items:stretch;margin-top:10px}
+.st{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:24px 22px}
+.st .ic{width:60px;height:60px;border-radius:14px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:16px}
+.st:nth-child(7) .ic{background:var(--azure);color:#fff}
+.st h3{font-size:24px;font-weight:800;margin-bottom:8px;white-space:nowrap}
+.st p{font-size:17.5px;line-height:1.45;color:var(--muted)}
+.arr{display:flex;align-items:center;justify-content:center;color:var(--azure)}
+.arr svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.band{margin-top:6px;background:var(--azure2);border-radius:14px;padding:16px 26px;font-size:20px;color:var(--navy);display:flex;gap:14px;align-items:center}
+.band b{color:var(--azure)}
+
+/* 4 comparison */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:6px}
+.pn{border:1px solid var(--line);border-radius:18px;padding:24px 30px;background:#fff}
+.pn.hi{border-color:var(--azure);background:linear-gradient(180deg,var(--azure2),#fff 60%)}
+.pn h3{font-size:28px;font-weight:800;margin-bottom:4px}
+.pn .sub{font-size:15px;color:var(--faint);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.pn svg.ill{width:100%;height:180px;display:block;margin:2px 0 8px}
+.pn ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.pn li{font-size:19.5px;line-height:1.4;color:var(--graphite);padding-left:24px;position:relative}
+.pn li:before{content:"";position:absolute;left:0;top:.6em;width:12px;height:3px;border-radius:2px;background:var(--faint)}
+.pn.hi li:before{background:var(--azure)}
+
+/* 5 AI */
+.flow{display:grid;grid-template-columns:1fr 50px 1fr 50px 1fr 50px 1fr;align-items:stretch}
+.fl{border:2px solid var(--line);border-radius:16px;padding:22px 16px 20px;background:#fff;text-align:center}
+.fl .ic{width:60px;height:60px;border-radius:50%;margin:0 auto 12px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:31px}
+.fl.you{border-color:var(--azure3)}
+.fl.ai{background:var(--azure);border-color:var(--azure);color:#fff}
+.fl.ai .ic{background:#fff;color:var(--azure)}
+.fl.ai p{color:rgba(255,255,255,.85)}
+.fl h3{font-size:23px;font-weight:800;margin-bottom:6px}
+.fl p{font-size:17.5px;line-height:1.35;color:var(--muted)}
+.back{display:block;width:100%;height:auto;margin:6px 0 16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:4px}
+.bx{background:var(--soft);border-radius:16px;padding:22px 28px}
+.bx h4{font-size:16px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--azure);margin-bottom:10px}
+.bx.you h4{color:var(--graphite)}
+.bx li{list-style:none;font-size:19.5px;line-height:1.4;padding-left:26px;position:relative;margin-bottom:7px;color:var(--graphite)}
+.bx li:before{content:"";position:absolute;left:0;top:.35em;width:14px;height:14px;border-radius:50%;background:var(--azure2);border:3px solid var(--azure);box-sizing:border-box}
+.bx.you li:before{border-color:var(--graphite);background:#fff}
+
+/* 6 modules */
+.segbar{display:flex;height:14px;border-radius:7px;overflow:hidden;gap:3px;margin:4px 0 18px}
+.segbar i{display:block;background:var(--azure)}
+.segbar i:nth-child(odd){background:var(--azure)}
+.segbar i:nth-child(even){background:var(--azure3)}
+.mods{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.md{border:1px solid var(--line);border-radius:14px;padding:20px 17px 18px;background:#fff;display:flex;flex-direction:column}
+.md .tp{font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.md .h{font-size:42px;font-weight:800;color:var(--azure);line-height:1;margin:6px 0 8px}
+.md .h small{font-size:16px;font-weight:700;color:var(--muted);margin-left:3px}
+.md h3{font-size:20px;font-weight:800;line-height:1.2;margin-bottom:10px;min-height:50px}
+.md p{font-size:16px;line-height:1.4;color:var(--muted);flex:1}
+.md .res{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-size:14px;color:var(--faint);font-weight:700}
+.md .res b{display:block;color:var(--navy);font-size:16.5px;margin-top:3px}
+.md:last-child{background:var(--azure);border-color:var(--azure)}
+.md:last-child .tp,.md:last-child .h,.md:last-child .h small,.md:last-child p,.md:last-child .res,.md:last-child .res b,.md:last-child h3{color:#fff}
+.md:last-child .res{border-color:rgba(255,255,255,.4)}
+
+/* 7 tracks */
+.fork{display:grid;grid-template-columns:300px 80px 1fr;align-items:center;margin-top:6px}
+.trunk{background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:22px 22px 18px}
+.trunk h3{font-size:25px;font-weight:800;margin-bottom:12px}
+.trunk .it{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;background:#fff;border:1px solid var(--line);font-size:18px;font-weight:700;margin-bottom:8px}
+.trunk .it svg{color:var(--azure);font-size:22px}
+.forkarr{width:80px;height:300px}
+.lanes{display:flex;flex-direction:column;gap:18px}
+.ln{border:2px solid var(--line);border-radius:18px;padding:18px 24px;display:grid;grid-template-columns:1fr 250px;gap:20px;align-items:center;background:#fff}
+.ln.a{border-color:var(--azure3)}
+.ln.b{border-color:var(--azure);background:linear-gradient(90deg,var(--azure2),#fff 70%)}
+.ln .t{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--azure)}
+.ln h3{font-size:27px;font-weight:800;margin:2px 0 4px}
+.ln .who{font-size:17px;color:var(--muted);line-height:1.35;margin-bottom:8px}
+.ln .fo{font-size:17px;color:var(--graphite);line-height:1.4}
+.ln .fo b{color:var(--navy)}
+.ln .doc{background:var(--azure);color:#fff;border-radius:14px;padding:16px 18px;text-align:center}
+.ln.a .doc{background:var(--graphite)}
+.ln .doc svg{font-size:30px;margin-bottom:6px}
+.ln .doc small{display:block;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;font-weight:700}
+.ln .doc b{font-size:19px;line-height:1.25;font-weight:800}
+
+/* 8 result */
+.res8{display:grid;grid-template-columns:540px 1fr;gap:40px;align-items:center;margin-top:6px}
+.cert{margin:0}
+.cert img{width:100%;display:block;border-radius:10px;border:1px solid var(--line);box-shadow:0 10px 30px rgba(10,15,26,.12)}
+.cert figcaption{margin-top:10px;font-size:14.5px;color:var(--faint);text-align:center}
+.outs{display:flex;flex-direction:column;gap:18px}
+.out{display:flex;gap:18px;align-items:flex-start;padding:18px 20px;border-radius:16px;background:var(--soft);border:1px solid var(--line)}
+.out .ic{width:54px;height:54px;border-radius:14px;background:var(--azure);color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;flex:none}
+.out h3{font-size:23px;font-weight:800;margin-bottom:4px}
+.out p{font-size:18px;line-height:1.42;color:var(--muted)}
+
+/* 9 examples */
+.gal{display:grid;grid-template-columns:430px 1fr;grid-template-rows:1fr 1fr;gap:14px;height:412px;margin-top:4px}
+.gal figure{position:relative;margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--soft)}
+.gal figure.big{grid-row:1/3}
+.gal img{width:100%;height:100%;object-fit:cover;display:block}
+.gal figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.94);padding:7px 12px;border-radius:8px;font-size:14.5px;font-weight:800;color:var(--navy)}
+
+/* 10 format */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:6px}
+.tl{border:1px solid var(--line);border-radius:18px;padding:28px 22px;background:#fff;display:flex;flex-direction:column}
+.tl .ic{width:66px;height:66px;border-radius:16px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:34px;margin-bottom:18px}
+.tl h3{font-size:24px;font-weight:800;margin-bottom:8px}
+.tl p{font-size:18px;line-height:1.45;color:var(--muted);flex:1}
+.tl a{margin-top:12px;color:var(--azure);font-weight:800;font-size:17px;text-decoration:none}
+.tl a:hover{text-decoration:underline}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
+.sb{background:var(--soft);border-radius:14px;padding:20px 22px;display:flex;align-items:baseline;gap:10px}
+.sb b{font-size:42px;font-weight:800;color:var(--azure)}
+.sb span{font-size:17px;color:var(--muted);line-height:1.25}
+
+/* 11 tools */
+.tools{display:grid;grid-template-columns:390px 1fr;gap:34px;align-items:center;margin-top:4px}
+.tools svg.rings{width:390px;height:390px}
+.tc{border:1px solid var(--line);border-radius:16px;padding:18px 24px;margin-bottom:12px}
+.tc.main{border-color:var(--azure);background:linear-gradient(90deg,var(--azure2),#fff 80%)}
+.tc h3{font-size:23px;font-weight:800;margin-bottom:4px}
+.tc .sub{font-size:17px;color:var(--muted);margin-bottom:10px;line-height:1.4}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips .chip{font-size:16px;padding:7px 13px}
+
+/* 12 verification */
+.checks{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:6px}
+.ck{border:1px solid var(--line);border-radius:18px;padding:32px 22px;background:#fff;text-align:center}
+.ck .ic{width:78px;height:78px;border-radius:50%;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 18px}
+.ck h3{font-size:26px;font-weight:800;margin-bottom:8px}
+.ck p{font-size:19px;line-height:1.45;color:var(--muted)}
+.rule{margin-top:20px;background:var(--navy);color:#fff;border-radius:16px;padding:24px 30px;font-size:26px;font-weight:800;display:flex;gap:16px;align-items:center}
+.rule svg{color:#6FA3FF;font-size:32px}
+
+/* 13 step */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.sp{border-top:5px solid var(--azure);background:var(--soft);border-radius:0 0 16px 16px;padding:30px 28px 34px}
+.sp .n{font-size:76px;font-weight:800;color:var(--azure);line-height:1;margin-bottom:12px}
+.sp h3{font-size:28px;font-weight:800;margin-bottom:8px}
+.sp p{font-size:20.5px;line-height:1.45;color:var(--muted)}
+.sp a{display:inline-block;margin-top:14px;background:var(--azure);color:#fff;text-decoration:none;font-weight:800;font-size:17px;padding:12px 18px;border-radius:10px}
+.sp a:hover{background:#0f56d6}
+
+/* 14 links */
+.links{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.lk{display:flex;flex-direction:column;border:2px solid var(--line);border-radius:20px;padding:38px 32px;text-decoration:none;background:#fff;transition:.15s}
+.lk:hover{border-color:var(--azure);box-shadow:0 10px 30px rgba(26,107,255,.14);transform:translateY(-2px)}
+.lk .ic{width:76px;height:76px;border-radius:18px;background:var(--azure);color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:22px}
+.lk h3{font-size:30px;font-weight:800;margin-bottom:8px}
+.lk p{font-size:19.5px;line-height:1.45;color:var(--muted);flex:1}
+.lk .go{margin-top:16px;color:var(--azure);font-weight:800;font-size:19px}
+.lk.nolink{cursor:default}
+.lk.nolink:hover{border-color:var(--line);box-shadow:none;transform:none}
+
+/* controls */
+.controls{display:flex;align-items:center;gap:10px;user-select:none}
+.controls button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);font-family:inherit;font-size:20px;font-weight:700;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.controls button:hover{border-color:var(--azure);color:var(--azure)}
+.controls button:disabled{opacity:.3;cursor:default;border-color:var(--line);color:var(--navy)}
+.counter{min-width:70px;text-align:center;font-size:15px;font-weight:800;color:var(--muted)}
+.dots{display:flex;gap:6px;margin:0 6px}
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--line);cursor:pointer;transition:.2s}
+.dots i.on{background:var(--azure);transform:scale(1.3)}
+.hint{font-size:12px;color:var(--faint);margin-left:8px}
+
+/* additional layouts for the 1.2 presentation */
+.tiles.three{grid-template-columns:repeat(3,1fr)}
+.plan{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px}
+.pl{border:1px solid var(--line);border-radius:16px;padding:20px 22px;background:#fff}
+.pl .n{font-size:34px;font-weight:800;color:var(--azure);line-height:1;margin-bottom:8px}
+.pl h3{font-size:20px;font-weight:800;margin-bottom:6px;line-height:1.2}
+.pl p{font-size:16.5px;line-height:1.4;color:var(--muted)}
+.numlist{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;margin-top:6px}
+.nl{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+.nl .n{font-size:18px;font-weight:800;color:var(--azure);min-width:24px}
+.nl p{font-size:18px;line-height:1.4;color:var(--graphite)}
+.toolrows{margin-top:6px;border-top:1px solid var(--line)}
+.tr{display:grid;grid-template-columns:260px 1fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.tr b{font-size:20px;font-weight:800}
+.tr span{font-size:18px;color:var(--muted);line-height:1.4}
+.datatable{width:100%;border-collapse:collapse;margin-top:6px;font-size:16px}
+.datatable th{text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:8px 10px;border-bottom:1px solid var(--line)}
+.datatable td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--graphite)}
+.datatable td:first-child{font-weight:700;color:var(--navy)}
+.datatable tr.sample td{font-style:italic;background:#F0F6FF;height:44px}
+.datatable tr.hint td{color:var(--faint);font-size:12.5px;height:44px;border-bottom:1px dashed #C9D3E3}
+.sample-tag{display:inline-block;font-style:normal;font-weight:700;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#1A6BFF;background:#EAF1FF;border-radius:4px;padding:1px 5px;margin-right:6px;vertical-align:middle}
+.stack{display:flex;flex-direction:column;gap:12px}
+.stack .it{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px}
+.stack .it b{display:block;font-size:17px;color:var(--azure);margin-bottom:3px}
+.stack .it p{font-size:16px;line-height:1.4;color:var(--muted)}
+.steps.six{grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px}
+.steps.six .sp{padding:18px 20px 20px}
+.steps.six .sp .n{font-size:48px;margin-bottom:6px}
+.steps.six .sp h3{font-size:21px;margin-bottom:6px}
+.steps.six .sp p{font-size:16.5px;line-height:1.4}
+.controls{flex-wrap:wrap;justify-content:center}
+.dots{flex-wrap:wrap;justify-content:center;max-width:100%}
+
+.part-divider{justify-content:center;align-items:flex-start;padding-top:96px}
+.part-divider .kick{margin-bottom:18px}
+.part-divider h1{font-size:54px;line-height:1.06;max-width:1050px}
+.part-divider .meta{font-size:22px;color:var(--muted);margin-top:18px;line-height:1.4}
+.part-divider .num{font-size:15px;font-weight:800;color:var(--azure);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.img-ph{border:1.5px dashed #9DB8E8;border-radius:14px;padding:20px 22px;background:#F4F8FF;display:flex;gap:16px;align-items:flex-start;margin-top:12px}
+.img-ph .ic{font-size:32px;flex-shrink:0}
+.img-ph b{display:block;font-size:18px;color:var(--navy);margin-bottom:6px}
+.img-ph p{font-size:15px;line-height:1.45;color:var(--muted)}
+.img-ph .src{font-size:12.5px;color:var(--faint);margin-top:6px}
+.fig{margin:8px 0 0}
+.fig img{width:100%;max-height:360px;object-fit:cover;border-radius:12px;display:block;border:1px solid var(--line)}
+.fig svg{width:100%;display:block}
+.figcap{font-size:13px;color:var(--faint);margin-top:6px}
+.checkpoint{background:var(--azure2);border:1px solid var(--azure3);border-radius:16px;padding:22px 26px;margin-top:12px}
+.checkpoint .lab{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--azure);margin-bottom:8px}
+.checkpoint h3{font-size:24px;font-weight:800;margin-bottom:6px}
+.checkpoint p{font-size:18px;line-height:1.45;color:var(--graphite)}
+.qa{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.qa .q{font-size:19px;font-weight:800;color:var(--navy)}
+.qa .a{font-size:17px;line-height:1.45;color:var(--muted);margin-bottom:8px}
+.contour{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:5px;background:var(--soft);color:var(--graphite);border:1px solid var(--line);margin-left:6px}
+.contour.main{background:var(--azure2);color:var(--azure);border-color:var(--azure3)}
+.contour.ext{background:#F3F0FF;color:#6B3FD4;border-color:#DCD3FF}
+
+  /* nav-v2: unified navigation bar */
+  .controls{width:100%;max-width:1280px;margin:0 auto;padding:0 12px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:nowrap;position:relative;z-index:100;user-select:none}
+  .controls button{width:44px;height:44px;min-width:44px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);font-family:inherit;font-size:20px;font-weight:700;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .controls button:hover{border-color:var(--azure);color:var(--azure)}
+  .controls button:disabled{opacity:.3;cursor:default;border-color:var(--line);color:var(--navy)}
+  .controls button:focus-visible{outline:2px solid var(--azure);outline-offset:3px}
+  .nav-progress{flex:1 1 auto;min-width:70px;display:flex;gap:4px;height:10px;align-items:stretch}
+  .nav-seg{width:auto;min-width:0;height:10px;border:0;border-radius:999px;background:var(--line);padding:0;cursor:pointer;position:relative;overflow:hidden;flex-basis:0;flex-shrink:1;flex-grow:1}
+  .nav-seg-fill{display:block;height:100%;width:0;background:var(--azure);border-radius:999px;transition:width .25s ease}
+  .controls .nav-seg{width:auto;min-width:0;height:10px;padding:0;border-radius:999px;flex-basis:0;flex-shrink:1;flex-grow:1}
+  .nav-seg:hover{background:#D6DDEA}
+  .nav-seg.active{background:#E4EBF8}
+  .counter{min-width:64px;text-align:center;font-size:14px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc-btn{font-size:20px}
+  .toc-menu{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);width:min(760px,calc(100vw - 24px));max-height:min(70vh,540px);overflow:auto;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 50px rgba(10,15,26,.18);padding:10px;z-index:1000;display:none}
+  .toc-menu.open{display:block}
+  .toc-part{display:flex;align-items:baseline;gap:8px;width:100%;border:0;background:transparent;text-align:left;padding:8px 10px;margin:2px 0;font:inherit;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--azure);cursor:pointer;border-top:1px solid var(--line)}
+  .toc-part:first-child{border-top:0}
+  .toc-part:hover{background:var(--azure2)}
+  .toc-part .range{font-size:10px;letter-spacing:.04em;color:var(--faint);font-weight:600;text-transform:none}
+  .toc-link{display:flex;gap:10px;align-items:baseline;width:100%;border:0;background:transparent;text-align:left;padding:7px 10px;border-radius:8px;font:inherit;font-size:15px;color:var(--graphite);cursor:pointer;line-height:1.3}
+  .toc-link:hover{background:var(--azure2);color:var(--navy)}
+  .toc-link .n{font-size:12px;font-weight:800;color:var(--faint);min-width:28px;flex:none}
+  .controls .toc-link{width:100%;height:auto;min-width:0;border:0;border-radius:8px;background:transparent;color:var(--graphite);font-size:15px;font-weight:400;line-height:1.3;justify-content:flex-start;align-items:baseline;padding:7px 10px}
+  .controls .toc-part{width:100%;height:auto;min-width:0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;color:var(--azure);font-size:12px;font-weight:800;line-height:1.3;justify-content:flex-start;align-items:baseline;padding:8px 10px}
+  .controls .toc-link:hover{background:var(--azure2);color:var(--navy)}
+  .controls .toc-part:hover{background:var(--azure2)}
+  .hint{font-size:11px;color:var(--faint);margin-left:4px;white-space:nowrap}
+  .slide{font-size:18px}
+  .slide .lead{font-size:23px;line-height:1.45}
+  .slide .bx li{font-size:20px}
+  .slide .body p{font-size:18px}
+  .slide .note{font-size:18px}
+  .slide .datatable{font-size:18px}
+  .plan-six{grid-template-columns:1fr;height:100%;align-content:stretch;margin-top:0}
+  .plan-six .nl{height:100%;align-items:center;padding:0}
+  .plan-six .nl p{font-size:22px;line-height:1.35}
+  @media (max-width:640px){
+    .controls{gap:6px;padding:0 8px}
+    .controls button{width:44px;height:44px;min-width:44px}
+    .counter{min-width:48px;font-size:12px}
+    .nav-progress{min-width:44px;gap:3px}
+    .hint{display:none}
+    .toc-menu{width:calc(100vw - 16px);max-height:60vh}
+  }
+</style>
+</head>
+<body>
+
+<span class="lang-switch deck-lang" aria-label="Language switcher"><a href="../redev-market.html" hreflang="ru" lang="ru">RU</a><span class="sep" aria-hidden="true">|</span><span class="on" aria-current="true">EN</span></span>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12M3 21h18M9 21v-5h6v5M8 11.5h.01M12 11.5h.01M16 11.5h.01"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.8 10.6c.7.7 1 1.4 1 2.4h5.6c0-1 .3-1.7 1-2.4A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M3 17l5-5 4 4 3-3 6 6"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM15 3v4h4M10 12h6M10 16h6"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h12l-2.5 4L17 12H5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.2l3 3 5-6"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-5 4v-4H4z"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4h12a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2zM5 18a2 2 0 0 1 2-2h12"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6zM9 12l2 2 4-4"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.6"/><path d="M10.7 12.4L20 3M16 7l3 3"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"/></symbol>
+    <symbol id="i-source" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 4v16M5 20h14M4 8h16M4 8l-2 7a3 3 0 0 0 6 0zM20 8l-2 7a3 3 0 0 0 6 0z"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7.5h7M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"/></symbol>
+    <symbol id="i-logic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.6 2.6 0 1 1 3.6 2.4c-.7.4-1.1.9-1.1 1.8M12 17h.01"/></symbol>
+  </defs>
+</svg>
+
+<div class="deck" id="deck">
+ <div class="viewport" id="viewport">
+  <div class="stage" id="stage">
+   <div class="progress" id="progress"></div>
+
+<section class="slide s1 active" data-foot="Topic 1.2 · Market and surroundings"><div class="l"><div class="kick">Topic 1.2 · three parts</div><h1>Market,<br><em>surroundings</em></h1><p class="lead">Topic 1.2: three parts, data for your site (C52 example), and the move to tracks.</p><div class="chips"><span class="chip">3 parts</span></div><p class="how">Use the arrows to navigate; ⤢ for fullscreen.</p></div><div class="r"><figure class="fig"><svg viewBox="0 0 560 380" role="img" aria-label="Diagram: surroundings, audience, and activity around the study site, C52 example">
+  <rect x="8" y="12" width="544" height="356" rx="26" fill="#F6F8FC" stroke="#E1E5EE" stroke-width="2"/>
+  <path d="M48 310 C110 250 150 210 215 220 S330 275 390 205 S470 110 520 95" fill="none" stroke="#BFD3FF" stroke-width="18" stroke-linecap="round"/>
+  <path d="M48 310 C110 250 150 210 215 220 S330 275 390 205 S470 110 520 95" fill="none" stroke="#1A6BFF" stroke-width="4" stroke-linecap="round" stroke-dasharray="10 10"/>
+  <g fill="#fff" stroke="#BFD3FF" stroke-width="2"><rect x="70" y="70" width="78" height="58" rx="8"/><rect x="165" y="55" width="56" height="88" rx="8"/><rect x="245" y="75" width="92" height="52" rx="8"/><rect x="365" y="65" width="66" height="74" rx="8"/><rect x="452" y="58" width="64" height="56" rx="8"/><rect x="90" y="215" width="86" height="58" rx="8"/><rect x="205" y="160" width="70" height="44" rx="8"/><rect x="300" y="235" width="86" height="62" rx="8"/><rect x="420" y="230" width="70" height="58" rx="8"/></g>
+  <g fill="#EAF1FF" stroke="#1A6BFF" stroke-width="2"><rect x="285" y="120" width="36" height="36" rx="8"/><rect x="350" y="170" width="30" height="30" rx="7"/><rect x="145" y="150" width="30" height="30" rx="7"/></g>
+  <g fill="#1A6BFF"><circle cx="215" cy="220" r="7"/><circle cx="390" cy="205" r="7"/><circle cx="520" cy="95" r="7"/></g>
+  <g><circle cx="332" cy="228" r="58" fill="#1A6BFF" opacity=".08"/><circle cx="332" cy="228" r="44" fill="none" stroke="#1A6BFF" stroke-width="4"/><path d="M364 260l30 30" stroke="#1A6BFF" stroke-width="8" stroke-linecap="round"/><circle cx="318" cy="216" r="5" fill="#1A6BFF"/><circle cx="344" cy="234" r="5" fill="#1A6BFF"/><circle cx="326" cy="246" r="5" fill="#1A6BFF"/></g>
+  <text x="280" y="340" text-anchor="middle" font-size="17" font-weight="800" fill="#0A0F1A" font-family="inherit">Surroundings · audience · activity</text>
+</svg><figcaption class="figcap">AI2ARCH diagram</figcaption></figure></div></section>
+
+<section class="slide has-terms" data-foot="Topic 1.2 · Market and surroundings"><div class="kick">Topic map</div><h2>Three parts, <em>three outcomes</em></h2><div class="body"><div class="plan"><div class="pl"><div class="n">Part 1</div><h3>Surroundings and data sources</h3><p>Outcome: a source map and an initial systematization of the data</p></div><div class="pl"><div class="n">Part 2</div><h3>AI processing, audience, scenarios</h3><p>Outcome: a persona profile and three preliminary scenarios</p></div><div class="pl"><div class="n">Part 3</div><h3>GIS pipeline, CIAN, rent rates</h3><p>Outcome: verified points and track materials</p></div></div><div class="band" style="margin-top:18px"><b>End-to-end logic:</b> data → interpretation → verification → track.</div></div><div class="terms"><span class="lab">Terms</span><span><b>GIS</b> — a geographic information system, software for working with maps and layers.</span></div></section>
+
+<section class="slide part-divider" data-foot="Part 1 · Surroundings and data sources"><div class="num">Part 1</div><div class="kick">Topic 1.2 · Market and surroundings</div><h1>Surroundings and<br>data sources</h1></section>
+
+<section class="slide " data-foot="Part 1 · Surroundings and data sources"><div class="kick">Part outcome</div><h2>A source map and <em>an initial systematization of the data</em></h2><div class="body"><div class="band"><b>By the end of this part:</b> data for your site (C52 example) has been collected from core and extended sources, entered into a table, and gaps marked.</div></div></section>
+
+<section class="slide has-terms" data-foot="Part 1 · Surroundings and data sources"><div class="kick">Three lenses</div><h2>Surroundings, audience, <em>activity</em></h2><div class="body"><div class="tiles three"><div class="tl"><div class="ic"><svg class="i"><use href="#i-building"/></svg></div><h3>Surroundings</h3><p><b>Context of place.</b> What buildings, functions, and activities already exist on and around the site.</p></div><div class="tl"><div class="ic"><svg class="i"><use href="#i-user"/></svg></div><h3>Audience</h3><p><b>The human factor.</b> Who lives, works, studies, and spends time in this location.</p></div><div class="tl"><div class="ic"><svg class="i"><use href="#i-chart"/></svg></div><h3>Activity</h3><p><b>Spatial dynamics.</b> How people use the area and what routes and visit patterns form. <b>Traffic:</b> through and destination.</p></div></div></div><div class="terms"><span class="lab">Terms</span><span><b>Through traffic</b> — people pass by; <b>destination traffic</b> — people come specifically to the site.</span></div></section>
+
+<section class="slide " data-foot="Part 1 · Surroundings and data sources"><div class="kick">Why it matters</div><h2>What <em>analysis</em> gives you</h2><div class="body"><div class="numlist"><div class="nl"><div class="n">1</div><p>Identify existing and missing functions.</p></div><div class="nl"><div class="n">2</div><p>Reveal potential user groups.</p></div><div class="nl"><div class="n">3</div><p>Establish the needs of different groups.</p></div><div class="nl"><div class="n">4</div><p>Determine how the site can be used.</p></div><div class="nl"><div class="n">5</div><p>Draft preliminary functional scenarios.</p></div></div><div class="band" style="margin-top:18px"><svg class="i"><use href="#i-bulb"/></svg><div><b>Important:</b> so you do not design functions just because they look good in a render.</div></div></div></section>
+
+<section class="slide has-terms" data-foot="Part 1 · Surroundings and data sources"><div class="kick">Risks</div><h2>What breaks without <em>analysis</em></h2><div class="body"><div class="two"><div class="bx"><h4>Typical mistakes</h4><ul><li>choosing functions without regard for the surroundings;</li><li>targeting an abstract audience;</li><li>duplicating existing services;</li><li>ignoring real routes;</li><li>spaces nobody uses.</li></ul></div><div class="bx"><h4>Chain of risk</h4><p style="font-size:20px;line-height:1.45;color:var(--graphite)">A decision without analysis →<br>a possible mistake →<br><b style="color:var(--navy)">consequences for the site</b></p><p class="note" style="margin-top:12px;font-size:15.5px"><b>Example:</b> a premium spa in a location without an audience or parking → CAPEX for equipment and waterproofing → OPEX on empty floor area (teaching example, not C52 data).</p></div></div></div><div class="terms"><span class="lab">Terms</span><span><b>CAPEX</b> — capital expenditures: one-time investment in building or renovating the site.</span><span><b>OPEX</b> — operating expenses: regular payments to maintain the site.</span></div></section>
+
+<section class="slide has-terms" data-foot="Part 1 · Surroundings and data sources"><div class="kick">C52 case</div><h2>The site: <em>main building 52a</em></h2><div class="body"><div class="two"><div><p class="lead" style="margin-top:0;font-size:21px">The main building is at Suvorova St., 52a. The cluster area covers 52 and 52a.</p><div class="band" style="font-size:16px;padding:11px 18px"><b>Excluded:</b> the site itself and its tenants.</div><p class="note" style="margin-top:11px;font-size:16px"><b>Research question:</b> which functions are logically justified here?</p><p class="note" style="margin-top:7px;font-size:16px"><b>Analysis radius:</b> you choose it; the example is a 15-minute walk.</p><p class="note" style="margin-top:7px;font-size:15px"><b>What we assess:</b> functions of neighboring plots, built form, attractors, accessibility.</p><p class="src">C52 example; use the same algorithm for your site.</p></div><figure class="fig"><img src="../images/c52-nspd-map.png" alt="NSPD map: buildings at Suvorova St., 52 and 52a" loading="lazy" style="display:block;width:100%;border:1px solid var(--line);border-radius:12px"><figcaption class="figcap">NSPD 2026 ©. Buildings 52 and 52A</figcaption></figure></div></div><div class="terms"><span class="lab">Terms</span><span><b>NSPD</b> — Russia's national spatial data system, the state portal for maps and cadastre.</span></div></section>
+
+<section class="slide " data-foot="Part 1 · Surroundings and data sources"><div class="kick">Demand</div><h2>What affects <em>potential demand</em></h2><div class="body"><div class="numlist"><div class="nl"><div class="n">1</div><p>Functional mix of the area.</p></div><div class="nl"><div class="n">2</div><p>Character of the surrounding built form.</p></div><div class="nl"><div class="n">3</div><p>Public, commercial, and social functions.</p></div><div class="nl"><div class="n">4</div><p>Transport and pedestrian accessibility.</p></div><div class="nl"><div class="n">5</div><p>Concentration of activity and attractors.</p></div></div></div></section>
+
+<section class="slide has-terms" data-foot="Part 1 · Surroundings and data sources"><div class="kick">Sources</div><h2>Where to get <em>data</em></h2><div class="body"><div class="tiles"><div class="tl"><div class="ic"><svg class="i"><use href="#i-layers"/></svg></div><h3>Mapping services</h3><p>2GIS.</p></div><div class="tl"><div class="ic"><svg class="i"><use href="#i-source"/></svg></div><h3>Geodata</h3><p>OSM, Overpass Turbo.</p></div><div class="tl"><div class="ic"><svg class="i"><use href="#i-chart"/></svg></div><h3>Activity data</h3><p>Strava.</p></div><div class="tl"><div class="ic"><svg class="i"><use href="#i-doc"/></svg></div><h3>State statistics</h3><p><b>Rosstat (core toolset)</b> — Federal State Statistics Service: population size, age, and employment.</p></div></div></div><div class="terms"><span class="lab">Terms</span><span><b>OSM (OpenStreetMap)</b> — the open world map maintained by a community.</span><span><b>Overpass Turbo</b> — a web tool for querying OSM objects by tag.</span><span><b>Rosstat</b> — Federal State Statistics Service.</span></div></section>
+
+<section class="slide has-terms" data-foot="Part 1 · Surroundings and data sources"><div class="kick">Tools</div><h2>Every tool has <em>its own role</em></h2><div class="body"><table class="datatable"><thead><tr><th>Tool</th><th>What for</th><th>Toolset</th></tr></thead><tbody><tr><td>2GIS</td><td>organizations and functions</td><td><span class="contour main">core toolset</span></td></tr><tr><td>LLM: Alice AI, DeepSeek</td><td>analysis and classification</td><td><span class="contour main">core toolset</span></td></tr><tr><td>OSM</td><td>spatial data</td><td><span class="contour ext">extended toolset</span></td></tr><tr><td>Overpass Turbo</td><td>filtering OSM</td><td><span class="contour ext">extended toolset</span></td></tr><tr><td>Strava</td><td>activity</td><td><span class="contour ext">extended toolset</span></td></tr><tr><td>LLM: ChatGPT, Gemini</td><td>extended analysis</td><td><span class="contour ext">extended toolset</span></td></tr></tbody></table></div><div class="terms"><span class="lab">Terms</span><span><b>OSM (OpenStreetMap)</b> — the open world map maintained by a community.</span><span><b>Overpass Turbo</b> — a web tool for querying OSM objects by tag.</span><span><b>LLM (large language model)</b> — a large language model.</span></div></section>
+
+<section class="slide has-terms" data-foot="Part 1 · Surroundings and data sources"><div class="kick">2GIS</div><h2>Basic and <em>extended analysis</em></h2><div class="body"><div class="two"><div class="bx"><h4>Basic access · free</h4><ul><li>search organizations by category;</li><li>objects on the map;</li><li>addresses and locations;</li><li>types of activity.</li></ul></div><div class="bx"><h4>2GIS PRO</h4><ul><li>functional analysis;</li><li>demographic analysis;</li><li>traffic analysis;</li><li>transport accessibility;</li><li>surroundings analysis;</li><li>geoanalytics;</li><li>5, 10, and 15-minute isochrones.</li></ul></div></div><p class="note" style="font-size:16px"><b>Cluster example:</b> five building-supply stores on one street make a bookstore a mistake.</p></div><div class="terms"><span class="lab">Terms</span><span><b>2GIS PRO</b> — the extended version of 2GIS with analytics.</span><span><b>Isochrone</b> — a zone of equal travel time, for example a 15-minute walk.</span></div></section>
+
+<section class="slide " data-foot="Part 1 · Surroundings and data sources"><div class="kick">2GIS</div><h2>2GIS: <em>collection</em></h2><div class="body"><div class="steps"><div class="sp"><div class="n">1</div><h3>Find organizations</h3><p>By category in 2GIS.</p></div><div class="sp"><div class="n">2</div><h3>See density</h3><p>On the map.</p></div><div class="sp"><div class="n">3</div><h3>Collect data</h3><p>Addresses, opening hours, categories.</p></div></div></div></section>
+
+<section class="slide has-terms" data-foot="Part 1 · Surroundings and data sources"><div class="kick">Fork</div><h2>What we look for <em>in the data</em></h2><div class="body"><div class="two"><div class="bx"><h4>Track A · designer</h4><ul><li>tissue morphology;</li><li>pedestrian graphs;</li><li>the shortage of urban functions around your site.</li></ul></div><div class="bx"><h4>Track B · developer</h4><ul><li>competitors and rent rates;</li><li>empty market niches;</li><li>product hypothesis.</li></ul></div></div></div><div class="terms"><span class="lab">Terms</span><span><b>Urban tissue morphology</b> — the form and structure of the built environment: density, height, street grid.</span><span><b>Pedestrian graph</b> — a simplified diagram of connections: attractors (nodes) and routes (edges).</span></div></section>
+
+<section class="slide has-terms" data-foot="Part 1 · Surroundings and data sources"><div class="kick">Spatial data</div><h2>OpenStreetMap</h2><div class="body"><div class="two"><div class="bx"><h4>What you can get</h4><ul><li>buildings and footprints;</li><li>street network;</li><li>pedestrian paths;</li><li>infrastructure facilities;</li><li>public spaces;</li><li>landscaping elements.</li></ul></div><div class="bx"><h4>How to get it</h4><ol style="font-size:18px;line-height:1.4;padding-left:20px;color:var(--graphite)"><li>Open OpenStreetMap.</li><li>Find your site (C52 example).</li><li>Turn on the building, road, and footpath layers.</li><li>Select the footprints.</li></ol></div></div><p class="src">The geometry is then used in QGIS and CAD — Part 3.</p></div><div class="terms"><span class="lab">Terms</span><span><b>OSM (OpenStreetMap)</b> — the open world map maintained by a community.</span><span><b>QGIS</b> — a free GIS program.</span><span><b>CAD</b> — computer-aided design system.</span></div></section>
+
+<section class="slide has-terms" data-foot="Part 1 · Surroundings and data sources"><div class="kick">Algorithm</div><h2>Overpass Turbo: <em>seven steps</em></h2><div class="body"><div class="two"><div class="bx"><h4>Steps</h4><ol style="font-size:18px;line-height:1.4;padding-left:20px;color:var(--graphite)"><li>Find the area.</li><li>Define the object category.</li><li>Go to Overpass Turbo.</li><li>Build a query by OSM tags.</li><li>Limit the query to the area.</li><li>Run it and review the result.</li><li>Export to GeoJSON.</li></ol></div><div class="bx"><h4>What you get</h4><ul><li><b>building</b> — footprints;</li><li><b>highway=footway</b> and <b>highway=pedestrian</b> — pedestrian links;</li><li><b>amenity</b>, <b>shop</b>, <b>leisure</b> — functions;</li><li>GeoJSON export.</li></ul></div></div></div><div class="terms"><span class="lab">Terms</span><span><b>Overpass Turbo</b> — a web tool for querying OSM objects by tag.</span><span><b>OSM tag</b> — a key=value pair that describes an object.</span><span><b>GeoJSON</b> — a file format for spatial data.</span></div></section>
+
+<section class="slide has-terms" data-foot="Part 1 · Surroundings and data sources"><div class="kick">Activity</div><h2>Strava: <em>digital traces</em></h2><div class="body"><div class="two"><div class="bx"><h4>What you can get</h4><ul><li>popular routes;</li><li>desire paths;</li><li>activity concentration;</li><li>directions of movement;</li><li>through routes and sports activity;</li><li>attractors.</li></ul></div><div class="bx"><h4>How to get it</h4><ol style="font-size:18px;line-height:1.4;padding-left:20px;color:var(--graphite)"><li>Open Strava Global Heatmap.</li><li>Find your site (C52 example).</li><li>Choose the pedestrian or cycling layer.</li><li>Choose the city scale and select routes near the site.</li></ol></div></div><p class="note"><b>What to look at:</b> where a route is through traffic and where it is sports activity.</p></div><div class="terms"><span class="lab">Terms</span><span><b>Strava Global Heatmap</b> — a heat map of users’ GPS tracks.</span></div></section>
+
+<section class="slide " data-foot="Part 1 · Surroundings and data sources"><div class="kick">Method</div><h2>Strava: from the area to <em>conclusions</em></h2><div class="body"><div class="steps six"><div class="sp"><div class="n">1</div><h3>Area</h3><p>Find the study area.</p></div><div class="sp"><div class="n">2</div><h3>Activity</h3><p>Choose the activity type.</p></div><div class="sp"><div class="n">3</div><h3>Routes</h3><p>Examine the distribution of routes.</p></div><div class="sp"><div class="n">4</div><h3>Concentration</h3><p>Identify areas of activity.</p></div><div class="sp"><div class="n">5</div><h3>Comparison</h3><p>Compare with objects and structure.</p></div><div class="sp"><div class="n">6</div><h3>Conclusions</h3><p>The main entrance goes where traffic is densest. Record observations and hypotheses.</p></div></div></div></section>
+
+<section class="slide " data-foot="Part 1 · Surroundings and data sources"><div class="kick">Field observation</div><h2>What to check <em>on site</em></h2><div class="body"><div class="bx"><h4>Checklist</h4><ul><li>timing and intensity of flows;</li><li>actual routes;</li><li>attractors;</li><li>barriers and inconvenience;</li><li>activity at neighboring sites.</li></ul></div></div></section>
+
+<section class="slide " data-foot="Part 1 · Surroundings and data sources"><div class="kick">Systematization</div><h2>300 objects — and still <em>not a single conclusion</em></h2><div class="body"><table class="datatable"><thead><tr><th>Name</th><th>Category</th><th>Address</th><th>Source</th><th>Note</th></tr></thead><tbody><tr><td>Organization 1</td><td>Food service</td><td>Address</td><td>2GIS</td><td>Operating</td></tr><tr><td>Object 2</td><td>Sports</td><td>Address</td><td>OSM</td><td>Needs verification</td></tr><tr><td>Object 3</td><td>Retail</td><td>Address</td><td>2GIS</td><td>—</td></tr></tbody></table></div></section>
+
+<section class="slide part-divider" data-foot="Part 2 · AI processing, audience, scenarios"><div class="num">Part 2</div><div class="kick">Topic 1.2 · Market and surroundings</div><h1>AI processing,<br>audience, scenarios</h1></section>
+
+<section class="slide " data-foot="Part 2 · AI processing, audience, scenarios"><div class="kick">Part outcome</div><h2>A persona profile and <em>three preliminary scenarios</em></h2><div class="body"><div class="band"><b>By the end of this part:</b> the data is processed, a persona profile is assembled, and three preliminary scenarios are formulated.</div></div></section>
+
+<section class="slide " data-foot="Part 2 · AI processing, audience, scenarios"><div class="kick">AI</div><h2>AI as <em>an analyst's tool</em></h2><div class="body"><div class="two"><div class="bx"><h4>What it can do</h4><ul><li>process large texts;</li><li>classify objects and data;</li><li>cross-check sources;</li><li>spot patterns;</li><li>form hypotheses.</li></ul></div><div class="bx"><h4>What to remember</h4><p style="font-size:20px;line-height:1.45;color:var(--graphite)">AI does not replace primary sources, does not guarantee that facts are true, and can make mistakes.</p></div></div></div></section>
+
+<section class="slide has-terms" data-foot="Part 2 · AI processing, audience, scenarios"><div class="kick">LLM</div><h2>Processing, classification, <em>interpretation</em></h2><div class="body"><div class="two"><div class="bx"><h4>Capabilities</h4><ul><li>classifying objects by category;</li><li>processing tables;</li><li>classification and interpretation; counts are done with a spreadsheet formula;</li><li>cross-checking sources;</li><li>audience analysis;</li><li>spotting patterns;</li></ul></div><div class="bx"><h4>Tools</h4><div class="chips"><span class="chip g">Alice AI · core</span><span class="chip g">DeepSeek · core</span><span class="chip g">ChatGPT · extended</span><span class="chip g">Gemini · extended</span></div></div></div></div><div class="terms"><span class="lab">Terms</span><span><b>LLM (large language model)</b> — a large language model, such as ChatGPT, DeepSeek, or Alice AI.</span></div></section>
+
+<section class="slide has-terms" data-foot="Part 2 · AI processing, audience, scenarios"><div class="kick">Prompt</div><h2>Structure of <em>an analytical prompt</em></h2><div class="body"><div class="plan"><div class="pl"><div class="n">1</div><h3>Role</h3><p>What role the model plays.</p></div><div class="pl"><div class="n">2</div><h3>Context</h3><p>What is being studied and why.</p></div><div class="pl"><div class="n">3</div><h3>Input data</h3><p>What materials are provided.</p></div><div class="pl"><div class="n">4</div><h3>Task</h3><p>What needs to be done.</p></div><div class="pl"><div class="n">5</div><h3>Constraints</h3><p>What must not be invented.</p></div><div class="pl"><div class="n">6</div><h3>Output format</h3><p>Table, list, classification, text.</p></div></div></div><div class="terms"><span class="lab">Terms</span><span><b>Prompt</b> — a text instruction for the model.</span><span><b>LLM (large language model)</b> — a large language model.</span></div></section>
+
+<section class="slide has-terms" data-foot="Part 2 · AI processing, audience, scenarios"><div class="kick">Data for the model</div><h2>What to give <em>the AI</em></h2><div class="body"><div class="plan"><div class="pl"><div class="n">1</div><h3>Text descriptions</h3><p>A description of the site, surroundings, and task.</p></div><div class="pl"><div class="n">2</div><h3>Tables and documents</h3><p>Collected tables, exports, and working documents.</p></div><div class="pl"><div class="n">3</div><h3>PDFs and reports</h3><p>Source PDFs and reports on the site.</p></div><div class="pl"><div class="n">4</div><h3>Source links</h3><p>Links to the pages and services the data came from.</p></div><div class="pl"><div class="n">5</div><h3>Images and screenshots</h3><p>Maps, diagrams, and screenshots for visual checks.</p></div><div class="pl"><div class="n">6</div><h3>Results of earlier stages</h3><p>Intermediate tables and findings from earlier stages.</p></div></div></div><div class="terms"><span class="lab">Terms</span><span><b>LLM (large language model)</b> — a large language model.</span></div></section>
+
+<section class="slide " data-foot="Part 2 · AI processing, audience, scenarios"><div class="kick">Decomposition</div><h2>Not one request, but <em>a chain</em></h2><div class="body"><div class="numlist"><div class="nl"><div class="n">1</div><p>Classify the organizations.</p></div><div class="nl"><div class="n">2</div><p>Count objects by category.</p></div><div class="nl"><div class="n">3</div><p>Compare categories with the area.</p></div><div class="nl"><div class="n">4</div><p>Identify patterns.</p></div><div class="nl"><div class="n">5</div><p>Form conclusions.</p></div></div><div class="rule" style="margin-top:18px;font-size:22px"><svg class="i"><use href="#i-shield"/></svg>One request for the whole study is a bad idea.</div></div></section>
+
+<section class="slide " data-foot="Part 2 · AI processing, audience, scenarios"><div class="kick">Practice</div><h2>Table of <em>organizations</em></h2><div class="body"><div class="two"><div class="bx"><h4>Combining categories</h4><ul><li>coffee shops;</li><li>patisseries;</li><li>culinary shops.</li></ul><p class="note" style="margin-top:10px">All three → one cluster, food service.</p><p class="note" style="margin-top:8px;font-size:15px">Counts and shares are calculated with formulas in Excel.</p></div><div class="bx"><h4>Area profile</h4><table class="datatable" style="font-size:15px"><thead><tr><th>Category</th><th>Share</th></tr></thead><tbody><tr><td>Offices</td><td>40%</td></tr><tr><td>Household services</td><td>30%</td></tr><tr><td>Recreation</td><td>5%</td></tr><tr><td>Other categories</td><td>25%</td></tr></tbody></table><p class="src">Teaching example, not C52 data. The sum of shares is checked with the =SUM() formula.</p></div></div></div></section>
+
+<section class="slide " data-foot="Part 2 · AI processing, audience, scenarios"><div class="kick">Demo</div><h2>The model versus <em>the formula</em></h2><div class="body"><div class="two"><div class="bx"><h4>Model</h4><p style="font-size:20px;line-height:1.45;color:var(--graphite)">Names a single number.</p></div><div class="bx"><h4>Excel</h4><p style="font-size:20px;line-height:1.45;color:var(--graphite)">Formula-based counting gives a different one.</p></div></div><div class="band" style="margin-top:18px"><b>Rule:</b> count with formulas, interpret with the model.</div><p class="src">Teaching example.</p></div></section>
+
+<section class="slide has-terms" data-foot="Part 2 · AI processing, audience, scenarios"><div class="kick">Audience</div><h2>Demographics and <em>statistics</em></h2><div class="body"><div class="two"><div class="bx"><h4>Input data</h4><ul><li>population size;</li><li>age structure;</li><li>socio-demographic characteristics;</li><li>employment;</li><li>distribution across the area.</li></ul></div><div class="bx"><h4>AI tasks</h4><ul><li>structure the statistics;</li><li>identify groups;</li><li>compare characteristics;</li><li>flag distinctive features.</li></ul></div></div><div class="band" style="margin-top:16px;font-size:17px"><b>Rosstat (core toolset)</b> — Federal State Statistics Service: population size, age, and employment.</div></div><div class="terms"><span class="lab">Terms</span><span><b>Rosstat</b> — Federal State Statistics Service.</span></div></section>
+
+<section class="slide " data-foot="Part 2 · AI processing, audience, scenarios"><div class="kick">Needs</div><h2>Who → why → <em>what they need</em></h2><div class="body"><div class="tiles three"><div class="tl"><div class="ic"><svg class="i"><use href="#i-user"/></svg></div><h3>Characteristics</h3><p>Who these people are: age, employment, role in the location.</p></div><div class="tl"><div class="ic"><svg class="i"><use href="#i-flag"/></svg></div><h3>Reasons for visiting</h3><p>Why they come to the area.</p></div><div class="tl"><div class="ic"><svg class="i"><use href="#i-building"/></svg></div><h3>Needs</h3><p>What services and spaces they need.</p></div></div></div></section>
+
+<section class="slide " data-foot="Part 2 · AI processing, audience, scenarios"><div class="kick">Persona profile</div><h2><em>Persona profile</em> template</h2><div class="body"><table class="datatable"><thead><tr><th>Persona (who)</th><th>Why they come to the area</th><th>Needs and requests</th><th>What supports it (sources)</th></tr></thead><tbody><tr class="sample"><td><span class="sample-tag">C52 sample</span>Residents aged 25–34 (38.50% of the population)</td><td>needs confirmation by field observation</td><td>needs checking against category queries (restaurants and bars: 155,000 per month)</td><td>Yandex Geoanalytics, 15-minute zone, collected 10.11.2026</td></tr><tr class="hint"><td>fill in: who</td><td>fill in: why they come</td><td>fill in: needs and requests</td><td>fill in: sources</td></tr><tr class="hint"><td>fill in: who</td><td>fill in: why they come</td><td>fill in: needs and requests</td><td>fill in: sources</td></tr></tbody></table><p class="figcap">The third row is optional.</p></div></section>
+
+<section class="slide " data-foot="Part 2 · AI processing, audience, scenarios"><div class="kick">Scenarios</div><h2>Three <em>preliminary</em> scenarios</h2><div class="body"><table class="datatable" style="font-size:14px"><thead><tr><th>Scenario</th><th>Target audience</th><th>Functions</th><th>Based on what data</th><th>What to check</th></tr></thead><tbody><tr><td>Public</td><td>residents and visitors of the area</td><td>public spaces, everyday services</td><td>2GIS, OSM, Strava, field observation</td><td>demand and legal permissibility</td></tr><tr><td>Educational and cultural</td><td>students, families, employees</td><td>educational and cultural functions</td><td>statistics, 2GIS, field observation</td><td>demand and schedule</td></tr><tr><td>Leisure and commercial</td><td>residents and guests</td><td>leisure, food service, commercial services</td><td>2GIS, Strava, statistics</td><td>economics and competition</td></tr></tbody></table></div></section>
+
+<section class="slide " data-foot="Part 2 · AI processing, audience, scenarios"><div class="kick">Economics</div><h2>Scenario and <em>economics</em></h2><div class="body"><div class="two"><div class="bx"><h4>Educational</h4><ul><li>lower capital costs;</li><li>a modest rental flow.</li></ul></div><div class="bx"><h4>Leisure and commercial</h4><ul><li>higher costs;</li><li>higher rates;</li></ul></div></div><div class="band" style="margin-top:18px"><b>A hypothesis to test.</b></div><p class="note">AI will not produce a cost estimate, but it helps frame the trade-offs for a conversation with the client.</p></div></section>
+
+<section class="slide has-terms" data-foot="Part 2 · AI processing, audience, scenarios"><div class="kick">Filter</div><h2>Legally <em>permissible?</em></h2><div class="body"><div class="two"><div class="bx"><h4>What we check</h4><ul><li>Land use and development rules (PZZ) and permitted use;</li><li>building codes (SP) and restrictions;</li><li>protected zones;</li><li>fire and other requirements.</li></ul></div><div class="bx"><h4>What we do</h4><ul><li>rule out what is not permitted;</li><li>clarify what is contested;</li><li>record assumptions.</li></ul></div></div><div class="band" style="margin-top:18px"><b>A scenario without legal review</b> is a hypothesis, not a scenario.</div></div><div class="terms"><span class="lab">Terms</span><span><b>PZZ</b> — land use and development rules.</span><span><b>Permitted use type</b> — the permitted use of a land plot.</span><span><b>SP</b> — a code of practice, technical construction standards.</span></div></section>
+
+<section class="slide " data-foot="Part 2 · AI processing, audience, scenarios"><div class="kick">Verification</div><h2>Verification: <em>fact, interpretation, hypothesis</em></h2><div class="body"><div class="two"><div class="bx"><h4>What we check</h4><ul><li>facts against primary sources;</li><li>independent sources;</li><li>dates and currency;</li><li>numbers and calculations;</li><li>unconfirmed claims;</li><li>data and assumptions.</li></ul></div><div class="stack"><div class="it"><b>Fact</b><p>A concentration of objects in this category was found in the zone.</p></div><div class="it"><b>Interpretation</b><p>The function occupies a noticeable place in the area's mix.</p></div><div class="it"><b>Hypothesis</b><p>Demand for additional functions is worth testing.</p></div></div></div><div class="rule" style="margin-top:16px;font-size:20px"><svg class="i"><use href="#i-shield"/></svg>It sounds convincing. That does not make it true.</div></div></section>
+
+<section class="slide has-terms" data-foot="Part 2 · AI processing, audience, scenarios"><div class="kick">Sources</div><h2>Point → <em>3 sources</em></h2><div class="body"><table class="datatable" style="font-size:11.5px"><thead><tr><th>Point</th><th>Source 1</th><th>Source 2</th><th>Source 3</th><th>Verdict</th><th>Limitations</th></tr></thead><tbody><tr class="sample"><td><span class="sample-tag">C52 sample</span>In the C52 zone there is strong interest in food service amid high competition</td><td>Yandex Geoanalytics, 15-minute zone, collected 10.11.2026: queries for “Restaurants and bars” — 155,000 per month; organizations — 826</td><td>2GIS: number of food-service organizations within the selected radius — no data: an export is needed</td><td>CIAN: no collection by the specified filters has been done; three random listings were taken for illustration (650, ≈723, ≈911 ₽/m² per month), this is not a sample</td><td>data needed</td><td>queries do not equal purchases; the number of organizations does not prove an open niche; three listings do not make a sample</td></tr><tr class="hint"><td>fill in: point</td><td>fill in: source 1</td><td>fill in: source 2</td><td>fill in: source 3</td><td>fill in: verdict</td><td>fill in: limitations</td></tr><tr class="hint"><td>fill in: point</td><td>fill in: source 1</td><td>fill in: source 2</td><td>fill in: source 3</td><td>fill in: verdict</td><td>fill in: limitations</td></tr></tbody></table></div><div class="terms"><span class="lab">Terms</span><span><b>Rosstat</b> — Federal State Statistics Service.</span></div></section>
+
+<section class="slide " data-foot="Part 2 · AI processing, audience, scenarios"><div class="kick">Outcome</div><h2>Six steps of <em>site research</em></h2><div class="body"><div class="steps six"><div class="sp"><div class="n">1</div><h3>Scoping</h3><p>Site, boundaries, goals.</p></div><div class="sp"><div class="n">2</div><h3>Data collection</h3><p>2GIS, OSM, Overpass Turbo, Strava, statistics.</p></div><div class="sp"><div class="n">3</div><h3>Systematization</h3><p>Tables, classification, merging.</p></div><div class="sp"><div class="n">4</div><h3>AI processing</h3><p>Analysis of organizations and audience.</p></div><div class="sp"><div class="n">5</div><h3>Verification</h3><p>Primary sources and reliability.</p></div><div class="sp"><div class="n">6</div><h3>Conclusions</h3><p>Patterns and hypotheses.</p></div></div></div></section>
+
+<section class="slide part-divider" data-foot="Part 3 · GIS pipeline, CIAN, rent rates"><div class="num">Part 3</div><div class="kick">Topic 1.2 · Market and surroundings</div><h1>GIS pipeline,<br>CIAN, rent rates</h1></section>
+
+<section class="slide " data-foot="Part 3 · GIS pipeline, CIAN, rent rates"><div class="kick">Part outcome</div><h2>Verified points and <em>track materials</em></h2><div class="body"><div class="band"><b>By the end of this part:</b> the GIS pipeline is assembled, points are verified, and materials for Track A or B are prepared.</div></div></section>
+
+<section class="slide has-terms" data-foot="Part 3 · GIS pipeline, CIAN, rent rates"><div class="kick">Fork</div><h2>Track A / <em>Track B</em></h2><div class="body"><div class="two"><div class="bx"><h4>Track A · designer</h4><ul><li>morphology;</li><li>pedestrian graphs;</li><li>function shortage.</li></ul></div><div class="bx"><h4>Track B · developer</h4><ul><li>CIAN and rent rates;</li><li>competitors;</li><li>niches and product.</li></ul></div></div></div><div class="terms"><span class="lab">Terms</span><span><b>Urban tissue morphology</b> — the form and structure of the built environment: density, height, street grid.</span><span><b>Pedestrian graph</b> — a simplified diagram of connections: attractors (nodes) and routes (edges).</span></div></section>
+
+<section class="slide has-terms" data-foot="Part 3 · GIS pipeline, CIAN, rent rates"><div class="kick">GIS pipeline</div><h2>OSM → QGIS → table → <em>LLM</em></h2><div class="body"><div class="stages"><div class="st"><div class="ic"><svg class="i"><use href="#i-layers"/></svg></div><h3>OSM</h3><p>Spatial data</p></div><div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div><div class="st"><div class="ic"><svg class="i"><use href="#i-layers"/></svg></div><h3>QGIS</h3><p>Layers and attributes</p></div><div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div><div class="st"><div class="ic"><svg class="i"><use href="#i-calc"/></svg></div><h3>Table</h3><p>Categories and calculations</p></div><div class="arr"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div><div class="st"><div class="ic"><svg class="i"><use href="#i-bulb"/></svg></div><h3>LLM</h3><p>Interpretation</p></div></div></div><div class="terms"><span class="lab">Terms</span><span><b>GIS</b> — a geographic information system, software for working with maps and layers.</span><span><b>QGIS</b> — a free GIS program.</span><span><b>LLM (large language model)</b> — a large language model.</span></div></section>
+
+<section class="slide has-terms" data-foot="Part 3 · GIS pipeline, CIAN, rent rates"><div class="kick">Layers and attributes</div><h2>QGIS: layers and the <em>attribute table</em></h2><div class="body"><div class="two"><div class="bx"><h4>Layers</h4><ol style="font-size:18px;line-height:1.4;padding-left:20px;color:var(--graphite)"><li>Load OSM/GeoJSON for your site (C52 example).</li><li>Turn on the building, road, and footpath layers.</li><li>Layers panel.</li></ol></div><div class="bx"><h4>Attribute table</h4><ol style="font-size:18px;line-height:1.4;padding-left:20px;color:var(--graphite)"><li>Open the attribute table.</li><li>Show the name, category, and source fields.</li><li>Filter categories; there is no personal data.</li></ol></div></div><p class="note" style="margin-top:10px">Source: the GeoJSON from Part 1.</p></div><div class="terms"><span class="lab">Terms</span><span><b>QGIS</b> — a free GIS program.</span><span><b>GeoJSON</b> — a file format for spatial data.</span><span><b>OSM (OpenStreetMap)</b> — the open world map maintained by a community.</span></div></section>
+
+<section class="slide has-terms" data-foot="Part 3 · GIS pipeline, CIAN, rent rates"><div class="kick">Vision model</div><h2>PNG diagrams for <em>a vision model</em></h2><div class="body"><div class="two"><div class="bx"><h4>What we prepare</h4><ul><li>export the diagram as PNG;</li><li>labels in Russian;</li><li>no extra layers.</li></ul></div><figure class="fig"><svg viewBox="0 0 420 220" role="img" aria-label="Diagram: the site diagram is exported as PNG and passed to a vision model"><rect x="8" y="8" width="404" height="204" rx="16" fill="#F6F8FC" stroke="#E1E5EE" stroke-width="2"/><rect x="30" y="60" width="90" height="70" rx="8" fill="#EAF1FF" stroke="#1A6BFF" stroke-width="2"/><path d="M150 95h70" stroke="#1A6BFF" stroke-width="4" stroke-linecap="round"/><path d="M210 85l12 10-12 10" fill="none" stroke="#1A6BFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><rect x="250" y="50" width="120" height="90" rx="8" fill="#fff" stroke="#BFD3FF" stroke-width="2"/><text x="310" y="100" text-anchor="middle" font-size="16" font-weight="800" fill="#0A0F1A" font-family="inherit">PNG</text></svg><figcaption class="figcap">AI2ARCH diagram</figcaption></figure></div></div><div class="terms"><span class="lab">Terms</span><span><b>Vision model</b> — a model that analyzes images.</span></div></section>
+
+<section class="slide has-terms" data-foot="Part 3 · GIS pipeline, CIAN, rent rates"><div class="kick">Track A · designer</div><h2>Morphology, pedestrian graphs, <em>function shortage</em></h2><div class="body"><div class="bx"><h4>What we do</h4><ul><li>tissue morphology;</li><li>pedestrian graphs;</li><li>the shortage of urban functions around your site.</li></ul><p class="note" style="margin-top:10px">Pedestrian graphs are a simplified diagram of connections: nodes are attractors, edges are routes.</p></div></div><div class="terms"><span class="lab">Terms</span><span><b>Urban tissue morphology</b> — the form and structure of the built environment: density, height, street grid.</span><span><b>Pedestrian graph</b> — a simplified diagram of connections: attractors (nodes) and routes (edges).</span></div></section>
+
+<section class="slide " data-foot="Part 3 · GIS pipeline, CIAN, rent rates"><div class="kick">Track B · developer</div><h2>CIAN, rent rates, <em>niches</em></h2><div class="body"><div class="two"><div class="bx"><h4>What we do</h4><ul><li>nearby competitors;</li><li>rental and sale rates;</li><li>empty market niches.</li></ul></div><div class="bx"><h4>How to collect</h4><ol style="font-size:18px;line-height:1.4;padding-left:20px;color:var(--graphite)"><li>Open CIAN and find your site (C52 example).</li><li>Manually enter rental and sale rates from competitor listings within the selected radius.</li><li>Categories: office, retail, food service.</li><li>Compile them in a table and note the sources.</li></ol></div></div></div></section>
+
+<section class="slide " data-foot="Part 3 · GIS pipeline, CIAN, rent rates"><div class="kick">Verification</div><h2>Point → <em>3 sources</em></h2><div class="body"><table class="datatable" style="font-size:11.5px"><thead><tr><th>Point</th><th>Source 1</th><th>Source 2</th><th>Source 3</th><th>Verdict</th><th>Limitations</th></tr></thead><tbody><tr class="sample"><td><span class="sample-tag">C52 sample</span>In the C52 zone there is strong interest in food service amid high competition</td><td>Yandex Geoanalytics, 15-minute zone, collected 10.11.2026: queries for “Restaurants and bars” — 155,000 per month; organizations — 826</td><td>2GIS: number of food-service organizations within the selected radius — no data: an export is needed</td><td>CIAN: no collection by the specified filters has been done; three random listings were taken for illustration (650, ≈723, ≈911 ₽/m² per month), this is not a sample</td><td>data needed</td><td>queries do not equal purchases; the number of organizations does not prove an open niche; three listings do not make a sample</td></tr><tr class="hint"><td>fill in: point</td><td>fill in: source 1</td><td>fill in: source 2</td><td>fill in: source 3</td><td>fill in: verdict</td><td>fill in: limitations</td></tr><tr class="hint"><td>fill in: point</td><td>fill in: source 1</td><td>fill in: source 2</td><td>fill in: source 3</td><td>fill in: verdict</td><td>fill in: limitations</td></tr></tbody></table></div></section>
+
+<section class="slide " data-foot="Part 3 · GIS pipeline, CIAN, rent rates"><div class="kick">What next</div><h2>What <em>comes next</em></h2><div class="body"><p class="note" style="font-size:24px">Topic 1.3: product hypothesis and scenarios based on the collected data.</p></div></section>
+
+   <div class="foot" id="foot"><span id="footText">Topic 1.2 · Market and surroundings</span><span><a href="redev-schedule.html" target="_blank" rel="noopener">Schedule ↗</a> · <a href="https://fortune-swing-02e.notion.site/41112bb3b5cd81839661da69963a035b?source=copy_link" target="_blank" rel="noopener">Workbook ↗</a></span></div>
+  </div>
+ </div>
+ <div class="controls">
+   <button id="prev" aria-label="Back" title="Back">‹</button>
+   <div class="nav-progress" id="navProgress" aria-label="Progress through presentation parts"></div>
+   <div class="counter" id="counter"></div>
+   <button id="tocBtn" class="toc-btn" type="button" aria-label="Contents" title="Contents" aria-haspopup="true" aria-expanded="false">☰</button>
+   <button id="next" aria-label="Next" title="Next">›</button>
+   <button id="fs" aria-label="Expand to full screen" title="Full screen (F)">⤢</button>
+   <span class="hint">← → to navigate · F — fullscreen</span>
+   <div class="toc-menu" id="tocMenu" role="menu" aria-label="Contents"></div>
+ </div>
+</div>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  var slides=[].slice.call(stage.querySelectorAll('.slide'));
+  var total=slides.length;
+  var prev=document.getElementById('prev'), next=document.getElementById('next'), fs=document.getElementById('fs');
+  var prog=document.getElementById('progress'), counter=document.getElementById('counter');
+  var footText=document.getElementById('footText');
+  var navProgress=document.getElementById('navProgress');
+  var tocBtn=document.getElementById('tocBtn'), tocMenu=document.getElementById('tocMenu');
+  var cur=0;
+
+  function clean(s){return String(s||'').replace(/\s+/g,' ').trim();}
+  function slideTitle(s){
+    var h=s.querySelector('h1,h2');
+    return h?clean(h.textContent):'Slide';
+  }
+  function buildParts(){
+    var divs=[];
+    slides.forEach(function(s,i){ if(s.classList.contains('part-divider')) divs.push(i); });
+    var parts=[];
+    if(!divs.length){
+      parts.push({title:'Presentation',start:0,end:total-1});
+    }else{
+      if(divs[0]>0) parts.push({title:'Introduction',start:0,end:divs[0]-1});
+      divs.forEach(function(d,idx){
+        var end=idx+1<divs.length?divs[idx+1]-1:total-1;
+        var num=slides[d].querySelector('.num');
+        var kick=slides[d].querySelector('.kick');
+        var title=(num?clean(num.textContent):'Part')+(kick?' · '+clean(kick.textContent):'');
+        parts.push({title:title,start:d,end:end,divider:true});
+      });
+    }
+    return parts;
+  }
+  var parts=buildParts();
+  var segs=[];
+
+  function buildProgress(){
+    navProgress.innerHTML='';
+    parts.forEach(function(p){
+      var b=document.createElement('button');
+      b.type='button'; b.className='nav-seg';
+      b.style.flexGrow=String(p.end-p.start+1);
+      b.title=p.title+' · slides '+(p.start+1)+'–'+(p.end+1);
+      b.setAttribute('aria-label',b.title);
+      var f=document.createElement('span'); f.className='nav-seg-fill'; b.appendChild(f);
+      b.addEventListener('click',function(){go(p.start);});
+      navProgress.appendChild(b); segs.push(b);
+    });
+  }
+
+  function updateProgress(){
+    parts.forEach(function(p,i){
+      var f=segs[i].querySelector('.nav-seg-fill');
+      var pct=0;
+      if(cur>=p.end) pct=100;
+      else if(cur>=p.start) pct=((cur-p.start+1)/(p.end-p.start+1))*100;
+      f.style.width=pct+'%';
+      segs[i].classList.toggle('active',cur>=p.start&&cur<=p.end);
+    });
+  }
+
+  function buildToc(){
+    tocMenu.innerHTML='';
+    parts.forEach(function(p){
+      var head=document.createElement('button');
+      head.type='button'; head.className='toc-part';
+      var t=document.createElement('span'); t.textContent=p.title;
+      var r=document.createElement('span'); r.className='range'; r.textContent='slides '+(p.start+1)+'–'+(p.end+1);
+      head.appendChild(t); head.appendChild(r);
+      head.addEventListener('click',function(){go(p.start);closeToc();});
+      tocMenu.appendChild(head);
+      for(var i=p.start;i<=p.end;i++){
+        if(p.divider && i===p.start) continue;
+        var b=document.createElement('button');
+        b.type='button'; b.className='toc-link'; b.setAttribute('role','menuitem');
+        var n=document.createElement('span'); n.className='n'; n.textContent=(i+1);
+        var tx=document.createElement('span'); tx.textContent=slideTitle(slides[i]);
+        b.appendChild(n); b.appendChild(tx);
+        (function(idx){b.addEventListener('click',function(){go(idx);closeToc();});})(i);
+        tocMenu.appendChild(b);
+      }
+    });
+  }
+
+  function openToc(){
+    tocMenu.classList.add('open'); tocBtn.setAttribute('aria-expanded','true');
+  }
+  function closeToc(){
+    tocMenu.classList.remove('open'); tocBtn.setAttribute('aria-expanded','false');
+  }
+  tocBtn.addEventListener('click',function(e){
+    e.stopPropagation();
+    if(tocMenu.classList.contains('open')) closeToc(); else openToc();
+  });
+  document.addEventListener('click',function(e){
+    if(!tocMenu.classList.contains('open')) return;
+    if(tocMenu.contains(e.target)||tocBtn.contains(e.target)) return;
+    closeToc();
+  });
+
+  function go(i){
+    if(i<0||i>=total) return;
+    slides[cur].classList.remove('active');
+    cur=i; slides[cur].classList.add('active');
+    counter.textContent=(cur+1)+' / '+total;
+    if(footText) footText.textContent=slides[cur].getAttribute('data-foot')||'Presentation';
+    prev.disabled=cur===0; next.disabled=cur===total-1;
+    prog.style.width=((cur+1)/total*100)+'%';
+    updateProgress();
+    try{history.replaceState(null,'','#slide-'+(cur+1));}catch(e){}
+  }
+  prev.onclick=function(){go(cur-1)}; next.onclick=function(){go(cur+1)};
+  function fit(){
+    var vp=document.getElementById('viewport');
+    var s=Math.min((vp.clientWidth-8)/1280,(vp.clientHeight-8)/720);
+    stage.style.transform='scale('+s+')';
+  }
+  window.addEventListener('resize',fit);
+  function toggleFs(){
+    var el=document.documentElement;
+    if(!document.fullscreenElement&&!document.webkitFullscreenElement){(el.requestFullscreen||el.webkitRequestFullscreen||function(){}).call(el);}
+    else{(document.exitFullscreen||document.webkitExitFullscreen||function(){}).call(document);}
+  }
+  fs.onclick=toggleFs;
+  document.addEventListener('fullscreenchange',function(){setTimeout(fit,60)});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){closeToc();return;}
+    if(['ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(cur+1);}
+    else if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(cur-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);} else if(e.key==='End'){e.preventDefault();go(total-1);}
+    else if(e.key==='f'||e.key==='F'){e.preventDefault();toggleFs();}
+  });
+  var tx=null;
+  stage.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  stage.addEventListener('touchend',function(e){
+    if(tx===null)return; var dx=e.changedTouches[0].clientX-tx; tx=null;
+    if(Math.abs(dx)>50) go(dx<0?cur+1:cur-1);
+  });
+  function parseHash(){
+    var m=(location.hash||'').match(/^#(?:slide-)?(\d+)$/);
+    if(!m) return 0;
+    return Math.min(Math.max(parseInt(m[1],10)-1,0),total-1);
+  }
+  window.addEventListener('hashchange',function(){
+    var idx=parseHash();
+    if(idx!==cur) go(idx);
+  });
+
+  buildProgress();
+  buildToc();
+  go(parseHash());
+  fit();
+})();
+</script>
+</body>
+</html>

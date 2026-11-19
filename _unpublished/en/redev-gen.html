@@ -1,0 +1,796 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3.2 · Track-Specific Image Generation · AI in Redevelopment · AI2ARCH</title>
+<meta name="description" content="Topic 3.2 covers track-specific image generation: prompt structure for a consistent series, the core browser toolset, and a Flux.1 + ControlNet chain that preserves the source frame and its geometry.">
+<link rel="canonical" href="https://ai2arch.ru/en/redev-gen.html">
+<link rel="alternate" hreflang="ru" href="https://ai2arch.ru/redev-gen.html">
+<link rel="alternate" hreflang="en" href="https://ai2arch.ru/en/redev-gen.html">
+<link rel="alternate" hreflang="x-default" href="https://ai2arch.ru/redev-gen.html">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://ai2arch.ru/en/redev-gen.html">
+<meta property="og:title" content="3.2 · Track-Specific Image Generation · AI in Redevelopment">
+<meta property="og:description" content="Topic 3.2 covers track-specific image generation: prompt structure for a consistent series, the core browser toolset, and a Flux.1 + ControlNet chain that preserves the source frame and its geometry.">
+<meta property="og:image" content="https://ai2arch.ru/images/og-ai2arch.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="3.2 · Track-Specific Image Generation · AI in Redevelopment">
+<meta name="twitter:description" content="Topic 3.2 covers track-specific image generation: prompt structure for a consistent series, the core browser toolset, and a Flux.1 + ControlNet chain that preserves the source frame and its geometry.">
+<meta name="twitter:image" content="https://ai2arch.ru/images/og-ai2arch.jpg">
+<link rel="stylesheet" href="../assets/lang-switch.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+:root{
+  --navy:#0A0F1A; --graphite:#2A2F3E; --azure:#1A6BFF;
+  --azure2:#EAF1FF; --azure3:#BFD3FF; --soft:#F6F8FC; --line:#E1E5EE; --muted:#5B6475; --faint:#9AA4B8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:#fff;color:var(--navy);font-family:Manrope,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;overflow-x:hidden;overflow-y:auto;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.deck{position:relative;height:100vh;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:8px 0 10px;overflow:hidden}
+.viewport{position:relative;flex:1 1 auto;width:100%;display:flex;align-items:center;justify-content:center;min-height:0}
+.stage{width:1280px;height:720px;position:relative;flex:none;transform-origin:center center;background:#fff;overflow:hidden;border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 30px rgba(10,15,26,.06)}
+.progress{position:absolute;left:0;top:0;height:5px;background:var(--azure);width:0;transition:width .35s ease;z-index:5}
+
+.slide{position:absolute;inset:0;padding:50px 72px 74px;display:none;flex-direction:column}
+.slide.active{display:flex;animation:in .4s ease both}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.kick{font-size:14px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--azure);margin-bottom:12px}
+h1{font-size:58px;line-height:1.04;font-weight:800;letter-spacing:-.02em}
+h2{font-size:44px;line-height:1.12;font-weight:800;letter-spacing:-.015em}
+h1 em,h2 em{font-style:normal;color:var(--azure)}
+.lead{font-size:22px;line-height:1.5;color:var(--muted);margin-top:12px;max-width:1040px}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;margin-top:14px}
+.foot{position:absolute;left:72px;right:72px;bottom:24px;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--faint);letter-spacing:.03em}
+.foot a{color:var(--azure);font-weight:700;text-decoration:none}
+.foot a:hover{text-decoration:underline}
+.src{font-size:12.5px;color:var(--faint);margin-top:6px}
+.prompt{background:var(--soft);border-radius:14px;padding:16px 20px;font-size:17px;line-height:1.38;color:var(--graphite)}
+.slide .body .src{font-size:12.5px}
+.slide.has-terms{padding-bottom:118px}
+.terms{position:absolute;left:72px;right:72px;bottom:50px;border-top:1px solid var(--line);padding-top:6px;font-size:11.5px;line-height:1.32;color:var(--faint);display:flex;gap:14px;flex-wrap:wrap}
+.terms .lab{flex:none;font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--azure);padding-top:2px}
+.terms span{flex:1 1 280px;min-width:220px}
+.terms b{color:var(--navy);font-weight:800}
+.foot .num{font-weight:800;color:var(--navy)}
+svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.note{font-size:18px;color:var(--muted);margin-top:14px;line-height:1.45}
+.note b{color:var(--navy)}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--azure2);color:var(--azure);font-weight:800;font-size:16px}
+.chip.g{background:var(--soft);color:var(--graphite);border:1px solid var(--line)}
+.pill{display:inline-block;padding:6px 12px;border-radius:8px;background:var(--azure2);color:var(--azure);font-weight:800;font-size:15px;line-height:1.25}
+
+/* 1 title */
+.s1{flex-direction:row;align-items:center;gap:30px}
+.s1 .l{flex:1.2}
+.s1 .r{flex:1}
+.s1 .chips{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.s1 .how{margin-top:26px;font-size:15px;color:var(--faint)}
+
+/* 2 chain */
+.chain{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:6px}
+.chain:before{content:"";position:absolute;left:8%;right:8%;top:45px;height:3px;background:var(--azure3);z-index:0}
+.node{position:relative;z-index:1;text-align:center}
+.node .c{width:92px;height:92px;border-radius:50%;margin:0 auto 16px;background:#fff;border:3px solid var(--azure);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:42px}
+.node:last-child .c{background:var(--azure);color:#fff}
+.node .n{font-size:14px;font-weight:800;color:var(--faint);letter-spacing:.1em}
+.node h3{font-size:25px;font-weight:800;margin:2px 0 10px}
+.node p{font-size:17.5px;line-height:1.4;color:var(--muted);min-height:112px}
+.node .pill{margin-top:8px;font-size:16px}
+
+/* 3 life cycle */
+.stages{display:grid;grid-template-columns:1fr 36px 1fr 36px 1fr 36px 1fr;align-items:stretch;margin-top:10px}
+.st{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:24px 22px}
+.st .ic{width:60px;height:60px;border-radius:14px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:16px}
+.st:nth-child(7) .ic{background:var(--azure);color:#fff}
+.st h3{font-size:24px;font-weight:800;margin-bottom:8px;white-space:nowrap}
+.st p{font-size:17.5px;line-height:1.45;color:var(--muted)}
+.arr{display:flex;align-items:center;justify-content:center;color:var(--azure)}
+.arr svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.band{margin-top:6px;background:var(--azure2);border-radius:14px;padding:16px 26px;font-size:20px;color:var(--navy);display:flex;gap:14px;align-items:center}
+.band b{color:var(--azure)}
+
+/* 4 comparison */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:6px}
+.pn{border:1px solid var(--line);border-radius:18px;padding:24px 30px;background:#fff}
+.pn.hi{border-color:var(--azure);background:linear-gradient(180deg,var(--azure2),#fff 60%)}
+.pn h3{font-size:28px;font-weight:800;margin-bottom:4px}
+.pn .sub{font-size:15px;color:var(--faint);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.pn svg.ill{width:100%;height:180px;display:block;margin:2px 0 8px}
+.pn ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.pn li{font-size:19.5px;line-height:1.4;color:var(--graphite);padding-left:24px;position:relative}
+.pn li:before{content:"";position:absolute;left:0;top:.6em;width:12px;height:3px;border-radius:2px;background:var(--faint)}
+.pn.hi li:before{background:var(--azure)}
+
+/* 5 AI */
+.flow{display:grid;grid-template-columns:1fr 50px 1fr 50px 1fr 50px 1fr;align-items:stretch}
+.fl{border:2px solid var(--line);border-radius:16px;padding:22px 16px 20px;background:#fff;text-align:center}
+.fl .ic{width:60px;height:60px;border-radius:50%;margin:0 auto 12px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:31px}
+.fl.you{border-color:var(--azure3)}
+.fl.ai{background:var(--azure);border-color:var(--azure);color:#fff}
+.fl.ai .ic{background:#fff;color:var(--azure)}
+.fl.ai p{color:rgba(255,255,255,.85)}
+.fl h3{font-size:23px;font-weight:800;margin-bottom:6px}
+.fl p{font-size:17.5px;line-height:1.35;color:var(--muted)}
+.back{display:block;width:100%;height:auto;margin:6px 0 16px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:4px}
+.bx{background:var(--soft);border-radius:16px;padding:22px 28px}
+.bx h4{font-size:16px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--azure);margin-bottom:10px}
+.bx.you h4{color:var(--graphite)}
+.bx li{list-style:none;font-size:19.5px;line-height:1.4;padding-left:26px;position:relative;margin-bottom:7px;color:var(--graphite)}
+.bx li:before{content:"";position:absolute;left:0;top:.35em;width:14px;height:14px;border-radius:50%;background:var(--azure2);border:3px solid var(--azure);box-sizing:border-box}
+.bx.you li:before{border-color:var(--graphite);background:#fff}
+
+/* 6 modules */
+.segbar{display:flex;height:14px;border-radius:7px;overflow:hidden;gap:3px;margin:4px 0 18px}
+.segbar i{display:block;background:var(--azure)}
+.segbar i:nth-child(odd){background:var(--azure)}
+.segbar i:nth-child(even){background:var(--azure3)}
+.mods{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.md{border:1px solid var(--line);border-radius:14px;padding:20px 17px 18px;background:#fff;display:flex;flex-direction:column}
+.md .tp{font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.md .h{font-size:42px;font-weight:800;color:var(--azure);line-height:1;margin:6px 0 8px}
+.md .h small{font-size:16px;font-weight:700;color:var(--muted);margin-left:3px}
+.md h3{font-size:20px;font-weight:800;line-height:1.2;margin-bottom:10px;min-height:50px}
+.md p{font-size:16px;line-height:1.4;color:var(--muted);flex:1}
+.md .res{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-size:14px;color:var(--faint);font-weight:700}
+.md .res b{display:block;color:var(--navy);font-size:16.5px;margin-top:3px}
+.md:last-child{background:var(--azure);border-color:var(--azure)}
+.md:last-child .tp,.md:last-child .h,.md:last-child .h small,.md:last-child p,.md:last-child .res,.md:last-child .res b,.md:last-child h3{color:#fff}
+.md:last-child .res{border-color:rgba(255,255,255,.4)}
+
+/* 7 tracks */
+.fork{display:grid;grid-template-columns:300px 80px 1fr;align-items:center;margin-top:6px}
+.trunk{background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:22px 22px 18px}
+.trunk h3{font-size:25px;font-weight:800;margin-bottom:12px}
+.trunk .it{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;background:#fff;border:1px solid var(--line);font-size:18px;font-weight:700;margin-bottom:8px}
+.trunk .it svg{color:var(--azure);font-size:22px}
+.forkarr{width:80px;height:300px}
+.lanes{display:flex;flex-direction:column;gap:18px}
+.ln{border:2px solid var(--line);border-radius:18px;padding:18px 24px;display:grid;grid-template-columns:1fr 250px;gap:20px;align-items:center;background:#fff}
+.ln.a{border-color:var(--azure3)}
+.ln.b{border-color:var(--azure);background:linear-gradient(90deg,var(--azure2),#fff 70%)}
+.ln .t{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--azure)}
+.ln h3{font-size:27px;font-weight:800;margin:2px 0 4px}
+.ln .who{font-size:17px;color:var(--muted);line-height:1.35;margin-bottom:8px}
+.ln .fo{font-size:17px;color:var(--graphite);line-height:1.4}
+.ln .fo b{color:var(--navy)}
+.ln .doc{background:var(--azure);color:#fff;border-radius:14px;padding:16px 18px;text-align:center}
+.ln.a .doc{background:var(--graphite)}
+.ln .doc svg{font-size:30px;margin-bottom:6px}
+.ln .doc small{display:block;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;font-weight:700}
+.ln .doc b{font-size:19px;line-height:1.25;font-weight:800}
+
+/* 8 result */
+.res8{display:grid;grid-template-columns:540px 1fr;gap:40px;align-items:center;margin-top:6px}
+.cert{margin:0}
+.cert img{width:100%;display:block;border-radius:10px;border:1px solid var(--line);box-shadow:0 10px 30px rgba(10,15,26,.12)}
+.cert figcaption{margin-top:10px;font-size:14.5px;color:var(--faint);text-align:center}
+.outs{display:flex;flex-direction:column;gap:18px}
+.out{display:flex;gap:18px;align-items:flex-start;padding:18px 20px;border-radius:16px;background:var(--soft);border:1px solid var(--line)}
+.out .ic{width:54px;height:54px;border-radius:14px;background:var(--azure);color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;flex:none}
+.out h3{font-size:23px;font-weight:800;margin-bottom:4px}
+.out p{font-size:18px;line-height:1.42;color:var(--muted)}
+
+/* 9 examples */
+.gal{display:grid;grid-template-columns:430px 1fr;grid-template-rows:1fr 1fr;gap:14px;height:412px;margin-top:4px}
+.gal figure{position:relative;margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--soft)}
+.gal figure.big{grid-row:1/3}
+.gal img{width:100%;height:100%;object-fit:cover;display:block}
+.gal figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.94);padding:7px 12px;border-radius:8px;font-size:14.5px;font-weight:800;color:var(--navy)}
+
+/* 10 format */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:6px}
+.tl{border:1px solid var(--line);border-radius:18px;padding:28px 22px;background:#fff;display:flex;flex-direction:column}
+.tl .ic{width:66px;height:66px;border-radius:16px;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:34px;margin-bottom:18px}
+.tl h3{font-size:24px;font-weight:800;margin-bottom:8px}
+.tl p{font-size:18px;line-height:1.45;color:var(--muted);flex:1}
+.tl a{margin-top:12px;color:var(--azure);font-weight:800;font-size:17px;text-decoration:none}
+.tl a:hover{text-decoration:underline}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
+.sb{background:var(--soft);border-radius:14px;padding:20px 22px;display:flex;align-items:baseline;gap:10px}
+.sb b{font-size:42px;font-weight:800;color:var(--azure)}
+.sb span{font-size:17px;color:var(--muted);line-height:1.25}
+
+/* 11 tools */
+.tools{display:grid;grid-template-columns:390px 1fr;gap:34px;align-items:center;margin-top:4px}
+.tools svg.rings{width:390px;height:390px}
+.tc{border:1px solid var(--line);border-radius:16px;padding:18px 24px;margin-bottom:12px}
+.tc.main{border-color:var(--azure);background:linear-gradient(90deg,var(--azure2),#fff 80%)}
+.tc h3{font-size:23px;font-weight:800;margin-bottom:4px}
+.tc .sub{font-size:17px;color:var(--muted);margin-bottom:10px;line-height:1.4}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips .chip{font-size:16px;padding:7px 13px}
+
+/* 12 check */
+.checks{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:6px}
+.ck{border:1px solid var(--line);border-radius:18px;padding:32px 22px;background:#fff;text-align:center}
+.ck .ic{width:78px;height:78px;border-radius:50%;background:var(--azure2);color:var(--azure);display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 18px}
+.ck h3{font-size:26px;font-weight:800;margin-bottom:8px}
+.ck p{font-size:19px;line-height:1.45;color:var(--muted)}
+.rule{margin-top:20px;background:var(--navy);color:#fff;border-radius:16px;padding:24px 30px;font-size:26px;font-weight:800;display:flex;gap:16px;align-items:center}
+.rule svg{color:#6FA3FF;font-size:32px}
+
+/* 13 step */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.sp{border-top:5px solid var(--azure);background:var(--soft);border-radius:0 0 16px 16px;padding:30px 28px 34px}
+.sp .n{font-size:76px;font-weight:800;color:var(--azure);line-height:1;margin-bottom:12px}
+.sp h3{font-size:28px;font-weight:800;margin-bottom:8px}
+.sp p{font-size:20.5px;line-height:1.45;color:var(--muted)}
+.sp a{display:inline-block;margin-top:14px;background:var(--azure);color:#fff;text-decoration:none;font-weight:800;font-size:17px;padding:12px 18px;border-radius:10px}
+.sp a:hover{background:#0f56d6}
+
+/* 14 links */
+.links{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+.lk{display:flex;flex-direction:column;border:2px solid var(--line);border-radius:20px;padding:38px 32px;text-decoration:none;background:#fff;transition:.15s}
+.lk:hover{border-color:var(--azure);box-shadow:0 10px 30px rgba(26,107,255,.14);transform:translateY(-2px)}
+.lk .ic{width:76px;height:76px;border-radius:18px;background:var(--azure);color:#fff;display:flex;align-items:center;justify-content:center;font-size:40px;margin-bottom:22px}
+.lk h3{font-size:30px;font-weight:800;margin-bottom:8px}
+.lk p{font-size:19.5px;line-height:1.45;color:var(--muted);flex:1}
+.lk .go{margin-top:16px;color:var(--azure);font-weight:800;font-size:19px}
+.lk.nolink{cursor:default}
+.lk.nolink:hover{border-color:var(--line);box-shadow:none;transform:none}
+
+/* controls */
+.controls{display:flex;align-items:center;gap:10px;user-select:none}
+.controls button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);font-family:inherit;font-size:20px;font-weight:700;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.controls button:hover{border-color:var(--azure);color:var(--azure)}
+.controls button:disabled{opacity:.3;cursor:default;border-color:var(--line);color:var(--navy)}
+.counter{min-width:70px;text-align:center;font-size:15px;font-weight:800;color:var(--muted)}
+.dots{display:flex;gap:6px;margin:0 6px}
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--line);cursor:pointer;transition:.2s}
+.dots i.on{background:var(--azure);transform:scale(1.3)}
+.hint{font-size:12px;color:var(--faint);margin-left:8px}
+
+/* extra layouts for presentation 1.2 */
+.tiles.three{grid-template-columns:repeat(3,1fr)}
+.plan{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px}
+.pl{border:1px solid var(--line);border-radius:16px;padding:20px 22px;background:#fff}
+.pl .n{font-size:34px;font-weight:800;color:var(--azure);line-height:1;margin-bottom:8px}
+.pl h3{font-size:20px;font-weight:800;margin-bottom:6px;line-height:1.2}
+.pl p{font-size:16.5px;line-height:1.4;color:var(--muted)}
+.numlist{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;margin-top:6px}
+.nl{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+.nl .n{font-size:18px;font-weight:800;color:var(--azure);min-width:24px}
+.nl p{font-size:18px;line-height:1.4;color:var(--graphite)}
+.toolrows{margin-top:6px;border-top:1px solid var(--line)}
+.tr{display:grid;grid-template-columns:260px 1fr;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.tr b{font-size:20px;font-weight:800}
+.tr span{font-size:18px;color:var(--muted);line-height:1.4}
+.datatable{width:100%;border-collapse:collapse;margin-top:6px;font-size:16px}
+.datatable th{text-align:left;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding:8px 10px;border-bottom:1px solid var(--line)}
+.datatable td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--graphite)}
+.datatable td:first-child{font-weight:700;color:var(--navy)}
+.stack{display:flex;flex-direction:column;gap:12px}
+.stack .it{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px}
+.stack .it b{display:block;font-size:17px;color:var(--azure);margin-bottom:3px}
+.stack .it p{font-size:16px;line-height:1.4;color:var(--muted)}
+.steps.six{grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px}
+.steps.six .sp{padding:18px 20px 20px}
+.steps.six .sp .n{font-size:48px;margin-bottom:6px}
+.steps.six .sp h3{font-size:21px;margin-bottom:6px}
+.steps.six .sp p{font-size:16.5px;line-height:1.4}
+.controls{flex-wrap:wrap;justify-content:center}
+.dots{flex-wrap:wrap;justify-content:center;max-width:100%}
+
+.part-divider{justify-content:center;align-items:flex-start;padding-top:96px}
+.part-divider .kick{margin-bottom:18px}
+.part-divider h1{font-size:54px;line-height:1.06;max-width:1050px}
+.part-divider .meta{font-size:22px;color:var(--muted);margin-top:18px;line-height:1.4}
+.part-divider .num{font-size:15px;font-weight:800;color:var(--azure);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.img-ph{border:1.5px dashed #9DB8E8;border-radius:14px;padding:20px 22px;background:#F4F8FF;display:flex;gap:16px;align-items:flex-start;margin-top:12px}
+.img-ph .ic{font-size:32px;flex-shrink:0}
+.img-ph b{display:block;font-size:18px;color:var(--navy);margin-bottom:6px}
+.img-ph p{font-size:15px;line-height:1.45;color:var(--muted)}
+.img-ph .src{font-size:12.5px;color:var(--faint);margin-top:6px}
+.fig{margin:8px 0 0}
+.fig img{width:100%;max-height:360px;object-fit:cover;border-radius:12px;display:block;border:1px solid var(--line)}
+.fig svg{width:100%;display:block}
+.figcap{font-size:13px;color:var(--faint);margin-top:6px}
+.checkpoint{background:var(--azure2);border:1px solid var(--azure3);border-radius:16px;padding:22px 26px;margin-top:12px}
+.checkpoint .lab{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--azure);margin-bottom:8px}
+.checkpoint h3{font-size:24px;font-weight:800;margin-bottom:6px}
+.checkpoint p{font-size:18px;line-height:1.45;color:var(--graphite)}
+.qa{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.qa .q{font-size:19px;font-weight:800;color:var(--navy)}
+.qa .a{font-size:17px;line-height:1.45;color:var(--muted);margin-bottom:8px}
+.contour{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:5px;background:var(--soft);color:var(--graphite);border:1px solid var(--line);margin-left:6px}
+.contour.main{background:var(--azure2);color:var(--azure);border-color:var(--azure3)}
+.contour.ext{background:#F3F0FF;color:#6B3FD4;border-color:#DCD3FF}
+
+  /* nav-v2: unified navigation bar */
+  .controls{width:100%;max-width:1280px;margin:0 auto;padding:0 12px;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:nowrap;position:relative;z-index:100;user-select:none}
+  .controls button{width:44px;height:44px;min-width:44px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);font-family:inherit;font-size:20px;font-weight:700;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .controls button:hover{border-color:var(--azure);color:var(--azure)}
+  .controls button:disabled{opacity:.3;cursor:default;border-color:var(--line);color:var(--navy)}
+  .controls button:focus-visible{outline:2px solid var(--azure);outline-offset:3px}
+  .nav-progress{flex:1 1 auto;min-width:70px;display:flex;gap:4px;height:10px;align-items:stretch}
+  .nav-seg{width:auto;min-width:0;height:10px;border:0;border-radius:999px;background:var(--line);padding:0;cursor:pointer;position:relative;overflow:hidden;flex-basis:0;flex-shrink:1;flex-grow:1}
+  .nav-seg-fill{display:block;height:100%;width:0;background:var(--azure);border-radius:999px;transition:width .25s ease}
+  .controls .nav-seg{width:auto;min-width:0;height:10px;padding:0;border-radius:999px;flex-basis:0;flex-shrink:1;flex-grow:1}
+  .nav-seg:hover{background:#D6DDEA}
+  .nav-seg.active{background:#E4EBF8}
+  .counter{min-width:64px;text-align:center;font-size:14px;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}
+  .toc-btn{font-size:20px}
+  .toc-menu{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);width:min(760px,calc(100vw - 24px));max-height:min(70vh,540px);overflow:auto;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 50px rgba(10,15,26,.18);padding:10px;z-index:1000;display:none}
+  .toc-menu.open{display:block}
+  .toc-part{display:flex;align-items:baseline;gap:8px;width:100%;border:0;background:transparent;text-align:left;padding:8px 10px;margin:2px 0;font:inherit;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--azure);cursor:pointer;border-top:1px solid var(--line)}
+  .toc-part:first-child{border-top:0}
+  .toc-part:hover{background:var(--azure2)}
+  .toc-part .range{font-size:10px;letter-spacing:.04em;color:var(--faint);font-weight:600;text-transform:none}
+  .toc-link{display:flex;gap:10px;align-items:baseline;width:100%;border:0;background:transparent;text-align:left;padding:7px 10px;border-radius:8px;font:inherit;font-size:15px;color:var(--graphite);cursor:pointer;line-height:1.3}
+  .toc-link:hover{background:var(--azure2);color:var(--navy)}
+  .toc-link .n{font-size:12px;font-weight:800;color:var(--faint);min-width:28px;flex:none}
+  .controls .toc-link{width:100%;height:auto;min-width:0;border:0;border-radius:8px;background:transparent;color:var(--graphite);font-size:15px;font-weight:400;line-height:1.3;justify-content:flex-start;align-items:baseline;padding:7px 10px}
+  .controls .toc-part{width:100%;height:auto;min-width:0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;color:var(--azure);font-size:12px;font-weight:800;line-height:1.3;justify-content:flex-start;align-items:baseline;padding:8px 10px}
+  .controls .toc-link:hover{background:var(--azure2);color:var(--navy)}
+  .controls .toc-part:hover{background:var(--azure2)}
+  .hint{font-size:11px;color:var(--faint);margin-left:4px;white-space:nowrap}
+  .slide{font-size:18px}
+  .slide .lead{font-size:23px;line-height:1.45}
+  .slide .bx li{font-size:20px}
+  .slide .body p{font-size:18px}
+  .slide .note{font-size:18px}
+  .slide .datatable{font-size:18px}
+  .plan-six{grid-template-columns:1fr;height:100%;align-content:stretch;margin-top:0}
+  .plan-six .nl{height:100%;align-items:center;padding:0}
+  .plan-six .nl p{font-size:22px;line-height:1.35}
+  @media (max-width:640px){
+    .controls{gap:6px;padding:0 8px}
+    .controls button{width:44px;height:44px;min-width:44px}
+    .counter{min-width:48px;font-size:12px}
+    .nav-progress{min-width:44px;gap:3px}
+    .hint{display:none}
+    .toc-menu{width:calc(100vw - 16px);max-height:60vh}
+  }
+
+.title-slide{justify-content:center}
+.title-slide h1{font-size:62px}
+.title-slide .lead{max-width:1040px}
+.title-slide .chips{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
+.prompt.tight{font-size:15px;line-height:1.34}
+.prompt + .note{margin-top:8px}
+
+  .scheme{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:4px 8px 2px;margin:6px 0 0}
+  .scheme-label{font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--azure);margin-bottom:2px}
+  .scheme svg{width:auto;height:115px;max-width:100%;display:block;margin:0 auto}
+  .scheme.compact svg{height:88px}
+  .scheme + .note{margin-top:4px}
+
+  .prompts-link{height:44px;display:inline-flex;align-items:center;justify-content:center;padding:0 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--navy);font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap}
+  .prompts-link:hover{border-color:var(--azure);color:var(--azure)}
+  .prompts-link:focus-visible{outline:2px solid var(--azure);outline-offset:3px}
+  .prompts-section{background:var(--soft);border-top:1px solid var(--line);padding:52px 24px 64px;color:var(--navy);scroll-margin-top:16px}
+  .prompts-inner{max-width:980px;margin:0 auto}
+  .prompts-section h2{font-size:34px;line-height:1.12;letter-spacing:-.015em}
+  .prompts-lead{font-size:15px;line-height:1.5;color:var(--muted);margin-top:10px;max-width:860px}
+  .prompts-grid{display:flex;flex-direction:column;gap:18px;margin-top:24px}
+  .prompt-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;min-width:0}
+  .prompt-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+  .prompt-part{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--azure);margin-bottom:3px}
+  .prompt-card h3{font-size:22px;line-height:1.2}
+  .prompt-flagship{font-size:12px;font-weight:700;color:var(--graphite);background:var(--azure2);border:1px solid var(--azure3);border-radius:7px;padding:5px 9px;white-space:nowrap}
+  .prompt-text{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:15px;line-height:1.5;color:var(--graphite);white-space:pre-wrap;overflow-wrap:anywhere}
+  .prompt-toolbar{display:flex;justify-content:flex-end;margin-bottom:8px}
+  .copy-btn{min-height:36px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--navy);font:700 12px var(--sans);padding:0 12px;cursor:pointer}
+  .copy-btn:hover{border-color:var(--azure);color:var(--azure)}
+  .copy-btn:focus-visible{outline:2px solid var(--azure);outline-offset:3px}
+  .copy-btn.copied{background:var(--azure);border-color:var(--azure);color:#fff}
+  .prompt-fill{font-size:13px;line-height:1.45;color:var(--muted);margin-top:10px}
+  .prompt-fill b{color:var(--navy)}
+  @media(max-width:640px){
+    .prompts-link{padding:0 9px;font-size:11px}
+    .prompts-section{padding:36px 16px 48px}
+    .prompts-section h2{font-size:27px}
+    .prompt-card{padding:16px}
+    .prompt-card h3{font-size:20px}
+    .prompt-text{font-size:14px;padding:12px}
+    .prompt-flagship{white-space:normal}
+  }
+  @media(prefers-color-scheme:dark){
+    .prompts-section{background:#101827;color:#F3F6FC;border-top-color:#2A3550}
+    .prompts-section h2,.prompt-fill b{color:#F3F6FC}
+    .prompts-lead,.prompt-fill{color:#B6C2D9}
+    .prompt-card{background:#162033;border-color:#2A3550}
+    .prompt-text{background:#0D1421;border-color:#2A3550;color:#E2E9F6}
+    .prompt-flagship{background:#1B2A45;border-color:#355078;color:#D9E5FA}
+    .copy-btn{background:#162033;border-color:#355078;color:#F3F6FC}
+    .prompt-card h3{color:#F3F6FC}
+  }
+</style>
+</head>
+<body>
+<span class="lang-switch deck-lang" aria-label="Language switcher"><a href="../redev-gen.html" hreflang="ru" lang="ru">RU</a><span class="sep" aria-hidden="true">|</span><span class="on" aria-current="true">EN</span></span>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12M3 21h18M9 21v-5h6v5M8 11.5h.01M12 11.5h.01M16 11.5h.01"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.8 10.6c.7.7 1 1.4 1 2.4h5.6c0-1 .3-1.7 1-2.4A6 6 0 0 0 12 3z"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M3 17l5-5 4 4 3-3 6 6"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM15 3v4h4M10 12h6M10 16h6"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h12l-2.5 4L17 12H5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.2l3 3 5-6"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H10l-5 4v-4H4z"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4h12a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2zM5 18a2 2 0 0 1 2-2h12"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6zM9 12l2 2 4-4"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="3.6"/><path d="M10.7 12.4L20 3M16 7l3 3"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5zM3 13l9 5 9-5"/></symbol>
+    <symbol id="i-source" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 4v16M5 20h14M4 8h16M4 8l-2 7a3 3 0 0 0 6 0zM20 8l-2 7a3 3 0 0 0 6 0z"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7.5h7M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"/></symbol>
+    <symbol id="i-logic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.6 2.6 0 1 1 3.6 2.4c-.7.4-1.1.9-1.1 1.8M12 17h.01"/></symbol>
+  </defs>
+</svg>
+
+<div class="deck" id="deck">
+ <div class="viewport" id="viewport">
+  <div class="stage" id="stage">
+   <div class="progress" id="progress"></div>
+
+
+<section class="slide title-slide" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Topic 3.2 · Generation</div><h1>Track-specific image <em>generation</em></h1><p class="lead">Prompt structure, the core toolset, and the Flux.1 + ControlNet pipeline.</p><div class="chips"><span class="chip">Part 1 · Scheme</span><span class="chip">Part 2 · Flux.1 + ControlNet</span><span class="chip">Two tracks</span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Why</div><h2>Visuals that <em>hold up to checking</em></h2><div class="body"><div class="bx"><h4>What matters</h4><ul><li>the visuals must match the table and the structure;</li><li>a beautiful image without area and materials is useless;</li><li>the cost of an error is redoing the series and a false impression;</li><li>the result is a series you can explain.</li></ul></div><div class="band" style="margin-top:12px"><b>Takeaway:</b> Visuals are checked against data, not impressions.</div></div><div class="terms"><span class="lab">Terms</span><span><b>Visual language</b> — a set of recurring features (materials, color, light, rhythm) that make a style recognizable.<br><span style="color:var(--muted)">In plain terms: recurring features of a style.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Context</div><h2>AI visualization <em>in a project</em></h2><div class="body"><div class="bx"><h4>What matters</h4><ul><li>AI visualization is part of practice as a draft of the image;</li><li>the inputs are photos of the property, measurements, and materials;</li><li>the model does not replace the design or the codes;</li><li>in the market, visuals are checked against the structure.</li></ul></div><div class="band" style="margin-top:12px"><b>Takeaway:</b> The model speeds up the image but does not remove the need to check it.</div></div><div class="terms"><span class="lab">Terms</span><span><b>Render</b> — a computer-generated image based on a design or description.<br><span style="color:var(--muted)">In plain terms: a picture built from a description.</span></span></div></section>
+
+<section class="slide part-divider" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="num">Part 1</div><div class="kick">Topic 3.2 · Track-Specific Image Generation</div><h1>Prompt structure and the core toolset</h1><p class="meta">An image series by scenario without installing software.</p></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Scheme</div><h2>Prompt <em>structure</em></h2><div class="body"><div class="bx"><h4>What matters</h4><ul><li>the role sets the frame of the answer;</li><li>the input lists photos, measurements, and materials;</li><li>the task describes the frame and constraints;</li><li>the format fixes the series and a consistent style.</li></ul></div><div class="scheme"><div class="scheme-label">Scheme</div><svg viewBox="0 0 1100 150" role="img" aria-label="Prompt structure: role, input, task, format"><rect x="20" y="38" width="240" height="62" rx="9" fill="#EAF1FF" stroke="#BFD3FF" stroke-width="1.5"/><text x="140" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#0A0F1A">Role</text><path d="M264 69.0 H290" stroke="#1A6BFF" stroke-width="2"/><path d="M282 65.0 L290 69.0 L282 73.0" stroke="#1A6BFF" stroke-width="2" fill="none"/><rect x="294" y="38" width="240" height="62" rx="9" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="413" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#2A2F3E">Input</text><path d="M537 69.0 H563" stroke="#1A6BFF" stroke-width="2"/><path d="M556 65.0 L563 69.0 L556 73.0" stroke="#1A6BFF" stroke-width="2" fill="none"/><rect x="567" y="38" width="240" height="62" rx="9" fill="#EAF1FF" stroke="#BFD3FF" stroke-width="1.5"/><text x="687" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#0A0F1A">Task</text><path d="M810 69.0 H836" stroke="#1A6BFF" stroke-width="2"/><path d="M830 65.0 L836 69.0 L830 73.0" stroke="#1A6BFF" stroke-width="2" fill="none"/><rect x="840" y="38" width="240" height="62" rx="9" fill="#1A6BFF" stroke="#1A6BFF" stroke-width="1.5"/><text x="960" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#fff">Format</text></svg></div><div class="band" style="margin-top:12px"><b>Takeaway:</b> A prompt without input produces a picture with no link to the property.</div></div><div class="terms"><span class="lab">Terms</span><span><b>Prompt</b> — a text instruction for the model.<br><span style="color:var(--muted)">In plain terms: a request to an AI model.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Task A · Part 1</div><h2>Assemble <em>a series by scenario</em></h2><div class="body">
+<div class="bx"><h4>Input and result</h4><ul>
+<li>input: a photo of the property or a 3D blockout;</li>
+<li>the function from the product hypothesis;</li>
+<li>the prompt structure from Topic 3.1;</li>
+<li>result: an image series in a consistent style.</li></ul></div>
+<div class="band" style="margin-top:12px"><b>Takeaway:</b> The series starts from the source frame and the function, not from a new building.</div></div><div class="terms"><span class="lab">Terms</span><span><b>Render</b> — a computer-generated image based on a design or description.</span><span><b>Visual language</b> — a set of recurring features: materials, color, light, rhythm.</span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Task A · Comparison</div><h2>Services: <em>comparison and lead tool</em></h2><div class="body"><table class="datatable" style="font-size:13px"><thead><tr><th>Service</th><th>Toolset</th><th>Strengths</th><th>Limitations</th><th>When to choose</th></tr></thead><tbody><tr><td>Shedevrum</td><td><span class="contour main">core</span></td><td>image generation in the browser</td><td>style control through a text prompt</td><td>core toolset</td></tr><tr><td>Kandinsky</td><td><span class="contour main">core</span></td><td>image generation in the browser</td><td>style control through a text prompt</td><td>core toolset</td></tr><tr><td>Midjourney</td><td><span class="contour ext">extended</span></td><td>series style control through references</td><td>the geometry of the source frame is not held automatically</td><td>series style</td></tr></tbody></table><p class="src">Check before the lecture: features and limitations change</p><p class="note" style="margin-top:8px"><b>Lead tool by criterion:</b> Shedevrum or Kandinsky — generation in the browser without installation; choose by availability.</p><div class="band" style="margin-top:12px"><b>Takeaway:</b> The core toolset works in the browser; the extended toolset adds style control.</div></div><div class="terms"><span class="lab">Terms</span><span><b>Prompt</b> — a text instruction for the model.</span><span><b>Render</b> — a computer-generated image based on a design or description.</span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Task A · Prompt</div><h2>Prompt <em>structure</em></h2><div class="body"><div class="prompt">Create an image series for an architectural project: [property and viewpoint]. Materials: [materials]. Light: [light]. Composition: [composition]. Style: [wording from the style dictionary]. Keep one structure for all frames in the series; change only the scene. Do not generate a new building from scratch: build on the source frame. Do not add details that are not in the style dictionary.</div><p class="note" style="margin-top:10px"><b>Structure:</b> property and viewpoint + materials + light + composition + style dictionary.</p><div class="band" style="margin-top:12px"><b>Takeaway:</b> The structure holds the series together, and the principle forbids generating a building from scratch.</div></div><div class="terms"><span class="lab">Terms</span><span><b>Prompt</b> — a text instruction for the model.</span><span><b>Visual language</b> — a set of recurring features: materials, color, light, rhythm.</span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Task A · Steps and check</div><h2>Steps <em>and check</em></h2><div class="body">
+<div class="numlist">
+<div class="nl"><div class="n">1</div><p>Upload the source frame of the property.</p></div>
+<div class="nl"><div class="n">2</div><p>Paste the prompt structure and set the scene.</p></div>
+<div class="nl"><div class="n">3</div><p>Generate a series in one style.</p></div>
+<div class="nl"><div class="n">4</div><p>Check the geometry and viewpoint.</p></div>
+<div class="nl"><div class="n">5</div><p>Save the frames and notes in the workbook.</p></div>
+</div>
+<p class="note" style="margin-top:8px"><b>Basic path:</b> a photo collage over the source photo + generation or mask-based editing.</p>
+<div class="band" style="margin-top:12px"><b>Takeaway:</b> A frame is accepted if the geometry and viewpoint are preserved.</div></div><div class="terms"><span class="lab">Terms</span><span><b>Inpainting</b> — redrawing a selected area of an image using a mask.</span><span><b>Render</b> — a computer-generated image based on a design or description.</span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Task A · Failure and toolset</div><h2>The path in the <em>core toolset</em></h2><div class="body">
+<div class="two">
+<div class="bx"><h4>Typical failure</h4><ul>
+<li>the building was generated from scratch;</li>
+<li>the geometry or viewpoint changed;</li>
+<li>the frames' style diverges.</li></ul></div>
+<div class="bx"><h4>Core toolset</h4><ul>
+<li>Shedevrum or Kandinsky in the browser;</li>
+<li>photo collage and mask-based editing;</li>
+<li>manual geometry check.</li></ul></div></div>
+<div class="band" style="margin-top:12px"><b>Takeaway:</b> The core toolset keeps the source frame and checks the geometry manually.</div></div><div class="terms"><span class="lab">Terms</span><span><b>Render</b> — a computer-generated image based on a design or description.</span><span><b>Inpainting</b> — redrawing a selected area of an image using a mask.</span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">C52</div><h2>C52: <em>what exists for the visuals</em></h2><div class="body"><div class="bx"><h4>What matters</h4><ul><li>photos and measurements — no data: a survey is needed;</li><li>area of 1,959.2 m² per EGRN is the scale for the frame;</li><li>nonstandard column spacing and heights — lecture 0.1, no figures;</li><li>a series cannot be assembled without a photo base.</li></ul></div><p class="note"><b>Example:</b> C52: area of 1,959.2 m² per EGRN; photos, measurements, and structure — no data: a survey is needed.</p><div class="band" style="margin-top:12px"><b>Takeaway:</b> Without photos and measurements, the visuals remain an illustration.</div></div><div class="terms"><span class="lab">Terms</span><span><b>Structure</b> — load-bearing elements and the building's geometry.<br><span style="color:var(--muted)">In plain terms: the frame you cannot invent.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Scheme</div><h2>Series: <em>one scheme, different scenes</em></h2><div class="body"><div class="bx"><h4>What matters</h4><ul><li>the dictionary sets the features;</li><li>the scheme holds the frame;</li><li>the scene changes;</li><li>the series stays consistent.</li></ul></div><div class="scheme"><div class="scheme-label">Scheme</div><svg viewBox="0 0 1100 150" role="img" aria-label="Series: dictionary, scheme, scene, series"><rect x="20" y="38" width="240" height="62" rx="9" fill="#EAF1FF" stroke="#BFD3FF" stroke-width="1.5"/><text x="140" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#0A0F1A">Dictionary</text><path d="M264 69.0 H290" stroke="#1A6BFF" stroke-width="2"/><path d="M282 65.0 L290 69.0 L282 73.0" stroke="#1A6BFF" stroke-width="2" fill="none"/><rect x="294" y="38" width="240" height="62" rx="9" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="413" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#2A2F3E">Scheme</text><path d="M537 69.0 H563" stroke="#1A6BFF" stroke-width="2"/><path d="M556 65.0 L563 69.0 L556 73.0" stroke="#1A6BFF" stroke-width="2" fill="none"/><rect x="567" y="38" width="240" height="62" rx="9" fill="#EAF1FF" stroke="#BFD3FF" stroke-width="1.5"/><text x="687" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#0A0F1A">Scene</text><path d="M810 69.0 H836" stroke="#1A6BFF" stroke-width="2"/><path d="M830 65.0 L836 69.0 L830 73.0" stroke="#1A6BFF" stroke-width="2" fill="none"/><rect x="840" y="38" width="240" height="62" rx="9" fill="#1A6BFF" stroke="#1A6BFF" stroke-width="1.5"/><text x="960" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#fff">Series</text></svg></div><div class="band" style="margin-top:12px"><b>Takeaway:</b> The series does not fall apart if there is one scheme.</div></div><div class="terms"><span class="lab">Terms</span><span><b>Visual language</b> — a set of recurring features (materials, color, light, rhythm) that make a style recognizable.<br><span style="color:var(--muted)">In plain terms: recurring features of a style.</span></span></div></section>
+
+<section class="slide part-divider" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="num">Part 2</div><div class="kick">Topic 3.2 · Track-Specific Image Generation</div><h1>Flux.1 + ControlNet</h1><p class="meta">The digital reconstruction chain: source, frame, materials.</p></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Scheme</div><h2>How to hold the <em>structure</em></h2><div class="body"><div class="bx"><h4>What matters</h4><ul><li>the photo sets the viewpoint and the existing property;</li><li>the frame holds the structure and proportions;</li><li>materials come from the cost estimate or description;</li><li>the series keeps one frame.</li></ul></div><div class="scheme"><div class="scheme-label">Scheme</div><svg viewBox="0 0 1100 150" role="img" aria-label="Chain: photo, frame, materials"><rect x="20" y="38" width="331" height="62" rx="9" fill="#EAF1FF" stroke="#BFD3FF" stroke-width="1.5"/><text x="185" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#0A0F1A">Photo</text><path d="M355 69.0 H381" stroke="#1A6BFF" stroke-width="2"/><path d="M374 65.0 L381 69.0 L374 73.0" stroke="#1A6BFF" stroke-width="2" fill="none"/><rect x="385" y="38" width="331" height="62" rx="9" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="550" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#2A2F3E">Frame</text><path d="M719 69.0 H745" stroke="#1A6BFF" stroke-width="2"/><path d="M738 65.0 L745 69.0 L738 73.0" stroke="#1A6BFF" stroke-width="2" fill="none"/><rect x="749" y="38" width="331" height="62" rx="9" fill="#1A6BFF" stroke="#1A6BFF" stroke-width="1.5"/><text x="915" y="74.0" text-anchor="middle" font-family="Manrope, sans-serif" font-size="14" font-weight="800" fill="#fff">Materials</text></svg></div><div class="band" style="margin-top:12px"><b>Takeaway:</b> The chain keeps the model from inventing the structure.</div></div><div class="terms"><span class="lab">Terms</span><span><b>ControlNet</b> — an add-on that holds the contours and geometry of the source frame during generation.<br><span style="color:var(--muted)">In plain terms: a tool that holds the geometry of the photo.</span></span><span><b>Flux.1 Dev</b> — an image generation model that works from a text description.<br><span style="color:var(--muted)">In plain terms: a model that draws from a description.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Scheme</div><h2>Materials: <em>estimate → frame</em></h2><div class="body"><div class="bx"><h4>What matters</h4><ul><li>the material comes from the estimate;</li><li>the volume sets the area;</li><li>the frame shows the material;</li><li>the caption records the source.</li></ul></div><div class="scheme"><div class="scheme-label">Scheme</div><svg viewBox="0 0 1100 170" role="img" aria-label="Materials: estimate, volume, frame"><rect x="30" y="20" width="320" height="130" rx="10" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="190" y="48" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#1A6BFF">Material</text><text x="190" y="74" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">from the estimate</text><text x="190" y="98" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">with a source</text><rect x="390" y="20" width="320" height="130" rx="10" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="550" y="48" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#1A6BFF">Volume</text><text x="550" y="74" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">area</text><text x="550" y="98" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">structure</text><rect x="750" y="20" width="320" height="130" rx="10" fill="#F6F8FC" stroke="#BFD3FF" stroke-width="1.5"/><text x="910" y="48" text-anchor="middle" font-family="Manrope, sans-serif" font-size="15" font-weight="800" fill="#1A6BFF">Frame</text><text x="910" y="74" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">material</text><text x="910" y="98" text-anchor="middle" font-family="Manrope, sans-serif" font-size="13" fill="#2A2F3E">caption</text></svg></div><div class="band" style="margin-top:12px"><b>Takeaway:</b> The frame does not invent material outside the estimate.</div></div><div class="terms"><span class="lab">Terms</span><span><b>Cost estimate</b> — a document listing works and materials.<br><span style="color:var(--muted)">In plain terms: a list of materials and quantities.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Task B · Part 2</div><h2>Chain: <em>photo → frame → materials</em></h2><div class="body">
+<div class="plan">
+<div class="pl"><div class="n">1</div><h3>Property photo</h3><p>A real photo or a gray screenshot of a 3D blockout.</p></div>
+<div class="pl"><div class="n">2</div><h3>ControlNet</h3><p>Depth and Canny hold the contour and geometry of the frame.</p></div>
+<div class="pl"><div class="n">3</div><h3>Flux.1 / Inpainting</h3><p>Materials and environment; spot replacements using a mask.</p></div>
+</div>
+<div class="band" style="margin-top:12px"><b>Takeaway:</b> The chain changes materials and function while preserving the original geometry.</div></div><div class="terms"><span class="lab">Terms</span><span><b>ControlNet</b> — an add-on that holds the contours and geometry of the source frame during generation.</span><span><b>Canny</b> — an edge map of the image.</span><span><b>Depth</b> — a depth map of the image.</span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Task B · Comparison</div><h2>Services: <em>comparison and lead tool</em></h2><div class="body"><table class="datatable" style="font-size:12.5px"><thead><tr><th>Service</th><th>Toolset</th><th>Strengths</th><th>Limitations</th><th>When to choose</th></tr></thead><tbody><tr><td>Flux.1 Dev + ControlNet</td><td><span class="contour ext">extended</span></td><td>generation based on the source frame with geometry held</td><td>a source is required; influence strength is tuned to the frame</td><td>reconstruction</td></tr><tr><td>Inpainting</td><td><span class="contour ext">extended</span></td><td>redrawing a selected area using a mask</td><td>requires a mask and edge checks</td><td>spot replacements</td></tr><tr><td>ComfyUI</td><td><span class="contour ext">extended</span></td><td>building a node chain</td><td>requires local installation and setup</td><td>repeatable chain</td></tr><tr><td>Krea.ai / Fal.ai</td><td><span class="contour ext">extended</span></td><td>Flux.1, ControlNet, and Inpainting in the browser</td><td>feature availability must be checked</td><td>cloud pro</td></tr><tr><td>Shedevrum / Kandinsky</td><td><span class="contour main">core</span></td><td>generation in the browser</td><td>geometry is held manually</td><td>basic path</td></tr></tbody></table><p class="src">Check before the lecture: features and limitations change</p><div class="band" style="margin-top:12px"><b>Takeaway:</b> The lead tool by criterion is Flux.1 Dev + ControlNet; series style remains a separate task.</div></div><div class="terms"><span class="lab">Terms</span><span><b>ControlNet</b> — an add-on that holds the contours and geometry of the source frame during generation.</span><span><b>Inpainting</b> — redrawing a selected area of an image using a mask.</span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Task B · Prompt</div><h2>Prompt for <em>estimate materials</em></h2><div class="body"><div class="prompt tight">Architectural photography of a revitalized industrial building courtyard, red-brick facade, adaptive reuse into a creative cluster. Preserved original historic brick facade and window rhythm, sandblasted clean red brick, new black aluminum floor-to-ceiling storefront glazing on the ground floor, warm interior cafe lighting visible inside. Courtyard paved with large-format light grey granite slabs, corten steel planters with ornamental grasses, wooden outdoor seating, subtle warm architectural uplighting on brick piers, dusk atmosphere, photorealistic, 35mm architectural lens.</div><p class="note" style="margin-top:8px"><b>Fields for your property:</b> property and viewpoint, masonry type, glazing profile, courtyard paving, lighting.</p><p class="note"><b>Example:</b> a teaching example, not C52 data; a structural prompt from the course guide.<br><span class="src">Source: course guide, Topic 3.2.</span></p><div class="band" style="margin-top:12px"><b>Takeaway:</b> The prompt describes materials from the estimate, not abstract beauty.</div></div><div class="terms"><span class="lab">Terms</span><span><b>Prompt</b> — a text instruction for the model.</span><span><b>Flux.1 Dev</b> — an image generation model that works from a text description.</span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Task B · Steps and check</div><h2>Four steps <em>and check</em></h2><div class="body">
+<div class="numlist">
+<div class="nl"><div class="n">1</div><p>The source and an “X-ray of the building”: Canny and Depth capture the contour and depth.</p></div>
+<div class="nl"><div class="n">2</div><p>Strength 1.0 locks the geometry; 0.65–0.80 allows adding elements — test it on your own frame.</p></div>
+<div class="nl"><div class="n">3</div><p>Build the series: frame 0 is the source photo; frame 1, “Construction”; frame 2, “Product and life” through Inpainting.</p></div>
+<div class="nl"><div class="n">4</div><p>A prompt based on the estimate materials: masonry, glazing, courtyard paving, lighting.</p></div>
+</div>
+<div class="band" style="margin-top:12px"><b>Takeaway:</b> The check holds the geometry and viewpoint across all frames in the series.</div></div><div class="terms"><span class="lab">Terms</span><span><b>Canny</b> — an edge map of the image.</span><span><b>Depth</b> — a depth map of the image.</span><span><b>Strength</b> — the strength of ControlNet's influence on the result.</span><span><b>Inpainting</b> — redrawing a selected area of an image using a mask.</span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Task B · Failure and toolset</div><h2>The path in the <em>core toolset</em></h2><div class="body">
+<div class="two">
+<div class="bx"><h4>Typical failure</h4><ul>
+<li>the geometry of the source frame changed;</li>
+<li>the building was assembled from scratch;</li>
+<li>the prompt's materials are not linked to the estimate.</li></ul></div>
+<div class="bx"><h4>Core toolset</h4><ul>
+<li>photo collage and generation in the browser;</li>
+<li>mask-based editing instead of a full scene;</li>
+<li>manual viewpoint check.</li></ul></div></div>
+<div class="band" style="margin-top:12px"><b>Takeaway:</b> The core toolset keeps the source frame and checks the geometry manually.</div></div><div class="terms"><span class="lab">Terms</span><span><b>ControlNet</b> — an add-on that holds the contours and geometry of the source frame during generation.</span><span><b>Render</b> — a computer-generated image based on a design or description.</span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Practice</div><h2>Three ways to <em>complete the practice</em></h2><div class="body">
+<div class="plan">
+<div class="pl"><div class="n">1</div><h3>Basic</h3><p>A photo collage over the source photo + generation or mask-based editing in the browser.</p></div>
+<div class="pl"><div class="n">2</div><h3>Cloud pro</h3><p>Krea.ai or Fal.ai: a web interface with Flux.1, ControlNet, and Inpainting.</p></div>
+<div class="pl"><div class="n">3</div><h3>Maximum</h3><p>ComfyUI: build a node chain and run it on your own frame.</p></div>
+</div>
+<div class="band" style="margin-top:12px"><b>Takeaway:</b> The way is chosen by toolset: browser, cloud, or a local chain.</div></div><div class="terms"><span class="lab">Terms</span><span><b>ComfyUI</b> — a node-based program for building generation chains.</span><span><b>Inpainting</b> — redrawing a selected area of an image using a mask.</span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Common errors</div><h2>Typical <em>errors</em></h2><div class="body"><div class="bx"><h4>What matters</h4><ul><li>the render does not match the area;</li><li>materials are not from the estimate;</li><li>the style changes from frame to frame;</li><li>the model invented structure.</li></ul></div><div class="band" style="margin-top:12px"><b>Takeaway:</b> Errors show when the frame is checked against the table and the photo.</div></div><div class="terms"><span class="lab">Terms</span><span><b>Render</b> — a computer-generated image based on a design or description.<br><span style="color:var(--muted)">In plain terms: a picture built from a description.</span></span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Tracks</div><h2>What we check <em>by track</em></h2><div class="body">
+<div class="two">
+<div class="bx"><h4>For Track A</h4><ul>
+<li>regeneration without losing geometry;</li>
+<li>a “before/after” series from one viewpoint;</li>
+<li>spot replacements through Inpainting.</li></ul></div>
+<div class="bx"><h4>For Track B</h4><ul>
+<li>visualization for the economics;</li>
+<li>engineering and financial honesty;</li>
+<li>checking against dimensions and CAPEX.</li></ul></div></div>
+<div class="band" style="margin-top:12px"><b>Takeaway:</b> The tracks check different sides of one image: geometry and economics.</div></div><div class="terms"><span class="lab">Terms</span><span><b>Render</b> — a computer-generated image based on a design or description.</span><span><b>CAPEX (capital expenditures)</b> — capital expenditures.</span></div></section>
+
+<section class="slide has-terms" data-foot="Topic 3.2 · Track-Specific Image Generation"><div class="kick">Assignment 4</div><h2>What goes into <em>Assignment 4</em></h2><div class="body"><div class="bx"><h4>What matters</h4><ul><li>a series of 4–6 frames in a consistent style;</li><li>the photo base and the preserved frame;</li><li>materials from the estimate or description;</li><li>“no data” notes where measurements are needed.</li></ul></div><div class="band" style="margin-top:12px"><b>Takeaway:</b> Assignment 4 contains a series that can be checked against the property.</div></div><div class="terms"><span class="lab">Terms</span><span><b>Visual language</b> — a set of recurring features (materials, color, light, rhythm) that make a style recognizable.<br><span style="color:var(--muted)">In plain terms: recurring features of a style.</span></span></div></section>
+
+<div class="foot" id="foot"><span id="footText">Topic 3.2 · Track-Specific Image Generation</span><span><a href="redev-schedule.html" target="_blank" rel="noopener">Schedule ↗</a> · <a href="https://fortune-swing-02e.notion.site/41112bb3b5cd81839661da69963a035b?source=copy_link" target="_blank" rel="noopener">Workbook ↗</a></span></div>
+  </div>
+ </div>
+ <div class="controls">
+   <button id="prev" aria-label="Back" title="Back">‹</button>
+   <div class="nav-progress" id="navProgress" aria-label="Progress through presentation parts"></div>
+   <div class="counter" id="counter"></div>
+   <button id="tocBtn" class="toc-btn" type="button" aria-label="Contents" title="Contents" aria-haspopup="true" aria-expanded="false">☰</button>
+   <button id="next" aria-label="Next" title="Next">›</button>
+   <button id="fs" aria-label="Expand to full screen" title="Full screen (F)">⤢</button>
+   <a class="prompts-link" href="#prompts">Prompts</a>
+   <span class="hint">← → to navigate · F — fullscreen</span>
+   <div class="toc-menu" id="tocMenu" role="menu" aria-label="Contents"></div>
+ </div>
+</div>
+
+<section class="prompts-section" id="prompts">
+  <div class="prompts-inner">
+    <h2>Prompts for Topic 3.2</h2>
+    <p class="prompts-lead">Copy a prompt, replace the values in square brackets with your own data, and check the result against the primary source</p>
+    <div class="prompts-grid">
+      <article class="prompt-card">
+        <div class="prompt-card-head"><div><div class="prompt-part">Part 1</div><h3>Series by scenario</h3></div></div>
+        <div class="prompt-toolbar"><button class="copy-btn" type="button" data-copy="gen-prompt-1">Copy</button></div>
+        <div class="prompt-text" id="gen-prompt-1">Create an image series for an architectural project: [property and viewpoint]. Materials: [materials]. Light: [light]. Composition: [composition]. Style: [wording from the style dictionary]. Keep one structure for all frames in the series; change only the scene. Do not generate a new building from scratch: build on the source frame. Do not add details that are not in the style dictionary.</div>
+        <p class="prompt-fill"><b>What to fill in:</b> [property and viewpoint], [materials], [light], [composition], [style dictionary]</p>
+      </article>
+      <article class="prompt-card">
+        <div class="prompt-card-head"><div><div class="prompt-part">Part 2</div><h3>Estimate materials</h3></div></div>
+        <div class="prompt-toolbar"><button class="copy-btn" type="button" data-copy="gen-prompt-2">Copy</button></div>
+        <div class="prompt-text" id="gen-prompt-2">Architectural photography of a revitalized industrial building courtyard, red-brick facade, adaptive reuse into a creative cluster. Preserved original historic brick facade and window rhythm, sandblasted clean red brick, new black aluminum floor-to-ceiling storefront glazing on the ground floor, warm interior cafe lighting visible inside. Courtyard paved with large-format light grey granite slabs, corten steel planters with ornamental grasses, wooden outdoor seating, subtle warm architectural uplighting on brick piers, dusk atmosphere, photorealistic, 35mm architectural lens.</div>
+        <p class="prompt-fill"><b>What to fill in:</b> photo base and materials from the estimate</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  var slides=[].slice.call(stage.querySelectorAll('.slide'));
+  var total=slides.length;
+  var prev=document.getElementById('prev'), next=document.getElementById('next'), fs=document.getElementById('fs');
+  var prog=document.getElementById('progress'), counter=document.getElementById('counter');
+  var footText=document.getElementById('footText');
+  var navProgress=document.getElementById('navProgress');
+  var tocBtn=document.getElementById('tocBtn'), tocMenu=document.getElementById('tocMenu');
+  var cur=0;
+
+  function clean(s){return String(s||'').replace(/\s+/g,' ').trim();}
+  function slideTitle(s){
+    var h=s.querySelector('h1,h2');
+    return h?clean(h.textContent):'Slide';
+  }
+  function buildParts(){
+    var divs=[];
+    slides.forEach(function(s,i){ if(s.classList.contains('part-divider')) divs.push(i); });
+    var parts=[];
+    if(!divs.length){
+      parts.push({title:'Topic 3.2 · Track-Specific Image Generation',start:0,end:total-1});
+    }else{
+      if(divs[0]>0) parts.push({title:'Introduction',start:0,end:divs[0]-1});
+      divs.forEach(function(d,idx){
+        var end=idx+1<divs.length?divs[idx+1]-1:total-1;
+        var num=slides[d].querySelector('.num');
+        var kick=slides[d].querySelector('.kick');
+        var title=(num?clean(num.textContent):'Part')+(kick?' · '+clean(kick.textContent):'');
+        parts.push({title:title,start:d,end:end,divider:true});
+      });
+    }
+    return parts;
+  }
+  var parts=buildParts();
+  var segs=[];
+
+  function buildProgress(){
+    navProgress.innerHTML='';
+    parts.forEach(function(p){
+      var b=document.createElement('button');
+      b.type='button'; b.className='nav-seg';
+      b.style.flexGrow=String(p.end-p.start+1);
+      b.title=p.title+' · slides '+(p.start+1)+'–'+(p.end+1);
+      b.setAttribute('aria-label',b.title);
+      var f=document.createElement('span'); f.className='nav-seg-fill'; b.appendChild(f);
+      b.addEventListener('click',function(){go(p.start);});
+      navProgress.appendChild(b); segs.push(b);
+    });
+  }
+
+  function updateProgress(){
+    parts.forEach(function(p,i){
+      var f=segs[i].querySelector('.nav-seg-fill');
+      var pct=0;
+      if(cur>=p.end) pct=100;
+      else if(cur>=p.start) pct=((cur-p.start+1)/(p.end-p.start+1))*100;
+      f.style.width=pct+'%';
+      segs[i].classList.toggle('active',cur>=p.start&&cur<=p.end);
+    });
+  }
+
+  function buildToc(){
+    tocMenu.innerHTML='';
+    parts.forEach(function(p){
+      var head=document.createElement('button');
+      head.type='button'; head.className='toc-part';
+      var t=document.createElement('span'); t.textContent=p.title;
+      var r=document.createElement('span'); r.className='range'; r.textContent='slides '+(p.start+1)+'–'+(p.end+1);
+      head.appendChild(t); head.appendChild(r);
+      head.addEventListener('click',function(){go(p.start);closeToc();});
+      tocMenu.appendChild(head);
+      for(var i=p.start;i<=p.end;i++){
+        if(p.divider && i===p.start) continue;
+        var b=document.createElement('button');
+        b.type='button'; b.className='toc-link'; b.setAttribute('role','menuitem');
+        var n=document.createElement('span'); n.className='n'; n.textContent=(i+1);
+        var tx=document.createElement('span'); tx.textContent=slideTitle(slides[i]);
+        b.appendChild(n); b.appendChild(tx);
+        (function(idx){b.addEventListener('click',function(){go(idx);closeToc();});})(i);
+        tocMenu.appendChild(b);
+      }
+    });
+  }
+
+  function openToc(){
+    tocMenu.classList.add('open'); tocBtn.setAttribute('aria-expanded','true');
+  }
+  function closeToc(){
+    tocMenu.classList.remove('open'); tocBtn.setAttribute('aria-expanded','false');
+  }
+  tocBtn.addEventListener('click',function(e){
+    e.stopPropagation();
+    if(tocMenu.classList.contains('open')) closeToc(); else openToc();
+  });
+  document.addEventListener('click',function(e){
+    if(!tocMenu.classList.contains('open')) return;
+    if(tocMenu.contains(e.target)||tocBtn.contains(e.target)) return;
+    closeToc();
+  });
+
+  function go(i, writeHash){
+    if(i<0||i>=total) return;
+    slides[cur].classList.remove('active');
+    cur=i; slides[cur].classList.add('active');
+    counter.textContent=(cur+1)+' / '+total;
+    if(footText) footText.textContent=slides[cur].getAttribute('data-foot')||'Presentation';
+    prev.disabled=cur===0; next.disabled=cur===total-1;
+    prog.style.width=((cur+1)/total*100)+'%';
+    updateProgress();
+    if(writeHash!==false){try{history.replaceState(null,'','#slide-'+(cur+1));}catch(e){}}
+  }
+  prev.onclick=function(){go(cur-1)}; next.onclick=function(){go(cur+1)};
+  function fit(){
+    var vp=document.getElementById('viewport');
+    var s=Math.min((vp.clientWidth-8)/1280,(vp.clientHeight-8)/720);
+    stage.style.transform='scale('+s+')';
+  }
+  window.addEventListener('resize',fit);
+  function toggleFs(){
+    var el=document.documentElement;
+    if(!document.fullscreenElement&&!document.webkitFullscreenElement){(el.requestFullscreen||el.webkitRequestFullscreen||function(){}).call(el);}
+    else{(document.exitFullscreen||document.webkitExitFullscreen||function(){}).call(document);}
+  }
+  fs.onclick=toggleFs;
+  document.addEventListener('fullscreenchange',function(){setTimeout(fit,60)});
+  document.addEventListener('keydown',function(e){
+    var prompts=document.getElementById('prompts');
+    if(prompts && (e.target.closest && e.target.closest('#prompts'))) return;
+    if(prompts && prompts.getBoundingClientRect().top < window.innerHeight - 40) return;
+    if(e.key==='Escape'){closeToc();return;}
+    if(['ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(cur+1);}
+    else if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(cur-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);} else if(e.key==='End'){e.preventDefault();go(total-1);}
+    else if(e.key==='f'||e.key==='F'){e.preventDefault();toggleFs();}
+  });
+  var tx=null;
+  stage.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  stage.addEventListener('touchend',function(e){
+    if(tx===null)return; var dx=e.changedTouches[0].clientX-tx; tx=null;
+    if(Math.abs(dx)>50) go(dx<0?cur+1:cur-1);
+  });
+  function parseHash(){
+    var m=(location.hash||'').match(/^#(?:slide-)?(\d+)$/);
+    if(!m) return 0;
+    return Math.min(Math.max(parseInt(m[1],10)-1,0),total-1);
+  }
+  window.addEventListener('hashchange',function(){
+    if(location.hash==='#prompts'){
+      var p=document.getElementById('prompts'); if(p) p.scrollIntoView();
+      return;
+    }
+    var idx=parseHash();
+    if(idx!==cur) go(idx);
+  });
+
+  buildProgress();
+  buildToc();
+  var initialPrompts=location.hash==='#prompts';
+  go(parseHash(),!initialPrompts);
+  if(initialPrompts){setTimeout(function(){var p=document.getElementById('prompts');if(p)p.scrollIntoView();},200);}
+  fit();
+})();
+</script>
+<script>
+(function(){
+  if (window.self !== window.top) {
+    var embeddedPrompts = document.getElementById('prompts');
+    var embeddedLink = document.querySelector('.prompts-link');
+    if (embeddedPrompts) embeddedPrompts.style.display = 'none';
+    if (embeddedLink) embeddedLink.style.display = 'none';
+  }
+  function fallback(text){
+    var ta=document.createElement('textarea');
+    ta.value=text; ta.setAttribute('readonly','');
+    ta.style.position='fixed'; ta.style.left='-9999px';
+    document.body.appendChild(ta); ta.select();
+    try{document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);
+  }
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var el=document.getElementById(btn.getAttribute('data-copy'));
+      if(!el) return;
+      var text=el.textContent;
+      var done=function(){
+        btn.textContent='Copied'; btn.classList.add('copied');
+        setTimeout(function(){btn.textContent='Copy';btn.classList.remove('copied');},2000);
+      };
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){fallback(text);done();});
+      }else{fallback(text);done();}
+    });
+  });
+})();
+</script>
+<script>
+(function(){
+  function scrollPrompts(){
+    if(location.hash!=='#prompts') return;
+    var p=document.getElementById('prompts'); if(p) p.scrollIntoView();
+  }
+  window.addEventListener('load',function(){scrollPrompts();setTimeout(scrollPrompts,250);setTimeout(scrollPrompts,800);});
+})();
+</script>
+</body>
+</html>
