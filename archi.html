@@ -372,7 +372,7 @@
       <button class="btn btn-primary" data-apply>Оставить заявку</button>
       <a class="btn btn-ghost" href="#program">Смотреть программу</a>
     </div>
-    <p class="hero-note">Старт 3 потока — 16 ноября, точное расписание присылаем после записи · <a href="archi-guide.html?from=archi" style="color:var(--azure-soft)">Уже записаны? Открыть учебное пособие →</a></p>
+    <p class="hero-note enroll-note" data-group-size="12">Идёт набор группы: <b data-group-count>12</b> человек. Оставьте заявку: когда группа наберётся, мы пришлём уведомление и уточним, как вам удобнее учиться.</p>
 
     <div class="facts">
       <div class="fact"><b>22<small>ак. ч</small></b><span>10 часов практики на воркшопах, 12 часов консультаций и самостоятельной работы. Удостоверение ЮФУ</span></div>
@@ -790,7 +790,7 @@
   <div class="wrap">
     <div class="kicker">Что дальше</div>
     <h2>Вторая ступень: ИИ в редевелопменте</h2>
-    <p class="lead">72 академических часа, старт 5 ноября 2026. Вы берёте реальное здание или территорию и доводите до защищённой концепции с расчётом площадей и экономики. 18 900 ₽; выпускникам курса «ИИ в архитектуре» — 14 900 ₽; рассрочка есть. Цена едина для обоих треков.</p>
+    <p class="lead">72 академических часа. Вы берёте реальное здание или территорию и доводите до защищённой концепции с расчётом площадей и экономики. 18 900 ₽; выпускникам курса «ИИ в архитектуре» — 14 900 ₽; рассрочка есть. Цена едина для обоих треков.</p>
     <a class="btn btn-dark" href="redev.html">Подробнее о второй ступени →</a>
   </div>
 </section>
@@ -804,7 +804,7 @@
       <div class="card step"><div class="n">1</div><h3>Заявка</h3><p>Оставляете контакты и сведения об образовании. Это займёт две минуты.</p></div>
       <div class="card step"><div class="n">2</div><h3>Короткий разговор</h3><p>Отвечаем на вопросы и подтверждаем участие.</p></div>
       <div class="card step"><div class="n">3</div><h3>Договор, оплата, зачисление</h3><p>Заключаем договор с ЮФУ, принимаем оплату (можно в два этапа) и зачисляем вас на курс приказом.</p></div>
-      <div class="card step"><div class="n">4</div><h3>Старт потока</h3><p>Открываем доступ к пособию и чату группы в Яндекс Телемост, присылаем файл-расписание с датами и начинаем со Спринта 0.</p></div>
+      <div class="card step"><div class="n">4</div><h3>Старт</h3><p>Группа набрана — присылаем уведомление и согласуем с вами удобный формат обучения; затем открываем доступ к материалам и чату.</p></div>
     </div>
     <div style="margin-top:28px"><button class="btn btn-primary" data-apply>Оставить заявку</button></div>
   </div>
@@ -923,8 +923,8 @@
       </form>
       <div class="done" id="done" role="status" aria-live="polite">
         <div class="done-ico" aria-hidden="true">✓</div>
-        <h3>Данные успешно отправлены</h3>
-        <p>Мы свяжемся с вами по электронной почте <b id="doneEmail"></b> и отправим приглашение в чат курса.</p>
+        <h3>Заявка принята</h3>
+        <p>Как только группа наберётся, мы пришлём уведомление и уточним, как вам удобнее учиться.</p>
         <p>Если хотите уточнить что-то сразу, напишите в Telegram: <a href="https://t.me/alkuleshov" target="_blank" rel="noopener" style="color:var(--azure-dark);font-weight:700">@alkuleshov</a>.</p>
         <button type="button" class="submit done-close" id="doneClose">Закрыть</button>
       </div>
@@ -1008,7 +1008,6 @@
       btn.disabled = false; btn.textContent = 'Отправить заявку';
       form.style.display = 'none';
       if (ok) {
-        document.getElementById('doneEmail').textContent = payload.email;
         if (typeof ym === 'function') ym(113526373, 'reachGoal', 'form_submit', { course: payload.course });
         form.reset(); notice.style.display = 'none';
         done.style.display = 'block';

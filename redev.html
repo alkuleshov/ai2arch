@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ИИ в редевелопменте — программа повышения квалификации ЮФУ · ai2arch</title>
-<meta name="description" content="72 ак. часа, онлайн, старт 5 ноября 2026. Берёте реальный объект и доводите его до защищённой концепции с помощью данных и ИИ. Удостоверение о повышении квалификации ЮФУ.">
+<meta name="description" content="72 ак. часа, онлайн. Берёте реальный объект и доводите его до защищённой концепции с помощью данных и ИИ. Удостоверение о повышении квалификации ЮФУ.">
 <meta property="og:title" content="ИИ в редевелопменте — программа повышения квалификации ЮФУ">
 <meta property="og:description" content="Реальный объект, аналитика на данных, генеративный ИИ и экспертная оценка проекта. 72 ак. часа, 5 мест в пилотной группе.">
 <meta property="og:type" content="website">
@@ -310,10 +310,10 @@
       <button class="btn btn-primary" data-apply>Оставить заявку</button>
       <a class="btn btn-ghost" href="#program">Смотреть программу</a>
     </div>
-    <p class="hero-note">Приём заявок открыт · в пилотной группе 5 мест · <a href="redev-guide.html?from=redev">Слушателям →</a></p>
+    <p class="hero-note enroll-note" data-group-size="10">Идёт набор группы: <b data-group-count>10</b> человек. Оставьте заявку: когда группа наберётся, мы пришлём уведомление и уточним, как вам удобнее учиться.</p>
 
     <div class="facts">
-      <div class="fact"><b>5 ноября<small>2026</small></b><span>старт, Demo Day 6 декабря</span></div>
+      <div class="fact"><b>Demo Day</b><span>6 декабря · заочная экспертная оценка с питчем</span></div>
       <div class="fact"><b>72<small>ак. ч</small></b><span>удостоверение о повышении квалификации ЮФУ</span></div>
       <div class="fact"><b>Онлайн</b><span>записи, встречи с обязательным присутствием и лекции в Яндекс Телемост, защита проекта</span></div>
       <div class="fact"><b>5<small>мест</small></b><span>камерная проектная лаборатория с индивидуальным разбором</span></div>
@@ -625,7 +625,7 @@
       <div class="card step"><div class="n">1</div><h3>Заявка</h3><p>Оставляете контакты и выбираете предварительный трек. Это займёт две минуты.</p></div>
       <div class="card step"><div class="n">2</div><h3>Короткий разговор</h3><p>Подтверждаем трек и уровень, отвечаем на вопросы. Если группа заполнена, ставим в лист ожидания.</p></div>
       <div class="card step"><div class="n">3</div><h3>Договор и оплата</h3><p>Заключаем договор с ЮФУ и принимаем оплату (можно в два этапа).</p></div>
-      <div class="card step"><div class="n">4</div><h3>Старт 5 ноября</h3><p>Открываем доступ к материалам и чату группы в Телемост, начинаем с вводного модуля.</p></div>
+      <div class="card step"><div class="n">4</div><h3>Старт</h3><p>Группа набрана — присылаем уведомление и согласуем с вами удобный формат обучения; затем открываем доступ к материалам и чату.</p></div>
     </div>
     <div style="margin-top:28px"><button class="btn btn-primary" data-apply>Оставить заявку</button></div>
   </div>
@@ -763,8 +763,8 @@
       </form>
       <div class="done" id="done" role="status" aria-live="polite">
         <div class="done-ico" aria-hidden="true">✓</div>
-        <h3>Данные успешно отправлены</h3>
-        <p>Мы свяжемся с вами по электронной почте <b id="doneEmail"></b>, подтвердим трек и отправим приглашение в чат программы.</p>
+        <h3>Заявка принята</h3>
+        <p>Как только группа наберётся, мы пришлём уведомление и уточним, как вам удобнее учиться.</p>
         <p>Если хотите уточнить что-то сразу, напишите в Telegram: <a href="https://t.me/alkuleshov" target="_blank" rel="noopener" style="color:var(--azure-dark);font-weight:700">@alkuleshov</a>.</p>
         <button type="button" class="submit done-close" id="doneClose">Закрыть</button>
       </div>
@@ -860,7 +860,6 @@
       btn.disabled = false; btn.textContent = 'Отправить заявку';
       form.style.display = 'none';
       if (ok) {
-        document.getElementById('doneEmail').textContent = payload.email;
         if (typeof ym === 'function') ym(113526373, 'reachGoal', 'form_submit', { course: payload.course });
         form.reset(); notice.style.display = 'none'; toggleAlumni();
         done.style.display = 'block';
