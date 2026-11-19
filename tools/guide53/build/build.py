@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import sys, os, math
+import sys, os, math, argparse
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
@@ -8,12 +8,25 @@ from reportlab.lib.colors import HexColor
 from reportlab.lib.utils import simpleSplit, ImageReader
 
 sys.path.insert(0, os.path.dirname(__file__))
-from data import W, SECTIONS, COURSES, A, R
+from strings import STRINGS
+
+_parser = argparse.ArgumentParser(description="Build the AI2ARCH 53-ways PDF.")
+_parser.add_argument("out", nargs="?", default=None, help="output PDF path")
+_parser.add_argument("--lang", choices=("ru", "en"), default="ru", help="edition language")
+_args = _parser.parse_args()
+
+LANG = _args.lang
+S = STRINGS[LANG]
+if LANG == "en":
+    import data_en as _data
+else:
+    import data as _data
+W, SECTIONS, COURSES, A, R = _data.W, _data.SECTIONS, _data.COURSES, _data.A, _data.R
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FONTS = os.path.join(ROOT, "fonts")
 IMG = os.path.join(ROOT, "img")
-OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "ai2arch-53ways.pdf")
+OUT = _args.out or os.path.join(ROOT, "ai2arch-53ways.pdf")
 
 pdfmetrics.registerFont(TTFont("MR", os.path.join(FONTS, "Manrope-Regular.ttf")))
 pdfmetrics.registerFont(TTFont("MS", os.path.join(FONTS, "Manrope-SemiBold.ttf")))
@@ -70,7 +83,7 @@ def brand_mark(c, x, y, size=22, small=True):
     c.drawImage(SIGN, x, y - size / 2, size, size, mask="auto")
     c.setFillColor(WHITE); c.setFont("MB", 8.5 if small else 11)
     c.drawString(x + size + 7, y + 1.5, "AI2ARCH")
-    spaced(c, x + size + 7, y - 7.5, "ЛАБОРАТОРИЯ ПРОЕКТНОГО ИНТЕЛЛЕКТА", "MR", 4.6, MUTED, 0.35)
+    spaced(c, x + size + 7, y - 7.5, S["brand_descriptor"], "MR", 4.6, MUTED, 0.35)
 
 
 def header(c, sec):
@@ -78,15 +91,15 @@ def header(c, sec):
     c.setFillColor(AZ); c.rect(0, PH - 46, 8, 46, stroke=0, fill=1)
     c.setFillColor(WHITE); c.setFont("MB", 9)
     c.drawString(M, PH - 28, f"{sec[0]}  {sec[1]}")
-    spaced(c, PW - M, PH - 28, "AI2ARCH.RU", "Mono", 7, FAINT, 0.6, "right")
+    spaced(c, PW - M, PH - 28, S["header_site"], "Mono", 7, FAINT, 0.6, "right")
     c.setStrokeColor(LINE); c.setLineWidth(0.5); c.line(0, PH - 46, PW, PH - 46)
 
 
 def footer(c, page_no):
     c.setFillColor(BAND); c.rect(0, 0, PW, 32, stroke=0, fill=1)
     c.setStrokeColor(LINE); c.setLineWidth(0.5); c.line(0, 32, PW, 32)
-    spaced(c, M, 13, f"стр. {page_no}", "Mono", 7, FAINT, 0.4)
-    spaced(c, PW - M, 13, "AI2ARCH  ·  ЛАБОРАТОРИЯ ПРОЕКТНОГО ИНТЕЛЛЕКТА", "Mono", 6.6, FAINT, 0.5, "right")
+    spaced(c, M, 13, S["footer_page"].format(n=page_no), "Mono", 7, FAINT, 0.4)
+    spaced(c, PW - M, 13, S["footer_brand"], "Mono", 6.6, FAINT, 0.5, "right")
 
 
 def dot(c, x, y, r, color):
@@ -123,7 +136,7 @@ TOOL_SIZE, TOOL_LEAD = 8 * K, 11.2 * K
 P_SIZE, P_LEAD = 7.3 * K, 10.4 * K
 LBL_SIZE = 6.2 * K
 CHIP_SIZE, CHIP_H = 7.2 * K, 15 * K
-LBL_W = 11 * K + tw("РАСШИРЕННЫЙ", "MS", LBL_SIZE) + 0.5 * 10 + 16
+LBL_W = 11 * K + tw(S["extended_label"], "MS", LBL_SIZE) + 0.5 * 10 + 16
 
 
 def card_layout(w):
@@ -148,8 +161,8 @@ def card_layout(w):
     d += 5 * K
     tools = []
     if osn:
-        tools.append(("ОСНОВНОЙ", GREEN, " · ".join(osn)))
-    tools.append(("РАСШИРЕННЫЙ", MUTED, " · ".join(ext)))
+        tools.append((S["core_label"], GREEN, " · ".join(osn)))
+    tools.append((S["extended_label"], MUTED, " · ".join(ext)))
     for label, color, text in tools:
         plan.append(("label", d, (label, color)))
         for ln in simpleSplit(text, "MR", TOOL_SIZE, IN_W - LBL_W):
@@ -212,7 +225,7 @@ def draw_card(c, w, top):
             if x - 8 > IN_X + IN_W:
                 print("WARN chips overflow", n)
         elif kind == "plabel":
-            spaced(c, IN_X + 12, y, "ПРОМПТ:", "MonoB", 6.8 * K, AZ_L, 0.5)
+            spaced(c, IN_X + 12, y, S["prompt_label"], "MonoB", 6.8 * K, AZ_L, 0.5)
         elif kind == "pline":
             c.setFillColor(HexColor("#E3EAF5")); c.setFont("Mono", P_SIZE); c.drawString(IN_X + 12, y, p)
     return h
@@ -222,10 +235,10 @@ def draw_card(c, w, top):
 class Doc:
     def __init__(self, path):
         self.c = canvas.Canvas(path, pagesize=A4)
-        self.c.setTitle("53 способа использовать ИИ для архитектора — AI2ARCH")
-        self.c.setAuthor("AI2ARCH · Лаборатория проектного интеллекта")
-        self.c.setSubject("Практический гайд с промпт-шаблонами. Редакция: ноябрь 2026")
-        self.c.setKeywords("ИИ, архитектура, промпты, AI2ARCH, ai2arch.ru")
+        self.c.setTitle(S["meta_title"])
+        self.c.setAuthor(S["meta_author"])
+        self.c.setSubject(S["meta_subject"])
+        self.c.setKeywords(S["meta_keywords"])
         self.page = 1
 
     def next(self):
@@ -239,21 +252,21 @@ def cover(d):
     s = 330
     c.drawImage(ARTIFACT, (PW - s) / 2, PH - 70 - s, s, s, mask="auto")
     y = PH - 70 - s - 34
-    spaced(c, PW / 2, y, "СИСТЕМА   ·   АНАЛИЗ   ·   СТРАТЕГИЯ   ·   ИССЛЕДОВАНИЕ", "Mono", 6.6, MUTED, 0.6, "center")
+    spaced(c, PW / 2, y, S["cover_eyebrow"], "Mono", 6.6, MUTED, 0.6, "center")
     y -= 52
-    c.setFillColor(WHITE); c.setFont("MB", 44); c.drawCentredString(PW / 2, y, "53 СПОСОБА")
+    c.setFillColor(WHITE); c.setFont("MB", 44); c.drawCentredString(PW / 2, y, S["cover_title"])
     y -= 30
-    c.setFont("MR", 22); c.drawCentredString(PW / 2, y, "использовать ИИ")
+    c.setFont("MR", 22); c.drawCentredString(PW / 2, y, S["cover_sub1"])
     y -= 27
-    c.drawCentredString(PW / 2, y, "для архитектора")
+    c.drawCentredString(PW / 2, y, S["cover_sub2"])
     y -= 26
     c.setStrokeColor(AZ); c.setLineWidth(0.8); c.line(PW / 2 - 110, y, PW / 2 + 110, y)
     y -= 20
-    spaced(c, PW / 2, y, "ПРАКТИЧЕСКИЙ ГАЙД С ПРОМПТ-ШАБЛОНАМИ", "Mono", 6.8, MUTED, 0.6, "center")
+    spaced(c, PW / 2, y, S["cover_tagline"], "Mono", 6.8, MUTED, 0.6, "center")
     brand_mark(c, M, 52, 26)
-    spaced(c, PW - M, 50, "AI2ARCH.RU   ·   НОЯБРЬ 2026", "Mono", 7, MUTED, 0.6, "right")
-    c.linkURL("https://ai2arch.ru", (PW - M - 140, 44, PW - M, 58), relative=0, thickness=0)
-    c.bookmarkPage("cover"); c.addOutlineEntry("Обложка", "cover", level=0)
+    spaced(c, PW - M, 50, S["cover_date"], "Mono", 7, MUTED, 0.6, "right")
+    c.linkURL(S["brand_url"], (PW - M - 140, 44, PW - M, 58), relative=0, thickness=0)
+    c.bookmarkPage("cover"); c.addOutlineEntry(S["bm_cover"], "cover", level=0)
     d.next()
 
 
@@ -269,10 +282,10 @@ def toc_and_legend(d):
         brand_mark(c, M, PH - 52, 22)
         y = PH - 70
         if with_title:
-            c.setFillColor(WHITE); c.setFont("MB", 24); c.drawString(M, PH - 108, "Содержание")
+            c.setFillColor(WHITE); c.setFont("MB", 24); c.drawString(M, PH - 108, S["toc_heading"])
             dot(c, PW - M - 168, PH - 104, 2.6, AZ_L)
             c.setFillColor(MUTED); c.setFont("MR", 7.6)
-            c.drawString(PW - M - 161, PH - 106.5, "способ разбирается в курсах AI2ARCH")
+            c.drawString(PW - M - 161, PH - 106.5, S["toc_note"])
             c.setStrokeColor(LINE); c.setLineWidth(0.6); c.line(M, PH - 122, PW - M, PH - 122)
             y = PH - 140
         else:
@@ -281,7 +294,7 @@ def toc_and_legend(d):
         return y
 
     y = start_page(True)
-    c.bookmarkPage("toc"); c.addOutlineEntry("Содержание", "toc", level=0)
+    c.bookmarkPage("toc"); c.addOutlineEntry(S["bm_toc"], "toc", level=0)
     col_w = (PW - 2 * M) / 2
     for no, name, _, off in SECTIONS:
         items = [w for w in W if w[1] == no]
@@ -293,7 +306,7 @@ def toc_and_legend(d):
         c.setFillColor(AZ); c.rect(M, y - 24, 5, 24, stroke=0, fill=1)
         c.setFillColor(WHITE); c.setFont("MB", 8.6); c.drawString(M + 16, y - 15.5, f"{no}  {name}")
         if off:
-            spaced(c, PW - M - 12, y - 15, "ВНЕ ПРОГРАММЫ КУРСОВ", "MS", 6.2, MUTED, 0.6, "right")
+            spaced(c, PW - M - 12, y - 15, S["toc_outside"], "MS", 6.2, MUTED, 0.6, "right")
         c.linkRect("", f"sec{no}", (M, y - 24, PW - 2 * M + M, y), relative=0, thickness=0)
         y -= 24 + 16
         for i, w in enumerate(items):
@@ -317,8 +330,8 @@ def toc_and_legend(d):
     y -= 14
     c.setStrokeColor(LINE); c.setLineWidth(0.6); c.line(M, y + 8, PW - M, y + 8)
     y -= 22
-    c.setFillColor(WHITE); c.setFont("MB", 18); c.drawString(M, y, "Как читать гайд")
-    c.bookmarkPage("legend", fit="XYZ", left=0, top=y + 30); c.addOutlineEntry("Как читать гайд", "legend", level=0)
+    c.setFillColor(WHITE); c.setFont("MB", 18); c.drawString(M, y, S["legend_heading"])
+    c.bookmarkPage("legend", fit="XYZ", left=0, top=y + 30); c.addOutlineEntry(S["bm_legend"], "legend", level=0)
     y -= 26
 
     def block(y, title, lines_spec):
@@ -337,27 +350,26 @@ def toc_and_legend(d):
             y -= 4
         return y - 8
 
-    y = block(y, "КОНТУРЫ ИНСТРУМЕНТОВ", [
-        ("dot", GREEN, "ОСНОВНОЙ", "Работает из России напрямую, оплата из РФ: Алиса AI, GigaChat (Kandinsky), Шедеврум, DeepSeek, QGIS, Яндекс Геоаналитика, Яндекс Переводчик, НСПД, Gamma."),
-        ("dot", MUTED, "РАСШИРЕННЫЙ", "Зарубежные сервисы с ограниченным доступом из России: ChatGPT, Claude, Gemini, Midjourney, Flux, QuickOSM, Photoshop и другие. Выбор сервиса и доступ к нему — за пользователем."),
+    y = block(y, S["legend_toolsets"], [
+        ("dot", GREEN, S["core_label"], S["legend_core_text"]),
+        ("dot", MUTED, S["extended_label"], S["legend_extended_text"]),
     ])
-    spaced(c, M, y, "ЗНАЧКИ КУРСОВ", "MS", 6.8, AZ_L, 0.7)
+    spaced(c, M, y, S["legend_badges"], "MS", 6.8, AZ_L, 0.7)
     y -= 22
     x = M
-    x += chip(c, x, y, chip_text(A, "модуль 3"), COURSES[A][1]) + 8
-    chip(c, x, y, chip_text(R, "тема 1.3"), COURSES[R][1])
+    for course, label in S["legend_badge_chips"]:
+        x += chip(c, x, y, chip_text(course, label), COURSES[course][1]) + 8
     y -= 16
-    txt = (f"Способ разбирается на курсе AI2ARCH, рядом — модуль или тема. Значок — ссылка на страницу курса. "
-           f"Таких способов {len(COVERED)} из 53; в содержании они отмечены точкой.")
+    txt = S["legend_badge_note"].format(n=len(COVERED))
     c.setFillColor(TXT); c.setFont("MR", 8.6)
     for ln in simpleSplit(txt, "MR", 8.6, PW - 2 * M):
         c.drawString(M, y, ln); y -= 12.4
     y -= 12
-    y = block(y, "ПРОМПТЫ", [
-        ("txt", None, None, "В квадратных скобках — то, что подставляете вы. Факты, нормы и цифры проверяйте по первоисточникам: ИИ ошибается и выдумывает."),
+    y = block(y, S["legend_prompts"], [
+        ("txt", None, None, S["legend_prompt_text"]),
     ])
-    y = block(y, "РАЗДЕЛЫ 05 И 08", [
-        ("txt", None, None, "BIM-автоматизацию, бизнес и маркетинг курсы AI2ARCH не разбирают — это карта на вырост. Исключения внутри разделов отмечены значками курсов."),
+    y = block(y, S["legend_sections"], [
+        ("txt", None, None, S["legend_sections_text"]),
     ])
     d.next()
 
@@ -378,17 +390,18 @@ def divider(d, sec):
     y += 14
     c.setStrokeColor(LINE); c.setLineWidth(0.8); c.line(M, y, M + 150, y)
     y -= 20
-    spaced(c, M, y, f"{len(items)} СПОСОБ{'ОВ' if len(items) >= 5 else 'А'} ПРИМЕНЕНИЯ", "MonoB", 7.2, AZ_L, 0.7)
+    count_key = "divider_count_many" if len(items) >= 5 else "divider_count_one"
+    spaced(c, M, y, S[count_key].format(n=len(items)), "MonoB", 7.2, AZ_L, 0.7)
     y -= 22
     if off:
         c.setFillColor(HexColor("#0D1E35")); c.setStrokeColor(MUTED); c.setLineWidth(0.6)
-        bw = tw("ВНЕ ПРОГРАММЫ КУРСОВ", "MS", 7) + 0.6 * 19 + 24
+        bw = tw(S["divider_outside"], "MS", 7) + 0.6 * 19 + 24
         c.roundRect(M, y - 6, bw, 18, 9, stroke=1, fill=1)
-        spaced(c, M + 12, y - 0.5, "ВНЕ ПРОГРАММЫ КУРСОВ", "MS", 7, TXT, 0.6)
+        spaced(c, M + 12, y - 0.5, S["divider_outside"], "MS", 7, TXT, 0.6)
         y -= 26
-        note = f"Карта на вырост: эти задачи курсы AI2ARCH не разбирают. Исключения — способы {off}, они есть в курсах."
+        note = S["divider_note_off"].format(off=off)
     else:
-        note = f"В курсах AI2ARCH разбираются {len(cov)} из {len(items)} способов раздела — они отмечены значками курсов."
+        note = S["divider_note_cover"].format(cov=len(cov), total=len(items))
     c.setFillColor(MUTED); c.setFont("MR", 8.6)
     for ln in simpleSplit(note, "MR", 8.6, 300):
         c.drawString(M, y, ln); y -= 12.4
@@ -426,45 +439,36 @@ def final_page(d):
     s = 210
     c.drawImage(ARTIFACT, (PW - s) / 2, PH - 40 - s, s, s, mask="auto")
     y = PH - 40 - s - 30
-    c.setFillColor(WHITE); c.setFont("MB", 26); c.drawCentredString(PW / 2, y, "Курсы AI2ARCH")
+    c.setFillColor(WHITE); c.setFont("MB", 26); c.drawCentredString(PW / 2, y, S["final_heading"])
     y -= 22
     c.setFillColor(TXT); c.setFont("MR", 10)
-    c.drawCentredString(PW / 2, y, "Исследуем, как ИИ работает в архитектуре и девелопменте,")
+    c.drawCentredString(PW / 2, y, S["final_lead1"])
     y -= 14
-    c.drawCentredString(PW / 2, y, "и учим этому на двух курсах.")
+    c.drawCentredString(PW / 2, y, S["final_lead2"])
     y -= 30
 
-    cards = [
-        ("ПЕРВАЯ СТУПЕНЬ", "ИИ в архитектуре",
-         "«Современные инструменты проектного анализа: ИИ и мобильные сервисы в работе с архитектурной средой»",
-         "Базовый вводный курс: цифровой двойник участка, ИИ-анализ и презентация для заказчика. С нуля, два трека на выбор.",
-         ["22 ак. часа", "2,5 недели", "Удостоверение ЮФУ"], "ai2arch.ru/archi", COURSES[A][1],
-         "Способы 01, 06–08, 10, 13–15, 22, 28, 33, 34, 41, 44"),
-        ("ВТОРАЯ СТУПЕНЬ", "ИИ в редевелопменте",
-         "«Современные инструменты развития территорий и объектов недвижимости: аналитика данных и генеративный ИИ в разработке концепций»",
-         "Реальное здание или территория — до защищённой концепции. Два трека: проектировщик и девелопер.",
-         ["72 ак. часа", "4,5 недели", "Удостоверение ЮФУ"], "ai2arch.ru/redev", COURSES[R][1],
-         None),
-    ]
-    # подпись «какие способы» считаем из данных
+    cards = S["final_courses"]
+
+    # "which ways" line is computed from the data
     def ways_of(course):
         ns = [w[0] for w in W if any(cc == course for cc, _ in w[7])]
-        return "Способы из гайда: " + ", ".join(f"{n:02d}" for n in ns)
+        return S["final_ways_prefix"] + ", ".join(f"{n:02d}" for n in ns)
 
     gapx = 16
     cw = (PW - 2 * M - gapx) / 2
     inner = cw - 36
     layouts = []
-    for st, name, off_name, desc, facts, link, url, _ in cards:
-        on = simpleSplit(off_name, "MR", 7.4, inner)
-        ds = simpleSplit(desc, "MR", 9, inner)
+    for card in cards:
+        on = simpleSplit(card["official"], "MR", 7.4, inner)
+        ds = simpleSplit(card["desc"], "MR", 9, inner)
         layouts.append((on, ds))
-    course_keys = [A, R]
+    course_keys = [card["key"] for card in cards]
     ways_lines = [simpleSplit(ways_of(k), "MR", 7.2, inner) for k in course_keys]
     ch = max(16 + 12 + 26 + len(on) * 10 + 10 + len(ds) * 12.8 + 10 + 22 + 10 + len(wl) * 10 + 14 + 26 + 18
              for (on, ds), wl in zip(layouts, ways_lines))
     for i, (card, (on, ds), wl) in enumerate(zip(cards, layouts, ways_lines)):
-        st, name, off_name, desc, facts, link, url, _ = card
+        st, name, desc, facts, link, url = (card["eyebrow"], card["name"], card["desc"],
+                                            card["facts"], card["link"], card["url"])
         x = M + i * (cw + gapx)
         y0 = y - ch
         c.setFillColor(CARD); c.setStrokeColor(LINE); c.setLineWidth(0.6)
@@ -485,11 +489,11 @@ def final_page(d):
         yy -= 8
         fx = x + 18
         for f in facts:
-            fw = tw(f, "MS", 7.4) + 16
+            fw = tw(f, "MS", 7.4) + S["fact_pad"]
             c.setFillColor(HexColor("#0F2A55")); c.setStrokeColor(HexColor("#24406E")); c.setLineWidth(0.6)
             c.roundRect(fx, yy - 5, fw, 16, 8, stroke=1, fill=1)
-            c.setFillColor(WHITE); c.setFont("MS", 7.4); c.drawString(fx + 8, yy, f)
-            fx += fw + 6
+            c.setFillColor(WHITE); c.setFont("MS", 7.4); c.drawString(fx + S["fact_pad"] // 2, yy, f)
+            fx += fw + S["fact_gap"]
         yy -= 24
         c.setFillColor(MUTED); c.setFont("MR", 7.2)
         for ln in wl:
@@ -504,10 +508,10 @@ def final_page(d):
     # низ страницы
     brand_mark(c, M, 62, 26)
     c.setFillColor(MUTED); c.setFont("MR", 7.4)
-    c.drawString(M, 36, "Объединяем архитектуру, данные и искусственный интеллект для проектирования будущего городов и территорий.")
-    c.setFillColor(AZ_L); c.setFont("MB", 9); c.drawRightString(PW - M, 58, "AI2ARCH.RU")
-    c.linkURL("https://ai2arch.ru", (PW - M - 70, 52, PW - M, 68), relative=0, thickness=0)
-    c.bookmarkPage("courses"); c.addOutlineEntry("Курсы AI2ARCH", "courses", level=0)
+    c.drawString(M, 36, S["final_footer"])
+    c.setFillColor(AZ_L); c.setFont("MB", 9); c.drawRightString(PW - M, 58, S["header_site"])
+    c.linkURL(S["brand_url"], (PW - M - 70, 52, PW - M, 68), relative=0, thickness=0)
+    c.bookmarkPage("courses"); c.addOutlineEntry(S["bm_courses"], "courses", level=0)
     c.showPage()
 
 

@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI in Architecture — SFedU professional development program · AI2ARCH</title>
+<meta name="description" content="22 academic hours, 2.5 weeks, delivered online. QGIS and AI tools from scratch: site maps, AI analysis, and a final presentation. SFedU professional development certificate.">
+<link rel="canonical" href="https://ai2arch.ru/en/archi.html">
+<link rel="alternate" hreflang="ru" href="https://ai2arch.ru/archi.html">
+<link rel="alternate" hreflang="en" href="https://ai2arch.ru/en/archi.html">
+<link rel="alternate" hreflang="x-default" href="https://ai2arch.ru/archi.html">
+<meta property="og:title" content="AI in Architecture — SFedU professional development program">
+<meta property="og:description" content="Site maps in QGIS, AI analysis of the site, and a final presentation. 22 academic hours, online, 5,000 ₽.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://ai2arch.ru/en/archi.html">
+<meta property="og:image" content="https://ai2arch.ru/images/og-ai2arch.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI in Architecture — SFedU professional development program">
+<meta name="twitter:description" content="Site maps in QGIS, AI analysis of the site, and a final presentation. 22 academic hours, online, 5,000 ₽.">
+<meta name="twitter:image" content="https://ai2arch.ru/images/og-ai2arch.jpg">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; overflow-x:hidden; }
+
+  :root {
+    --ink-night:#0A0F1A; --graphite:#2A2F3E;
+    --azure:#4DA3FF; --azure-dark:#2A7CE8; --azure-soft:#7BBFFF;
+    --bg:#F6F4F0; --surface:#FFFFFF; --surface2:#F2F0EB; --border:#E4E1D8;
+    --ink:#0A0F1A; --ink-muted:#2A2F3E; --ink-faint:#6A7080; --accent-l:#EBF4FF;
+    --orange:#E8862B; --green:#1A9E6E; --green-l:#EDFAF4; --purple:#6B3FD4; --purple-l:#F0EEFF;
+    --mono:'JetBrains Mono', monospace; --sans:'Manrope', sans-serif;
+    --nav-h:56px;
+  }
+  body { font-family:var(--sans); background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; }
+  img { max-width:100%; display:block; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 28px; }
+  @media (max-width:640px) { .wrap { padding:0 20px; } }
+
+  /* placeholder marker for missing data: visible only in the draft */
+  .todo { background:#FFF3B0; color:#6B5300; border-radius:4px; padding:0 4px; font-weight:600; }
+
+  /* ── buttons ── */
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:var(--sans); font-size:15px; font-weight:700; padding:14px 26px; border-radius:12px; border:1px solid transparent; cursor:pointer; text-decoration:none; transition:transform .15s, opacity .15s; }
+  .btn:hover { opacity:.92; transform:translateY(-1px); }
+  .btn-primary { background:linear-gradient(135deg, var(--azure-dark), var(--azure)); color:#fff; box-shadow:0 8px 24px rgba(77,163,255,.32); }
+  .btn-ghost { background:transparent; color:#fff; border-color:rgba(255,255,255,.28); }
+  .btn-dark { background:var(--ink-night); color:#fff; }
+  .btn-line { background:var(--surface); color:var(--ink-muted); border-color:var(--border); }
+  .btn-sm { padding:9px 18px; font-size:13px; border-radius:10px; }
+
+  /* ── header ── */
+  .head { position:sticky; top:0; z-index:60; background:rgba(10,15,26,.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(255,255,255,.08); }
+  .head-in { display:flex; align-items:center; gap:20px; height:var(--nav-h); }
+  .head .wrap { max-width:1160px; }
+  /* AI2ARCH logo: mark + wordmark + descriptor (brand book, section 11) */
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; flex-shrink:0; }
+  .brand-sign { width:38px; height:38px; flex-shrink:0; }
+  .brand-text { display:flex; flex-direction:column; line-height:1.15; }
+  .brand-text b { font-family:var(--sans); font-size:17px; font-weight:600; letter-spacing:.02em; color:#fff; }
+  .brand-text small { font-family:var(--sans); font-size:10.5px; font-weight:400; color:rgba(255,255,255,.58); margin-top:2px; white-space:nowrap; }
+  .brand:focus-visible { outline:2px solid var(--azure); outline-offset:4px; border-radius:6px; }
+  .nav { display:flex; gap:2px; flex:1; min-width:0; justify-content:flex-start; overflow-x:auto; scrollbar-width:none; }
+  .nav::-webkit-scrollbar { display:none; }
+  .nav a { flex:0 0 auto; font-size:13px; font-weight:600; color:rgba(255,255,255,.65); text-decoration:none; padding:8px 10px; border-radius:8px; white-space:nowrap; }
+  .nav a:hover, .nav a.on { color:#fff; background:rgba(255,255,255,.08); }
+  .burger { display:none; width:42px; height:42px; border-radius:10px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:5px; flex-shrink:0; }
+  .burger span { display:block; width:18px; height:2px; background:#fff; border-radius:2px; transition:transform .2s, opacity .2s; }
+  .burger[aria-expanded="true"] span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+  .burger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+  .burger[aria-expanded="true"] span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+  @media (max-width:1180px) {
+    .burger { display:flex; }
+    .head-apply { margin-left:auto; }
+    .nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; gap:2px; overflow:visible; background:rgba(10,15,26,.98); padding:10px 20px 18px; border-bottom:1px solid rgba(255,255,255,.1); }
+    .nav.open { display:flex; }
+    .nav a { padding:13px 12px; font-size:16px; }
+  }
+  @media (max-width:860px) { .head-in { gap:12px; } }
+  @media (max-width:359px) { .brand-text small { display:none; } }
+  @media (max-width:520px) { .head-apply { display:none; } .burger { margin-left:auto; } }
+
+  /* ── hero ── */
+  .hero { position:relative; background:var(--ink-night); color:#fff; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(60% 80% at 85% 0%, rgba(77,163,255,.2), transparent 70%); pointer-events:none; }
+  .hero-mark { display:block; position:absolute; top:-90px; right:-16vw; left:auto; width:1100px; height:820px; opacity:.85; mix-blend-mode:screen; pointer-events:none; z-index:0; }
+  @media (max-width:760px) { .hero-mark { top:-40px; right:-32vw; width:620px; height:560px; opacity:.5; } }
+  @media (prefers-reduced-motion:no-preference) { .hero-mark { animation:drift 24s ease-in-out infinite alternate; } @keyframes drift { from { transform:translate3d(0,-4px,0); } to { transform:translate3d(0,6px,0); } } }
+  /* ── constellation: a shimmering contour field instead of a static image ── */
+  .hero-mark canvas { display:block; width:100%; height:100%; }
+  .hero-in { position:relative; z-index:1; padding-top:72px; }
+  .eyebrow { font-size:12px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--azure-soft); margin-bottom:22px; }
+  .hero h1 { font-size:clamp(30px, 8.4vw, 84px); line-height:1.02; font-weight:800; letter-spacing:-.03em; margin-bottom:22px; }
+  .hero h1 em { font-style:normal; color:var(--azure); }
+  .hero-sub { font-size:clamp(17px, 2.2vw, 21px); line-height:1.5; color:rgba(255,255,255,.78); max-width:660px; margin-bottom:12px; }
+  .ast { font-size:.42em; vertical-align:top; position:relative; top:.35em; margin-left:.08em; font-weight:700; }
+  .ast a { color:var(--azure-soft); text-decoration:none; }
+  .hero-fn { font-size:13.5px; line-height:1.5; color:rgba(255,255,255,.6); max-width:660px; margin-bottom:30px; padding-left:16px; border-left:2px solid rgba(77,163,255,.5); }
+  .hero-fn span { color:var(--azure-soft); font-weight:800; }
+  .hero-fn b { color:rgba(255,255,255,.85); }
+  .hero-name { font-size:13px; color:rgba(255,255,255,.42); max-width:660px; margin-bottom:34px; }
+  .hero-cta { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
+  .hero-note { font-size:13px; color:rgba(255,255,255,.5); }
+  .facts { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:0; margin-top:56px; border-top:1px solid rgba(255,255,255,.14); }
+  .fact { padding:24px 20px 28px 0; }
+  .fact + .fact { padding-left:24px; border-left:1px solid rgba(255,255,255,.1); }
+  .fact b { display:block; font-size:clamp(24px, 3.4vw, 36px); font-weight:800; letter-spacing:-.02em; line-height:1.1; }
+  .fact b small { font-size:.5em; color:rgba(255,255,255,.55); margin-left:5px; font-weight:700; }
+  .fact span { display:block; font-size:13px; color:rgba(255,255,255,.55); margin-top:6px; line-height:1.4; }
+  @media (max-width:820px) {
+    .facts { grid-template-columns:repeat(2, minmax(0,1fr)); }
+    .fact, .fact + .fact { padding:20px 12px 20px 0; border-left:0; }
+    .fact:nth-child(even) { padding-left:20px; border-left:1px solid rgba(255,255,255,.1); }
+    .fact:nth-child(n+3) { border-top:1px solid rgba(255,255,255,.1); }
+  }
+
+  /* ── sections ── */
+  section { scroll-margin-top:calc(var(--nav-h) + 4px); }
+  .sec { padding:88px 0; }
+  .sec.alt { background:var(--surface); }
+  .sec.dark { background:var(--ink-night); color:#fff; position:relative; overflow:hidden; }
+  .sec.dark::before { content:''; position:absolute; inset:0; background:radial-gradient(50% 70% at 10% 0%, rgba(77,163,255,.16), transparent 70%); pointer-events:none; }
+  .sec.dark > .wrap { position:relative; }
+  @media (max-width:640px) { .sec { padding:64px 0; } }
+  .kicker { font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--azure-dark); margin-bottom:12px; }
+  .dark .kicker { color:var(--azure-soft); }
+  h2 { font-size:clamp(28px, 4.4vw, 42px); line-height:1.12; font-weight:800; letter-spacing:-.02em; margin-bottom:18px; max-width:760px; }
+  .lead { font-size:18px; line-height:1.55; color:var(--ink-muted); max-width:720px; margin-bottom:36px; }
+  .dark .lead { color:rgba(255,255,255,.72); }
+  h3 { font-size:19px; line-height:1.25; font-weight:800; letter-spacing:-.01em; margin-bottom:10px; }
+
+  .grid2, .grid3, .grid4 { display:grid; gap:16px; }
+  .grid2 { grid-template-columns:repeat(2, minmax(0,1fr)); }
+  .grid3 { grid-template-columns:repeat(3, minmax(0,1fr)); }
+  .grid4 { grid-template-columns:repeat(4, minmax(0,1fr)); }
+  @media (max-width:900px) { .grid4 { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+  @media (max-width:760px) { .grid3 { grid-template-columns:minmax(0,1fr); } }
+  @media (max-width:640px) { .grid2, .grid4 { grid-template-columns:minmax(0,1fr); } }
+
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:24px 26px; }
+  .alt .card { background:var(--bg); }
+  .card p, .card li { font-size:15px; color:var(--ink-muted); }
+  .card p + p { margin-top:10px; }
+  .ico { width:42px; height:42px; border-radius:12px; background:var(--accent-l); color:var(--azure-dark); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-weight:700; font-size:15px; margin-bottom:16px; }
+  .list { list-style:none; display:flex; flex-direction:column; gap:9px; }
+  .list li { position:relative; padding-left:20px; }
+  .list li::before { content:''; position:absolute; left:2px; top:.62em; width:8px; height:8px; border-radius:50%; background:var(--azure); }
+  .dark .card { background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.12); }
+  .dark .card p, .dark .card li { color:rgba(255,255,255,.75); }
+
+  /* tracks */
+  .track { border-top:5px solid var(--azure); }
+  .track.b { border-top-color:var(--purple); }
+  .track .who { font-size:13px; font-weight:700; color:var(--ink-faint); margin-bottom:14px; }
+  .track .label { font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); margin:16px 0 8px; }
+  .track .btn { margin-top:20px; }
+  .note { margin-top:18px; background:var(--surface2); border:1px solid var(--border); border-radius:14px; padding:16px 22px; font-size:14px; color:var(--ink-muted); }
+  .alt .note { background:var(--bg); }
+
+  /* hours bar + modules */
+  .bar { display:flex; gap:4px; height:12px; border-radius:100px; overflow:hidden; margin-bottom:24px; }
+  .bar span { min-width:0; }
+  .c0{background:var(--graphite)} .c1{background:var(--azure)} .c2{background:var(--purple)} .c3{background:var(--green)} .c4{background:var(--orange)} .c5{background:#C0392B}
+  details.mod { background:var(--surface); border:1px solid var(--border); border-radius:16px; margin-bottom:10px; overflow:hidden; }
+  details.mod summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:14px; padding:18px 22px; }
+  details.mod summary::-webkit-details-marker { display:none; }
+  .mod-dot { width:10px; height:34px; border-radius:6px; flex-shrink:0; }
+  .mod-t { flex:1; min-width:0; }
+  .mod-t small { display:block; font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.08em; color:var(--ink-faint); text-transform:uppercase; }
+  .mod-t strong { font-size:17px; font-weight:800; line-height:1.3; }
+  .mod-h { font-family:var(--mono); font-size:13px; font-weight:700; background:var(--surface2); border-radius:8px; padding:4px 10px; white-space:nowrap; }
+  .mod-plus { width:28px; height:28px; border-radius:50%; background:var(--accent-l); color:var(--azure-dark); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700; flex-shrink:0; transition:transform .2s; }
+  details[open] > summary .mod-plus { transform:rotate(45deg); }
+  .mod-body { padding:2px 22px 22px 46px; }
+  .mod-body li { font-size:15px; color:var(--ink-muted); }
+  .mod-body .list li { margin-bottom:0; }
+  .tag { display:inline-block; font-family:var(--mono); font-size:10.5px; font-weight:700; letter-spacing:.04em; border-radius:6px; padding:1px 7px; margin-right:7px; vertical-align:1px; }
+  .tag.all { background:var(--surface2); color:var(--ink-faint); }
+  .tag.a { background:var(--accent-l); color:var(--azure-dark); }
+  .tag.b { background:var(--purple-l); color:var(--purple); }
+  .tag.live { background:#FDF3EE; color:var(--orange); }
+  @media (max-width:640px) { .mod-body { padding:2px 18px 20px 18px; } details.mod summary { padding:16px 16px; gap:10px; } .mod-h { display:none; } }
+
+  /* format */
+  .step-n { font-family:var(--mono); font-size:12px; font-weight:700; color:var(--azure-dark); margin-bottom:10px; }
+
+  /* result */
+  .res-big { font-size:clamp(22px, 3vw, 30px); line-height:1.3; font-weight:700; max-width:800px; margin-bottom:30px; }
+  .res-big em { font-style:normal; color:var(--azure); }
+
+  /* team */
+  .person { display:flex; gap:20px; align-items:flex-start; }
+  .avatar { width:104px; height:104px; border-radius:50%; object-fit:cover; flex-shrink:0; border:3px solid rgba(77,163,255,.55); }
+  .avatar-ini { display:flex; align-items:center; justify-content:center; background:#0A0F1A; color:#F6F4F0; font-size:30px; font-weight:600; letter-spacing:.02em; border-color:rgba(26,130,255,.55); }
+  .person h3 { margin-bottom:4px; font-size:20px; }
+  .role { font-size:13px; font-weight:700; color:var(--azure-dark); margin-bottom:14px; }
+  @media (max-width:520px) { .person { flex-direction:column; } }
+
+  /* price */
+  .price { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:28px; }
+  .price.main { border:2px solid var(--azure); background:var(--accent-l); }
+  .price-val { font-size:clamp(34px, 5vw, 46px); font-weight:800; letter-spacing:-.02em; line-height:1.05; }
+  .price-val small { font-size:.45em; color:var(--ink-faint); font-weight:700; }
+  .price-lab { font-size:14px; color:var(--ink-muted); margin:8px 0 18px; }
+  .price .list li { font-size:14px; }
+  .deduct { display:flex; gap:18px; align-items:flex-start; margin-top:16px; background:var(--green-l); border:1px solid #CBEBDD; border-radius:16px; padding:20px 24px; }
+  .deduct b { font-family:var(--mono); font-size:22px; color:var(--green); flex-shrink:0; }
+  .deduct p { font-size:14.5px; color:var(--ink-muted); }
+  @media (max-width:520px) { .deduct { flex-direction:column; gap:8px; } }
+
+  /* steps */
+  .step { position:relative; }
+  .step .n { width:34px; height:34px; border-radius:50%; background:var(--ink-night); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-weight:700; font-size:14px; margin-bottom:14px; }
+
+  /* faq */
+  details.q { background:var(--surface); border:1px solid var(--border); border-radius:14px; margin-bottom:10px; }
+  details.q summary { list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 22px; font-weight:700; font-size:16px; }
+  details.q summary::-webkit-details-marker { display:none; }
+  details.q .mod-plus { }
+  details.q[open] > summary .mod-plus { transform:rotate(45deg); }
+  details.q .ans { padding:0 22px 20px; font-size:15px; color:var(--ink-muted); max-width:780px; }
+  details.q .ans p + p { margin-top:10px; }
+
+  /* contact */
+  .contact { display:flex; gap:26px; align-items:center; flex-wrap:wrap; }
+  .contact .avatar { width:120px; height:120px; }
+  .contact-main { flex:1 1 280px; min-width:0; }
+  .contact-links { display:flex; gap:12px; flex-wrap:wrap; margin-top:14px; }
+
+  footer { background:var(--ink-night); color:rgba(255,255,255,.6); padding:48px 0 56px; font-size:13px; }
+  footer .brand { margin-bottom:14px; }
+  footer p { max-width:760px; }
+  footer p + p { margin-top:8px; }
+  footer a { color:var(--azure-soft); }
+
+  /* modal */
+  .modal { display:none; position:fixed; inset:0; z-index:200; background:rgba(10,15,26,.82); align-items:center; justify-content:center; padding:16px; }
+  .modal.open { display:flex; }
+  .modal-box { background:#fff; border-radius:16px; width:100%; max-width:560px; max-height:94vh; display:flex; flex-direction:column; overflow:hidden; }
+  .modal-top { display:flex; align-items:center; justify-content:space-between; padding:16px 22px; background:var(--ink-night); color:#fff; font-weight:700; font-size:15px; flex-shrink:0; }
+  .modal-x { background:none; border:none; color:#fff; font-size:26px; line-height:1; cursor:pointer; }
+  .modal-body { overflow-y:auto; padding:22px; }
+  .modal label { display:block; font-size:13px; font-weight:700; margin:0 0 6px; }
+  .modal input[type=text], .modal input[type=tel], .modal input[type=email], .modal select, .modal textarea { width:100%; padding:11px 14px; border:1px solid #DDE1EC; border-radius:9px; font-size:14px; font-family:inherit; margin-bottom:14px; background:#fff; color:var(--ink); }
+  .modal textarea { resize:vertical; }
+  .notice { display:none; padding:11px 14px; border-radius:9px; font-size:12.5px; line-height:1.5; margin:-4px 0 14px; background:var(--accent-l); color:#1F4F8F; }
+  .notice.warn { background:#FDF3EE; color:#8A4B12; }
+  .consent { display:flex; gap:10px; align-items:flex-start; font-size:12px; color:#5B647A; margin:6px 0 18px; }
+  .consent input { margin-top:3px; flex-shrink:0; }
+  .consent label { font-weight:500; margin:0; font-size:12px; }
+  .submit { width:100%; padding:14px; background:linear-gradient(135deg, #111828, #4DA3FF 65%, #6DBEFF); color:#fff; border:none; border-radius:10px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit; }
+  .submit:disabled { opacity:.6; cursor:default; }
+  .done { display:none; text-align:center; padding:26px 6px; }
+  .done h3 { font-size:20px; margin-bottom:10px; }
+  .done p { font-size:14.5px; color:var(--ink-muted); }
+  .done p + p { margin-top:10px; }
+  .done-ico { width:56px; height:56px; margin:0 auto 14px; border-radius:50%; background:var(--green-l); color:var(--green); font-size:30px; font-weight:800; line-height:56px; }
+  .done-close { margin-top:22px; }
+  .tag.sprint { background:var(--purple-l); color:var(--purple); }
+  .shots { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; margin-top:28px; align-items:start; }
+  .shot { margin:0; }
+  .shot.wide { grid-column:1 / -1; }
+  .shot img { width:100%; height:auto; border-radius:14px; border:1px solid var(--border); background:var(--surface); }
+  .shot figcaption { font-size:13px; color:var(--ink-faint); margin-top:8px; }
+  @media (max-width:640px) { .shots { grid-template-columns:minmax(0,1fr); } }
+
+  /* reviews and projects */
+  .reviews-section { scroll-margin-top:calc(var(--nav-h) + 16px); }
+  .reviews-nav { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 4px; }
+  .reviews-nav a { display:inline-flex; align-items:center; min-height:36px; padding:7px 12px; border:1px solid var(--border); border-radius:9px; background:var(--surface); color:var(--ink-muted); font-size:12.5px; font-weight:700; text-decoration:none; }
+  .reviews-nav a:hover { border-color:var(--azure); color:var(--ink); }
+  .review-sub { margin-top:34px; scroll-margin-top:calc(var(--nav-h) + 18px); }
+  .review-sub h3 { margin:0 0 14px; font-size:clamp(21px,2.4vw,26px); }
+  .work-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; align-items:stretch; }
+  .work-card { display:flex; flex-direction:column; height:100%; background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:18px; }
+  .work-card h4 { font-size:18px; line-height:1.25; margin:0 0 5px; color:var(--ink); }
+  .work-author { font-size:12.5px; line-height:1.45; color:var(--ink-faint); margin:0 0 10px; }
+  .work-author b { color:var(--ink); }
+  .work-ai { font-size:13px; line-height:1.5; color:var(--ink-muted); margin:0 0 12px; }
+  .work-ai b, .work-result b { color:var(--ink); }
+  .work-media { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; margin:0 0 12px; }
+  .work-media.one { grid-template-columns:minmax(0,1fr); }
+  .work-media img { width:100%; height:104px; object-fit:cover; display:block; border:1px solid var(--border); border-radius:8px; background:var(--bg); }
+  .work-media.one img { height:190px; object-fit:cover; }
+  .work-result { font-size:13px; line-height:1.5; color:var(--ink-muted); margin:auto 0 0; }
+  .work-quote { margin:12px 0 0; padding:12px 14px; border-left:3px solid var(--azure); background:var(--bg); border-radius:0 9px 9px 0; font-size:13.5px; line-height:1.55; color:var(--ink); }
+  @media (max-width:760px) {
+    .work-grid { grid-template-columns:minmax(0,1fr); }
+    .work-media img { height:92px; }
+    .work-media.one img { height:170px; }
+    .reviews-nav a { width:100%; justify-content:center; }
+  }
+
+  /* reviews */
+  .cases-h { margin:40px 0 14px; }
+  .flow-tag { display:inline-flex; align-items:center; padding:3px 8px; border-radius:5px; background:var(--accent-l,#EBF4FF); color:var(--accent,#4DA3FF); font-size:11.5px; font-weight:800; letter-spacing:.02em; }
+  .reviews-block { margin-top:8px; scroll-margin-top:calc(var(--nav-h) + 20px); }
+  .reviews-lead { font-size:14px; line-height:1.5; color:var(--ink-muted); margin:0 0 16px; max-width:760px; }
+  .reviews { display:flex; flex-direction:column; gap:18px; margin-top:16px; }
+  .review { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:28px; align-items:start; background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:22px 24px; }
+  .review-main { min-width:0; }
+  .review-head { display:flex; align-items:flex-start; gap:14px; margin-bottom:14px; }
+  .review-avatar { width:48px; height:48px; border-radius:50%; background:var(--accent-l,#EBF4FF); color:var(--accent,#4DA3FF); display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:800; flex:none; }
+  .review-name { display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-size:17px; font-weight:800; color:var(--ink); }
+  .review-status { font-size:13px; line-height:1.4; color:var(--ink-faint); margin-top:2px; }
+  .review-contact { display:inline-block; margin-top:4px; font-size:12.5px; font-weight:700; color:var(--accent,#4DA3FF); text-decoration:none; }
+  .review-contact:hover { text-decoration:underline; }
+  .review-request { font-size:14px; line-height:1.55; color:var(--ink-muted); margin:0 0 10px; overflow-wrap:anywhere; }
+  .review-request b, .review-quote b { color:var(--ink); }
+  .review-quote { margin:0 0 12px; padding:14px 16px; border-left:3px solid var(--accent,#4DA3FF); background:var(--bg); border-radius:0 10px 10px 0; font-size:15px; line-height:1.6; color:var(--ink); overflow-wrap:anywhere; }
+  .review-project { font-size:14px; line-height:1.5; color:var(--ink-muted); overflow-wrap:anywhere; }
+  .review-project b { color:var(--ink); }
+  .review-shots { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; margin:0; align-content:start; }
+  .review-shots .shot:first-child { grid-column:1 / -1; }
+  .review-shots .shot img { border-radius:10px; }
+  @media (max-width:860px) {
+    .review { grid-template-columns:minmax(0,1fr); gap:16px; }
+  }
+  @media (max-width:640px) {
+    .review { padding:18px; }
+    .review-head { gap:10px; }
+    .review-shots { grid-template-columns:minmax(0,1fr); }
+    .review-shots .shot:first-child { grid-column:auto; }
+  }
+
+</style>
+<link rel="stylesheet" href="../assets/ai-levels.css">
+<link rel="stylesheet" href="../assets/lang-switch.css">
+<script src="../assets/ai-levels-en.js" defer></script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113526373', 'ym');
+
+    ym(113526373, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    ym(113526373, 'params', {lang:'en'});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113526373" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+
+<header class="head">
+  <div class="wrap head-in">
+    <a class="brand" href="index.html"><img class="brand-sign" src="../images/ai2arch-sign.png" width="38" height="38" alt=""><span class="brand-text"><b>AI2ARCH</b><small>Project Intelligence Lab</small></span></a>
+    <nav class="nav" id="nav">
+      <a href="#audience">Who it's for</a>
+      <a href="#about">About</a>
+      <a href="#program">Curriculum</a>
+      <a href="#team">Speakers</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#price">Fees</a>
+      <a href="#faq">FAQ</a>
+      <a href="archi-guide.html?from=archi" style="color:var(--azure-soft)">Course guide →</a>
+    </nav>
+    <span class="lang-switch" style="color:#fff" aria-label="Language switcher"><a href="../archi.html" hreflang="ru" lang="ru">RU</a><span class="sep" aria-hidden="true">|</span><span class="on" aria-current="true">EN</span></span>
+    <button class="btn btn-primary btn-sm head-apply" style="margin-left:0" data-apply>Apply</button>
+    <button class="burger" id="burger" style="margin-left:0" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-mark" aria-hidden="true"><canvas></canvas></div>
+  <div class="wrap hero-in">
+    <div class="eyebrow">Professional development program · SFedU · Level 1</div>
+    <h1><em>AI</em> in Architecture</h1>
+    <p class="hero-sub">An introductory course: you build a digital twin of the site, analyze it with AI, and assemble a presentation that convinces the client and the review panel. We cover QGIS and AI tools from scratch, so no prior AI knowledge is needed.</p>
+    <p class="hero-name">Official program title: “Modern Tools of Project Analysis: AI and Mobile Services for the Architectural Environment”</p>
+    <div class="ai-level" data-ai-course="archi" data-ai-theme="dark"></div>
+    <div class="hero-cta">
+      <button class="btn btn-primary" data-apply>Apply</button>
+      <a class="btn btn-ghost" href="#program">View the curriculum</a>
+    </div>
+    <p class="hero-note">Third cohort starts November 16; we send the exact schedule after you enroll · <a href="archi-guide.html?from=archi" style="color:var(--azure-soft)">Already enrolled? Open the course guide →</a></p>
+
+    <div class="facts">
+      <div class="fact"><b>22<small>academic hours</small></b><span>10 hours of workshops plus 12 hours of consultations and independent work. SFedU professional development certificate</span></div>
+      <div class="fact"><b>2.5<small>weeks</small></b><span>delivered online, following the cohort schedule</span></div>
+      <div class="fact"><b>3<small>live sessions</small></b><span>online in the evening: QGIS review, AI tools and generation, final project review</span></div>
+      <div class="fact"><b>5,000<small>₽</small></b><span>course fee, 3,600 ₽ for SFedU staff</span></div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ═══ AUDIENCE ═══ -->
+<section class="sec" id="audience">
+  <div class="wrap">
+    <div class="kicker">Who this course is for</div>
+    <h2>An introductory course — no prior experience with AI tools</h2>
+    <p class="lead">No prior AI knowledge is needed: we cover AI tools and QGIS from scratch, and you only need to be comfortable using a computer. You choose how deep to go in QGIS through one of two tracks.</p>
+
+    <div class="grid2" style="margin-bottom:20px;">
+      <div class="card track">
+        <div class="who">Track A · I want to understand QGIS</div>
+        <h3>Full immersion</h3>
+        <p>You complete all three video lessons and build the base map and diagrams of your own site yourself. For those who want spatial analysis as a practical skill.</p>
+      </div>
+      <div class="card track b">
+        <div class="who">Track B · AI tools and the presentation matter more</div>
+        <h3>Quick start</h3>
+        <p>You watch only the QGIS introduction for a general understanding and don't need to install the software. Any site diagram from the internet will do for the presentation — there are no strict requirements.</p>
+      </div>
+    </div>
+    <p class="note" style="margin-bottom:32px;">QGIS is not a mandatory, heavy module you must complete to pass the course; it is optional depth you choose with your track. The final project review and the SFedU professional development certificate do not depend on which track you choose.</p>
+
+    <h3 style="margin-bottom:16px;">Who it suits and what you get</h3>
+    <div class="grid3">
+      <div class="card"><h3>Students and beginners</h3><p>You don't need a higher education degree to enroll: you can join and present your project right away. You enter the profession with a working set of AI tools and a finished project for your portfolio.</p></div>
+      <div class="card"><h3>Architects, urban planners, environmental designers</h3><p>Speed up pre-design analysis and visualization: site maps, scenarios, and a presentation for the client or review panel — in 2.5 weeks, without a heavy overhaul of your workflows.</p></div>
+      <div class="card"><h3>Instructors in creative disciplines</h3><p>Learn to spot where a student's work uses generative AI tools, and guide your students: AI is not a cheat code for gaming the system and getting a grade, but a working tool for high-quality architectural solutions.</p></div>
+    </div>
+
+    <p class="note" style="margin-top:28px;">There is no entrance exam. The professional development certificate is awarded to participants with higher education. If you don't have a degree yet, you can join and present your project right away: after the final review we issue a certificate of attendance, and the professional development certificate once you obtain your degree.</p>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section class="sec alt" id="about">
+  <div class="wrap">
+    <div class="kicker">About the program · the problems it solves</div>
+    <h2>Three places where site analysis most often stalls</h2>
+    <div class="grid3">
+      <div class="card"><div class="ico">01</div><h3>Analysis takes days</h3><p>Maps, diagrams, and descriptions have to be assembled and formatted by hand. In the course, diagrams are built in QGIS from open data, and AI helps formulate the conclusions.</p></div>
+      <div class="card"><div class="ico">02</div><h3>AI is used blindly</h3><p>A prompt like “come up with a park concept” produces a banal result. In the course you set the task using a template: role, context, task, examples, format, tone.</p></div>
+      <div class="card"><div class="ico">03</div><h3>Conclusions are hard to present</h3><p>The analysis stays in tables and files. In the course everything comes together in a single interactive presentation you can show to the client or review panel.</p></div>
+    </div>
+    <h3 style="margin:36px 0 14px">What you do in the course</h3>
+    <div class="grid3">
+      <div class="card"><div class="ico">A</div><h3>You prepare site maps</h3><p>Base maps, roads, buildings, terrain, cadastre. You style the map in QGIS and export it to PDF.</p></div>
+      <div class="card"><div class="ico">B</div><h3>You analyze with AI</h3><p>You assemble the brief and context, and build scenarios and audience profiles with language models.</p></div>
+      <div class="card"><div class="ico">C</div><h3>You visualize and assemble the project</h3><p>You turn sketches into visualizations with AI tools and assemble the result into a final presentation.</p></div>
+    </div>
+    <div class="ai-level ai-level--about" data-ai-course="archi"></div>
+  </div>
+</section>
+
+<!-- ═══ OUTCOMES ═══ -->
+<section class="sec dark" id="result">
+  <div class="wrap">
+    <div class="kicker">Learning outcomes</div>
+    <div class="res-big">By the end of the course you have <em>a finished project for your site</em>: from maps to presentation.</div>
+    <div class="grid2">
+      <div class="card"><h3>Digital twin of the site</h3><p>An accurate model of the site, ready for any analysis: base maps, transport, buildings, terrain, cadastre.</p></div>
+      <div class="card"><h3>AI analysis in minutes</h3><p>Site analysis and behavioral scenario forecasting instead of work that used to take days.</p></div>
+      <div class="card"><h3>Dozens of design options</h3><p>Generation of design options and visualizations with AI tools instead of a single hand-drawn version.</p></div>
+      <div class="card"><h3>A presentation built on data</h3><p>A final interactive presentation that wins over the client and the review panel.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SPEAKERS ═══ -->
+<section class="sec alt" id="team">
+  <div class="wrap">
+    <div class="kicker">Speakers</div>
+    <h2>A practitioner, a program coordinator, and the video lesson authors</h2>
+    <div class="grid2">
+      <div class="card person">
+        <img class="avatar" src="../images/kuleshov.jpg" alt="Alexander Kuleshov">
+        <div>
+          <h3>Alexander Kuleshov</h3>
+          <div class="role">Program Director</div>
+          <ul class="list">
+            <li>15 years of practice in environmental design and redevelopment</li>
+            <li>Creator of the first creative cluster in southern Russia (C52, Rostov-on-Don)</li>
+            <li>Leads the workshops and authored the “AI Tools” and “Synthesis and Presentation” sections</li>
+          </ul>
+          <p style="margin-top:12px;font-size:13px">Author's website: <a href="https://ku1eshov.ru" target="_blank" rel="noopener" style="color:var(--azure-dark);font-weight:700">ku1eshov.ru</a></p>
+        </div>
+      </div>
+      <div class="card person">
+        <img class="avatar" src="../images/petrenko.jpg" alt="Ekaterina Petrenko">
+        <div>
+          <h3>Ekaterina Petrenko</h3>
+          <div class="role">Program coordinator, co-author of the “Idea Generation and Visualization” section</div>
+          <ul class="list">
+            <li>Instructor at the Academy of Architecture and Arts, SFedU</li>
+            <li>Architect specializing in environmental design</li>
+            <li>Author of comprehensive territorial development (KRT) projects</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card person">
+        <img class="avatar" src="../images/kostenko.jpg" width="104" height="104" alt="Daria Kostenko" loading="lazy">
+        <div>
+          <h3>Daria Kostenko</h3>
+          <div class="role">Practicing architect, author of the QGIS video lessons</div>
+          <ul class="list">
+            <li>Instructor at the Academy of Architecture and Arts, SFedU</li>
+            <li>Architect specializing in environmental design</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card person">
+        <img class="avatar" src="../images/popova.jpg" width="104" height="104" alt="Elizaveta Popova" loading="lazy">
+        <div>
+          <h3>Elizaveta Popova</h3>
+          <div class="role">Practicing architect, co-author of the “Idea Generation and Visualization” section</div>
+          <ul class="list">
+            <li>Instructor at the Academy of Architecture and Arts, SFedU</li>
+            <li>Architect specializing in environmental design</li>
+            <li>Author of comprehensive territorial development (KRT) projects</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROGRAM ═══ -->
+<section class="sec" id="program">
+  <div class="wrap">
+    <div class="kicker">Curriculum · 22 academic hours</div>
+    <h2>How the cohort runs: 2.5 weeks, day by day</h2>
+    <p class="lead">10 hours of practice in live workshops plus 12 hours of consultations and independent work between them. We send the exact dates and live session links for your cohort in a separate schedule file after enrollment. The labels show the format: <span class="tag live">LIVE SESSION</span>: a meeting with the group in Yandex Telemost, <span class="tag sprint">SELF-PACED</span>: a flexible schedule, tracking in the group chat.</p>
+
+    <div class="bar" aria-hidden="true">
+      <span class="c0" style="flex:6 1 0"></span><span class="c1" style="flex:14 1 0"></span><span class="c1" style="flex:14 1 0"></span><span class="c2" style="flex:14 1 0"></span><span class="c3" style="flex:14 1 0"></span><span class="c4" style="flex:14 1 0"></span><span class="c5" style="flex:6 1 0"></span>
+    </div>
+
+    <details class="mod">
+      <summary><span class="mod-dot c0"></span><span class="mod-t"><small>Sprint 0 · Onboarding</small><strong>Setting up your workspace</strong></span><span class="mod-h">Day 1</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li>Day 1, Monday, all day. <span class="tag sprint">ASYNCHRONOUS</span> in the group chat.</li>
+        <li>Setting up your working toolset: LLM authorization rules (Claude, ChatGPT, Gemini), checking QGIS 3.44 LTR and Photoshop.</li>
+        <li><b>Outcome:</b> a configured workstation, the readiness checklist completed.</li>
+      </ul></div>
+    </details>
+
+    <details class="mod">
+      <summary><span class="mod-dot c1"></span><span class="mod-t"><small>Workshop 1 · Module 1: QGIS</small><strong>Site base map</strong></span><span class="mod-h">Day 2</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li>Day 2, Tuesday, 19:00–21:00 MSK. <span class="tag live">LIVE SESSION</span> in Yandex Telemost.</li>
+        <li>Live walkthrough: QuickOSM, open geodata, terrain, cadastre (NSPD). Exporting clean base maps for machine vision.</li>
+        <li><b>Homework 1:</b> a finished site location diagram and base map of your site.</li>
+      </ul></div>
+    </details>
+
+    <details class="mod">
+      <summary><span class="mod-dot c1"></span><span class="mod-t"><small>Sprint 1 · Geoanalytics</small><strong>Independent work in QGIS</strong></span><span class="mod-h">Days 3–8</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li>Days 3–8, Wednesday to Monday, flexible schedule. <span class="tag sprint">ASYNCHRONOUS</span> plus tracking in the chat.</li>
+        <li>Independent work: exporting vector layers, functional zoning, transport connections across the site.</li>
+        <li><b>Outcome:</b> a prepared set of graphic diagrams (PNG, 300 DPI).</li>
+      </ul></div>
+    </details>
+
+    <details class="mod">
+      <summary><span class="mod-dot c2"></span><span class="mod-t"><small>Workshop 2 · Modules 2–3: AI</small><strong>AI tools and generation</strong></span><span class="mod-h">Day 9</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li>Day 9, Tuesday, 19:00–21:00 MSK. <span class="tag live">LIVE SESSION</span> in Yandex Telemost.</li>
+        <li>Combining geodata and AI tools: drafting the brief and scenarios in Claude, controlled generation of facades and the environment, drafts in Photoshop.</li>
+        <li><b>Homework 2:</b> a written AI brief and drafts of the project concept.</li>
+      </ul></div>
+    </details>
+
+    <details class="mod">
+      <summary><span class="mod-dot c3"></span><span class="mod-t"><small>Sprint 2 · Visualization</small><strong>Final project views</strong></span><span class="mod-h">Days 10–14</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li>Days 10–14, Wednesday to Sunday, flexible schedule. <span class="tag sprint">ASYNCHRONOUS</span> plus consultations.</li>
+        <li>Generating space-planning solutions, post-processing in Photoshop, selecting the final views.</li>
+        <li><b>Outcome:</b> a series of final project visualizations (2–4 views).</li>
+      </ul></div>
+    </details>
+
+    <details class="mod">
+      <summary><span class="mod-dot c4"></span><span class="mod-t"><small>Sprint 3 · Module 4: Gamma</small><strong>Assembling the presentation</strong></span><span class="mod-h">Days 15–16</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li>Days 15–16, Monday to Tuesday, flexible schedule. <span class="tag sprint">ASYNCHRONOUS</span> plus checklists.</li>
+        <li>Combining analytics and visuals in Gamma App: automatic layout of the interactive presentation and pitch deck.</li>
+        <li><b>Outcome:</b> an assembled interactive presentation (web link plus PDF).</li>
+      </ul></div>
+    </details>
+
+    <details class="mod">
+      <summary><span class="mod-dot c5"></span><span class="mod-t"><small>Final · Assessment</small><strong>Final project review</strong></span><span class="mod-h">Day 17</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li>Day 17, Wednesday, 19:00–21:00 MSK. <span class="tag live">LIVE SESSION</span> in Yandex Telemost.</li>
+        <li>Participants present their projects: 3-minute pitches, feedback from the track lead, and a summary of the cohort results.</li>
+        <li><b>Certification:</b> submitting participant lists for SFedU document processing.</li>
+      </ul></div>
+    </details>
+  </div>
+</section>
+
+<!-- ═══ CERTIFICATE ═══ -->
+<section class="sec alt" id="certificate">
+  <div class="wrap">
+    <div class="kicker">Document awarded at the end of the course</div>
+    <h2>SFedU professional development certificate</h2>
+    <p class="lead">A standard-form document issued by Southern Federal University. It suits the periodic professional development of architects and designers.</p>
+    <div class="shots">
+      <figure class="shot wide"><img src="../images/certificate-sample.jpg" loading="lazy" alt="Sample SFedU professional development certificate"><figcaption>Sample certificate</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURES ═══ -->
+<section class="sec alt" id="features">
+  <div class="wrap">
+    <div class="kicker">Program features</div>
+    <h2>A short course with ready-made materials and your own site</h2>
+    <div class="grid3">
+      <div class="card"><div class="ico">01</div><h3>One site for the whole course</h3><p>You take your own: a park, a residential block, a university campus. If choosing is hard, you can take the Botanical Garden.</p></div>
+      <div class="card"><div class="ico">02</div><h3>Video lessons and the course guide</h3><p>Video lessons and a course guide with lecture notes, checklists, and templates. Materials become available to participants.</p></div>
+      <div class="card"><div class="ico">03</div><h3>A ready-made prompt template</h3><p>Role, context, task, examples, format, tone. Worked through in course assignments with AI tool results.</p></div>
+      <div class="card"><div class="ico">04</div><h3>Open data</h3><p>OpenStreetMap, cadastre, terrain data. QGIS is free, and no paid mapping software is needed.</p></div>
+      <div class="card"><div class="ico">05</div><h3>Three live sessions</h3><p>A review of your maps in QGIS, connecting geodata with AI tools, and the final project review, with independent work and chat tracking in between.</p></div>
+      <div class="card"><div class="ico">06</div><h3>From scratch and no code</h3><p>QGIS and AI tools are covered from scratch. No programming is needed.</p></div>
+    </div>
+    <p class="note">The course uses QGIS, Photoshop, and services with language models. Paid subscriptions are not required: for the purposes of the course, Alice AI or another comparable local solution is enough. If you choose other services, such as Gemini, ChatGPT, or Claude, the student provides access to them independently, in line with their user agreements and applicable law. The organizer does not provide communication tools or distribute tools for bypassing blocks.</p>
+  </div>
+</section>
+
+<!-- ═══ FORMAT ═══ -->
+<section class="sec" id="format">
+  <div class="wrap">
+    <div class="kicker">How the course runs</div>
+    <h2>Self-paced video lessons and three live sessions during the course</h2>
+    <p class="lead">You do the main work independently over 2.5 weeks, and the group live sessions set the direction and review your materials.</p>
+    <div class="grid4">
+      <div class="card"><div class="step-n">01 · ANY TIME</div><h3>Video lessons</h3><p>Video lessons and lecture notes in the course guide. Watch and repeat at your own pace.</p></div>
+      <div class="card"><div class="step-n">02 · WITH THE GROUP</div><h3>Three live sessions</h3><p>Live evening meetings in Yandex Telemost: a QGIS base map review, connecting with AI tools and generation, and the final project review.</p></div>
+      <div class="card"><div class="step-n">03 · SELF-PACED</div><h3>Sprints</h3><p>Assignments with deadlines between live sessions. Prompts and concepts are discussed in the group chat.</p></div>
+      <div class="card"><div class="step-n">04 · STAY IN TOUCH</div><h3>Consultations</h3><p>Consultations on independent work and a private group chat in Yandex Telemost.</p></div>
+    </div>
+    <p class="note">The program totals 22 academic hours: 10 hours of workshops and 12 hours of consultations and independent work. No more than 25 people per group.</p>
+  </div>
+</section>
+
+<!-- ═══ PROJECTS AND REVIEWS ═══ -->
+<section class="sec alt reviews-section" id="reviews">
+  <div class="wrap">
+    <div class="kicker">Examples of work</div>
+    <h2>What participants produce</h2>
+    <p class="lead">17 participants have completed the course. Below are examples of their final projects and the course assignments.</p>
+
+    <nav class="reviews-nav" aria-label="Review sections">
+      <a href="#student-projects">Final participant projects</a>
+      <a href="#course-tasks">Course assignments</a>
+      <a href="#student-reviews">What participants say</a>
+    </nav>
+
+    <div class="review-sub" id="student-projects">
+      <h3>Final participant projects</h3>
+      <div class="work-grid">
+        <article class="work-card">
+          <h4>“Catharsis”</h4>
+          <p class="work-author"><b>Anastasia</b> · undergraduate student at NRU MGSU</p>
+          <p class="work-ai"><b>With AI:</b> prompting, working with international services, environmental analysis.</p>
+          <div class="work-media"><img src="../images/reviews/katarsis-4.jpg" loading="lazy" alt="Preview 1 of the Catharsis project"><img src="../images/reviews/katarsis-6.jpg" loading="lazy" alt="Preview 2 of the Catharsis project"><img src="../images/reviews/katarsis-10.jpg" loading="lazy" alt="Preview 3 of the Catharsis project"></div>
+          <p class="work-result"><b>Result:</b> a multifunctional sports and play complex, Yeysk.</p>
+        </article>
+        <article class="work-card">
+          <h4>“Don Nature”</h4>
+          <p class="work-author"><b>Alexandra</b> · SFedU</p>
+          <p class="work-ai"><b>With AI:</b> site location diagram in QGIS, textures on the 3D model and elevation.</p>
+          <div class="work-media"><img src="../images/reviews/donskaya-4.jpg" loading="lazy" alt="Preview 1 of the Don Nature project"><img src="../images/reviews/donskaya-7.jpg" loading="lazy" alt="Preview 2 of the Don Nature project"><img src="../images/reviews/donskaya-11.jpg" loading="lazy" alt="Preview 3 of the Don Nature project"></div>
+          <p class="work-result"><b>Result:</b> a landscaping concept for a public space and a children's park.</p>
+        </article>
+        <article class="work-card">
+          <h4>“Pionerskaya Grove Landscaping”</h4>
+          <p class="work-author"><b>Tatiana</b> · architect, ASI Project</p>
+          <p class="work-ai"><b>With AI:</b> QGIS, reference images for AI, post-processing in Photoshop.</p>
+          <div class="work-media"><img src="../images/reviews/pionerskaya-1.jpg" loading="lazy" alt="Preview 1 of the Pionerskaya Grove Landscaping project"><img src="../images/reviews/pionerskaya-5.jpg" loading="lazy" alt="Preview 2 of the Pionerskaya Grove Landscaping project"><img src="../images/reviews/pionerskaya-7.jpg" loading="lazy" alt="Preview 3 of the Pionerskaya Grove Landscaping project"></div>
+          <p class="work-result"><b>Result:</b> Novorossiysk, 2026 concept.</p>
+        </article>
+        <article class="work-card">
+          <h4>“Vual Winegrowers' Park”</h4>
+          <p class="work-author"><b>Angelina</b> · student at SFedU, Academy of Architecture and Arts</p>
+          <p class="work-ai"><b>With AI:</b> well-crafted prompts for faster work.</p>
+          <div class="work-media"><img src="../images/reviews/vual-5.jpg" loading="lazy" alt="Vual visitor center in the winegrowers' park: architectural visualization"><img src="../images/reviews/vual-4.jpg" loading="lazy" alt="Master plan and structure of the Vual winegrowers' park"><img src="../images/reviews/vual-6.jpg" loading="lazy" alt="Visualizations of the Vual winegrowers' park pavilions: bakery, entrance area, festival square"></div>
+          <p class="work-result"><b>Result:</b> Semigorsky khutor, Novorossiysk.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="review-sub" id="course-tasks">
+      <h3>Course assignments</h3>
+      <div class="work-grid">
+        <article class="work-card">
+          <h4>Children's playground on the embankment</h4>
+          <p class="work-author"><b>Course assignment</b></p>
+          <p class="work-ai"><b>With AI:</b> visualizations, the master plan, and the materials list from a single prompt.</p>
+          <div class="work-media one"><img src="../images/rostov-naberezhnaya-gallery.jpg" loading="lazy" alt="Children's playground on the embankment in Rostov-on-Don: visualizations, master plan, and materials list"></div>
+          <p class="work-result"><b>Result:</b> Rostov-on-Don.</p>
+        </article>
+        <article class="work-card">
+          <h4>“Steppe Mandala”</h4>
+          <p class="work-author"><b>Course assignment</b></p>
+          <p class="work-ai"><b>With AI:</b> a master plan with functional zones and a legend; visualizations from different angles.</p>
+          <div class="work-media"><img src="../images/elista-mandala-genplan.jpg" loading="lazy" alt="Master plan of the Steppe Mandala children's playground in Elista"><img src="../images/elista-mandala-vizualizacii.jpg" loading="lazy" alt="Visualizations of the Steppe Mandala children's playground from different angles"></div>
+          <p class="work-result"><b>Result:</b> Elista.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="review-sub" id="student-reviews">
+      <h3>What participants say</h3>
+      <div class="work-grid">
+        <article class="work-card quote-card">
+          <h4>Review · “Catharsis”</h4>
+          <p class="work-author"><b>Anastasia</b> · undergraduate student at NRU MGSU</p>
+          <p class="work-ai"><b>With AI:</b> prompting, working with international services, environmental analysis.</p>
+          <p class="work-result"><b>Project:</b> a multifunctional sports and play complex, Yeysk.</p>
+          <blockquote class="work-quote">“I gained prompting skills, I understand international services better, and I went deeper into environmental analysis.”</blockquote>
+        </article>
+        <article class="work-card quote-card">
+          <h4>Review · “Don Nature”</h4>
+          <p class="work-author"><b>Alexandra</b> · SFedU</p>
+          <p class="work-ai"><b>With AI:</b> site location diagram in QGIS, textures on the 3D model and elevation.</p>
+          <p class="work-result"><b>Project:</b> a landscaping concept for a public space and a children's park.</p>
+          <blockquote class="work-quote">“For example, I made the site location diagram in QGIS because it saved files in the format I needed, and AI helped me apply textures to the 3D model and elevation.”</blockquote>
+        </article>
+        <article class="work-card quote-card">
+          <h4>Review · “Pionerskaya Grove Landscaping”</h4>
+          <p class="work-author"><b>Tatiana</b> · architect, ASI Project</p>
+          <p class="work-ai"><b>With AI:</b> QGIS, reference images for AI, post-processing in Photoshop.</p>
+          <p class="work-result"><b>Project:</b> Novorossiysk, 2026 concept.</p>
+          <blockquote class="work-quote">“I completed the AI in Architecture course. I learned QGIS, how to create and use reference images for AI, and I reinforced my Photoshop post-processing skills. Now I confidently combine generative methods with manual refinement for high-quality architectural visualizations.”</blockquote>
+        </article>
+        <article class="work-card quote-card">
+          <h4>Review · “Vual Winegrowers' Park”</h4>
+          <p class="work-author"><b>Angelina</b> · student at SFedU, Academy of Architecture and Arts</p>
+          <p class="work-ai"><b>With AI:</b> well-crafted prompts for faster work.</p>
+          <p class="work-result"><b>Project:</b> Semigorsky khutor, Novorossiysk.</p>
+          <blockquote class="work-quote">“I learned to write effective prompts, which made my work much easier and faster.”</blockquote>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FEES ═══ -->
+<section class="sec" id="price">
+  <div class="wrap">
+    <div class="kicker">Fees and discounts</div>
+    <h2>Course fee and the price for SFedU staff</h2>
+    <div class="grid2">
+      <div class="price main">
+        <div class="price-val">5,000 <small>₽</small></div>
+        <div class="price-lab">course fee, 22 academic hours</div>
+        <ul class="list">
+          <li>two-installment plan: 2,500 + 2,500 ₽</li>
+          <li>video lessons and the course guide</li>
+          <li>three live online sessions</li>
+          <li>consultations on independent work</li>
+          <li>SFedU professional development certificate</li>
+        </ul>
+        <button class="btn btn-primary" style="margin-top:22px;width:100%" data-apply>Apply</button>
+      </div>
+      <div class="price">
+        <div class="price-val">3,600 <small>₽</small></div>
+        <div class="price-lab">for SFedU staff</div>
+        <ul class="list">
+          <li>two-installment plan: 1,800 + 1,800 ₽</li>
+          <li>the same course content</li>
+          <li>send proof of status after you apply</li>
+        </ul>
+        <button class="btn btn-dark" style="margin-top:22px;width:100%" data-apply>Apply as SFedU staff</button>
+      </div>
+    </div>
+    <div class="deduct">
+      <b aria-hidden="true">💳</b>
+      <p><strong>Two-installment plan.</strong> The first 50% is paid at enrollment: 2,500 ₽ of the 5,000 ₽ fee, and 1,800 ₽ of the 3,600 ₽ fee. The balance is paid in a second installment halfway through the course. The terms are fixed when you sign the agreement with SFedU.</p>
+    </div>
+    <div class="deduct">
+      <b>13%</b>
+      <p><strong>Tax deduction.</strong> If you pay for the course yourself and pay personal income tax (NDFL), you can reclaim 13% of the fee: 650 ₽ of 5,000 ₽ and 468 ₽ of 3,600 ₽. The deduction applies to study at a licensed organization, and the expense limit in 2026 is 150,000 ₽.</p>
+    </div>
+    <p class="note">The agreement with SFedU is signed with an individual or a legal entity.</p>
+  </div>
+</section>
+
+<!-- ═══ DOCUMENTS ═══ -->
+<section class="sec alt" id="docs">
+  <div class="wrap">
+    <div class="kicker">Documents on successful completion</div>
+    <h2>SFedU professional development certificate</h2>
+    <p class="lead">The standard-form certificate for 22 academic hours is issued after the final assessment: you submit a project: a link to the final presentation and a form describing the case.</p>
+    <p class="note" style="margin-top:0">The professional development certificate is issued to participants with higher education. If you don't have a degree yet, you can join and submit your project right away: after the final assessment we issue a certificate of attendance, and the professional development certificate once you obtain your degree.</p>
+  </div>
+</section>
+
+<!-- ═══ WHAT'S NEXT ═══ -->
+<section class="sec" id="next">
+  <div class="wrap">
+    <div class="kicker">What's next</div>
+    <h2>Level 2: AI in Redevelopment</h2>
+    <p class="lead">72 academic hours, starts November 5, 2026. You take a real building or site and develop it into a concept ready for the final review, with area and economic calculations. 18,900 ₽; 14,900 ₽ for graduates of AI in Architecture; a two-installment plan is available. The price is the same for both tracks.</p>
+    <a class="btn btn-dark" href="redev.html">More about Level 2 →</a>
+  </div>
+</section>
+
+<!-- ═══ HOW TO APPLY ═══ -->
+<section class="sec alt" id="apply">
+  <div class="wrap">
+    <div class="kicker">How to apply</div>
+    <h2>Four steps to the start</h2>
+    <div class="grid4">
+      <div class="card step"><div class="n">1</div><h3>Application</h3><p>You leave your contacts and education details. It takes two minutes.</p></div>
+      <div class="card step"><div class="n">2</div><h3>A short conversation</h3><p>We answer your questions and confirm your participation.</p></div>
+      <div class="card step"><div class="n">3</div><h3>Agreement, payment, enrollment</h3><p>We sign the agreement with SFedU, take payment (in two installments if you prefer), and enroll you by order.</p></div>
+      <div class="card step"><div class="n">4</div><h3>Cohort start</h3><p>We open access to the course guide and the group chat in Yandex Telemost, send the schedule file with dates, and start with Sprint 0.</p></div>
+    </div>
+    <div style="margin-top:28px"><button class="btn btn-primary" data-apply>Apply</button></div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="kicker">Questions and answers</div>
+    <h2>What people usually ask before enrolling</h2>
+
+    <details class="q"><summary>Do I need to know QGIS or AI tools?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>No. QGIS and work with language models are covered from scratch: the interface, a project, data, the prompt template. You only need to be comfortable using a computer.</p></div></details>
+
+    <details class="q"><summary>Do I need to program?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>No, not a single line of code. You work in QGIS, AI web services, and Photoshop.</p></div></details>
+
+    <details class="q"><summary>Which site should I take for the project?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Your own: a park, a residential block, a university campus, a place you work with. If choosing is hard, you can take the Botanical Garden.</p></div></details>
+
+    <details class="q"><summary>What do I need for the classes?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>A computer, internet access, QGIS (free), Photoshop on an Adobe subscription, and any service with a language model. Paid AI subscriptions are not required: for the purposes of the course you can use Alice AI or other comparable local solutions. We cover installing and setting up all the tools in the preparatory Sprint 0 module of the course guide.</p>
+      <p>If you choose international services, the student provides access to them independently, in line with their user agreements and applicable law.</p></div></details>
+
+    <details class="q"><summary>How much time does it take?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>The program totals 22 academic hours over 2.5 weeks: 10 hours of practice in three evening live sessions and 12 hours of consultations and independent work in between, on a flexible schedule with tracking in the group chat. The exact cohort dates are in the schedule file we send after enrollment.</p></div></details>
+
+    <details class="q"><summary>I don't have a higher education degree or I'm still studying. What will I get?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>You can join the course and submit your project right away. After the final assessment you receive a certificate of attendance, and the professional development certificate once you obtain your higher education degree.</p></div></details>
+
+    <details class="q"><summary>Who pays 3,600 ₽?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>SFedU staff. All other participants pay 5,000 ₽. We will ask for proof of status after you apply.</p></div></details>
+
+    <details class="q"><summary>Can I pay in installments?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Yes, a two-installment plan is allowed: 50% at enrollment and the remaining 50% halfway through the course. The terms are fixed when you sign the agreement with SFedU.</p></div></details>
+
+    <details class="q"><summary>Can I get part of the fee back via tax deduction?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Yes, if you pay yourself and have income subject to personal income tax (NDFL): you can reclaim 13% of the fee. It is arranged through the tax office or your employer, using the agreement and the payment receipt.</p></div></details>
+
+    <details class="q"><summary>What comes after the course?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>You can continue to Level 2, AI in Redevelopment: there you take a real property and develop it into a concept ready for the final review. 18,900 ₽; 14,900 ₽ for graduates of AI in Architecture. The price is the same for both tracks.</p></div></details>
+
+    <details class="q"><summary>What if I change my mind?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>The refund terms are set out in the agreement with SFedU. You sign the agreement before paying, so you can review the terms in advance. Questions about the agreement: SFedU coordinator Alexander Andreev, <a href="mailto:alandreev@sfedu.ru" style="color:var(--azure-dark);font-weight:700">alandreev@sfedu.ru</a>.</p></div></details>
+  </div>
+</section>
+
+<!-- ═══ CONTACTS ═══ -->
+<section class="sec alt" id="contact">
+  <div class="wrap">
+    <div class="kicker">Contacts</div>
+    <div class="card contact">
+      <img class="avatar" src="../images/kuleshov.jpg" alt="Alexander Kuleshov">
+      <div class="contact-main">
+        <h2 style="font-size:clamp(24px,3.4vw,32px);margin-bottom:8px">Still have questions?</h2>
+        <p style="font-size:15px;color:var(--ink-muted)">We will tell you more about the course and help you apply. Questions are answered by the course director, Alexander Kuleshov.</p>
+        <div class="contact-links">
+          <button class="btn btn-primary btn-sm" data-apply>Apply</button>
+          <a class="btn btn-line btn-sm" href="https://t.me/alkuleshov" target="_blank" rel="noopener">Ask a question on Telegram</a>
+        </div>
+        <p style="font-size:13px;color:var(--ink-faint);margin-top:14px">For the agreement, payment, and enrollment: SFedU Academy of Architecture and Arts coordinator Alexander Andreev, <a href="mailto:alandreev@sfedu.ru" style="color:var(--azure-dark);font-weight:700">alandreev@sfedu.ru</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="index.html"><img class="brand-sign" src="../images/ai2arch-sign.png" width="38" height="38" alt=""><span class="brand-text"><b>AI2ARCH</b><small>Project Intelligence Lab</small></span></a>
+    <p>The program is delivered by Southern Federal University, Academy of Architecture and Arts. Rostov-on-Don.</p>
+    <p>The program was approved by SFedU order No. 1298 of May 21, 2026. Mode of study: full-time, using distance learning technologies.</p>
+    <p><a href="redev.html">Level 2: AI in Redevelopment</a></p>
+  </div>
+</footer>
+
+<!-- ═══ APPLICATION ═══ -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <div class="modal-top"><span id="modalTitle">Application for AI in Architecture</span><button class="modal-x" id="modalX" aria-label="Close">&times;</button></div>
+    <div class="modal-body">
+      <form id="form">
+        <label for="f-name">Full name *</label>
+        <input required type="text" id="f-name" placeholder="Anna Petrova" autocomplete="name">
+
+        <label for="f-email">Email *</label>
+        <input required type="email" id="f-email" placeholder="mail@example.com" autocomplete="email">
+
+        <label for="f-phone">Phone or messenger *</label>
+        <input required type="text" id="f-phone" placeholder="+7 900 000-00-00 or @username" autocomplete="tel">
+
+        <label for="f-edu">Education *</label>
+        <select required id="f-edu">
+          <option value="">Select an option</option>
+          <option value="has_diploma">I have a diploma</option>
+          <option value="no_diploma">No diploma yet (currently studying or not yet awarded)</option>
+        </select>
+        <div class="notice" id="notice"></div>
+
+        <label for="f-status">You are *</label>
+        <select required id="f-status">
+          <option value="">Select an option</option>
+          <option value="SFedU staff">SFedU staff</option>
+          <option value="SFedU student">SFedU student</option>
+          <option value="Student at another university">Student at another university</option>
+          <option value="Practicing architect or designer">Practicing architect or designer</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="f-comment">Comment (optional)</label>
+        <textarea id="f-comment" rows="2" placeholder="Which site you plan to take and how you heard about the course"></textarea>
+
+        <div class="consent"><input type="checkbox" id="f-consent" required><label for="f-consent">I consent to the processing of my personal data.</label></div>
+        <button type="submit" class="submit" id="submitBtn">Submit application</button>
+      </form>
+      <div class="done" id="done" role="status" aria-live="polite">
+        <div class="done-ico" aria-hidden="true">✓</div>
+        <h3>Your details have been sent</h3>
+        <p>We will contact you by email at <b id="doneEmail"></b> and send an invitation to the course chat.</p>
+        <p>If you want to clarify something right away, message us on Telegram: <a href="https://t.me/alkuleshov" target="_blank" rel="noopener" style="color:var(--azure-dark);font-weight:700">@alkuleshov</a>.</p>
+        <button type="button" class="submit done-close" id="doneClose">Close</button>
+      </div>
+      <div class="done" id="fail">
+        <h3>Sending failed</h3>
+        <p>Try again or message us directly on Telegram: <a href="https://t.me/alkuleshov" target="_blank" rel="noopener" style="color:var(--azure-dark);font-weight:700">@alkuleshov</a>.</p>
+      
+        <button type="button" class="submit done-close" id="failClose">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  // Application endpoint: the same Google script as on Level 1 (the spreadsheet columns match).
+  var ENROLL_URL = 'https://script.google.com/macros/s/AKfycby1af9vPX9ucvhf1phoY_kr0BQ3q4YMAVVRNUMB0Y_xbYHxlhyp2ca69mpD3S7uTRY/exec';
+
+  var modal = document.getElementById('modal');
+  var form = document.getElementById('form');
+  var done = document.getElementById('done');
+  var fail = document.getElementById('fail');
+  var notice = document.getElementById('notice');
+
+  function openModal(track) {
+    form.style.display = 'block'; done.style.display = 'none'; fail.style.display = 'none';
+    if (typeof ym === 'function') ym(113526373, 'reachGoal', 'form_open', { course: 'AI in Architecture' });
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
+  document.getElementById('doneClose').addEventListener('click', closeModal);
+  document.getElementById('failClose').addEventListener('click', closeModal);
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-apply]'), function (b) {
+    b.addEventListener('click', function () { openModal(b.getAttribute('data-apply')); });
+  });
+  document.getElementById('modalX').addEventListener('click', closeModal);
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+  // The archi.html#enroll link (the Apply button on the home page) opens the form immediately
+  if (location.hash === '#enroll') openModal();
+  window.addEventListener('hashchange', function () { if (location.hash === '#enroll') openModal(); });
+
+  var EDU = {
+    has_diploma: { cert: 'Удостоверение', text: '', warn: false },
+    no_diploma: { cert: 'Справка', text: 'You can join and present your project right away. After the final review we issue a certificate of attendance, and the professional development certificate once you obtain your higher education degree.', warn: false }
+  };
+  document.getElementById('f-edu').addEventListener('change', function () {
+    var r = EDU[this.value];
+    if (r && r.text) { notice.textContent = r.text; notice.className = 'notice' + (r.warn ? ' warn' : ''); notice.style.display = 'block'; }
+    else { notice.style.display = 'none'; }
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = document.getElementById('submitBtn');
+    var eduSel = document.getElementById('f-edu');
+    var eduLabel = eduSel.options[eduSel.selectedIndex].text;
+    var rule = EDU[eduSel.value];
+    var status = document.getElementById('f-status').value;
+    var comment = document.getElementById('f-comment').value;
+    var payload = {
+      name: document.getElementById('f-name').value,
+      phone: document.getElementById('f-phone').value,
+      email: document.getElementById('f-email').value,
+      education: eduLabel,
+      certEligible: rule ? rule.cert : '',
+      comment: 'Role: ' + status + (comment ? '. ' + comment : ''),
+      timestamp: new Date().toISOString(),
+      course: 'ИИ в архитектуре',
+      source: 'archi-en'
+    };
+    btn.disabled = true; btn.textContent = 'Sending...';
+    // The Google script's response cannot be read in no-cors mode, and the redirect sometimes takes a long time.
+    // If the request has not finished within 5 seconds, we treat the application as sent: the data has already gone through.
+    var settled = false;
+    function finish(ok) {
+      if (settled) return;
+      settled = true; clearTimeout(timer);
+      btn.disabled = false; btn.textContent = 'Submit application';
+      form.style.display = 'none';
+      if (ok) {
+        document.getElementById('doneEmail').textContent = payload.email;
+        if (typeof ym === 'function') ym(113526373, 'reachGoal', 'form_submit', { course: payload.course });
+        form.reset(); notice.style.display = 'none';
+        done.style.display = 'block';
+      } else { fail.style.display = 'block'; }
+    }
+    var timer = setTimeout(function () { finish(true); }, 5000);
+    fetch(ENROLL_URL, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) })
+      .then(function () { finish(true); })
+      .catch(function () { finish(false); });
+  });
+
+  // menu on tablets and phones
+  var burger = document.getElementById('burger');
+  var navEl = document.getElementById('nav');
+  function setMenu(open) { navEl.classList.toggle('open', open); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  burger.addEventListener('click', function (e) { e.stopPropagation(); setMenu(!navEl.classList.contains('open')); });
+  navEl.addEventListener('click', function (e) { if (e.target.tagName === 'A') setMenu(false); });
+  document.addEventListener('click', function (e) { if (!navEl.contains(e.target)) setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+  // highlight the current section in the menu
+  var links = Array.prototype.slice.call(document.querySelectorAll('#nav a'));
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting && map[en.target.id]) {
+          links.forEach(function (a) { a.classList.remove('on'); });
+          map[en.target.id].classList.add('on');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
+  }
+})();
+</script>
+
+<script>
+  // Metrika goals: clicks on the course guide and Telegram are counted site-wide by link address
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a'); if (!a) return;
+    if (typeof ym !== 'function') return;
+    if (a.href.indexOf('archi-guide.html') !== -1) ym(113526373, 'reachGoal', 'guide_click');
+    else if (a.href.indexOf('t.me/alkuleshov') !== -1) ym(113526373, 'reachGoal', 'telegram_click');
+  }, true);
+</script>
+
+<!-- ── constellation: a shimmering contour of stars behind the heading ── -->
+<script>
+(function () {
+  function initConstellation(sel, opts) {
+    var host = document.querySelector(sel);
+    if (!host) return;
+    var canvas = host.querySelector('canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W, H, cx, cy;
+    var R = opts.R || 230;
+    var HUE = opts.hueBase || 212;
+
+    function resize() {
+      var r = host.getBoundingClientRect();
+      W = Math.max(1, r.width); H = Math.max(1, r.height);
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cx = W * (opts.cx || 0.5); cy = H * (opts.cy || 0.5);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var M = 46;
+    var nodes = [];
+    for (var i = 0; i < M; i++) {
+      nodes.push({
+        a: (i / M) * Math.PI * 2,
+        twinklePhase: Math.random() * Math.PI * 2,
+        twinkleSpeed: 0.5 + Math.random() * 0.9,
+        wobble: Math.random() * Math.PI * 2,
+        weight: 0.35 + Math.random() * Math.random() * 2.3,
+        rot: Math.random() * Math.PI * 2
+      });
+    }
+
+    var links = [];
+    for (var k = 0; k < 30; k++) {
+      var i1 = (Math.random() * M) | 0;
+      var i2 = (i1 + 3 + ((Math.random() * (M - 6)) | 0)) % M;
+      links.push([i1, i2]);
+    }
+
+    var IN = 44;
+    var inner = [];
+    for (var j = 0; j < IN; j++) {
+      inner.push({
+        a: Math.random() * Math.PI * 2,
+        rf: 0.06 + Math.random() * 0.86,
+        twinklePhase: Math.random() * Math.PI * 2,
+        twinkleSpeed: 0.6 + Math.random() * 1.2,
+        wobble: Math.random() * Math.PI * 2,
+        weight: 0.3 + Math.random() * Math.random() * 2.6,
+        link: (Math.random() * M) | 0,
+        rot: Math.random() * Math.PI * 2
+      });
+    }
+    for (var hb = 0; hb < 3; hb++) {
+      inner[(Math.random() * IN) | 0].weight = 2.4 + Math.random() * 0.8;
+    }
+
+    var innerLinks = [];
+    for (var k2 = 0; k2 < 40; k2++) {
+      var j1 = (Math.random() * IN) | 0;
+      var j2 = (Math.random() * IN) | 0;
+      if (j1 !== j2) innerLinks.push([j1, j2]);
+    }
+
+    function contourPoint(a, t) {
+      var rr = R * (1
+        + 0.15 * Math.sin(3 * a + t * 0.55)
+        + 0.08 * Math.sin(5 * a - t * 0.8 + 1.3)
+        + 0.05 * Math.sin(8 * a + t * 0.35));
+      return { x: cx + Math.cos(a) * rr, y: cy + Math.sin(a) * rr * 0.82 };
+    }
+
+    function facetPath(cx0, cy0, r, rot) {
+      /* angular (not round) glow silhouette: an elongated faceted diamond spark */
+      var k = 0.46;
+      ctx.beginPath();
+      ctx.moveTo(cx0 + Math.cos(rot) * r, cy0 + Math.sin(rot) * r);
+      ctx.lineTo(cx0 + Math.cos(rot + Math.PI / 2) * r * k, cy0 + Math.sin(rot + Math.PI / 2) * r * k);
+      ctx.lineTo(cx0 + Math.cos(rot + Math.PI) * r, cy0 + Math.sin(rot + Math.PI) * r);
+      ctx.lineTo(cx0 + Math.cos(rot - Math.PI / 2) * r * k, cy0 + Math.sin(rot - Math.PI / 2) * r * k);
+      ctx.closePath();
+    }
+
+    function star(p, tw, weight, rot0) {
+      var rad = (0.8 + 1.5 * tw) * weight;
+      var haloA = Math.min(0.5, (0.12 + 0.16 * tw) * weight);
+      var glowA = Math.min(0.95, (0.4 + 0.32 * tw) * weight);
+      var coreA = Math.min(1, (0.55 + 0.3 * tw) * Math.max(0.6, Math.min(1.3, weight)));
+      var rot = rot0 || 0;
+
+      ctx.save();
+      facetPath(p.x, p.y, rad * 8.5, rot);
+      ctx.clip();
+      var halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rad * 8.5);
+      halo.addColorStop(0, 'hsla(' + HUE + ',92%,60%,' + haloA.toFixed(3) + ')');
+      halo.addColorStop(1, 'hsla(' + HUE + ',92%,60%,0)');
+      ctx.fillStyle = halo;
+      ctx.fillRect(p.x - rad * 8.5, p.y - rad * 8.5, rad * 17, rad * 17);
+      ctx.restore();
+
+      ctx.save();
+      facetPath(p.x, p.y, rad * 5, rot + Math.PI / 4);
+      ctx.clip();
+      var glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rad * 5);
+      glow.addColorStop(0, 'hsla(' + HUE + ',95%,66%,' + glowA.toFixed(3) + ')');
+      glow.addColorStop(1, 'hsla(' + HUE + ',95%,66%,0)');
+      ctx.fillStyle = glow;
+      ctx.fillRect(p.x - rad * 5, p.y - rad * 5, rad * 10, rad * 10);
+      ctx.restore();
+
+      ctx.fillStyle = 'hsla(' + HUE + ',60%,86%,' + coreA.toFixed(3) + ')';
+      facetPath(p.x, p.y, Math.max(0.6, rad * 0.55), rot);
+      ctx.fill();
+    }
+
+    function frame(t) {
+      ctx.clearRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'lighter';
+
+      var pts = [];
+      for (var i = 0; i < M; i++) {
+        pts.push(contourPoint(nodes[i].a + Math.sin(t * 0.12 + nodes[i].wobble) * 0.025, t));
+      }
+      var ipts = [];
+      for (var j = 0; j < IN; j++) {
+        var n = inner[j];
+        var rr = R * n.rf * (1 + 0.07 * Math.sin(t * 0.3 + n.wobble));
+        var aa = n.a + Math.sin(t * 0.1 + n.wobble) * 0.06;
+        ipts.push({ x: cx + Math.cos(aa) * rr, y: cy + Math.sin(aa) * rr * 0.82 });
+      }
+
+      for (var i = 0; i < M; i++) {
+        var p1 = pts[i], p2 = pts[(i + 1) % M];
+        var tw = 0.5 + 0.5 * Math.sin(t * nodes[i].twinkleSpeed + nodes[i].twinklePhase);
+        var a1 = (0.07 + 0.16 * tw) * Math.min(1.4, nodes[i].weight);
+        ctx.strokeStyle = 'hsla(' + HUE + ',85%,64%,' + a1.toFixed(3) + ')';
+        ctx.lineWidth = 0.9;
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+
+      for (var l = 0; l < links.length; l++) {
+        var la = links[l][0], lb = links[l][1];
+        var p1 = pts[la], p2 = pts[lb];
+        var tw = 0.5 + 0.5 * Math.sin(t * 0.7 + l);
+        ctx.strokeStyle = 'hsla(' + HUE + ',82%,62%,' + (0.05 + 0.09 * tw).toFixed(3) + ')';
+        ctx.lineWidth = 0.75;
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+
+      for (var l2 = 0; l2 < innerLinks.length; l2++) {
+        var ja = innerLinks[l2][0], jb = innerLinks[l2][1];
+        var p1 = ipts[ja], p2 = ipts[jb];
+        var tw = 0.5 + 0.5 * Math.sin(t * 0.5 + l2 * 1.7);
+        var wmax = Math.max(inner[ja].weight, inner[jb].weight);
+        ctx.strokeStyle = 'hsla(' + HUE + ',85%,66%,' + (0.045 + 0.09 * tw * Math.min(1, wmax / 1.6)).toFixed(3) + ')';
+        ctx.lineWidth = 0.75;
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+
+      for (var j = 0; j < IN; j++) {
+        if (j % 3 !== 0) continue;
+        var p1 = ipts[j], p2 = pts[inner[j].link];
+        var tw = 0.5 + 0.5 * Math.sin(t * 0.6 + j);
+        ctx.strokeStyle = 'hsla(' + HUE + ',82%,64%,' + (0.045 + 0.08 * tw).toFixed(3) + ')';
+        ctx.lineWidth = 0.75;
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+
+      for (var i = 0; i < M; i++) {
+        var tw = 0.3 + 0.7 * Math.max(0, Math.sin(t * nodes[i].twinkleSpeed + nodes[i].twinklePhase));
+        star(pts[i], tw, nodes[i].weight, nodes[i].rot);
+      }
+      for (var j = 0; j < IN; j++) {
+        var tw = 0.25 + 0.75 * Math.max(0, Math.sin(t * inner[j].twinkleSpeed + inner[j].twinklePhase));
+        star(ipts[j], tw, inner[j].weight, inner[j].rot);
+      }
+
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    if (reduced) {
+      frame(6);
+      return;
+    }
+
+    var t0 = performance.now();
+    function loop(now) {
+      frame((now - t0) / 1000);
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  }
+
+  function ready(fn) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  ready(function () {
+    var mob = window.innerWidth < 760;
+    initConstellation('.hero-mark', { cx: mob ? 0.4 : 0.54, cy: mob ? 0.4 : 0.42, R: mob ? 150 : 230, hueBase: 221 });
+  });
+})();
+</script>
+<script>
+(function(){
+  function jumpReviews(){
+    if (location.hash !== '#reviews') return;
+    var el = document.getElementById('reviews');
+    if (!el) return;
+    var root = document.documentElement;
+    var prev = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    el.scrollIntoView({block:'start'});
+    root.style.scrollBehavior = prev;
+  }
+  jumpReviews();
+  window.addEventListener('DOMContentLoaded', jumpReviews);
+  window.addEventListener('load', function(){
+    jumpReviews();
+    setTimeout(jumpReviews, 300);
+    setTimeout(jumpReviews, 1000);
+  });
+})();
+</script>
+</body>
+</html>
