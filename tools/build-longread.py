@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Собирает статический лонгрид из docs/lectures/2.2.md и шаблона."""
+"""Собирает статический лонгрид из docs/lectures/2.2.md и шаблона.
+
+Вопросы «Проверь себя» берутся из docs/lectures/2.2.quiz.json. Для другой
+темы достаточно положить рядом с её конспектом файл <тема>.quiz.json:
+разметка глав и порядок вопросов в коде не зашиты.
+"""
 import html
 import json
 import re
@@ -8,6 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / 'docs' / 'lectures' / '2.2.md'
+QUIZ = SRC.with_name(SRC.stem + '.quiz.json')
 TPL = ROOT / 'templates' / 'longread.html'
 OUT = ROOT / 'redev-read-income.html'
 SLIDE_DIR = 'images/slides/income'
@@ -240,6 +246,45 @@ def load():
                        'final':section_text(text.splitlines(),'Итог темы 2.2')})
     return terms, ext, parsed
 
+def load_quiz(path):
+    """Читает вопросы к главам из docs/lectures/<тема>.quiz.json."""
+    if not path.exists():
+        return {}
+    data = json.loads(path.read_text(encoding='utf-8'))
+    quiz = {}
+    for chapter in data:
+        cnum = int(chapter['chapter'])
+        questions = []
+        for q in chapter['questions']:
+            opts = list(q['opts'])
+            answer = int(q['a'])
+            if len(opts) != 4 or not 0 <= answer < len(opts):
+                raise ValueError(f'{path.name}: глава {cnum}, вопрос «{q["q"]}»: нужны 4 варианта и верный индекс')
+            questions.append({
+                'q': q['q'],
+                'opts': opts,
+                'a': answer,
+                'why': q['why'],
+                'ref': int(q['ref']),
+            })
+        quiz[cnum] = {
+            'title': chapter['title'],
+            'slides': chapter.get('slides', ''),
+            'questions': questions,
+        }
+    return quiz
+
+def quiz_block(cnum, quiz):
+    """Карточка «Проверь себя» в конце главы. Вопросы рендерит скрипт шаблона."""
+    total = len(quiz['questions'])
+    return f'''<section class="quiz" id="quiz-chapter-{cnum}" data-quiz-chapter="{cnum}" aria-labelledby="quiz-title-{cnum}">
+  <div class="quiz-head"><div class="quiz-kicker">Проверь себя</div><h2 id="quiz-title-{cnum}">Проверь себя</h2><p class="quiz-sub">Вопросов: {total} · без оценок</p></div>
+  <div class="quiz-top"><span data-quiz-progress>Вопрос 1 из {total}</span><span data-quiz-score></span></div>
+  <div class="quiz-body" data-quiz-body></div>
+  <div class="trainer-feedback quiz-feedback" data-quiz-feedback aria-live="polite"></div>
+  <div class="trainer-actions quiz-actions" data-quiz-actions></div>
+</section>'''
+
 def slide_img(n, cls='slide-inline'):
     name=f'{n:02d}'
     return (f'<figure class="{cls}" data-n="{n}"><div class="inline-frame"><img src="{SLIDE_DIR}/{name}-1600.webp" '
@@ -314,16 +359,18 @@ def gaps_registry():
   <p class="gaps-note">Без цифр: только документы и зависимости.</p>
 </section>'''
 
-def finish_card(tasks):
+def finish_card(tasks, quiz_total=0):
     items=''.join(
         f'<li data-finish-task="{t["n"]}"><a href="#slide-{t["n"]}">Слайд {t["n"]} · {esc(t["title"])}</a>'
         f'<span>{inline(t["task"])}</span></li>'
         for t in tasks
     )
+    quiz_line = (f'\n  <p class="finish-quiz" id="finishQuiz">Проверь себя: 0 из {quiz_total} глав пройдено</p>'
+                 if quiz_total else '')
     return f'''<section class="finish-card" id="finish">
   <div class="finish-kicker">Финал</div>
   <h2>Урок прочитан</h2>
-  <p class="finish-count" id="finishCount">Задания: 0 из {len(tasks)} отмечены</p>
+  <p class="finish-count" id="finishCount">Задания: 0 из {len(tasks)} отмечены</p>{quiz_line}
   <div class="finish-missing" id="finishMissing"><h3>Осталось самостоятельно</h3><ul>{items}</ul></div>
   <div class="finish-actions">
     <a class="finish-btn finish-btn-dark" href="https://fortune-swing-02e.notion.site/41112bb3b5cd81839661da69963a035b?source=copy_link" target="_blank" rel="noopener">Рабочая тетрадь ↗</a>
@@ -371,11 +418,17 @@ def mark_terms(html_text, terms):
 
 def build():
     terms, example, parts = load()
+    quiz = load_quiz(QUIZ)
     chapter_bodies=[]; toc=[]; all_tasks=[]
     for ci,(cnum,a,b,name) in enumerate(CHAPTERS):
         part=next(p for p in parts if any(s['n']==a for s in p['slides']))
         slides=[s for s in part['slides'] if a<=s['n']<=b]
-        toc.append(f'<a href="#chapter-{cnum}" class="toc-ch">Глава {cnum}. {esc(name)}</a>')
+        mark = ''
+        if cnum in quiz:
+            mark = f'<span class="toc-quiz" data-quiz-chapter="{cnum}">✓ Проверено</span>'
+            toc.append(f'<a href="#chapter-{cnum}" class="toc-ch" data-quiz-chapter="{cnum}">Глава {cnum}. {esc(name)}{mark}</a>')
+        else:
+            toc.append(f'<a href="#chapter-{cnum}" class="toc-ch">Глава {cnum}. {esc(name)}</a>')
         header=f'<header class="chapter-head"><div class="chapter-kicker">Глава {cnum}</div><h1>{esc(name)}</h1></header>'
         intro_html=''
         if part['intro']:
@@ -419,9 +472,11 @@ def build():
         if example_html: body.append(example_html)
         body += content
         body.append(chapter_end(part))
+        if cnum in quiz:
+            body.append(quiz_block(cnum, quiz[cnum]))
         if cnum==3 and part['final']:
             body.append('<section class="lesson-end" id="lesson-end"><h2>Итог темы 2.2</h2>'+md_html(part['final'])+'</section>')
-            body.append(finish_card(all_tasks))
+            body.append(finish_card(all_tasks, len(quiz)))
         body.append('</section>')
         chapter_bodies.append(''.join(body))
     body_html=''.join(chapter_bodies)
@@ -434,10 +489,13 @@ def build():
     # время чтения по видимому тексту
     words=len(re.sub(r'<[^>]+>',' ',body_html).split())
     minutes=max(1,round(words/180))
+    quiz_json=json.dumps(quiz, ensure_ascii=False).replace('</', '<\\/')
+    quiz_key=json.dumps('lr-quiz-' + SRC.stem, ensure_ascii=False)
     tpl=TPL.read_text(encoding='utf-8')
     out=(tpl.replace('{{READ_TIME}}',str(minutes)).replace('{{BODY}}',body_html)
          .replace('{{TOC}}',''.join(toc)).replace('{{GLOSSARY}}',glossary)
          .replace('{{RAIL}}',rail).replace('{{SLIDES_JSON}}',slides_json)
+         .replace('{{QUIZ_JSON}}',quiz_json).replace('{{QUIZ_KEY}}',quiz_key)
          .replace('{{WORDS}}',str(words)))
     OUT.write_text(out,encoding='utf-8')
     print(f'{OUT.name}: {words} слов, {minutes} мин, {len(body_html)} байт')
