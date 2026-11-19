@@ -4,6 +4,16 @@
   'use strict';
 
   var mounts = Array.prototype.slice.call(document.querySelectorAll('[data-ai-course]'));
+
+  // Group size comes from data-group-size so the wording stays in one place.
+  Array.prototype.forEach.call(document.querySelectorAll('[data-group-size]'), function (box) {
+    var size = box.getAttribute('data-group-size');
+    if (!size) return;
+    var out = box.querySelector('[data-group-count]');
+    if (out) out.textContent = size;
+    else box.textContent = size;
+  });
+
   if (!mounts.length) return;
 
   var data = null;
@@ -23,11 +33,6 @@
 
     var level = Number(course.level);
     var theme = mount.getAttribute('data-ai-theme') || 'light';
-    var result = data.results[String(level)] || '';
-    if (!result) {
-      var levelInfo = data.levels.filter(function (item) { return Number(item.n) === level; })[0];
-      if (levelInfo) result = levelInfo.description.charAt(0).toUpperCase() + levelInfo.description.slice(1);
-    }
     var squares = '';
     for (var i = 1; i <= 5; i++) {
       squares += '<span class="ai-level-square' + (i <= level ? ' is-on' : '') + '" aria-hidden="true"></span>';
@@ -35,15 +40,12 @@
 
     mount.innerHTML =
       '<div class="ai-level-box">' +
-        '<p class="ai-level-title">AI proficiency level after the course: <b>' + level + ' of 5</b></p>' +
-        '<div class="ai-level-scale" aria-hidden="true">' + squares + '</div>' +
-        '<p class="ai-level-result">' + esc(result) + '</p>' +
-        '<p class="ai-level-entry"><b>Entry requirements:</b> ' + esc(data.entry) + '</p>' +
-        '<button type="button" class="ai-level-open" data-ai-open>What the levels mean</button>' +
+        '<div class="ai-level-head">' +
+          '<p class="ai-level-title">AI proficiency level</p>' +
+          '<button type="button" class="ai-level-help" data-ai-open aria-label="What the levels mean">?</button>' +
+        '</div>' +
+        '<div class="ai-level-scale" role="img" aria-label="AI proficiency level: ' + level + ' of 5">' + squares + '</div>' +
       '</div>';
-
-    mount.setAttribute('role', 'group');
-    mount.setAttribute('aria-label', 'Level ' + level + ' of 5');
 
     mount.querySelector('[data-ai-open]').addEventListener('click', function () {
       openLegend(course, theme, this);
@@ -89,7 +91,7 @@
 
     view.setAttribute('data-ai-theme', theme);
     view.querySelector('[data-ai-sub]').textContent =
-      course.name + '. AI proficiency level after the course: ' + level + ' of 5';
+      course.name + '. AI proficiency level.';
 
     var items = '';
     data.levels.forEach(function (item) {

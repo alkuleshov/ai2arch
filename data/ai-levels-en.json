@@ -26,10 +26,6 @@
       "description": "you build your own services on top of models."
     }
   ],
-  "results": {
-    "2": "You apply AI to professional tasks and check the result",
-    "3": "You build a workflow from several services and verify the result"
-  },
   "courses": {
     "archi": {
       "name": "AI in Architecture",
@@ -39,6 +35,5 @@
       "name": "AI in Redevelopment",
       "level": 3
     }
-  },
-  "entry": "Specified at enrollment"
+  }
 }

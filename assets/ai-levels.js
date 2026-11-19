@@ -8,8 +8,10 @@
   // Число мест берём из data-group-size, чтобы формулировку не править вручную.
   Array.prototype.forEach.call(document.querySelectorAll('[data-group-size]'), function (box) {
     var size = box.getAttribute('data-group-size');
+    if (!size) return;
     var out = box.querySelector('[data-group-count]');
-    if (size && out) out.textContent = size;
+    if (out) out.textContent = size;
+    else box.textContent = size;
   });
 
   if (!mounts.length) return;
