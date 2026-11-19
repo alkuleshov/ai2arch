@@ -51,7 +51,7 @@ const slug = u => u.replace(/^\//, '').replace(/\/$/, '') || 'root';
       switcher: (document.querySelector('.lang-switch') || {}).textContent || null
     }));
     await page.screenshot({ path: path.join(OUT, slug(url) + '-1440.png'), fullPage: false });
-    await page.screenshot({ path: path.join(OUT, slug(url) + '-1440-full.png'), fullPage: true });
+    if (process.env.FULL === '1') await page.screenshot({ path: path.join(OUT, slug(url) + '-1440-full.png'), fullPage: true });
 
     await page.setViewportSize({ width: 390, height: 844 });
     await page.waitForTimeout(500);
@@ -60,7 +60,7 @@ const slug = u => u.replace(/^\//, '').replace(/\/$/, '') || 'root';
       clientWidth: document.documentElement.clientWidth
     }));
     await page.screenshot({ path: path.join(OUT, slug(url) + '-390.png'), fullPage: false });
-    await page.screenshot({ path: path.join(OUT, slug(url) + '-390-full.png'), fullPage: true });
+    if (process.env.FULL === '1') await page.screenshot({ path: path.join(OUT, slug(url) + '-390-full.png'), fullPage: true });
 
     await page.setViewportSize({ width: 320, height: 800 });
     await page.waitForTimeout(500);
