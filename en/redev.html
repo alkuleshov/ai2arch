@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI in Redevelopment — SFedU professional development program · ai2arch</title>
+<meta name="description" content="72 academic hours, online, starts November 5, 2026. You take a real property and carry it through to a substantiated concept using data and AI. SFedU professional development certificate.">
+<link rel="canonical" href="https://ai2arch.ru/en/redev.html">
+<link rel="alternate" hreflang="ru" href="https://ai2arch.ru/redev.html">
+<link rel="alternate" hreflang="en" href="https://ai2arch.ru/en/redev.html">
+<link rel="alternate" hreflang="x-default" href="https://ai2arch.ru/redev.html">
+<meta property="og:title" content="AI in Redevelopment — SFedU professional development program">
+<meta property="og:description" content="A real property, data-driven analysis, generative AI, and expert review of the project. 72 academic hours, 5 places in the pilot cohort.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://ai2arch.ru/en/redev.html">
+<meta property="og:image" content="https://ai2arch.ru/images/og-ai2arch.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI in Redevelopment — SFedU professional development program">
+<meta name="twitter:description" content="A real property, data-driven analysis, generative AI, and expert review of the project. 72 academic hours, 5 places in the pilot cohort.">
+<meta name="twitter:image" content="https://ai2arch.ru/images/og-ai2arch.jpg">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; overflow-x:hidden; }
+
+  :root {
+    --ink-night:#0A0F1A; --graphite:#2A2F3E;
+    --azure:#4DA3FF; --azure-dark:#2A7CE8; --azure-soft:#7BBFFF;
+    --bg:#F6F4F0; --surface:#FFFFFF; --surface2:#F2F0EB; --border:#E4E1D8;
+    --ink:#0A0F1A; --ink-muted:#2A2F3E; --ink-faint:#6A7080; --accent-l:#EBF4FF;
+    --orange:#E8862B; --green:#1A9E6E; --green-l:#EDFAF4; --purple:#6B3FD4; --purple-l:#F0EEFF;
+    --mono:'JetBrains Mono', monospace; --sans:'Manrope', sans-serif;
+    --nav-h:56px;
+  }
+  body { font-family:var(--sans); background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; }
+  img { max-width:100%; display:block; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 28px; }
+  @media (max-width:640px) { .wrap { padding:0 20px; } }
+
+  /* missing-data marker: visible only in the draft */
+  .todo { background:#FFF3B0; color:#6B5300; border-radius:4px; padding:0 4px; font-weight:600; }
+
+  /* ── buttons ── */
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; font-family:var(--sans); font-size:15px; font-weight:700; padding:14px 26px; border-radius:12px; border:1px solid transparent; cursor:pointer; text-decoration:none; transition:transform .15s, opacity .15s; }
+  .btn:hover { opacity:.92; transform:translateY(-1px); }
+  .btn-primary { background:linear-gradient(135deg, var(--azure-dark), var(--azure)); color:#fff; box-shadow:0 8px 24px rgba(77,163,255,.32); }
+  .btn-ghost { background:transparent; color:#fff; border-color:rgba(255,255,255,.28); }
+  .btn-dark { background:var(--ink-night); color:#fff; }
+  .btn-line { background:var(--surface); color:var(--ink-muted); border-color:var(--border); }
+  .btn-sm { padding:9px 18px; font-size:13px; border-radius:10px; }
+
+  /* ── header ── */
+  .head { position:sticky; top:0; z-index:60; background:rgba(10,15,26,.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(255,255,255,.08); }
+  .head-in { display:flex; align-items:center; gap:20px; height:var(--nav-h); }
+  .head .wrap { max-width:1160px; }
+  /* AI2ARCH logo: mark + wordmark + descriptor (brand book, section 11) */
+  .brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; flex-shrink:0; }
+  .brand-sign { width:38px; height:38px; flex-shrink:0; }
+  .brand-text { display:flex; flex-direction:column; line-height:1.15; }
+  .brand-text b { font-family:var(--sans); font-size:17px; font-weight:600; letter-spacing:.02em; color:#fff; }
+  .brand-text small { font-family:var(--sans); font-size:10.5px; font-weight:400; color:rgba(255,255,255,.58); margin-top:2px; white-space:nowrap; }
+  .brand:focus-visible { outline:2px solid var(--azure); outline-offset:4px; border-radius:6px; }
+  .nav { display:flex; gap:2px; flex:1; min-width:0; justify-content:flex-start; overflow-x:auto; scrollbar-width:none; }
+  .nav::-webkit-scrollbar { display:none; }
+  .nav a { flex:0 0 auto; font-size:13px; font-weight:600; color:rgba(255,255,255,.65); text-decoration:none; padding:8px 10px; border-radius:8px; white-space:nowrap; }
+  .nav a:hover, .nav a.on { color:#fff; background:rgba(255,255,255,.08); }
+  .burger { display:none; width:42px; height:42px; border-radius:10px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); cursor:pointer; flex-direction:column; align-items:center; justify-content:center; gap:5px; flex-shrink:0; }
+  .burger span { display:block; width:18px; height:2px; background:#fff; border-radius:2px; transition:transform .2s, opacity .2s; }
+  .burger[aria-expanded="true"] span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+  .burger[aria-expanded="true"] span:nth-child(2) { opacity:0; }
+  .burger[aria-expanded="true"] span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+  @media (max-width:1180px) {
+    .burger { display:flex; }
+    .head-apply { margin-left:auto; }
+    .nav { display:none; position:absolute; top:100%; left:0; right:0; flex-direction:column; gap:2px; overflow:visible; background:rgba(10,15,26,.98); padding:10px 20px 18px; border-bottom:1px solid rgba(255,255,255,.1); }
+    .nav.open { display:flex; }
+    .nav a { padding:13px 12px; font-size:16px; }
+  }
+  @media (max-width:860px) { .head-in { gap:12px; } }
+  @media (max-width:359px) { .brand-text small { display:none; } }
+  @media (max-width:520px) { .head-apply { display:none; } .burger { margin-left:auto; } }
+
+  /* ── hero ── */
+  .hero { position:relative; background:var(--ink-night); color:#fff; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(60% 80% at 85% 0%, rgba(77,163,255,.2), transparent 70%); pointer-events:none; }
+  .hero-mark { display:block; position:absolute; top:-90px; right:-16vw; left:auto; width:1100px; height:820px; opacity:.85; mix-blend-mode:screen; pointer-events:none; z-index:0; }
+  @media (max-width:760px) { .hero-mark { top:-40px; right:-32vw; width:620px; height:560px; opacity:.5; } }
+  @media (prefers-reduced-motion:no-preference) { .hero-mark { animation:drift 24s ease-in-out infinite alternate; } @keyframes drift { from { transform:translate3d(0,-4px,0); } to { transform:translate3d(0,6px,0); } } }
+  /* ── constellation: a shimmering contour field instead of a static image ── */
+  .hero-mark canvas { display:block; width:100%; height:100%; }
+  .hero-in { position:relative; z-index:1; padding-top:72px; }
+  .eyebrow { font-size:12px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--azure-soft); margin-bottom:22px; }
+  .hero h1 { font-size:clamp(30px, 8.4vw, 84px); line-height:1.02; font-weight:800; letter-spacing:-.03em; margin-bottom:22px; }
+  .hero h1 em { font-style:normal; color:var(--azure); }
+  .hero-sub { font-size:clamp(17px, 2.2vw, 21px); line-height:1.5; color:rgba(255,255,255,.78); max-width:660px; margin-bottom:12px; }
+  .ast { font-size:.42em; vertical-align:top; position:relative; top:.35em; margin-left:.08em; font-weight:700; }
+  .ast a { color:var(--azure-soft); text-decoration:none; }
+  .hero-fn { font-size:13.5px; line-height:1.5; color:rgba(255,255,255,.6); max-width:660px; margin-bottom:30px; padding-left:16px; border-left:2px solid rgba(77,163,255,.5); }
+  .hero-fn span { color:var(--azure-soft); font-weight:800; }
+  .hero-fn b { color:rgba(255,255,255,.85); }
+  .hero-name { font-size:13px; color:rgba(255,255,255,.42); max-width:660px; margin-bottom:34px; }
+  .hero-cta { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
+  .hero-note { font-size:13px; color:rgba(255,255,255,.5); }
+  .facts { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:0; margin-top:56px; border-top:1px solid rgba(255,255,255,.14); }
+  .fact { padding:24px 20px 28px 0; }
+  .fact + .fact { padding-left:24px; border-left:1px solid rgba(255,255,255,.1); }
+  .fact b { display:block; font-size:clamp(24px, 3.4vw, 36px); font-weight:800; letter-spacing:-.02em; line-height:1.1; }
+  .fact b small { font-size:.5em; color:rgba(255,255,255,.55); margin-left:5px; font-weight:700; }
+  .fact span { display:block; font-size:13px; color:rgba(255,255,255,.55); margin-top:6px; line-height:1.4; }
+  @media (max-width:820px) {
+    .facts { grid-template-columns:repeat(2, minmax(0,1fr)); }
+    .fact, .fact + .fact { padding:20px 12px 20px 0; border-left:0; }
+    .fact:nth-child(even) { padding-left:20px; border-left:1px solid rgba(255,255,255,.1); }
+    .fact:nth-child(n+3) { border-top:1px solid rgba(255,255,255,.1); }
+  }
+
+  /* ── sections ── */
+  section { scroll-margin-top:calc(var(--nav-h) + 4px); }
+  .sec { padding:88px 0; }
+  .sec.alt { background:var(--surface); }
+  .sec.dark { background:var(--ink-night); color:#fff; position:relative; overflow:hidden; }
+  .sec.dark::before { content:''; position:absolute; inset:0; background:radial-gradient(50% 70% at 10% 0%, rgba(77,163,255,.16), transparent 70%); pointer-events:none; }
+  .sec.dark > .wrap { position:relative; }
+  @media (max-width:640px) { .sec { padding:64px 0; } }
+  .kicker { font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--azure-dark); margin-bottom:12px; }
+  .dark .kicker { color:var(--azure-soft); }
+  h2 { font-size:clamp(28px, 4.4vw, 42px); line-height:1.12; font-weight:800; letter-spacing:-.02em; margin-bottom:18px; max-width:760px; }
+  .lead { font-size:18px; line-height:1.55; color:var(--ink-muted); max-width:720px; margin-bottom:36px; }
+  .dark .lead { color:rgba(255,255,255,.72); }
+  h3 { font-size:19px; line-height:1.25; font-weight:800; letter-spacing:-.01em; margin-bottom:10px; }
+
+  .grid2, .grid3, .grid4 { display:grid; gap:16px; }
+  .grid2 { grid-template-columns:repeat(2, minmax(0,1fr)); }
+  .grid3 { grid-template-columns:repeat(3, minmax(0,1fr)); }
+  .grid4 { grid-template-columns:repeat(4, minmax(0,1fr)); }
+  @media (max-width:900px) { .grid4 { grid-template-columns:repeat(2, minmax(0,1fr)); } }
+  @media (max-width:760px) { .grid3 { grid-template-columns:minmax(0,1fr); } }
+  @media (max-width:640px) { .grid2, .grid4 { grid-template-columns:minmax(0,1fr); } }
+
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:24px 26px; }
+  .alt .card { background:var(--bg); }
+  .card p, .card li { font-size:15px; color:var(--ink-muted); }
+  .card p + p { margin-top:10px; }
+  .ico { width:42px; height:42px; border-radius:12px; background:var(--accent-l); color:var(--azure-dark); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-weight:700; font-size:15px; margin-bottom:16px; }
+  .list { list-style:none; display:flex; flex-direction:column; gap:9px; }
+  .list li { position:relative; padding-left:20px; }
+  .list li::before { content:''; position:absolute; left:2px; top:.62em; width:8px; height:8px; border-radius:50%; background:var(--azure); }
+  .dark .card { background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.12); }
+  .dark .card p, .dark .card li { color:rgba(255,255,255,.75); }
+
+  /* tracks */
+  .track { border-top:5px solid var(--azure); }
+  .track.b { border-top-color:var(--purple); }
+  .track .who { font-size:13px; font-weight:700; color:var(--ink-faint); margin-bottom:14px; }
+  .track .label { font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); margin:16px 0 8px; }
+  .track .btn { margin-top:20px; }
+  .note { margin-top:18px; background:var(--surface2); border:1px solid var(--border); border-radius:14px; padding:16px 22px; font-size:14px; color:var(--ink-muted); }
+  .alt .note { background:var(--bg); }
+
+  /* hours bar + modules */
+  .bar { display:flex; gap:4px; height:12px; border-radius:100px; overflow:hidden; margin-bottom:24px; }
+  .bar span { min-width:0; }
+  .c0{background:var(--graphite)} .c1{background:var(--azure)} .c2{background:var(--purple)} .c3{background:var(--green)} .c4{background:var(--orange)} .c5{background:#C0392B}
+  details.mod { background:var(--surface); border:1px solid var(--border); border-radius:16px; margin-bottom:10px; overflow:hidden; }
+  details.mod summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:14px; padding:18px 22px; }
+  details.mod summary::-webkit-details-marker { display:none; }
+  .mod-dot { width:10px; height:34px; border-radius:6px; flex-shrink:0; }
+  .mod-t { flex:1; min-width:0; }
+  .mod-t small { display:block; font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.08em; color:var(--ink-faint); text-transform:uppercase; }
+  .mod-t strong { font-size:17px; font-weight:800; line-height:1.3; }
+  .mod-h { font-family:var(--mono); font-size:13px; font-weight:700; background:var(--surface2); border-radius:8px; padding:4px 10px; white-space:nowrap; }
+  .mod-plus { width:28px; height:28px; border-radius:50%; background:var(--accent-l); color:var(--azure-dark); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700; flex-shrink:0; transition:transform .2s; }
+  details[open] > summary .mod-plus { transform:rotate(45deg); }
+  .mod-body { padding:2px 22px 22px 46px; }
+  .mod-body li { font-size:15px; color:var(--ink-muted); }
+  .mod-body .list li { margin-bottom:0; }
+  .tag { display:inline-block; font-family:var(--mono); font-size:10.5px; font-weight:700; letter-spacing:.04em; border-radius:6px; padding:1px 7px; margin-right:7px; vertical-align:1px; }
+  .tag.all { background:var(--surface2); color:var(--ink-faint); }
+  .tag.a { background:var(--accent-l); color:var(--azure-dark); }
+  .tag.b { background:var(--purple-l); color:var(--purple); }
+  .tag.live { background:#FDF3EE; color:var(--orange); }
+  @media (max-width:640px) { .mod-body { padding:2px 18px 20px 18px; } details.mod summary { padding:16px 16px; gap:10px; } .mod-h { display:none; } }
+
+  /* format */
+  .step-n { font-family:var(--mono); font-size:12px; font-weight:700; color:var(--azure-dark); margin-bottom:10px; }
+
+  /* result */
+  .res-big { font-size:clamp(22px, 3vw, 30px); line-height:1.3; font-weight:700; max-width:800px; margin-bottom:30px; }
+  .res-big em { font-style:normal; color:var(--azure); }
+
+  /* team */
+  .person { display:flex; gap:20px; align-items:flex-start; }
+  .avatar { width:104px; height:104px; border-radius:50%; object-fit:cover; flex-shrink:0; border:3px solid rgba(77,163,255,.55); }
+  .person h3 { margin-bottom:4px; font-size:20px; }
+  .role { font-size:13px; font-weight:700; color:var(--azure-dark); margin-bottom:14px; }
+  @media (max-width:520px) { .person { flex-direction:column; } }
+
+  /* price */
+  .price { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:28px; }
+  .price.main { border:2px solid var(--azure); background:var(--accent-l); }
+  .price-val { font-size:clamp(34px, 5vw, 46px); font-weight:800; letter-spacing:-.02em; line-height:1.05; }
+  .price-val small { font-size:.45em; color:var(--ink-faint); font-weight:700; }
+  .price-lab { font-size:14px; color:var(--ink-muted); margin:8px 0 18px; }
+  .price .list li { font-size:14px; }
+  .deduct { display:flex; gap:18px; align-items:flex-start; margin-top:16px; background:var(--green-l); border:1px solid #CBEBDD; border-radius:16px; padding:20px 24px; }
+  .deduct b { font-family:var(--mono); font-size:22px; color:var(--green); flex-shrink:0; }
+  .deduct p { font-size:14.5px; color:var(--ink-muted); }
+  @media (max-width:520px) { .deduct { flex-direction:column; gap:8px; } }
+
+  /* steps */
+  .step { position:relative; }
+  .step .n { width:34px; height:34px; border-radius:50%; background:var(--ink-night); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-weight:700; font-size:14px; margin-bottom:14px; }
+
+  /* faq */
+  details.q { background:var(--surface); border:1px solid var(--border); border-radius:14px; margin-bottom:10px; }
+  details.q summary { list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 22px; font-weight:700; font-size:16px; }
+  details.q summary::-webkit-details-marker { display:none; }
+  details.q .mod-plus { }
+  details.q[open] > summary .mod-plus { transform:rotate(45deg); }
+  details.q .ans { padding:0 22px 20px; font-size:15px; color:var(--ink-muted); max-width:780px; }
+  details.q .ans p + p { margin-top:10px; }
+
+  /* contact */
+  .contact { display:flex; gap:26px; align-items:center; flex-wrap:wrap; }
+  .contact .avatar { width:120px; height:120px; }
+  .contact-main { flex:1 1 280px; min-width:0; }
+  .contact-links { display:flex; gap:12px; flex-wrap:wrap; margin-top:14px; }
+
+  footer { background:var(--ink-night); color:rgba(255,255,255,.6); padding:48px 0 56px; font-size:13px; }
+  footer .brand { margin-bottom:14px; }
+  footer p { max-width:760px; }
+  footer p + p { margin-top:8px; }
+  footer a { color:var(--azure-soft); }
+
+  /* modal */
+  .modal { display:none; position:fixed; inset:0; z-index:200; background:rgba(10,15,26,.82); align-items:center; justify-content:center; padding:16px; }
+  .modal.open { display:flex; }
+  .modal-box { background:#fff; border-radius:16px; width:100%; max-width:560px; max-height:94vh; display:flex; flex-direction:column; overflow:hidden; }
+  .modal-top { display:flex; align-items:center; justify-content:space-between; padding:16px 22px; background:var(--ink-night); color:#fff; font-weight:700; font-size:15px; flex-shrink:0; }
+  .modal-x { background:none; border:none; color:#fff; font-size:26px; line-height:1; cursor:pointer; }
+  .modal-body { overflow-y:auto; padding:22px; }
+  .modal label { display:block; font-size:13px; font-weight:700; margin:0 0 6px; }
+  .modal input[type=text], .modal input[type=tel], .modal input[type=email], .modal select, .modal textarea { width:100%; padding:11px 14px; border:1px solid #DDE1EC; border-radius:9px; font-size:14px; font-family:inherit; margin-bottom:14px; background:#fff; color:var(--ink); }
+  .modal textarea { resize:vertical; }
+  .notice { display:none; padding:11px 14px; border-radius:9px; font-size:12.5px; line-height:1.5; margin:-4px 0 14px; background:var(--accent-l); color:#1F4F8F; }
+  .notice.warn { background:#FDF3EE; color:#8A4B12; }
+  .consent { display:flex; gap:10px; align-items:flex-start; font-size:12px; color:#5B647A; margin:6px 0 18px; }
+  .consent input { margin-top:3px; flex-shrink:0; }
+  .consent label { font-weight:500; margin:0; font-size:12px; }
+  .submit { width:100%; padding:14px; background:linear-gradient(135deg, #111828, #4DA3FF 65%, #6DBEFF); color:#fff; border:none; border-radius:10px; font-size:15px; font-weight:700; cursor:pointer; font-family:inherit; }
+  .submit:disabled { opacity:.6; cursor:default; }
+  .done { display:none; text-align:center; padding:26px 6px; }
+  .done h3 { font-size:20px; margin-bottom:10px; }
+  .done p { font-size:14.5px; color:var(--ink-muted); }
+  .done p + p { margin-top:10px; }
+  .done-ico { width:56px; height:56px; margin:0 auto 14px; border-radius:50%; background:var(--green-l); color:var(--green); font-size:30px; font-weight:800; line-height:56px; }
+  .done-close { margin-top:22px; }
+
+  .format-plain { display:grid; gap:10px; max-width:900px; margin-top:8px; }
+  .format-plain p { font-size:15px; line-height:1.55; color:var(--ink-muted); }
+  .format-plain b { color:var(--ink); }
+</style>
+<link rel="stylesheet" href="../assets/ai-levels.css">
+<link rel="stylesheet" href="../assets/lang-switch.css">
+<script src="../assets/ai-levels-en.js" defer></script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113526373', 'ym');
+
+    ym(113526373, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+    ym(113526373, 'params', {lang:'en'});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113526373" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+
+<header class="head">
+  <div class="wrap head-in">
+    <a class="brand" href="index.html"><img class="brand-sign" src="../images/ai2arch-sign.png" width="38" height="38" alt=""><span class="brand-text"><b>AI2ARCH</b><small>Project Intelligence Lab</small></span></a>
+    <nav class="nav" id="nav">
+      <a href="#audience">Who it's for</a>
+      <a href="#about">About the program</a>
+      <a href="#program">Curriculum</a>
+      <a href="redev-schedule.html">Schedule</a>
+      <a href="#team">Speakers</a>
+      <a href="#format">Format</a>
+      <a href="#price">Fees</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <span class="lang-switch" style="color:#fff" aria-label="Language switcher"><a href="../redev.html" hreflang="ru" lang="ru">RU</a><span class="sep" aria-hidden="true">|</span><span class="on" aria-current="true">EN</span></span>
+    <button class="btn btn-primary btn-sm head-apply" data-apply>Apply</button>
+
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-mark" aria-hidden="true"><canvas></canvas></div>
+  <div class="wrap hero-in">
+    <div class="eyebrow">Professional development program · SFedU · Level 2</div>
+    <h1><em>AI</em> in Redevelopment<sup class="ast"><a href="#fn-redev" aria-label="What redevelopment means">*</a></sup></h1>
+    <p class="hero-sub">You take a real building or site and carry it through to a substantiated concept: you test the idea against data, calculate functions and floor areas, and present it visually. AI handles the routine; the decisions stay with you.</p>
+    <p class="hero-name">Official program title: “Modern Tools for the Development of Territories and Real Estate: Data Analytics and Generative AI in Concept Development”</p>
+    <p class="hero-fn" id="fn-redev"><span>*</span> <b>Redevelopment</b> (from the English word redevelopment, “renewed development”) — the renewal of an already built-up area or building with a new use, for example turning an abandoned factory into a creative cluster.</p>
+    <div class="ai-level" data-ai-course="redev" data-ai-theme="dark"></div>
+    <div class="hero-cta">
+      <button class="btn btn-primary" data-apply>Apply</button>
+      <a class="btn btn-ghost" href="#program">View the curriculum</a>
+    </div>
+    <p class="hero-note">Enrollment open · 5 places in the pilot cohort · <a href="redev-guide.html?from=redev">Course guide →</a></p>
+
+    <div class="facts">
+      <div class="fact"><b>November 5<small>2026</small></b><span>start, Demo Day December 6</span></div>
+      <div class="fact"><b>72<small>academic hours</small></b><span>SFedU professional development certificate</span></div>
+      <div class="fact"><b>Online</b><span>recordings, mandatory live meetings and lectures in Yandex Telemost, final project review</span></div>
+      <div class="fact"><b>5<small>places</small></b><span>a small project lab with individual review of each project</span></div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ═══ WHO IT'S FOR ═══ -->
+<section class="sec" id="audience">
+  <div class="wrap">
+    <div class="kicker">Who this course is for</div>
+    <h2>For designers and for everyone who works with the numbers</h2>
+    <p class="lead">The program is designed for people who work with existing buildings and sites. Everyone takes the common modules, while the practice and the final document depend on the track you choose. You make the final choice in the introductory module; in the application, a preliminary choice is enough.</p>
+
+    <div class="card" style="margin-bottom:16px">
+      <h3>This is for you if you are</h3>
+      <ul class="list">
+        <li>a student: you do not need a higher education degree to enroll, you can join right away;</li>
+        <li>an early-career architect, concept designer, or environmental designer;</li>
+        <li>a specialist in an analysis, design, or development department, including at a large private company;</li>
+        <li>a property owner or investor deciding what to do with a building or a plot;</li>
+        <li>a realtor or commercial real estate broker preparing a property for sale or lease with a new use;</li>
+        <li>you want a project you can stand behind with numbers: before a review panel, a client, an investor, or a buyer.</li>
+      </ul>
+    </div>
+
+    <div class="grid2">
+      <div class="card track">
+        <h3>Track A · Designer</h3>
+        <div class="who">Architect, urban planner, designer</div>
+        <p>You translate functional performance into space-planning solutions. You work more deeply with generative AI models (ComfyUI, ControlNet) to sketch facades and interiors without compromising the structural frame.</p>
+        <div class="label">Deliverable for Demo Day</div>
+        <p>An architectural-visual study: a concept for renewing the environment, the building's siting on the terrain, adaptive reuse sketches, functional diagrams.</p>
+        <button class="btn btn-dark btn-sm" data-apply="a">Apply for Track A</button>
+      </div>
+      <div class="card track b">
+        <h3>Track B · Developer and investor</h3>
+        <div class="who">Developer, investor, property owner, realtor, analyst, economist</div>
+        <p>You turn ideas into numbers and a product. You work more deeply with language models: analyzing land use and development rules, calculating Highest and Best Use (HBU), a zoning matrix, a basic financial model.</p>
+        <div class="label">Deliverable for Demo Day</div>
+        <p>An investment concept brief for the property: a product hypothesis, an audience profile, a floor area balance, basic economics, and concept renders. You can use it as the basis for a conversation with a partner, an investor, or a buyer.</p>
+        <button class="btn btn-dark btn-sm" data-apply="b">Apply for Track B</button>
+      </div>
+    </div>
+    <p class="note"><b>Team option.</b> At the final assessment, you can pair up as an architect plus an analyst or developer and present a comprehensive master plan together.</p>
+  </div>
+</section>
+
+<!-- ═══ ABOUT THE PROGRAM ═══ -->
+<section class="sec alt" id="about">
+  <div class="wrap">
+    <div class="kicker">About the program · the problems it solves</div>
+    <h2>Three places where redevelopment most often stalls</h2>
+    <div class="grid3">
+      <div class="card"><div class="ico">01</div><h3>Training for empty sites</h3><p>Architectural education focuses on new construction on vacant land and hardly teaches how to work with outdated buildings, former factories, and public spaces.</p></div>
+      <div class="card"><div class="ico">02</div><h3>Context is assembled by hand</h3><p>Weeks go into collecting data, and the property's use is then hard to justify to an investor. In this program, the context and the rationale are assembled with data and language models.</p></div>
+      <div class="card"><div class="ico">03</div><h3>Pictures without structure</h3><p>Mass AI courses teach random image generation and ignore load-bearing walls, column spacing, and regulations. Here the concept rests on the structural frame and building codes.</p></div>
+    </div>
+    <h3 style="margin:36px 0 14px">What you do in the program</h3>
+    <div class="grid3">
+      <div class="card"><div class="ico">A</div><h3>Test the idea against data</h3><p>You analyze regulations and codes with language models, describe the audience of the place, and find unmet demand.</p></div>
+      <div class="card"><div class="ico">B</div><h3>Calculate functions and floor areas</h3><p>You determine the Highest and Best Use of the property and assemble a zoning matrix and a floor area balance. For developers, basic economics is added.</p></div>
+      <div class="card"><div class="ico">C</div><h3>Present the concept</h3><p>You make mood boards, adaptive reuse facade sketches that preserve the structural frame, and assemble the final document. Experts review the projects remotely, based on the final documents.</p></div>
+    </div>
+    <div class="ai-level ai-level--about" data-ai-course="redev"></div>
+  </div>
+</section>
+
+<!-- ═══ OUTCOMES ═══ -->
+<section class="sec dark" id="result">
+  <div class="wrap">
+    <div class="kicker">Learning outcomes</div>
+    <div class="res-big">After the final review, you keep <em>a ready concept with a rationale</em> and skills you can use from then on.</div>
+    <div class="grid3">
+      <div class="card"><h3>A project based on a real property</h3><p>An architectural-visual study or an investment concept brief for the chosen property, backed by calculations and visuals. Suitable for a portfolio, a thesis, or a conversation with an investor, a client, or a buyer.</p></div>
+      <div class="card"><h3>Skills</h3><ul class="list"><li>a rapid audit of the urban environment;</li><li>scenario-based functional zoning of properties in outdated buildings;</li><li>controlled sketching with AI models.</li></ul></div>
+      <div class="card"><h3>Working toolkit</h3><p>A library of prompts and templates for pre-design analysis that you can keep using after the course.</p></div>
+    </div>
+  </div>
+</section>
+<!-- ═══ INSTRUCTORS ═══ -->
+<section class="sec alt" id="team">
+  <div class="wrap">
+    <div class="kicker">Instructors</div>
+    <h2>A practitioner who launched a cluster, and a coordinator from the academy</h2>
+    <div class="grid2">
+      <div class="card person">
+        <img class="avatar" src="../images/kuleshov.jpg" alt="Alexander Kuleshov">
+        <div>
+          <h3>Alexander Kuleshov</h3>
+          <div class="role">Program Director, lead practitioner</div>
+          <ul class="list">
+            <li>15 years of practice in environmental design and redevelopment</li>
+            <li>Creator of the first creative cluster in southern Russia (C52, Rostov-on-Don)</li>
+            <li>Director of the CPE program in AI in Architecture at SFedU</li>
+            <li>Leads workshops, reviews participants' projects, and is responsible for methodology and the technical side</li>
+          </ul>
+          <p style="margin-top:12px;font-size:13px">Author's website: <a href="https://ku1eshov.ru" target="_blank" rel="noopener" style="color:var(--azure-dark);font-weight:700">ku1eshov.ru</a></p>
+        </div>
+      </div>
+      <div class="card person">
+        <img class="avatar" src="../images/petrenko.jpg" alt="Ekaterina Petrenko">
+        <div>
+          <h3>Ekaterina Petrenko</h3>
+          <div class="role">Program coordinator and participant support</div>
+          <ul class="list">
+            <li>Instructor at the Academy of Architecture and Arts, SFedU</li>
+            <li>Architect, environmental design specialist</li>
+            <li>Developer of Comprehensive Territorial Development (KRT) projects</li>
+            <li>Supports the learning process, contacts participants, and tracks the submission of stage deliverables</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <p class="note"><b>Level 1.</b> Eleven participants have already completed the program “Modern Tools of Project Analysis”, and all of them reached the final review. <a href="archi.html" style="color:var(--azure-dark);font-weight:700">View Level 1 →</a></p>
+  </div>
+</section>
+
+<!-- ═══ CURRICULUM ═══ -->
+<section class="sec" id="program">
+  <div class="wrap">
+    <div class="kicker">Curriculum · 72 academic hours</div>
+    <h2>An introductory module, four working blocks, and the final review</h2>
+    <p class="lead">The tags show who each assignment is for: <span class="tag all">ALL</span> common, <span class="tag a">TRACK A</span> for designers, <span class="tag b">TRACK B</span> for developers, <span class="tag live">LIVE WORKSHOP</span> an online group meeting.</p>
+
+    <div class="bar" aria-hidden="true">
+      <span class="c0" style="flex:6 1 0"></span><span class="c1" style="flex:16 1 0"></span><span class="c2" style="flex:20 1 0"></span><span class="c3" style="flex:16 1 0"></span><span class="c4" style="flex:10 1 0"></span><span class="c5" style="flex:4 1 0"></span>
+    </div>
+
+    <details class="mod">
+      <summary><span class="mod-dot c0"></span><span class="mod-t"><small>Introductory module</small><strong>Introduction to the development of territories and properties</strong></span><span class="mod-h">6 h</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li><span class="tag all">ALL</span>The property life cycle: from an abandoned building to a creative cluster. The C52 case study.</li>
+        <li><span class="tag all">ALL</span>Roles: the architect is responsible for form and function, the developer for investment and the product. Choosing a track.</li>
+        <li><span class="tag all">ALL</span>An overview of the course workflow and tools.</li>
+      </ul></div>
+    </details>
+
+    <details class="mod">
+      <summary><span class="mod-dot c1"></span><span class="mod-t"><small>Module 1</small><strong>Product hypothesis and site context</strong></span><span class="mod-h">16 h</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li><span class="tag all">ALL</span>A rapid audit of land use and development rules (PZZ) and the regulatory framework with Claude and ChatGPT: uploading and analyzing the texts.</li>
+        <li><span class="tag all">ALL</span>A profile of the location's target audience and a search for unmet demand with AI.</li>
+        <li><span class="tag a">TRACK A</span>Analyzing the context of the place through a language model: architectural metaphors and identity.</li>
+        <li><span class="tag b">TRACK B</span>A product hypothesis for the property based on market trend analysis.</li>
+        <li><span class="tag live">LIVE WORKSHOP</span>2 h · “From data to an idea”</li>
+      </ul></div>
+    </details>
+
+    <details class="mod">
+      <summary><span class="mod-dot c2"></span><span class="mod-t"><small>Module 2</small><strong>Functional planning and the economics of space</strong></span><span class="mod-h">20 h</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li><span class="tag all">ALL</span>The Highest and Best Use (HBU) methodology.</li>
+        <li><span class="tag b">TRACK B</span>Prompts for basic financial models: capital and operating expenses (CAPEX/OPEX), payback.</li>
+        <li><span class="tag a">TRACK A</span>Translating HBU into a functional zoning matrix. AI assistants for floor area balance and building codes: solar access (insolation), fire safety requirements.</li>
+        <li><span class="tag all">ALL</span>Practice: a floor area allocation table (area schedule) with language models.</li>
+        <li><span class="tag live">LIVE WORKSHOP</span>2 h · on functional planning</li>
+      </ul></div>
+    </details>
+
+    <details class="mod">
+      <summary><span class="mod-dot c3"></span><span class="mod-t"><small>Module 3</small><strong>Visual presentation and conceptualization</strong></span><span class="mod-h">16 h</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li><span class="tag all">ALL</span>AI for mood boards and for conveying the atmosphere of the future property.</li>
+        <li><span class="tag a">TRACK A</span>Controlled redesign of facades in the existing building stock. The logic of working with structural networks (ControlNet) to preserve the structural frame.</li>
+        <li><span class="tag b">TRACK B</span>The structure of an investment teaser and the textual narrative of the presentation through a language model.</li>
+        <li><span class="tag all">ALL</span>Practice: the visual series of the concept.</li>
+        <li><span class="tag live">LIVE WORKSHOP</span>2 h · review of sketches and presentation structures</li>
+      </ul></div>
+    </details>
+
+    <details class="mod">
+      <summary><span class="mod-dot c4"></span><span class="mod-t"><small>Module 4</small><strong>Concept synthesis. Final project</strong></span><span class="mod-h">10 h</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li><span class="tag a">TRACK A</span>Assembling the architectural-visual study: urban context, functional diagram, adaptive reuse sketches.</li>
+        <li><span class="tag b">TRACK B</span>Assembling the investment concept brief: hypothesis, HBU, audience profile, floor area balance, basic economics.</li>
+        <li><span class="tag all">ALL</span>Optional: team up and assemble a comprehensive master plan.</li>
+      </ul></div>
+    </details>
+
+    <details class="mod">
+      <summary><span class="mod-dot c5"></span><span class="mod-t"><small>Final assessment</small><strong>Demo Day: expert review and project pitches</strong></span><span class="mod-h">4 h</span><span class="mod-plus">+</span></summary>
+      <div class="mod-body"><ul class="list">
+        <li><span class="tag live">LIVE MEETING</span>Pitch and discussion of the expert review results.</li>
+      </ul></div>
+    </details>
+  </div>
+</section>
+
+
+<!-- ═══ CERTIFICATE ═══ -->
+<section class="sec alt" id="certificate">
+  <div class="wrap">
+    <div class="kicker">Document at the end of the course</div>
+    <h2>SFedU professional development certificate</h2>
+    <p class="lead">A document of the established form. Issued by Southern Federal University. Suitable for periodic professional development of architects and designers.</p>
+    <div class="shots">
+      <figure class="shot wide"><img src="../images/certificate-sample-redev.png" loading="lazy" alt="Sample SFedU professional development certificate"><figcaption>Sample certificate</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURES ═══ -->
+<section class="sec alt" id="features">
+  <div class="wrap">
+    <div class="kicker">What sets the program apart</div>
+    <h2>How the program differs from ordinary AI courses</h2>
+    <div class="grid3">
+      <div class="card"><div class="ico">01</div><h3>A real property</h3><p>You work on your own real property. If you do not have one, work with the base property C52.</p></div>
+      <div class="card"><div class="ico">02</div><h3>Two tracks</h3><p>Designers and developers follow a common core, while the practice and the final document are specific to each track.</p></div>
+      <div class="card"><div class="ico">03</div><h3>A group of five</h3><p>A small project lab: every project is reviewed individually, not briefly in a general cohort.</p></div>
+      <div class="card"><div class="ico">04</div><h3>Language models at the center</h3><p>Claude, ChatGPT, and Gemini calculate and build the argument: development rules, highest and best use, floor area balance, investment copy. Image AI models are secondary.</p></div>
+      <div class="card"><div class="ico">05</div><h3>No coding</h3><p>Ready-made prompt libraries and clear web services. The expert demonstrates ComfyUI and ControlNet at an overview level; you do not need to set them up yourself.</p></div>
+      <div class="card"><div class="ico">06</div><h3>Data is ready</h3><p>QGIS is not part of the program: the site data has been prepared, and you only need to load it into your work. No QGIS knowledge is required.</p></div>
+    </div>
+    <p class="note">Besides language models, you use Notion and Gamma to assemble the developer booklet and the pitch deck, and Flux, Midjourney, and ComfyUI for quick illustrations of hypotheses. You need active accounts in the services and a stable network connection. Students independently provide access to the services required for learning in accordance with their user agreements and applicable law. The organizer does not provide communication tools or distribute tools for bypassing blocks.</p>
+  </div>
+</section>
+
+<!-- ═══ FORMAT ═══ -->
+<section class="sec" id="format">
+  <div class="wrap">
+    <div class="kicker">How the course runs</div>
+    <h2>Group meetings, recorded lectures, and a review of your project</h2>
+    <p class="lead">You work on one project from start to finish. Group meetings are for discussing questions and work; lectures can be watched as recordings.</p>
+    <div class="format-plain">
+      <p><b>Meetings.</b> Attendance is mandatory. A synchronous video call in Telemost: we discuss questions and the group's work and demonstrate working workflows.</p>
+      <p><b>Lectures.</b> Attendance is optional. The recording appears in the course guide once it is ready. Short recordings showing work with models and templates.</p>
+      <p><b>Individual work.</b> The group has five people, so every project is reviewed personally.</p>
+      <p><b>Chat and templates.</b> A private group chat, materials, and ready-made prompt libraries.</p>
+    </div>
+    <p class="note">Workload: 72 academic hours over 4.5 weeks. That is about 12 clock hours per week; live meetings take a small part of it.</p>
+  </div>
+</section>
+
+<!-- ═══ CASES AND REVIEWS ═══ -->
+<section class="sec alt" id="cases">
+  <div class="wrap">
+    <div class="kicker">Case studies</div>
+    <h2>The experience the program is built on</h2>
+    <div class="grid2">
+      <div class="card"><h3>The base property C52</h3><p>If you do not have a property of your own, work with C52: a warehouse at Suvorova St., 52a (the C52 cluster). In the introductory module we examine the property life cycle through C52, the first creative cluster in southern Russia, created by the program director.</p></div>
+      <div class="card"><h3>Level 1</h3><p>Eleven participants have completed the program “Modern Tools of Project Analysis”, and all of them reached the final review. <a href="archi.html" style="color:var(--azure-dark);font-weight:700">View Level 1 →</a></p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FEES ═══ -->
+<section class="sec" id="price">
+  <div class="wrap">
+    <div class="kicker">Fees</div>
+    <h2>Course fees</h2>
+    <p class="note" style="margin-top:0">The price is the same for both tracks. 14,900 ₽ for graduates of the AI in Architecture course.</p>
+    <div class="grid2">
+      <div class="price main">
+        <div class="price-val">18,900 <small>₽</small></div>
+        <div class="price-lab">full price, 72 academic hours</div>
+        <ul class="list">
+          <li>two-installment plan: 9,450 + 9,450 ₽</li>
+          <li>recordings, mandatory live meetings and lectures in Telemost, final review</li>
+          <li>individual review of your project</li>
+          <li>a library of prompts and templates</li>
+          <li>SFedU professional development certificate</li>
+        </ul>
+        <button class="btn btn-primary" style="margin-top:22px;width:100%" data-apply>Apply</button>
+      </div>
+      <div class="price">
+        <div class="price-val">14,900 <small>₽</small></div>
+        <div class="price-lab">for graduates of the AI in Architecture course</div>
+        <ul class="list">
+          <li>two-installment plan: 7,450 + 7,450 ₽</li>
+          <li>the program content is the same</li>
+          <li>the price is the same for both tracks</li>
+        </ul>
+        <button class="btn btn-dark" style="margin-top:22px;width:100%" data-apply>Apply at the discounted rate</button>
+      </div>
+    </div>
+    <div class="deduct">
+      <b aria-hidden="true">💳</b>
+      <p><strong>Two-installment plan.</strong> The first 50% is paid at enrollment: 9,450 ₽ at the full price and 7,450 ₽ for graduates of the AI in Architecture course. The remainder is paid in a second installment in the middle of the course. We fix the terms when you sign the agreement with SFedU.</p>
+    </div>
+    <div class="deduct">
+      <b>13%</b>
+      <p><strong>Tax deduction.</strong> If you pay for the course yourself and pay personal income tax, you can recover 13% of the cost: 2,457 ₽ at the 18,900 ₽ price and 1,937 ₽ at the 14,900 ₽ price. The deduction applies to education at a licensed organization, and the expense limit in 2026 is 150,000 ₽.</p>
+    </div>
+    <p class="note">For the agreement, payment, and enrollment: SFedU Academy of Architecture and Arts coordinator Alexander Andreev, <a href="mailto:alandreev@sfedu.ru" style="color:var(--azure-dark);font-weight:700">alandreev@sfedu.ru</a>.</p>
+  </div>
+</section>
+
+<!-- ═══ DOCUMENTS ═══ -->
+<section class="sec alt" id="docs">
+  <div class="wrap">
+    <div class="kicker">Documents on successful completion</div>
+    <h2>SFedU professional development certificate</h2>
+    <p class="lead">A certificate of the established form for 72 academic hours is issued after the final assessment, a remote expert review of the project.</p>
+    <p class="note" style="margin-top:0">The certificate is issued to participants with higher education. If you do not have it yet, you can join and present your project right away: after the final review we issue a certificate of attendance, and the professional development certificate once you obtain a higher education degree.</p>
+  </div>
+</section>
+
+<!-- ═══ HOW TO APPLY ═══ -->
+<section class="sec" id="apply">
+  <div class="wrap">
+    <div class="kicker">How to apply</div>
+    <h2>Four steps to the start</h2>
+    <div class="grid4">
+      <div class="card step"><div class="n">1</div><h3>Application</h3><p>You leave your contact details and choose a preliminary track. It takes two minutes.</p></div>
+      <div class="card step"><div class="n">2</div><h3>A short conversation</h3><p>We confirm your track and level and answer your questions. If the group is full, we put you on the waiting list.</p></div>
+      <div class="card step"><div class="n">3</div><h3>Agreement and payment</h3><p>We sign an agreement with SFedU and accept payment (it can be in two installments).</p></div>
+      <div class="card step"><div class="n">4</div><h3>Start on November 5</h3><p>We open access to the materials and the group chat in Telemost and begin with the introductory module.</p></div>
+    </div>
+    <div style="margin-top:28px"><button class="btn btn-primary" data-apply>Apply</button></div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="sec alt" id="faq">
+  <div class="wrap">
+    <div class="kicker">Questions and answers</div>
+    <h2>What people usually ask before applying</h2>
+
+    <details class="q"><summary>Do I need to know how to code?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>No. The course uses ready-made prompt libraries and clear web services. The expert demonstrates complex setups such as ComfyUI at an overview level; you do not need to configure them yourself.</p></div></details>
+
+    <details class="q"><summary>Do I need to complete Level 1 or know QGIS?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>No. QGIS is not part of the program, and the site data has been prepared. Graduates of the AI in Architecture course will find it easier to pick up the working rhythm, but it is not a requirement.</p></div></details>
+
+    <details class="q"><summary>Is the program suitable for a property owner, an investor, or a realtor?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Yes, Track B is designed for them. You do not need to design: you work with data and calculations and receive an investment concept brief for the property with a use hypothesis, a floor area balance, and basic economics. AI will draw for you to the extent needed for illustrations.</p>
+      <p>The certificate is issued to participants with higher education; others receive a certificate of attendance after the final review.</p></div></details>
+
+    <details class="q"><summary>Which property should I take for the project?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Your own real property: a building or a site you work with or would like to work with. If you do not have one, work with the base property C52.</p></div></details>
+
+    <details class="q"><summary>What do I need for the classes?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>A computer, internet access, and active accounts in Claude, ChatGPT, and Gemini. Paid subscriptions are not required; details on the services will be provided inside the course. Students independently provide access to the services required for learning in accordance with their user agreements and applicable law.</p></div></details>
+
+    <details class="q"><summary>What if I miss a workshop?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Workshops are recorded, and screencasts are available at any time. You can watch a missed meeting in the recording.</p></div></details>
+
+    <details class="q"><summary>How much time does it take?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>72 academic hours over 4.5 weeks, about 12 clock hours per week. Most of the time goes to independent work on the project, and live meetings take a small share.</p></div></details>
+
+    <details class="q"><summary>I do not have a higher education degree or I am still studying. What will I receive?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>You can join the program and present your project right away. After the final review you will receive a certificate of attendance, and the professional development certificate once you obtain a higher education degree.</p></div></details>
+
+    <details class="q"><summary>Who pays 14,900 ₽?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>18,900 ₽ for everyone; 14,900 ₽ for graduates of the AI in Architecture course. The price is the same for both tracks.</p></div></details>
+
+    <details class="q"><summary>Can I pay in installments?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Yes, a two-installment plan is available: 50% at enrollment and the remaining 50% in the middle of the course. The terms are fixed when you sign the agreement with SFedU.</p></div></details>
+
+    <details class="q"><summary>Can I get part of the money back through tax?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>Yes, if you pay yourself and have income subject to personal income tax, you can recover 13% of the cost. It is arranged through the tax office or your employer, using the agreement and the payment receipt.</p></div></details>
+
+    <details class="q"><summary>What if I change my mind?<span class="mod-plus">+</span></summary>
+      <div class="ans"><p>The refund terms are set out in the agreement with SFedU. You sign the agreement before payment, so you can review the terms in advance. Questions about the agreement go to the SFedU coordinator: Alexander Andreev, <a href="mailto:alandreev@sfedu.ru" style="color:var(--azure-dark);font-weight:700">alandreev@sfedu.ru</a>.</p></div></details>
+  </div>
+</section>
+
+<!-- ═══ CONTACTS ═══ -->
+<section class="sec" id="contact">
+  <div class="wrap">
+    <div class="kicker">Contacts</div>
+    <div class="card contact">
+      <img class="avatar" src="../images/kuleshov.jpg" alt="Alexander Kuleshov">
+      <div class="contact-main">
+        <h2 style="font-size:clamp(24px,3.4vw,32px);margin-bottom:8px">Still have questions?</h2>
+        <p style="font-size:15px;color:var(--ink-muted)">We will tell you more about the program, help you choose a track, and guide you through the application. Program Director Alexander Kuleshov answers questions. The course itself runs in Telemost.</p>
+        <div class="contact-links">
+          <button class="btn btn-primary btn-sm" data-apply>Apply</button>
+          <a class="btn btn-line btn-sm" href="https://t.me/alkuleshov" target="_blank" rel="noopener">Ask a question on Telegram</a>
+        </div>
+        <p style="font-size:13px;color:var(--ink-faint);margin-top:14px">For the agreement, payment, and enrollment: SFedU Academy of Architecture and Arts coordinator Alexander Andreev, <a href="mailto:alandreev@sfedu.ru" style="color:var(--azure-dark);font-weight:700">alandreev@sfedu.ru</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="index.html"><img class="brand-sign" src="../images/ai2arch-sign.png" width="38" height="38" alt=""><span class="brand-text"><b>AI2ARCH</b><small>Project Intelligence Lab</small></span></a>
+    <p>The program is delivered by Southern Federal University, Academy of Architecture and Arts. Rostov-on-Don.</p>
+    <p><a href="archi.html">Level 1: AI in Architecture</a></p>
+  </div>
+</footer>
+
+<!-- ═══ APPLICATION ═══ -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <div class="modal-top"><span id="modalTitle">Application for the AI in Redevelopment program</span><button class="modal-x" id="modalX" aria-label="Close">&times;</button></div>
+    <div class="modal-body">
+      <form id="form">
+        <label for="f-name">Full name *</label>
+        <input required type="text" id="f-name" placeholder="Maria Ivanova" autocomplete="name">
+
+        <label for="f-email">Email *</label>
+        <input required type="email" id="f-email" placeholder="mail@example.com" autocomplete="email">
+
+        <label for="f-phone">Phone or messenger *</label>
+        <input required type="text" id="f-phone" placeholder="+7 900 000-00-00 or @username" autocomplete="tel">
+
+        <label for="f-track">Preliminary track *</label>
+        <select required id="f-track">
+          <option value="">Choose a track</option>
+          <option value="Трек А · Проектировщик">Track A · Designer (architect, urban planner, designer)</option>
+          <option value="Трек Б · Девелопер и инвестор">Track B · Developer and investor (developer, investor, property owner, realtor, analyst)</option>
+          <option value="Пока не определился">Not sure yet</option>
+        </select>
+
+        <label for="f-edu">Education *</label>
+        <select required id="f-edu">
+          <option value="">Choose an option</option>
+          <option value="has_diploma">I have a diploma</option>
+          <option value="no_diploma">No diploma yet (still studying or not received yet)</option>
+        </select>
+        <div class="notice" id="notice"></div>
+
+        <label for="f-status">You are *</label>
+        <select required id="f-status">
+          <option value="">Choose an option</option>
+          <option value="Graduate of the AI in Architecture course">Graduate of the AI in Architecture course</option>
+          <option value="SFedU staff member">SFedU staff member</option>
+          <option value="SFedU student">SFedU student</option>
+          <option value="Student at another university">Student at another university</option>
+          <option value="Practicing architect or designer">Practicing architect or designer</option>
+          <option value="Developer, investor, or property owner">Developer, investor, or property owner</option>
+          <option value="Realtor or broker">Realtor or broker</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <div id="alumniBlock" style="display:none">
+          <label for="f-alumni">Cohort and full name from the certificate</label>
+          <input type="text" id="f-alumni" placeholder="For example: cohort 1, Maria Ivanova">
+          <div class="notice" style="display:block">The rate for graduates of the AI in Architecture course is 14,900 ₽. Specify the cohort and the full name from the certificate; we will confirm the rate manually.</div>
+        </div>
+
+        <label for="f-comment">Comment (optional)</label>
+        <textarea id="f-comment" rows="2" placeholder="Which property you would like to take (C52 or your own) and how you heard about the program"></textarea>
+
+        <div class="consent"><input type="checkbox" id="f-consent" required><label for="f-consent">I consent to the processing of my personal data.</label></div>
+        <button type="submit" class="submit" id="submitBtn">Submit application</button>
+      </form>
+      <div class="done" id="done" role="status" aria-live="polite">
+        <div class="done-ico" aria-hidden="true">✓</div>
+        <h3>Your details have been sent</h3>
+        <p>We will contact you by email at <b id="doneEmail"></b>, confirm your track, and send an invitation to the program chat.</p>
+        <p>If you would like to clarify something right away, message us on Telegram: <a href="https://t.me/alkuleshov" target="_blank" rel="noopener" style="color:var(--azure-dark);font-weight:700">@alkuleshov</a>.</p>
+        <button type="button" class="submit done-close" id="doneClose">Close</button>
+      </div>
+      <div class="done" id="fail">
+        <h3>Sending failed</h3>
+        <p>Try again or message us directly on Telegram: <a href="https://t.me/alkuleshov" target="_blank" rel="noopener" style="color:var(--azure-dark);font-weight:700">@alkuleshov</a>.</p>
+      
+        <button type="button" class="submit done-close" id="failClose">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  // Application endpoint: the same Google script as in Level 1 (the table columns match).
+  var ENROLL_URL = 'https://script.google.com/macros/s/AKfycby1af9vPX9ucvhf1phoY_kr0BQ3q4YMAVVRNUMB0Y_xbYHxlhyp2ca69mpD3S7uTRY/exec';
+
+  var modal = document.getElementById('modal');
+  var form = document.getElementById('form');
+  var done = document.getElementById('done');
+  var fail = document.getElementById('fail');
+  var notice = document.getElementById('notice');
+
+  function openModal(track) {
+    form.style.display = 'block'; done.style.display = 'none'; fail.style.display = 'none';
+    if (typeof ym === 'function') ym(113526373, 'reachGoal', 'form_open', { course: 'AI in Redevelopment' });
+    var sel = document.getElementById('f-track');
+    if (track === 'a') sel.value = 'Трек А · Проектировщик';
+    if (track === 'b') sel.value = 'Трек Б · Девелопер и инвестор';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
+  document.getElementById('doneClose').addEventListener('click', closeModal);
+  document.getElementById('failClose').addEventListener('click', closeModal);
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-apply]'), function (b) {
+    b.addEventListener('click', function () { openModal(b.getAttribute('data-apply')); });
+  });
+  document.getElementById('modalX').addEventListener('click', closeModal);
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+
+  var EDU = {
+    has_diploma: { cert: 'Удостоверение', text: '', warn: false },
+    no_diploma: { cert: 'Справка', text: 'You can join and present your project right away. After the final review we issue a certificate of attendance, and the professional development certificate once you obtain a higher education degree.', warn: false }
+  };
+  document.getElementById('f-edu').addEventListener('change', function () {
+    var r = EDU[this.value];
+    if (r && r.text) { notice.textContent = r.text; notice.className = 'notice' + (r.warn ? ' warn' : ''); notice.style.display = 'block'; }
+    else { notice.style.display = 'none'; }
+  });
+
+  var statusSel = document.getElementById('f-status');
+  var alumniBlock = document.getElementById('alumniBlock');
+  function toggleAlumni() {
+    alumniBlock.style.display = statusSel.value === 'Graduate of the AI in Architecture course' ? 'block' : 'none';
+  }
+  statusSel.addEventListener('change', toggleAlumni);
+  toggleAlumni();
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = document.getElementById('submitBtn');
+    var eduSel = document.getElementById('f-edu');
+    var eduLabel = eduSel.options[eduSel.selectedIndex].text;
+    var rule = EDU[eduSel.value];
+    var track = document.getElementById('f-track').value;
+    var status = document.getElementById('f-status').value;
+    var isAlumni = status === 'Graduate of the AI in Architecture course';
+    var alumni = isAlumni ? document.getElementById('f-alumni').value : '';
+    var comment = document.getElementById('f-comment').value;
+    var payload = {
+      name: document.getElementById('f-name').value,
+      phone: document.getElementById('f-phone').value,
+      email: document.getElementById('f-email').value,
+      education: eduLabel,
+      certEligible: rule ? rule.cert : '',
+      comment: 'Track: ' + track + '. Status: ' + status + (alumni ? '. Cohort and full name from the certificate: ' + alumni : '') + (comment ? '. ' + comment : ''),
+      timestamp: new Date().toISOString(),
+      course: 'ИИ в редевелопменте',
+      track: track,
+      source: 'redev-en'
+    };
+    btn.disabled = true; btn.textContent = 'Sending...';
+    // The Google script response cannot be read in no-cors mode, and the redirect sometimes takes a long time.
+    // If the request has not completed within 5 seconds, we consider the application sent: the data has already left by then.
+    var settled = false;
+    function finish(ok) {
+      if (settled) return;
+      settled = true; clearTimeout(timer);
+      btn.disabled = false; btn.textContent = 'Submit application';
+      form.style.display = 'none';
+      if (ok) {
+        document.getElementById('doneEmail').textContent = payload.email;
+        if (typeof ym === 'function') ym(113526373, 'reachGoal', 'form_submit', { course: payload.course });
+        form.reset(); notice.style.display = 'none'; toggleAlumni();
+        done.style.display = 'block';
+      } else { fail.style.display = 'block'; }
+    }
+    var timer = setTimeout(function () { finish(true); }, 5000);
+    fetch(ENROLL_URL, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) })
+      .then(function () { finish(true); })
+      .catch(function () { finish(false); });
+  });
+
+  // menu on tablets and phones
+  var burger = document.getElementById('burger');
+  var navEl = document.getElementById('nav');
+  function setMenu(open) { navEl.classList.toggle('open', open); burger.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+  burger.addEventListener('click', function (e) { e.stopPropagation(); setMenu(!navEl.classList.contains('open')); });
+  navEl.addEventListener('click', function (e) { if (e.target.tagName === 'A') setMenu(false); });
+  document.addEventListener('click', function (e) { if (!navEl.contains(e.target)) setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+  // highlight the current section in the menu
+  var links = Array.prototype.slice.call(document.querySelectorAll('#nav a'));
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting && map[en.target.id]) {
+          links.forEach(function (a) { a.classList.remove('on'); });
+          map[en.target.id].classList.add('on');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+    Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
+  }
+})();
+</script>
+
+<script>
+  // Metrika goals: clicks on the guide and Telegram are counted site-wide by link address
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a'); if (!a) return;
+    if (typeof ym !== 'function') return;
+    if ((a.href.indexOf('archi-guide.html') !== -1 || a.href.indexOf('redev-guide.html') !== -1)) ym(113526373, 'reachGoal', 'guide_click');
+    else if (a.href.indexOf('t.me/alkuleshov') !== -1) ym(113526373, 'reachGoal', 'telegram_click');
+  }, true);
+</script>
+
+<!-- ── constellation: a shimmering contour of stars behind the heading ── -->
+<script>
+(function () {
+  function initConstellation(sel, opts) {
+    var host = document.querySelector(sel);
+    if (!host) return;
+    var canvas = host.querySelector('canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W, H, cx, cy;
+    var R = opts.R || 230;
+    var HUE = opts.hueBase || 212;
+
+    function resize() {
+      var r = host.getBoundingClientRect();
+      W = Math.max(1, r.width); H = Math.max(1, r.height);
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cx = W * (opts.cx || 0.5); cy = H * (opts.cy || 0.5);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var M = 46;
+    var nodes = [];
+    for (var i = 0; i < M; i++) {
+      nodes.push({
+        a: (i / M) * Math.PI * 2,
+        twinklePhase: Math.random() * Math.PI * 2,
+        twinkleSpeed: 0.5 + Math.random() * 0.9,
+        wobble: Math.random() * Math.PI * 2,
+        weight: 0.35 + Math.random() * Math.random() * 2.3,
+        rot: Math.random() * Math.PI * 2
+      });
+    }
+
+    var links = [];
+    for (var k = 0; k < 30; k++) {
+      var i1 = (Math.random() * M) | 0;
+      var i2 = (i1 + 3 + ((Math.random() * (M - 6)) | 0)) % M;
+      links.push([i1, i2]);
+    }
+
+    var IN = 44;
+    var inner = [];
+    for (var j = 0; j < IN; j++) {
+      inner.push({
+        a: Math.random() * Math.PI * 2,
+        rf: 0.06 + Math.random() * 0.86,
+        twinklePhase: Math.random() * Math.PI * 2,
+        twinkleSpeed: 0.6 + Math.random() * 1.2,
+        wobble: Math.random() * Math.PI * 2,
+        weight: 0.3 + Math.random() * Math.random() * 2.6,
+        link: (Math.random() * M) | 0,
+        rot: Math.random() * Math.PI * 2
+      });
+    }
+    for (var hb = 0; hb < 3; hb++) {
+      inner[(Math.random() * IN) | 0].weight = 2.4 + Math.random() * 0.8;
+    }
+
+    var innerLinks = [];
+    for (var k2 = 0; k2 < 40; k2++) {
+      var j1 = (Math.random() * IN) | 0;
+      var j2 = (Math.random() * IN) | 0;
+      if (j1 !== j2) innerLinks.push([j1, j2]);
+    }
+
+    function contourPoint(a, t) {
+      var rr = R * (1
+        + 0.15 * Math.sin(3 * a + t * 0.55)
+        + 0.08 * Math.sin(5 * a - t * 0.8 + 1.3)
+        + 0.05 * Math.sin(8 * a + t * 0.35));
+      return { x: cx + Math.cos(a) * rr, y: cy + Math.sin(a) * rr * 0.82 };
+    }
+
+    function facetPath(cx0, cy0, r, rot) {
+      /* angular (not round) glow silhouette: an elongated faceted diamond spark */
+      var k = 0.46;
+      ctx.beginPath();
+      ctx.moveTo(cx0 + Math.cos(rot) * r, cy0 + Math.sin(rot) * r);
+      ctx.lineTo(cx0 + Math.cos(rot + Math.PI / 2) * r * k, cy0 + Math.sin(rot + Math.PI / 2) * r * k);
+      ctx.lineTo(cx0 + Math.cos(rot + Math.PI) * r, cy0 + Math.sin(rot + Math.PI) * r);
+      ctx.lineTo(cx0 + Math.cos(rot - Math.PI / 2) * r * k, cy0 + Math.sin(rot - Math.PI / 2) * r * k);
+      ctx.closePath();
+    }
+
+    function star(p, tw, weight, rot0) {
+      var rad = (0.8 + 1.5 * tw) * weight;
+      var haloA = Math.min(0.5, (0.12 + 0.16 * tw) * weight);
+      var glowA = Math.min(0.95, (0.4 + 0.32 * tw) * weight);
+      var coreA = Math.min(1, (0.55 + 0.3 * tw) * Math.max(0.6, Math.min(1.3, weight)));
+      var rot = rot0 || 0;
+
+      ctx.save();
+      facetPath(p.x, p.y, rad * 8.5, rot);
+      ctx.clip();
+      var halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rad * 8.5);
+      halo.addColorStop(0, 'hsla(' + HUE + ',92%,60%,' + haloA.toFixed(3) + ')');
+      halo.addColorStop(1, 'hsla(' + HUE + ',92%,60%,0)');
+      ctx.fillStyle = halo;
+      ctx.fillRect(p.x - rad * 8.5, p.y - rad * 8.5, rad * 17, rad * 17);
+      ctx.restore();
+
+      ctx.save();
+      facetPath(p.x, p.y, rad * 5, rot + Math.PI / 4);
+      ctx.clip();
+      var glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rad * 5);
+      glow.addColorStop(0, 'hsla(' + HUE + ',95%,66%,' + glowA.toFixed(3) + ')');
+      glow.addColorStop(1, 'hsla(' + HUE + ',95%,66%,0)');
+      ctx.fillStyle = glow;
+      ctx.fillRect(p.x - rad * 5, p.y - rad * 5, rad * 10, rad * 10);
+      ctx.restore();
+
+      ctx.fillStyle = 'hsla(' + HUE + ',60%,86%,' + coreA.toFixed(3) + ')';
+      facetPath(p.x, p.y, Math.max(0.6, rad * 0.55), rot);
+      ctx.fill();
+    }
+
+    function frame(t) {
+      ctx.clearRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'lighter';
+
+      var pts = [];
+      for (var i = 0; i < M; i++) {
+        pts.push(contourPoint(nodes[i].a + Math.sin(t * 0.12 + nodes[i].wobble) * 0.025, t));
+      }
+      var ipts = [];
+      for (var j = 0; j < IN; j++) {
+        var n = inner[j];
+        var rr = R * n.rf * (1 + 0.07 * Math.sin(t * 0.3 + n.wobble));
+        var aa = n.a + Math.sin(t * 0.1 + n.wobble) * 0.06;
+        ipts.push({ x: cx + Math.cos(aa) * rr, y: cy + Math.sin(aa) * rr * 0.82 });
+      }
+
+      for (var i = 0; i < M; i++) {
+        var p1 = pts[i], p2 = pts[(i + 1) % M];
+        var tw = 0.5 + 0.5 * Math.sin(t * nodes[i].twinkleSpeed + nodes[i].twinklePhase);
+        var a1 = (0.07 + 0.16 * tw) * Math.min(1.4, nodes[i].weight);
+        ctx.strokeStyle = 'hsla(' + HUE + ',85%,64%,' + a1.toFixed(3) + ')';
+        ctx.lineWidth = 0.9;
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+
+      for (var l = 0; l < links.length; l++) {
+        var la = links[l][0], lb = links[l][1];
+        var p1 = pts[la], p2 = pts[lb];
+        var tw = 0.5 + 0.5 * Math.sin(t * 0.7 + l);
+        ctx.strokeStyle = 'hsla(' + HUE + ',82%,62%,' + (0.05 + 0.09 * tw).toFixed(3) + ')';
+        ctx.lineWidth = 0.75;
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+
+      for (var l2 = 0; l2 < innerLinks.length; l2++) {
+        var ja = innerLinks[l2][0], jb = innerLinks[l2][1];
+        var p1 = ipts[ja], p2 = ipts[jb];
+        var tw = 0.5 + 0.5 * Math.sin(t * 0.5 + l2 * 1.7);
+        var wmax = Math.max(inner[ja].weight, inner[jb].weight);
+        ctx.strokeStyle = 'hsla(' + HUE + ',85%,66%,' + (0.045 + 0.09 * tw * Math.min(1, wmax / 1.6)).toFixed(3) + ')';
+        ctx.lineWidth = 0.75;
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+
+      for (var j = 0; j < IN; j++) {
+        if (j % 3 !== 0) continue;
+        var p1 = ipts[j], p2 = pts[inner[j].link];
+        var tw = 0.5 + 0.5 * Math.sin(t * 0.6 + j);
+        ctx.strokeStyle = 'hsla(' + HUE + ',82%,64%,' + (0.045 + 0.08 * tw).toFixed(3) + ')';
+        ctx.lineWidth = 0.75;
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+
+      for (var i = 0; i < M; i++) {
+        var tw = 0.3 + 0.7 * Math.max(0, Math.sin(t * nodes[i].twinkleSpeed + nodes[i].twinklePhase));
+        star(pts[i], tw, nodes[i].weight, nodes[i].rot);
+      }
+      for (var j = 0; j < IN; j++) {
+        var tw = 0.25 + 0.75 * Math.max(0, Math.sin(t * inner[j].twinkleSpeed + inner[j].twinklePhase));
+        star(ipts[j], tw, inner[j].weight, inner[j].rot);
+      }
+
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    if (reduced) {
+      frame(6);
+      return;
+    }
+
+    var t0 = performance.now();
+    function loop(now) {
+      frame((now - t0) / 1000);
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  }
+
+  function ready(fn) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  ready(function () {
+    var mob = window.innerWidth < 760;
+    initConstellation('.hero-mark', { cx: mob ? 0.4 : 0.6, cy: mob ? 0.4 : 0.42, R: mob ? 150 : 230, hueBase: 221 });
+  });
+})();
+</script>
+</body>
+</html>

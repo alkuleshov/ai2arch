@@ -1,0 +1,44 @@
+{
+  "levels": [
+    {
+      "n": 1,
+      "title": "Familiar",
+      "description": "you ask the chat questions and understand where models make mistakes."
+    },
+    {
+      "n": 2,
+      "title": "Applied user",
+      "description": "you write prompts for professional tasks and check the output."
+    },
+    {
+      "n": 3,
+      "title": "Workflow",
+      "description": "you assemble a chain of several services: structure, table, calculation, verification."
+    },
+    {
+      "n": 4,
+      "title": "Automation and integrations",
+      "description": "you build repeatable scenarios and connect AI to your working software, for example Claude + Archicad or Claude + Blender."
+    },
+    {
+      "n": 5,
+      "title": "Custom AI tools",
+      "description": "you build your own services on top of models."
+    }
+  ],
+  "results": {
+    "2": "You apply AI to professional tasks and check the result",
+    "3": "You build a workflow from several services and verify the result"
+  },
+  "courses": {
+    "archi": {
+      "name": "AI in Architecture",
+      "level": 2
+    },
+    "redev": {
+      "name": "AI in Redevelopment",
+      "level": 3
+    }
+  },
+  "entry": "Specified at enrollment"
+}
