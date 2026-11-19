@@ -105,10 +105,10 @@
   h3 { font-size:18px; line-height:1.25; font-weight:800; letter-spacing:-.01em; margin-bottom:8px; }
 
   /* ── листалка ── */
-  #read { padding-top:0; padding-bottom:64px; overflow:visible; overflow:clip; }
-  .viewer { position:relative; --panel-h:76px; }
-  .stage { position:relative; width:min(100%, calc((100svh - var(--nav-h) - 150px) * .7071)); min-width:min(100%, 300px); aspect-ratio:1200 / 1696; margin:0 auto; background:#000C1F; border-radius:8px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08); touch-action:pan-y; user-select:none; -webkit-user-select:none; }
-  .stage img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; transform-origin:center center; will-change:transform; -webkit-user-drag:none; }
+  #read { padding:0; overflow:visible; scroll-margin-top:0; }
+  .viewer { position:relative; width:100%; }
+  .stage { position:relative; height:calc(100svh - 64px); width:auto; max-width:100%; aspect-ratio:1200 / 1625; margin:0 auto; background:#000C1F; border-radius:8px 8px 0 0; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08); touch-action:pan-y; user-select:none; -webkit-user-select:none; }
+  .stage img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top center; transform-origin:center center; will-change:transform; -webkit-user-drag:none; }
   .viewer.is-zoomed .stage { cursor:grab; touch-action:none; }
   .viewer.is-zoomed .stage:active { cursor:grabbing; }
   .viewer.is-zoomed .zone { pointer-events:none; }
@@ -116,108 +116,37 @@
   .zone.prev { left:0; cursor:w-resize; }
   .zone.next { right:0; cursor:e-resize; }
   .zone:focus-visible { outline:2px solid var(--azure); outline-offset:-4px; }
-  .panel { position:sticky; bottom:0; z-index:10; margin-top:14px; padding:12px 0 calc(12px + env(safe-area-inset-bottom)); background:linear-gradient(to top, rgba(10,15,26,.97) 70%, rgba(10,15,26,0)); transition:opacity .25s ease, transform .25s ease; }
-  .bar { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin:0 auto; max-width:1180px; }
+  .progress { height:2px; background:rgba(255,255,255,.1); border-radius:2px; margin:10px auto 0; max-width:760px; overflow:hidden; }
+  .progress i { display:block; height:100%; width:0; background:var(--azure); transition:width .2s; }
+  .panel { height:52px; margin:0; padding:0; background:transparent; }
+  .bar { display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:nowrap; height:52px; margin:0 auto; max-width:1180px; }
   .bar > * { flex:0 0 auto; }
-  .ctrl { display:inline-flex; align-items:center; justify-content:center; gap:6px; min-width:42px; height:40px; padding:0 12px; border-radius:10px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); color:#fff; font-family:var(--sans); font-size:14px; font-weight:700; cursor:pointer; }
+  .ctrl { display:inline-flex; align-items:center; justify-content:center; min-width:40px; height:38px; padding:0 12px; border-radius:10px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); color:#fff; font-family:var(--sans); font-size:14px; font-weight:700; cursor:pointer; }
   .ctrl:hover { background:rgba(255,255,255,.14); }
   .ctrl:disabled { opacity:.35; cursor:default; }
-  .ctrl.wide { font-size:13px; }
-  .zoom-val { min-width:52px; text-align:center; font-family:var(--mono); font-size:12px; color:rgba(255,255,255,.72); }
   .count { font-family:var(--mono); font-size:14px; color:rgba(255,255,255,.75); min-width:64px; text-align:center; }
   .count b { color:#fff; }
-  .jump { width:240px; max-width:100%; height:40px; border-radius:10px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); color:#fff; font-family:var(--sans); font-size:13.5px; font-weight:600; padding:0 40px 0 14px; cursor:pointer; -webkit-appearance:none; -moz-appearance:none; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 5.5l4 4 4-4'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; background-size:14px 14px; text-overflow:ellipsis; }
+  .jump { width:260px; max-width:100%; height:38px; border-radius:10px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16); color:#fff; font-family:var(--sans); font-size:13.5px; font-weight:600; padding:0 40px 0 12px; cursor:pointer; -webkit-appearance:none; -moz-appearance:none; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 5.5l4 4 4-4'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; background-size:14px 14px; text-overflow:ellipsis; }
   .jump option { color:#0A0F1A; }
-  .progress { height:3px; background:rgba(255,255,255,.1); border-radius:3px; margin:10px auto 0; max-width:760px; overflow:hidden; }
-  .progress i { display:block; height:100%; width:0; background:var(--azure); transition:width .2s; }
-  .hint { text-align:center; font-size:12.5px; color:rgba(255,255,255,.45); margin-top:12px; }
+  .panel .btn { min-height:38px; padding:0 14px; font-size:13px; }
   .tap-hint { position:absolute; left:50%; bottom:16px; transform:translateX(-50%); z-index:6; max-width:calc(100% - 24px); padding:9px 15px; border-radius:999px; background:rgba(10,15,26,.9); border:1px solid rgba(255,255,255,.2); color:#fff; font-size:13px; font-weight:700; text-align:center; display:none; box-shadow:0 8px 24px rgba(0,0,0,.35); }
   .tap-hint.show { display:block; }
-  /* полноэкранный режим: страница по высоте, панель поверх */
-  .viewer.is-full { position:fixed; inset:0; z-index:300; background:#05080F; display:flex; align-items:center; justify-content:center; padding:0 0 var(--panel-h); }
-  .viewer.is-full .stage { height:100%; width:auto; max-width:100vw; max-height:100%; min-width:0; border-radius:0; flex:none; box-shadow:none; }
-  .viewer.is-full .panel { position:absolute; left:0; right:0; bottom:0; z-index:20; padding:10px 16px calc(10px + env(safe-area-inset-bottom)); background:linear-gradient(to top, rgba(5,8,15,.97) 55%, rgba(5,8,15,0)); }
-  .viewer.is-full .bar { margin:0 auto; max-width:1120px; }
-  .viewer.is-full .progress { margin:8px auto 0; max-width:760px; }
-  .viewer.is-full .hint { display:none; }
-  .viewer.is-full.panel-hidden .panel { opacity:0; pointer-events:none; transform:translateY(10px); }
+  .head { transition:transform .2s ease; }
+  .head.head-hidden { transform:translateY(-100%); }
+  .ctrl:focus-visible, .jump:focus-visible, .panel .btn:focus-visible { outline:2px solid #BFD3FF; outline-offset:2px; }
   @media (max-width:640px) {
-    .viewer { --panel-h:172px; }
-    .bar { gap:6px; }
-    .ctrl { min-width:36px; height:38px; padding:0 8px; font-size:13px; }
-    .ctrl.wide { font-size:11.5px; padding:0 8px; }
-    .zoom-val { min-width:38px; font-size:11px; }
-    .jump { order:7; flex:1 1 100%; width:auto; max-width:none; height:38px; }
-    .ctrl.fs-txt span { display:none; }
     #read .wrap { padding-left:0; padding-right:0; }
-    .stage { width:100%; min-width:0; max-width:100%; border-radius:0; }
-    .viewer.is-full .stage { width:100vw; height:auto; max-height:100%; }
+    .stage { width:100%; height:auto; max-width:100%; border-radius:0; }
+    .progress { margin-top:8px; }
+    .panel { height:auto; min-height:86px; padding:6px 12px calc(6px + env(safe-area-inset-bottom)); }
+    .bar { display:grid; grid-template-columns:auto auto auto 1fr; gap:6px; height:auto; padding:0; align-items:center; }
+    .bar > #bPrev { grid-column:1; }
+    .bar > .count { grid-column:2; min-width:52px; }
+    .bar > #bNext { grid-column:3; }
+    .bar > .jump { grid-column:1 / -1; grid-row:2; width:100%; }
+    .panel .btn { grid-column:4; justify-self:end; min-height:40px; padding:0 12px; font-size:12.5px; }
+    .ctrl { min-width:36px; height:38px; padding:0 8px; font-size:13px; }
   }
-
-  /* ── режим «По способам» ── */
-  .viewer.mode-ways { height:calc(100svh - var(--nav-h) - 18px); min-height:520px; display:flex; flex-direction:column; background:#000C1F; border-radius:14px; padding:10px; }
-  .viewer.mode-ways .stage,
-  .viewer.mode-ways .hint,
-  .viewer.mode-ways .progress { display:none; }
-  .viewer.mode-ways .ways-view { display:flex; flex-direction:column; flex:1; min-height:0; }
-  .viewer.mode-pdf .ways-view { display:none; }
-  .viewer.mode-ways .panel { position:static; margin-top:2px; padding:4px 0 0; background:none; }
-  .viewer.mode-ways .bar { gap:8px; }
-  .ways-view { display:none; min-height:0; }
-  .ways-loading[hidden], .ways-card[hidden] { display:none; }
-  .ways-loading { flex:1; display:flex; align-items:center; justify-content:center; min-height:320px; color:rgba(255,255,255,.65); font-size:15px; }
-  .ways-card { flex:1; min-height:0; display:flex; flex-direction:column; overflow:hidden; background:#0D1E35; border:1px solid rgba(77,163,255,.18); border-radius:14px; padding:clamp(20px,2.2vw,30px); color:#fff; }
-  .ways-meta { display:flex; align-items:baseline; justify-content:space-between; gap:16px; }
-  .ways-section { font-size:11.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#79B7FF; }
-  .ways-num { font-family:var(--mono); font-size:13px; color:rgba(255,255,255,.56); white-space:nowrap; }
-  .ways-card h2 { margin:10px 0 4px; font-size:clamp(26px,2.8vw,40px); line-height:1.07; letter-spacing:-.02em; color:#fff; }
-  .ways-sub { margin:0 0 12px; font-size:17px; line-height:1.35; font-weight:700; color:#4DA3FF; }
-  .ways-desc { max-width:70ch; margin:0 0 15px; font-size:clamp(18px,1.35vw,20px); line-height:1.55; color:#D7E0F0; }
-  .ways-tools { display:grid; gap:6px; margin:0 0 11px; }
-  .ways-tool { display:grid; grid-template-columns:112px minmax(0,1fr); gap:10px; align-items:baseline; font-size:13.5px; line-height:1.4; color:#C8D5E8; }
-  .ways-tool-label { display:flex; align-items:center; gap:7px; font-size:10.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.6); }
-  .ways-dot { width:7px; height:7px; border-radius:50%; flex:none; }
-  .ways-tool.main .ways-dot { background:#3DDC97; }
-  .ways-tool.ext { opacity:.58; }
-  .ways-tool.ext .ways-dot { background:#93A1B6; }
-  .ways-tool-list { overflow-wrap:anywhere; }
-  .ways-courses { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 12px; }
-  .ways-course { display:inline-flex; align-items:center; gap:6px; padding:5px 9px; border:1px solid rgba(77,163,255,.42); border-radius:999px; background:rgba(77,163,255,.11); color:#B9D9FF; font-size:12px; font-weight:700; text-decoration:none; line-height:1.3; }
-  .ways-course:hover { background:rgba(77,163,255,.2); color:#fff; }
-  .ways-course small { font-size:10.5px; font-weight:600; opacity:.72; }
-  .ways-prompt { margin-top:auto; background:#08172B; border-left:3px solid #4DA3FF; border-radius:0 10px 10px 0; padding:9px 12px 10px; }
-  .ways-prompt-head { display:flex; align-items:center; justify-content:space-between; gap:10px; }
-  .ways-prompt-head span { font-family:var(--mono); font-size:10.5px; font-weight:700; letter-spacing:.12em; color:#79B7FF; text-transform:uppercase; }
-  .ways-copy { border:1px solid rgba(77,163,255,.45); border-radius:7px; background:rgba(77,163,255,.1); color:#CFE6FF; font-family:var(--sans); font-size:11.5px; font-weight:700; padding:4px 9px; cursor:pointer; }
-  .ways-copy:hover { background:rgba(77,163,255,.22); color:#fff; }
-  .ways-prompt pre { margin:6px 0 0; white-space:pre-wrap; overflow-wrap:anywhere; font-family:var(--mono); font-size:15px; line-height:1.5; color:#DCE7F7; }
-  .mode-switch { display:flex; justify-content:center; gap:3px; width:max-content; max-width:100%; margin:8px auto 6px; padding:3px; border:1px solid rgba(255,255,255,.14); border-radius:9px; background:rgba(255,255,255,.05); }
-  .mode-switch button { border:0; border-radius:6px; background:transparent; color:rgba(255,255,255,.62); font-family:var(--sans); font-size:12px; font-weight:700; padding:6px 11px; cursor:pointer; }
-  .mode-switch button.on { background:#4DA3FF; color:#04101F; }
-  .mode-switch button:disabled { opacity:.4; cursor:default; }
-  .mode-switch button:focus-visible, .ways-course:focus-visible, .ways-copy:focus-visible, .ctrl:focus-visible, .jump:focus-visible, .btn:focus-visible { outline:2px solid #BFD3FF; outline-offset:2px; }
-  @media (max-height:800px) and (min-width:641px) {
-    .ways-card { padding:18px 22px; }
-    .ways-card h2 { font-size:clamp(24px,2.4vw,34px); margin-top:7px; }
-    .ways-sub { font-size:16px; margin-bottom:8px; }
-    .ways-desc { font-size:18px; line-height:1.45; margin-bottom:10px; }
-    .ways-tools { gap:4px; margin-bottom:8px; }
-    .ways-courses { margin-bottom:8px; }
-    .ways-prompt { padding:7px 10px; }
-    .ways-prompt pre { font-size:15px; line-height:1.4; }
-  }
-  @media (max-width:640px) {
-    .viewer.mode-ways { height:calc(100svh - var(--nav-h) - 28px); min-height:0; padding:0; border-radius:0; }
-    .ways-card { overflow-y:auto; border-radius:0; padding:18px 16px; -webkit-overflow-scrolling:touch; }
-    .ways-card h2 { font-size:clamp(25px,7vw,32px); }
-    .ways-sub { font-size:17px; }
-    .ways-desc { font-size:18px; line-height:1.55; }
-    .ways-tool { grid-template-columns:100px minmax(0,1fr); font-size:13px; }
-    .ways-prompt pre { font-size:15px; }
-    .mode-switch { margin-top:6px; margin-bottom:4px; }
-    .viewer.mode-ways .panel { padding-bottom:0; }
-  }
-  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .viewer *, .mode-switch * { transition:none !important; scroll-behavior:auto !important; } }
 
   /* ── что внутри ── */
   .secs { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:14px; }
@@ -315,56 +244,37 @@
 <!-- ═══ ЛИСТАЛКА ═══ -->
 <section class="sec dark" id="read" aria-label="Листать гайд">
   <div class="wrap">
-    <div class="viewer mode-ways" id="viewer">
-      <div class="ways-view" id="waysView">
-        <div class="ways-loading" id="waysLoading">Загрузка способов…</div>
-        <article class="ways-card" id="waysCard" hidden aria-labelledby="waysTitle">
-          <div class="ways-meta"><span class="ways-section" id="waysSection"></span><span class="ways-num" id="waysNum"></span></div>
-          <h2 id="waysTitle"></h2>
-          <p class="ways-sub" id="waysSub"></p>
-          <p class="ways-desc" id="waysDesc"></p>
-          <div class="ways-tools">
-            <div class="ways-tool main"><span class="ways-tool-label"><i class="ways-dot"></i>Основной</span><span class="ways-tool-list" id="waysMain"></span></div>
-            <div class="ways-tool ext"><span class="ways-tool-label"><i class="ways-dot"></i>Расширенный</span><span class="ways-tool-list" id="waysExt"></span></div>
-          </div>
-          <div class="ways-courses" id="waysCourses"></div>
-          <div class="ways-prompt" id="waysPromptBlock">
-            <div class="ways-prompt-head"><span>Промпт</span><button class="ways-copy" id="waysCopy" type="button">Копировать</button></div>
-            <pre id="waysPrompt"></pre>
-          </div>
-        </article>
-      </div>
+    <div class="viewer" id="viewer">
       <div class="stage" id="stage" aria-roledescription="листалка" aria-label="Страницы гайда">
-        <img id="pg" src="guide/53/p01.webp" width="1200" height="1696" alt="Страница 1 из 39">
+        <img id="pg" src="guide/53/p01@2x.webp" width="1200" height="1625" alt="Страница 1 из 39">
         <button class="zone prev" id="zPrev" aria-label="Предыдущая страница"></button>
         <button class="zone next" id="zNext" aria-label="Следующая страница"></button>
         <div class="tap-hint" id="tapHint" role="status">Двойной тап — увеличить</div>
       </div>
-      <div class="mode-switch" role="group" aria-label="Режим просмотра гайда">
-        <button type="button" id="modeWays" class="on" aria-pressed="true">По способам</button>
-        <button type="button" id="modePdf" aria-pressed="false">Как в PDF</button>
-      </div>
+      <div class="progress" aria-hidden="true"><i id="prog"></i></div>
       <div class="panel" id="panel">
         <div class="bar">
           <button class="ctrl" id="bPrev" aria-label="Предыдущая страница">←</button>
-          <span class="count" aria-live="polite"><b id="cur">1</b> / <span id="total">53</span></span>
+          <span class="count" aria-live="polite"><b id="cur">1</b> / <span id="total">39</span></span>
           <button class="ctrl" id="bNext" aria-label="Следующая страница">→</button>
           <select class="jump" id="jump" aria-label="Перейти к разделу">
-            <option value="all">Все способы</option>
-            <option value="01">01 · Концепция и генерация идей</option>
-            <option value="02">02 · Визуализация и графика</option>
-            <option value="03">03 · Анализ территории и контекста</option>
-            <option value="04">04 · Документация и тексты</option>
-            <option value="05">05 · BIM, ГИС и автоматизация</option>
-            <option value="06">06 · Работа с клиентом</option>
-            <option value="07">07 · Обучение и исследования</option>
-            <option value="08">08 · Бизнес и маркетинг</option>
+            <option value="">Перейти к разделу…</option>
+            <option value="2">Содержание</option>
+            <option value="3">Как читать гайд</option>
+            <option value="4">01 · Концепция и генерация идей</option>
+            <option value="8">02 · Визуализация и графика</option>
+            <option value="13">03 · Анализ территории и контекста</option>
+            <option value="18">04 · Документация и тексты</option>
+            <option value="22">05 · BIM, ГИС и автоматизация</option>
+            <option value="26">06 · Работа с клиентом</option>
+            <option value="29">07 · Обучение и исследования</option>
+            <option value="33">08 · Бизнес и маркетинг</option>
+            <option value="39">Курсы AI2ARCH</option>
           </select>
           <a class="btn btn-primary btn-sm" href="guide/ai2arch-53-sposoba.pdf" download="AI2ARCH-53-sposoba-II-dlya-arhitektora.pdf" data-dl="viewer">Скачать PDF</a>
         </div>
-        <div class="progress" aria-hidden="true"><i id="prog"></i></div>
       </div>
-      <p class="hint">Листайте стрелками, кликом по краю страницы или свайпом. Двойной клик — увеличить. Ссылки на курсы работают в скачанном PDF.</p>
+    </div>
     </div>
   </div>
 </section>
@@ -445,36 +355,91 @@
   var cur = 1, readSent = false;
   var img = document.getElementById('pg');
   var curEl = document.getElementById('cur');
+  var totalEl = document.getElementById('total');
   var prog = document.getElementById('prog');
   var bPrev = document.getElementById('bPrev'), bNext = document.getElementById('bNext');
   var jump = document.getElementById('jump');
   var viewer = document.getElementById('viewer');
   var stage = document.getElementById('stage');
-  var panel = document.getElementById('panel');
-  var stub = function (t) { var b = document.createElement('button'); b.appendChild(document.createTextNode(t || '')); return b; };
-  var bZoomIn = stub(), bZoomOut = stub(), bFit = stub(), zoomVal = stub(), bFull = stub('⤢ ');
-  var cache = {}, cache2 = {};
-  var totalEl = document.getElementById('total');
-  var modeWays = document.getElementById('modeWays'), modePdf = document.getElementById('modePdf');
-  var waysView = document.getElementById('waysView'), waysLoading = document.getElementById('waysLoading');
-  var waysCard = document.getElementById('waysCard'), waysSection = document.getElementById('waysSection');
-  var waysNum = document.getElementById('waysNum'), waysTitle = document.getElementById('waysTitle');
-  var waysSub = document.getElementById('waysSub'), waysDesc = document.getElementById('waysDesc');
-  var waysMain = document.getElementById('waysMain'), waysExt = document.getElementById('waysExt');
-  var waysCourses = document.getElementById('waysCourses'), waysPrompt = document.getElementById('waysPrompt');
-  var waysCopy = document.getElementById('waysCopy');
-  var currentMode = 'ways', currentWay = 1, waysData = null, waysLoadingFlag = false, waysFailed = false;
-  var pdfJumpHTML = '<option value="">Перейти к разделу…</option><option value="2">Содержание</option><option value="3">Как читать гайд</option><option value="4">01 · Концепция и генерация идей</option><option value="8">02 · Визуализация и графика</option><option value="13">03 · Анализ территории и контекста</option><option value="18">04 · Документация и тексты</option><option value="22">05 · BIM, ГИС и автоматизация</option><option value="26">06 · Работа с клиентом</option><option value="29">07 · Обучение и исследования</option><option value="33">08 · Бизнес и маркетинг</option><option value="39">Курсы AI2ARCH</option>';
-  function esc(v) { return String(v == null ? '' : v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  var readSection = document.getElementById('read');
+  var head = document.querySelector('.head');
+  var cache = {};
 
-  var ZOOMS = [1, 1.5, 2, 3];
   var zoom = 1, tx = 0, ty = 0;
+  var lastY = window.scrollY, headHidden = false, hideY = 0;
 
   function goal(name, params) { if (typeof ym === 'function') ym(113526373, 'reachGoal', name, params || {}); }
-  function preload(n) { if (n < 1 || n > TOTAL || cache[n]) return; var i = new Image(); i.src = SRC(n); cache[n] = i; }
-  function preloadHi(n) { if (n < 1 || n > TOTAL || cache2[n]) return; var i = new Image(); i.src = SRC2(n); cache2[n] = i; }
-  function highActive() { return true; }
+  function preload(n) { if (n < 1 || n > TOTAL || cache[n]) return; var i = new Image(); i.src = SRC2(n); cache[n] = i; }
 
+  function alignRead() {
+    var r = readSection.getBoundingClientRect();
+    if (r.top < -8 || r.top > 8) {
+      var root = document.documentElement, prev = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      window.scrollTo(0, Math.round(window.pageYOffset + r.top));
+      root.style.scrollBehavior = prev;
+      hideHeader();
+    }
+  }
+  function hideHeader() {
+    if (!head || headHidden) return;
+    headHidden = true; hideY = window.scrollY;
+    head.classList.add('head-hidden');
+  }
+  function showHeader() {
+    if (!head || !headHidden) return;
+    headHidden = false;
+    head.classList.remove('head-hidden');
+  }
+  function onScroll() {
+    var y = window.scrollY, r = readSection.getBoundingClientRect();
+    if (r.bottom <= 0 || r.top >= window.innerHeight) showHeader();
+    else if (headHidden && y < lastY && hideY - y > 40) showHeader();
+    else if (!headHidden && r.top <= 8 && y >= lastY) hideHeader();
+    lastY = y;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  function show(n, opts) {
+    opts = opts || {};
+    n = Math.max(1, Math.min(TOTAL, n));
+    cur = n;
+    img.src = SRC2(n);
+    img.alt = 'Страница ' + n + ' из ' + TOTAL;
+    curEl.textContent = n;
+    totalEl.textContent = TOTAL;
+    bPrev.disabled = n === 1; bNext.disabled = n === TOTAL;
+    prog.style.width = (n / TOTAL * 100) + '%';
+    preload(n + 1); preload(n + 2); preload(n - 1);
+    resetZoom();
+    if (opts.hash !== false) { try { history.replaceState(null, '', '#p' + n); } catch (e) {} }
+    if (!readSent && n >= 10) { readSent = true; goal('guide_read'); }
+    if (opts.align) alignRead();
+  }
+  function next() { if (cur < TOTAL) show(cur + 1, { align: true }); }
+  function prev() { if (cur > 1) show(cur - 1, { align: true }); }
+
+  if (img) img.addEventListener('error', function () {
+    if ((img.getAttribute('src') || '').indexOf('@2x') !== -1) img.src = SRC(cur);
+  });
+
+  bNext.addEventListener('click', next); bPrev.addEventListener('click', prev);
+  var zoneTimer = null, suppressClickUntil = 0;
+  function zoneClick(e, dir) {
+    if (e.detail > 1) { if (zoneTimer) clearTimeout(zoneTimer); return; }
+    if (Date.now() < suppressClickUntil) return;
+    if (zoneTimer) clearTimeout(zoneTimer);
+    zoneTimer = setTimeout(function () { dir > 0 ? next() : prev(); }, 300);
+  }
+  document.getElementById('zNext').addEventListener('click', function (e) { zoneClick(e, 1); });
+  document.getElementById('zPrev').addEventListener('click', function (e) { zoneClick(e, -1); });
+  jump.addEventListener('change', function () {
+    if (!this.value) return;
+    show(+this.value, { align: true });
+    this.value = '';
+  });
+
+  // масштаб: двойной клик/тап и жесты, без кнопок
   function maxX() { return stage.clientWidth * (zoom - 1) / 2; }
   function maxY() { return stage.clientHeight * (zoom - 1) / 2; }
   function clampPan() {
@@ -485,213 +450,25 @@
   function applyTransform() {
     img.style.transform = zoom > 1.001 ? 'translate3d(' + tx + 'px,' + ty + 'px,0) scale(' + zoom + ')' : '';
     viewer.classList.toggle('is-zoomed', zoom > 1.001);
-    zoomVal.textContent = Math.round(zoom * 100) + '%';
-    bZoomOut.disabled = zoom <= 1.001;
-    bZoomIn.disabled = zoom >= 2.999;
   }
-  function applySource() {
-    var src = highActive() ? SRC2(cur) : SRC(cur);
-    if (img.getAttribute('src') !== src) img.src = src;
-    img.alt = 'Страница ' + cur + ' из ' + TOTAL;
-    if (highActive()) { preloadHi(cur); preloadHi(cur + 1); preloadHi(cur - 1); }
-  }
-  function setZoom(next, clientX, clientY) {
+  function resetZoom() { zoom = 1; tx = 0; ty = 0; applyTransform(); }
+  function setZoom(next, cx, cy) {
     next = Math.max(1, Math.min(3, next));
     if (Math.abs(next - zoom) < 0.001) return;
     var old = zoom;
-    if (next <= 1.001) {
-      zoom = 1; tx = 0; ty = 0;
-    } else {
-      if (clientX != null && clientY != null) {
+    if (next <= 1.001) { zoom = 1; tx = 0; ty = 0; }
+    else {
+      if (cx != null && cy != null) {
         var r = stage.getBoundingClientRect();
-        var px = clientX - (r.left + r.width / 2);
-        var py = clientY - (r.top + r.height / 2);
-        var bx = (px - tx) / old;
-        var by = (py - ty) / old;
-        tx = px - bx * next;
-        ty = py - by * next;
+        var px = cx - (r.left + r.width / 2);
+        var py = cy - (r.top + r.height / 2);
+        var bx = (px - tx) / old, by = (py - ty) / old;
+        tx = px - bx * next; ty = py - by * next;
       }
-      zoom = next;
-      clampPan();
+      zoom = next; clampPan();
     }
     applyTransform();
-    applySource();
-    showPanel();
   }
-  function zoomStep(dir) {
-    var i;
-    if (dir > 0) {
-      for (i = 0; i < ZOOMS.length; i++) if (ZOOMS[i] > zoom + 0.01) { setZoom(ZOOMS[i]); return; }
-    } else {
-      for (i = ZOOMS.length - 1; i >= 0; i--) if (ZOOMS[i] < zoom - 0.01) { setZoom(ZOOMS[i]); return; }
-    }
-  }
-  function resetPanForPage() {
-    if (zoom > 1.001) { tx = maxX(); ty = maxY(); } else { tx = 0; ty = 0; }
-    clampPan(); applyTransform();
-  }
-  function panStep() { return Math.max(80, stage.clientWidth * 0.38); }
-  function panBy(dx, dy) {
-    tx += dx; ty += dy; clampPan(); applyTransform(); showPanel();
-  }
-  function arrowRight() {
-    if (zoom > 1.001) {
-      var edge = -maxX();
-      if (tx > edge + 0.5) { tx = Math.max(edge, tx - panStep()); clampPan(); applyTransform(); showPanel(); return; }
-    }
-    next();
-  }
-  function arrowLeft() {
-    if (zoom > 1.001) {
-      var edge = maxX();
-      if (tx < edge - 0.5) { tx = Math.min(edge, tx + panStep()); clampPan(); applyTransform(); showPanel(); return; }
-    }
-    prev();
-  }
-
-  function show(n, push) {
-    n = Math.max(1, Math.min(TOTAL, n));
-    cur = n;
-    totalEl.textContent = TOTAL;
-    curEl.textContent = n;
-    bPrev.disabled = n === 1; bNext.disabled = n === TOTAL;
-    prog.style.width = (n / TOTAL * 100) + '%';
-    applySource();
-    resetPanForPage();
-    preload(n + 1); preload(n + 2); preload(n - 1);
-    if (push !== false) {
-      try { history.replaceState(null, '', '#p' + n); } catch (e) {}
-      var r = stage.getBoundingClientRect();
-      var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 64;
-      if (r.top < navH || r.top > window.innerHeight * 0.5) window.scrollTo(0, window.pageYOffset + r.top - navH - 8);
-    }
-    if (!readSent && n >= 10) { readSent = true; goal('guide_read'); }
-  }
-  function pdfNext() { if (cur < TOTAL) show(cur + 1); }
-  function pdfPrev() { if (cur > 1) show(cur - 1); }
-  function next() { if (currentMode === 'ways') showWay(currentWay + 1); else pdfNext(); }
-  function prev() { if (currentMode === 'ways') showWay(currentWay - 1); else pdfPrev(); }
-
-  function updateModeButtons() {
-    var ways = currentMode === 'ways';
-    modeWays.classList.toggle('on', ways); modePdf.classList.toggle('on', !ways);
-    modeWays.setAttribute('aria-pressed', ways ? 'true' : 'false');
-    modePdf.setAttribute('aria-pressed', ways ? 'false' : 'true');
-  }
-  function renderWay(n, push) {
-    if (!waysData || !waysData.ways || !waysData.ways.length) return;
-    n = Math.max(1, Math.min(waysData.ways.length, n));
-    var way = waysData.ways[n - 1];
-    currentWay = way.n;
-    var sec = (waysData.sections || []).filter(function(s){ return s.no === way.section; })[0];
-    waysSection.textContent = sec ? (sec.no + ' · ' + sec.title) : 'Раздел ' + way.section;
-    waysNum.textContent = (way.n < 10 ? '0' + way.n : way.n) + ' / ' + waysData.ways.length;
-    waysTitle.textContent = way.title || '';
-    waysSub.textContent = way.sub || '';
-    waysDesc.textContent = way.desc || '';
-    waysMain.textContent = (way.main && way.main.length) ? way.main.join(' · ') : '—';
-    waysExt.textContent = (way.ext && way.ext.length) ? way.ext.join(' · ') : '—';
-    waysCourses.innerHTML = (way.courses || []).map(function(c){
-      return '<a class="ways-course" href="' + esc(c.url) + '" data-course="' + esc(c.course) + '" target="_blank" rel="noopener">' + esc(c.name) + ' <small>' + esc(c.label) + '</small></a>';
-    }).join('');
-    waysCourses.hidden = !(way.courses && way.courses.length);
-    waysPrompt.textContent = way.prompt || '';
-    waysCopy.textContent = 'Копировать';
-    waysCopy.disabled = !way.prompt;
-    waysPrompt.scrollTop = 0;
-    waysCard.scrollTop = 0;
-    totalEl.textContent = waysData.ways.length;
-    curEl.textContent = way.n;
-    bPrev.disabled = n === 1; bNext.disabled = n === waysData.ways.length;
-    jump.value = way.section;
-    if (!readSent && way.n >= 10) { readSent = true; goal('guide_read'); }
-    if (push !== false) { try { history.replaceState(null, '', '#w' + way.n); } catch (e) {} }
-  }
-  function showWay(n, push) { if (!waysData) return; renderWay(n, push); }
-  function loadWays() {
-    if (waysData || waysLoadingFlag || waysFailed) return Promise.resolve(waysData);
-    waysLoadingFlag = true;
-    waysLoading.hidden = false; waysCard.hidden = true;
-    return fetch('guide/53/ways.json').then(function(r){
-      if (!r.ok) throw new Error('ways.json');
-      return r.json();
-    }).then(function(data){
-      if (!data || !data.ways || !data.ways.length) throw new Error('ways empty');
-      waysData = data; waysLoading.hidden = true; waysCard.hidden = false;
-      waysLoadingFlag = false;
-      if (currentMode === 'ways') renderWay(currentWay, false);
-      return waysData;
-    }).catch(function(){
-      waysLoadingFlag = false; waysFailed = true;
-      modeWays.disabled = true;
-      setMode('pdf');
-      return null;
-    });
-  }
-  function setMode(mode, push) {
-    currentMode = (mode === 'pdf') ? 'pdf' : 'ways';
-    viewer.classList.toggle('mode-ways', currentMode === 'ways');
-    viewer.classList.toggle('mode-pdf', currentMode === 'pdf');
-    updateModeButtons();
-    if (currentMode === 'ways') {
-      jump.innerHTML = '<option value="all">Все способы</option>' + (waysData ? waysData.sections.map(function(s){ return '<option value="' + esc(s.no) + '">' + esc(s.no + ' · ' + s.title) + '</option>'; }).join('') : '');
-      if (waysData) renderWay(currentWay, push !== false);
-      else loadWays();
-    } else {
-      jump.innerHTML = pdfJumpHTML;
-      show(cur, push !== false);
-    }
-  }
-  modeWays.addEventListener('click', function(){ if (currentMode !== 'ways') setMode('ways', true); });
-  modePdf.addEventListener('click', function(){ if (currentMode !== 'pdf') setMode('pdf', true); });
-  waysCourses.addEventListener('click', function(e){
-    var a = e.target.closest ? e.target.closest('a[data-course]') : null;
-    if (a) goal('enroll_click', { course: a.getAttribute('data-course'), source: 'guide53' });
-  });
-  waysCopy.addEventListener('click', function(){
-    var text = waysPrompt.textContent || '';
-    var done = function(ok){
-      if (ok) { waysCopy.textContent = 'Скопировано'; }
-      else {
-        waysCopy.textContent = 'Текст выделен';
-        try {
-          var range = document.createRange(); range.selectNodeContents(waysPrompt);
-          var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
-        } catch (e) {}
-      }
-      setTimeout(function(){ waysCopy.textContent = 'Копировать'; }, 1500);
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function(){ done(true); }).catch(function(){ done(false); });
-    } else { done(false); }
-  });
-  // свайп по способам
-  var wsx = null, wsy = null;
-  waysView.addEventListener('touchstart', function(e){
-    if (e.touches.length !== 1) return;
-    wsx = e.touches[0].clientX; wsy = e.touches[0].clientY;
-  }, { passive: true });
-  waysView.addEventListener('touchend', function(e){
-    if (wsx === null) return;
-    var dx = e.changedTouches[0].clientX - wsx, dy = e.changedTouches[0].clientY - wsy;
-    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.3) { dx < 0 ? next() : prev(); }
-    wsx = wsy = null;
-  }, { passive: true });
-
-  if (img) img.addEventListener('error', function () {
-    if (img.getAttribute('src') && img.getAttribute('src').indexOf('@2x') !== -1) img.src = SRC(cur);
-  });
-
-  bNext.addEventListener('click', next); bPrev.addEventListener('click', prev);
-  var zoneTimer = null, suppressClickUntil = 0;
-  function zoneClick(e, dir) {
-    if (e.detail > 1) { if (zoneTimer) clearTimeout(zoneTimer); return; }
-    if (Date.now() < suppressClickUntil) return;
-    if (zoneTimer) clearTimeout(zoneTimer);
-    zoneTimer = setTimeout(function () { dir > 0 ? next() : prev(); }, 350);
-  }
-  document.getElementById('zNext').addEventListener('click', function (e) { zoneClick(e, 1); });
-  document.getElementById('zPrev').addEventListener('click', function (e) { zoneClick(e, -1); });
   stage.addEventListener('click', function (e) {
     if (e.detail === 2) {
       if (Date.now() < suppressClickUntil) return;
@@ -700,66 +477,12 @@
       setZoom(zoom > 1.001 ? 1 : 2, e.clientX, e.clientY);
     }
   });
-  jump.addEventListener('change', function () {
-    if (!this.value) return;
-    if (currentMode === 'ways') {
-      if (!waysData) return;
-      if (this.value === 'all') { renderWay(1, true); return; }
-      var first = waysData.ways.filter(function(w){ return w.section === jump.value; })[0];
-      if (first) renderWay(first.n, true);
-    } else {
-      show(+this.value);
-      this.value = '';
-    }
-  });
-  bZoomIn.addEventListener('click', function () { zoomStep(1); });
-  bZoomOut.addEventListener('click', function () { zoomStep(-1); });
-  bFit.addEventListener('click', function () { setZoom(1); });
-
-  // панель в полном экране
-  var panelTimer = null;
-  function isFull() { return viewer.classList.contains('is-full'); }
-  function showPanel() {
-    if (!isFull()) return;
-    viewer.classList.remove('panel-hidden');
-    if (panelTimer) clearTimeout(panelTimer);
-    panelTimer = setTimeout(function () { if (isFull()) viewer.classList.add('panel-hidden'); }, 3000);
-  }
-  viewer.addEventListener('mousemove', showPanel);
-  viewer.addEventListener('touchstart', showPanel, { passive: true });
-  viewer.addEventListener('pointerdown', showPanel);
-  panel.addEventListener('click', showPanel);
-
-  // клавиатура — только когда листалка на экране
-  var inView = false;
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (es) { inView = es[0].isIntersecting; }, { threshold: .35 }).observe(viewer);
-  } else { inView = true; }
-  document.addEventListener('keydown', function (e) {
-    if (e.target && /INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
-    var full = isFull();
-    if (!inView && !full) return;
-    if (currentMode === 'ways') {
-      if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); next(); }
-      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
-      return;
-    }
-    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); arrowRight(); }
-    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); arrowLeft(); }
-    else if (e.key === '+' || e.key === '=' || e.code === 'NumpadAdd') { e.preventDefault(); zoomStep(1); }
-    else if (e.key === '-' || e.key === '_' || e.code === 'NumpadSubtract') { e.preventDefault(); zoomStep(-1); }
-    else if (e.key === '0') { e.preventDefault(); setZoom(1); }
-    else if (e.key === 'Escape' && full) { exitFull(); }
-  });
-
-  // колесо с Ctrl
   stage.addEventListener('wheel', function (e) {
     if (!e.ctrlKey) return;
     e.preventDefault();
     setZoom(zoom * (e.deltaY < 0 ? 1.15 : 1 / 1.15), e.clientX, e.clientY);
   }, { passive: false });
 
-  // перетаскивание мышью при увеличении
   var dragging = false, dragX = 0, dragY = 0, startTx = 0, startTy = 0;
   stage.addEventListener('pointerdown', function (e) {
     if (e.pointerType !== 'mouse' || e.button !== 0 || zoom <= 1.001) return;
@@ -777,17 +500,11 @@
   stage.addEventListener('pointercancel', endDrag);
 
   var sx = null, sy = null, stx = 0, sty = 0, moved = false;
-  var pinch = null, lastTap = 0, lastX = 0, lastY = 0, touchZoomAt = 0, lastTouchAt = 0;
+  var pinch = null, lastTap = 0, lastX = 0, lastY = 0;
   stage.addEventListener('touchstart', function (e) {
-    lastTouchAt = Date.now();
-    showPanel();
     if (e.touches.length === 2) {
-      pinch = {
-        d: Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY),
-        z: zoom
-      };
-      sx = null;
-      return;
+      pinch = { d: Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY), z: zoom };
+      sx = null; return;
     }
     if (e.touches.length === 1) {
       sx = e.touches[0].clientX; sy = e.touches[0].clientY;
@@ -803,67 +520,44 @@
     }
     if (e.touches.length === 1 && sx !== null && zoom > 1.001) {
       e.preventDefault();
-      tx = stx + (e.touches[0].clientX - sx);
-      ty = sty + (e.touches[0].clientY - sy);
+      tx = stx + (e.touches[0].clientX - sx); ty = sty + (e.touches[0].clientY - sy);
       clampPan(); applyTransform();
       if (Math.abs(e.touches[0].clientX - sx) > 6 || Math.abs(e.touches[0].clientY - sy) > 6) moved = true;
     }
   }, { passive: false });
   stage.addEventListener('touchend', function (e) {
-    if (pinch) {
-      if (e.touches.length < 2) pinch = null;
-      sx = sy = null;
-      return;
-    }
+    if (pinch) { if (e.touches.length < 2) pinch = null; sx = sy = null; return; }
     if (sx === null) return;
     var ex = e.changedTouches[0].clientX, ey = e.changedTouches[0].clientY;
     var dx = ex - sx, dy = ey - sy;
-    if (zoom <= 1.001 && Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.3) {
-      dx < 0 ? next() : prev();
-    } else if (!moved && Math.abs(dx) < 12 && Math.abs(dy) < 12 && zoom > 1.001) {
+    if (zoom <= 1.001 && Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.3) { dx < 0 ? next() : prev(); }
+    else if (!moved && Math.abs(dx) < 12 && Math.abs(dy) < 12 && zoom > 1.001) {
       e.preventDefault();
       var now = Date.now();
       if (now - lastTap < 450 && Math.hypot(ex - lastX, ey - lastY) < 35) {
-        setZoom(1, ex, ey);
-        suppressClickUntil = now + 600;
-        lastTap = 0;
-      } else {
-        lastTap = now; lastX = ex; lastY = ey;
-      }
+        setZoom(1, ex, ey); suppressClickUntil = now + 600; lastTap = 0;
+      } else { lastTap = now; lastX = ex; lastY = ey; }
     }
     sx = sy = null;
   }, { passive: false });
 
-  // полный экран (на iPhone — разворот внутри страницы)
-  function enterFull() {
-    viewer.classList.add('is-full'); document.body.style.overflow = 'hidden';
-    var th = document.getElementById('tapHint'); if (th) th.classList.remove('show');
-    if (viewer.requestFullscreen) { viewer.requestFullscreen().catch(function () {}); }
-    else if (viewer.webkitRequestFullscreen) { try { viewer.webkitRequestFullscreen(); } catch (e) {} }
-    bFull.setAttribute('aria-label', 'Свернуть'); bFull.firstChild.nodeValue = '✕ ';
-    applySource();
-    showPanel();
-    setTimeout(function () { clampPan(); applyTransform(); }, 60);
-  }
-  function exitFull() {
-    viewer.classList.remove('is-full', 'panel-hidden'); document.body.style.overflow = '';
-    if (panelTimer) clearTimeout(panelTimer);
-    if (document.fullscreenElement && document.exitFullscreen) { document.exitFullscreen().catch(function () {}); }
-    else if (document.webkitFullscreenElement && document.webkitExitFullscreen) { document.webkitExitFullscreen(); }
-    bFull.setAttribute('aria-label', 'На весь экран'); bFull.firstChild.nodeValue = '⤢ ';
-    applySource();
-    setTimeout(function () { clampPan(); applyTransform(); }, 60);
-  }
-  bFull.addEventListener('click', function () { isFull() ? exitFull() : enterFull(); });
-  document.addEventListener('fullscreenchange', function () { if (!document.fullscreenElement && isFull()) exitFull(); });
-  window.addEventListener('resize', function () { clampPan(); applyTransform(); });
-
-  // карточки разделов открывают нужную страницу
-  Array.prototype.forEach.call(document.querySelectorAll('.sec-card'), function (c) {
-    c.addEventListener('click', function () { setMode('pdf', true); show(+c.getAttribute('data-page')); document.getElementById('read').scrollIntoView({ behavior: 'smooth' }); });
+  document.addEventListener('keydown', function (e) {
+    if (e.target && /INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
+    var r = readSection.getBoundingClientRect();
+    if (r.bottom <= 0 || r.top >= window.innerHeight) return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    else if (e.key === '+' || e.key === '=' || e.code === 'NumpadAdd') { e.preventDefault(); setZoom(zoom + 0.5); }
+    else if (e.key === '-' || e.key === '_' || e.code === 'NumpadSubtract') { e.preventDefault(); setZoom(zoom - 0.5); }
+    else if (e.key === '0') { e.preventDefault(); resetZoom(); }
   });
 
-  // цели Метрики: скачивание и переход к заявке
+  // карточки разделов открывают нужную страницу и выравнивают листалку
+  Array.prototype.forEach.call(document.querySelectorAll('.sec-card'), function (c) {
+    c.addEventListener('click', function () { show(+c.getAttribute('data-page'), { align: true }); });
+  });
+
+  // цели Метрики
   Array.prototype.forEach.call(document.querySelectorAll('[data-dl]'), function (a) {
     a.addEventListener('click', function () { goal('guide_download', { source: a.getAttribute('data-dl') }); });
   });
@@ -871,7 +565,7 @@
     a.addEventListener('click', function () { goal('enroll_click', { course: a.getAttribute('data-course'), source: 'guide53' }); });
   });
 
-  // подсказка для телефона — один раз за сессию
+  // подсказка двойного тапа — один раз за сессию
   if (window.innerWidth <= 600) {
     var tapHint = document.getElementById('tapHint');
     var seen = false;
@@ -884,32 +578,16 @@
     }
   }
 
-  // deep links: #p12 — страница PDF, #w7 — способ
-  var mw = /^#w(\d{1,2})$/.exec(location.hash);
+  // #p14 — страница 14; #w7 — первая страница
   var mp = /^#p(\d{1,2})$/.exec(location.hash);
-  if (mp) {
-    currentMode = 'pdf';
-    viewer.classList.remove('mode-ways'); viewer.classList.add('mode-pdf');
-    updateModeButtons();
-    jump.innerHTML = pdfJumpHTML;
-    show(+mp[1], false);
-    setTimeout(function(){ document.getElementById('read').scrollIntoView(); }, 50);
-  } else {
-    if (mw) currentWay = +mw[1];
-    viewer.classList.remove('mode-pdf'); viewer.classList.add('mode-ways');
-    updateModeButtons();
-    loadWays().then(function(){
-      if (waysData) {
-        jump.innerHTML = '<option value="all">Все способы</option>' + waysData.sections.map(function(s){ return '<option value="' + esc(s.no) + '">' + esc(s.no + ' · ' + s.title) + '</option>'; }).join('');
-        renderWay(currentWay, false);
-      }
-    });
-    if (mw) setTimeout(function(){ document.getElementById('read').scrollIntoView(); }, 50);
-  }
-  window.addEventListener('hashchange', function(){
-    var w = /^#w(\d{1,2})$/.exec(location.hash), p = /^#p(\d{1,2})$/.exec(location.hash);
-    if (w && currentMode === 'ways' && waysData) renderWay(+w[1], false);
-    if (p) { setMode('pdf', false); show(+p[1], false); }
+  var mw = /^#w(\d{1,2})$/.exec(location.hash);
+  if (mp) { show(+mp[1], { align: true }); }
+  else if (mw) { show(1, { align: true }); }
+  else { show(1, { align: false, hash: false }); }
+  window.addEventListener('hashchange', function () {
+    var p = /^#p(\d{1,2})$/.exec(location.hash), w = /^#w(\d{1,2})$/.exec(location.hash);
+    if (p) show(+p[1], { align: true });
+    else if (w) show(1, { align: true });
   });
 })();
 </script>
