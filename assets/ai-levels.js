@@ -4,6 +4,14 @@
   'use strict';
 
   var mounts = Array.prototype.slice.call(document.querySelectorAll('[data-ai-course]'));
+
+  // Число мест берём из data-group-size, чтобы формулировку не править вручную.
+  Array.prototype.forEach.call(document.querySelectorAll('[data-group-size]'), function (box) {
+    var size = box.getAttribute('data-group-size');
+    var out = box.querySelector('[data-group-count]');
+    if (size && out) out.textContent = size;
+  });
+
   if (!mounts.length) return;
 
   var data = null;
@@ -23,11 +31,6 @@
 
     var level = Number(course.level);
     var theme = mount.getAttribute('data-ai-theme') || 'light';
-    var result = data.results[String(level)] || '';
-    if (!result) {
-      var levelInfo = data.levels.filter(function (item) { return Number(item.n) === level; })[0];
-      if (levelInfo) result = levelInfo.description.charAt(0).toUpperCase() + levelInfo.description.slice(1);
-    }
     var squares = '';
     for (var i = 1; i <= 5; i++) {
       squares += '<span class="ai-level-square' + (i <= level ? ' is-on' : '') + '" aria-hidden="true"></span>';
@@ -35,15 +38,12 @@
 
     mount.innerHTML =
       '<div class="ai-level-box">' +
-        '<p class="ai-level-title">Уровень работы с ИИ после курса: <b>' + level + ' из 5</b></p>' +
-        '<div class="ai-level-scale" aria-hidden="true">' + squares + '</div>' +
-        '<p class="ai-level-result">' + esc(result) + '</p>' +
-        '<p class="ai-level-entry"><b>Что нужно на входе:</b> ' + esc(data.entry) + '</p>' +
-        '<button type="button" class="ai-level-open" data-ai-open>Что значат уровни</button>' +
+        '<div class="ai-level-head">' +
+          '<p class="ai-level-title">Уровень овладения ИИ</p>' +
+          '<button type="button" class="ai-level-help" data-ai-open aria-label="Что значат уровни">?</button>' +
+        '</div>' +
+        '<div class="ai-level-scale" role="img" aria-label="Уровень овладения ИИ: ' + level + ' из 5">' + squares + '</div>' +
       '</div>';
-
-    mount.setAttribute('role', 'group');
-    mount.setAttribute('aria-label', 'Уровень ' + level + ' из 5');
 
     mount.querySelector('[data-ai-open]').addEventListener('click', function () {
       openLegend(course, theme, this);
@@ -89,7 +89,7 @@
 
     view.setAttribute('data-ai-theme', theme);
     view.querySelector('[data-ai-sub]').textContent =
-      course.name + '. Уровень работы с ИИ после курса: ' + level + ' из 5';
+      course.name + '. Уровень овладения ИИ.';
 
     var items = '';
     data.levels.forEach(function (item) {

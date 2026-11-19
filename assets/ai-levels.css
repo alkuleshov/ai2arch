@@ -26,16 +26,39 @@
 }
 .ai-level--about { margin-top: 28px; }
 .ai-level-box { min-width: 0; }
-.ai-level-title {
+.ai-level-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 7px;
   margin: 0 0 8px;
+}
+.ai-level-title {
+  margin: 0;
   font-size: 13px;
   line-height: 1.45;
   font-weight: 600;
   color: var(--ai-muted);
   overflow-wrap: anywhere;
 }
-.ai-level-title b { color: var(--ai-ink); font-weight: 800; white-space: nowrap; }
-.ai-level-scale { display: flex; align-items: center; gap: 6px; margin: 0 0 10px; }
+.ai-level-help {
+  position: relative;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: -1px 0 0;
+  padding: 0;
+  border: 1px solid var(--ai-line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ai-muted);
+  font: 800 12px/1 var(--sans, 'Manrope', sans-serif);
+  cursor: pointer;
+}
+.ai-level-help::before { content: ''; position: absolute; inset: -11px; border-radius: 50%; }
+.ai-level-help:hover { border-color: var(--ai-accent); background: var(--ai-accent-soft); color: var(--ai-accent); }
+.ai-level-help:focus-visible { outline: 2px solid var(--ai-accent); outline-offset: 3px; }
+.ai-level-scale { display: flex; align-items: center; gap: 6px; margin: 0; }
 .ai-level-square {
   display: block;
   width: 15px;
@@ -46,7 +69,8 @@
   background: transparent;
 }
 .ai-level-square.is-on { background: var(--ai-accent); border-color: var(--ai-accent); }
-.ai-level-result {
+/* Старая разметка шкалы остаётся для английской версии (en/*.html). */
+:lang(en) .ai-level-result {
   margin: 0 0 10px;
   max-width: 56ch;
   font-size: 13.5px;
@@ -54,7 +78,7 @@
   color: var(--ai-ink);
   overflow-wrap: anywhere;
 }
-.ai-level-entry {
+:lang(en) .ai-level-entry {
   margin: 0 0 7px;
   padding-top: 9px;
   border-top: 1px solid var(--ai-border);
@@ -63,8 +87,8 @@
   color: var(--ai-muted);
   overflow-wrap: anywhere;
 }
-.ai-level-entry b { color: var(--ai-ink); font-weight: 800; }
-.ai-level-open {
+:lang(en) .ai-level-entry b { color: var(--ai-ink); font-weight: 800; }
+:lang(en) .ai-level-open {
   appearance: none;
   display: inline-flex;
   align-items: center;
@@ -82,8 +106,8 @@
   text-decoration-thickness: 1px;
   cursor: pointer;
 }
-.ai-level-open:hover { text-decoration-thickness: 2px; }
-.ai-level-open:focus-visible { outline: 2px solid var(--ai-accent); outline-offset: 3px; border-radius: 4px; }
+:lang(en) .ai-level-open:hover { text-decoration-thickness: 2px; }
+:lang(en) .ai-level-open:focus-visible { outline: 2px solid var(--ai-accent); outline-offset: 3px; border-radius: 4px; }
 
 /* Легенда */
 .ai-legend {
