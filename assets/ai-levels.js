@@ -71,6 +71,9 @@
     dialog.addEventListener('click', function (event) {
       if (event.target === dialog) closeLegend();
     });
+    window.addEventListener('resize', function () {
+      if (dialog && dialog.open) placeLegend(dialog);
+    });
     dialog.addEventListener('close', function () {
       document.documentElement.classList.remove('ai-legend-open');
       if (lastTrigger) lastTrigger.focus();
@@ -81,6 +84,24 @@
 
   function closeLegend() {
     if (dialog && dialog.open) dialog.close();
+  }
+
+  // Ставим окошко рядом с кнопкой «?»: под ней, а если не помещается — над ней.
+  function placeLegend(view) {
+    if (!lastTrigger) return;
+    var r = lastTrigger.getBoundingClientRect();
+    var vw = document.documentElement.clientWidth;
+    var vh = window.innerHeight;
+    var w = view.offsetWidth;
+    var h = view.offsetHeight;
+    var left = Math.max(12, Math.min(r.left - 8, vw - w - 12));
+    var top = r.bottom + 8;
+    if (top + h > vh - 12) top = r.top - h - 8;
+    top = Math.max(12, Math.min(top, vh - h - 12));
+    view.style.inset = 'auto';
+    view.style.margin = '0';
+    view.style.left = left + 'px';
+    view.style.top = top + 'px';
   }
 
   function openLegend(course, theme, trigger) {
@@ -110,6 +131,7 @@
     if (!view.open) {
       view.showModal();
       document.documentElement.classList.add('ai-legend-open');
+      placeLegend(view);
     }
   }
 
