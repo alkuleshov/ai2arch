@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>AI2ARCH — лаборатория проектного интеллекта (превью)</title>
+<link rel="icon" href="../favicon.ico">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800;900&display=swap">
+<style>
+/* Макет: швейцарская модульная сетка. 4 колонки на телефоне, 8 на десктопе.
+   Видимые линии сетки, тяжёлый гротеск с плотной разрядкой, двухцветные заголовки,
+   цветные строки-индексы вместо кнопок, гигантское слово-марка. Одна светлая тема. */
+:root{
+  color-scheme: light;
+  /* бумага и сетка */
+  --paper:#F6F4F0;      /* тёплый белый брендбука */
+  --grid:#E1DDD5;
+  --cell:#F1E1E7;       /* подсветка ячейки, бледно-розовая */
+  /* текст */
+  --ink:#0A0F1A;        /* «ночь» брендбука */
+  --gray:#848A9A;       /* вторая строка заголовков, крупный текст */
+  --muted:#5A6070;      /* мелкий текст */
+  /* цвета строк-индексов */
+  --azure:#1A82FF;      /* лазурь брендбука: фокус, отметки */
+  --blush:#EDC3D2;      /* ИИ в архитектуре — пыльная роза */
+  --cobalt:#2B4FD8;     /* ИИ в редевелопменте — кобальт, светлый текст */
+  --midnight:#13234B;   /* корпоративное обучение — полночный синий, светлый текст */
+  --powder:#BED0EE;     /* гайд — пудрово-голубой */
+  --sand:#E6D9BE;       /* отзывы — песок, третий тон к синему и розовому */
+  --mist:#D3D9E6;       /* лекции и таймлайн на ku1eshov.ru — серо-голубой */
+  --on-dark:#F6F4F0;
+  --on-dark-2:#EDC3D2;  /* вторая строка заголовка на полночном синем — роза */
+  --panel:#E7E3DB;      /* подложка панели */
+  --ink-hover:#1E2636;
+  /* шрифт */
+  --sans:'Inter Tight', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  /* сетка */
+  --cols:4;
+  --row:88px;
+  --pad:max(16px, env(safe-area-inset-left, 0px));
+  --pad-r:max(16px, env(safe-area-inset-right, 0px));
+}
+@media (min-width: 900px){
+  :root{ --cols:8; --row:120px; --pad:max(32px, env(safe-area-inset-left, 0px)); --pad-r:max(32px, env(safe-area-inset-right, 0px)); }
+}
+
+*{ box-sizing:border-box; }
+html{ background:var(--paper); }
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:15px; line-height:1.35;
+  -webkit-font-smoothing:antialiased; overflow-x:clip;
+}
+a{ color:inherit; }
+:focus-visible{ outline:2px solid var(--azure); outline-offset:3px; }
+
+/* Полоса с видимой сеткой: линии совпадают с колонками контента */
+.band{
+  position:relative;
+  padding-left:var(--pad); padding-right:var(--pad-r);
+  background-image:
+    linear-gradient(to right, var(--grid) 0 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 0 1px, transparent 1px);
+  background-size: calc((100% - var(--pad) - var(--pad-r)) / var(--cols)) 100%, 100% var(--row);
+  background-position: var(--pad) 0, 0 0;
+  border-bottom:1px solid var(--grid);
+}
+.grid{
+  display:grid; grid-template-columns:repeat(var(--cols), minmax(0,1fr));
+  column-gap:0;
+}
+.grid > *{ min-width:0; }
+.pad-cell{ padding:14px 12px 14px 0; }
+
+/* Типографика */
+.display{
+  margin:0; font-weight:800; letter-spacing:-0.045em; line-height:.92;
+  text-wrap:balance;
+}
+.display .g{ color:var(--gray); }
+.small{ margin:0; font-size:12.5px; line-height:1.22; font-weight:500; color:var(--muted); letter-spacing:-0.005em; }
+.small b{ color:var(--ink); font-weight:700; }
+.bullet{ display:flex; gap:7px; align-items:baseline; margin:0; font-size:13px; line-height:1.15; font-weight:700; letter-spacing:-0.01em; }
+.bullet::before{ content:''; flex:none; width:8px; height:8px; border-radius:50%; background:var(--ink); transform:translateY(-1px); }
+.paren{ font-weight:300; letter-spacing:-0.04em; color:var(--gray); }
+
+/* ---------- ШАПКА ---------- */
+.head{ padding-block:18px 0; }
+.brand{ grid-column:span 4; font-size:clamp(34px, 9.5vw, 46px); padding-bottom:18px; }
+.head-text{ grid-column:span 2; padding:2px 14px 16px 0; }
+.head-menu{ grid-column:span 2; display:flex; flex-direction:column; gap:9px; padding:4px 0 16px; }
+.head-menu a{ text-decoration:none; }
+.head-menu a:hover{ text-decoration:underline; text-underline-offset:3px; }
+@media (min-width:900px){
+  .brand{ grid-column:span 2; font-size:40px; }
+  .head-text{ grid-column:span 2; }
+  .head-menu{ grid-column:span 2; }
+  .head-text--2{ grid-column:span 2; }
+}
+.head-text--2{ display:none; }
+@media (min-width:900px){ .head-text--2{ display:block; } }
+
+/* Ряд значков */
+.marks{ display:flex; align-items:center; justify-content:space-between; padding-block:14px 26px; }
+.signs{ display:flex; align-items:center; gap:8px; }
+.signs svg{ display:block; height:52px; width:auto; }
+.goto{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+.goto svg{ width:56px; height:56px; }
+.num-badge{ display:grid; place-items:center; width:52px; height:52px; border-radius:50%; background:var(--ink); color:var(--paper); font-weight:800; font-size:26px; letter-spacing:-0.04em; }
+.goto-cap{ font-size:12.5px; font-weight:600; color:var(--muted); max-width:11ch; line-height:1.15; }
+@media (min-width:900px){ .num-badge{ width:72px; height:72px; font-size:34px; } .signs svg{ height:72px; } .goto svg{ width:76px; height:76px; } }
+
+/* ---------- ПАНЕЛЬ ---------- */
+.stage{ position:relative; padding-block:8px 0; overflow:hidden; }
+.panel{
+  position:relative; z-index:1;
+  margin-inline:auto; width:min(100%, 760px);
+  background:var(--ink); border-radius:26px; padding:8px;
+}
+.panel-in{
+  background:var(--panel); border-radius:19px; padding:8px;
+  display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:6px;
+}
+.panel-bar{ grid-column:1/-1; display:flex; justify-content:space-between; padding:2px 8px 2px; font-size:11px; font-weight:600; color:var(--ink); }
+.tile{
+  position:relative; border-radius:12px; padding:12px; min-height:200px;
+  display:flex; flex-direction:column; justify-content:space-between; text-decoration:none; overflow:hidden;
+}
+.tile h3{ margin:0; font-size:17px; line-height:1; font-weight:800; letter-spacing:-0.03em; }
+.tile .kick{ display:block; margin-bottom:4px; font-size:10.5px; font-weight:600; letter-spacing:-0.005em; opacity:.75; }
+.tile .big{ font-size:56px; line-height:.82; font-weight:800; letter-spacing:-0.06em; }
+.tile .unit{ font-size:11px; font-weight:600; line-height:1.15; }
+.tile-foot{ display:flex; align-items:flex-end; justify-content:space-between; gap:6px; }
+.tile--blush{ background:var(--blush); }
+.tile--cobalt{ background:var(--cobalt); color:var(--on-dark); }
+/* условные обозначения: штриховка разреза и участок с пятном застройки */
+.tile--blush::after{
+  content:''; position:absolute; right:12px; bottom:64px; width:50px; height:50px;
+  border:2px solid var(--ink);
+  background:repeating-linear-gradient(45deg, var(--ink) 0 1.5px, transparent 1.5px 6px);
+}
+.tile--cobalt::after{
+  content:''; position:absolute; right:12px; bottom:64px; width:50px; height:50px;
+  border:2px dashed var(--on-dark);
+  background:
+    linear-gradient(var(--on-dark),var(--on-dark)) left 18% top 18%/56% 30% no-repeat,
+    linear-gradient(var(--on-dark),var(--on-dark)) left 18% bottom 18%/26% 44% no-repeat;
+}
+.tile > *{ position:relative; z-index:1; }
+
+.index{ grid-column:1/-1; display:flex; flex-direction:column; gap:3px; }
+.ix{
+  display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:10px;
+  padding:9px 10px; border-radius:9px; text-decoration:none; color:var(--ink);
+  transition:filter .15s;
+}
+.ix:hover{ filter:brightness(.95); }
+.ix-n{ display:grid; place-items:center; width:20px; height:20px; border-radius:50%; background:var(--ink); color:var(--paper); font-size:11px; font-weight:800; }
+.ix-t{ font-size:19px; line-height:1; font-weight:800; letter-spacing:-0.035em; }
+.ix-s{ display:block; margin-top:3px; font-size:11px; font-weight:600; letter-spacing:0; opacity:.78; line-height:1.2; }
+.ix-go{ width:26px; height:26px; }
+.ix--blush{ background:var(--blush); }
+.ix--cobalt{ background:var(--cobalt); color:var(--on-dark); }
+.ix--midnight{ background:var(--midnight); color:var(--on-dark); }
+.ix--cobalt .ix-n{ background:var(--on-dark); color:var(--cobalt); }
+.ix--midnight .ix-n{ background:var(--blush); color:var(--midnight); }
+.ix--cobalt .ix-s, .ix--midnight .ix-s{ opacity:.9; }
+.ix--powder{ background:var(--powder); } .ix--sand{ background:var(--sand); }
+@media (min-width:900px){
+  .panel-in{ grid-template-columns:repeat(4, minmax(0,1fr)); }
+  .tile{ min-height:250px; padding:14px; }
+  .tile--blush::after, .tile--cobalt::after{ width:68px; height:68px; bottom:96px; right:16px; }
+  .tile h3{ font-size:22px; }
+  .tile .big{ font-size:84px; }
+  .index{ grid-column:3 / span 2; grid-row:2; }
+  .ix-t{ font-size:20px; }
+}
+
+/* Гигантское слово-марка */
+.word{
+  position:relative; z-index:0; margin:-.24em 0 0; padding:0;
+  font-weight:800; letter-spacing:-0.075em; line-height:.76;
+  font-size:22vw; white-space:nowrap; color:var(--ink); width:max-content;
+}
+.word-wrap{ overflow:hidden; padding-bottom:1.2vw; }
+
+
+/* ---------- РАЗДЕЛ: заголовок ---------- */
+.sec-head{ padding-block:20px 18px; }
+.sec-title{ grid-column:span 4; font-size:clamp(32px, 8.4vw, 64px); padding-bottom:14px; }
+.sec-note{ grid-column:span 2; padding-right:12px; }
+.sec-flag{ grid-column:span 2; display:flex; flex-direction:column; gap:8px; }
+@media (min-width:900px){
+  .sec-title{ grid-column:span 5; padding-bottom:0; }
+  .sec-note{ grid-column:6 / span 2; padding-top:6px; }
+  .sec-flag{ grid-column:8 / span 1; padding-top:6px; }
+}
+
+/* ---------- КУРС ---------- */
+.course{ padding-block:24px 28px; row-gap:18px; }
+.c-num{ grid-column:span 4; font-size:56px; line-height:.8; }
+.c-main{ grid-column:span 4; display:flex; flex-direction:column; gap:14px; }
+.c-title{ font-size:clamp(36px, 10vw, 64px); }
+.status{ display:flex; align-items:center; gap:8px; margin:0; font-size:13px; font-weight:700; }
+.status i{ width:9px; height:9px; border-radius:50%; background:var(--cobalt); box-shadow:0 0 0 3px var(--cell); }
+.status span{ color:var(--muted); font-weight:500; }
+.facts{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px 12px; margin:0; }
+.facts div{ min-width:0; }
+.facts dt{ margin:0 0 3px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; }
+.facts dd{ margin:0; font-size:13px; line-height:1.28; font-weight:500; color:var(--muted); }
+.facts .wide{ grid-column:1/-1; }
+.c-side{ grid-column:span 4; display:flex; flex-direction:column; gap:16px; }
+.c-big{ display:flex; align-items:flex-end; gap:10px; }
+.c-big b{ font-size:clamp(96px, 30vw, 168px); line-height:.78; font-weight:800; letter-spacing:-0.07em; }
+.c-big span{ font-size:13px; font-weight:700; line-height:1.15; padding-bottom:6px; }
+.c-big span em{ display:block; font-style:normal; font-weight:500; color:var(--muted); }
+.results{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+.results li{ display:grid; grid-template-columns:22px minmax(0,1fr); gap:8px; align-items:start; font-size:14px; font-weight:600; line-height:1.2; letter-spacing:-0.01em; }
+.results li::before{ counter-increment:r; content:counter(r); display:grid; place-items:center; width:20px; height:20px; border-radius:50%; background:var(--ink); color:var(--paper); font-size:11px; font-weight:800; }
+.results{ counter-reset:r; }
+.results-cap{ margin:0; font-size:12.5px; font-weight:800; }
+.actions{ display:flex; flex-wrap:wrap; gap:8px; }
+.btn{
+  display:inline-flex; align-items:center; gap:10px; min-height:48px; padding:0 18px;
+  border-radius:999px; font-size:15px; font-weight:700; letter-spacing:-0.01em; text-decoration:none;
+  border:1.5px solid var(--ink);
+}
+.btn--solid{ background:var(--ink); color:var(--paper); }
+.btn--solid:hover{ background:var(--ink-hover); }
+.btn--line:hover{ background:var(--cell); }
+.btn svg{ width:15px; height:15px; }
+@media (min-width:900px){
+  .course{ row-gap:0; }
+  .c-num{ grid-column:span 1; font-size:64px; }
+  .c-main{ grid-column:2 / span 4; padding-right:28px; }
+  .c-side{ grid-column:6 / span 3; }
+}
+.reviews-link{ padding-block:16px; }
+.reviews-link a{ grid-column:1/-1; display:flex; align-items:center; justify-content:space-between; gap:12px; text-decoration:none; font-size:clamp(22px, 5.6vw, 34px); font-weight:800; letter-spacing:-0.04em; line-height:1; }
+.reviews-link a .g{ color:var(--gray); }
+.reviews-link svg{ flex:none; width:40px; height:40px; }
+
+/* ---------- КОРПОРАТИВНОЕ ---------- */
+.corp{ background-color:var(--midnight); color:var(--on-dark); border-bottom:0;
+  background-image:
+    linear-gradient(to right, rgba(246,244,240,.10) 0 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(246,244,240,.10) 0 1px, transparent 1px); }
+.corp .grid{ padding-block:22px 26px; row-gap:16px; }
+.corp-k{ grid-column:span 4; display:flex; justify-content:space-between; align-items:flex-start; }
+.corp-k .small{ color:rgba(246,244,240,.75); }
+.corp-mark{ font-size:clamp(64px, 18vw, 120px); font-weight:800; letter-spacing:-0.07em; line-height:.8; }
+.corp-title{ grid-column:span 4; font-size:clamp(34px, 9vw, 60px); }
+.corp-title .g{ color:var(--on-dark-2); }
+.corp-text{ grid-column:span 4; margin:0; font-size:15px; line-height:1.35; font-weight:500; color:rgba(246,244,240,.85); max-width:52ch; }
+.corp .btn{ border-color:var(--blush); background:var(--blush); color:var(--midnight); }
+.corp .btn:hover{ background:var(--on-dark); border-color:var(--on-dark); }
+.corp-act{ grid-column:span 4; }
+@media (min-width:900px){
+  .corp-k{ grid-column:span 2; flex-direction:column; gap:18px; }
+  .corp-mark{ font-size:84px; }
+  .corp-title{ grid-column:3 / span 4; }
+  .corp-text{ grid-column:3 / span 4; }
+  .corp-act{ grid-column:3 / span 4; }
+}
+
+/* ---------- РУКОВОДИТЕЛЬ ---------- */
+.lead-row{ padding-block:20px; row-gap:12px; }
+.lead-k{ grid-column:span 4; }
+.lead-name{ grid-column:span 4; font-size:clamp(28px, 7.4vw, 44px); }
+.lead-role{ grid-column:span 4; }
+.lead-links{ grid-column:span 4; display:flex; flex-wrap:wrap; gap:8px; }
+.lead-links .btn{ min-height:44px; font-size:14px; }
+@media (min-width:900px){
+  .lead-k{ grid-column:span 2; padding-top:8px; }
+  .lead-name{ grid-column:3 / span 4; }
+  .lead-role{ grid-column:3 / span 3; }
+  .lead-links{ grid-column:7 / span 2; flex-direction:column; align-items:flex-start; }
+}
+
+/* ---------- ИНСТРУМЕНТЫ ---------- */
+.tools{ padding-block:0; }
+.tool{ grid-column:span 2; min-height:72px; padding:10px 10px 10px 8px; display:flex; flex-direction:column; justify-content:space-between; }
+.tool small{ font-size:10.5px; font-weight:600; color:var(--gray); font-variant-numeric:tabular-nums; }
+.tool b{ font-size:15px; font-weight:800; letter-spacing:-0.03em; line-height:1.02; overflow-wrap:anywhere; }
+@media (min-width:900px){ .tool{ grid-column:span 1; min-height:var(--row); } .tool b{ font-size:20px; } }
+.tool--on{ background:var(--cell); }
+.tools-note{ padding-block:14px 18px; }
+.tools-note p{ grid-column:span 4; }
+@media (min-width:900px){ .tools-note p{ grid-column:3 / span 4; } }
+
+/* ---------- УДОСТОВЕРЕНИЕ ---------- */
+.cert{ padding-block:22px; row-gap:12px; }
+.cert-title{ grid-column:span 4; font-size:clamp(30px, 8vw, 52px); }
+.cert-text{ grid-column:span 4; margin:0; font-size:15px; line-height:1.38; font-weight:500; color:var(--muted); max-width:56ch; }
+.cert-text b{ color:var(--ink); font-weight:700; }
+@media (min-width:900px){ .cert-title{ grid-column:span 4; } .cert-text{ grid-column:5 / span 4; padding-top:8px; } }
+
+/* ---------- ПОДВАЛ ---------- */
+.foot{ padding-block:18px 26px; row-gap:14px; }
+.foot-a{ grid-column:span 2; }
+.foot-b{ grid-column:span 2; }
+.foot-c{ grid-column:span 4; }
+.foot-a p, .foot-b p{ margin:0; font-size:13px; font-weight:700; letter-spacing:-0.01em; }
+.foot-b p{ color:var(--gray); }
+@media (min-width:900px){ .foot-a{ grid-column:span 1; } .foot-b{ grid-column:span 1; } .foot-c{ grid-column:4 / span 4; } }
+
+
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+
+</head>
+<body>
+<!-- ШАПКА -->
+<header class="band head">
+  <div class="grid">
+    <h1 class="display brand">AI2ARCH <span class="g">Лаборатория проектного интеллекта</span></h1>
+    <p class="small head-text">Исследуем, как ИИ работает в&nbsp;архитектуре, градостроительстве и&nbsp;девелопменте.</p>
+    <nav class="head-menu" aria-label="Разделы">
+      <a class="bullet" href="../corp.html">Корпоративное обучение</a>
+      <a class="bullet" href="../53.html">Гайд «53 способа»</a>
+    </nav>
+    <p class="small head-text head-text--2">Разрабатываем методики анализа объектов и&nbsp;территорий и&nbsp;передаём их специалистам и&nbsp;проектным командам.</p>
+  </div>
+  <div class="marks">
+    <div class="signs" aria-hidden="true">
+      <!-- стрелка севера -->
+      <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="31" fill="#0A0F1A"/><path d="M32 9 L45 45 L32 37 L19 45 Z" fill="#F6F4F0"/><path d="M32 9 L32 37 L19 45 Z" fill="#0A0F1A" stroke="#F6F4F0" stroke-width="2.5" stroke-linejoin="round"/><text x="32" y="58" text-anchor="middle" font-family="Inter Tight, Arial, sans-serif" font-weight="800" font-size="10" fill="#F6F4F0">С</text></svg>
+      <!-- выноска разреза -->
+      <svg viewBox="0 0 92 64"><path d="M60 14 L90 32 L60 50 Z" fill="#0A0F1A"/><circle cx="32" cy="32" r="28.5" fill="#F6F4F0" stroke="#0A0F1A" stroke-width="5"/><path d="M4 32 H60" stroke="#0A0F1A" stroke-width="4"/><text x="32" y="26" text-anchor="middle" font-family="Inter Tight, Arial, sans-serif" font-weight="800" font-size="17" fill="#0A0F1A">1</text><text x="32" y="50" text-anchor="middle" font-family="Inter Tight, Arial, sans-serif" font-weight="700" font-size="12" fill="#0A0F1A">А-01</text></svg>
+    </div>
+    <a class="goto" href="#courses" aria-label="Перейти к курсам: открыт набор на 2 курса">
+      <span class="goto-cap">Набор открыт</span>
+      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M14 50 L46 18 M22 16 H48 V42" fill="none" stroke="#0A0F1A" stroke-width="9" stroke-linecap="square"/></svg>
+      <span class="num-badge" aria-hidden="true">2</span>
+    </a>
+  </div>
+</header>
+
+<!-- ПАНЕЛЬ И МАРКА -->
+<section class="band stage" aria-label="Направления лаборатории">
+  <div class="panel">
+    <div class="panel-in">
+      <div class="panel-bar"><span>AI2ARCH</span><span>Ростов-на-Дону · онлайн</span></div>
+      <a class="tile tile--blush" href="../archi.html">
+        <div><span class="kick">Ступень 1</span><h3>ИИ в&nbsp;архитектуре</h3></div>
+        <div class="tile-foot"><span class="big">22</span><span class="unit">ак. часа<br>5&nbsp;000&nbsp;₽</span></div>
+      </a>
+      <a class="tile tile--cobalt" href="../redev.html">
+        <div><span class="kick">Ступень 2</span><h3>ИИ в&nbsp;редевелоп&shy;менте</h3></div>
+        <div class="tile-foot"><span class="big">72</span><span class="unit">ак. часа<br>18&nbsp;900&nbsp;₽</span></div>
+      </a>
+      <nav class="index" aria-label="Все направления">
+        <a class="ix ix--blush" href="../archi.html"><span class="ix-n">1</span><span class="ix-t">ИИ в&nbsp;архитектуре<span class="ix-s">Повышение квалификации ЮФУ</span></span><svg class="ix-go" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 17 L17 9 M11 9 H17 V15" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        <a class="ix ix--cobalt" href="../redev.html"><span class="ix-n">2</span><span class="ix-t">ИИ в&nbsp;редевелопменте<span class="ix-s">Повышение квалификации ЮФУ</span></span><svg class="ix-go" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 17 L17 9 M11 9 H17 V15" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        <a class="ix ix--midnight" href="../corp.html"><span class="ix-n">3</span><span class="ix-t">Корпоративное обучение<span class="ix-s">Для проектных бюро</span></span><svg class="ix-go" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 17 L17 9 M11 9 H17 V15" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        <a class="ix ix--powder" href="../53.html"><span class="ix-n">4</span><span class="ix-t">Гайд «53 способа»<span class="ix-s">ИИ в&nbsp;архитектуре</span></span><svg class="ix-go" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 17 L17 9 M11 9 H17 V15" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        <a class="ix ix--sand" href="../archi.html#reviews"><span class="ix-n">5</span><span class="ix-t">Отзывы и&nbsp;проекты<span class="ix-s">Работы слушателей</span></span><svg class="ix-go" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 17 L17 9 M11 9 H17 V15" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+      </nav>
+    </div>
+  </div>
+  <div class="word-wrap" aria-hidden="true"><p class="word">AI2ARCH</p></div>
+</section>
+
+<!-- КУРСЫ -->
+<section id="courses" aria-labelledby="courses-h">
+  <div class="band sec-head">
+    <div class="grid">
+      <h2 id="courses-h" class="display sec-title">Курсы <span class="g">повышения квалификации ЮФУ</span></h2>
+      <p class="small sec-note">Старт после набора группы. Оставьте заявку — мы согласуем дату старта.</p>
+      <div class="sec-flag"><p class="bullet">Удостоверение ЮФУ</p><p class="bullet">Онлайн</p></div>
+    </div>
+  </div>
+
+  <article class="band">
+    <div class="grid course">
+      <p class="display paren c-num">(01)</p>
+      <div class="c-main">
+        <p class="small"><b>Ступень 1</b> · Повышение квалификации ЮФУ</p>
+        <h3 class="display c-title">ИИ в&nbsp;архитектуре</h3>
+        <p class="status"><i aria-hidden="true"></i>Группа набирается <span>· на 12 человек</span></p>
+        <dl class="facts">
+          <div class="wide"><dt>Для кого</dt><dd>Студентам и&nbsp;начинающим, архитекторам, урбанистам и&nbsp;дизайнерам среды, преподавателям творческих и&nbsp;архитектурных специальностей. Опыт в&nbsp;нейросетях не&nbsp;нужен.</dd></div>
+          <div><dt>Формат</dt><dd>Онлайн · 22 ак. часа · 2,5 недели</dd></div>
+          <div><dt>Стоимость</dt><dd>5&nbsp;000&nbsp;₽, рассрочка в&nbsp;2 этапа</dd></div>
+        </dl>
+        <div class="actions">
+          <a class="btn btn--solid" href="../archi.html#enroll">Оставить заявку <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 L13 3 M5 3 H13 V11" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+          <a class="btn btn--line" href="../archi.html">Подробнее</a>
+        </div>
+      </div>
+      <div class="c-side">
+        <div class="c-big"><b>22</b><span>ак. часа<em>2,5 недели онлайн</em></span></div>
+        <p class="results-cap">Три результата курса</p>
+        <ol class="results">
+          <li>Цифровая модель территории в&nbsp;QGIS</li>
+          <li>ИИ-анализ с&nbsp;прогнозом сценариев</li>
+          <li>Интерактивная презентация в&nbsp;Gamma</li>
+        </ol>
+      </div>
+    </div>
+  </article>
+
+  <article class="band">
+    <div class="grid course">
+      <p class="display paren c-num">(02)</p>
+      <div class="c-main">
+        <p class="small"><b>Ступень 2</b> · Повышение квалификации ЮФУ</p>
+        <h3 class="display c-title">ИИ в&nbsp;редевелопменте</h3>
+        <p class="status"><i aria-hidden="true"></i>Группа набирается <span>· на 10 человек</span></p>
+        <dl class="facts">
+          <div class="wide"><dt>Для кого</dt><dd>Проектировщикам и&nbsp;тем, кто считает деньги: архитекторам, аналитикам, девелоперам, инвесторам, собственникам.</dd></div>
+          <div><dt>Формат</dt><dd>Онлайн · 72 ак. часа · 4,5 недели</dd></div>
+          <div><dt>Стоимость</dt><dd>18&nbsp;900&nbsp;₽, рассрочка в&nbsp;2 этапа. Выпускникам «ИИ в&nbsp;архитектуре» — 14&nbsp;900&nbsp;₽</dd></div>
+        </dl>
+        <div class="actions">
+          <a class="btn btn--solid" href="../redev.html#apply">Оставить заявку <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 L13 3 M5 3 H13 V11" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+          <a class="btn btn--line" href="../redev.html">Подробнее</a>
+        </div>
+      </div>
+      <div class="c-side">
+        <div class="c-big"><b>72</b><span>ак. часа<em>4,5 недели онлайн</em></span></div>
+        <p class="results-cap">Три результата курса</p>
+        <ol class="results">
+          <li>Проект по&nbsp;реальному объекту с&nbsp;расчётами и&nbsp;визуальным рядом</li>
+          <li>Инвестиционный концепт-паспорт или архитектурно-визуальное исследование</li>
+          <li>Библиотека промптов и&nbsp;шаблонов для предпроектной аналитики</li>
+        </ol>
+      </div>
+    </div>
+  </article>
+
+  <div class="band reviews-link">
+    <div class="grid">
+      <a href="../archi.html#reviews"><span>Отзывы <span class="g">и&nbsp;проекты слушателей</span></span><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M14 50 L46 18 M22 16 H48 V42" fill="none" stroke="#0A0F1A" stroke-width="7" stroke-linecap="square"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- КОРПОРАТИВНОЕ -->
+<section class="band corp" aria-labelledby="corp-h">
+  <div class="grid">
+    <div class="corp-k"><p class="small">Корпоративное обучение</p><span class="corp-mark" aria-hidden="true">Бюро</span></div>
+    <h2 id="corp-h" class="display corp-title">Обучение ИИ <span class="g">для проектного бюро</span></h2>
+    <p class="corp-text">Практикум на&nbsp;живых проектах вашей команды: анализ участка, концепции, визуализации, Revit, нормы и&nbsp;тексты. Очно в&nbsp;Ростове-на-Дону или онлайн. Соберите программу в&nbsp;конструкторе — стоимость видна сразу.</p>
+    <div class="corp-act"><a class="btn" href="../corp.html">Собрать программу для команды <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13 L13 3 M5 3 H13 V11" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></div>
+  </div>
+</section>
+
+<!-- РУКОВОДИТЕЛЬ -->
+<section class="band" aria-labelledby="lead-h">
+  <div class="grid lead-row">
+    <p class="bullet lead-k">Руководитель лаборатории</p>
+    <h2 id="lead-h" class="display lead-name">Кулешов Александр <span class="g">Алексеевич</span></h2>
+    <p class="small lead-role">AI Product &amp; Spatial Intelligence Strategist · 15+ лет в&nbsp;архитектуре, КРТ и&nbsp;редевелопменте · Основатель ai2arch</p>
+    <div class="lead-links">
+      <a class="btn btn--line" href="https://ku1eshov.ru">ku1eshov.ru</a>
+      <a class="btn btn--line" href="https://t.me/alkuleshov">Написать в&nbsp;Telegram</a>
+    </div>
+  </div>
+</section>
+
+<!-- ИНСТРУМЕНТЫ -->
+<section aria-labelledby="tools-h">
+  <div class="band sec-head">
+    <div class="grid">
+      <h2 id="tools-h" class="display sec-title">С&nbsp;чем <span class="g">работаем</span></h2>
+      <p class="small sec-note">Программы и&nbsp;сервисы, которые используем в&nbsp;исследованиях и&nbsp;на&nbsp;занятиях.</p>
+    </div>
+  </div>
+  <div class="band tools">
+    <ul class="grid" style="list-style:none;margin:0;padding:0">
+      <li class="tool tool--on"><small>01 · ГИС</small><b>QGIS</b></li>
+      <li class="tool"><small>02 · ГИС</small><b>Open&shy;StreetMap</b></li>
+      <li class="tool"><small>03 · ГИС</small><b>НСПД</b></li>
+      <li class="tool"><small>04 · ГИС</small><b>Open&shy;Topography</b></li>
+      <li class="tool tool--on"><small>05 · LLM</small><b>ChatGPT</b></li>
+      <li class="tool"><small>06 · LLM</small><b>Claude</b></li>
+      <li class="tool"><small>07 · LLM</small><b>Gemini</b></li>
+      <li class="tool"><small>08 · LLM</small><b>Алиса AI</b></li>
+      <li class="tool tool--on"><small>09 · Изобр.</small><b>Stable Diffusion</b></li>
+      <li class="tool"><small>10 · Изобр.</small><b>ComfyUI</b></li>
+      <li class="tool"><small>11 · Изобр.</small><b>Control&shy;Net</b></li>
+      <li class="tool"><small>12 · Изобр.</small><b>Flux</b></li>
+      <li class="tool"><small>13 · Изобр.</small><b>Midjourney</b></li>
+      <li class="tool"><small>14 · Изобр.</small><b>Photoshop</b></li>
+      <li class="tool tool--on"><small>15 · Подача</small><b>Gamma</b></li>
+      <li class="tool"><small>16 · Подача</small><b>Notion</b></li>
+    </ul>
+  </div>
+  <div class="band tools-note">
+    <div class="grid"><p class="small">ComfyUI и&nbsp;ControlNet показываем обзорно: настраивать их самостоятельно не&nbsp;нужно. Названия и&nbsp;логотипы принадлежат их владельцам.</p></div>
+  </div>
+</section>
+
+<!-- УДОСТОВЕРЕНИЕ -->
+<section class="band" aria-labelledby="cert-h">
+  <div class="grid cert">
+    <h2 id="cert-h" class="display cert-title">Удостоверение <span class="g">ЮФУ</span></h2>
+    <p class="cert-text">Выдаёт <b>Южный федеральный университет, Академия архитектуры и&nbsp;искусств</b>. Удостоверение получают слушатели с&nbsp;высшим образованием. Остальным после защиты выдаётся справка — до&nbsp;получения высшего образования.</p>
+  </div>
+</section>
+
+<!-- ПОДВАЛ -->
+<footer class="band">
+  <div class="grid foot">
+    <div class="foot-a"><p>AI2ARCH</p></div>
+    <div class="foot-b"><p>Лаборатория проектного интеллекта</p></div>
+    <div class="foot-c">
+      <p class="small"><b>Мы объединяем архитектуру, данные и&nbsp;искусственный интеллект, чтобы проектировать будущее городов и&nbsp;территорий.</b></p>
+      <p class="small" style="margin-top:8px">Исследования и&nbsp;методики · курсы на&nbsp;базе ААИ ЮФУ · обучение проектных бюро · Ростов-на-Дону</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Марка AI2ARCH растягивается ровно на ширину полосы */
+(function(){
+  var w=document.querySelector('.word'); if(!w) return;
+  function fit(){
+    w.style.fontSize='100px';
+    var box=w.parentElement.clientWidth, real=w.getBoundingClientRect().width;
+    if(real>0) w.style.fontSize=(100*box/real*0.985)+'px';
+  }
+  fit();
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
+  addEventListener('resize',fit);
+})();
+</script>
+
+</body>
+</html>
