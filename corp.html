@@ -65,6 +65,10 @@ section.blk{padding:46px 0}
 .pc .who{font-size:13px;color:var(--muted);min-height:40px}
 .pc .pr{font-size:26px;font-weight:800;letter-spacing:-.02em;color:var(--navy);margin:14px 0 2px}
 .pc .hrs{font-size:12.5px;color:var(--faint)}
+.pc .ppl{display:inline-flex;align-self:flex-start;align-items:center;gap:6px;margin-top:8px;font-size:12.5px;font-weight:700;color:var(--navy);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px 10px}
+.pc.sel .ppl{color:#fff;background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2)}
+.pc li small{font-size:11.5px;color:var(--faint);margin-left:4px;white-space:nowrap}
+.pc.sel li small{color:#8A96AD}
 .pc ul{list-style:none;margin:14px 0 16px;padding-top:12px;border-top:1px dashed var(--line);display:grid;gap:6px;flex:1}
 .pc li{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--ink)}
 .pc li i{font-style:normal;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;white-space:nowrap;align-self:center}
@@ -75,7 +79,7 @@ section.blk{padding:46px 0}
 .pc.sel ul{border-color:rgba(255,255,255,.2)}
 .pc.sel .pick{background:#fff;color:var(--navy)}
 .pc.own{border-style:dashed;background:transparent}
-.pc.own.sel{border-style:solid}
+.pc.own.sel{border-style:solid;background:var(--navy)}
 .pc.own p{font-size:13px;color:var(--muted);margin:14px 0 16px;flex:1}
 .pc.sel.own p{color:#B8C2D6}
 /* builder */
@@ -291,7 +295,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <div class="sum-h"><div class="kicker">Ваша программа</div><span class="pid" id="progId"></span><button class="x" type="button" id="closeSheet" aria-label="Закрыть">✕</button></div>
         <div class="total" id="total">0 ₽</div>
         <div class="sub" id="perPerson"></div>
-        <div class="stats"><div><b id="stMods">0</b><span>модулей</span></div><div><b id="stOff">0</b><span>ч очно</span></div><div><b id="stOn">0</b><span>ч онлайн</span></div></div>
+        <div class="stats"><div><b id="stMods">0</b><span>модулей</span></div><div><b id="stOff">0</b><span>часов очно</span></div><div><b id="stOn">0</b><span>часов онлайн</span></div></div>
         <div class="cv-h">Канва программы <span>⋮⋮ меняет порядок</span></div>
         <ol class="canvas" id="canvas"></ol>
         <div class="warn" id="warn"></div>
@@ -353,6 +357,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <script>
 const {D, LV, FMT, byId, CAT, isNum, rub, num, clampN, tierOf, blank, presetState, eff, cost, totals} = Corp;
 const $ = s => document.querySelector(s);
+const plural = (n, one, few, many) => { if (!Number.isInteger(n)) return few; const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many; };
+const hours = h => `${num(h)} ${plural(h, 'час', 'часа', 'часов')}`;
+const people = n => `${n} ${plural(n, 'человек', 'человека', 'человек')}`;
 let S;
 
 /* ---------- render ---------- */
@@ -365,13 +372,13 @@ function renderFacts(){
 function renderPrograms(){
   const cards = Object.keys(D.presets).map(k => {
     const p = D.presets[k], st = presetState(k), T = totals(st);
-    const items = st.order.filter(id => st.m[id].lvl >= 0).map(id => `<li><span>${byId[id].name}</span><i class="d${st.m[id].lvl}">${LV[st.m[id].lvl]}</i></li>`).join('');
+    const items = st.order.filter(id => st.m[id].lvl >= 0).map(id => { const e = eff(st, id); return `<li><span>${byId[id].name}${T.minN !== T.maxN ? `<small>${people(e.n)}</small>` : ''}</span><i class="d${st.m[id].lvl}">${LV[st.m[id].lvl]}</i></li>`; }).join('');
     return `<div class="pc ${S.preset===k?'sel':''}"><div class="tagline">${p.tag}</div><h3>${p.name}</h3><div class="who">${p.who}</div>
-      <div class="pr">${rub(T.t)}</div><div class="hrs">${num(T.off)} ч очно · ${num(T.on)} ч онлайн</div>
+      <div class="pr">${rub(T.t)}</div><div class="hrs">${hours(T.off)} очно · ${hours(T.on)} онлайн</div><div class="ppl">${T.minN === T.maxN ? 'Группа ' + people(T.maxN) : `Группы от ${T.minN} до ${people(T.maxN)}`}</div>
       <ul>${items}</ul><button type="button" class="btn dark pick" data-preset="${k}">${S.preset===k?'Выбрано':'Выбрать'}</button></div>`;
   }).join('');
   $('#progs').innerHTML = cards + `<div class="pc own ${S.preset==='own'?'sel':''}"><div class="tagline">Своя</div><h3>Собрать с нуля</h3><div class="who">Только нужные модули</div>
-    <div class="pr">от ${rub(D.start.price)}</div><div class="hrs">включён модуль «Старт»</div>
+    <div class="pr">от ${rub(D.start.price)}</div><div class="hrs">включён модуль «Старт»</div><div class="ppl">Группа от 1 до 20 человек</div>
     <p>Выберите модули и глубину в конструкторе. Стоимость пересчитывается сразу.</p><button type="button" class="btn dark pick" data-preset="own">${S.preset==='own'?'Выбрано':'Собрать'}</button></div>`;
 }
 function renderParams(){
@@ -427,7 +434,7 @@ function renderCanvas(){
   $('#pay').href = Corp.orderUrl(code);
   $('#pay').classList.toggle('off', !T.mods); $('#pdf').classList.toggle('off', !T.mods);
   $('#barTotal').textContent = rub(T.t);
-  $('#barSub').textContent = `${T.mods} модулей · ${num(T.off)} ч очно · ${num(T.on)} ч онлайн`;
+  $('#barSub').textContent = `${T.mods} модулей · ${hours(T.off)} очно · ${hours(T.on)} онлайн`;
 }
 let shown = null;
 function animate(el, to){
