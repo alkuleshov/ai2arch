@@ -21,7 +21,7 @@ button{font-family:var(--sans);cursor:pointer;color:inherit}
 /* header */
 .hd{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--head);background:rgba(246,244,240,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .hd .wrap{height:100%;display:flex;align-items:center;gap:18px}
-.hd-back{display:flex;align-items:center;gap:10px;color:var(--navy);white-space:nowrap;text-decoration:none!important}.hd-back img{border-radius:8px}.hd-back b{display:block;font-size:14px;line-height:1.1;font-weight:800}.hd-back small{display:block;font-size:10.5px;line-height:1.2;color:var(--faint);font-weight:700}
+.hd-back{display:flex;align-items:center;gap:10px;color:var(--navy);white-space:nowrap;text-decoration:none!important}.hd-back img{width:40px;height:40px}.hd-back b{display:block;font-size:17px;line-height:1.1;font-weight:700;letter-spacing:.02em}.hd-back small{display:block;font-size:11px;line-height:1.2;color:var(--faint);font-weight:600;margin-top:2px}
 .hd nav{display:flex;gap:4px;flex:1;justify-content:center}
 .hd nav a{font-size:13px;font-weight:700;color:var(--muted);padding:7px 11px;border-radius:999px}
 .hd nav a:hover{background:#fff;color:var(--navy);text-decoration:none}
@@ -29,7 +29,6 @@ button{font-family:var(--sans);cursor:pointer;color:inherit}
 .hd-btn:hover{background:var(--accent)}
 /* hero */
 .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:calc(var(--head) + 36px) 0 48px;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(10,15,26,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(10,15,26,.05) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse at 70% 30%,#000 10%,transparent 70%);mask-image:radial-gradient(ellipse at 70% 30%,#000 10%,transparent 70%);pointer-events:none}
 .hero .wrap{position:relative;width:100%;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;align-items:center}
 .kicker{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
 h1{font-size:clamp(32px,5.2vw,56px);line-height:1.04;letter-spacing:-.025em;color:var(--navy);margin-bottom:18px}
@@ -76,14 +75,19 @@ section.blk{padding:46px 0}
 .pc.sel .ppl{color:#fff;background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2)}
 .pc li small{font-size:11.5px;color:var(--faint);margin-left:4px;white-space:nowrap}
 .pc.sel li small{color:#8A96AD}
-.pc ul{list-style:none;margin:14px 0 16px;padding-top:12px;border-top:1px dashed var(--line);display:grid;gap:6px;flex:1}
+.pc-more{margin:14px 0 16px;border-top:1px dashed var(--line);padding-top:10px}
+.pc-more summary{cursor:pointer;list-style:none;font-size:13px;font-weight:800;color:var(--accent);display:flex;justify-content:space-between}
+.pc-more summary::-webkit-details-marker{display:none}
+.pc-more summary::after{content:'▾'}.pc-more[open] summary::after{content:'▴'}
+.pc.sel .pc-more summary{color:#8FB4FF}
+.pc ul{list-style:none;margin-top:10px;display:grid;gap:6px}
 .pc li{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--ink)}
 .pc li i{font-style:normal;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;white-space:nowrap;align-self:center}
 .d0{background:var(--accent-l);color:var(--accent)}.d1{background:var(--accent);color:#fff}.d2{background:var(--navy);color:#fff}
 .pc .pick{margin-top:auto}
 .pc.sel{background:var(--navy);border-color:var(--navy);color:#fff}
 .pc.sel h3,.pc.sel .pr,.pc.sel li{color:#fff}.pc.sel .who,.pc.sel .hrs{color:#B8C2D6}.pc.sel .tagline{color:#8FB4FF}
-.pc.sel ul{border-color:rgba(255,255,255,.2)}
+.pc.sel .pc-more{border-color:rgba(255,255,255,.2)}
 .pc.sel .pick{background:#fff;color:var(--navy)}
 .pc.own{border-style:dashed;background:transparent}
 .pc.own.sel{border-style:solid;background:var(--navy)}
@@ -194,7 +198,11 @@ aside{position:sticky;top:calc(var(--head) + 14px)}
 .faq details[open] summary::after{content:'–'}
 .faq p{font-size:14px;color:var(--muted);padding:0 0 16px}
 footer{border-top:1px solid var(--line);padding:28px 0 120px;font-size:12.5px;color:var(--faint)}
-footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer .ft-row{display:grid;grid-template-columns:auto 1fr 1fr;gap:12px 32px;align-items:center}
+.ft-brand{display:flex;align-items:center;gap:12px;color:var(--navy);text-decoration:none!important}
+.ft-brand b{display:block;font-size:19px;line-height:1.1;font-weight:700;letter-spacing:.02em}.ft-brand small{display:block;font-size:11.5px;color:var(--faint);font-weight:600;margin-top:2px}
+.ft-note{text-align:right}
+@media(max-width:900px){footer .ft-row{grid-template-columns:minmax(0,1fr)}.ft-note{text-align:left}}
 .bar{display:none}
 .toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,20px);background:var(--navy);color:#fff;font-size:13px;font-weight:700;padding:10px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:all .2s;z-index:120;max-width:90vw;text-align:center}
 .toast.show{opacity:1;transform:translate(-50%,0)}
@@ -263,7 +271,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </head>
 <body>
 <header class="hd"><div class="wrap">
-  <a class="hd-back" href="./" aria-label="AI2ARCH — на главную"><img src="images/ai2arch-sign.png" width="32" height="32" alt=""><span><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
+  <a class="hd-back" href="./" aria-label="AI2ARCH — на главную"><img src="images/ai2arch-sign.png" width="40" height="40" alt=""><span><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
   <nav><a href="#programs">Программы</a><a href="#builder">Конструктор</a><a href="#terms">Условия</a><a href="#faq">Вопросы</a></nav>
   <button class="hd-btn" id="shareTop" type="button">Скопировать ссылку</button>
 </div></header>
@@ -360,7 +368,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <div class="talk"><p><strong>Не нашли свой вопрос? Спросите нас, ответим лично и по-человечески.</strong></p><a class="talk-btn" data-tg href="https://t.me/alkuleshov" target="_blank" rel="noopener">Записаться на консультацию</a></div>
 </div></section>
 
-<footer><div class="wrap"><span>AI2ARCH · лаборатория проектного интеллекта · ai2arch.ru<br><span id="reqLine"></span></span><span>Цены ориентировочные, без НДС. Стоимость, дни и время занятий фиксируются в счёте-договоре.</span></div></footer>
+<footer><div class="wrap ft-row">
+  <a class="ft-brand" href="./"><img src="images/ai2arch-tile.png" width="48" height="48" alt=""><span><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
+  <p class="ft-req"><span id="reqLine"></span></p>
+  <p class="ft-note">Цены ориентировочные, без НДС. Стоимость, дни и время занятий фиксируются в счёте-договоре.</p>
+</div></footer>
 
 <button class="bar" id="bar" type="button"><div><b id="barTotal">0 ₽</b><span id="barSub"></span></div><i>Программа ↑</i></button>
 <div class="shade" id="shade"></div>
@@ -391,13 +403,14 @@ function renderHero(){
 function renderFacts(){
   $('#facts').innerHTML = [`${CAT.length} модулей`, '3 уровня глубины', 'очно или онлайн', 'счёт-договор'].map(t => `<span>${t}</span>`).join('');
 }
+const modsN = st => { const n = st.order.filter(id => st.m[id].lvl >= 0).length; return `${n} ${plural(n, 'модуль', 'модуля', 'модулей')}`; };
 function renderPrograms(){
   const cards = Object.keys(D.presets).map(k => {
     const p = D.presets[k], st = presetState(k), T = totals(st);
     const items = st.order.filter(id => st.m[id].lvl >= 0).map(id => { const e = eff(st, id); return `<li><span>${byId[id].name}${T.minN !== T.maxN ? `<small>${people(e.n)}</small>` : ''}</span><i class="d${st.m[id].lvl}">${LV[st.m[id].lvl]}</i></li>`; }).join('');
     return `<div class="pc ${S.preset===k?'sel':''}"><div class="tagline">${p.tag}</div><h3>${p.name}</h3><div class="who">${p.who}</div>
       <div class="pr">${rub(T.t)}</div><div class="hrs">${hours(T.off)} очно · ${hours(T.on)} онлайн</div><div class="ppl">${T.minN === T.maxN ? 'Группа ' + people(T.maxN) : `Группы от ${T.minN} до ${people(T.maxN)}`}</div>
-      <ul>${items}</ul><button type="button" class="btn dark pick" data-preset="${k}">${S.preset===k?'Выбрано':'Выбрать'}</button></div>`;
+      <details class="pc-more"><summary>Состав · ${modsN(st)}</summary><ul>${items}</ul></details><button type="button" class="btn dark pick" data-preset="${k}">${S.preset===k?'Выбрано':'Выбрать'}</button></div>`;
   }).join('');
   $('#progs').innerHTML = cards + `<div class="pc own ${S.preset==='own'?'sel':''}"><div class="tagline">Своя</div><h3>Собрать с нуля</h3><div class="who">Только нужные модули</div>
     <div class="pr">от ${rub(D.start.price)}</div><div class="hrs">включён модуль «Старт»</div><div class="ppl">Группа от 1 до 20 человек</div>
