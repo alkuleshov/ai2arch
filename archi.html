@@ -94,7 +94,16 @@
   .hero-fn b { color:rgba(255,255,255,.85); }
   .hero-name { font-size:13px; color:rgba(255,255,255,.42); max-width:660px; margin-bottom:34px; }
   .hero-cta { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
-  .hero-note { font-size:13px; color:rgba(255,255,255,.5); }
+  .hero-note { font-size:13.5px; color:rgba(255,255,255,.62); }
+  /* статус набора у кнопки заявки */
+  .enroll-status { display:inline-flex; align-items:center; gap:9px; margin:4px 0 16px; padding:7px 14px; border:1px solid rgba(232,134,43,.55); border-radius:999px; background:rgba(232,134,43,.14); color:#FFB25E; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+  .enroll-status small { font-size:13px; font-weight:500; letter-spacing:0; text-transform:none; color:#FFD9B3; }
+  .enroll-status small b { font-weight:700; }
+  .enroll-status .live-dot { position:relative; display:inline-block; width:8px; height:8px; flex:none; border-radius:50%; background:#E8862B; }
+  .enroll-status .live-dot::after { content:''; position:absolute; inset:0; border-radius:50%; background:inherit; animation:enroll-ping 1.6s cubic-bezier(0,0,.2,1) infinite; }
+  @keyframes enroll-ping { 0% { transform:scale(1); opacity:.75; } 80%,100% { transform:scale(3.2); opacity:0; } }
+  @media (prefers-reduced-motion:reduce) { .enroll-status .live-dot::after { animation:none; } }
+
   .facts { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:0; margin-top:56px; border-top:1px solid rgba(255,255,255,.14); }
   .fact { padding:24px 20px 28px 0; }
   .fact + .fact { padding-left:24px; border-left:1px solid rgba(255,255,255,.1); }
@@ -370,11 +379,12 @@
     <p class="hero-sub">Базовый вводный курс: строите цифровой двойник территории, анализируете её с помощью ИИ и собираете презентацию, которая убеждает заказчика и комиссию. QGIS и нейросети разбираем с нуля, специальных знаний в ИИ не нужно.</p>
     <p class="hero-name">Официальное название программы: «Современные инструменты проектного анализа: ИИ и мобильные сервисы в работе с архитектурной средой»</p>
     <div class="ai-level" data-ai-course="archi" data-ai-theme="dark"></div>
+    <p class="enroll-status" data-group-size="12"><i class="live-dot" aria-hidden="true"></i>Группа набирается <small>· на <b data-group-count>12</b> человек</small></p>
     <div class="hero-cta">
       <button class="btn btn-primary" data-apply>Оставить заявку</button>
       <a class="btn btn-ghost" href="#program">Смотреть программу</a>
     </div>
-    <p class="hero-note enroll-note" data-group-size="12">Группа набирается — на <b data-group-count>12</b> человек. Старт после набора участников. Оставьте заявку и выберите поток: ближайший или следующий.</p>
+    <p class="hero-note">Старт после набора участников. Оставьте заявку — мы сообщим дату старта потока.</p>
 
     <div class="facts">
       <div class="fact"><b>22<small>ак. ч</small></b><span>10 часов практики на воркшопах, 12 часов консультаций и самостоятельной работы. Удостоверение ЮФУ</span></div>

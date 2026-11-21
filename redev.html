@@ -94,7 +94,16 @@
   .hero-fn b { color:rgba(255,255,255,.85); }
   .hero-name { font-size:13px; color:rgba(255,255,255,.42); max-width:660px; margin-bottom:34px; }
   .hero-cta { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
-  .hero-note { font-size:13px; color:rgba(255,255,255,.5); }
+  .hero-note { font-size:13.5px; color:rgba(255,255,255,.62); }
+  /* статус набора у кнопки заявки */
+  .enroll-status { display:inline-flex; align-items:center; gap:9px; margin:4px 0 16px; padding:7px 14px; border:1px solid rgba(232,134,43,.55); border-radius:999px; background:rgba(232,134,43,.14); color:#FFB25E; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+  .enroll-status small { font-size:13px; font-weight:500; letter-spacing:0; text-transform:none; color:#FFD9B3; }
+  .enroll-status small b { font-weight:700; }
+  .enroll-status .live-dot { position:relative; display:inline-block; width:8px; height:8px; flex:none; border-radius:50%; background:#E8862B; }
+  .enroll-status .live-dot::after { content:''; position:absolute; inset:0; border-radius:50%; background:inherit; animation:enroll-ping 1.6s cubic-bezier(0,0,.2,1) infinite; }
+  @keyframes enroll-ping { 0% { transform:scale(1); opacity:.75; } 80%,100% { transform:scale(3.2); opacity:0; } }
+  @media (prefers-reduced-motion:reduce) { .enroll-status .live-dot::after { animation:none; } }
+
   .facts { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:0; margin-top:56px; border-top:1px solid rgba(255,255,255,.14); }
   .fact { padding:24px 20px 28px 0; }
   .fact + .fact { padding-left:24px; border-left:1px solid rgba(255,255,255,.1); }
@@ -301,11 +310,12 @@
     <p class="hero-name">Официальное название программы: «Современные инструменты развития территорий и объектов недвижимости: аналитика данных и генеративный ИИ в разработке концепций»</p>
     <p class="hero-fn" id="fn-redev"><span>*</span> <b>Редевелопмент</b> (от англ. redevelopment, «повторное развитие») — обновление уже застроенной территории или здания с новым назначением, например превращение заброшенной фабрики в креативный кластер.</p>
     <div class="ai-level" data-ai-course="redev" data-ai-theme="dark"></div>
+    <p class="enroll-status" data-group-size="10"><i class="live-dot" aria-hidden="true"></i>Группа набирается <small>· на <b data-group-count>10</b> человек</small></p>
     <div class="hero-cta">
       <button class="btn btn-primary" data-apply>Оставить заявку</button>
       <a class="btn btn-ghost" href="#program">Смотреть программу</a>
     </div>
-    <p class="hero-note enroll-note" data-group-size="10">Группа набирается — на <b data-group-count>10</b> человек. Старт после набора участников. Оставьте заявку и выберите поток: ближайший или следующий.</p>
+    <p class="hero-note">Старт после набора участников. Оставьте заявку — мы сообщим дату старта потока.</p>
 
     <div class="facts">
       <div class="fact"><b>Demo Day</b><span>6 декабря · заочная экспертная оценка с питчем</span></div>
@@ -521,7 +531,7 @@
     <div class="grid3">
       <div class="card"><div class="ico">01</div><h3>Реальный объект</h3><p>Работаете над своим реальным объектом. Если своего нет, работайте с базовым объектом C52.</p></div>
       <div class="card"><div class="ico">02</div><h3>Два трека</h3><p>Проектировщики и девелоперы идут по общей базе, а практика и итоговый документ у каждого свои.</p></div>
-      <div class="card"><div class="ico">03</div><h3>Группа из пяти человек</h3><p>Камерная проектная лаборатория: каждый проект разбирается лично, а не вскользь на общем потоке.</p></div>
+      <div class="card"><div class="ico">03</div><h3>Группа на 10 человек</h3><p>Камерная проектная лаборатория: каждый проект разбирается лично, а не вскользь на общем потоке.</p></div>
       <div class="card"><div class="ico">04</div><h3>Языковые модели в центре</h3><p>Claude, ChatGPT, Gemini считают и аргументируют: правила застройки, наилучшее использование, баланс площадей, инвестиционный текст. Нейросети для изображений вспомогательные.</p></div>
       <div class="card"><div class="ico">05</div><h3>Без программирования</h3><p>Готовые библиотеки промптов и понятные веб-сервисы. ComfyUI и ControlNet эксперт показывает обзорно, настраивать их самостоятельно не нужно.</p></div>
       <div class="card"><div class="ico">06</div><h3>Данные уже готовы</h3><p>QGIS в программу не входит: данные по территории подготовлены, их остаётся загрузить в работу. Знание QGIS не требуется.</p></div>
