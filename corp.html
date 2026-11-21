@@ -241,9 +241,9 @@ footer .ft-row{display:grid;grid-template-columns:auto 1fr 1fr;gap:12px 32px;ali
  .hero{padding-bottom:20px}
  .hd-btn{display:none}
  section.blk{padding:32px 0}
- .progs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -16px;padding:4px 16px 12px;scrollbar-width:none}
- .progs::-webkit-scrollbar{display:none}
- .pc{flex:0 0 82%;scroll-snap-align:start}
+ .progs{grid-template-columns:minmax(0,1fr);gap:12px}
+ .pc .who{min-height:0}
+ .pc .pr{margin-top:10px}
  .params{grid-template-columns:repeat(2,minmax(0,1fr))}
  .params .param:first-child{grid-column:1 / -1}
  .param{padding:12px}
