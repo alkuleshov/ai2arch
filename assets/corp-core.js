@@ -165,9 +165,9 @@
     return {
       pageSize: 'A4', pageMargins: [42, 48, 42, 54], defaultStyle: { font: 'Roboto', fontSize: 9.5, color: NAVY, lineHeight: 1.25 },
       info: { title, author: 'AI2ARCH' },
-      footer: (p, n) => ({ columns: [{ text: 'AI2ARCH · корпоративное обучение · ai2arch.ru/corp', color: MUTED, fontSize: 7.5 }, { text: `${p} / ${n}`, alignment: 'right', color: MUTED, fontSize: 7.5 }], margin: [42, 16, 42, 0] }),
+      footer: (p, n) => ({ columns: [{ text: 'AI2ARCH · лаборатория проектного интеллекта · ai2arch.ru/corp', color: MUTED, fontSize: 7.5 }, { text: `${p} / ${n}`, alignment: 'right', color: MUTED, fontSize: 7.5 }], margin: [42, 16, 42, 0] }),
       content: [
-        { text: 'AI2ARCH · ЛАБОРАТОРИЯ ИИ В АРХИТЕКТУРЕ', color: ACC, fontSize: 7.5, bold: true, characterSpacing: 1 },
+        { text: 'AI2ARCH · ЛАБОРАТОРИЯ ПРОЕКТНОГО ИНТЕЛЛЕКТА', color: ACC, fontSize: 7.5, bold: true, characterSpacing: 1 },
         { text: title, fontSize: 18, bold: true, margin: [0, 6, 0, 2] },
         { text: sub, color: MUTED, margin: [0, 0, 0, 10] },
         ...content
