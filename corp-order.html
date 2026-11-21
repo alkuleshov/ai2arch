@@ -101,7 +101,7 @@ input:focus,textarea:focus{outline:2px solid var(--accent-b);border-color:var(--
 <!-- /Yandex.Metrika counter -->
 </head>
 <body>
-<header class="hd"><div class="wrap"><a id="back" href="corp.html">← Изменить программу</a><a class="home" href="./">AI2ARCH</a></div></header>
+<header class="hd"><div class="wrap"><a id="back" href="corp.html">← Изменить программу</a><a class="home" href="./">AI2ARCH · лаборатория проектного интеллекта</a></div></header>
 <main class="wrap" id="app"></main>
 <footer class="ft"><div class="wrap" id="reqLine"></div></footer>
 <div class="toast" id="toast"></div>
@@ -120,7 +120,7 @@ async function copy(t){ try{ await navigator.clipboard.writeText(t); return true
 function goal(g){ try{ ym(113526373, 'reachGoal', g); }catch(e){} }
 
 if (!S || !totals(S).mods){
-  $('#app').innerHTML = `<div class="empty top"><div class="kicker">Корпоративное обучение · AI2ARCH</div><h1>Программа не найдена</h1><p>Соберите программу в конструкторе и нажмите «Оплатить».</p><a class="btn pri" href="corp.html">Открыть конструктор</a></div>`;
+  $('#app').innerHTML = `<div class="empty top"><div class="kicker">Корпоративное обучение · Лаборатория проектного интеллекта</div><h1>Программа не найдена</h1><p>Соберите программу в конструкторе и нажмите «Оплатить».</p><a class="btn pri" href="corp.html">Открыть конструктор</a></div>`;
 } else {
   const code = Corp.encode(S), id = Corp.programId(code), T = totals(S), R = rows(S);
   const pre = Math.round(T.t * D.prepay), date = new Date().toLocaleDateString('ru-RU');
@@ -143,7 +143,7 @@ if (!S || !totals(S).mods){
       <a class="btn pri" href="https://t.me/${D.manager}" target="_blank" rel="noopener" data-tg>Договориться о встрече</a>
     </div>`;
   $('#app').innerHTML = `
-  <section class="top"><div class="kicker">Корпоративное обучение · AI2ARCH</div>
+  <section class="top"><div class="kicker">Корпоративное обучение · Лаборатория проектного интеллекта</div>
     <h1>Программа <span>№ ${id}</span></h1>
     <div class="meta">${date} · ${T.mods} модулей · ${num(T.off)} ч очно, ${num(T.on)} ч онлайн</div></section>
   <div class="grid">

@@ -21,16 +21,16 @@ button{font-family:var(--sans);cursor:pointer;color:inherit}
 /* header */
 .hd{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--head);background:rgba(246,244,240,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .hd .wrap{height:100%;display:flex;align-items:center;gap:18px}
-.hd-back{font-size:13px;font-weight:800;color:var(--navy);white-space:nowrap}
+.hd-back{display:flex;align-items:center;gap:10px;color:var(--navy);white-space:nowrap;text-decoration:none!important}.hd-back img{border-radius:8px}.hd-back b{display:block;font-size:14px;line-height:1.1;font-weight:800}.hd-back small{display:block;font-size:10.5px;line-height:1.2;color:var(--faint);font-weight:700}
 .hd nav{display:flex;gap:4px;flex:1;justify-content:center}
 .hd nav a{font-size:13px;font-weight:700;color:var(--muted);padding:7px 11px;border-radius:999px}
 .hd nav a:hover{background:#fff;color:var(--navy);text-decoration:none}
 .hd-btn{font:800 12.5px var(--sans);border:0;background:var(--navy);color:#fff;border-radius:999px;padding:9px 14px;white-space:nowrap}
 .hd-btn:hover{background:var(--accent)}
 /* hero */
-.hero{position:relative;padding:calc(var(--head) + 48px) 0 40px;overflow:hidden}
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;padding:calc(var(--head) + 36px) 0 48px;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(10,15,26,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(10,15,26,.05) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse at 70% 30%,#000 10%,transparent 70%);mask-image:radial-gradient(ellipse at 70% 30%,#000 10%,transparent 70%);pointer-events:none}
-.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;align-items:center}
+.hero .wrap{position:relative;width:100%;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;align-items:center}
 .kicker{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
 h1{font-size:clamp(32px,5.2vw,56px);line-height:1.04;letter-spacing:-.025em;color:var(--navy);margin-bottom:18px}
 h1 em{font-style:normal;color:var(--accent)}
@@ -41,13 +41,15 @@ h1 em{font-style:normal;color:var(--accent)}
 .btn.pri{background:var(--accent);color:#fff}.btn.pri:hover{background:#0F5BE6}
 .btn.dark{background:var(--navy);color:#fff}.btn.dark:hover{background:var(--navy2)}
 .btn.ghost{background:#fff;color:var(--navy);border:1px solid var(--line)}.btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
-.steps3{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 20px 50px rgba(10,15,26,.07)}
-.steps3 h3{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:14px}
-.s3{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
-.s3:first-of-type{border-top:0;padding-top:0}
-.s3 b{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:var(--accent-l);color:var(--accent);font-size:18px}
-.s3 strong{display:block;font-size:15px;color:var(--navy)}
-.s3 span{font-size:13px;color:var(--muted)}
+.hp{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 20px 50px rgba(10,15,26,.07)}
+.hp h3{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+.hp-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0;border-top:1px solid var(--line);color:var(--navy);text-decoration:none!important}
+.hp-row:first-of-type{border-top:0}
+.hp-row b{display:block;font-size:18px;line-height:1.2}
+.hp-row span{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.hp-row strong{font-size:17px;white-space:nowrap;color:var(--accent)}
+.hp-row:hover b{color:var(--accent)}
+.hp-all{display:block;margin-top:6px;padding-top:14px;border-top:1px solid var(--line);font-size:13.5px;font-weight:800;text-align:center}
 .facts{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
 .facts span{font-size:12px;font-weight:700;color:var(--navy);background:rgba(255,255,255,.8);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
 /* sections */
@@ -213,7 +215,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
  .canvas{max-height:none}
  .shade{display:block;position:fixed;inset:0;background:rgba(10,15,26,.4);z-index:90;opacity:0;pointer-events:none;transition:opacity .2s}
  .shade.open{opacity:1;pointer-events:auto}
- .bar{display:flex;position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:80;background:var(--navy);color:#fff;border-radius:16px;padding:10px 10px 10px 16px;align-items:center;gap:10px;box-shadow:0 12px 30px rgba(10,15,26,.3);border:0;text-align:left;width:auto}
+ body.past .bar{display:flex}
+ .bar{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:80;background:var(--navy);color:#fff;border-radius:16px;padding:10px 10px 10px 16px;align-items:center;gap:10px;box-shadow:0 12px 30px rgba(10,15,26,.3);border:0;text-align:left;width:auto}
  .bar div{flex:1;min-width:0}.bar b{display:block;font-size:20px;line-height:1.1}.bar span{font-size:11.5px;color:#B8C2D6}
  .bar i{font-style:normal;background:var(--accent);border-radius:11px;padding:10px 12px;font-size:13px;font-weight:800;white-space:nowrap}
 }
@@ -221,6 +224,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
  .wrap{padding:0 16px}
  .hero{padding:calc(var(--head) + 26px) 0 24px}
  .lead{font-size:15.5px}
+ .facts{display:none}
+ .hero{padding-bottom:20px}
  .hd-btn{display:none}
  section.blk{padding:32px 0}
  .progs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -16px;padding:4px 16px 12px;scrollbar-width:none}
@@ -253,24 +258,23 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </head>
 <body>
 <header class="hd"><div class="wrap">
-  <a class="hd-back" href="./">← AI2ARCH</a>
+  <a class="hd-back" href="./" aria-label="AI2ARCH — на главную"><img src="images/ai2arch-sign.png" width="32" height="32" alt=""><span><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
   <nav><a href="#programs">Программы</a><a href="#builder">Конструктор</a><a href="#terms">Условия</a><a href="#faq">Вопросы</a></nav>
   <button class="hd-btn" id="shareTop" type="button">Скопировать ссылку</button>
 </div></header>
 
 <section class="hero"><div class="wrap">
   <div>
-    <div class="kicker">Корпоративное обучение · Лаборатория AI2ARCH</div>
+    <div class="kicker">Корпоративное обучение · Лаборатория проектного интеллекта</div>
     <h1>Обучение ИИ для <em>проектного бюро</em></h1>
     <p class="lead">Практикум на проектах вашей команды: анализ участка, концепции, визуализации, Revit, нормы и тексты. Выберите готовую программу или соберите свою, стоимость видна сразу.</p>
     <div class="cta"><a class="btn pri" href="#programs">Выбрать программу</a><a class="btn ghost" href="#builder">Собрать свою</a></div>
     <div class="facts" id="facts"></div>
   </div>
-  <div class="steps3">
-    <h3>Как это устроено</h3>
-    <div class="s3"><b>1</b><div><strong>Выберите программу</strong><span>Три готовых варианта под разные задачи и бюджет.</span></div></div>
-    <div class="s3"><b>2</b><div><strong>Настройте под бюро</strong><span>Глубина модулей, формат, число участников, порядок.</span></div></div>
-    <div class="s3"><b>3</b><div><strong>Оплатите или обсудите</strong><span>Номер программы, сумма, PDF и способы оплаты на одной странице.</span></div></div>
+  <div class="hp">
+    <h3>Программы</h3>
+    <div id="heroProgs"></div>
+    <a class="hp-all" href="#programs">Состав и цены ↓</a>
   </div>
 </div></section>
 
@@ -345,7 +349,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </div></section>
 
-<footer><div class="wrap"><span>Лаборатория AI2ARCH · ai2arch.ru<br><span id="reqLine"></span></span><span>Цены ориентировочные, без НДС. Стоимость, дни и время занятий фиксируются в счёте-договоре.</span></div></footer>
+<footer><div class="wrap"><span>AI2ARCH · лаборатория проектного интеллекта · ai2arch.ru<br><span id="reqLine"></span></span><span>Цены ориентировочные, без НДС. Стоимость, дни и время занятий фиксируются в счёте-договоре.</span></div></footer>
 
 <button class="bar" id="bar" type="button"><div><b id="barTotal">0 ₽</b><span id="barSub"></span></div><i>Программа ↑</i></button>
 <div class="shade" id="shade"></div>
@@ -365,6 +369,13 @@ let S;
 /* ---------- render ---------- */
 function seg(labels, cur, attr, dis, req){
   return '<div class="seg" role="group">' + labels.map((l,i) => `<button type="button" ${attr}="${i}" aria-pressed="${i===cur}" ${dis&&dis(i)?'disabled':''} class="${req&&req(i)?'req':''}">${l}</button>`).join('') + '</div>';
+}
+function renderHero(){
+  const rows = Object.keys(D.presets).map(k => {
+    const p = D.presets[k], T = totals(presetState(k));
+    return `<a class="hp-row" href="#programs"><div><b>${p.name}</b><span>${hours(T.off + T.on)} · ${T.minN === T.maxN ? 'группа ' + people(T.maxN) : `группы от ${T.minN} до ${people(T.maxN)}`}</span></div><strong>${rub(T.t)}</strong></a>`;
+  }).join('');
+  $('#heroProgs').innerHTML = rows + `<a class="hp-row" href="#builder"><div><b>Собрать с нуля</b><span>только нужные модули</span></div><strong>от ${rub(D.start.price)}</strong></a>`;
 }
 function renderFacts(){
   $('#facts').innerHTML = [`${CAT.length} модулей`, '3 уровня глубины', 'очно или онлайн', 'счёт-договор'].map(t => `<span>${t}</span>`).join('');
@@ -512,7 +523,8 @@ document.addEventListener('pointercancel', endDrag);
 /* init */
 S = Corp.fromHash() || blank();
 if (Corp.REQ) $('#reqLine').textContent = `${Corp.REQ.name} · ИНН ${Corp.REQ.inn} · ОГРНИП ${Corp.REQ.ogrnip}`;
-renderFacts(); render();
+renderFacts(); renderHero(); render();
+if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => document.body.classList.toggle('past', !e.isIntersecting), { threshold: 0.35 }).observe(document.querySelector('.hero')); else document.body.classList.add('past');
 </script>
 </body>
 </html>
