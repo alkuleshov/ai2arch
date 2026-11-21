@@ -3,148 +3,229 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Конструктор обучения для бюро · AI2ARCH</title>
+<title>Обучение ИИ для проектного бюро · AI2ARCH</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Соберите корпоративное обучение ИИ для проектного бюро: модули по задачам, глубина, очный или онлайн-формат, стоимость сразу.">
+<meta name="description" content="Корпоративное обучение ИИ для проектных бюро: готовые программы и конструктор модулей, очно или онлайн, работа по договору.">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
-:root{--navy:#0A0F1A;--ink:#1F2430;--muted:#5B6475;--faint:#667085;--bg:#F6F4F0;--surface:#fff;--line:#E4E1D8;--accent:#1A6BFF;--accent-l:#EAF1FF;--accent-b:#BFD3FF;--orange:#C46A16;--orange-l:#FFF7EF;--orange-b:#F1D2BE;--sans:'Manrope','Segoe UI',system-ui,Arial,sans-serif;--head:58px}
+:root{--navy:#0A0F1A;--navy2:#141B2B;--ink:#1F2430;--muted:#5B6475;--faint:#667085;--bg:#F6F4F0;--line:#E4E1D8;--accent:#1A6BFF;--accent-l:#EAF1FF;--accent-b:#BFD3FF;--orange:#C46A16;--orange-l:#FFF7EF;--orange-b:#F1D2BE;--sans:'Manrope','Segoe UI',system-ui,Arial,sans-serif;--head:60px;--r:16px}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;overflow-x:clip}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-padding-top:calc(var(--head) + 12px)}
 body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-button{font-family:var(--sans);cursor:pointer}
-.hd{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--head);display:flex;align-items:center;gap:12px;padding:0 18px;background:rgba(246,244,240,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.hd-back{font-size:13px;font-weight:800;color:var(--ink);white-space:nowrap}
-.hd-name{font-size:13px;font-weight:600;color:var(--muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.hd-btn{font:700 12px var(--sans);border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:7px 12px;white-space:nowrap}
-.hd-btn:hover{border-color:var(--accent);color:var(--accent)}
-main{max-width:1180px;margin:0 auto;padding:calc(var(--head) + 30px) 24px 120px}
-.hero{max-width:760px;margin:0 0 28px}
-.kicker{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
-h1{font-size:clamp(30px,5vw,48px);line-height:1.08;letter-spacing:-.02em;color:var(--navy);margin-bottom:14px}
-.hero p{font-size:16px;color:var(--muted);max-width:640px}
-.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-.meta span{font-size:12px;font-weight:700;color:var(--navy);background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px 11px}
-.levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 26px}
-.lv{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
-.lv b{display:block;font-size:14px;color:var(--navy);margin-bottom:2px}
-.lv i{font-style:normal;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
-.lv p{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5}
-.sec-kicker{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin:0 0 10px}
-.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.preset{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 14px;text-align:left;min-width:150px;transition:border-color .15s,box-shadow .15s}
-.preset:hover{border-color:var(--accent)}
-.preset.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-l)}
-.preset b{display:block;font-size:14px;color:var(--navy)}
-.preset span{font-size:12px;color:var(--muted)}
-.preset em{display:block;font-style:normal;font-size:13px;font-weight:800;color:var(--accent);margin-top:2px}
-.bulk{display:flex;gap:14px;flex-wrap:wrap;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:16px}
-.bulk>span{font-size:12px;font-weight:800;color:var(--muted)}
-.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:22px;align-items:start}
-.list{display:grid;gap:10px}
-.mod{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px 14px 12px;display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;transition:border-color .15s,box-shadow .15s,opacity .15s}
-.mod.on{border-color:var(--accent-b);box-shadow:0 1px 0 var(--accent-b)}
-.mod.off{opacity:.78}
-.mod.off:hover{opacity:1}
-.mod.dragging{z-index:5;box-shadow:0 14px 36px rgba(10,15,26,.18);border-color:var(--accent);opacity:1}
-.grip{display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:2px}
-.grip .num{font-size:11px;font-weight:800;color:var(--faint);min-height:16px}
-.mod.on .grip .num{color:var(--accent)}
-.handle{width:26px;height:30px;border:0;background:transparent;color:#A0A6B3;border-radius:8px;touch-action:none;cursor:grab;font-size:15px;line-height:1;letter-spacing:-2px}
-.handle:hover{background:var(--bg);color:var(--navy)}
-.mv{width:26px;height:22px;border:0;background:transparent;color:#A0A6B3;border-radius:6px;font-size:11px}
-.mv:hover{background:var(--bg);color:var(--navy)}
-.body{min-width:0}
-.top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.top h3{font-size:16px;line-height:1.3;color:var(--navy);flex:1;min-width:150px}
-.tag{font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--orange);background:var(--orange-l);border:1px solid var(--orange-b);border-radius:999px;padding:2px 8px}
-.sw{position:relative;width:44px;height:26px;border-radius:999px;border:0;background:#D5D8DF;flex:none;transition:background .15s}
-.sw::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .15s}
-.sw[aria-checked="true"]{background:var(--accent)}
-.sw[aria-checked="true"]::after{transform:translateX(18px)}
-.sw:disabled{opacity:.6;cursor:default}
-.teaser{font-size:13px;color:var(--muted);margin-top:4px}
-.controls{display:flex;gap:10px 14px;flex-wrap:wrap;align-items:center;margin-top:12px}
-.seg{display:inline-flex;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:3px;gap:2px}
-.seg button{border:0;background:transparent;border-radius:7px;padding:6px 10px;font-size:12.5px;font-weight:700;color:var(--muted);white-space:nowrap}
-.seg button[aria-pressed="true"]{background:#fff;color:var(--navy);box-shadow:0 1px 3px rgba(10,15,26,.12)}
+button{font-family:var(--sans);cursor:pointer;color:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+/* header */
+.hd{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--head);background:rgba(246,244,240,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.hd .wrap{height:100%;display:flex;align-items:center;gap:18px}
+.hd-back{font-size:13px;font-weight:800;color:var(--navy);white-space:nowrap}
+.hd nav{display:flex;gap:4px;flex:1;justify-content:center}
+.hd nav a{font-size:13px;font-weight:700;color:var(--muted);padding:7px 11px;border-radius:999px}
+.hd nav a:hover{background:#fff;color:var(--navy);text-decoration:none}
+.hd-btn{font:800 12.5px var(--sans);border:0;background:var(--navy);color:#fff;border-radius:999px;padding:9px 14px;white-space:nowrap}
+.hd-btn:hover{background:var(--accent)}
+/* hero */
+.hero{position:relative;padding:calc(var(--head) + 48px) 0 40px;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(10,15,26,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(10,15,26,.05) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse at 70% 30%,#000 10%,transparent 70%);mask-image:radial-gradient(ellipse at 70% 30%,#000 10%,transparent 70%);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;align-items:center}
+.kicker{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+h1{font-size:clamp(32px,5.2vw,56px);line-height:1.04;letter-spacing:-.025em;color:var(--navy);margin-bottom:18px}
+h1 em{font-style:normal;color:var(--accent)}
+.lead{font-size:17px;color:var(--muted);max-width:560px}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;padding:13px 18px;font-size:14px;font-weight:800;border:0;text-decoration:none!important;transition:transform .12s,background .15s}
+.btn:active{transform:scale(.98)}
+.btn.pri{background:var(--accent);color:#fff}.btn.pri:hover{background:#0F5BE6}
+.btn.dark{background:var(--navy);color:#fff}.btn.dark:hover{background:var(--navy2)}
+.btn.ghost{background:#fff;color:var(--navy);border:1px solid var(--line)}.btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+.steps3{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 20px 50px rgba(10,15,26,.07)}
+.steps3 h3{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:14px}
+.s3{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.s3:first-of-type{border-top:0;padding-top:0}
+.s3 b{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:var(--accent-l);color:var(--accent);font-size:18px}
+.s3 strong{display:block;font-size:15px;color:var(--navy)}
+.s3 span{font-size:13px;color:var(--muted)}
+.facts{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.facts span{font-size:12px;font-weight:700;color:var(--navy);background:rgba(255,255,255,.8);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+/* sections */
+section.blk{padding:46px 0}
+.sh{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:22px;flex-wrap:wrap}
+.sh .num{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.sh h2{font-size:clamp(26px,3.4vw,36px);line-height:1.12;letter-spacing:-.02em;color:var(--navy)}
+.sh p{font-size:14.5px;color:var(--muted);max-width:440px}
+/* programs */
+.progs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.pc{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;text-align:left;transition:transform .15s,box-shadow .15s,border-color .15s}
+.pc:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(10,15,26,.08);border-color:var(--accent-b)}
+.pc .tagline{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.pc h3{font-size:22px;color:var(--navy);margin:6px 0 2px}
+.pc .who{font-size:13px;color:var(--muted);min-height:40px}
+.pc .pr{font-size:26px;font-weight:800;letter-spacing:-.02em;color:var(--navy);margin:14px 0 2px}
+.pc .hrs{font-size:12.5px;color:var(--faint)}
+.pc ul{list-style:none;margin:14px 0 16px;padding-top:12px;border-top:1px dashed var(--line);display:grid;gap:6px;flex:1}
+.pc li{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--ink)}
+.pc li i{font-style:normal;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;white-space:nowrap;align-self:center}
+.d0{background:var(--accent-l);color:var(--accent)}.d1{background:var(--accent);color:#fff}.d2{background:var(--navy);color:#fff}
+.pc .pick{margin-top:auto}
+.pc.sel{background:var(--navy);border-color:var(--navy);color:#fff}
+.pc.sel h3,.pc.sel .pr,.pc.sel li{color:#fff}.pc.sel .who,.pc.sel .hrs{color:#B8C2D6}.pc.sel .tagline{color:#8FB4FF}
+.pc.sel ul{border-color:rgba(255,255,255,.2)}
+.pc.sel .pick{background:#fff;color:var(--navy)}
+.pc.own{border-style:dashed;background:transparent}
+.pc.own.sel{border-style:solid}
+.pc.own p{font-size:13px;color:var(--muted);margin:14px 0 16px;flex:1}
+.pc.sel.own p{color:#B8C2D6}
+/* builder */
+.bgrid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px;align-items:start}
+.params{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:18px}
+.param{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.param label{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.param small{display:block;font-size:11.5px;color:var(--faint);margin-top:6px}
+.seg{display:inline-flex;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:3px;gap:2px;max-width:100%}
+.seg button{border:0;background:transparent;border-radius:8px;padding:7px 11px;font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap;transition:background .12s,color .12s}
+.seg button[aria-pressed="true"]{background:#fff;color:var(--navy);box-shadow:0 1px 3px rgba(10,15,26,.14)}
 .seg button.req{color:var(--orange)}
-.seg button.req[aria-pressed="true"]{color:var(--orange)}
-.seg button:disabled{opacity:.35;cursor:not-allowed}
-.step{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:10px;background:#fff;overflow:hidden}
-.step button{width:32px;height:32px;border:0;background:transparent;font-size:16px;font-weight:700;color:var(--navy)}
+.seg button:disabled{opacity:.3;cursor:not-allowed}
+.param .seg{display:flex}.param .seg button{flex:1}
+.step{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:11px;background:#fff;overflow:hidden}
+.step button{width:38px;height:36px;border:0;background:transparent;font-size:18px;font-weight:700;color:var(--navy)}
 .step button:hover{background:var(--bg)}
-.step output{min-width:58px;text-align:center;font-size:12.5px;font-weight:800;color:var(--navy)}
-.detail{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);display:grid;gap:4px}
-.detail p{font-size:13.5px;line-height:1.55;color:var(--ink)}
-.detail small{font-size:12.5px;color:var(--muted)}
-.detail small b{color:var(--navy)}
-.price{text-align:right;min-width:92px}
-.price strong{display:block;font-size:17px;color:var(--navy);white-space:nowrap}
-.price span{display:block;font-size:12px;color:var(--faint);white-space:nowrap}
-.price .rq{font-size:13px;color:var(--orange);font-weight:800}
-.mod.off .controls,.mod.off .detail{display:none}
-.mod.on:not(.lock) .teaser{display:none}
-.mod.off .price strong{font-size:13px;color:var(--faint);font-weight:700}
-aside{position:sticky;top:calc(var(--head) + 16px)}
-.sum{background:var(--navy);color:#fff;border-radius:18px;padding:18px}
-.sum .kicker{color:#8FB4FF}
-.total{font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.step output{min-width:70px;text-align:center;font-size:13.5px;font-weight:800;color:var(--navy)}
+.group{margin:22px 0 8px;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:10px}
+.group::after{content:'';flex:1;height:1px;background:var(--line)}
+.mods{display:grid;gap:8px}
+.mod{background:#fff;border:1px solid var(--line);border-radius:var(--r);transition:border-color .15s,box-shadow .15s}
+.mod.on{border-color:var(--accent-b);box-shadow:inset 3px 0 0 var(--accent)}
+.mrow{display:grid;grid-template-columns:minmax(0,1fr) auto 112px;gap:14px;align-items:center;padding:14px 16px}
+.mt h4{font-size:15.5px;line-height:1.3;color:var(--navy)}
+.mt p{font-size:12.5px;color:var(--muted);margin-top:2px}
+.more{border:0;background:none;font-size:12px;font-weight:800;color:var(--accent);padding:4px 0 0}
+.mp{text-align:right}
+.mp strong{display:block;font-size:16px;color:var(--navy);white-space:nowrap}
+.mp span{display:block;font-size:11.5px;color:var(--faint);white-space:nowrap}
+.mp .rq{color:var(--orange);font-size:13.5px}
+.mod:not(.on) .mp strong{font-size:13px;color:var(--faint);font-weight:700}
+.mx{display:none;padding:0 16px 16px;border-top:1px dashed var(--line)}
+.mod.open .mx{display:block}
+.lvls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}
+.lvc{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:12.5px;color:var(--muted);line-height:1.5}
+.lvc b{display:flex;justify-content:space-between;font-size:12.5px;color:var(--navy);margin-bottom:3px}
+.lvc b em{font-style:normal;font-weight:700;color:var(--faint)}
+.lvc.cur{border-color:var(--accent);background:var(--accent-l)}
+.lvc.na{opacity:.45}
+.ovr{display:flex;gap:10px 16px;flex-wrap:wrap;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.ovr label{display:inline-flex;align-items:center;gap:7px;font-weight:700;color:var(--navy);cursor:pointer}
+.ovr input{width:16px;height:16px;accent-color:var(--accent)}
+.ovr .ctl{display:flex;gap:10px;flex-wrap:wrap}
+.ovr .ctl.dis{opacity:.4;pointer-events:none}
+.supp{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:#fff;border:1px dashed var(--accent-b);border-radius:var(--r);padding:14px 16px;margin-top:22px}
+.supp div{flex:1;min-width:220px}.supp b{color:var(--navy)}.supp p{font-size:13px;color:var(--muted)}
+/* summary / canvas */
+aside{position:sticky;top:calc(var(--head) + 14px)}
+.sum{background:var(--navy);color:#fff;border-radius:22px;padding:20px;box-shadow:0 24px 60px rgba(10,15,26,.22)}
+.sum-h{display:flex;justify-content:space-between;align-items:center}
+.sum .kicker{color:#8FB4FF;margin:0}
+.x{display:none;border:0;background:rgba(255,255,255,.1);color:#fff;width:32px;height:32px;border-radius:50%;font-size:16px}
+.total{font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-top:8px;font-variant-numeric:tabular-nums}
 .sub{font-size:12.5px;color:#B8C2D6;margin-top:4px}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0}
-.stats div{background:rgba(255,255,255,.07);border-radius:10px;padding:8px 10px}
-.stats b{display:block;font-size:16px}
-.stats span{font-size:11px;color:#B8C2D6}
-.prog{list-style:none;border-top:1px solid rgba(255,255,255,.14);padding-top:10px;display:grid;gap:7px;max-height:320px;overflow:auto}
-.prog li{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:6px;font-size:12.5px;line-height:1.35}
-.prog li i{font-style:normal;color:#8FB4FF;font-weight:800}
-.prog li small{display:block;color:#B8C2D6;font-size:11.5px}
-.prog li em{font-style:normal;font-weight:800;white-space:nowrap}
-.prog .empty{display:block;color:#B8C2D6}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:14px 0}
+.stats div{background:rgba(255,255,255,.07);border-radius:11px;padding:8px 10px}
+.stats b{display:block;font-size:16px}.stats span{font-size:11px;color:#B8C2D6}
+.cv-h{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8FB4FF;margin:4px 0 8px;display:flex;justify-content:space-between}
+.cv-h span{text-transform:none;letter-spacing:0;font-weight:600;color:#8A96AD}
+.canvas{list-style:none;display:grid;gap:6px;max-height:330px;overflow:auto;padding-right:2px}
+.cv{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;align-items:center;background:rgba(255,255,255,.06);border-radius:11px;padding:8px 8px 8px 6px;font-size:12.5px;line-height:1.3;transition:background .12s}
+.cv.drag{background:rgba(26,107,255,.35);box-shadow:0 10px 24px rgba(0,0,0,.35);position:relative;z-index:3}
+.cv .h{border:0;background:transparent;color:#6F7B93;font-size:13px;letter-spacing:-2px;cursor:grab;touch-action:none;height:28px}
+.cv .h:hover{color:#fff}
+.cv .h.fix{cursor:default;color:#8FB4FF;letter-spacing:0;font-weight:800;font-size:12px}
+.cv small{display:block;color:#9AA6BD;font-size:11px;margin-top:1px}
+.cv em{font-style:normal;font-weight:800;white-space:nowrap;font-size:12.5px}
+.cv .ar{display:flex;flex-direction:column}
+.cv .ar button{border:0;background:none;color:#6F7B93;font-size:9px;line-height:1;padding:2px 4px}
+.cv .ar button:hover{color:#fff}
+.empty{font-size:12.5px;color:#9AA6BD;padding:6px 2px}
 .warn{margin-top:10px;font-size:12px;color:#FFD3A8}
 .acts{display:grid;gap:8px;margin-top:14px}
-.btn{display:flex;align-items:center;justify-content:center;gap:8px;border-radius:11px;padding:11px 14px;font-size:13.5px;font-weight:800;border:0}
-.btn.pri{background:var(--accent);color:#fff}
-.btn.pri:hover{background:#0F5BE6;text-decoration:none}
-.btn.sec{background:rgba(255,255,255,.1);color:#fff}
-.btn.sec:hover{background:rgba(255,255,255,.18)}
-.support{background:#fff;border:1px dashed var(--accent-b);border-radius:16px;padding:14px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.support div{flex:1;min-width:200px}
-.support b{font-size:15px;color:var(--navy)}
-.support p{font-size:13px;color:var(--muted)}
-.how{background:#fff;border:1px solid var(--line);border-radius:14px;margin:22px 0 0;padding:0 16px}
-.how summary{cursor:pointer;padding:14px 0;font-size:13px;font-weight:800;color:var(--muted);list-style:none}
-.how summary::-webkit-details-marker{display:none}
-.how summary::before{content:'◆ ';color:var(--accent)}
-.how[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px}
-.how .inner{padding-bottom:16px;display:grid;gap:12px;font-size:13.5px;color:var(--muted)}
-.how table{border-collapse:collapse;font-size:13px}
-.how td,.how th{border:1px solid var(--line);padding:6px 10px;text-align:left}
-.how th{background:var(--bg);color:var(--navy)}
-.foot{margin-top:26px;font-size:12.5px;color:var(--faint);max-width:760px}
+.btn.wl{background:rgba(255,255,255,.1);color:#fff}.btn.wl:hover{background:rgba(255,255,255,.18)}
+.mini{display:flex;gap:8px}.mini .btn{flex:1;padding:10px;font-size:12.5px}
+/* terms */
+.flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;counter-reset:f;margin-bottom:26px}
+.fl{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 14px}
+.fl::before{counter-increment:f;content:counter(f);display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:800;margin-bottom:10px}
+.fl b{display:block;font-size:14px;color:var(--navy);margin-bottom:4px}
+.fl span{font-size:12.5px;color:var(--muted);line-height:1.45}
+.terms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.tm{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
+.tm .ic{width:36px;height:36px;border-radius:10px;background:var(--accent-l);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:10px}
+.tm h3{font-size:15.5px;color:var(--navy);margin-bottom:6px}
+.tm p{font-size:13.5px;color:var(--muted);line-height:1.55}
+.note{margin-top:16px;background:var(--orange-l);border:1px solid var(--orange-b);border-radius:16px;padding:16px 18px;font-size:13.5px;color:#4A3524}
+.note b{color:var(--orange)}
+/* faq */
+.faq{display:grid;gap:8px;max-width:860px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:0 18px}
+.faq summary{cursor:pointer;list-style:none;padding:15px 0;font-size:15px;font-weight:800;color:var(--navy);display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';color:var(--accent);font-size:20px;line-height:1}
+.faq details[open] summary::after{content:'–'}
+.faq p{font-size:14px;color:var(--muted);padding:0 0 16px}
+footer{border-top:1px solid var(--line);padding:28px 0 120px;font-size:12.5px;color:var(--faint)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .bar{display:none}
-.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,20px);background:var(--navy);color:#fff;font-size:13px;font-weight:700;padding:10px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:all .2s;z-index:90}
+.toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,20px);background:var(--navy);color:#fff;font-size:13px;font-weight:700;padding:10px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:all .2s;z-index:120;max-width:90vw;text-align:center}
 .toast.show{opacity:1;transform:translate(-50%,0)}
-@media(max-width:940px){
- .grid{grid-template-columns:minmax(0,1fr)}
- aside{position:static}
- .bar{display:flex;position:fixed;left:10px;right:10px;bottom:10px;z-index:70;background:var(--navy);color:#fff;border-radius:14px;padding:10px 12px 10px 16px;align-items:center;gap:10px;box-shadow:0 10px 30px rgba(10,15,26,.3)}
- .bar div{flex:1;min-width:0}
- .bar b{display:block;font-size:19px;line-height:1.1}
- .bar span{font-size:11.5px;color:#B8C2D6}
- .bar a{background:var(--accent);color:#fff;border-radius:10px;padding:9px 12px;font-size:13px;font-weight:800;white-space:nowrap}
+.shade{display:none}
+@media(max-width:1180px) and (min-width:961px),(max-width:720px){
+ .mrow{grid-template-columns:minmax(0,1fr) auto;gap:10px}
+ .mrow .seg{grid-column:1 / -1;order:3;display:flex}
+ .mrow .seg button{flex:1;padding:8px 4px}
+ .mp{order:2}
+}
+@media(max-width:1080px){
+ .progs{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .flow{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:960px){
+ .hd nav{display:none}
+ .hero .wrap{grid-template-columns:minmax(0,1fr)}
+ .bgrid{grid-template-columns:minmax(0,1fr)}
+ aside{position:fixed;left:0;right:0;bottom:0;top:auto;z-index:100;transform:translateY(105%);transition:transform .25s ease;max-height:86vh;overflow:auto}
+ aside.open{transform:none}
+ .sum{border-radius:22px 22px 0 0;padding-bottom:calc(20px + env(safe-area-inset-bottom))}
+ .x{display:block}
+ .canvas{max-height:none}
+ .shade{display:block;position:fixed;inset:0;background:rgba(10,15,26,.4);z-index:90;opacity:0;pointer-events:none;transition:opacity .2s}
+ .shade.open{opacity:1;pointer-events:auto}
+ .bar{display:flex;position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:80;background:var(--navy);color:#fff;border-radius:16px;padding:10px 10px 10px 16px;align-items:center;gap:10px;box-shadow:0 12px 30px rgba(10,15,26,.3);border:0;text-align:left;width:auto}
+ .bar div{flex:1;min-width:0}.bar b{display:block;font-size:20px;line-height:1.1}.bar span{font-size:11.5px;color:#B8C2D6}
+ .bar i{font-style:normal;background:var(--accent);border-radius:11px;padding:10px 12px;font-size:13px;font-weight:800;white-space:nowrap}
+ .terms{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:640px){
- main{padding:calc(var(--head) + 20px) 14px 110px}
- .levels{grid-template-columns:minmax(0,1fr)}
- .mod{grid-template-columns:26px minmax(0,1fr);padding:12px 12px 12px 8px}
- .price{grid-column:2;text-align:left;display:flex;gap:10px;align-items:baseline}
- .preset{min-width:0;flex:1 1 140px}
- .hd-name{display:none}
+ .wrap{padding:0 16px}
+ .hero{padding:calc(var(--head) + 26px) 0 24px}
+ .lead{font-size:15.5px}
+ .hd-btn{display:none}
+ section.blk{padding:32px 0}
+ .progs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -16px;padding:4px 16px 12px;scrollbar-width:none}
+ .progs::-webkit-scrollbar{display:none}
+ .pc{flex:0 0 82%;scroll-snap-align:start}
+ .params{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .params .param:first-child{grid-column:1 / -1}
+ .param{padding:12px}
+ .step output{min-width:56px}
+ .mrow{padding:13px 14px}
+ .mrow .seg button{font-size:12.5px}
+ .lvls{grid-template-columns:minmax(0,1fr)}
+ .flow{grid-template-columns:minmax(0,1fr)}
+ .flow{gap:8px}
+ .fl{display:grid;grid-template-columns:30px 1fr;gap:0 12px;padding:12px 14px}
+ .fl::before{grid-row:span 2;margin:0}
+ .terms{grid-template-columns:minmax(0,1fr)}
 }
 </style>
 <!-- Yandex.Metrika counter -->
@@ -162,282 +243,307 @@ aside{position:sticky;top:calc(var(--head) + 16px)}
 <!-- /Yandex.Metrika counter -->
 </head>
 <body>
-<header class="hd">
+<header class="hd"><div class="wrap">
   <a class="hd-back" href="./">← AI2ARCH</a>
-  <span class="hd-name">Конструктор обучения для бюро</span>
+  <nav><a href="#programs">Программы</a><a href="#builder">Конструктор</a><a href="#terms">Условия</a><a href="#faq">Вопросы</a></nav>
   <button class="hd-btn" id="shareTop" type="button">Скопировать ссылку</button>
-</header>
+</div></header>
 
-<main>
-  <section class="hero">
+<section class="hero"><div class="wrap">
+  <div>
     <div class="kicker">Корпоративное обучение · Лаборатория AI2ARCH</div>
-    <h1>Соберите обучение ИИ для своего бюро</h1>
-    <p>Модули построены вокруг задач проектной практики. Включите нужные, выберите глубину, формат и число участников, расставьте в удобном порядке. Стоимость считается сразу, а готовую программу можно отправить нам одной ссылкой.</p>
-    <div class="meta" id="meta"></div>
-  </section>
-
-  <div class="sec-kicker">Глубина модуля</div>
-  <div class="levels" id="levels"></div>
-
-  <div class="sec-kicker">Начать с готовой программы</div>
-  <div class="presets" id="presets"></div>
-
-  <div class="bulk">
-    <span>Для всех включённых модулей:</span>
-    <div class="seg" id="bulkFmt"></div>
-    <div class="step" id="bulkN"><button type="button" data-d="-1" aria-label="Меньше участников">−</button><output></output><button type="button" data-d="1" aria-label="Больше участников">+</button></div>
+    <h1>Обучение ИИ для <em>проектного бюро</em></h1>
+    <p class="lead">Практикум на проектах вашей команды: анализ участка, концепции, визуализации, Revit, нормы и тексты. Выберите готовую программу или соберите свою, стоимость видна сразу.</p>
+    <div class="cta"><a class="btn pri" href="#programs">Выбрать программу</a><a class="btn ghost" href="#builder">Собрать свою</a></div>
+    <div class="facts" id="facts"></div>
   </div>
+  <div class="steps3">
+    <h3>Как это устроено</h3>
+    <div class="s3"><b>1</b><div><strong>Выберите программу</strong><span>Три готовых варианта под разные задачи и бюджет.</span></div></div>
+    <div class="s3"><b>2</b><div><strong>Настройте под бюро</strong><span>Глубина модулей, формат, число участников, порядок.</span></div></div>
+    <div class="s3"><b>3</b><div><strong>Отправьте нам ссылку</strong><span>Обсудим на встрече и заключим договор.</span></div></div>
+  </div>
+</div></section>
 
-  <div class="grid">
+<section class="blk" id="programs"><div class="wrap">
+  <div class="sh"><div><div class="num">Шаг 1</div><h2>Программы обучения</h2></div><p>Каждую программу можно взять как есть или изменить в конструкторе ниже.</p></div>
+  <div class="progs" id="progs"></div>
+</div></section>
+
+<section class="blk" id="builder" style="padding-top:10px"><div class="wrap">
+  <div class="sh"><div><div class="num">Шаг 2</div><h2>Настройте под бюро</h2></div><p>Глубина — главное: «Нет» выключает модуль. Остальное можно не трогать.</p></div>
+  <div class="bgrid">
     <div>
-      <div class="sec-kicker">Модули · перетаскивайте за ⋮⋮, чтобы изменить порядок</div>
-      <div class="list" id="list"></div>
-      <div style="height:10px"></div>
-      <div class="support">
-        <div><b>Сопровождение после обучения</b><p>Чат поддержки и онлайн-сессия раз в месяц: разбираем новые задачи бюро и обновляем библиотеку промптов.</p></div>
-        <div class="step" id="supStep"><button type="button" data-d="-1" aria-label="Меньше месяцев">−</button><output></output><button type="button" data-d="1" aria-label="Больше месяцев">+</button></div>
+      <div class="params">
+        <div class="param"><label>Формат занятий</label><div class="seg" id="gFmt"></div><small id="gFmtNote">Очно — в офисе бюро в Ростове-на-Дону</small></div>
+        <div class="param"><label>Участников</label><div class="step" id="gN"><button type="button" data-d="-1" aria-label="Меньше">−</button><output></output><button type="button" data-d="1" aria-label="Больше">+</button></div><small id="gNNote"></small></div>
+        <div class="param"><label>Сопровождение после</label><div class="step" id="gSup"><button type="button" data-d="-1" aria-label="Меньше">−</button><output></output><button type="button" data-d="1" aria-label="Больше">+</button></div><small>Чат и онлайн-сессия раз в месяц</small></div>
       </div>
-      <details class="how">
-        <summary>Как считается стоимость</summary>
-        <div class="inner" id="how"></div>
-      </details>
-      <p class="foot">Цены ориентировочные, без НДС. Итоговую программу и смету фиксируем после короткой встречи с бюро. Очные занятия проходят в офисе бюро в Ростове-на-Дону; в другие города добавляются дорога и проживание.</p>
+      <div id="catalog"></div>
     </div>
-
-    <aside id="summary">
+    <aside id="summary" aria-label="Ваша программа">
       <div class="sum">
-        <div class="kicker">Ваша программа</div>
+        <div class="sum-h"><div class="kicker">Ваша программа</div><button class="x" type="button" id="closeSheet" aria-label="Закрыть">✕</button></div>
         <div class="total" id="total">0 ₽</div>
         <div class="sub" id="perPerson"></div>
-        <div class="stats">
-          <div><b id="stMods">0</b><span>модулей</span></div>
-          <div><b id="stOff">0</b><span>часов очно</span></div>
-          <div><b id="stOn">0</b><span>часов онлайн</span></div>
-        </div>
-        <ol class="prog" id="prog"></ol>
+        <div class="stats"><div><b id="stMods">0</b><span>модулей</span></div><div><b id="stOff">0</b><span>ч очно</span></div><div><b id="stOn">0</b><span>ч онлайн</span></div></div>
+        <div class="cv-h">Канва программы <span>⋮⋮ меняет порядок</span></div>
+        <ol class="canvas" id="canvas"></ol>
         <div class="warn" id="warn"></div>
         <div class="acts">
-          <a class="btn pri" id="tg" href="https://t.me/alkuleshov" target="_blank" rel="noopener">Обсудить программу в Telegram</a>
-          <button class="btn sec" id="share" type="button">Скопировать ссылку на программу</button>
-          <button class="btn sec" id="copyText" type="button">Скопировать текстом</button>
-          <button class="btn sec" id="reset" type="button">Сбросить</button>
+          <a class="btn pri" id="tg" href="https://t.me/alkuleshov" target="_blank" rel="noopener">Обсудить в Telegram</a>
+          <div class="mini"><button class="btn wl" id="share" type="button">Ссылка</button><button class="btn wl" id="copyText" type="button">Текстом</button><button class="btn wl" id="reset" type="button">Сбросить</button></div>
         </div>
       </div>
     </aside>
   </div>
-</main>
+</div></section>
 
-<div class="bar" id="bar"><div><b id="barTotal">0 ₽</b><span id="barSub"></span></div><a href="#summary">Программа ↓</a></div>
+<section class="blk" id="terms"><div class="wrap">
+  <div class="sh"><div><div class="num">Шаг 3</div><h2>Как мы работаем</h2></div><p>Всё официально: договор, счёт, акт. Предоплата 50%, остаток — после последнего занятия.</p></div>
+  <div class="flow">
+    <div class="fl"><b>Заявка</b><span>Ссылка на собранную программу или сообщение в Telegram.</span></div>
+    <div class="fl"><b>Встреча</b><span>40–60 минут: задачи бюро, софт, проект для практики.</span></div>
+    <div class="fl"><b>Программа и смета</b><span>Фиксируем модули, даты, формат и стоимость.</span></div>
+    <div class="fl"><b>Договор и счёт</b><span>Договор оказания услуг, безналичная оплата.</span></div>
+    <div class="fl"><b>Обучение</b><span>Занятия по графику, инструкции и чат поддержки.</span></div>
+    <div class="fl"><b>Акт</b><span>Закрывающие документы после последнего занятия.</span></div>
+  </div>
+  <div class="terms">
+    <div class="tm"><div class="ic">§</div><h3>Договор</h3><p>Работаем с юрлицами и ИП по договору возмездного оказания услуг: информационно-консультационные услуги в форме практических семинаров. Договор готовим мы, можем подписать и по форме бюро.</p></div>
+    <div class="tm"><div class="ic">₽</div><h3>Оплата</h3><p>Безналичный расчёт по счёту. 50% до начала занятий, 50% после последнего занятия по акту. Цены без НДС.</p></div>
+    <div class="tm"><div class="ic">⇄</div><h3>Перенос и отмена</h3><p>Занятие переносим без доплаты, если предупредить за 2 рабочих дня. Оплаченные и не проведённые занятия переносим на другие даты или возвращаем деньги.</p></div>
+    <div class="tm"><div class="ic">◎</div><h3>Конфиденциальность</h3><p>Материалы проектов бюро используем только на занятиях и не передаём третьим лицам. Правила работы с данными в облачных ИИ согласуем до старта. Соглашение о неразглашении подпишем по запросу.</p></div>
+    <div class="tm"><div class="ic">✦</div><h3>Материалы остаются у бюро</h3><p>Инструкции, промпты, скрипты и чек-листы, созданные на занятиях, бюро использует внутри компании без ограничений.</p></div>
+    <div class="tm"><div class="ic">▣</div><h3>Документы</h3><p>По итогам подписываем акт оказанных услуг. Документ об обучении не выдаётся: это практикум для команды, а не программа повышения квалификации.</p></div>
+  </div>
+  <div class="note"><b>Нужно удостоверение о повышении квалификации?</b> Его дают открытые программы ЮФУ: <a href="archi.html">«ИИ в архитектуре»</a> и <a href="redev.html">«ИИ в редевелопменте»</a>. Сотрудников бюро можно записать туда отдельно.</div>
+</div></section>
+
+<section class="blk" id="faq"><div class="wrap">
+  <div class="sh"><div><div class="num">Вопросы</div><h2>Частые вопросы</h2></div></div>
+  <div class="faq">
+    <details><summary>Нужен ли опыт работы с нейросетями?</summary><p>Нет. Достаточно уверенно работать в своих программах. Модуль «Старт» готовит рабочие места: пошаговые инструкции по установке и проверка готовности до первого занятия.</p></details>
+    <details><summary>Что нужно от бюро?</summary><p>Рабочие места с правами на установку программ, аккаунты в ИИ-сервисах (ChatGPT, Qwen или аналоги), текущий проект для практики. Для очных занятий — переговорная с экраном, для модуля визуализаций — компьютер с видеокартой NVIDIA RTX.</p></details>
+    <details><summary>Чем «Обзор» отличается от «Практики» и «Внедрения»?</summary><p>«Обзор» показывает, что умеют инструменты, без практики. На «Практике» каждый выполняет задание на проекте бюро. «Внедрение» добавляет настройку под стандарты бюро: шаблоны, скрипты, чек-листы и разбор результатов через неделю.</p></details>
+    <details><summary>Можно ли учиться онлайн из другого города?</summary><p>Да, онлайн-занятия идут в Телемосте. Очные занятия проводим в Ростове-на-Дону, в другие города — с оплатой дороги и проживания.</p></details>
+    <details><summary>Сколько длится обучение?</summary><p>Обычно одно-два занятия в неделю. Программа из шести модулей занимает три-четыре недели, интенсив можно уложить в две.</p></details>
+    <details><summary>Можно ли изменить программу после старта?</summary><p>Да, по согласованию: модули можно поменять местами или заменить другими той же стоимости.</p></details>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><span>Лаборатория AI2ARCH · ai2arch.ru</span><span>Цены ориентировочные, без НДС. Итоговая стоимость фиксируется в договоре после встречи.</span></div></footer>
+
+<button class="bar" id="bar" type="button"><div><b id="barTotal">0 ₽</b><span id="barSub"></span></div><i>Программа ↑</i></button>
+<div class="shade" id="shade"></div>
 <div class="toast" id="toast"></div>
 
 <script>
-/* Цены и состав модулей совпадают с таблицей «Конструктор корпоративного обучения AI2ARCH». Меняйте их здесь и в таблице одновременно. */
-const D = {"modules": [{"id": "M0", "name": "Старт: рабочее место и правила работы с данными", "text": ["Обязательный модуль, входит в любую программу.", "5 пошаговых инструкций по установке со скриншотами, проверка готовности онлайн за 30 минут.", "Шаблон правил работы с данными бюро в облачных ИИ."], "result": "Рабочие места готовы к первому занятию", "price": ["нет", "нет", "нет"], "hours": ["нет", "нет", "нет"], "locked": true}, {"id": "M1", "name": "Анализ участка", "text": ["Какие открытые данные есть (НСПД, OpenStreetMap) и как ИИ сводит ограничения ПЗЗ и ГПЗУ. Демонстрация.", "Подложка участка в QGIS по открытым данным и таблица ограничений с ИИ на объекте бюро.", "Практика плюс шаблон анализа участка под стандарты бюро и разбор результатов через неделю."], "result": "Ситуационная схема и таблица ограничений участка", "price": [8000, 22000, 40000], "hours": [1.5, 3, 4]}, {"id": "M2", "name": "Концепции и ИИ-ТЗ", "text": ["Как ИИ помогает собрать ТЗ, сценарии использования и варианты образа. Примеры.", "ТЗ заказчика → сценарии и функциональная программа, 2–3 варианта образа из скетча или вида модели.", "Практика плюс шаблон ИИ-ТЗ бюро, промпты для концепций и разбор через неделю."], "result": "ИИ-ТЗ и варианты концепции", "price": [8000, 22000, 40000], "hours": [1.5, 3, 4]}, {"id": "M3", "name": "Визуализации", "text": ["ИИ-функции D5 Render и генеративные нейросети: что и когда использовать.", "ИИ-функции D5, D5 Lite прямо в Revit, постобработка в Photoshop на объекте бюро.", "Практика плюс пресеты и промпты визуализации бюро, разбор через неделю."], "result": "Серия ракурсов и замер времени до и после", "price": [8000, 22000, 40000], "hours": [1.5, 3, 4]}, {"id": "M4", "name": "Revit + ИИ", "text": ["Как ИИ пишет скрипты Dynamo и pyRevit, коннектор ИИ к модели Revit. Демонстрация.", "3–5 скриптов под рутину бюро, написанных с ИИ: листы, виды, марки, параметры.", "Коннектор ИИ к Revit на рабочих местах и 5–7 скриптов под стандарты бюро."], "result": "Рабочие скрипты бюро", "price": [8000, 26000, "по запросу"], "hours": [1.5, 3, "по запросу"]}, {"id": "M5", "name": "AutoCAD + ИИ", "text": ["Скрипты LISP по описанию задачи и коннекторы ИИ к AutoCAD. Демонстрация.", "Скрипты под рутину бюро.", "Настройка под стандарты бюро."], "result": "Понимание, что автоматизировать в AutoCAD", "price": [8000, "по запросу", "по запросу"], "hours": [1.5, "по запросу", "по запросу"]}, {"id": "M6", "name": "Нормы и проверка документации", "text": ["Что ИИ может проверить и где ошибается. Своя база норм бюро.", "База актуальных СП в проекте ИИ, чек-лист по профилю объектов, проверка раздела АР.", "Практика плюс 2–3 чек-листа, сверка выгрузок из Revit с требованиями, порядок проверки в бюро."], "result": "Чек-листы и база норм бюро", "price": [8000, 24000, 45000], "hours": [1.5, 3, 4]}, {"id": "M7", "name": "Тексты и документы", "text": ["Какие документы ИИ готовит быстрее и как их проверять.", "Пояснительная записка, ответы на замечания экспертизы, ТЗ смежникам на документах бюро.", "Практика плюс шаблоны документов бюро и библиотека промптов, разбор через неделю."], "result": "Шаблоны и промпты для документов", "price": [8000, 22000, 40000], "hours": [1.5, 3, 4]}, {"id": "M8", "name": "Презентации и подача", "text": ["Сборка презентации и питча с ИИ.", "Презентация концепции объекта бюро.", "Шаблон подачи бюро."], "result": "Презентация концепции", "price": [8000, 18000, "по запросу"], "hours": [1.5, 3, "по запросу"]}, {"id": "M9", "name": "ИИ для ГИПа", "text": ["Замечания экспертизы, сводки по проекту, контроль комплектности с ИИ.", "Матрица ответов на замечания, сводка по проекту, ТЗ смежникам.", "Практика плюс регламент проверки ИИ-результатов и шаблоны ГИПа."], "result": "Шаблоны ГИПа", "price": [8000, 22000, 40000], "hours": [1.5, 3, 4]}, {"id": "M10", "name": "ИИ для инженерных разделов", "text": ["Расчёты с проверкой кодом, спецификации, пояснительные записки разделов.", "Задачи раздела бюро, ведётся с приглашённым экспертом.", "Настройка под раздел бюро."], "result": "Понимание, что ИИ даёт инженерам", "price": [8000, "по запросу", "по запросу"], "hours": [1.5, "по запросу", "по запросу"]}, {"id": "M11", "name": "Итоговая сессия", "text": ["Не предусмотрен.", "Сбор библиотеки промптов бюро, разбор результатов участников.", "Практика плюс регламент ИИ в бюро и онлайн-разбор через 2 недели."], "result": "Библиотека промптов и регламент", "price": ["нет", 15000, 30000], "hours": ["нет", 2, 3]}], "fmt": [1.0, 1.3], "tiers": [{"from": 1, "to": 6, "k": 1.0}, {"from": 7, "to": 10, "k": 1.2}, {"from": 11, "to": 15, "k": 1.4}, {"from": 16, "to": 20, "k": 1.6}], "start": {"name": "Старт: рабочее место и правила работы с данными", "price": 6000, "hours": 0.5}, "support": 20000, "levels": [{"name": "Обзор", "time": "1,5 часа", "text": "Лекция-демонстрация: что умеют инструменты, примеры на задачах бюро. Без практики."}, {"name": "Практика", "time": "3 часа", "text": "Практикум на проекте бюро: каждый делает сам, задание и разбор результата."}, {"name": "Внедрение", "time": "4 часа", "text": "Практика плюс настройка под стандарты бюро: шаблоны, скрипты, чек-листы, разбор через неделю и чат 2 недели."}], "presets": {"Знакомство": {"name": "Знакомство", "who": "6 архитекторов · обзор всех задач", "sel": {"M1": ["Обзор", "Очно", 6], "M2": ["Обзор", "Очно", 6], "M3": ["Обзор", "Очно", 6], "M4": ["Обзор", "Очно", 6], "M6": ["Обзор", "Очно", 6], "M7": ["Обзор", "Очно", 6]}}, "Практикум": {"name": "Практикум", "who": "6 архитекторов · практика в ключевых задачах", "sel": {"M1": ["Обзор", "Очно", 6], "M2": ["Практика", "Очно", 6], "M3": ["Практика", "Очно", 6], "M4": ["Практика", "Очно", 6], "M6": ["Обзор", "Очно", 6], "M7": ["Практика", "Очно", 6]}}, "Бюро целиком": {"name": "Бюро целиком", "who": "архитекторы, ГИПы и инженеры", "sel": {"M1": ["Обзор", "Очно", 6], "M2": ["Практика", "Очно", 6], "M3": ["Практика", "Очно", 6], "M4": ["Практика", "Очно", 10], "M6": ["Практика", "Очно", 15], "M7": ["Практика", "Очно", 11], "M9": ["Обзор", "Онлайн", 5], "M10": ["Обзор", "Онлайн", 4]}}}};
-const LV = ['Обзор','Практика','Внедрение'];
-const FMT = ['Онлайн','Очно'];
+/* Цены и состав модулей совпадают с Google Таблицей «Конструктор корпоративного обучения AI2ARCH». Меняйте их в двух местах одновременно. */
+const D = {"modules": [{"id": "M0", "name": "Старт: рабочее место и правила работы с данными", "text": ["Обязательный модуль, входит в любую программу.", "5 пошаговых инструкций по установке со скриншотами, проверка готовности онлайн за 30 минут.", "Шаблон правил работы с данными бюро в облачных ИИ."], "result": "Рабочие места готовы к первому занятию", "price": ["нет", "нет", "нет"], "hours": ["нет", "нет", "нет"], "locked": true}, {"id": "M1", "name": "Анализ участка", "text": ["Какие открытые данные есть (НСПД, OpenStreetMap) и как ИИ сводит ограничения ПЗЗ и ГПЗУ. Демонстрация.", "Подложка участка в QGIS по открытым данным и таблица ограничений с ИИ на объекте бюро.", "Практика плюс шаблон анализа участка под стандарты бюро и разбор результатов через неделю."], "result": "Ситуационная схема и таблица ограничений участка", "price": [8000, 22000, 40000], "hours": [1.5, 3, 4], "locked": false}, {"id": "M2", "name": "Концепции и ИИ-ТЗ", "text": ["Как ИИ помогает собрать ТЗ, сценарии использования и варианты образа. Примеры.", "ТЗ заказчика → сценарии и функциональная программа, 2–3 варианта образа из скетча или вида модели.", "Практика плюс шаблон ИИ-ТЗ бюро, промпты для концепций и разбор через неделю."], "result": "ИИ-ТЗ и варианты концепции", "price": [8000, 22000, 40000], "hours": [1.5, 3, 4], "locked": false}, {"id": "M3", "name": "Визуализации", "text": ["ИИ-функции D5 Render и генеративные нейросети: что и когда использовать.", "ИИ-функции D5, D5 Lite прямо в Revit, постобработка в Photoshop на объекте бюро.", "Практика плюс пресеты и промпты визуализации бюро, разбор через неделю."], "result": "Серия ракурсов и замер времени до и после", "price": [8000, 22000, 40000], "hours": [1.5, 3, 4], "locked": false}, {"id": "M4", "name": "Revit + ИИ", "text": ["Как ИИ пишет скрипты Dynamo и pyRevit, коннектор ИИ к модели Revit. Демонстрация.", "3–5 скриптов под рутину бюро, написанных с ИИ: листы, виды, марки, параметры.", "Коннектор ИИ к Revit на рабочих местах и 5–7 скриптов под стандарты бюро."], "result": "Рабочие скрипты бюро", "price": [8000, 26000, "по запросу"], "hours": [1.5, 3, "по запросу"], "locked": false}, {"id": "M5", "name": "AutoCAD + ИИ", "text": ["Скрипты LISP по описанию задачи и коннекторы ИИ к AutoCAD. Демонстрация.", "Скрипты под рутину бюро.", "Настройка под стандарты бюро."], "result": "Понимание, что автоматизировать в AutoCAD", "price": [8000, "по запросу", "по запросу"], "hours": [1.5, "по запросу", "по запросу"], "locked": false}, {"id": "M6", "name": "Нормы и проверка документации", "text": ["Что ИИ может проверить и где ошибается. Своя база норм бюро.", "База актуальных СП в проекте ИИ, чек-лист по профилю объектов, проверка раздела АР.", "Практика плюс 2–3 чек-листа, сверка выгрузок из Revit с требованиями, порядок проверки в бюро."], "result": "Чек-листы и база норм бюро", "price": [8000, 24000, 45000], "hours": [1.5, 3, 4], "locked": false}, {"id": "M7", "name": "Тексты и документы", "text": ["Какие документы ИИ готовит быстрее и как их проверять.", "Пояснительная записка, ответы на замечания экспертизы, ТЗ смежникам на документах бюро.", "Практика плюс шаблоны документов бюро и библиотека промптов, разбор через неделю."], "result": "Шаблоны и промпты для документов", "price": [8000, 22000, 40000], "hours": [1.5, 3, 4], "locked": false}, {"id": "M8", "name": "Презентации и подача", "text": ["Сборка презентации и питча с ИИ.", "Презентация концепции объекта бюро.", "Шаблон подачи бюро."], "result": "Презентация концепции", "price": [8000, 18000, "по запросу"], "hours": [1.5, 3, "по запросу"], "locked": false}, {"id": "M9", "name": "ИИ для ГИПа", "text": ["Замечания экспертизы, сводки по проекту, контроль комплектности с ИИ.", "Матрица ответов на замечания, сводка по проекту, ТЗ смежникам.", "Практика плюс регламент проверки ИИ-результатов и шаблоны ГИПа."], "result": "Шаблоны ГИПа", "price": [8000, 22000, 40000], "hours": [1.5, 3, 4], "locked": false}, {"id": "M10", "name": "ИИ для инженерных разделов", "text": ["Расчёты с проверкой кодом, спецификации, пояснительные записки разделов.", "Задачи раздела бюро, ведётся с приглашённым экспертом.", "Настройка под раздел бюро."], "result": "Понимание, что ИИ даёт инженерам", "price": [8000, "по запросу", "по запросу"], "hours": [1.5, "по запросу", "по запросу"], "locked": false}, {"id": "M11", "name": "Итоговая сессия", "text": ["Не предусмотрен.", "Сбор библиотеки промптов бюро, разбор результатов участников.", "Практика плюс регламент ИИ в бюро и онлайн-разбор через 2 недели."], "result": "Библиотека промптов и регламент", "price": ["нет", 15000, 30000], "hours": ["нет", 2, 3], "locked": false}], "presets": {"intro": {"name": "Знакомство", "tag": "Обзор", "who": "Команда видит, что ИИ даёт бюро и с чего начать", "sel": {"M1": ["Обзор", "Очно", 6], "M2": ["Обзор", "Очно", 6], "M3": ["Обзор", "Очно", 6], "M4": ["Обзор", "Очно", 6], "M6": ["Обзор", "Очно", 6], "M7": ["Обзор", "Очно", 6]}}, "practice": {"name": "Практикум", "tag": "Практика на проекте", "who": "Архитекторы осваивают инструменты на своём объекте", "sel": {"M1": ["Обзор", "Очно", 6], "M2": ["Практика", "Очно", 6], "M3": ["Практика", "Очно", 6], "M4": ["Практика", "Очно", 6], "M6": ["Обзор", "Очно", 6], "M7": ["Практика", "Очно", 6]}}, "full": {"name": "Бюро целиком", "tag": "Архитекторы, ГИПы, инженеры", "who": "Практика для архитекторов и обзоры для ГИПов и инженеров", "sel": {"M1": ["Обзор", "Очно", 6], "M2": ["Практика", "Очно", 6], "M3": ["Практика", "Очно", 6], "M4": ["Практика", "Очно", 10], "M6": ["Практика", "Очно", 15], "M7": ["Практика", "Очно", 11], "M9": ["Обзор", "Онлайн", 5], "M10": ["Обзор", "Онлайн", 4]}}}, "groups": [{"name": "Проектирование и подача", "ids": ["M1", "M2", "M3", "M8"]}, {"name": "Revit и AutoCAD", "ids": ["M4", "M5"]}, {"name": "Нормы и документы", "ids": ["M6", "M7"]}, {"name": "Для ГИПов и инженеров", "ids": ["M9", "M10"]}, {"name": "Закрепление", "ids": ["M11"]}], "start": {"name": "Старт: рабочее место и правила работы с данными", "price": 6000, "hours": 0.5}, "fmt": [1.0, 1.3], "tiers": [{"from": 1, "to": 6, "k": 1.0}, {"from": 7, "to": 10, "k": 1.2}, {"from": 11, "to": 15, "k": 1.4}, {"from": 16, "to": 20, "k": 1.6}], "support": 20000};
+const LV = ['Обзор','Практика','Внедрение'], FMT = ['Онлайн','Очно'];
 const byId = Object.fromEntries(D.modules.map(m => [m.id, m]));
+const CAT = D.modules.filter(m => !m.locked);
 const rub = v => Math.round(v).toLocaleString('ru-RU') + ' ₽';
 const num = v => (Math.round(v*10)/10).toLocaleString('ru-RU');
 const tierOf = n => D.tiers.find(t => n >= t.from && n <= t.to) || D.tiers[D.tiers.length-1];
 const isNum = v => typeof v === 'number';
+const $ = s => document.querySelector(s);
+let S;
 
-let S; // state: {order:[ids], m:{id:{on,lvl,fmt,n}}, sup, preset}
+/* ---------- state ---------- */
 function blank(){
-  const m = {};
-  D.modules.forEach(x => { m[x.id] = {on:false, lvl:firstLvl(x), fmt:1, n:6}; });
-  return {order: D.modules.map(x => x.id), m, sup:0, preset:null};
+  const m = {}; CAT.forEach(x => m[x.id] = {lvl:-1, own:false, fmt:1, n:6});
+  return {order: CAT.map(x => x.id), m, fmt:1, n:6, sup:0, preset:'own'};
 }
-function firstLvl(x){ const i = x.price.findIndex(p => p !== 'нет'); return i < 0 ? 0 : i; }
-function applyPreset(key){
-  const s = blank(); const p = D.presets[key];
-  Object.entries(p.sel).forEach(([id,[lvl,fmt,n]]) => { s.m[id] = {on:true, lvl:LV.indexOf(lvl), fmt:FMT.indexOf(fmt), n}; });
-  s.preset = key; return s;
+function presetState(key){
+  const s = blank(); s.preset = key;
+  Object.entries(D.presets[key].sel).forEach(([id,[l,f,n]]) => {
+    const fi = FMT.indexOf(f); const own = fi !== s.fmt || n !== s.n;
+    s.m[id] = {lvl: LV.indexOf(l), own, fmt: fi, n};
+  });
+  return s;
 }
-
-/* ---------- price ---------- */
-function modCost(id, st){
+const eff = (st, id) => { const c = st.m[id]; return c.own ? {fmt:c.fmt, n:c.n} : {fmt:st.fmt, n:st.n}; };
+function cost(st, id){
   const x = byId[id], c = st.m[id];
-  if (!c.on) return {price:0, hours:0, req:false};
-  const base = x.price[c.lvl], h = x.hours[c.lvl];
-  if (!isNum(base)) return {price:0, hours:0, req:true};
-  return {price: base * D.fmt[c.fmt] * tierOf(c.n).k, hours: h, req:false};
+  if (c.lvl < 0) return {on:false};
+  const base = x.price[c.lvl], e = eff(st, id);
+  if (!isNum(base)) return {on:true, req:true, ...e};
+  return {on:true, req:false, price: base * D.fmt[e.fmt] * tierOf(e.n).k, hours: x.hours[c.lvl], ...e};
 }
 function totals(st){
-  let t = D.start.price, off = 0, on = D.start.hours, mods = 0, req = 0, maxN = 0;
-  st.order.forEach(id => { if (byId[id].locked) return; const r = modCost(id, st); const c = st.m[id];
-    if (!c.on) return; mods++; maxN = Math.max(maxN, c.n);
-    if (r.req) { req++; return; }
-    t += r.price; if (c.fmt === 1) off += r.hours; else on += r.hours; });
+  let t = D.start.price, off = 0, on = D.start.hours, mods = 0, req = 0, maxN = 0, minN = 99;
+  st.order.forEach(id => { const r = cost(st, id); if (!r.on) return; mods++; maxN = Math.max(maxN, r.n); minN = Math.min(minN, r.n);
+    if (r.req){ req++; return; } t += r.price; if (r.fmt === 1) off += r.hours; else on += r.hours; });
   t += st.sup * D.support;
-  return {t, off, on, mods, req, maxN};
+  return {t, off, on, mods, req, maxN, minN};
 }
 
 /* ---------- render ---------- */
-const $ = s => document.querySelector(s);
-function seg(opts, cur, attr, disabledFn, reqFn){
-  return '<div class="seg" role="group">' + opts.map((o,i) =>
-    `<button type="button" ${attr}="${i}" aria-pressed="${i===cur}" ${disabledFn&&disabledFn(i)?'disabled':''} class="${reqFn&&reqFn(i)?'req':''}">${o}</button>`).join('') + '</div>';
+function seg(labels, cur, attr, dis, req){
+  return '<div class="seg" role="group">' + labels.map((l,i) => `<button type="button" ${attr}="${i}" aria-pressed="${i===cur}" ${dis&&dis(i)?'disabled':''} class="${req&&req(i)?'req':''}">${l}</button>`).join('') + '</div>';
 }
-function renderStatic(){
-  $('#meta').innerHTML = [`${D.modules.length} модулей`, '3 уровня глубины', 'очно или онлайн', 'группа до 20 человек'].map(t => `<span>${t}</span>`).join('');
-  $('#levels').innerHTML = D.levels.map(l => `<div class="lv"><i>${l.time}</i><b>${l.name}</b><p>${l.text}</p></div>`).join('');
-  $('#how').innerHTML = `
-    <p>Стоимость модуля = базовая цена уровня × коэффициент формата × коэффициент группы. Базовая цена указана для группы до 6 человек онлайн.</p>
-    <table><tr><th>Формат</th><th>Коэффициент</th></tr>${FMT.map((f,i)=>`<tr><td>${f}</td><td>×${num(D.fmt[i])}</td></tr>`).join('')}</table>
-    <table><tr><th>Участников</th><th>Коэффициент</th></tr>${D.tiers.map(t=>`<tr><td>${t.from}–${t.to}</td><td>×${num(t.k)}</td></tr>`).join('')}<tr><td>больше ${D.tiers[D.tiers.length-1].to}</td><td>по запросу</td></tr></table>
-    <p>Модуль «${D.start.name}» входит в любую программу: ${rub(D.start.price)}. Пошаговые инструкции по установке, проверка рабочих мест онлайн и шаблон правил работы с данными.</p>
-    <p>Уровни с пометкой «по запросу» собираем под бюро отдельно, их цена появится после разговора.</p>`;
+function renderFacts(){
+  $('#facts').innerHTML = [`${CAT.length} модулей`, '3 уровня глубины', 'очно или онлайн', 'по договору'].map(t => `<span>${t}</span>`).join('');
 }
-function renderPresets(){
-  $('#presets').innerHTML = Object.entries(D.presets).map(([k,p]) => {
-    const tt = totals(applyPreset(k)).t;
-    return `<button type="button" class="preset ${S.preset===k?'on':''}" data-preset="${k}"><b>${p.name}</b><span>${p.who}</span><em>${rub(tt)}</em></button>`;
-  }).join('') + `<button type="button" class="preset ${S.preset==='blank'?'on':''}" data-preset="blank"><b>С нуля</b><span>Только старт, остальное выберете сами</span><em>${rub(D.start.price)}</em></button>`;
+function renderPrograms(){
+  const cards = Object.keys(D.presets).map(k => {
+    const p = D.presets[k], st = presetState(k), T = totals(st);
+    const items = st.order.filter(id => st.m[id].lvl >= 0).map(id => `<li><span>${byId[id].name}</span><i class="d${st.m[id].lvl}">${LV[st.m[id].lvl]}</i></li>`).join('');
+    return `<div class="pc ${S.preset===k?'sel':''}"><div class="tagline">${p.tag}</div><h3>${p.name}</h3><div class="who">${p.who}</div>
+      <div class="pr">${rub(T.t)}</div><div class="hrs">${num(T.off)} ч очно · ${num(T.on)} ч онлайн</div>
+      <ul>${items}</ul><button type="button" class="btn dark pick" data-preset="${k}">${S.preset===k?'Выбрано':'Выбрать'}</button></div>`;
+  }).join('');
+  $('#progs').innerHTML = cards + `<div class="pc own ${S.preset==='own'?'sel':''}"><div class="tagline">Своя</div><h3>Собрать с нуля</h3><div class="who">Только нужные модули</div>
+    <div class="pr">от ${rub(D.start.price)}</div><div class="hrs">включён модуль «Старт»</div>
+    <p>Выберите модули и глубину в конструкторе. Стоимость пересчитывается сразу.</p><button type="button" class="btn dark pick" data-preset="own">${S.preset==='own'?'Выбрано':'Собрать'}</button></div>`;
 }
-function renderBulk(){
-  const ons = S.order.filter(id => !byId[id].locked && S.m[id].on);
-  const fmts = new Set(ons.map(id => S.m[id].fmt));
-  const cur = fmts.size === 1 ? [...fmts][0] : -1;
-  $('#bulkFmt').innerHTML = FMT.map((f,i)=>`<button type="button" data-bfmt="${i}" aria-pressed="${i===cur}">${f}</button>`).join('');
-  const ns = new Set(ons.map(id => S.m[id].n));
-  $('#bulkN output').textContent = ns.size === 1 ? `${[...ns][0]} чел.` : 'разное';
+function renderParams(){
+  const ons = S.order.filter(id => S.m[id].lvl >= 0);
+  const mixed = ons.some(id => S.m[id].own);
+  $('#gFmt').innerHTML = FMT.map((f,i) => `<button type="button" data-gfmt="${i}" aria-pressed="${i===S.fmt}">${f}</button>`).join('');
+  $('#gFmtNote').textContent = mixed ? 'У части модулей свои настройки' : (S.fmt === 1 ? 'В офисе бюро в Ростове-на-Дону' : 'Телемост, из любого города');
+  $('#gN output').textContent = `${S.n} чел.`;
+  const t = tierOf(S.n); $('#gNNote').textContent = t.k === 1 ? 'Группа до 6 человек — базовая цена' : `Группа ${t.from}–${t.to} человек: ×${num(t.k)} к цене`;
+  $('#gSup output').textContent = S.sup ? `${S.sup} мес.` : 'нет';
 }
-function modHTML(id, idx){
-  const x = byId[id], c = S.m[id], r = modCost(id, S);
-  const locked = !!x.locked;
-  const on = locked || c.on;
-  let priceHTML;
-  if (locked) priceHTML = `<strong>${rub(D.start.price)}</strong><span>${num(D.start.hours)} ч онлайн</span>`;
-  else if (!c.on) { const from = x.price.filter(isNum); priceHTML = `<strong>от ${rub(Math.min(...from))}</strong>`; }
-  else if (r.req) priceHTML = `<strong class="rq">по запросу</strong><span>${LV[c.lvl]}</span>`;
-  else priceHTML = `<strong>${rub(r.price)}</strong><span>${num(r.hours)} ч ${c.fmt===1?'очно':'онлайн'}</span>`;
-  const text = locked ? x.text[1] + ' ' + x.text[2] : x.text[c.lvl];
-  const tier = tierOf(c.n);
-  return `<article class="mod ${on?'on':'off'} ${locked?'lock':''}" data-id="${id}">
-    <div class="grip">
-      <span class="num">${on? idx : ''}</span>
-      ${locked ? '' : `<button type="button" class="handle" aria-label="Перетащить модуль">⋮⋮</button>
-      <button type="button" class="mv" data-mv="-1" aria-label="Поднять выше">▲</button>
-      <button type="button" class="mv" data-mv="1" aria-label="Опустить ниже">▼</button>`}
+function modHTML(id){
+  const x = byId[id], c = S.m[id], r = cost(S, id), e = eff(S, id);
+  let pr;
+  if (!r.on){ const from = x.price.filter(isNum); pr = `<strong>от ${rub(Math.min(...from))}</strong>`; }
+  else if (r.req) pr = `<strong class="rq">по запросу</strong><span>${LV[c.lvl]}</span>`;
+  else pr = `<strong>${rub(r.price)}</strong><span>${num(r.hours)} ч ${e.fmt===1?'очно':'онлайн'}${e.n!==6?' · '+e.n+' чел.':''}</span>`;
+  const lv = LV.map((l,i) => { const p = x.price[i], h = x.hours[i];
+    const meta = p === 'нет' ? 'нет' : isNum(p) ? `${num(h)} ч · ${rub(p)}` : 'по запросу';
+    return `<div class="lvc ${c.lvl===i?'cur':''} ${p==='нет'?'na':''}"><b>${l}<em>${meta}</em></b>${x.text[i]}</div>`; }).join('');
+  return `<article class="mod ${c.lvl>=0?'on':''}" data-id="${id}">
+    <div class="mrow">
+      <div class="mt"><h4>${x.name}</h4><p>${x.result}</p><button type="button" class="more" data-more aria-expanded="false">Подробнее ▾</button></div>
+      ${seg(['Нет', ...LV], c.lvl + 1, 'data-lvl', i => i>0 && x.price[i-1]==='нет', i => i>0 && x.price[i-1]==='по запросу')}
+      <div class="mp">${pr}</div>
     </div>
-    <div class="body">
-      <div class="top">
-        <h3>${x.name}</h3>
-        ${locked ? '<span class="tag">Обязательно</span>' : ''}
-        <button type="button" class="sw" role="switch" aria-checked="${on}" aria-label="Включить модуль ${x.name}" ${locked?'disabled':''} data-sw></button>
+    <div class="mx">
+      <div class="lvls">${lv}</div>
+      <div class="ovr"><label><input type="checkbox" data-own ${c.own?'checked':''}> Отдельные настройки для модуля</label>
+        <div class="ctl ${c.own?'':'dis'}">${seg(FMT, c.fmt, 'data-fmt')}<div class="step"><button type="button" data-n="-1" aria-label="Меньше">−</button><output>${c.n} чел.</output><button type="button" data-n="1" aria-label="Больше">+</button></div></div>
       </div>
-      <div class="teaser">${x.result}</div>
-      ${locked ? `<div class="detail"><p>${text}</p></div>` : `
-      <div class="controls">
-        ${seg(LV, c.lvl, 'data-lvl', i => x.price[i]==='нет', i => x.price[i]==='по запросу')}
-        ${seg(FMT, c.fmt, 'data-fmt')}
-        <div class="step"><button type="button" data-n="-1" aria-label="Меньше участников">−</button><output>${c.n} чел.</output><button type="button" data-n="1" aria-label="Больше участников">+</button></div>
-      </div>
-      <div class="detail"><p>${text}</p><small>Результат: <b>${x.result}</b>${c.n>6?` · группа ${tier.from}–${tier.to} чел., ×${num(tier.k)}`:''}</small></div>`}
     </div>
-    <div class="price">${priceHTML}</div>
   </article>`;
 }
-function renderList(){
-  let k = 0;
-  $('#list').innerHTML = S.order.map(id => { const x = byId[id]; const on = x.locked || S.m[id].on; if (on) k++; return modHTML(id, on ? k : 0); }).join('');
+function renderCatalog(){
+  const open = new Set([...document.querySelectorAll('.mod.open')].map(m => m.dataset.id));
+  $('#catalog').innerHTML = D.groups.map(g => `<div class="group">${g.name}</div><div class="mods">${g.ids.map(modHTML).join('')}</div>`).join('');
+  open.forEach(id => { const m = document.querySelector(`.mod[data-id="${id}"]`); if (m){ m.classList.add('open'); m.querySelector('[data-more]').textContent = 'Свернуть ▴'; } });
 }
-function renderSummary(){
+function renderCanvas(){
   const T = totals(S);
-  $('#total').textContent = rub(T.t);
-  $('#perPerson').textContent = T.maxN ? `≈ ${rub(T.t/T.maxN)} на участника при группе ${T.maxN} чел.` : 'Включите модули, чтобы собрать программу';
+  animate($('#total'), T.t);
+  $('#perPerson').textContent = !T.mods ? 'Выберите программу или включите модули' : T.minN === T.maxN ? `≈ ${rub(T.t/T.maxN)} на участника · группа ${T.maxN} чел.` : `Группы по модулям: от ${T.minN} до ${T.maxN} чел.`;
   $('#stMods').textContent = T.mods; $('#stOff').textContent = num(T.off); $('#stOn').textContent = num(T.on);
-  let k = 1;
-  const rows = [`<li><i>${k++}</i><div>${D.start.name}<small>онлайн · ${num(D.start.hours)} ч</small></div><em>${rub(D.start.price)}</em></li>`];
-  S.order.forEach(id => { const x = byId[id], c = S.m[id]; if (x.locked || !c.on) return; const r = modCost(id, S);
-    rows.push(`<li><i>${k++}</i><div>${x.name}<small>${LV[c.lvl]} · ${FMT[c.fmt].toLowerCase()} · ${c.n} чел.${r.req?'':' · '+num(r.hours)+' ч'}</small></div><em>${r.req?'по запросу':rub(r.price)}</em></li>`); });
-  if (S.sup) rows.push(`<li><i>+</i><div>Сопровождение<small>${S.sup} мес.</small></div><em>${rub(S.sup*D.support)}</em></li>`);
-  $('#prog').innerHTML = rows.join('');
-  $('#warn').textContent = T.req ? `Модулей с ценой по запросу: ${T.req}. В итог они не входят.` : '';
+  const rows = [`<li class="cv"><button class="h fix" type="button" tabindex="-1">1</button><div>${D.start.name}<small>онлайн · ${num(D.start.hours)} ч · обязательно</small></div><em>${rub(D.start.price)}</em></li>`];
+  let k = 2;
+  S.order.forEach(id => { const r = cost(S, id); if (!r.on) return; const x = byId[id], c = S.m[id];
+    rows.push(`<li class="cv" data-id="${id}"><button class="h" type="button" aria-label="Перетащить">⋮⋮</button><div>${k++}. ${x.name}<small>${LV[c.lvl]} · ${FMT[r.fmt].toLowerCase()} · ${r.n} чел.${r.req?'':' · '+num(r.hours)+' ч'}</small></div><span style="display:flex;align-items:center;gap:4px"><em>${r.req?'по запросу':rub(r.price)}</em><span class="ar"><button type="button" data-mv="-1" aria-label="Выше">▲</button><button type="button" data-mv="1" aria-label="Ниже">▼</button></span></span></li>`); });
+  if (S.sup) rows.push(`<li class="cv"><button class="h fix" type="button" tabindex="-1">+</button><div>Сопровождение<small>${S.sup} мес.</small></div><em>${rub(S.sup*D.support)}</em></li>`);
+  if (!T.mods) rows.push(`<li class="empty">Выберите программу выше или включите модули в конструкторе.</li>`);
+  $('#canvas').innerHTML = rows.join('');
+  $('#warn').textContent = T.req ? `Модулей с ценой по запросу: ${T.req}. В итог они не входят, цену назовём после встречи.` : '';
   $('#barTotal').textContent = rub(T.t);
   $('#barSub').textContent = `${T.mods} модулей · ${num(T.off)} ч очно · ${num(T.on)} ч онлайн`;
-  $('#supStep output').textContent = `${S.sup} мес.`;
 }
-function render(){ renderPresets(); renderBulk(); renderList(); renderSummary(); saveHash(); }
+let shown = null;
+function animate(el, to){
+  const from = shown === null ? to : shown; shown = to;
+  if (from === to || matchMedia('(prefers-reduced-motion: reduce)').matches){ el.textContent = rub(to); return; }
+  const t0 = performance.now(), dur = 380;
+  const tick = now => { const p = Math.min(1, (now - t0)/dur), v = from + (to - from) * (1 - Math.pow(1-p, 3)); el.textContent = rub(v); if (p < 1) requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+}
+function render(){ renderPrograms(); renderParams(); renderCatalog(); renderCanvas(); saveHash(); }
 
-/* ---------- URL state ---------- */
+/* ---------- link & text ---------- */
 function encode(st){
-  return st.order.map(id => { const c = st.m[id]; return `${id.slice(1)}-${c.on?1:0}${c.lvl}${c.fmt}-${c.n}`; }).join('.') + '~' + st.sup;
+  const mods = st.order.map(id => { const c = st.m[id]; return [id.slice(1), c.lvl+1, c.own?1:0, c.fmt, c.n].join('.'); }).join('_');
+  return `2~${st.fmt}~${st.n}~${st.sup}~${st.preset}~${mods}`;
 }
 function decode(h){
   try{
-    const [mods, sup] = h.split('~'); const s = blank(); const order = [];
-    mods.split('.').forEach(t => { const [i,f,n] = t.split('-'); const id = 'M'+i; if (!byId[id]) return; order.push(id);
-      s.m[id] = {on:f[0]==='1', lvl:+f[1], fmt:+f[2], n:Math.min(20,Math.max(1,+n||6))}; });
-    D.modules.forEach(x => { if (!order.includes(x.id)) order.push(x.id); });
-    s.order = order; s.sup = Math.min(12, Math.max(0, +sup||0)); return s;
+    const [v, f, n, sup, preset, mods] = h.split('~'); if (v !== '2') return null;
+    const s = blank(); s.fmt = +f ? 1 : 0; s.n = clampN(+n); s.sup = Math.min(12, Math.max(0, +sup||0));
+    s.preset = (D.presets[preset] || preset === 'own') ? preset : 'own';
+    const order = [];
+    mods.split('_').forEach(t => { const [i,l,o,ff,nn] = t.split('.'); const id = 'M'+i; if (!s.m[id]) return; order.push(id);
+      s.m[id] = {lvl: Math.min(2, Math.max(-1, (+l)-1)), own: o==='1', fmt: +ff ? 1 : 0, n: clampN(+nn)}; });
+    CAT.forEach(x => { if (!order.includes(x.id)) order.push(x.id); }); s.order = order; return s;
   }catch(e){ return null; }
 }
+const clampN = n => Math.min(20, Math.max(1, n || 6));
 function saveHash(){ history.replaceState(null, '', '#p=' + encode(S)); }
-function link(){ return location.origin + location.pathname + '#p=' + encode(S); }
+const link = () => location.origin + location.pathname + '#p=' + encode(S);
 function asText(){
-  const T = totals(S); const lines = ['Программа обучения ИИ для бюро (конструктор AI2ARCH)'];
-  let k = 1; lines.push(`${k++}. ${D.start.name} — онлайн — ${rub(D.start.price)}`);
-  S.order.forEach(id => { const x = byId[id], c = S.m[id]; if (x.locked || !c.on) return; const r = modCost(id,S);
-    lines.push(`${k++}. ${x.name} — ${LV[c.lvl]}, ${FMT[c.fmt].toLowerCase()}, ${c.n} чел. — ${r.req?'по запросу':rub(r.price)}`); });
-  if (S.sup) lines.push(`Сопровождение: ${S.sup} мес. — ${rub(S.sup*D.support)}`);
-  lines.push(`Итого: ${rub(T.t)} (очно ${num(T.off)} ч, онлайн ${num(T.on)} ч)`, link());
-  return lines.join('\n');
+  const T = totals(S), L = ['Программа обучения ИИ для бюро (AI2ARCH)'];
+  if (D.presets[S.preset]) L.push(`Основа: программа «${D.presets[S.preset].name}»`);
+  L.push(`1. ${D.start.name} — онлайн — ${rub(D.start.price)}`); let k = 2;
+  S.order.forEach(id => { const r = cost(S, id); if (!r.on) return; const c = S.m[id];
+    L.push(`${k++}. ${byId[id].name} — ${LV[c.lvl]}, ${FMT[r.fmt].toLowerCase()}, ${r.n} чел. — ${r.req?'по запросу':rub(r.price)}`); });
+  if (S.sup) L.push(`Сопровождение: ${S.sup} мес. — ${rub(S.sup*D.support)}`);
+  L.push(`Итого: ${rub(T.t)} (очно ${num(T.off)} ч, онлайн ${num(T.on)} ч)`, link());
+  return L.join('\n');
 }
-function toast(t){ const el = $('#toast'); el.textContent = t; el.classList.add('show'); clearTimeout(toast.h); toast.h = setTimeout(() => el.classList.remove('show'), 2200); }
-async function copy(t, msg){ try{ await navigator.clipboard.writeText(t); toast(msg); }catch(e){ prompt('Скопируйте:', t); } }
-function goal(g){ try{ ym(113526373,'reachGoal',g); }catch(e){} }
+function toast(t){ const el = $('#toast'); el.textContent = t; el.classList.add('show'); clearTimeout(toast.h); toast.h = setTimeout(() => el.classList.remove('show'), 2400); }
+async function copy(t, msg){ try{ await navigator.clipboard.writeText(t); toast(msg); }catch(e){ window.prompt('Скопируйте:', t); } }
+function goal(g){ try{ ym(113526373, 'reachGoal', g); }catch(e){} }
+const sheet = open => { $('#summary').classList.toggle('open', open); $('#shade').classList.toggle('open', open); };
 
 /* ---------- events ---------- */
 document.addEventListener('click', e => {
-  const b = e.target.closest('button,a'); if (!b) return;
-  const mod = b.closest('.mod'); const id = mod && mod.dataset.id; const c = id && S.m[id];
-  if (b.dataset.preset){ S = b.dataset.preset === 'blank' ? Object.assign(blank(), {preset:'blank'}) : applyPreset(b.dataset.preset); render(); goal('corp_preset'); return; }
-  if (b.hasAttribute('data-sw') && c){ c.on = !c.on; S.preset = null; render(); return; }
-  if (b.dataset.lvl !== undefined && c){ c.lvl = +b.dataset.lvl; c.on = true; S.preset = null; render(); return; }
-  if (b.dataset.fmt !== undefined && c){ c.fmt = +b.dataset.fmt; S.preset = null; render(); return; }
-  if (b.dataset.n !== undefined && c){ c.n = Math.min(20, Math.max(1, c.n + +b.dataset.n)); S.preset = null; render(); return; }
-  if (b.dataset.mv !== undefined && id){ const i = S.order.indexOf(id), j = i + +b.dataset.mv;
-    if (j >= 1 && j < S.order.length){ [S.order[i], S.order[j]] = [S.order[j], S.order[i]]; render(); document.querySelector(`.mod[data-id="${id}"] [data-mv="${b.dataset.mv}"]`)?.focus(); } return; }
-  if (b.dataset.bfmt !== undefined){ S.order.forEach(i => { if (!byId[i].locked && S.m[i].on) S.m[i].fmt = +b.dataset.bfmt; }); S.preset = null; render(); return; }
-  if (b.closest('#bulkN')){ const d = +b.dataset.d; const ons = S.order.filter(i => !byId[i].locked && S.m[i].on); const base = ons.length ? Math.max(...ons.map(i => S.m[i].n)) : 6;
-    const nn = Math.min(20, Math.max(1, base + d)); ons.forEach(i => S.m[i].n = nn); S.preset = null; render(); return; }
-  if (b.closest('#supStep')){ S.sup = Math.min(12, Math.max(0, S.sup + +b.dataset.d)); render(); return; }
+  const b = e.target.closest('button,a,input'); if (!b) return;
+  const mod = b.closest('.mod'), id = mod && mod.dataset.id, c = id && S.m[id];
+  if (b.dataset.preset){ S = b.dataset.preset === 'own' ? blank() : presetState(b.dataset.preset); render(); goal('corp_preset');
+    document.getElementById('builder').scrollIntoView({behavior:'smooth'}); toast(b.dataset.preset === 'own' ? 'Включайте модули в конструкторе' : `Программа «${D.presets[b.dataset.preset].name}» загружена`); return; }
+  if (b.hasAttribute('data-more') && mod){ const o = mod.classList.toggle('open'); b.textContent = o ? 'Свернуть ▴' : 'Подробнее ▾'; b.setAttribute('aria-expanded', o); return; }
+  if (b.dataset.lvl !== undefined && c){ c.lvl = +b.dataset.lvl - 1; S.preset = 'own'; render(); return; }
+  if (b.hasAttribute('data-own') && c){ c.own = b.checked; if (c.own){ c.fmt = S.fmt; c.n = S.n; } S.preset = 'own'; render(); return; }
+  if (b.dataset.fmt !== undefined && c){ c.fmt = +b.dataset.fmt; S.preset = 'own'; render(); return; }
+  if (b.dataset.n !== undefined && c){ c.n = clampN(c.n + +b.dataset.n); S.preset = 'own'; render(); return; }
+  if (b.dataset.gfmt !== undefined){ S.fmt = +b.dataset.gfmt; render(); return; }
+  if (b.closest('#gN')){ S.n = clampN(S.n + +b.dataset.d); render(); return; }
+  if (b.closest('#gSup')){ S.sup = Math.min(12, Math.max(0, S.sup + +b.dataset.d)); render(); return; }
+  if (b.dataset.mv !== undefined){ const cid = b.closest('.cv').dataset.id; const on = S.order.filter(i => S.m[i].lvl >= 0);
+    const i = on.indexOf(cid), j = i + +b.dataset.mv; if (j < 0 || j >= on.length) return;
+    const a = S.order.indexOf(on[i]), z = S.order.indexOf(on[j]); [S.order[a], S.order[z]] = [S.order[z], S.order[a]]; render(); return; }
   if (b.id === 'share' || b.id === 'shareTop'){ copy(link(), 'Ссылка на программу скопирована'); goal('corp_copy_link'); return; }
   if (b.id === 'copyText'){ copy(asText(), 'Программа скопирована текстом'); goal('corp_copy_text'); return; }
-  if (b.id === 'reset'){ S = Object.assign(blank(), {preset:'blank'}); render(); return; }
-  if (b.id === 'tg'){ goal('corp_telegram'); copy(asText(), 'Программа скопирована, вставьте её в сообщение'); return; }
+  if (b.id === 'reset'){ S = blank(); render(); return; }
+  if (b.id === 'tg'){ goal('corp_telegram'); copy(asText(), 'Программа скопирована — вставьте её в сообщение'); return; }
+  if (b.id === 'bar'){ sheet(true); return; }
+  if (b.id === 'closeSheet'){ sheet(false); return; }
 });
+$('#shade').addEventListener('click', () => sheet(false));
 
-/* drag & drop by handle (mouse and touch) */
+/* drag in canvas */
 let drag = null;
 document.addEventListener('pointerdown', e => {
-  const h = e.target.closest('.handle'); if (!h) return;
-  const card = h.closest('.mod'); e.preventDefault();
-  drag = {card, startY:e.clientY, id:card.dataset.id};
-  card.classList.add('dragging'); h.setPointerCapture(e.pointerId);
+  const h = e.target.closest('.cv .h:not(.fix)'); if (!h) return;
+  const li = h.closest('.cv'); e.preventDefault(); h.setPointerCapture(e.pointerId);
+  drag = {li, y: e.clientY}; li.classList.add('drag');
 });
 document.addEventListener('pointermove', e => {
   if (!drag) return;
-  const list = $('#list'); const cards = [...list.querySelectorAll('.mod')].filter(c => c !== drag.card);
-  drag.card.style.transform = `translateY(${e.clientY - drag.startY}px)`;
-  let before = null;
-  for (const c of cards){ const r = c.getBoundingClientRect(); if (e.clientY < r.top + r.height/2){ before = c; break; } }
-  if (before && before.dataset.id === 'M0') before = cards[1] || null;
-  const ref = before || null;
-  if (ref !== drag.card.nextElementSibling){
-    const r0 = drag.card.getBoundingClientRect().top;
-    list.insertBefore(drag.card, ref);
-    const r1 = drag.card.getBoundingClientRect().top;
-    drag.startY += (r1 - r0);
-    drag.card.style.transform = `translateY(${e.clientY - drag.startY}px)`;
+  const list = $('#canvas'), items = [...list.querySelectorAll('.cv[data-id]')].filter(x => x !== drag.li);
+  drag.li.style.transform = `translateY(${e.clientY - drag.y}px)`;
+  let before = null; for (const it of items){ const r = it.getBoundingClientRect(); if (e.clientY < r.top + r.height/2){ before = it; break; } }
+  if (!before){ const last = items[items.length-1]; before = last ? last.nextElementSibling : null; }
+  if (before !== drag.li.nextElementSibling && before !== drag.li){
+    const r0 = drag.li.getBoundingClientRect().top; list.insertBefore(drag.li, before);
+    drag.y += drag.li.getBoundingClientRect().top - r0; drag.li.style.transform = `translateY(${e.clientY - drag.y}px)`;
   }
 });
 function endDrag(){
-  if (!drag) return;
-  drag.card.style.transform = ''; drag.card.classList.remove('dragging');
-  S.order = [...$('#list').querySelectorAll('.mod')].map(c => c.dataset.id);
-  if (S.order[0] !== 'M0'){ S.order = ['M0', ...S.order.filter(i => i !== 'M0')]; }
+  if (!drag) return; drag.li.style.transform = ''; drag.li.classList.remove('drag');
+  const onOrder = [...$('#canvas').querySelectorAll('.cv[data-id]')].map(x => x.dataset.id);
+  const off = S.order.filter(id => S.m[id].lvl < 0); S.order = [...onOrder, ...off];
   drag = null; render();
 }
 document.addEventListener('pointerup', endDrag);
@@ -445,9 +551,8 @@ document.addEventListener('pointercancel', endDrag);
 
 /* init */
 const fromHash = location.hash.startsWith('#p=') ? decode(decodeURIComponent(location.hash.slice(3))) : null;
-S = fromHash || Object.assign(blank(), {preset:'blank'});
-S.m.M0.on = true;
-renderStatic(); render();
+S = fromHash || blank();
+renderFacts(); render();
 </script>
 </body>
 </html>
