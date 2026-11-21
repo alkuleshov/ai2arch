@@ -52,6 +52,11 @@ h1 em{font-style:normal;color:var(--accent)}
 .hp-all{display:block;margin-top:6px;padding-top:14px;border-top:1px solid var(--line);font-size:13.5px;font-weight:800;text-align:center}
 .facts{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
 .facts span{font-size:12px;font-weight:700;color:var(--navy);background:rgba(255,255,255,.8);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+.talk{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:22px;background:#fff;border:1px dashed var(--accent-b);border-radius:16px;padding:14px 18px}
+.talk p{font-size:14.5px;color:var(--muted);max-width:640px}.talk strong{font-weight:700;color:var(--navy)}
+.talk-btn{font:800 13.5px var(--sans);color:var(--accent);background:var(--accent-l);border-radius:12px;padding:10px 16px;white-space:nowrap;text-decoration:none!important}
+.talk-btn:hover{background:var(--accent-b)}
+.hp-ask{display:block;margin-top:10px;font-size:13px;font-weight:700;color:var(--muted);text-align:center}
 /* sections */
 section.blk{padding:46px 0}
 .sh{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:22px;flex-wrap:wrap}
@@ -275,12 +280,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <h3>Программы</h3>
     <div id="heroProgs"></div>
     <a class="hp-all" href="#programs">Состав и цены ↓</a>
+    <a class="hp-ask" data-tg href="https://t.me/alkuleshov" target="_blank" rel="noopener">Не знаете, что выбрать? Напишите нам →</a>
   </div>
 </div></section>
 
 <section class="blk" id="programs"><div class="wrap">
   <div class="sh"><div><div class="num">Шаг 1</div><h2>Программы обучения</h2></div><p>Каждую программу можно взять как есть или изменить в конструкторе ниже.</p></div>
   <div class="progs" id="progs"></div>
+  <div class="talk"><p><strong>Не знаете, какая программа подойдёт? Расскажите о бюро — подскажем. Платить ничего не нужно.</strong></p><a class="talk-btn" data-tg href="https://t.me/alkuleshov" target="_blank" rel="noopener">Написать в Telegram</a></div>
 </div></section>
 
 <section class="blk" id="builder" style="padding-top:10px"><div class="wrap">
@@ -311,6 +318,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       </div>
     </aside>
   </div>
+  <div class="talk"><p><strong>Сомневаетесь в составе или цене? Напишите — обсудим и соберём вместе.</strong></p><a class="talk-btn" data-tg href="https://t.me/alkuleshov" target="_blank" rel="noopener">Написать в Telegram</a></div>
 </div></section>
 
 <section class="blk" id="terms"><div class="wrap">
@@ -326,6 +334,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="fx"><p class="hl"><strong>Занятия проходят только в дни и время, которые согласованы на встрече и записаны в счёте-договоре.</strong></p><p>Если нужно перенести занятие, предупредите за 2 рабочих дня — перенесём без доплаты.</p></div></details>
   </div>
   <p class="flow-more">Счёт-договор, оплата, переносы, конфиденциальность и документы — в <a href="#faq">частых вопросах</a>.</p>
+  <div class="talk"><p><strong>Остались вопросы по шагам? Спросите до оплаты, ответим в Telegram.</strong></p><a class="talk-btn" data-tg href="https://t.me/alkuleshov" target="_blank" rel="noopener">Написать в Telegram</a></div>
 </div></section>
 
 <section class="blk" id="faq"><div class="wrap">
@@ -348,6 +357,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <details><summary>Как вы работаете с данными наших проектов и что с конфиденциальностью?</summary><p>Конфиденциальность обязательная и обоюдная, она входит в счёт-договор, отдельно подписывать ничего не нужно. Мы не разглашаем проекты, данные и структуру работы бюро, используем материалы только на занятиях и не называем бюро клиентом без вашего согласия. Бюро не разглашает содержание и методику курса: не записывает занятия и не публикует их, в том числе в соцсетях и рилсах. Кейс можно опубликовать только с согласия обеих сторон. Правила работы с данными в облачных ИИ согласуем до первого занятия: какие файлы можно загружать, а какие нет. Материалы проектов мы не храним после обучения. Обязательство действует 3 года после обучения.</p></details>
     <details><summary>Кому принадлежат материалы занятий?</summary><p>Бюро. Инструкции, промпты, скрипты и чек-листы, созданные на занятиях, бюро использует внутри компании без ограничений. Передавать и публиковать их за пределами бюро нельзя, это часть конфиденциальности.</p></details>
   </div>
+  <div class="talk"><p><strong>Не нашли ответ? Напишите — ответим лично.</strong></p><a class="talk-btn" data-tg href="https://t.me/alkuleshov" target="_blank" rel="noopener">Написать в Telegram</a></div>
 </div></section>
 
 <footer><div class="wrap"><span>AI2ARCH · лаборатория проектного интеллекта · ai2arch.ru<br><span id="reqLine"></span></span><span>Цены ориентировочные, без НДС. Стоимость, дни и время занятий фиксируются в счёте-договоре.</span></div></footer>
@@ -488,6 +498,7 @@ document.addEventListener('click', async e => {
     catch(err){ toast('Не получилось сформировать PDF, попробуйте ещё раз'); }
     b.disabled = false; b.textContent = t; return; }
   if (b.id === 'reset'){ S = blank(); render(); return; }
+  if (b.hasAttribute('data-tg')){ goal('corp_telegram'); if (totals(S).mods) copy(`Здравствуйте! Вопрос по программе № ${Corp.programId(Corp.encode(S))}: ${Corp.builderUrl(Corp.encode(S))}`, 'Номер программы скопирован — вставьте его в сообщение'); return; }
   if (b.id === 'tg'){ goal('corp_telegram'); copy(`Здравствуйте! Вопрос по программе № ${Corp.programId(Corp.encode(S))}: ${Corp.builderUrl(Corp.encode(S))}`, 'Номер программы скопирован — вставьте его в сообщение'); return; }
   if (b.id === 'bar'){ sheet(true); return; }
   if (b.id === 'closeSheet'){ sheet(false); return; }
