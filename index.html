@@ -6,13 +6,13 @@
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0A0F1A">
 <title>AI2ARCH — лаборатория проектного интеллекта · курс «ИИ в архитектуре»</title>
-<meta name="description" content="Лаборатория проектного интеллекта AI2ARCH. Курс повышения квалификации «ИИ в архитектуре» на базе ААИ ЮФУ: 22 ак. часа, QGIS и нейросети с нуля, удостоверение ЮФУ. Курс «ИИ в редевелопменте». Идёт набор на оба курса.">
+<meta name="description" content="Лаборатория проектного интеллекта AI2ARCH. Курс повышения квалификации «ИИ в архитектуре» на базе ААИ ЮФУ: 22 ак. часа, QGIS и нейросети с нуля, удостоверение ЮФУ. Курс «ИИ в редевелопменте». Группы набираются на оба курса.">
 <link rel="canonical" href="https://ai2arch.ru/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:url" content="https://ai2arch.ru/">
 <meta property="og:title" content="AI2ARCH — лаборатория проектного интеллекта">
-<meta property="og:description" content="Курс «ИИ в архитектуре» на базе ААИ ЮФУ: QGIS и нейросети с нуля, удостоверение о повышении квалификации. Курс «ИИ в редевелопменте». Идёт набор на оба курса.">
+<meta property="og:description" content="Курс «ИИ в архитектуре» на базе ААИ ЮФУ: QGIS и нейросети с нуля, удостоверение о повышении квалификации. Курс «ИИ в редевелопменте». Группы набираются на оба курса.">
 <meta property="og:image" content="https://ai2arch.ru/images/og-ai2arch.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -129,9 +129,10 @@
   .enroll-bar { display:flex; align-items:baseline; gap:12px; max-width:62ch; margin-top:18px; font-size:14.5px; line-height:1.5; color:var(--muted); }
   .enroll-bar .live-dot { top:-1px; }
   .enroll-bar b { font-weight:700; color:#FFB25E; }
-  .card-tag { align-self:flex-start; display:inline-flex; align-items:center; gap:9px; margin:-4px 0 14px; padding:6px 12px; border:1px solid rgba(232,134,43,.5); border-radius:999px; background:rgba(232,134,43,.14); color:#FFB25E; font-size:11.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+  .card-tag { align-self:flex-start; display:inline-flex; align-items:center; gap:9px; margin:auto 0 14px; padding:6px 12px; border:1px solid rgba(232,134,43,.5); border-radius:999px; background:rgba(232,134,43,.14); color:#FFB25E; font-size:11.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
   .card-tag small { font-size:12px; font-weight:500; letter-spacing:0; text-transform:none; color:#FFD9B3; }
   .card-tag small b { font-weight:700; }
+  .card-tag + .actions { margin-top:0; }
   .meta-pair { display:grid; gap:9px; }
   @property --sweep { syntax:'<angle>'; inherits:false; initial-value:0deg; }
   .cards > .card { position:relative; border-color:rgba(232,134,43,.22); animation:cardglow 5s ease-in-out infinite; }
@@ -258,13 +259,12 @@
       <span class="brand-text"><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span>
     </h1>
     <p class="lead">Исследуем, как ИИ работает в архитектуре и девелопменте, и учим этому на двух программах повышения квалификации ЮФУ.</p>
-    <p class="enroll-bar"><i class="live-dot" aria-hidden="true"></i><span><b>Набор постоянный.</b> Старт обучения — после набора группы. Оставьте заявку и выберите поток: ближайший или следующий.</span></p>
+    <p class="enroll-bar"><i class="live-dot" aria-hidden="true"></i><span><b>Группы набираются.</b> Старт после набора участников. Оставьте заявку и выберите поток: ближайший или следующий.</span></p>
   </header>
 
   <main class="wrap">
     <div class="cards" id="courses">
       <article class="card">
-        <p class="card-tag" data-group-size="12"><i class="live-dot" aria-hidden="true"></i>Идёт набор <small>· группа <b data-group-count>12</b> человек</small></p>
         <h2>ИИ в архитектуре</h2>
         <div class="ai-level" data-ai-course="archi" data-ai-theme="dark"></div>
         <div class="course-meta">
@@ -282,6 +282,7 @@
             <li>Интерактивная презентация в Gamma</li>
           </ul>
         </div>
+        <p class="card-tag" data-group-size="12"><i class="live-dot" aria-hidden="true"></i>Группа набирается <small>· на <b data-group-count>12</b> человек</small></p>
         <div class="actions">
           <a class="btn btn-ghost" href="archi.html">Подробнее</a>
           <a class="btn btn-primary" href="archi.html#enroll" onclick="typeof ym==='function'&&ym(113526373,'reachGoal','enroll_click',{course:'ИИ в архитектуре',source:'index'})">Оставить заявку</a>
@@ -289,7 +290,6 @@
       </article>
 
       <article class="card">
-        <p class="card-tag" data-group-size="10"><i class="live-dot" aria-hidden="true"></i>Идёт набор <small>· группа <b data-group-count>10</b> человек</small></p>
         <h2>ИИ в редевелопменте</h2>
         <div class="ai-level" data-ai-course="redev" data-ai-theme="dark"></div>
         <div class="course-meta">
@@ -307,6 +307,7 @@
             <li>Библиотека промптов и шаблонов для предпроектной аналитики</li>
           </ul>
         </div>
+        <p class="card-tag" data-group-size="10"><i class="live-dot" aria-hidden="true"></i>Группа набирается <small>· на <b data-group-count>10</b> человек</small></p>
         <div class="actions">
           <a class="btn btn-ghost" href="redev.html">Подробнее</a>
           <a class="btn btn-primary" href="redev.html#apply" onclick="typeof ym==='function'&&ym(113526373,'reachGoal','enroll_click',{course:'ИИ в редевелопменте',source:'index'})">Оставить заявку</a>
