@@ -126,7 +126,7 @@ section.blk{padding:46px 0}
 /* summary / canvas */
 aside{position:sticky;top:calc(var(--head) + 14px)}
 .sum{background:var(--navy);color:#fff;border-radius:22px;padding:20px;box-shadow:0 24px 60px rgba(10,15,26,.22)}
-.sum-h{display:flex;justify-content:space-between;align-items:center}
+.sum-h{display:flex;gap:10px;align-items:center}
 .sum .kicker{color:#8FB4FF;margin:0}
 .x{display:none;border:0;background:rgba(255,255,255,.1);color:#fff;width:32px;height:32px;border-radius:50%;font-size:16px}
 .total{font-size:38px;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-top:8px;font-variant-numeric:tabular-nums}
@@ -153,18 +153,27 @@ aside{position:sticky;top:calc(var(--head) + 14px)}
 .btn.wl{background:rgba(255,255,255,.1);color:#fff}.btn.wl:hover{background:rgba(255,255,255,.18)}
 .mini{display:flex;gap:8px}.mini .btn{flex:1;padding:10px;font-size:12.5px}
 /* terms */
-.flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;counter-reset:f;margin-bottom:26px}
-.fl{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 14px}
-.fl::before{counter-increment:f;content:counter(f);display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:800;margin-bottom:10px}
-.fl b{display:block;font-size:14px;color:var(--navy);margin-bottom:4px}
-.fl span{font-size:12.5px;color:var(--muted);line-height:1.45}
-.terms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.tm{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
-.tm .ic{width:36px;height:36px;border-radius:10px;background:var(--accent-l);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:10px}
-.tm h3{font-size:15.5px;color:var(--navy);margin-bottom:6px}
-.tm p{font-size:13.5px;color:var(--muted);line-height:1.55}
-.note{margin-top:16px;background:var(--orange-l);border:1px solid var(--orange-b);border-radius:16px;padding:16px 18px;font-size:13.5px;color:#4A3524}
-.note b{color:var(--orange)}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:start}
+.fl{background:#fff;border:1px solid var(--line);border-radius:16px;transition:border-color .15s,box-shadow .15s}
+.fl[open]{border-color:var(--accent-b);box-shadow:0 14px 34px rgba(10,15,26,.07)}
+.fl summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:36px minmax(0,1fr) 16px;gap:2px 12px;align-items:center;padding:16px}
+.fl summary::-webkit-details-marker{display:none}
+.fl summary i{grid-row:1 / span 2;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;font-style:normal;font-size:14px;font-weight:800}
+.fl[open] summary i{background:var(--accent)}
+.fl summary b{font-size:16px;color:var(--navy);line-height:1.25}
+.fl summary span{grid-column:2;font-size:12.5px;color:var(--muted);line-height:1.4}
+.fl summary::after{content:'+';grid-column:3;grid-row:1 / span 2;color:var(--accent);font-size:20px;font-weight:700;line-height:1}
+.fl[open] summary::after{content:'–'}
+.fx{padding:0 16px 16px;font-size:13.5px;color:var(--muted);line-height:1.55;border-top:1px dashed var(--line);padding-top:12px;margin:0 16px;padding-left:0;padding-right:0}
+.fx p+p{margin-top:8px}
+.fx strong{color:var(--navy)}
+.fx .hl{background:var(--orange-l);border:1px solid var(--orange-b);border-radius:10px;padding:8px 10px;color:#4A3524}
+.flow-more{margin-top:14px;font-size:13.5px;color:var(--muted)}
+.fq-h{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin:14px 0 2px}
+.fq-h:first-child{margin-top:0}
+.pid{font-size:12px;font-weight:700;color:#8FB4FF;margin-left:auto;font-variant-numeric:tabular-nums}
+.ask{display:block;text-align:center;font-size:12.5px;font-weight:700;color:#B8C2D6!important;padding:4px 0}
+.btn.off{opacity:.45}
 /* faq */
 .faq{display:grid;gap:8px;max-width:860px}
 .faq details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:0 18px}
@@ -187,7 +196,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 }
 @media(max-width:1080px){
  .progs{grid-template-columns:repeat(2,minmax(0,1fr))}
- .flow{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .flow{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:960px){
  .hd nav{display:none}
@@ -203,7 +212,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
  .bar{display:flex;position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:80;background:var(--navy);color:#fff;border-radius:16px;padding:10px 10px 10px 16px;align-items:center;gap:10px;box-shadow:0 12px 30px rgba(10,15,26,.3);border:0;text-align:left;width:auto}
  .bar div{flex:1;min-width:0}.bar b{display:block;font-size:20px;line-height:1.1}.bar span{font-size:11.5px;color:#B8C2D6}
  .bar i{font-style:normal;background:var(--accent);border-radius:11px;padding:10px 12px;font-size:13px;font-weight:800;white-space:nowrap}
- .terms{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:640px){
  .wrap{padding:0 16px}
@@ -221,11 +229,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
  .mrow{padding:13px 14px}
  .mrow .seg button{font-size:12.5px}
  .lvls{grid-template-columns:minmax(0,1fr)}
- .flow{grid-template-columns:minmax(0,1fr)}
- .flow{gap:8px}
- .fl{display:grid;grid-template-columns:30px 1fr;gap:0 12px;padding:12px 14px}
- .fl::before{grid-row:span 2;margin:0}
- .terms{grid-template-columns:minmax(0,1fr)}
+ .flow{grid-template-columns:minmax(0,1fr);gap:8px}
+ .fl summary{padding:14px}
 }
 </style>
 <!-- Yandex.Metrika counter -->
@@ -261,7 +266,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <h3>Как это устроено</h3>
     <div class="s3"><b>1</b><div><strong>Выберите программу</strong><span>Три готовых варианта под разные задачи и бюджет.</span></div></div>
     <div class="s3"><b>2</b><div><strong>Настройте под бюро</strong><span>Глубина модулей, формат, число участников, порядок.</span></div></div>
-    <div class="s3"><b>3</b><div><strong>Отправьте нам ссылку</strong><span>Обсудим на встрече и заключим договор.</span></div></div>
+    <div class="s3"><b>3</b><div><strong>Оплатите или обсудите</strong><span>Номер программы, сумма, PDF и способы оплаты на одной странице.</span></div></div>
   </div>
 </div></section>
 
@@ -283,7 +288,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     </div>
     <aside id="summary" aria-label="Ваша программа">
       <div class="sum">
-        <div class="sum-h"><div class="kicker">Ваша программа</div><button class="x" type="button" id="closeSheet" aria-label="Закрыть">✕</button></div>
+        <div class="sum-h"><div class="kicker">Ваша программа</div><span class="pid" id="progId"></span><button class="x" type="button" id="closeSheet" aria-label="Закрыть">✕</button></div>
         <div class="total" id="total">0 ₽</div>
         <div class="sub" id="perPerson"></div>
         <div class="stats"><div><b id="stMods">0</b><span>модулей</span></div><div><b id="stOff">0</b><span>ч очно</span></div><div><b id="stOn">0</b><span>ч онлайн</span></div></div>
@@ -291,8 +296,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <ol class="canvas" id="canvas"></ol>
         <div class="warn" id="warn"></div>
         <div class="acts">
-          <a class="btn pri" id="tg" href="https://t.me/alkuleshov" target="_blank" rel="noopener">Обсудить в Telegram</a>
-          <div class="mini"><button class="btn wl" id="share" type="button">Ссылка</button><button class="btn wl" id="copyText" type="button">Текстом</button><button class="btn wl" id="reset" type="button">Сбросить</button></div>
+          <a class="btn pri" id="pay" href="corp-order.html">Оплатить</a>
+          <div class="mini"><button class="btn wl" id="pdf" type="button">Скачать PDF</button><button class="btn wl" id="reset" type="button">Сбросить</button></div>
+          <a class="ask" id="tg" href="https://t.me/alkuleshov" target="_blank" rel="noopener">Вопрос менеджеру в Telegram →</a>
         </div>
       </div>
     </aside>
@@ -300,92 +306,61 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </div></section>
 
 <section class="blk" id="terms"><div class="wrap">
-  <div class="sh"><div><div class="num">Шаг 3</div><h2>Как мы работаем</h2></div><p>Всё официально: договор, счёт, акт. Предоплата 50%, остаток — после последнего занятия.</p></div>
+  <div class="sh"><div><div class="num">Шаг 3</div><h2>Как мы работаем</h2></div><p>Четыре шага от заявки до обучения. Нажмите на шаг, чтобы раскрыть подробности.</p></div>
   <div class="flow">
-    <div class="fl"><b>Заявка</b><span>Ссылка на собранную программу или сообщение в Telegram.</span></div>
-    <div class="fl"><b>Встреча</b><span>40–60 минут: задачи бюро, софт, проект для практики.</span></div>
-    <div class="fl"><b>Программа и смета</b><span>Фиксируем модули, даты, формат и стоимость.</span></div>
-    <div class="fl"><b>Договор и счёт</b><span>Договор оказания услуг, безналичная оплата.</span></div>
-    <div class="fl"><b>Обучение</b><span>Занятия по графику, инструкции и чат поддержки.</span></div>
-    <div class="fl"><b>Акт</b><span>Закрывающие документы после последнего занятия.</span></div>
+    <details class="fl"><summary><i>1</i><b>Заявка</b><span>Программа из конструктора, сообщение или оплата</span></summary>
+      <div class="fx"><p>Соберите программу и нажмите <strong>«Оплатить»</strong>: откроется страница с номером программы, составом и суммой. Оттуда можно скачать PDF, написать менеджеру в Telegram или оплатить.</p><p>Можно и просто прислать ссылку на программу или вопрос в Telegram.</p></div></details>
+    <details class="fl"><summary><i>2</i><b>Встреча</b><span>40–60 минут онлайн</span></summary>
+      <div class="fx"><p>Созваниваемся онлайн — удобно бюро из любого города. Обсуждаем бюро, софт и задачи, уточняем <strong>программу, смету и документы</strong>.</p><p class="hl"><strong>Сразу фиксируем дни и время занятий и состав команды.</strong> Всё это войдёт в счёт-договор, чтобы потом не подбирать время заново.</p></div></details>
+    <details class="fl"><summary><i>3</i><b>Оплата</b><span>Счёт-договор или QR-код</span></summary>
+      <div class="fx"><p>Оплатить можно любым удобным способом: <strong>по счёту-договору</strong> или <strong>по QR-коду</strong> в банковском приложении — реквизиты и сумма заполнятся сами.</p><p>50% — до первого занятия, остаток — после последнего. Все закрывающие документы вы получите после обучения.</p></div></details>
+    <details class="fl"><summary><i>4</i><b>Обучение</b><span>Строго по согласованному графику</span></summary>
+      <div class="fx"><p class="hl"><strong>Занятия проходят только в дни и время, которые согласованы на встрече и записаны в счёте-договоре.</strong></p><p>Если нужно перенести занятие, предупредите за 2 рабочих дня — перенесём без доплаты.</p></div></details>
   </div>
-  <div class="terms">
-    <div class="tm"><div class="ic">§</div><h3>Договор</h3><p>Работаем с юрлицами и ИП по договору возмездного оказания услуг: информационно-консультационные услуги в форме практических семинаров. Договор готовим мы, можем подписать и по форме бюро.</p></div>
-    <div class="tm"><div class="ic">₽</div><h3>Оплата</h3><p>Безналичный расчёт по счёту. 50% до начала занятий, 50% после последнего занятия по акту. Цены без НДС.</p></div>
-    <div class="tm"><div class="ic">⇄</div><h3>Перенос и отмена</h3><p>Занятие переносим без доплаты, если предупредить за 2 рабочих дня. Оплаченные и не проведённые занятия переносим на другие даты или возвращаем деньги.</p></div>
-    <div class="tm"><div class="ic">◎</div><h3>Конфиденциальность</h3><p>Материалы проектов бюро используем только на занятиях и не передаём третьим лицам. Правила работы с данными в облачных ИИ согласуем до старта. Соглашение о неразглашении подпишем по запросу.</p></div>
-    <div class="tm"><div class="ic">✦</div><h3>Материалы остаются у бюро</h3><p>Инструкции, промпты, скрипты и чек-листы, созданные на занятиях, бюро использует внутри компании без ограничений.</p></div>
-    <div class="tm"><div class="ic">▣</div><h3>Документы</h3><p>По итогам подписываем акт оказанных услуг. Документ об обучении не выдаётся: это практикум для команды, а не программа повышения квалификации.</p></div>
-  </div>
-  <div class="note"><b>Нужно удостоверение о повышении квалификации?</b> Его дают открытые программы ЮФУ: <a href="archi.html">«ИИ в архитектуре»</a> и <a href="redev.html">«ИИ в редевелопменте»</a>. Сотрудников бюро можно записать туда отдельно.</div>
+  <p class="flow-more">Счёт-договор, оплата, переносы, конфиденциальность и документы — в <a href="#faq">частых вопросах</a>.</p>
 </div></section>
 
 <section class="blk" id="faq"><div class="wrap">
   <div class="sh"><div><div class="num">Вопросы</div><h2>Частые вопросы</h2></div></div>
   <div class="faq">
+    <h3 class="fq-h">Об обучении</h3>
     <details><summary>Нужен ли опыт работы с нейросетями?</summary><p>Нет. Достаточно уверенно работать в своих программах. Модуль «Старт» готовит рабочие места: пошаговые инструкции по установке и проверка готовности до первого занятия.</p></details>
     <details><summary>Что нужно от бюро?</summary><p>Рабочие места с правами на установку программ, аккаунты в ИИ-сервисах (ChatGPT, Qwen или аналоги), текущий проект для практики. Для очных занятий — переговорная с экраном, для модуля визуализаций — компьютер с видеокартой NVIDIA RTX.</p></details>
     <details><summary>Чем «Обзор» отличается от «Практики» и «Внедрения»?</summary><p>«Обзор» показывает, что умеют инструменты, без практики. На «Практике» каждый выполняет задание на проекте бюро. «Внедрение» добавляет настройку под стандарты бюро: шаблоны, скрипты, чек-листы и разбор результатов через неделю.</p></details>
     <details><summary>Можно ли учиться онлайн из другого города?</summary><p>Да, онлайн-занятия идут в Телемосте. Очные занятия проводим в Ростове-на-Дону, в другие города — с оплатой дороги и проживания.</p></details>
     <details><summary>Сколько длится обучение?</summary><p>Обычно одно-два занятия в неделю. Программа из шести модулей занимает три-четыре недели, интенсив можно уложить в две.</p></details>
     <details><summary>Можно ли изменить программу после старта?</summary><p>Да, по согласованию: модули можно поменять местами или заменить другими той же стоимости.</p></details>
+    <h3 class="fq-h">Документы и оплата</h3>
+    <details><summary>Можно работать по счёту-договору, без отдельного договора?</summary><p>Да. Мы выставляем счёт-договор (счёт-оферту): в нём программа, дни и время занятий, стоимость и условия. Оплата счёта означает согласие с условиями, и договор считается заключённым в письменной форме (п. 3 ст. 434 и п. 3 ст. 438 ГК РФ). Если бухгалтерии бюро нужен отдельный двусторонний договор, подпишем его по форме бюро.</p></details>
+    <details><summary>Как оплатить?</summary><p>Безналичным переводом с расчётного счёта организации или ИП: по реквизитам из счёта-договора или по QR-коду в банковском приложении. 50% — до первого занятия, остаток — после последнего. Цены без НДС.</p></details>
+    <details><summary>Какие документы получим?</summary><p>Счёт-договор — до начала обучения, акт оказанных услуг — после последнего занятия. Документ об обучении не выдаётся: это практикум для команды, а не программа повышения квалификации.</p></details>
+    <details><summary>Нужно удостоверение о повышении квалификации?</summary><p>Его дают открытые программы ЮФУ: <a href="archi.html">«ИИ в архитектуре»</a> и <a href="redev.html">«ИИ в редевелопменте»</a>. Сотрудников бюро можно записать туда отдельно.</p></details>
+    <details><summary>Можно ли перенести занятие?</summary><p>Да, без доплаты, если предупредить за 2 рабочих дня. Оплаченные занятия, которые не состоялись по нашей вине, проведём в другие согласованные даты или вернём деньги.</p></details>
+    <details><summary>Как вы работаете с данными наших проектов?</summary><p>Материалы проектов бюро используем только на занятиях и не передаём третьим лицам. Правила работы с данными в облачных ИИ согласуем до старта. Соглашение о неразглашении подпишем по запросу.</p></details>
+    <details><summary>Кому принадлежат материалы занятий?</summary><p>Бюро. Инструкции, промпты, скрипты и чек-листы, созданные на занятиях, бюро использует внутри компании без ограничений.</p></details>
   </div>
 </div></section>
 
-<footer><div class="wrap"><span>Лаборатория AI2ARCH · ai2arch.ru</span><span>Цены ориентировочные, без НДС. Итоговая стоимость фиксируется в договоре после встречи.</span></div></footer>
+<footer><div class="wrap"><span>Лаборатория AI2ARCH · ai2arch.ru<br><span id="reqLine"></span></span><span>Цены ориентировочные, без НДС. Стоимость, дни и время занятий фиксируются в счёте-договоре.</span></div></footer>
 
 <button class="bar" id="bar" type="button"><div><b id="barTotal">0 ₽</b><span id="barSub"></span></div><i>Программа ↑</i></button>
 <div class="shade" id="shade"></div>
 <div class="toast" id="toast"></div>
 
+<script src="assets/corp-data.js"></script>
+<script src="assets/corp-req.js"></script>
+<script src="assets/corp-core.js"></script>
 <script>
-/* Цены и состав модулей совпадают с Google Таблицей «Конструктор корпоративного обучения AI2ARCH». Меняйте их в двух местах одновременно. */
-const D = {"modules": [{"id": "M0", "name": "Старт: рабочее место и правила работы с данными", "text": ["Обязательный модуль, входит в любую программу.", "5 пошаговых инструкций по установке со скриншотами, проверка готовности онлайн за 30 минут.", "Шаблон правил работы с данными бюро в облачных ИИ."], "result": "Рабочие места готовы к первому занятию", "price": ["нет", "нет", "нет"], "hours": ["нет", "нет", "нет"], "locked": true}, {"id": "M1", "name": "Анализ участка", "text": ["Какие открытые данные есть (НСПД, OpenStreetMap) и как ИИ сводит ограничения ПЗЗ и ГПЗУ. Демонстрация.", "Подложка участка в QGIS по открытым данным и таблица ограничений с ИИ на объекте бюро.", "Практика плюс шаблон анализа участка под стандарты бюро и разбор результатов через неделю."], "result": "Ситуационная схема и таблица ограничений участка", "price": [8000, 22000, 40000], "hours": [1.5, 3, 4], "locked": false}, {"id": "M2", "name": "Концепции и ИИ-ТЗ", "text": ["Как ИИ помогает собрать ТЗ, сценарии использования и варианты образа. Примеры.", "ТЗ заказчика → сценарии и функциональная программа, 2–3 варианта образа из скетча или вида модели.", "Практика плюс шаблон ИИ-ТЗ бюро, промпты для концепций и разбор через неделю."], "result": "ИИ-ТЗ и варианты концепции", "price": [8000, 22000, 40000], "hours": [1.5, 3, 4], "locked": false}, {"id": "M3", "name": "Визуализации", "text": ["ИИ-функции D5 Render и генеративные нейросети: что и когда использовать.", "ИИ-функции D5, D5 Lite прямо в Revit, постобработка в Photoshop на объекте бюро.", "Практика плюс пресеты и промпты визуализации бюро, разбор через неделю."], "result": "Серия ракурсов и замер времени до и после", "price": [8000, 22000, 40000], "hours": [1.5, 3, 4], "locked": false}, {"id": "M4", "name": "Revit + ИИ", "text": ["Как ИИ пишет скрипты Dynamo и pyRevit, коннектор ИИ к модели Revit. Демонстрация.", "3–5 скриптов под рутину бюро, написанных с ИИ: листы, виды, марки, параметры.", "Коннектор ИИ к Revit на рабочих местах и 5–7 скриптов под стандарты бюро."], "result": "Рабочие скрипты бюро", "price": [8000, 26000, "по запросу"], "hours": [1.5, 3, "по запросу"], "locked": false}, {"id": "M5", "name": "AutoCAD + ИИ", "text": ["Скрипты LISP по описанию задачи и коннекторы ИИ к AutoCAD. Демонстрация.", "Скрипты под рутину бюро.", "Настройка под стандарты бюро."], "result": "Понимание, что автоматизировать в AutoCAD", "price": [8000, "по запросу", "по запросу"], "hours": [1.5, "по запросу", "по запросу"], "locked": false}, {"id": "M6", "name": "Нормы и проверка документации", "text": ["Что ИИ может проверить и где ошибается. Своя база норм бюро.", "База актуальных СП в проекте ИИ, чек-лист по профилю объектов, проверка раздела АР.", "Практика плюс 2–3 чек-листа, сверка выгрузок из Revit с требованиями, порядок проверки в бюро."], "result": "Чек-листы и база норм бюро", "price": [8000, 24000, 45000], "hours": [1.5, 3, 4], "locked": false}, {"id": "M7", "name": "Тексты и документы", "text": ["Какие документы ИИ готовит быстрее и как их проверять.", "Пояснительная записка, ответы на замечания экспертизы, ТЗ смежникам на документах бюро.", "Практика плюс шаблоны документов бюро и библиотека промптов, разбор через неделю."], "result": "Шаблоны и промпты для документов", "price": [8000, 22000, 40000], "hours": [1.5, 3, 4], "locked": false}, {"id": "M8", "name": "Презентации и подача", "text": ["Сборка презентации и питча с ИИ.", "Презентация концепции объекта бюро.", "Шаблон подачи бюро."], "result": "Презентация концепции", "price": [8000, 18000, "по запросу"], "hours": [1.5, 3, "по запросу"], "locked": false}, {"id": "M9", "name": "ИИ для ГИПа", "text": ["Замечания экспертизы, сводки по проекту, контроль комплектности с ИИ.", "Матрица ответов на замечания, сводка по проекту, ТЗ смежникам.", "Практика плюс регламент проверки ИИ-результатов и шаблоны ГИПа."], "result": "Шаблоны ГИПа", "price": [8000, 22000, 40000], "hours": [1.5, 3, 4], "locked": false}, {"id": "M10", "name": "ИИ для инженерных разделов", "text": ["Расчёты с проверкой кодом, спецификации, пояснительные записки разделов.", "Задачи раздела бюро, ведётся с приглашённым экспертом.", "Настройка под раздел бюро."], "result": "Понимание, что ИИ даёт инженерам", "price": [8000, "по запросу", "по запросу"], "hours": [1.5, "по запросу", "по запросу"], "locked": false}, {"id": "M11", "name": "Итоговая сессия", "text": ["Не предусмотрен.", "Сбор библиотеки промптов бюро, разбор результатов участников.", "Практика плюс регламент ИИ в бюро и онлайн-разбор через 2 недели."], "result": "Библиотека промптов и регламент", "price": ["нет", 15000, 30000], "hours": ["нет", 2, 3], "locked": false}], "presets": {"intro": {"name": "Знакомство", "tag": "Обзор", "who": "Команда видит, что ИИ даёт бюро и с чего начать", "sel": {"M1": ["Обзор", "Очно", 6], "M2": ["Обзор", "Очно", 6], "M3": ["Обзор", "Очно", 6], "M4": ["Обзор", "Очно", 6], "M6": ["Обзор", "Очно", 6], "M7": ["Обзор", "Очно", 6]}}, "practice": {"name": "Практикум", "tag": "Практика на проекте", "who": "Архитекторы осваивают инструменты на своём объекте", "sel": {"M1": ["Обзор", "Очно", 6], "M2": ["Практика", "Очно", 6], "M3": ["Практика", "Очно", 6], "M4": ["Практика", "Очно", 6], "M6": ["Обзор", "Очно", 6], "M7": ["Практика", "Очно", 6]}}, "full": {"name": "Бюро целиком", "tag": "Архитекторы, ГИПы, инженеры", "who": "Практика для архитекторов и обзоры для ГИПов и инженеров", "sel": {"M1": ["Обзор", "Очно", 6], "M2": ["Практика", "Очно", 6], "M3": ["Практика", "Очно", 6], "M4": ["Практика", "Очно", 10], "M6": ["Практика", "Очно", 15], "M7": ["Практика", "Очно", 11], "M9": ["Обзор", "Онлайн", 5], "M10": ["Обзор", "Онлайн", 4]}}}, "groups": [{"name": "Проектирование и подача", "ids": ["M1", "M2", "M3", "M8"]}, {"name": "Revit и AutoCAD", "ids": ["M4", "M5"]}, {"name": "Нормы и документы", "ids": ["M6", "M7"]}, {"name": "Для ГИПов и инженеров", "ids": ["M9", "M10"]}, {"name": "Закрепление", "ids": ["M11"]}], "start": {"name": "Старт: рабочее место и правила работы с данными", "price": 6000, "hours": 0.5}, "fmt": [1.0, 1.3], "tiers": [{"from": 1, "to": 6, "k": 1.0}, {"from": 7, "to": 10, "k": 1.2}, {"from": 11, "to": 15, "k": 1.4}, {"from": 16, "to": 20, "k": 1.6}], "support": 20000};
-const LV = ['Обзор','Практика','Внедрение'], FMT = ['Онлайн','Очно'];
-const byId = Object.fromEntries(D.modules.map(m => [m.id, m]));
-const CAT = D.modules.filter(m => !m.locked);
-const rub = v => Math.round(v).toLocaleString('ru-RU') + ' ₽';
-const num = v => (Math.round(v*10)/10).toLocaleString('ru-RU');
-const tierOf = n => D.tiers.find(t => n >= t.from && n <= t.to) || D.tiers[D.tiers.length-1];
-const isNum = v => typeof v === 'number';
+const {D, LV, FMT, byId, CAT, isNum, rub, num, clampN, tierOf, blank, presetState, eff, cost, totals} = Corp;
 const $ = s => document.querySelector(s);
 let S;
-
-/* ---------- state ---------- */
-function blank(){
-  const m = {}; CAT.forEach(x => m[x.id] = {lvl:-1, own:false, fmt:1, n:6});
-  return {order: CAT.map(x => x.id), m, fmt:1, n:6, sup:0, preset:'own'};
-}
-function presetState(key){
-  const s = blank(); s.preset = key;
-  Object.entries(D.presets[key].sel).forEach(([id,[l,f,n]]) => {
-    const fi = FMT.indexOf(f); const own = fi !== s.fmt || n !== s.n;
-    s.m[id] = {lvl: LV.indexOf(l), own, fmt: fi, n};
-  });
-  return s;
-}
-const eff = (st, id) => { const c = st.m[id]; return c.own ? {fmt:c.fmt, n:c.n} : {fmt:st.fmt, n:st.n}; };
-function cost(st, id){
-  const x = byId[id], c = st.m[id];
-  if (c.lvl < 0) return {on:false};
-  const base = x.price[c.lvl], e = eff(st, id);
-  if (!isNum(base)) return {on:true, req:true, ...e};
-  return {on:true, req:false, price: base * D.fmt[e.fmt] * tierOf(e.n).k, hours: x.hours[c.lvl], ...e};
-}
-function totals(st){
-  let t = D.start.price, off = 0, on = D.start.hours, mods = 0, req = 0, maxN = 0, minN = 99;
-  st.order.forEach(id => { const r = cost(st, id); if (!r.on) return; mods++; maxN = Math.max(maxN, r.n); minN = Math.min(minN, r.n);
-    if (r.req){ req++; return; } t += r.price; if (r.fmt === 1) off += r.hours; else on += r.hours; });
-  t += st.sup * D.support;
-  return {t, off, on, mods, req, maxN, minN};
-}
 
 /* ---------- render ---------- */
 function seg(labels, cur, attr, dis, req){
   return '<div class="seg" role="group">' + labels.map((l,i) => `<button type="button" ${attr}="${i}" aria-pressed="${i===cur}" ${dis&&dis(i)?'disabled':''} class="${req&&req(i)?'req':''}">${l}</button>`).join('') + '</div>';
 }
 function renderFacts(){
-  $('#facts').innerHTML = [`${CAT.length} модулей`, '3 уровня глубины', 'очно или онлайн', 'по договору'].map(t => `<span>${t}</span>`).join('');
+  $('#facts').innerHTML = [`${CAT.length} модулей`, '3 уровня глубины', 'очно или онлайн', 'счёт-договор'].map(t => `<span>${t}</span>`).join('');
 }
 function renderPrograms(){
   const cards = Object.keys(D.presets).map(k => {
@@ -400,8 +375,7 @@ function renderPrograms(){
     <p>Выберите модули и глубину в конструкторе. Стоимость пересчитывается сразу.</p><button type="button" class="btn dark pick" data-preset="own">${S.preset==='own'?'Выбрано':'Собрать'}</button></div>`;
 }
 function renderParams(){
-  const ons = S.order.filter(id => S.m[id].lvl >= 0);
-  const mixed = ons.some(id => S.m[id].own);
+  const mixed = S.order.some(id => S.m[id].lvl >= 0 && S.m[id].own);
   $('#gFmt').innerHTML = FMT.map((f,i) => `<button type="button" data-gfmt="${i}" aria-pressed="${i===S.fmt}">${f}</button>`).join('');
   $('#gFmtNote').textContent = mixed ? 'У части модулей свои настройки' : (S.fmt === 1 ? 'В офисе бюро в Ростове-на-Дону' : 'Телемост, из любого города');
   $('#gN output').textContent = `${S.n} чел.`;
@@ -411,7 +385,7 @@ function renderParams(){
 function modHTML(id){
   const x = byId[id], c = S.m[id], r = cost(S, id), e = eff(S, id);
   let pr;
-  if (!r.on){ const from = x.price.filter(isNum); pr = `<strong>от ${rub(Math.min(...from))}</strong>`; }
+  if (!r.on){ pr = `<strong>от ${rub(Math.min(...x.price.filter(isNum)))}</strong>`; }
   else if (r.req) pr = `<strong class="rq">по запросу</strong><span>${LV[c.lvl]}</span>`;
   else pr = `<strong>${rub(r.price)}</strong><span>${num(r.hours)} ч ${e.fmt===1?'очно':'онлайн'}${e.n!==6?' · '+e.n+' чел.':''}</span>`;
   const lv = LV.map((l,i) => { const p = x.price[i], h = x.hours[i];
@@ -437,9 +411,10 @@ function renderCatalog(){
   open.forEach(id => { const m = document.querySelector(`.mod[data-id="${id}"]`); if (m){ m.classList.add('open'); m.querySelector('[data-more]').textContent = 'Свернуть ▴'; } });
 }
 function renderCanvas(){
-  const T = totals(S);
+  const T = totals(S), code = Corp.encode(S);
   animate($('#total'), T.t);
   $('#perPerson').textContent = !T.mods ? 'Выберите программу или включите модули' : T.minN === T.maxN ? `≈ ${rub(T.t/T.maxN)} на участника · группа ${T.maxN} чел.` : `Группы по модулям: от ${T.minN} до ${T.maxN} чел.`;
+  $('#progId').textContent = T.mods ? `№ ${Corp.programId(code)}` : '';
   $('#stMods').textContent = T.mods; $('#stOff').textContent = num(T.off); $('#stOn').textContent = num(T.on);
   const rows = [`<li class="cv"><button class="h fix" type="button" tabindex="-1">1</button><div>${D.start.name}<small>онлайн · ${num(D.start.hours)} ч · обязательно</small></div><em>${rub(D.start.price)}</em></li>`];
   let k = 2;
@@ -448,7 +423,9 @@ function renderCanvas(){
   if (S.sup) rows.push(`<li class="cv"><button class="h fix" type="button" tabindex="-1">+</button><div>Сопровождение<small>${S.sup} мес.</small></div><em>${rub(S.sup*D.support)}</em></li>`);
   if (!T.mods) rows.push(`<li class="empty">Выберите программу выше или включите модули в конструкторе.</li>`);
   $('#canvas').innerHTML = rows.join('');
-  $('#warn').textContent = T.req ? `Модулей с ценой по запросу: ${T.req}. В итог они не входят, цену назовём после встречи.` : '';
+  $('#warn').textContent = T.req ? `Модулей с ценой по запросу: ${T.req}. В итог они не входят, цену назовём на встрече.` : '';
+  $('#pay').href = Corp.orderUrl(code);
+  $('#pay').classList.toggle('off', !T.mods); $('#pdf').classList.toggle('off', !T.mods);
   $('#barTotal').textContent = rub(T.t);
   $('#barSub').textContent = `${T.mods} модулей · ${num(T.off)} ч очно · ${num(T.on)} ч онлайн`;
 }
@@ -460,44 +437,15 @@ function animate(el, to){
   const tick = now => { const p = Math.min(1, (now - t0)/dur), v = from + (to - from) * (1 - Math.pow(1-p, 3)); el.textContent = rub(v); if (p < 1) requestAnimationFrame(tick); };
   requestAnimationFrame(tick);
 }
-function render(){ renderPrograms(); renderParams(); renderCatalog(); renderCanvas(); saveHash(); }
+function render(){ renderPrograms(); renderParams(); renderCatalog(); renderCanvas(); history.replaceState(null, '', '#c=' + Corp.encode(S)); }
 
-/* ---------- link & text ---------- */
-function encode(st){
-  const mods = st.order.map(id => { const c = st.m[id]; return [id.slice(1), c.lvl+1, c.own?1:0, c.fmt, c.n].join('.'); }).join('_');
-  return `2~${st.fmt}~${st.n}~${st.sup}~${st.preset}~${mods}`;
-}
-function decode(h){
-  try{
-    const [v, f, n, sup, preset, mods] = h.split('~'); if (v !== '2') return null;
-    const s = blank(); s.fmt = +f ? 1 : 0; s.n = clampN(+n); s.sup = Math.min(12, Math.max(0, +sup||0));
-    s.preset = (D.presets[preset] || preset === 'own') ? preset : 'own';
-    const order = [];
-    mods.split('_').forEach(t => { const [i,l,o,ff,nn] = t.split('.'); const id = 'M'+i; if (!s.m[id]) return; order.push(id);
-      s.m[id] = {lvl: Math.min(2, Math.max(-1, (+l)-1)), own: o==='1', fmt: +ff ? 1 : 0, n: clampN(+nn)}; });
-    CAT.forEach(x => { if (!order.includes(x.id)) order.push(x.id); }); s.order = order; return s;
-  }catch(e){ return null; }
-}
-const clampN = n => Math.min(20, Math.max(1, n || 6));
-function saveHash(){ history.replaceState(null, '', '#p=' + encode(S)); }
-const link = () => location.origin + location.pathname + '#p=' + encode(S);
-function asText(){
-  const T = totals(S), L = ['Программа обучения ИИ для бюро (AI2ARCH)'];
-  if (D.presets[S.preset]) L.push(`Основа: программа «${D.presets[S.preset].name}»`);
-  L.push(`1. ${D.start.name} — онлайн — ${rub(D.start.price)}`); let k = 2;
-  S.order.forEach(id => { const r = cost(S, id); if (!r.on) return; const c = S.m[id];
-    L.push(`${k++}. ${byId[id].name} — ${LV[c.lvl]}, ${FMT[r.fmt].toLowerCase()}, ${r.n} чел. — ${r.req?'по запросу':rub(r.price)}`); });
-  if (S.sup) L.push(`Сопровождение: ${S.sup} мес. — ${rub(S.sup*D.support)}`);
-  L.push(`Итого: ${rub(T.t)} (очно ${num(T.off)} ч, онлайн ${num(T.on)} ч)`, link());
-  return L.join('\n');
-}
-function toast(t){ const el = $('#toast'); el.textContent = t; el.classList.add('show'); clearTimeout(toast.h); toast.h = setTimeout(() => el.classList.remove('show'), 2400); }
+function toast(t){ const el = $('#toast'); el.textContent = t; el.classList.add('show'); clearTimeout(toast.h); toast.h = setTimeout(() => el.classList.remove('show'), 2600); }
 async function copy(t, msg){ try{ await navigator.clipboard.writeText(t); toast(msg); }catch(e){ window.prompt('Скопируйте:', t); } }
 function goal(g){ try{ ym(113526373, 'reachGoal', g); }catch(e){} }
 const sheet = open => { $('#summary').classList.toggle('open', open); $('#shade').classList.toggle('open', open); };
 
 /* ---------- events ---------- */
-document.addEventListener('click', e => {
+document.addEventListener('click', async e => {
   const b = e.target.closest('button,a,input'); if (!b) return;
   const mod = b.closest('.mod'), id = mod && mod.dataset.id, c = id && S.m[id];
   if (b.dataset.preset){ S = b.dataset.preset === 'own' ? blank() : presetState(b.dataset.preset); render(); goal('corp_preset');
@@ -513,10 +461,15 @@ document.addEventListener('click', e => {
   if (b.dataset.mv !== undefined){ const cid = b.closest('.cv').dataset.id; const on = S.order.filter(i => S.m[i].lvl >= 0);
     const i = on.indexOf(cid), j = i + +b.dataset.mv; if (j < 0 || j >= on.length) return;
     const a = S.order.indexOf(on[i]), z = S.order.indexOf(on[j]); [S.order[a], S.order[z]] = [S.order[z], S.order[a]]; render(); return; }
-  if (b.id === 'share' || b.id === 'shareTop'){ copy(link(), 'Ссылка на программу скопирована'); goal('corp_copy_link'); return; }
-  if (b.id === 'copyText'){ copy(asText(), 'Программа скопирована текстом'); goal('corp_copy_text'); return; }
+  if (b.id === 'shareTop'){ copy(Corp.builderUrl(Corp.encode(S)), 'Ссылка на программу скопирована'); goal('corp_copy_link'); return; }
+  if (b.id === 'pay'){ if (!totals(S).mods){ e.preventDefault(); toast('Сначала выберите программу или модули'); return; } goal('corp_pay'); return; }
+  if (b.id === 'pdf'){ if (!totals(S).mods){ toast('Сначала выберите программу или модули'); return; }
+    b.disabled = true; const t = b.textContent; b.textContent = 'Готовлю PDF…';
+    try{ await Corp.downloadPdf(S, 'program'); goal('corp_pdf'); toast('PDF с программой скачан'); }
+    catch(err){ toast('Не получилось сформировать PDF, попробуйте ещё раз'); }
+    b.disabled = false; b.textContent = t; return; }
   if (b.id === 'reset'){ S = blank(); render(); return; }
-  if (b.id === 'tg'){ goal('corp_telegram'); copy(asText(), 'Программа скопирована — вставьте её в сообщение'); return; }
+  if (b.id === 'tg'){ goal('corp_telegram'); copy(`Здравствуйте! Вопрос по программе № ${Corp.programId(Corp.encode(S))}: ${Corp.builderUrl(Corp.encode(S))}`, 'Номер программы скопирован — вставьте его в сообщение'); return; }
   if (b.id === 'bar'){ sheet(true); return; }
   if (b.id === 'closeSheet'){ sheet(false); return; }
 });
@@ -550,8 +503,8 @@ document.addEventListener('pointerup', endDrag);
 document.addEventListener('pointercancel', endDrag);
 
 /* init */
-const fromHash = location.hash.startsWith('#p=') ? decode(decodeURIComponent(location.hash.slice(3))) : null;
-S = fromHash || blank();
+S = Corp.fromHash() || blank();
+if (Corp.REQ) $('#reqLine').textContent = `${Corp.REQ.name} · ИНН ${Corp.REQ.inn} · ОГРНИП ${Corp.REQ.ogrnip}`;
 renderFacts(); render();
 </script>
 </body>

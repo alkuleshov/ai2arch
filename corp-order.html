@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Программа обучения и оплата · AI2ARCH</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+:root{--navy:#0A0F1A;--navy2:#141B2B;--ink:#1F2430;--muted:#5B6475;--faint:#667085;--bg:#F6F4F0;--line:#E4E1D8;--accent:#1A6BFF;--accent-l:#EAF1FF;--accent-b:#BFD3FF;--orange:#C46A16;--orange-l:#FFF7EF;--orange-b:#F1D2BE;--sans:'Manrope','Segoe UI',system-ui,Arial,sans-serif;--head:60px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:clip}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+button,input,textarea{font-family:var(--sans);color:inherit}
+button{cursor:pointer}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.hd{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--head);background:rgba(246,244,240,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.hd .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.hd a{font-size:13px;font-weight:800;color:var(--navy)}
+.hd .home{color:var(--muted);font-weight:700}
+.top{padding:calc(var(--head) + 36px) 0 22px}
+.kicker{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+h1{font-size:clamp(28px,4.4vw,44px);line-height:1.08;letter-spacing:-.025em;color:var(--navy)}
+h1 span{color:var(--accent);white-space:nowrap}
+.meta{margin-top:10px;color:var(--muted);font-size:14.5px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:22px;align-items:start;padding-bottom:60px}
+.paper{background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 20px 50px rgba(10,15,26,.06)}
+.paper h2{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);text-align:left;padding:0 8px 10px 0;border-bottom:1px solid var(--line)}
+td{padding:11px 8px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+td.r,th.r{text-align:right;padding-right:0;white-space:nowrap}
+td.n{color:var(--faint);width:26px}
+tr.tot td{border-bottom:0;padding-top:14px;font-weight:800;color:var(--navy);font-size:16px}
+.tot .big{font-size:22px;letter-spacing:-.02em}
+.small{font-size:12.5px;color:var(--muted);margin-top:12px}
+.res{margin-top:22px;padding-top:18px;border-top:1px dashed var(--line)}
+.res ul{list-style:none;display:grid;gap:8px}
+.res li{font-size:13.5px;color:var(--muted);padding-left:18px;position:relative}
+.res li::before{content:'';position:absolute;left:2px;top:8px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.res li b{color:var(--navy)}
+.side{display:grid;gap:12px;position:sticky;top:calc(var(--head) + 14px)}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}
+.card.dark{background:var(--navy);color:#fff;border-color:var(--navy)}
+.card h3{font-size:16px;color:var(--navy);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.card.dark h3{color:#fff}
+.card p{font-size:13.5px;color:var(--muted)}
+.card.dark p{color:#B8C2D6}
+.num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--accent-l);color:var(--accent);font-size:12px;font-weight:800;flex:none}
+.card.dark .num{background:rgba(255,255,255,.12);color:#8FB4FF}
+.sum{font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:6px 0 2px;font-variant-numeric:tabular-nums}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border-radius:12px;padding:12px 16px;font-size:14px;font-weight:800;border:0;text-decoration:none!important;margin-top:12px;transition:background .15s}
+.btn.pri{background:var(--accent);color:#fff}.btn.pri:hover{background:#0F5BE6}
+.btn.ghost{background:var(--bg);color:var(--navy);border:1px solid var(--line)}.btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn.wl{background:rgba(255,255,255,.12);color:#fff}.btn.wl:hover{background:rgba(255,255,255,.2)}
+.btn:disabled{opacity:.5;cursor:wait}
+form{display:grid;gap:10px;margin-top:12px}
+label{display:grid;gap:4px;font-size:12px;font-weight:800;color:var(--faint);letter-spacing:.04em}
+input,textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;font-weight:500;background:var(--bg);color:var(--navy);resize:vertical}
+input:focus,textarea:focus{outline:2px solid var(--accent-b);border-color:var(--accent)}
+.qr{display:none;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);text-align:center}
+.qr.show{display:block}
+.qr svg{width:200px;height:200px}
+.qr p{font-size:12.5px}
+.hint{font-size:12px;color:var(--faint);margin-top:8px}
+.steps{list-style:none;display:grid;gap:10px;margin-top:8px}
+.steps li{display:grid;grid-template-columns:24px 1fr;gap:10px;font-size:13px;color:var(--muted)}
+.steps b{color:var(--navy)}
+.empty{text-align:center;padding:80px 0}
+.empty p{color:var(--muted);margin:10px 0 18px}
+.empty .btn{display:inline-flex;width:auto}
+.ft{border-top:1px solid var(--line);padding:22px 0 40px;font-size:12px;color:var(--faint)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--navy);color:#fff;font-size:13px;font-weight:700;padding:10px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:all .2s;z-index:120;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}.side{position:static;order:-1}}
+@media(max-width:640px){
+ .wrap{padding:0 16px}
+ .top{padding:calc(var(--head) + 22px) 0 16px}
+ .paper{padding:18px 16px;border-radius:18px}
+ table{font-size:13px}
+ th.hide,td.hide{display:none}
+}
+</style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113526373', 'ym');
+
+    ym(113526373, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113526373" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<header class="hd"><div class="wrap"><a id="back" href="corp.html">← Изменить программу</a><a class="home" href="./">AI2ARCH</a></div></header>
+<main class="wrap" id="app"></main>
+<footer class="ft"><div class="wrap" id="reqLine"></div></footer>
+<div class="toast" id="toast"></div>
+<script src="assets/corp-data.js"></script>
+<script src="assets/corp-req.js"></script>
+<script src="assets/vendor/qrcode.js"></script>
+<script src="assets/corp-core.js"></script>
+<script>
+const {D, REQ, rub, num, totals, rows} = Corp;
+const $ = s => document.querySelector(s);
+const S = Corp.fromHash();
+if (REQ) $('#reqLine').textContent = `${REQ.name} · ИНН ${REQ.inn} · ОГРНИП ${REQ.ogrnip} · р/с ${REQ.account} в ${REQ.bank}, БИК ${REQ.bik}`;
+const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function toast(t){ const el = $('#toast'); el.textContent = t; el.classList.add('show'); clearTimeout(toast.h); toast.h = setTimeout(() => el.classList.remove('show'), 2600); }
+async function copy(t){ try{ await navigator.clipboard.writeText(t); return true; }catch(e){ return false; } }
+function goal(g){ try{ ym(113526373, 'reachGoal', g); }catch(e){} }
+
+if (!S || !totals(S).mods){
+  $('#app').innerHTML = `<div class="empty top"><div class="kicker">Корпоративное обучение · AI2ARCH</div><h1>Программа не найдена</h1><p>Соберите программу в конструкторе и нажмите «Оплатить».</p><a class="btn pri" href="corp.html">Открыть конструктор</a></div>`;
+} else {
+  const code = Corp.encode(S), id = Corp.programId(code), T = totals(S), R = rows(S);
+  const pre = Math.round(T.t * D.prepay), date = new Date().toLocaleDateString('ru-RU');
+  $('#back').href = Corp.builderUrl(code);
+  document.title = `Программа № ${id} · AI2ARCH`;
+  const body = R.map((r, i) => `<tr><td class="n">${i+1}</td><td><b>${esc(r.name)}</b><small>${r.depth} · ${r.fmt.toLowerCase()}${r.n ? ' · ' + r.n + ' чел.' : ''}</small></td><td class="r hide">${r.hours == null ? '—' : num(r.hours) + ' ч'}</td><td class="r">${r.price == null ? 'по запросу' : rub(r.price)}</td></tr>`).join('');
+  const invoice = REQ ? `
+    <div class="card dark" id="inv"><h3><span class="num">2</span>Счёт-договор и QR-код</h3>
+      <p>Заполните после встречи: дни и время занятий войдут в счёт-договор. Оплата счёта — согласие с условиями, отдельный договор не нужен.</p>
+      <form id="invForm">
+        <label>Заказчик<input name="customer" required placeholder="ООО «Бюро», ИП Иванов И. И."></label>
+        <label>ИНН заказчика<input name="inn" inputmode="numeric" pattern="[0-9]{10,12}" placeholder="10 или 12 цифр"></label>
+        <label>Дни и время занятий<textarea name="dates" rows="2" required placeholder="2, 4, 9 и 11 декабря, 10:00–13:00"></textarea></label>
+        <button class="btn pri" type="submit" id="invBtn">Скачать счёт-договор и показать QR</button>
+      </form>
+      <div class="qr" id="qr"></div>
+    </div>` : `
+    <div class="card dark"><h3><span class="num">2</span>Счёт-договор и QR-код</h3>
+      <p>Готовим после короткой встречи онлайн, когда согласуем дни и время занятий и состав команды — они войдут в счёт-договор. Оплатить можно по счёту или по QR-коду в банковском приложении.</p>
+      <a class="btn pri" href="https://t.me/${D.manager}" target="_blank" rel="noopener" data-tg>Договориться о встрече</a>
+    </div>`;
+  $('#app').innerHTML = `
+  <section class="top"><div class="kicker">Корпоративное обучение · AI2ARCH</div>
+    <h1>Программа <span>№ ${id}</span></h1>
+    <div class="meta">${date} · ${T.mods} модулей · ${num(T.off)} ч очно, ${num(T.on)} ч онлайн</div></section>
+  <div class="grid">
+    <div class="paper">
+      <h2>Состав и стоимость</h2>
+      <table><thead><tr><th>№</th><th>Услуга</th><th class="r hide">Часы</th><th class="r">Сумма</th></tr></thead>
+        <tbody>${body}<tr class="tot"><td></td><td>Итого</td><td class="r hide">${num(T.off + T.on)} ч</td><td class="r big">${rub(T.t)}</td></tr></tbody></table>
+      <p class="small">Цены без НДС. ${T.req ? `Модули с ценой по запросу (${T.req}) в итог не входят. ` : ''}Предоплата ${Math.round(D.prepay*100)}% — ${rub(pre)} до первого занятия, остаток — после последнего.</p>
+      <div class="res"><h2>Что получит бюро</h2><ul>${R.filter(r => r.result).map(r => `<li><b>${esc(r.name)}</b> — ${esc(r.result)}</li>`).join('')}</ul></div>
+    </div>
+    <div class="side">
+      <div class="card"><div class="kicker" style="margin:0">К оплате</div><div class="sum">${rub(T.t)}</div><p>предоплата ${rub(pre)} · без НДС</p></div>
+      <div class="card"><h3><span class="num">1</span>Программа в PDF</h3><p>Состав, стоимость и порядок работы — чтобы показать руководителю или бухгалтерии.</p>
+        <button class="btn ghost" id="pdf" type="button">Скачать PDF</button></div>
+      ${invoice}
+      <div class="card"><h3><span class="num">3</span>Связаться с менеджером</h3><p>Менеджер увидит вашу программу по номеру <b>${id}</b>: он скопируется вместе со ссылкой, вставьте его в сообщение.</p>
+        <a class="btn ghost" href="https://t.me/${D.manager}" target="_blank" rel="noopener" data-tg>Написать в Telegram</a></div>
+      <div class="card"><h3>Что дальше</h3><ol class="steps">
+        <li><span class="num">1</span><span><b>Встреча онлайн</b> 40–60 минут: программа, смета, документы, дни и время занятий, состав команды.</span></li>
+        <li><span class="num">2</span><span><b>Оплата</b> по счёту-договору или QR-коду, 50% до первого занятия.</span></li>
+        <li><span class="num">3</span><span><b>Обучение</b> строго в дни и время из счёта-договора. Акт — после последнего занятия.</span></li></ol></div>
+    </div>
+  </div>`;
+
+  document.addEventListener('click', async e => {
+    const tg = e.target.closest('[data-tg]');
+    if (tg){ goal('corp_order_telegram'); if (await copy(`Здравствуйте! Программа № ${id}: ${Corp.orderUrl(code)}`)) toast('Номер программы скопирован — вставьте его в сообщение'); return; }
+    if (e.target.closest('#pdf')){
+      const b = $('#pdf'); b.disabled = true; b.textContent = 'Готовлю PDF…';
+      try{ await Corp.downloadPdf(S, 'program'); goal('corp_order_pdf'); toast('PDF скачан'); }catch(err){ toast('Не получилось сформировать PDF, попробуйте ещё раз'); }
+      b.disabled = false; b.textContent = 'Скачать PDF';
+    }
+  });
+  const form = $('#invForm');
+  if (form) form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(form)); Object.keys(f).forEach(k => f[k] = f[k].trim());
+    const b = $('#invBtn'); b.disabled = true; b.textContent = 'Готовлю счёт…';
+    try{
+      await Corp.downloadPdf(S, 'invoice', f); goal('corp_invoice');
+      const purpose = `Предоплата ${Math.round(D.prepay*100)}% по счёту-договору № ${id} от ${date} за информационно-консультационные услуги. Без НДС`;
+      $('#qr').innerHTML = Corp.qrSvg(Corp.payString(pre, purpose)) + `<p>Отсканируйте в банковском приложении организации: получатель, сумма ${rub(pre)} и назначение платежа заполнятся сами.</p>`;
+      $('#qr').classList.add('show'); toast('Счёт-договор скачан');
+    }catch(err){ toast('Не получилось сформировать счёт, попробуйте ещё раз'); }
+    b.disabled = false; b.textContent = 'Скачать счёт-договор и показать QR';
+  });
+}
+</script>
+</body>
+</html>
