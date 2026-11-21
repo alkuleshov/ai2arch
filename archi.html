@@ -197,6 +197,11 @@
   .price-val small { font-size:.45em; color:var(--ink-faint); font-weight:700; }
   .price-lab { font-size:14px; color:var(--ink-muted); margin:8px 0 18px; }
   .price .list li { font-size:14px; }
+  .price-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:16px; align-items:start; }
+  .price-side .deduct:first-child { margin-top:0; }
+  @media (max-width:860px) { .price-grid { grid-template-columns:minmax(0,1fr); } }
+  .price-alt { margin-top:16px; padding-top:14px; border-top:1px solid var(--border); font-size:14px; color:var(--ink-muted); }
+  .price-alt b { color:var(--ink); }
   .deduct { display:flex; gap:18px; align-items:flex-start; margin-top:16px; background:var(--green-l); border:1px solid #CBEBDD; border-radius:16px; padding:20px 24px; }
   .deduct b { font-family:var(--mono); font-size:22px; color:var(--green); flex-shrink:0; }
   .deduct p { font-size:14.5px; color:var(--ink-muted); }
@@ -734,9 +739,9 @@
 <!-- ═══ ТАРИФЫ ═══ -->
 <section class="sec" id="price">
   <div class="wrap">
-    <div class="kicker">Тарифы и скидки</div>
-    <h2>Стоимость курса и цена для сотрудников ЮФУ</h2>
-    <div class="grid2">
+    <div class="kicker">Стоимость</div>
+    <h2>Стоимость курса</h2>
+    <div class="price-grid">
       <div class="price main">
         <div class="price-val">5 000 <small>₽</small></div>
         <div class="price-lab">стоимость курса, 22 ак. часа</div>
@@ -747,28 +752,21 @@
           <li>консультации по самостоятельной работе</li>
           <li>удостоверение о повышении квалификации ЮФУ</li>
         </ul>
+        <p class="price-alt">Сотрудникам ЮФУ — <b>3&nbsp;600&nbsp;₽</b> (рассрочка 1&nbsp;800&nbsp;+&nbsp;1&nbsp;800&nbsp;₽). Статус отметьте в&nbsp;заявке.</p>
         <button class="btn btn-primary" style="margin-top:22px;width:100%" data-apply>Оставить заявку</button>
       </div>
-      <div class="price">
-        <div class="price-val">3 600 <small>₽</small></div>
-        <div class="price-lab">для сотрудников ЮФУ</div>
-        <ul class="list">
-          <li>рассрочка в 2 этапа: 1 800 + 1 800 ₽</li>
-          <li>состав курса тот же</li>
-          <li>подтверждение статуса пришлёте после заявки</li>
-        </ul>
-        <button class="btn btn-dark" style="margin-top:22px;width:100%" data-apply>Оставить заявку как сотрудник ЮФУ</button>
+      <div class="price-side">
+        <div class="deduct">
+          <b aria-hidden="true">💳</b>
+          <p><strong>Рассрочка в 2 этапа.</strong> Первые 50% оплачиваются при зачислении: 2 500 ₽ при цене 5 000 ₽ и 1 800 ₽ при 3 600 ₽. Остаток вносится вторым траншем в середине обучения. Условия закрепляем при заключении договора с ЮФУ.</p>
+        </div>
+        <div class="deduct">
+          <b>13%</b>
+          <p><strong>Налоговый вычет.</strong> Если вы платите за обучение сами и платите НДФЛ, можно вернуть 13% стоимости: 650 ₽ при цене 5 000 ₽ и 468 ₽ при 3 600 ₽. Вычет положен за обучение в организации с лицензией, а лимит расходов в 2026 году составляет 150 000 ₽.</p>
+        </div>
+        <p class="note">Договор с ЮФУ заключается с физическим или юридическим лицом.</p>
       </div>
     </div>
-    <div class="deduct">
-      <b aria-hidden="true">💳</b>
-      <p><strong>Рассрочка в 2 этапа.</strong> Первые 50% оплачиваются при зачислении: 2 500 ₽ при цене 5 000 ₽ и 1 800 ₽ при 3 600 ₽. Остаток вносится вторым траншем в середине обучения. Условия закрепляем при заключении договора с ЮФУ.</p>
-    </div>
-    <div class="deduct">
-      <b>13%</b>
-      <p><strong>Налоговый вычет.</strong> Если вы платите за обучение сами и платите НДФЛ, можно вернуть 13% стоимости: 650 ₽ при цене 5 000 ₽ и 468 ₽ при 3 600 ₽. Вычет положен за обучение в организации с лицензией, а лимит расходов в 2026 году составляет 150 000 ₽.</p>
-    </div>
-    <p class="note">Договор с ЮФУ заключается с физическим или юридическим лицом.</p>
   </div>
 </section>
 
@@ -833,7 +831,7 @@
       <div class="ans"><p>Участвовать в курсе и сдавать проект можно сразу. После итоговой аттестации вы получите справку, а удостоверение о повышении квалификации — после того, как получите высшее образование.</p></div></details>
 
     <details class="q"><summary>Кто платит 3 600 ₽?<span class="mod-plus">+</span></summary>
-      <div class="ans"><p>Сотрудники ЮФУ. Остальные слушатели платят 5 000 ₽. Подтверждение статуса пришлём после заявки.</p></div></details>
+      <div class="ans"><p>Сотрудники ЮФУ. Остальные слушатели платят 5 000 ₽. Статус отметьте в заявке, подтверждение попросим после неё.</p></div></details>
 
     <details class="q"><summary>Можно ли платить частями?<span class="mod-plus">+</span></summary>
       <div class="ans"><p>Да, допускается рассрочка в 2 этапа: 50% при зачислении, оставшиеся 50% в середине обучения. Условия закрепляются при заключении договора с ЮФУ.</p></div></details>
