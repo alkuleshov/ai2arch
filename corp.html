@@ -341,7 +341,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </div></section>
 
-<footer><div class="wrap"><span>Лаборатория AI2ARCH · ai2arch.ru</span><span>Цены ориентировочные, без НДС. Стоимость, дни и время занятий фиксируются в счёте-договоре.</span></div></footer>
+<footer><div class="wrap"><span>Лаборатория AI2ARCH · ai2arch.ru<br><span id="reqLine"></span></span><span>Цены ориентировочные, без НДС. Стоимость, дни и время занятий фиксируются в счёте-договоре.</span></div></footer>
 
 <button class="bar" id="bar" type="button"><div><b id="barTotal">0 ₽</b><span id="barSub"></span></div><i>Программа ↑</i></button>
 <div class="shade" id="shade"></div>
@@ -504,6 +504,7 @@ document.addEventListener('pointercancel', endDrag);
 
 /* init */
 S = Corp.fromHash() || blank();
+if (Corp.REQ) $('#reqLine').textContent = `${Corp.REQ.name} · ИНН ${Corp.REQ.inn} · ОГРНИП ${Corp.REQ.ogrnip}`;
 renderFacts(); render();
 </script>
 </body>
