@@ -793,6 +793,16 @@
   .res-link:hover .res-title { color:#2B4FD8 !important; }
   .tag.g, .tag.o, .ttag-green, .ttag-orange, .ttag-purple, .ttag-blue { background:transparent !important; border:1px solid #0A0F1A !important; color:#0A0F1A !important; }
   @media (max-width:760px){ body { background-size:100% 100%,100% 90px !important; } }
+
+  /* tools grid (Swiss grid style) — replaces links-row in reference section */
+  .tgrid { display:grid; grid-template-columns:repeat(5,1fr); border-top:1px solid var(--border,#0A0F1A); border-left:1px solid var(--border,#0A0F1A); background:#F4F3EF; margin:6px 0 4px; }
+  .tgrid a { display:flex; flex-direction:column; justify-content:space-between; min-height:112px; padding:14px 16px; border-right:1px solid var(--border,#0A0F1A); border-bottom:1px solid var(--border,#0A0F1A); color:#0A0F1A; text-decoration:none; background:#F4F3EF; transition:background .15s; }
+  .tgrid a:hover { background:#EDE7EE; text-decoration:none; }
+  .tgrid a.hl { background:#F1DFE7; }
+  .tgrid a.hl:hover { background:#E9CFDB; }
+  .tgrid .tg-cat { font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:#7A8094; }
+  .tgrid .tg-name { font-size:17px; font-weight:800; letter-spacing:-.01em; line-height:1.15; }
+  @media (max-width:760px) { .tgrid { grid-template-columns:repeat(2,1fr); } .tgrid a { min-height:96px; padding:12px 12px; } .tgrid .tg-name { font-size:15px; } }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -849,53 +859,7 @@
   <div class="guide-ref-section">
     <div class="guide-ref-inner">
       <div class="ref-eyebrow light">Справочные материалы</div>
-      <div class="links-row">
-        <span class="qlink light" onclick="goToRef('qgis', 'lesson1')">
-          <span>🧮</span> GeoProj — геокалькулятор
-          <span class="ql-badge light">QGIS</span>
-        </span>
-        <span class="qlink light" onclick="goToRef('qgis', 'lesson2')">
-          <span>🗺️</span> Теги OSM
-          <span class="ql-badge light">QGIS</span>
-        </span>
-        <span class="qlink light" onclick="goToRef('qgis', 'lesson2')">
-          <span>📖</span> SoftCulture OSM
-          <span class="ql-badge light">QGIS</span>
-        </span>
-        <span class="qlink light" onclick="goToRef('qgis', 'lesson3')">
-          <span>📍</span> НСПД — кадастр
-          <span class="ql-badge light">QGIS</span>
-        </span>
-        <span class="qlink light" onclick="goToRef('qgis', 'lesson3')">
-          <span>⛰️</span> OpenTopography
-          <span class="ql-badge light">QGIS</span>
-        </span>
-        <a class="qlink light" href="https://qgis.org/download" target="_blank" rel="noopener noreferrer">
-          <span>⬇️</span> QGIS — официальный сайт
-          <span class="ql-badge light">QGIS</span>
-        </a>
-        <a class="qlink light" href="https://alice.yandex.ru" target="_blank" rel="noopener noreferrer">
-          <span>🟣</span> Алиса AI
-          <span class="ql-badge light">ИИ</span>
-        </a>
-        <a class="qlink light" href="https://claude.ai" target="_blank" rel="noopener noreferrer">
-          <span>✳️</span> Claude
-          <span class="ql-badge light">ИИ</span>
-        </a>
-        <a class="qlink light" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer">
-          <span>💬</span> ChatGPT
-          <span class="ql-badge light">ИИ</span>
-        </a>
-        <a class="qlink light" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">
-          <span>♊</span> Gemini
-          <span class="ql-badge light">ИИ</span>
-        </a>
-        <a class="qlink light" href="https://gamma.app" target="_blank" rel="noopener noreferrer">
-          <span>📊</span> Gamma.app
-          <span class="ql-badge light">Синтез</span>
-        </a>
-      </div>
-    </div>
+      <div class="tgrid"><a class="hl" href="https://qgis.org/download" target="_blank" rel="noopener noreferrer"><span class="tg-cat">01 · ГИС</span><span class="tg-name">QGIS</span></a><a class="" href="https://alice.yandex.ru" target="_blank" rel="noopener noreferrer"><span class="tg-cat">02 · ИИ</span><span class="tg-name">Алиса AI</span></a><a class="" href="https://claude.ai" target="_blank" rel="noopener noreferrer"><span class="tg-cat">03 · ИИ</span><span class="tg-name">Claude</span></a><a class="" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer"><span class="tg-cat">04 · ИИ</span><span class="tg-name">ChatGPT</span></a><a class="hl" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer"><span class="tg-cat">05 · ИИ</span><span class="tg-name">Gemini</span></a><a class="" href="https://gamma.app" target="_blank" rel="noopener noreferrer"><span class="tg-cat">06 · Синтез</span><span class="tg-name">Gamma.app</span></a></div></div>
   </div>
 
   <!-- module tabs -->
