@@ -137,7 +137,7 @@ if (!S || !totals(S).mods){
       <form id="invForm">
         <label>Заказчик<input name="customer" required placeholder="ООО «Бюро», ИП Иванов И. И."></label>
         <label>ИНН заказчика<input name="inn" inputmode="numeric" pattern="[0-9]{10,12}" placeholder="10 или 12 цифр"></label>
-        <label>Дни и время занятий<textarea name="dates" rows="2" required placeholder="2, 4, 9 и 11 декабря, 10:00–13:00"></textarea></label>
+        <label>Дни и время занятий<textarea name="dates" rows="2" required placeholder="например: по вторникам и четвергам, 10:00–13:00"></textarea></label>
         <button class="btn pri" type="submit" id="invBtn">Скачать счёт-договор и показать QR</button>
       </form>
       <div class="qr" id="qr"></div>
