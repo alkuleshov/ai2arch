@@ -955,15 +955,13 @@
   .tag.g, .tag.o, .ttag-green, .ttag-orange, .ttag-purple, .ttag-blue { background:transparent !important; border:1px solid #0A0F1A !important; color:#0A0F1A !important; }
   @media (max-width:760px){ body { background-size:100% 100%,100% 90px !important; } }
 
-  /* tools grid (Swiss grid style) — replaces links-row in reference section */
-  .tgrid { display:grid; grid-template-columns:repeat(5,1fr); border-top:1px solid var(--border,#0A0F1A); border-left:1px solid var(--border,#0A0F1A); background:#F4F3EF; margin:6px 0 4px; }
-  .tgrid a { display:flex; flex-direction:column; justify-content:space-between; min-height:112px; padding:14px 16px; border-right:1px solid var(--border,#0A0F1A); border-bottom:1px solid var(--border,#0A0F1A); color:#0A0F1A; text-decoration:none; background:#F4F3EF; transition:background .15s; }
-  .tgrid a:hover { background:#EDE7EE; text-decoration:none; }
-  .tgrid a.hl { background:#F1DFE7; }
-  .tgrid a.hl:hover { background:#E9CFDB; }
-  .tgrid .tg-cat { font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:#7A8094; }
-  .tgrid .tg-name { font-size:17px; font-weight:800; letter-spacing:-.01em; line-height:1.15; }
-  @media (max-width:760px) { .tgrid { grid-template-columns:repeat(2,1fr); } .tgrid a { min-height:96px; padding:12px 12px; } .tgrid .tg-name { font-size:15px; } }
+  /* reference tag cloud — plain clickable text, compact */
+  .tcloud { display:flex; flex-wrap:wrap; gap:6px 18px; margin:4px 0 2px; }
+  .tcloud a { font-size:15px; font-weight:700; color:#0A0F1A; text-decoration:none; letter-spacing:-.005em; border-bottom:1px solid transparent; }
+  .tcloud a:hover { color:#2B4FD8; border-bottom-color:#2B4FD8; text-decoration:none; }
+  .tcloud a sup { font-size:9px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:#7A8094; margin-left:3px; vertical-align:super; }
+  .tcloud a.hl { color:#2B4FD8; }
+  @media (max-width:760px) { .tcloud a { font-size:14px; } .tcloud { gap:6px 14px; } }
 
   /* module colour identity — from the main page palette */
   #mtab-m0{--mc:#E6D9BE} #mtab-m1{--mc:#EDC3D2} #mtab-m2{--mc:#D3D9E6} #mtab-m3{--mc:#BED0EE} #mtab-m4{--mc:#2B4FD8}
@@ -1025,7 +1023,7 @@
   <div class="guide-ref-section">
     <div class="guide-ref-inner">
       <div class="ref-eyebrow light">Справочные материалы</div>
-      <div class="tgrid"><a class="hl" href="https://alice.yandex.ru" target="_blank" rel="noopener noreferrer"><span class="tg-cat">01 · ИИ</span><span class="tg-name">Алиса AI</span></a><a class="" href="https://giga.chat" target="_blank" rel="noopener noreferrer"><span class="tg-cat">02 · ИИ</span><span class="tg-name">GigaChat</span></a><a class="" href="https://shedevrum.ai" target="_blank" rel="noopener noreferrer"><span class="tg-cat">03 · Изобр.</span><span class="tg-name">Шедеврум</span></a><a class="" href="https://claude.ai" target="_blank" rel="noopener noreferrer"><span class="tg-cat">04 · ИИ</span><span class="tg-name">Claude</span></a><a class="hl" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer"><span class="tg-cat">05 · ИИ</span><span class="tg-name">ChatGPT</span></a><a class="" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer"><span class="tg-cat">06 · ИИ</span><span class="tg-name">Gemini</span></a><a class="" href="https://nspd.gov.ru" target="_blank" rel="noopener noreferrer"><span class="tg-cat">07 · Данные</span><span class="tg-name">НСПД</span></a><a class="" href="https://2gis.ru" target="_blank" rel="noopener noreferrer"><span class="tg-cat">08 · Данные</span><span class="tg-name">2ГИС</span></a><a class="hl" href="https://www.cian.ru" target="_blank" rel="noopener noreferrer"><span class="tg-cat">09 · Данные</span><span class="tg-name">ЦИАН</span></a><a class="" href="https://gamma.app" target="_blank" rel="noopener noreferrer"><span class="tg-cat">10 · Синтез</span><span class="tg-name">Gamma.app</span></a></div></div>
+      <div class="tcloud"><a class="hl" href="https://alice.yandex.ru" target="_blank" rel="noopener noreferrer">Алиса AI<sup>ИИ</sup></a><a class="" href="https://giga.chat" target="_blank" rel="noopener noreferrer">GigaChat<sup>ИИ</sup></a><a class="" href="https://shedevrum.ai" target="_blank" rel="noopener noreferrer">Шедеврум<sup>Изобр.</sup></a><a class="" href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude<sup>ИИ</sup></a><a class="hl" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer">ChatGPT<sup>ИИ</sup></a><a class="" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">Gemini<sup>ИИ</sup></a><a class="" href="https://nspd.gov.ru" target="_blank" rel="noopener noreferrer">НСПД<sup>Данные</sup></a><a class="" href="https://2gis.ru" target="_blank" rel="noopener noreferrer">2ГИС<sup>Данные</sup></a><a class="hl" href="https://www.cian.ru" target="_blank" rel="noopener noreferrer">ЦИАН<sup>Данные</sup></a><a class="" href="https://gamma.app" target="_blank" rel="noopener noreferrer">Gamma.app<sup>Синтез</sup></a></div></div>
   </div>
 
   <div class="trackbar" id="trackbar">
