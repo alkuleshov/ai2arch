@@ -964,6 +964,17 @@
   .tgrid .tg-cat { font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:#7A8094; }
   .tgrid .tg-name { font-size:17px; font-weight:800; letter-spacing:-.01em; line-height:1.15; }
   @media (max-width:760px) { .tgrid { grid-template-columns:repeat(2,1fr); } .tgrid a { min-height:96px; padding:12px 12px; } .tgrid .tg-name { font-size:15px; } }
+
+  /* module colour identity — from the main page palette */
+  #mtab-m0{--mc:#E6D9BE} #mtab-m1{--mc:#EDC3D2} #mtab-m2{--mc:#D3D9E6} #mtab-m3{--mc:#BED0EE} #mtab-m4{--mc:#2B4FD8}
+  .module-tab { box-shadow: inset 0 5px 0 var(--mc, transparent); }
+  .module-tab.active { background: var(--mc, transparent); }
+  #mtab-m4.active .mt-eyebrow, #mtab-m4.active .mt-title { color:#F6F4F0 !important; }
+  #panel-m0 { border-top:6px solid #E6D9BE; }
+  #panel-m1 { border-top:6px solid #EDC3D2; }
+  #panel-m2 { border-top:6px solid #D3D9E6; }
+  #panel-m3 { border-top:6px solid #BED0EE; }
+  #panel-m4 { border-top:6px solid #2B4FD8; }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
