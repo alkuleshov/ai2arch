@@ -71,6 +71,17 @@ a:hover{text-decoration:underline}
 .num-list{margin:0 0 18px 22px}
 .num-list li{margin-bottom:6px}
 @media (max-width:760px){.tbl,.c52 table{display:block;overflow-x:auto;max-width:100%}.prompt{overflow-wrap:anywhere}.route{grid-template-columns:1fr}}
+  /* верхняя панель в формате пособий: бумага, ink-линия, квадратная кнопка назад */
+  .bar, .lr-head { background:#F6F4F0 !important; border-bottom:1.5px solid #0A0F1A !important; box-shadow:none !important; min-height:54px; }
+  .bar > a:first-child, .lr-head > a:first-child { display:inline-flex !important; align-items:center; border:1.5px solid #0A0F1A !important; border-radius:0 !important; background:transparent !important; color:#0A0F1A !important; font-family:'Inter Tight','Helvetica Neue',Arial,sans-serif !important; font-size:15px !important; font-weight:800 !important; letter-spacing:-0.02em !important; padding:17px 22px !important; text-decoration:none; }
+  .bar > a:first-child:hover, .lr-head > a:first-child:hover { background:transparent !important; color:#0A0F1A !important; }
+  .bar { padding:0 !important; min-height:54px; align-items:stretch !important; }
+  .bar > a:last-child { display:inline-flex; align-items:center; padding:0 16px !important; }
+  .lr-head { padding:0 !important; min-height:54px; align-items:stretch !important; }
+  .lr-head > a:first-child { line-height:normal !important; }
+  .bar > a:first-child, .lr-head > a:first-child, .bar > a:last-child { line-height:normal !important; }
+  .bar > a:first-child { padding:16px 22px !important; }
+  .lr-head > a:first-child { padding:16px 22px !important; }
 </style>
 </head>
 <body>

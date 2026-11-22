@@ -58,6 +58,17 @@ a:hover{text-decoration:underline}
 .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
 .btn.ghost:hover{background:var(--ink);color:var(--paper)}
 @media (max-width:760px){body{font-size:17px}.route{grid-template-columns:1fr}.route>div+div{border-left:0;border-top:1px solid var(--ink)}}
+  /* верхняя панель в формате пособий: бумага, ink-линия, квадратная кнопка назад */
+  .bar, .lr-head { background:#F6F4F0 !important; border-bottom:1.5px solid #0A0F1A !important; box-shadow:none !important; min-height:54px; }
+  .bar > a:first-child, .lr-head > a:first-child { display:inline-flex !important; align-items:center; border:1.5px solid #0A0F1A !important; border-radius:0 !important; background:transparent !important; color:#0A0F1A !important; font-family:'Inter Tight','Helvetica Neue',Arial,sans-serif !important; font-size:15px !important; font-weight:800 !important; letter-spacing:-0.02em !important; padding:17px 22px !important; text-decoration:none; }
+  .bar > a:first-child:hover, .lr-head > a:first-child:hover { background:transparent !important; color:#0A0F1A !important; }
+  .bar { padding:0 !important; min-height:54px; align-items:stretch !important; }
+  .bar > a:last-child { display:inline-flex; align-items:center; padding:0 16px !important; }
+  .lr-head { padding:0 !important; min-height:54px; align-items:stretch !important; }
+  .lr-head > a:first-child { line-height:normal !important; }
+  .bar > a:first-child, .lr-head > a:first-child, .bar > a:last-child { line-height:normal !important; }
+  .bar > a:first-child { padding:16px 22px !important; }
+  .lr-head > a:first-child { padding:16px 22px !important; }
 </style>
 </head>
 <body>
