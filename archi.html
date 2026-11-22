@@ -445,6 +445,23 @@
   .ai-level { min-height:76px; }
   .hero-mark { display:none !important; animation:none !important; }
   .hero { min-height:0; }
+  /* ── «Для кого»: сетка ячеек, крупные номера треков ── */
+  .tracks { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid #0A0F1A; margin-top:24px; }
+  .track-cell { background:#FFFFFF; border-right:1px solid #E1DDD5; border-bottom:1px solid #E1DDD5; padding:26px 22px 28px; }
+  .track-cell.track-b { border-right:0; background:#F1E1E7; }
+  .track-n { font-size:clamp(48px,7vw,84px); font-weight:900; letter-spacing:-0.06em; line-height:.9; color:#2B4FD8; }
+  .track-cell.track-b .track-n { color:#0A0F1A; }
+  .track-cell .who { font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#5A6070; margin:14px 0 6px; }
+  .track-cell h3 { font-size:clamp(22px,2.6vw,30px); font-weight:900 !important; letter-spacing:-0.03em; margin-bottom:8px; }
+  .track-cell p { color:#5A6070; font-size:15px; }
+  .sub-h { margin:44px 0 0; font-size:clamp(22px,2.8vw,30px); font-weight:900; letter-spacing:-0.03em; padding-top:14px; border-top:1px solid #0A0F1A; }
+  .aud-grid { display:grid; grid-template-columns:repeat(3,1fr); border-top:0; margin-top:0; }
+  .aud-cell { background:#FFFFFF; border-right:1px solid #E1DDD5; border-bottom:1px solid #E1DDD5; padding:24px 22px; }
+  .aud-cell:last-child { border-right:0; }
+  .aud-cell h3 { font-size:clamp(19px,2.2vw,24px); font-weight:800 !important; letter-spacing:-0.02em; margin-bottom:8px; }
+  .aud-cell p { color:#5A6070; font-size:15px; }
+  .swiss-note { margin-top:24px; padding:16px 18px; background:#EFECE6; border:1px solid #E1DDD5; font-size:14px; color:#0A0F1A; }
+  @media (max-width:760px) { .tracks { grid-template-columns:1fr; } .track-cell { border-right:0; } .aud-grid { grid-template-columns:1fr; } .aud-cell { border-right:0; } }
 </style>
 <link rel="stylesheet" href="assets/ai-levels.css">
 <script src="assets/ai-levels.js" defer></script>
@@ -525,31 +542,33 @@ els.js" defer></script>
 <section class="sec" id="audience">
   <div class="wrap">
     <div class="kicker">Для кого этот курс</div>
-    <h2>Базовый вводный курс — <span class="g">без опыта в нейросетях</span></h2>
+    <h2>Базовый вводный курс <span class="g">— без опыта в нейросетях</span></h2>
     <p class="lead">Специальных знаний в ИИ не нужно: работа с нейросетями и QGIS разбирается с нуля, достаточно уверенно пользоваться компьютером. Глубину погружения в QGIS вы выбираете сами — через один из двух треков.</p>
 
-    <div class="grid2" style="margin-bottom:20px;">
-      <div class="card track">
+    <div class="tracks">
+      <div class="track-cell">
+        <div class="track-n">01</div>
         <div class="who">Трек А · Хочу разобраться в QGIS</div>
         <h3>Полное погружение</h3>
         <p>Проходите все три видеоурока, строите геоподоснову и схемы своего участка самостоятельно. Для тех, кому важен пространственный анализ как практический навык.</p>
       </div>
-      <div class="card track b">
+      <div class="track-cell track-b">
+        <div class="track-n">02</div>
         <div class="who">Трек Б · Важнее нейросети и презентация</div>
         <h3>Быстрый старт</h3>
         <p>Смотрите только вводную часть QGIS для общего понимания, программу можно не устанавливать. Для презентации подойдёт любая схема территории из интернета — строгих требований нет.</p>
       </div>
     </div>
-    <p class="note" style="margin-bottom:32px;">QGIS — не обязательный тяжёлый модуль для сдачи курса, а факультативная глубина по выбору трека. Итоговая защита и удостоверение ЮФУ не зависят от того, какой трек вы выбрали.</p>
+    <p class="note swiss-note">QGIS — не обязательный тяжёлый модуль для сдачи курса, а факультативная глубина по выбору трека. Итоговая защита и удостоверение ЮФУ не зависят от того, какой трек вы выбрали.</p>
 
-    <h3 style="margin-bottom:16px;">Кому подойдёт и что вы получите</h3>
-    <div class="grid3">
-      <div class="card"><h3>Студентам и начинающим</h3><p>Высшее образование на момент записи не нужно — участвовать и защищать проект можно сразу. Войдёте в профессию с рабочим набором ИИ-инструментов и готовым проектом в портфолио.</p></div>
-      <div class="card"><h3>Архитекторам, урбанистам, дизайнерам среды</h3><p>Ускорите предпроектный анализ и визуализацию: карты участка, сценарии и презентация для заказчика или комиссии — за 2,5 недели, без ухода в тяжёлую перестройку рабочих процессов.</p></div>
-      <div class="card"><h3>Преподавателям творческих и архитектурных специальностей</h3><p>Разберётесь, как работают генеративные нейросети, научитесь видеть их следы в студенческих работах и направлять студентов: ИИ — не чит-код для обмана системы и получения оценки, а рабочий инструмент для качественных архитектурных решений.</p></div>
+    <h3 class="sub-h">Кому подойдёт и что вы получите</h3>
+    <div class="aud-grid">
+      <div class="aud-cell"><h3>Студентам и начинающим</h3><p>Высшее образование на момент записи не нужно — участвовать и защищать проект можно сразу. Войдёте в профессию с рабочим набором ИИ-инструментов и готовым проектом в портфолио.</p></div>
+      <div class="aud-cell"><h3>Архитекторам, урбанистам, дизайнерам среды</h3><p>Ускорите предпроектный анализ и визуализацию: карты участка, сценарии и презентация для заказчика или комиссии — за 2,5 недели, без ухода в тяжёлую перестройку рабочих процессов.</p></div>
+      <div class="aud-cell"><h3>Преподавателям творческих и архитектурных специальностей</h3><p>Разберётесь, как работают генеративные нейросети, научитесь видеть их следы в студенческих работах и направлять студентов: ИИ — не чит-код для обмана системы и получения оценки, а рабочий инструмент для качественных архитектурных решений.</p></div>
     </div>
 
-    <p class="note" style="margin-top:28px;">Вступительных испытаний нет. Удостоверение получают слушатели с высшим образованием. Если его пока нет, участвовать и защищать проект можно сразу — после защиты мы выдадим справку, а удостоверение после того, как вы его получите.</p>
+    <p class="note swiss-note">Вступительных испытаний нет. Удостоверение получают слушатели с высшим образованием. Если его пока нет, участвовать и защищать проект можно сразу — после защиты мы выдадим справку, а удостоверение после того, как вы его получите.</p>
   </div>
 </section>
 
