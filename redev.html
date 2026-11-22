@@ -418,6 +418,10 @@
 /* модальное окно: без градиента, в палитре сайта */
 .submit{ background:#0A0F1A !important; border-radius:0 !important; box-shadow:none !important; }
 .submit:hover{ background:#2B4FD8 !important; }
+  .apply-grid { gap:0; border-top:1px solid #0A0F1A; }
+  .apply-grid > .grid-cell { border-bottom:0; }
+  .apply-grid > .grid-cell:nth-child(4n) { border-right:0; }
+  .apply-grid .cell-n { font-family:var(--mono); font-size:13px; font-weight:800; color:#2B4FD8; margin-bottom:14px; }
 </style>
 <link rel="stylesheet" href="assets/ai-levels.css">
 <script src="assets/ai-levels.js" defer></script>
@@ -476,7 +480,7 @@
     <p class="hero-name">Официальное название программы: «Современные инструменты развития территорий и объектов недвижимости: аналитика данных и генеративный ИИ в разработке концепций»</p>
     <p class="hero-fn" id="fn-redev"><span>*</span> <b>Редевелопмент</b> (от англ. redevelopment, «повторное развитие») — обновление уже застроенной территории или здания с новым назначением, например превращение заброшенной фабрики в креативный кластер.</p>
     <div class="ai-level" data-ai-course="redev" data-ai-theme="dark"></div>
-    <p class="enroll-status" data-group-size="10"><i class="live-dot" aria-hidden="true"></i>Группа набирается <small>· на <b data-group-count>10</b> человек</small></p>
+    <p class="enroll-status" data-group-size="10"><i class="live-dot" aria-hidden="true"></i>Группа набирается <small>· <b data-group-count>10</b> человек</small></p>
     <div class="hero-cta">
       <button class="btn btn-primary" data-apply>Оставить заявку</button>
       <a class="btn btn-ghost" href="#program">Смотреть программу</a>
@@ -697,7 +701,7 @@
     <div class="grid3">
       <div class="card"><div class="ico">01</div><h3>Реальный объект</h3><p>Работаете над своим реальным объектом. Если своего нет, работайте с базовым объектом C52.</p></div>
       <div class="card"><div class="ico">02</div><h3>Два трека</h3><p>Проектировщики и девелоперы идут по общей базе, а практика и итоговый документ у каждого свои.</p></div>
-      <div class="card"><div class="ico">03</div><h3>Группа на 10 человек</h3><p>Камерная проектная лаборатория: каждый проект разбирается лично, а не вскользь на общем потоке.</p></div>
+      <div class="card"><div class="ico">03</div><h3>Группа 10 человек</h3><p>Камерная проектная лаборатория: каждый проект разбирается лично, а не вскользь на общем потоке.</p></div>
       <div class="card"><div class="ico">04</div><h3>Языковые модели в центре</h3><p>Claude, ChatGPT, Gemini считают и аргументируют: правила застройки, наилучшее использование, баланс площадей, инвестиционный текст. Нейросети для изображений вспомогательные.</p></div>
       <div class="card"><div class="ico">05</div><h3>Без программирования</h3><p>Готовые библиотеки промптов и понятные веб-сервисы. ComfyUI и ControlNet эксперт показывает обзорно, настраивать их самостоятельно не нужно.</p></div>
       <div class="card"><div class="ico">06</div><h3>Данные уже готовы</h3><p>QGIS в программу не входит: данные по территории подготовлены, их остаётся загрузить в работу. Знание QGIS не требуется.</p></div>
@@ -792,11 +796,11 @@
   <div class="wrap">
     <div class="kicker">Как записаться</div>
     <h2>Четыре шага до старта</h2>
-    <div class="grid4">
-      <div class="card step"><div class="n">1</div><h3>Заявка</h3><p>Оставляете контакты и выбираете предварительный трек. Это займёт две минуты.</p></div>
-      <div class="card step"><div class="n">2</div><h3>Короткий разговор</h3><p>Подтверждаем трек и уровень, отвечаем на вопросы. Если группа заполнена, ставим в лист ожидания.</p></div>
-      <div class="card step"><div class="n">3</div><h3>Договор и оплата</h3><p>Заключаем договор с ЮФУ и принимаем оплату (можно в два этапа).</p></div>
-      <div class="card step"><div class="n">4</div><h3>Старт</h3><p>Группа набрана — присылаем уведомление и согласуем с вами удобный формат обучения; затем открываем доступ к материалам и чату.</p></div>
+    <div class="grid4 apply-grid">
+      <div class="grid-cell"><div class="cell-n">1</div><h3>Заявка</h3><p>Оставляете контакты и выбираете предварительный трек. Это займёт две минуты.</p></div>
+      <div class="grid-cell"><div class="cell-n">2</div><h3>Короткий разговор</h3><p>Подтверждаем трек и уровень, отвечаем на вопросы. Если группа заполнена, ставим в лист ожидания.</p></div>
+      <div class="grid-cell"><div class="cell-n">3</div><h3>Договор и оплата</h3><p>Заключаем договор с ЮФУ и принимаем оплату (можно в два этапа).</p></div>
+      <div class="grid-cell"><div class="cell-n">4</div><h3>Старт</h3><p>Группа набрана — присылаем уведомление и согласуем с вами удобный формат обучения; затем открываем доступ к материалам и чату.</p></div>
     </div>
     <div style="margin-top:28px"><button class="btn btn-primary" data-apply>Оставить заявку</button></div>
   </div>

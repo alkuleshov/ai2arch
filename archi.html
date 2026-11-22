@@ -492,6 +492,10 @@
 /* модальное окно: без градиента, в палитре сайта */
 .submit{ background:#0A0F1A !important; border-radius:0 !important; box-shadow:none !important; }
 .submit:hover{ background:#2B4FD8 !important; }
+  .apply-grid { gap:0; border-top:1px solid #0A0F1A; }
+  .apply-grid > .grid-cell { border-bottom:0; }
+  .apply-grid > .grid-cell:nth-child(4n) { border-right:0; }
+  .apply-grid .cell-n { font-family:var(--mono); font-size:13px; font-weight:800; color:#2B4FD8; margin-bottom:14px; }
 </style>
 <link rel="stylesheet" href="assets/ai-levels.css">
 <script src="assets/ai-levels.js" defer></script>
@@ -550,7 +554,7 @@ els.js" defer></script>
     <p class="hero-sub">Базовый вводный курс: строите цифровой двойник территории, анализируете её с помощью ИИ и собираете презентацию, которая убеждает заказчика и комиссию. QGIS и нейросети разбираем с нуля, специальных знаний в ИИ не нужно.</p>
     <p class="hero-name">Официальное название программы: «Современные инструменты проектного анализа: ИИ и мобильные сервисы в работе с архитектурной средой»</p>
     <div class="ai-level" data-ai-course="archi" data-ai-theme="dark"></div>
-    <p class="enroll-status" data-group-size="12"><i class="live-dot" aria-hidden="true"></i>Группа набирается <small>· на <b data-group-count>12</b> человек</small></p>
+    <p class="enroll-status" data-group-size="12"><i class="live-dot" aria-hidden="true"></i>Группа набирается <small>· <b data-group-count>12</b> человек</small></p>
     <div class="hero-cta">
       <button class="btn btn-primary" data-apply>Оставить заявку</button>
       <a class="btn btn-ghost" href="#program">Смотреть программу</a>
@@ -978,11 +982,11 @@ els.js" defer></script>
   <div class="wrap">
     <div class="kicker">Как записаться</div>
     <h2>Четыре шага до старта</h2>
-    <div class="grid4">
-      <div class="card step"><div class="n">1</div><h3>Заявка</h3><p>Оставляете контакты и сведения об образовании. Это займёт две минуты.</p></div>
-      <div class="card step"><div class="n">2</div><h3>Короткий разговор</h3><p>Отвечаем на вопросы и подтверждаем участие.</p></div>
-      <div class="card step"><div class="n">3</div><h3>Договор, оплата, зачисление</h3><p>Заключаем договор с ЮФУ, принимаем оплату (можно в два этапа) и зачисляем вас на курс приказом.</p></div>
-      <div class="card step"><div class="n">4</div><h3>Старт</h3><p>Группа набрана — присылаем уведомление и согласуем с вами удобный формат обучения; затем открываем доступ к материалам и чату.</p></div>
+    <div class="grid4 apply-grid">
+      <div class="grid-cell"><div class="cell-n">1</div><h3>Заявка</h3><p>Оставляете контакты и сведения об образовании. Это займёт две минуты.</p></div>
+      <div class="grid-cell"><div class="cell-n">2</div><h3>Короткий разговор</h3><p>Отвечаем на вопросы и подтверждаем участие.</p></div>
+      <div class="grid-cell"><div class="cell-n">3</div><h3>Договор, оплата, зачисление</h3><p>Заключаем договор с ЮФУ, принимаем оплату (можно в два этапа) и зачисляем вас на курс приказом.</p></div>
+      <div class="grid-cell"><div class="cell-n">4</div><h3>Старт</h3><p>Группа набрана — присылаем уведомление и согласуем с вами удобный формат обучения; затем открываем доступ к материалам и чату.</p></div>
     </div>
     <div style="margin-top:28px"><button class="btn btn-primary" data-apply>Оставить заявку</button></div>
   </div>
