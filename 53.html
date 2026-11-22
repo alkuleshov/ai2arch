@@ -259,6 +259,11 @@ section{background-image:linear-gradient(to right, rgba(10,15,26,.07) 0 1px, tra
   header.head a.back-btn span { color:inherit !important; }
   /* шапка 53 во всю ширину, как верхняя панель пособий: кнопка у левого края, знак у правого */
   .head .wrap, .head .head-in { max-width:none !important; width:100% !important; margin:0 !important; padding:0 !important; }
+  /* граница и тени шапки как у верхней панели пособий */
+  .head, .head * { box-shadow:none !important; text-shadow:none !important; }
+  .head { backdrop-filter:none !important; -webkit-backdrop-filter:none !important; background:#F6F4F0 !important; border-top:0 !important; border-bottom:1.5px solid #0A0F1A !important; transition:none !important; }
+  .head .back-btn { border:1.5px solid #0A0F1A !important; border-top:1.5px solid #0A0F1A !important; border-bottom:1.5px solid #0A0F1A !important; border-left:1.5px solid #0A0F1A !important; height:54px; box-sizing:border-box; }
+  .head .head-in { height:54px !important; }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
