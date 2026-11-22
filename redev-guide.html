@@ -955,37 +955,25 @@
   .tag.g, .tag.o, .ttag-green, .ttag-orange, .ttag-purple, .ttag-blue { background:transparent !important; border:1px solid #0A0F1A !important; color:#0A0F1A !important; }
   @media (max-width:760px){ body { background-size:100% 100%,100% 90px !important; } }
 
-  /* reference tag cloud — plain clickable text, compact */
-  .tcloud { display:flex; flex-wrap:wrap; gap:6px 18px; margin:4px 0 2px; }
-  .tcloud a { font-size:15px; font-weight:700; color:#0A0F1A; text-decoration:none; letter-spacing:-.005em; border-bottom:1px solid transparent; }
-  .tcloud a:hover { color:#2B4FD8; border-bottom-color:#2B4FD8; text-decoration:none; }
-  .tcloud a sup { font-size:9px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:#7A8094; margin-left:3px; vertical-align:super; }
-  .tcloud a.hl { color:#2B4FD8; }
-  @media (max-width:760px) { .tcloud a { font-size:14px; } .tcloud { gap:6px 14px; } }
+  /* tools grid (Swiss grid style) — replaces links-row in reference section */
+  .tgrid { display:grid; grid-template-columns:repeat(5,1fr); border-top:1px solid var(--border,#0A0F1A); border-left:1px solid var(--border,#0A0F1A); background:#F4F3EF; margin:6px 0 4px; }
+  .tgrid a { display:flex; flex-direction:column; justify-content:space-between; min-height:112px; padding:14px 16px; border-right:1px solid var(--border,#0A0F1A); border-bottom:1px solid var(--border,#0A0F1A); color:#0A0F1A; text-decoration:none; background:#F4F3EF; transition:background .15s; }
+  .tgrid a:hover { background:#EDE7EE; text-decoration:none; }
+  .tgrid a.hl { background:#F1DFE7; }
+  .tgrid a.hl:hover { background:#E9CFDB; }
+  .tgrid .tg-cat { font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:#7A8094; }
+  .tgrid .tg-name { font-size:17px; font-weight:800; letter-spacing:-.01em; line-height:1.15; }
+  @media (max-width:760px) { .tgrid { grid-template-columns:repeat(2,1fr); } .tgrid a { min-height:96px; padding:12px 12px; } .tgrid .tg-name { font-size:15px; } }
 
-
-  /* module tiles — colours and layout from the main page course tiles, modules 1–5 */
-  .module-tabs { display:grid !important; grid-template-columns:repeat(5,minmax(0,1fr)) !important; gap:6px !important; overflow:visible !important; padding:14px 16px 12px !important; border-bottom:0 !important; background:transparent !important; }
-  .module-tabs::-webkit-scrollbar { display:none; }
-  .module-tab { position:relative; display:flex !important; flex-direction:column; align-items:center; justify-content:space-between; min-width:0; height:320px; padding:14px 0 14px !important; margin:0 !important; border:0 !important; border-radius:14px !important; background:var(--mc) !important; color:var(--mt-ink,#0A0F1A) !important; box-shadow:none !important; cursor:pointer; box-sizing:border-box; }
-  .module-tab.active { box-shadow: inset 0 0 0 2px #0A0F1A !important; }
-  .module-tab::before { content:'\2196'; flex:0 0 34px; width:34px; height:34px; box-sizing:border-box; border:2px solid currentColor; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:700; line-height:1; }
-  .module-tab .mt-eyebrow { display:none !important; }
-  .module-tab .mt-title { writing-mode:vertical-rl; transform:rotate(180deg); flex:1; min-height:0; display:flex; align-items:center; justify-content:flex-start; font-size:22px; font-weight:800; line-height:1.05; letter-spacing:-.02em; color:inherit !important; text-align:left; white-space:normal; overflow:hidden; padding:6px 0; }
-  .module-tab::after { content:attr(data-n); flex:0 0 34px; width:34px; height:34px; box-sizing:border-box; border-radius:50%; background:var(--mt-dot,#0A0F1A); color:var(--mt-dot-ink,#F6F4F0); display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:800; }
-  .module-tab.active::before, .module-tab.active .mt-title { color:inherit !important; }
-  @media (max-width:760px) {
-    .module-tabs { gap:5px !important; padding:12px 12px 10px !important; }
-    .module-tab { height:300px; border-radius:12px !important; padding:12px 0 12px !important; }
-    .module-tab::before { width:28px; flex-basis:28px; height:28px; font-size:14px; }
-    .module-tab::after { width:28px; flex-basis:28px; height:28px; font-size:13px; }
-    .module-tab .mt-title { font-size:15px; }
-  }
-  #mtab-m0{--mc:#EDC3D2;--mt-ink:#0A0F1A;--mt-dot:#0A0F1A;--mt-dot-ink:#F6F4F0}
-  #mtab-m1{--mc:#2B4FD8;--mt-ink:#F6F4F0;--mt-dot:#F6F4F0;--mt-dot-ink:#0A0F1A}
-  #mtab-m2{--mc:#13234B;--mt-ink:#F6F4F0;--mt-dot:#EDC3D2;--mt-dot-ink:#0A0F1A}
-  #mtab-m3{--mc:#BED0EE;--mt-ink:#0A0F1A;--mt-dot:#0A0F1A;--mt-dot-ink:#F6F4F0}
-  #mtab-m4{--mc:#E6D9BE;--mt-ink:#0A0F1A;--mt-dot:#0A0F1A;--mt-dot-ink:#F6F4F0}
+  /* module tabs — colours from the main page course tiles */
+  #mtab-m0{--mc:#EDC3D2;--mt-ink:#0A0F1A}
+  #mtab-m1{--mc:#2B4FD8;--mt-ink:#F6F4F0}
+  #mtab-m2{--mc:#13234B;--mt-ink:#F6F4F0}
+  #mtab-m3{--mc:#BED0EE;--mt-ink:#0A0F1A}
+  #mtab-m4{--mc:#E6D9BE;--mt-ink:#0A0F1A}
+  .module-tab { background:var(--mc) !important; }
+  .module-tab .mt-eyebrow, .module-tab .mt-title { color:var(--mt-ink) !important; }
+  .module-tab.active { background:var(--mc) !important; box-shadow:inset 0 -3px 0 #0A0F1A; }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -1036,7 +1024,7 @@
   <div class="guide-ref-section">
     <div class="guide-ref-inner">
       <div class="ref-eyebrow light">Справочные материалы</div>
-      <div class="tcloud"><a class="hl" href="https://alice.yandex.ru" target="_blank" rel="noopener noreferrer">Алиса AI<sup>ИИ</sup></a><a class="" href="https://giga.chat" target="_blank" rel="noopener noreferrer">GigaChat<sup>ИИ</sup></a><a class="" href="https://shedevrum.ai" target="_blank" rel="noopener noreferrer">Шедеврум<sup>Изобр.</sup></a><a class="" href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude<sup>ИИ</sup></a><a class="hl" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer">ChatGPT<sup>ИИ</sup></a><a class="" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">Gemini<sup>ИИ</sup></a><a class="" href="https://nspd.gov.ru" target="_blank" rel="noopener noreferrer">НСПД<sup>Данные</sup></a><a class="" href="https://2gis.ru" target="_blank" rel="noopener noreferrer">2ГИС<sup>Данные</sup></a><a class="hl" href="https://www.cian.ru" target="_blank" rel="noopener noreferrer">ЦИАН<sup>Данные</sup></a><a class="" href="https://gamma.app" target="_blank" rel="noopener noreferrer">Gamma.app<sup>Синтез</sup></a></div></div>
+      <div class="tgrid"><a class="hl" href="https://alice.yandex.ru" target="_blank" rel="noopener noreferrer"><span class="tg-cat">01 · ИИ</span><span class="tg-name">Алиса AI</span></a><a class="" href="https://giga.chat" target="_blank" rel="noopener noreferrer"><span class="tg-cat">02 · ИИ</span><span class="tg-name">GigaChat</span></a><a class="" href="https://shedevrum.ai" target="_blank" rel="noopener noreferrer"><span class="tg-cat">03 · Изобр.</span><span class="tg-name">Шедеврум</span></a><a class="" href="https://claude.ai" target="_blank" rel="noopener noreferrer"><span class="tg-cat">04 · ИИ</span><span class="tg-name">Claude</span></a><a class="hl" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer"><span class="tg-cat">05 · ИИ</span><span class="tg-name">ChatGPT</span></a><a class="" href="https://gemini.google.com" target="_blank" rel="noopener noreferrer"><span class="tg-cat">06 · ИИ</span><span class="tg-name">Gemini</span></a><a class="" href="https://nspd.gov.ru" target="_blank" rel="noopener noreferrer"><span class="tg-cat">07 · Данные</span><span class="tg-name">НСПД</span></a><a class="" href="https://2gis.ru" target="_blank" rel="noopener noreferrer"><span class="tg-cat">08 · Данные</span><span class="tg-name">2ГИС</span></a><a class="hl" href="https://www.cian.ru" target="_blank" rel="noopener noreferrer"><span class="tg-cat">09 · Данные</span><span class="tg-name">ЦИАН</span></a><a class="" href="https://gamma.app" target="_blank" rel="noopener noreferrer"><span class="tg-cat">10 · Синтез</span><span class="tg-name">Gamma.app</span></a></div></div>
   </div>
 
   <div class="trackbar" id="trackbar">
@@ -1054,25 +1042,25 @@
 
   <div class="nav-wrap" id="moduleTabsWrap" style="top:0;">
     <div class="module-tabs">
-      <div class="module-tab active" id="mtab-m0" onclick="switchModuleWithSpy('m0')" data-n="0">
+      <div class="module-tab active" id="mtab-m0" onclick="switchModuleWithSpy('m0')">
         <span class="mt-eyebrow">Вводный модуль</span>
-        <span class="mt-title">Введение в развитие территорий</span>
+        <span class="mt-title">🧭 Введение в развитие территорий</span>
       </div>
-      <div class="module-tab" id="mtab-m1" onclick="switchModuleWithSpy('m1')" data-n="2">
+      <div class="module-tab" id="mtab-m1" onclick="switchModuleWithSpy('m1')">
         <span class="mt-eyebrow">Модуль 1</span>
-        <span class="mt-title">Контекст территории</span>
+        <span class="mt-title">📍 Контекст территории</span>
       </div>
-      <div class="module-tab" id="mtab-m2" onclick="switchModuleWithSpy('m2')" data-n="3">
+      <div class="module-tab" id="mtab-m2" onclick="switchModuleWithSpy('m2')">
         <span class="mt-eyebrow">Модуль 2</span>
-        <span class="mt-title">Функции и экономика</span>
+        <span class="mt-title">📐 Функции и экономика</span>
       </div>
-      <div class="module-tab" id="mtab-m3" onclick="switchModuleWithSpy('m3')" data-n="4">
+      <div class="module-tab" id="mtab-m3" onclick="switchModuleWithSpy('m3')">
         <span class="mt-eyebrow">Модуль 3</span>
-        <span class="mt-title">Визуальная упаковка</span>
+        <span class="mt-title">🎨 Визуальная упаковка</span>
       </div>
-      <div class="module-tab" id="mtab-m4" onclick="switchModuleWithSpy('m4')" data-n="5">
+      <div class="module-tab" id="mtab-m4" onclick="switchModuleWithSpy('m4')">
         <span class="mt-eyebrow">Модуль 4</span>
-        <span class="mt-title">Синтез и защита</span>
+        <span class="mt-title">🏁 Синтез и защита</span>
       </div>
     </div>
   </div>
