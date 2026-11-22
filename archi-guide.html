@@ -795,21 +795,19 @@
   @media (max-width:760px){ body { background-size:100% 100%,100% 90px !important; } }
 
   /* reference tag cloud — plain clickable text, compact */
-  .tcloud { display:flex; flex-wrap:wrap; gap:6px 18px; margin:4px 0 2px; }
-  .tcloud a { font-size:15px; font-weight:700; color:#0A0F1A; text-decoration:none; letter-spacing:-.005em; border-bottom:1px solid transparent; }
+  .tcloud { display:flex; flex-wrap:wrap; gap:4px 16px; margin:2px 0 0; }
+  .tcloud a { font-size:13px; font-weight:700; color:#0A0F1A; text-decoration:none; letter-spacing:-.005em; border-bottom:1px solid transparent; line-height:1.4; }
   .tcloud a:hover { color:#2B4FD8; border-bottom-color:#2B4FD8; text-decoration:none; }
-  .tcloud a sup { font-size:9px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:#7A8094; margin-left:3px; vertical-align:super; }
+  .tcloud a sup { font-size:8px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:#7A8094; margin-left:3px; vertical-align:super; }
   .tcloud a.hl { color:#2B4FD8; }
-  @media (max-width:760px) { .tcloud a { font-size:14px; } .tcloud { gap:6px 14px; } }
-  /* module tabs — colours from the main page course tiles */
-  #mtab-sprint{--mc:#EDC3D2;--mt-ink:#0A0F1A}
-  #mtab-qgis{--mc:#2B4FD8;--mt-ink:#F6F4F0}
-  #mtab-ai{--mc:#13234B;--mt-ink:#F6F4F0}
-  #mtab-gen{--mc:#BED0EE;--mt-ink:#0A0F1A}
-  #mtab-pres{--mc:#E6D9BE;--mt-ink:#0A0F1A}
-  .module-tab { background:var(--mc) !important; }
-  .module-tab .mt-eyebrow, .module-tab .mt-title { color:var(--mt-ink) !important; }
-  .module-tab.active { background:var(--mc) !important; box-shadow:inset 0 -3px 0 #0A0F1A; }
+  @media (max-width:760px) { .tcloud a { font-size:12px; } .tcloud { gap:4px 12px; } }
+  /* module tabs: white by default, module colour when active */
+  #mtab-sprint{--mc:#EDC3D2;--mt-ink:#0A0F1A} #mtab-qgis{--mc:#2B4FD8;--mt-ink:#F6F4F0} #mtab-ai{--mc:#13234B;--mt-ink:#F6F4F0} #mtab-gen{--mc:#BED0EE;--mt-ink:#0A0F1A} #mtab-pres{--mc:#E6D9BE;--mt-ink:#0A0F1A}
+  .module-tab { box-shadow: inset 0 3px 0 var(--mc); }
+  .module-tab.active { background: var(--mc) !important; box-shadow: none; }
+  .module-tab.active .mt-eyebrow, .module-tab.active .mt-title { color: var(--mt-ink) !important; }
+  .module-tab:hover { background: var(--mc); }
+  .module-tab:hover .mt-eyebrow, .module-tab:hover .mt-title { color: var(--mt-ink) !important; }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
