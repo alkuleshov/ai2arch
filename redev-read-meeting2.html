@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Тема 2.3 · Подготовка к встрече 2 — лонгрид</title>
+<style>
+:root{--paper:#F6F4F0;--ink:#0A0F1A;--grey:#848A9A;--muted:#5A6070;--blush:#EDC3D2;--cobalt:#2B4FD8;--midnight:#13234B;--powder:#BED0EE;--sand:#E6D9BE;--mist:#D3D9E6;--grid:#E1DDD5}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background-color:var(--paper);color:var(--ink);font-family:'Inter Tight',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;font-size:18px;line-height:1.6;overflow-x:hidden;background-image:linear-gradient(to right,var(--grid) 1px,transparent 1px);background-size:calc(min(100%,1200px)/4) 100%;background-position:center top;background-repeat:repeat-y}
+a{color:var(--cobalt);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px}
+.bar{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;background:var(--paper);border-bottom:1px solid var(--ink);font-size:13px;font-weight:600}
+.bar a{color:var(--ink)}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cobalt);margin-bottom:10px}
+.hero{padding:40px 0 28px}
+.hero h1{font-size:clamp(32px,5.5vw,56px);line-height:1.04;letter-spacing:-.025em;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--grey)}
+.hero .lead{margin-top:16px;color:var(--muted);font-size:19px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.meta span{font-size:12px;font-weight:700;padding:5px 10px;border:1px solid var(--ink)}
+.route{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin-top:26px}
+.route>div{padding:12px 14px}
+.route>div+div{border-left:1px solid var(--ink)}
+.route .n{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.route .t{font-size:17px;font-weight:800}
+.route .s{font-size:13px;color:var(--muted)}
+.r1{background:var(--powder)}.r2{background:var(--mist)}.r3{background:var(--blush)}
+.chapter{padding:44px 0 6px;border-top:1px solid var(--ink);margin-top:44px}
+.chapter .ck{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--cobalt)}
+.chapter h2{font-size:clamp(26px,4vw,36px);line-height:1.12;letter-spacing:-.02em;font-weight:800;margin:8px 0 18px}
+.chapter p{margin:0 0 16px}
+.chapter h3{font-size:19px;font-weight:800;margin:26px 0 10px}
+.note{border:1px solid var(--ink);background:#fff;padding:16px 18px;margin:22px 0}
+.note .lbl{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--cobalt);margin-bottom:6px}
+.note p{margin:0;font-size:16px}
+.c52{border:1px solid var(--ink);background:var(--sand);padding:18px 18px 8px;margin:22px 0}
+.c52 .lbl{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--midnight);margin-bottom:10px}
+.c52 table{width:100%;border-collapse:collapse;margin-bottom:12px;font-size:15px}
+.c52 td{padding:9px 8px;border-top:1px solid var(--grid);vertical-align:top}
+.c52 td:first-child{font-weight:700;width:34%}
+.ok{color:var(--midnight);font-weight:700}
+.gap{color:#8A1F3F;font-weight:700}
+.funnel{list-style:none;margin:22px 0;border-top:1px solid var(--ink)}
+.funnel li{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--grid);font-size:17px}
+.funnel li b{color:var(--cobalt);font-size:14px}
+.terms{margin:30px 0 0;border-top:1px solid var(--ink);padding-top:14px}
+.terms h3{font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin:0 0 10px}
+.terms dl{display:grid;gap:10px}
+.terms dt{font-weight:800;font-size:16px}
+.terms dd{margin:0 0 0;color:var(--muted);font-size:15px}
+.next{margin:56px 0 0;border-top:1px solid var(--ink);padding:22px 0 80px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);padding:13px 20px;border-radius:999px;font-weight:700;font-size:15px}
+.btn:hover{background:var(--cobalt);color:#fff;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+@media (max-width:760px){body{font-size:17px}.route{grid-template-columns:1fr}.route>div+div{border-left:0;border-top:1px solid var(--ink)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="bar">
+    <a href="redev-guide.html#t23">← Тема 2.3</a>
+    <a href="redev-meeting2.html">Слайды на весь экран →</a>
+  </div>
+
+  <header class="hero">
+    <div class="kicker">Модуль 2 · Тема 2.3 · лонгрид</div>
+    <h1>Встреча 2 <em>— проверка досье</em></h1>
+    <p class="lead">Встреча — не курс. Это беседа, которая проверяет, что подтверждено документом, а что осталось допущением. Этот лонгрид — о том, как к ней готовиться.</p>
+    <div class="meta"><span>≈ 15 мин чтения</span><span>4 главы</span><span>Пример: C52</span></div>
+
+    <div class="route" aria-label="Маршрут темы">
+      <div class="r1"><div class="n">Шаг 1 · до встречи</div><div class="t">Самостоятельно</div><div class="s">Этот лонгрид и досье</div></div>
+      <div class="r2"><div class="n">Шаг 2 · встреча</div><div class="t">На встрече</div><div class="s">Беседа в чате потока, 90 минут</div></div>
+      <div class="r3"><div class="n">Шаг 3 · итог</div><div class="t">Задания нет</div><div class="s">Итоги переносим в рабочую тетрадь</div></div>
+    </div>
+  </header>
+
+  <section class="chapter" id="glava-1">
+    <div class="ck">Глава 1</div>
+    <h2>Как устроена встреча</h2>
+    <p>Встреча 2 не проходит тему заново. Досье уже подготовлено, и на встрече мы его разбираем: сверяем тезисы с документами и источниками, отмечаем, что осталось в строке «Что не знаем», и переносим итоги в рабочую тетрадь.</p>
+    <p>Главное правило: беседа проверяет готовность материалов, а не добавляет новые данные. Если на встрече выясняется, что вывод держится на догадке, это не провал, а нормальный результат разбора. Провалом было бы выдать догадку за факт.</p>
+
+    <div class="note"><div class="lbl">Вывод</div><p>Встреча проверяет досье. Новые данные она не добавляет, и так и должно быть.</p></div>
+  </section>
+
+  <section class="chapter" id="glava-2">
+    <div class="ck">Глава 2</div>
+    <h2>Что собрать к встрече</h2>
+    <p>К встрече готов тот, у кого есть три вещи: нормативная карточка со ссылками на пункты, досье контекста по своему объекту и продуктовая гипотеза со сценариями. Эти материалы общие для всех, но акценты различаются по треку.</p>
+    <ul style="margin:0 0 18px 20px">
+      <li><strong>Трек А, проектировщик.</strong> В досье — место, смыслы и метафоры, пешеходные связи и дефицит функций. Сценарии — для проектного решения.</li>
+      <li><strong>Трек Б, девелопер и инвестор.</strong> В досье — рынок, аудитория и спрос. Сценарии — для экономики.</li>
+    </ul>
+    <p>Продуктовая гипотеза здесь — проверяемое утверждение в формате «функция X для аудитории Y, потому что фактор Z». Если вы не можете записать гипотезу в такой форме, значит, она ещё не готова к проверке.</p>
+
+    <div class="terms">
+      <h3>Термины главы</h3>
+      <dl>
+        <div><dt>Продуктовая гипотеза</dt><dd>Проверяемое утверждение: кому, что и почему вы предлагаете.</dd></div>
+        <div><dt>ПЗЗ — правила землепользования и застройки</dt><dd>Что по закону можно строить на участке.</dd></div>
+        <div><dt>ЕГРН — Единый государственный реестр недвижимости</dt><dd>Официальные данные о праве, площади и кадастровой стоимости.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="chapter" id="glava-3">
+    <div class="ck">Глава 3</div>
+    <h2>Подтверждено или допущение</h2>
+    <p>Главный вопрос разбора — что удалось подтвердить. Тезис считается подтверждённым, если его можно найти в документе: пункте ПЗЗ, выписке ЕГРН, нормативной карточке. Всё остальное — допущение, и его честно записываем.</p>
+    <p>Для этого в досье есть строка «Что не знаем». Там записываются незакрытые данные и следующий источник, в котором их можно проверить. Пустая строка «Что не знаем» — тревожный сигнал: скорее всего, проверка не проводилась, а не вопросов не было.</p>
+    <p>Отдельно смотрим на расхождения между документами. Если две версии данных противоречат друг другу, в работу принимается одна, и причина выбора записывается. Молча выбрать удобную версию нельзя.</p>
+
+    <div class="note"><div class="lbl">Вывод</div><p>Разбор отделяет подтверждённое от неподтверждённого. Именно это и должно остаться в досье.</p></div>
+  </section>
+
+  <section class="chapter" id="glava-4">
+    <div class="ck">Глава 4</div>
+    <h2>Данные и их ограничения</h2>
+    <p>Данные из открытых источников редко говорят то, что хочется. Например, поисковые запросы не равны покупкам, а число организаций в районе не доказывает, что там есть свободная ниша. Объявления о продаже или аренде — это предложения, а не сделки, и ставка из объявления требует отдельной проверки.</p>
+    <p>Работая с нейросетью, держим в голове риск галлюцинации: модель может выдать уверенно звучащий ответ, который не подтверждён данными. Поэтому любой вывод сверяем с файлом-источником. Если в файле его нет, вывод не используем.</p>
+
+    <div class="note"><div class="lbl">Вывод</div><p>Данные подтверждают тезис только вместе с ограничениями. Без них вывод не принимается.</p></div>
+  </section>
+
+  <section class="chapter" id="glava-5">
+    <div class="ck">Глава 5</div>
+    <h2>Гипотеза и сценарии</h2>
+    <p>Гипотеза редко остаётся такой, какой была в начале. После проверки данных она меняется, и это нормально: важно записать, как именно. Какой сценарий снят и какой тест жизнеспособности он не прошёл? Какая проверка нужна, чтобы гипотеза стала устойчивее?</p>
+    <p>Гипотеза остаётся рабочей, пока проходит проверку данными. Как только её опровергает документ или цифра, она переписывается, а не подгоняется под результат.</p>
+
+    <div class="note"><div class="lbl">Вывод</div><p>Гипотеза рабочая, пока её проверка не опровергла. Опровержение — повод переписать, а не защищать.</p></div>
+  </section>
+
+  <section class="chapter" id="glava-6">
+    <div class="ck">Глава 6</div>
+    <h2>Ошибки перехода от HBU к решению</h2>
+    <p>Самые частые ошибки на этом переходе повторяются. Пять из них стоит держать перед глазами:</p>
+    <ul style="margin:0 0 18px 20px">
+      <li>расчёт сделан в чате вместо таблицы, и его нельзя проверить;</li>
+      <li>гипотеза осталась без источника;</li>
+      <li>объявление принято за рыночную ставку;</li>
+      <li>сценарий не прошёл юридический или физический тест, но остался в расчёте;</li>
+      <li>число организаций принято за свободную нишу.</li>
+    </ul>
+    <p>Общий знаменатель у всех ошибок один: решение начинается с проверяемого расчёта и источника. Если их нет, решения пока нет.</p>
+
+    <div class="next">
+      <div>
+        <div style="font-size:13px;color:var(--muted)">Дальше по модулю</div>
+        <strong>Тема 2.1 · HBU и баланс площадей</strong>
+      </div>
+      <a class="btn" href="redev-read-hbu.html">Читать лонгрид →</a>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
