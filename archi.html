@@ -441,6 +441,10 @@
   .work-media { gap:6px; }
   .work-quote { border-left:3px solid #2B4FD8 !important; border-radius:0 !important; background:transparent !important; font-size:16px; }
   .quote-card { background:#F6F4F0 !important; }
+  /* ── меньше сдвигов при загрузке: место под шкалу, без фоновой анимации ── */
+  .ai-level { min-height:76px; }
+  .hero-mark { display:none !important; animation:none !important; }
+  .hero { min-height:0; }
 </style>
 <link rel="stylesheet" href="assets/ai-levels.css">
 <link rel="stylesheet" href="assets/lightbox.css">
@@ -617,7 +621,7 @@ els.js" defer></script>
         <img class="avatar" src="images/kostenko.jpg" width="104" height="104" alt="Костенко Дарья Богдановна" loading="lazy">
         <div>
           <h3>Костенко Дарья Богдановна</h3>
-          <div class="role">Практикующий архитектор, автор видеоуроков по QGIS</div>
+          <div class="role">Практикующий архитектор, автор раздела по QGIS</div>
           <ul class="list">
             <li>Преподаватель Академии архитектуры и искусств ЮФУ</li>
             <li>Архитектор, специалист по средовому дизайну</li>
