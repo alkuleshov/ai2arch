@@ -89,6 +89,10 @@ input:focus,textarea:focus{outline:2px solid var(--accent-b);border-color:var(--
  table{font-size:13px}
  th.hide,td.hide{display:none}
 }
+
+/* видимая сетка: линии колонок 1200px-контейнера (4 колонки; с 900px — 8) */
+section{background-image:linear-gradient(to right, rgba(10,15,26,.07) 0 1px, transparent 1px);background-size:calc(min(100%, 1200px) / 4) 100%;background-position:center top;background-repeat:repeat-x}
+@media (min-width:900px){section{background-size:calc(min(100%, 1200px) / 8) 100%}}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
