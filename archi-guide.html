@@ -11,9 +11,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800;900&display=swap">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
-  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior: smooth; overflow-x: hidden; }
 
   :root {
@@ -756,6 +756,14 @@
   .back-btn, .back-btn:hover { text-decoration:none; }
   .view { animation: fadeIn .25s ease; }
   @keyframes fadeIn { from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)} }
+
+  /* ── швейцарский стиль (первичный перевод): переопределения, разметка не менялась ── */
+  :root { --azure:#2B4FD8; --azure-dark:#2B4FD8; --azure-soft:#BED0EE; --bg:#F6F4F0; --surface:#FFFFFF; --surface2:#EFECE6; --border:#E1DDD5; --ink-faint:#5A6070; --accent-l:#E4EBFB; --sans:'Inter Tight','Helvetica Neue',Arial,sans-serif; }
+  body { font-family:var(--sans); letter-spacing:-0.005em; }
+  *, *::before, *::after { border-radius:0 !important; box-shadow:none !important; text-shadow:none !important; }
+  img { border-radius:0 !important; }
+  h1, h2, h3 { font-weight:900 !important; letter-spacing:-0.035em !important; }
+  footer { border-top:1px solid #0A0F1A; }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
