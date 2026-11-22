@@ -462,6 +462,14 @@
   .aud-cell p { color:#5A6070; font-size:15px; }
   .swiss-note { margin-top:24px; padding:16px 18px; background:#EFECE6; border:1px solid #E1DDD5; font-size:14px; color:#0A0F1A; }
   @media (max-width:760px) { .tracks { grid-template-columns:1fr; } .track-cell { border-right:0; } .aud-grid { grid-template-columns:1fr; } .aud-cell { border-right:0; } }
+  /* ── «О программе»: ячейки сетки с номерами ── */
+  .grid-cell { background:#FFFFFF; border-right:1px solid #E1DDD5; border-bottom:1px solid #E1DDD5; padding:24px 22px; }
+  #about .grid3 { border-top:1px solid #0A0F1A; gap:0; }
+  #about .grid3 > .grid-cell:last-child { border-right:0; }
+  .cell-n { font-size:clamp(44px,5.6vw,64px); font-weight:900; letter-spacing:-0.06em; line-height:.9; color:#2B4FD8; margin-bottom:14px; }
+  .grid-cell h3 { font-size:clamp(19px,2.2vw,24px); font-weight:800 !important; letter-spacing:-0.02em; margin-bottom:8px; }
+  .grid-cell p { color:#5A6070; font-size:15px; }
+  #about .sub-h { margin:48px 0 0; }
 </style>
 <link rel="stylesheet" href="assets/ai-levels.css">
 <script src="assets/ai-levels.js" defer></script>
@@ -578,15 +586,15 @@ els.js" defer></script>
     <div class="kicker">О программе · какие проблемы решает</div>
     <h2>Три места, <span class="g">где анализ территории чаще всего тормозит</span></h2>
     <div class="grid3">
-      <div class="card"><div class="ico">01</div><h3>Анализ отнимает дни</h3><p>Карты, схемы и описания приходится собирать и оформлять вручную. На курсе схемы строятся в QGIS из открытых данных, а выводы по ним помогает формулировать ИИ.</p></div>
-      <div class="card"><div class="ico">02</div><h3>ИИ используют вслепую</h3><p>Запрос «придумай концепт парка» выдаёт банальный результат. На курсе задачу ставят по схеме: роль, контекст, задача, примеры, формат, тон.</p></div>
-      <div class="card"><div class="ico">03</div><h3>Выводы трудно показать</h3><p>Анализ остаётся в таблицах и файлах. На курсе всё собирается в одну интерактивную презентацию, которую можно показать заказчику или комиссии.</p></div>
+      <div class="grid-cell"><div class="cell-n">01</div><h3>Анализ отнимает дни</h3><p>Карты, схемы и описания приходится собирать и оформлять вручную. На курсе схемы строятся в QGIS из открытых данных, а выводы по ним помогает формулировать ИИ.</p></div>
+      <div class="grid-cell"><div class="cell-n">02</div><h3>ИИ используют вслепую</h3><p>Запрос «придумай концепт парка» выдаёт банальный результат. На курсе задачу ставят по схеме: роль, контекст, задача, примеры, формат, тон.</p></div>
+      <div class="grid-cell"><div class="cell-n">03</div><h3>Выводы трудно показать</h3><p>Анализ остаётся в таблицах и файлах. На курсе всё собирается в одну интерактивную презентацию, которую можно показать заказчику или комиссии.</p></div>
     </div>
-    <h3 style="margin:36px 0 14px">Что вы делаете на курсе</h3>
+    <h3 class="sub-h">Что вы делаете на курсе</h3>
     <div class="grid3">
-      <div class="card"><div class="ico">А</div><h3>Готовите карты участка</h3><p>Подложки, дороги, здания, рельеф, кадастр. Оформляете карту в QGIS и выгружаете в PDF.</p></div>
-      <div class="card"><div class="ico">Б</div><h3>Анализируете с помощью ИИ</h3><p>Собираете техническое задание и контекст, строите сценарии и портреты аудитории с помощью языковых моделей.</p></div>
-      <div class="card"><div class="ico">В</div><h3>Визуализируете и собираете проект</h3><p>Превращаете эскизы в визуализации с помощью нейросетей и собираете результат в итоговую презентацию.</p></div>
+      <div class="grid-cell"><div class="cell-n">А</div><h3>Готовите карты участка</h3><p>Подложки, дороги, здания, рельеф, кадастр. Оформляете карту в QGIS и выгружаете в PDF.</p></div>
+      <div class="grid-cell"><div class="cell-n">Б</div><h3>Анализируете с помощью ИИ</h3><p>Собираете техническое задание и контекст, строите сценарии и портреты аудитории с помощью языковых моделей.</p></div>
+      <div class="grid-cell"><div class="cell-n">В</div><h3>Визуализируете и собираете проект</h3><p>Превращаете эскизы в визуализации с помощью нейросетей и собираете результат в итоговую презентацию.</p></div>
     </div>
     <div class="ai-level ai-level--about" data-ai-course="archi"></div>
   </div>
