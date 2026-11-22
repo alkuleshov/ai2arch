@@ -205,6 +205,10 @@
   img { border-radius:0 !important; }
   h1, h2, h3 { font-weight:900 !important; letter-spacing:-0.035em !important; }
   footer { border-top:1px solid #0A0F1A; }
+
+/* видимая сетка колонок 1200px-контейнера (4 колонки; с 900px — 8) */
+body{background-image:linear-gradient(to right, rgba(10,15,26,.07) 0 1px, transparent 1px);background-size:calc(min(100%, 1200px) / 4) 100%;background-position:center top;background-repeat:repeat-x;background-attachment:scroll}
+@media (min-width:900px){body{background-size:calc(min(100%, 1200px) / 8) 100%}}
 </style>
 </head>
 <body>
