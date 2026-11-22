@@ -283,6 +283,8 @@ section{background-image:linear-gradient(to right, rgba(10,15,26,.07) 0 1px, tra
   header.head .nav { gap:6px !important; }
   header.head .head-dl { margin-left:auto !important; }
   header.head .lang-switch { margin-right:18px !important; }
+  /* телефон: подпись бренда переносится на две строки, кнопка справа не выходит за экран */
+  @media (max-width:760px) { header :is(.wrap,.head-in) > a:first-child small { white-space:normal !important; max-width:138px !important; line-height:1.2 !important; } header.hd .hd-btn { font-size:12px !important; padding:9px 12px !important; white-space:nowrap !important; } }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">

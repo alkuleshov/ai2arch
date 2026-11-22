@@ -554,6 +554,8 @@
   header :is(.wrap,.head-in) > a:first-child small { display:block !important; font-size:11px !important; font-weight:600 !important; letter-spacing:0 !important; color:#5A6070 !important; white-space:nowrap !important; margin:2px 0 0 !important; }
   /* навигация шапки не налезает на кнопку справа на средних ширинах */
   @media (min-width:761px) and (max-width:1440px) { header.head .nav a { font-size:13px !important; padding:8px 7px !important; } }
+  /* телефон: подпись бренда переносится на две строки, кнопка справа не выходит за экран */
+  @media (max-width:760px) { header :is(.wrap,.head-in) > a:first-child small { white-space:normal !important; max-width:138px !important; line-height:1.2 !important; } header.hd .hd-btn { font-size:12px !important; padding:9px 12px !important; white-space:nowrap !important; } }
 </style>
 <link rel="stylesheet" href="assets/ai-levels.css">
 <script src="assets/ai-levels.js" defer></script>

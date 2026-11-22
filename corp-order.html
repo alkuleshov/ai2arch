@@ -109,6 +109,9 @@ section{background-image:linear-gradient(to right, rgba(10,15,26,.07) 0 1px, tra
   header :is(.wrap,.head-in) > a:first-child > span { display:flex !important; flex-direction:column !important; align-items:flex-start !important; line-height:1.15 !important; }
   header :is(.wrap,.head-in) > a:first-child b { display:block !important; font-size:16px !important; font-weight:800 !important; letter-spacing:-0.02em !important; color:#0A0F1A !important; white-space:nowrap !important; }
   header :is(.wrap,.head-in) > a:first-child small { display:block !important; font-size:11px !important; font-weight:600 !important; letter-spacing:0 !important; color:#5A6070 !important; white-space:nowrap !important; margin:2px 0 0 !important; }
+  /* телефон: подпись бренда переносится на две строки, кнопка справа не выходит за экран */
+  @media (max-width:760px) { header :is(.wrap,.head-in) > a:first-child small { white-space:normal !important; max-width:138px !important; line-height:1.2 !important; } header.hd .hd-btn { font-size:12px !important; padding:9px 12px !important; white-space:nowrap !important; } }
+  @media (max-width:380px) { header.hd .hd-btn { padding:9px 10px !important; } }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
