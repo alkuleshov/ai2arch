@@ -325,15 +325,15 @@ a{ color:inherit; }
 
 @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
 
-/* выпадающий выбор пособия для слушателей */
+/* выбор пособия для слушателей: раскрывается поверх, не сдвигая страницу */
 .stud{ position:relative; }
-.stud summary{ list-style:none; cursor:pointer; display:flex; gap:7px; align-items:baseline; font-size:13px; line-height:1.15; font-weight:700; letter-spacing:-0.01em; }
+.stud summary{ list-style:none; cursor:pointer; display:flex; gap:7px; align-items:baseline; font-size:13px; line-height:1.15; font-weight:800; letter-spacing:-0.01em; color:#2B4FD8; }
 .stud summary::-webkit-details-marker{ display:none; }
-.stud summary::before{ content:''; flex:none; width:8px; height:8px; border-radius:50%; background:var(--ink); transform:translateY(-1px); }
-.stud summary::after{ content:'+'; margin-left:4px; font-weight:800; }
+.stud summary::before{ content:''; flex:none; width:8px; height:8px; border-radius:50%; background:#2B4FD8; transform:translateY(-1px); }
+.stud summary::after{ content:'+'; margin-left:2px; font-weight:800; }
 .stud[open] summary::after{ content:'–'; }
-.stud-list{ margin:10px 0 0 0; display:flex; flex-direction:column; width:100%; max-width:100%; min-width:0; background:#FBFAF7; border:1px solid var(--ink); }
-.stud-list a{ display:flex; flex-direction:column; gap:2px; padding:11px 14px; font-size:14px; overflow-wrap:anywhere; font-weight:800; letter-spacing:-0.01em; color:var(--ink); text-decoration:none; border-bottom:1px solid var(--grid); }
+.stud-list{ position:absolute; top:calc(100% + 10px); right:0; z-index:30; width:max-content; min-width:250px; display:flex; flex-direction:column; background:#FBFAF7; border:1px solid #0A0F1A; box-shadow:0 14px 30px rgba(10,15,26,.12); }
+.stud-list a{ display:flex; flex-direction:column; gap:2px; padding:11px 14px; font-size:14px; font-weight:800; letter-spacing:-0.01em; color:#0A0F1A; text-decoration:none; border-bottom:1px solid #E1DDD5; }
 .stud-list a:last-child{ border-bottom:0; }
 .stud-list a small{ font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#5A6070; }
 .stud-list a:hover{ background:#BED0EE; text-decoration:none; }
@@ -366,8 +366,6 @@ a{ color:inherit; }
     <h1 class="display brand">AI2ARCH <span class="g">Лаборатория проектного интеллекта</span></h1>
     <p class="small head-text">Исследуем, как ИИ работает в&nbsp;архитектуре, градостроительстве и&nbsp;девелопменте.</p>
     <nav class="head-menu" aria-label="Разделы">
-      <a class="bullet" href="corp.html" onclick="typeof ym==='function'&&ym(113526373,'reachGoal','corp_click',{source:'index-top'})">Корпоративное обучение</a>
-      <a class="bullet" href="53.html" onclick="typeof ym==='function'&&ym(113526373,'reachGoal','guide_click',{source:'index-top'})">Гайд «53 способа»</a>
       <details class="stud">
         <summary>Слушателям</summary>
         <div class="stud-list">
@@ -375,6 +373,8 @@ a{ color:inherit; }
           <a href="redev-guide.html?from=index" onclick="typeof ym==='function'&&ym(113526373,'reachGoal','guide_click',{source:'index-top-students-redev'})"><small>Ступень 2</small>ИИ в редевелопменте</a>
         </div>
       </details>
+      <a class="bullet" href="corp.html" onclick="typeof ym==='function'&&ym(113526373,'reachGoal','corp_click',{source:'index-top'})">Корпоративное обучение</a>
+      <a class="bullet" href="53.html" onclick="typeof ym==='function'&&ym(113526373,'reachGoal','guide_click',{source:'index-top'})">Гайд «53 способа»</a>
     </nav>
     <p class="small head-text head-text--2">Разрабатываем методики анализа объектов и&nbsp;территорий и&nbsp;передаём их специалистам и&nbsp;проектным командам.</p>
   </div>
