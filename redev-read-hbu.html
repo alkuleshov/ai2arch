@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Тема 2.1 · HBU, сценарии и баланс площадей — лонгрид</title>
+<style>
+:root{--paper:#F6F4F0;--ink:#0A0F1A;--grey:#848A9A;--muted:#5A6070;--blush:#EDC3D2;--cobalt:#2B4FD8;--midnight:#13234B;--powder:#BED0EE;--sand:#E6D9BE;--mist:#D3D9E6;--grid:#E1DDD5}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background-color:var(--paper);color:var(--ink);font-family:'Inter Tight',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;font-size:18px;line-height:1.6;overflow-x:hidden;background-image:linear-gradient(to right,var(--grid) 1px,transparent 1px);background-size:calc(min(100%,1200px)/4) 100%;background-position:center top;background-repeat:repeat-y}
+a{color:var(--cobalt);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:760px;margin:0 auto;padding:0 18px}
+.bar{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;background:var(--paper);border-bottom:1px solid var(--ink);font-size:13px;font-weight:600}
+.bar a{color:var(--ink)}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cobalt);margin-bottom:10px}
+.hero{padding:40px 0 28px}
+.hero h1{font-size:clamp(32px,5.5vw,56px);line-height:1.04;letter-spacing:-.025em;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--grey)}
+.hero .lead{margin-top:16px;color:var(--muted);font-size:19px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.meta span{font-size:12px;font-weight:700;padding:5px 10px;border:1px solid var(--ink)}
+.route{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin-top:26px}
+.route>div{padding:12px 14px}
+.route>div+div{border-left:1px solid var(--ink)}
+.route .n{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.route .t{font-size:17px;font-weight:800}
+.route .s{font-size:13px;color:var(--muted)}
+.r1{background:var(--powder)}.r2{background:var(--mist)}.r3{background:var(--blush)}
+.chapter{padding:44px 0 6px;border-top:1px solid var(--ink);margin-top:44px}
+.chapter .ck{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--cobalt)}
+.chapter h2{font-size:clamp(26px,4vw,36px);line-height:1.12;letter-spacing:-.02em;font-weight:800;margin:8px 0 18px}
+.chapter p{margin:0 0 16px}
+.chapter h3{font-size:19px;font-weight:800;margin:26px 0 10px}
+.note{border:1px solid var(--ink);background:#fff;padding:16px 18px;margin:22px 0}
+.note .lbl{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--cobalt);margin-bottom:6px}
+.note p{margin:0;font-size:16px}
+.c52{border:1px solid var(--ink);background:var(--sand);padding:18px 18px 8px;margin:22px 0}
+.c52 .lbl{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--midnight);margin-bottom:10px}
+.c52 table{width:100%;border-collapse:collapse;margin-bottom:12px;font-size:15px}
+.c52 td{padding:9px 8px;border-top:1px solid var(--grid);vertical-align:top}
+.c52 td:first-child{font-weight:700;width:34%}
+.ok{color:var(--midnight);font-weight:700}
+.gap{color:#8A1F3F;font-weight:700}
+.funnel{list-style:none;margin:22px 0;border-top:1px solid var(--ink)}
+.funnel li{display:grid;grid-template-columns:44px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--grid);font-size:17px}
+.funnel li b{color:var(--cobalt);font-size:14px}
+.terms{margin:30px 0 0;border-top:1px solid var(--ink);padding-top:14px}
+.terms h3{font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin:0 0 10px}
+.terms dl{display:grid;gap:10px}
+.terms dt{font-weight:800;font-size:16px}
+.terms dd{margin:0 0 0;color:var(--muted);font-size:15px}
+.next{margin:56px 0 0;border-top:1px solid var(--ink);padding:22px 0 80px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);padding:13px 20px;border-radius:999px;font-weight:700;font-size:15px}
+.btn:hover{background:var(--cobalt);color:#fff;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+@media (max-width:760px){body{font-size:17px}.route{grid-template-columns:1fr}.route>div+div{border-left:0;border-top:1px solid var(--ink)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="bar">
+    <a href="redev-guide.html#t21">← Тема 2.1</a>
+    <a href="redev-hbu.html">Слайды на весь экран →</a>
+  </div>
+
+  <header class="hero">
+    <div class="kicker">Модуль 2 · Тема 2.1 · лонгрид</div>
+    <h1>HBU, сценарии <em>и баланс площадей</em></h1>
+    <p class="lead">Какая функция даёт зданию максимум пользы, как отсеять неподходящие сценарии четырьмя тестами и почему без документов первые два теста остаются догадкой.</p>
+    <div class="meta"><span>≈ 25 мин чтения</span><span>4 главы</span><span>Пример: C52</span></div>
+
+    <div class="route" aria-label="Маршрут темы">
+      <div class="r1"><div class="n">Шаг 1 · до встречи</div><div class="t">Самостоятельно</div><div class="s">Этот лонгрид</div></div>
+      <div class="r2"><div class="n">Шаг 2 · встреча</div><div class="t">На встрече</div><div class="s">Лекция, присутствие по возможности</div></div>
+      <div class="r3"><div class="n">Шаг 3 · итог</div><div class="t">В Задание №3</div><div class="s">Матрица сценариев попадает в артефакт</div></div>
+    </div>
+  </header>
+
+  <section class="chapter" id="glava-1">
+    <div class="ck">Глава 1</div>
+    <h2>Зачем нужен HBU</h2>
+    <p>Представьте объект, который уже стоит. У него есть площадь, этажность, инженерия и текущая функция. Прежде чем тратить деньги на ремонт или перепроектирование, нужен ответ на простой вопрос: какая функция даст этому зданию и этому участку максимум пользы? Этот вопрос в оценке недвижимости называется HBU, Highest and Best Use, наилучшее и наиболее эффективное использование.</p>
+    <p>HBU сравнивает два состояния участка. Первое — «как свободный»: земля без здания, что на ней можно построить. Второе — «как улучшенный»: здание в нынешнем виде. Из сравнения получаются три решения: оставить объект как есть, модернизировать его под другую функцию или снести и строить заново. Ни одно из них нельзя принять по ощущению, без расчёта.</p>
+    <p>Польза HBU в том, что он отсеивает сценарии до вложений. Соблазнительная функция может оказаться запрещённой правилами землепользования, физически невозможной в существующей сетке колонн или неокупаемой на этом месте. Если проверку пропустить, решение будет опираться на функцию, которая никогда не заработает.</p>
+
+    <div class="c52">
+      <div class="lbl">Пример · C52, ул. Суворова, 52а</div>
+      <table>
+        <tr><td>Текущая функция</td><td>Креативный бизнес, образование, гастро-концепции, события. Так здание работает сегодня, и это первый сценарий для сравнения.</td></tr>
+        <tr><td>Что дал бы HBU</td><td>Ответ на вопрос, стоит ли сохранять эту функцию, менять её или возвращать часть здания под другие сценарии.</td></tr>
+      </table>
+    </div>
+
+    <div class="note"><div class="lbl">Главное</div><p>HBU даёт решение: оставить, модернизировать или снести. Без него проект строится на вкусе, а не на проверке.</p></div>
+  </section>
+
+  <section class="chapter" id="glava-2">
+    <div class="ck">Глава 2</div>
+    <h2>Четыре теста по порядку</h2>
+    <p>Полный HBU по канону Appraisal Institute проверяет четыре условия. Это разумно вероятное и законное использование, которое физически возможно, обеспечено спросом, финансово осуществимо и даёт наибольшую стоимость. В учебной версии курса мы работаем с рабочим вариантом: из 5–7 функциональных сценариев последовательно отсеиваем те, что не проходят проверку.</p>
+    <ol class="funnel">
+      <li><b>01</b><span><strong>Юридическая допустимость.</strong> Разрешает ли правило землепользования (ПЗЗ) и вид разрешённого использования участка эту функцию? Есть ли зоны с особыми условиями (ЗОУИТ), которые её запрещают?</span></li>
+      <li><b>02</b><span><strong>Физическая осуществимость.</strong> Выдержит ли здание эту функцию: сетка колонн, высоты, инсоляция, эвакуация, инженерия?</span></li>
+      <li><b>03</b><span><strong>Финансовая осуществимость.</strong> Окупается ли функция на этом месте при реальных ставках, загрузке и затратах на переделку?</span></li>
+      <li><b>04</b><span><strong>Максимальная продуктивность.</strong> Среди оставшихся сценариев какой даёт наибольший доход или стоимость?</span></li>
+    </ol>
+    <p>Тесты идут строго по порядку, и на каждом часть сценариев отпадает. Нет смысла считать экономику функции, которой нельзя законно построить. Поэтому первые два теста дешевле и важнее: они стоят на документах, а не на цифрах.</p>
+
+    <div class="note"><div class="lbl">Вывод</div><p>Победитель — сценарий, который прошёл все четыре теста. Всё, что отпало раньше, в расчёт экономики не попадает.</p></div>
+  </section>
+
+  <section class="chapter" id="glava-3">
+    <div class="ck">Глава 3</div>
+    <h2>Что нужно на входе</h2>
+    <p>Тесты 1 и 2 работают с документами. Без них остаётся догадка, а не проверка. Поэтому первое, что мы собираем, — не расчёт, а список документов. Минимум для HBU:</p>
+    <ul style="margin:0 0 18px 20px">
+      <li>фрагмент ПЗЗ с видом разрешённого использования и зонами с особыми условиями;</li>
+      <li>документы БТИ: площади, высоты, этажность, поэтажные планы;</li>
+      <li>нормативная карточка объекта и выписка из ЕГРН;</li>
+      <li>ставки аренды, CAPEX и OPEX, площади по функциям, для экономики (тесты 3 и 4).</li>
+    </ul>
+    <p>Здесь полезно договориться о словах, которые встретятся дальше. Каждый термин мы объясняем один раз, а в конце главы даём сводку.</p>
+
+    <div class="terms">
+      <h3>Термины главы</h3>
+      <dl>
+        <div><dt>ПЗЗ — правила землепользования и застройки</dt><dd>Что по закону можно строить на участке.</dd></div>
+        <div><dt>ВРИ — вид разрешённого использования участка</dt><dd>Разрешённая функция конкретного земельного участка.</dd></div>
+        <div><dt>ЗОУИТ — зоны с особыми условиями использования территорий</dt><dd>Ограничения: охранные зоны, санитарные разрывы и другие.</dd></div>
+        <div><dt>БТИ — бюро технической инвентаризации</dt><dd>Технический паспорт здания и поэтажные планы.</dd></div>
+        <div><dt>ЕГРН — Единый государственный реестр недвижимости</dt><dd>Официальные данные о праве, площади и кадастровой стоимости.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="chapter" id="glava-4">
+    <div class="ck">Глава 4</div>
+    <h2>С чем работаем на C52</h2>
+    <p>Самая полезная привычка в HBU — честно записать, что известно, а чего нет. Для C52 это выглядит так.</p>
+
+    <div class="c52">
+      <div class="lbl">Пример · что есть и чего нет</div>
+      <table>
+        <tr><td>Есть</td><td class="ok">Адрес, кадастровый номер, назначение, площадь 1 959,2 м² по ЕГРН, кадастровая стоимость 17,3 млн ₽. Планы БТИ 2005 года и обмеры 2016 года.</td></tr>
+        <tr><td>Нет</td><td class="gap">Актуальный техпаспорт, выписка ПЗЗ, ЗОУИТ, технические условия по мощности.</td></tr>
+        <tr><td>Что это значит</td><td>Тесты 3 и 4 можно считать по открытым данным, ориентируясь на ставки и затраты. Тест 1 остаётся неподтверждённым, пока нет выписки ПЗЗ. Без документа тест не считается пройденным.</td></tr>
+      </table>
+    </div>
+
+    <p>Так и работает курс: анализ идёт по тому, что есть. Полный инвестиционный паспорт без документов не собрать, и это не слабость примера, а реальность работы с объектом. Недостающее помечается «нет данных» и сопровождается документом, который его закроет.</p>
+    <p>Кроме того, тесты выстраиваются в воронку: 5–7 сценариев, на каждом теста часть отпадает, на выходе один победитель. Сценарии, которые не проходят тест 1, в дальнейших расчётах не нужны, даже если они выгоднее на бумаге.</p>
+
+    <div class="note"><div class="lbl">Вывод</div><p>Стену снимают документами, а не догадками. Пока документа нет, пишем «нет данных» и называем, какой документ его закроет.</p></div>
+  </section>
+
+  <section class="chapter" id="glava-5">
+    <div class="ck">Глава 5</div>
+    <h2>Как собрать сценарии с нейросетью</h2>
+    <p>Нейросеть хорошо генерирует варианты функций и быстро раскладывает их по тестам. Но ссылки на нормы и цифры она может выдумать. Поэтому работаем в три шага: генерируем сценарии, сверяем каждое юридическое утверждение с документом и только потом считаем экономику.</p>
+    <p>Выбирать сервис стоит по критерию, а не по названию. Для работы с загруженными документами удобнее сервисы, которые дают ссылку на источник: тогда проверка сводится к переходу по сноске. Для таблиц и расчётов полезен сервис, который показывает код или формулы. Для шаблона таблицы подходит отдельное окно с готовым документом, которое можно править в чате.</p>
+
+    <div class="note"><div class="lbl">Правило проверки</div><p>Любая ссылка на норму, ВРИ или ЗОУИТ, которую дала модель, считается непроверенной, пока не найдена в документе. Ответ модели без первоисточника в работу не берём.</p></div>
+  </section>
+
+  <section class="chapter" id="glava-6">
+    <div class="ck">Глава 6</div>
+    <h2>Что уходит в задание</h2>
+    <p>Результат темы — матрица сценариев: список функций, результат каждого теста и список недостающих данных. Эта матрица становится частью Задания №3. В треке А она превращается в матрицу зонирования с предпроверкой норм, в треке Б — в исходную базу для финансовой модели.</p>
+    <p>Чтобы матрица была полезной, в каждой строке должны быть три вещи: что проверили, по какому документу, и что осталось неподтверждённым. Строка без источника в матрицу не попадает.</p>
+
+    <div class="next">
+      <div>
+        <div style="font-size:13px;color:var(--muted)">Дальше по теме</div>
+        <strong>Тема 2.2 · Доходная база, CAPEX и OPEX</strong>
+      </div>
+      <a class="btn" href="redev-guide.html#t22">Перейти →</a>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
