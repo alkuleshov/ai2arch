@@ -308,6 +308,11 @@
   .sec.dark .card p, .sec.dark .card li { color:#C9D1E6 !important; }
   .sec.dark .grid2 > .card, .sec.dark .grid3 > .card { border-right-color:rgba(246,244,240,.14) !important; border-bottom-color:rgba(246,244,240,.14) !important; }
   .sec h2 { font-size:clamp(30px, 4.4vw, 52px) !important; line-height:.98 !important; }
+  /* ── кнопка «наверх»: появляется после прокрутки ── */
+  .to-top { position:fixed; right:18px; bottom:22px; z-index:90; width:48px; height:48px; border-radius:50% !important; background:#0A0F1A; color:#F6F4F0; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:22px; font-weight:900; opacity:0; transform:translateY(12px); pointer-events:none; transition:opacity .2s, transform .2s; }
+  .to-top.show { opacity:1; transform:none; pointer-events:auto; }
+  .to-top:hover { background:#2B4FD8; }
+  .to-top:focus-visible { outline:2px solid #1A82FF; outline-offset:3px; }
 </style>
 <link rel="stylesheet" href="assets/ai-levels.css">
 <script src="assets/ai-levels.js" defer></script>
@@ -1190,6 +1195,14 @@
     var mob = window.innerWidth < 760;
     initConstellation('.hero-mark', { cx: mob ? 0.4 : 0.6, cy: mob ? 0.4 : 0.42, R: mob ? 150 : 230, hueBase: 221 });
   });
+})();
+</script>
+<a class="to-top" id="toTop" href="#" aria-label="Наверх">↑</a>
+<script>
+(function(){ var b=document.getElementById('toTop'); if(!b) return;
+  function upd(){ b.classList.toggle('show', window.scrollY > 600); }
+  addEventListener('scroll', upd, {passive:true}); upd();
+  b.addEventListener('click', function(e){ e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
 })();
 </script>
 </body>
