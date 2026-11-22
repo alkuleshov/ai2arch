@@ -313,6 +313,102 @@
   .to-top.show { opacity:1; transform:none; pointer-events:auto; }
   .to-top:hover { background:#2B4FD8; }
   .to-top:focus-visible { outline:2px solid #1A82FF; outline-offset:3px; }
+  /* ── программа и спикеры в швейцарском стиле ── */
+  .bar { border-radius:0 !important; height:14px; gap:0; }
+  .c0{background:#E1DDD5 !important} .c1{background:#2B4FD8 !important} .c2{background:#13234B !important} .c3{background:#BED0EE !important} .c4{background:#EDC3D2 !important} .c5{background:#E6D9BE !important}
+  details.mod { background:#FFFFFF; border:0; border-top:1px solid #0A0F1A; border-radius:0 !important; margin-bottom:0; }
+  details.mod:last-child { border-bottom:1px solid #0A0F1A; }
+  details.mod summary { padding:20px 4px; }
+  .mod-dot { width:14px; height:14px; border-radius:0 !important; }
+  .mod-t strong { font-size:clamp(18px,2.2vw,24px) !important; font-weight:900 !important; letter-spacing:-0.03em; }
+  .mod-t small { color:#5A6070 !important; }
+  .mod-h, .mod-plus { border-radius:0 !important; background:transparent !important; color:#0A0F1A !important; font-weight:800; }
+  .mod-plus { border:1px solid #0A0F1A; width:32px; height:32px; font-size:20px; }
+  .mod-body { padding:0 4px 22px 30px !important; }
+  .tag { border-radius:0 !important; }
+  .tag.live { background:#EDC3D2 !important; color:#0A0F1A !important; }
+  .tag.sprint { background:#BED0EE !important; color:#0A0F1A !important; }
+  .tag.a { background:#E4EBFB !important; color:#0A0F1A !important; }
+  .tag.b { background:#E6D9BE !important; color:#0A0F1A !important; }
+  .person { gap:24px; }
+  .avatar { border-radius:0 !important; border:1px solid #0A0F1A !important; width:112px !important; height:112px !important; }
+  .person h3 { font-weight:900 !important; letter-spacing:-0.03em; font-size:clamp(20px,2.4vw,26px) !important; line-height:1.05; }
+  .person .role { color:#2B4FD8; font-weight:700; font-size:14px; margin:6px 0 12px; }
+  /* ── цена и вопросы в швейцарском стиле ── */
+  .price-grid { border-top:1px solid #0A0F1A; }
+  .price.main { background:#13234B !important; color:#F6F4F0 !important; border:0 !important; border-radius:0 !important; padding:28px !important; }
+  .price.main .price-val { font-size:clamp(64px,10vw,120px) !important; font-weight:900 !important; letter-spacing:-0.06em !important; line-height:.9 !important; color:#F6F4F0; }
+  .price.main .price-val small { font-size:.45em; color:#EDC3D2; letter-spacing:0; }
+  .price.main .price-lab, .price.main li { color:#C9D1E6 !important; }
+  .price.main .list li::before { background:#EDC3D2 !important; }
+  .price:not(.main) { background:#FFFFFF; border:1px solid #E1DDD5 !important; border-radius:0 !important; }
+  details.q { border-top:1px solid #0A0F1A; background:transparent; border-left:0; border-right:0; border-bottom:0; border-radius:0 !important; }
+  details.q:last-child { border-bottom:1px solid #0A0F1A; }
+  details.q summary { padding:22px 4px; font-size:clamp(17px,2vw,22px); font-weight:800; letter-spacing:-0.02em; }
+  details.q summary .mod-plus { border:1px solid #0A0F1A; width:32px; height:32px; background:transparent !important; color:#0A0F1A !important; border-radius:0 !important; }
+  details.q .ans { padding:0 4px 22px; color:#5A6070; }
+  .deduct { background:#FFFFFF !important; border:1px solid #E1DDD5 !important; border-radius:0 !important; box-shadow:none !important; }
+  .deduct > b[aria-hidden="true"] { display:none !important; }
+  .deduct > b { color:#2B4FD8 !important; font-size:clamp(36px,4vw,48px) !important; font-weight:900 !important; letter-spacing:-0.04em; line-height:1; }
+  .deduct p, .deduct strong { color:#0A0F1A !important; }
+  .price-alt { color:#C9D1E6 !important; }
+  .price-alt b { color:#EDC3D2 !important; }
+  .price-side .note { color:#5A6070; }
+  /* ── отзывы и работы в швейцарской сетке ── */
+  .reviews-nav a { border-radius:0 !important; border:1px solid #0A0F1A !important; background:transparent !important; color:#0A0F1A !important; font-weight:800; }
+  .reviews-nav a:hover { background:#0A0F1A !important; color:#F6F4F0 !important; }
+  .review-sub h3 { font-size:clamp(26px,3.6vw,40px) !important; font-weight:900 !important; letter-spacing:-0.04em; line-height:1; border-top:1px solid #0A0F1A; padding-top:14px; }
+  .work-grid { gap:0 !important; border-top:1px solid #0A0F1A; }
+  .work-card { border:0 !important; border-right:1px solid #E1DDD5 !important; border-bottom:1px solid #E1DDD5 !important; border-radius:0 !important; background:#FFFFFF !important; padding:22px !important; }
+  .work-card h4 { font-size:clamp(18px,2vw,22px) !important; font-weight:900 !important; letter-spacing:-0.03em; }
+  .work-media img { border-radius:0 !important; }
+  .work-media { gap:6px; }
+  .work-quote { border-left:3px solid #2B4FD8 !important; border-radius:0 !important; background:transparent !important; font-size:16px; }
+  .quote-card { background:#F6F4F0 !important; }
+  /* ── цена и вопросы в швейцарском стиле ── */
+  .price-grid { border-top:1px solid #0A0F1A; }
+  .price.main { background:#13234B !important; color:#F6F4F0 !important; border:0 !important; border-radius:0 !important; padding:28px !important; }
+  .price.main .price-val { font-size:clamp(64px,10vw,120px) !important; font-weight:900 !important; letter-spacing:-0.06em !important; line-height:.9 !important; color:#F6F4F0; }
+  .price.main .price-val small { font-size:.45em; color:#EDC3D2; letter-spacing:0; }
+  .price.main .price-lab, .price.main li { color:#C9D1E6 !important; }
+  .price.main .list li::before { background:#EDC3D2 !important; }
+  .price:not(.main) { background:#FFFFFF; border:1px solid #E1DDD5 !important; border-radius:0 !important; }
+  details.q { border-top:1px solid #0A0F1A; background:transparent; border-left:0; border-right:0; border-bottom:0; border-radius:0 !important; }
+  details.q:last-child { border-bottom:1px solid #0A0F1A; }
+  details.q summary { padding:22px 4px; font-size:clamp(17px,2vw,22px); font-weight:800; letter-spacing:-0.02em; }
+  details.q summary .mod-plus { border:1px solid #0A0F1A; width:32px; height:32px; background:transparent !important; color:#0A0F1A !important; border-radius:0 !important; }
+  details.q .ans { padding:0 4px 22px; color:#5A6070; }
+  .deduct { background:#FFFFFF !important; border:1px solid #E1DDD5 !important; border-radius:0 !important; box-shadow:none !important; }
+  .deduct > b[aria-hidden="true"] { display:none !important; }
+  .deduct > b { color:#2B4FD8 !important; font-size:clamp(36px,4vw,48px) !important; font-weight:900 !important; letter-spacing:-0.04em; line-height:1; }
+  .deduct p, .deduct strong { color:#0A0F1A !important; }
+  .price-alt { color:#C9D1E6 !important; }
+  .price-alt b { color:#EDC3D2 !important; }
+  .price-side .note { color:#5A6070; }
+  /* ── отзывы и работы в швейцарской сетке ── */
+  .reviews-nav a { border-radius:0 !important; border:1px solid #0A0F1A !important; background:transparent !important; color:#0A0F1A !important; font-weight:800; }
+  .reviews-nav a:hover { background:#0A0F1A !important; color:#F6F4F0 !important; }
+  .review-sub h3 { font-size:clamp(26px,3.6vw,40px) !important; font-weight:900 !important; letter-spacing:-0.04em; line-height:1; border-top:1px solid #0A0F1A; padding-top:14px; }
+  .work-grid { gap:0 !important; border-top:1px solid #0A0F1A; }
+  .work-card { border:0 !important; border-right:1px solid #E1DDD5 !important; border-bottom:1px solid #E1DDD5 !important; border-radius:0 !important; background:#FFFFFF !important; padding:22px !important; }
+  .work-card h4 { font-size:clamp(18px,2vw,22px) !important; font-weight:900 !important; letter-spacing:-0.03em; }
+  .work-media img { border-radius:0 !important; }
+  .work-media { gap:6px; }
+  .work-quote { border-left:3px solid #2B4FD8 !important; border-radius:0 !important; background:transparent !important; font-size:16px; }
+  .quote-card { background:#F6F4F0 !important; }
+  /* ── отзывы и работы в швейцарской сетке ── */
+  .reviews-nav a { border-radius:0 !important; border:1px solid #0A0F1A !important; background:transparent !important; color:#0A0F1A !important; font-weight:800; }
+  .reviews-nav a:hover { background:#0A0F1A !important; color:#F6F4F0 !important; }
+  .review-sub h3 { font-size:clamp(26px,3.6vw,40px) !important; font-weight:900 !important; letter-spacing:-0.04em; line-height:1; border-top:1px solid #0A0F1A; padding-top:14px; }
+  .work-grid { gap:0 !important; border-top:1px solid #0A0F1A; }
+  .work-card { border:0 !important; border-right:1px solid #E1DDD5 !important; border-bottom:1px solid #E1DDD5 !important; border-radius:0 !important; background:#FFFFFF !important; padding:22px !important; }
+  .work-card h4 { font-size:clamp(18px,2vw,22px) !important; font-weight:900 !important; letter-spacing:-0.03em; }
+  .work-media img { border-radius:0 !important; }
+  .work-media { gap:6px; }
+  .work-quote { border-left:3px solid #2B4FD8 !important; border-radius:0 !important; background:transparent !important; font-size:16px; }
+  .quote-card { background:#F6F4F0 !important; }
+  h2 .g { color:#848A9A; font-weight:900; }
+  .sec.dark h2 .g { color:#EDC3D2 !important; }
 </style>
 <link rel="stylesheet" href="assets/ai-levels.css">
 <script src="assets/ai-levels.js" defer></script>
@@ -392,7 +488,7 @@
 <section class="sec" id="audience">
   <div class="wrap">
     <div class="kicker">Для кого этот курс</div>
-    <h2>Для проектировщиков и для тех, кто считает деньги</h2>
+    <h2>Для проектировщиков и для тех, <span class="g">кто считает деньги</span></h2>
     <p class="lead">Программа рассчитана на тех, кто работает с готовыми зданиями и территориями. Все проходят общие модули, а практика и итоговый документ зависят от выбранного трека. Окончательный выбор делаете на вводном модуле, в заявке достаточно указать предварительный.</p>
 
     <div class="card" style="margin-bottom:16px">
@@ -433,7 +529,7 @@
 <section class="sec alt" id="about">
   <div class="wrap">
     <div class="kicker">О программе · какие проблемы решает</div>
-    <h2>Три места, где редевелопмент чаще всего буксует</h2>
+    <h2>Три места, <span class="g">где редевелопмент чаще всего буксует</span></h2>
     <div class="grid3">
       <div class="card"><div class="ico">01</div><h3>Учат строить на пустом месте</h3><p>Архитектурное образование ориентировано на новое строительство на свободных участках и почти не учит работать с устаревшими зданиями, бывшими фабриками и общественными пространствами.</p></div>
       <div class="card"><div class="ico">02</div><h3>Контекст собирают вручную</h3><p>Недели уходят на сбор данных, а назначение объекта потом трудно обосновать инвестору. На программе контекст и обоснование собираются с помощью данных и языковых моделей.</p></div>
@@ -465,7 +561,7 @@
 <section class="sec alt" id="team">
   <div class="wrap">
     <div class="kicker">Преподаватели</div>
-    <h2>Урбанист-девелопер и архитекторы-практики, дипломированные преподаватели</h2>
+    <h2>Урбанист-девелопер и архитекторы-практики, <span class="g">дипломированные преподаватели</span></h2>
     <div class="grid2">
       <div class="card person">
         <img class="avatar" src="images/kuleshov.jpg" alt="Кулешов Александр Алексеевич">
@@ -503,7 +599,7 @@
 <section class="sec" id="program">
   <div class="wrap">
     <div class="kicker">Программа · 72 академических часа</div>
-    <h2>Вводный модуль, четыре рабочих блока и защита</h2>
+    <h2>Вводный модуль, <span class="g">четыре рабочих блока и защита</span></h2>
     <p class="lead">Метки показывают, для кого задание: <span class="tag all">ВСЕМ</span> общее, <span class="tag a">ТРЕК А</span> проектировщикам, <span class="tag b">ТРЕК Б</span> девелоперам, <span class="tag live">ЖИВОЙ ВОРКШОП</span> онлайн-встреча в группе.</p>
 
     <div class="bar" aria-hidden="true">
@@ -604,7 +700,7 @@
 <section class="sec" id="format">
   <div class="wrap">
     <div class="kicker">Как проходит обучение</div>
-    <h2>Встречи с группой, лекции в записи и разбор вашего проекта</h2>
+    <h2>Встречи с группой, <span class="g">лекции в записи и разбор вашего проекта</span></h2>
     <p class="lead">Работаете над одним проектом от начала до конца. Встречи с группой — для разбора вопросов и работ, лекции можно смотреть в записи.</p>
     <div class="format-plain">
       <p><b>Встречи.</b> Присутствие обязательно. Синхронный видеозвонок в Телемост: разбираем вопросы и работы группы, показываем рабочие цепочки.</p>
@@ -620,7 +716,7 @@
 <section class="sec alt" id="cases">
   <div class="wrap">
     <div class="kicker">Кейсы</div>
-    <h2>Опыт, на котором построена программа</h2>
+    <h2>Опыт, <span class="g">на котором построена программа</span></h2>
     <div class="grid2">
       <div class="card"><h3>Базовый объект C52</h3><p>Если своего объекта нет, работайте с C52: склад на ул. Суворова, 52а (кластер C52). На вводном модуле жизненный цикл объекта разбираем на примере C52 — первого креативного кластера на Юге России, который создал руководитель программы.</p></div>
       <div class="card"><h3>Первая ступень</h3><p>Программу «Современные инструменты проектного анализа» прошли 11 слушателей, все дошли до защиты. <a href="archi.html" style="color:var(--azure-dark);font-weight:700">Посмотреть первую ступень →</a></p></div>
