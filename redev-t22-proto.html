@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Тема 2.2 · Доходная база, CAPEX и OPEX — прототип</title>
+<style>
+:root{
+  --paper:#F6F4F0; --ink:#0A0F1A; --grey:#848A9A; --muted:#5A6070;
+  --blush:#EDC3D2; --cobalt:#2B4FD8; --midnight:#13234B; --powder:#BED0EE;
+  --sand:#E6D9BE; --mist:#D3D9E6; --grid:#E1DDD5;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background-color:var(--paper);color:var(--ink);
+  font-family:'Inter Tight',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  font-size:17px;line-height:1.55;overflow-x:hidden;
+  background-image:
+    linear-gradient(to right,var(--grid) 1px,transparent 1px),
+    linear-gradient(to bottom,var(--grid) 1px,transparent 1px);
+  background-size:calc(min(100%,1200px)/4) 100%,100% 120px;
+  background-position:center top,center top;
+  background-repeat:repeat-y,repeat-y;
+}
+a{color:var(--cobalt);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1200px;margin:0 auto;padding:0 16px}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--ink);font-size:13px;font-weight:600}
+.bar a{color:var(--ink)}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cobalt);margin-bottom:10px}
+.hero{padding:44px 0 36px}
+.hero h1{font-size:clamp(34px,6vw,64px);line-height:1.02;letter-spacing:-.025em;font-weight:800;max-width:900px}
+.hero h1 em{font-style:normal;color:var(--grey)}
+.hero p{max-width:640px;margin-top:18px;color:var(--muted);font-size:18px}
+.route{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin-top:34px}
+.route > div{padding:18px 16px 20px;border-left:1px solid var(--ink);background:var(--paper)}
+.route > div:first-child{border-left:0}
+.route .n{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.route .t{font-size:20px;font-weight:700;margin:6px 0 4px;letter-spacing:-.01em}
+.route .s{font-size:14px;color:var(--muted)}
+.route .self{background:var(--powder)}
+.route .meet{background:var(--mist)}
+.route .task{background:var(--blush)}
+.step{padding:48px 0 8px}
+.step-head{display:flex;gap:14px;align-items:baseline;border-top:1px solid var(--ink);padding-top:14px;margin-bottom:18px}
+.step-head .num{font-size:13px;font-weight:800;color:var(--cobalt);min-width:28px}
+.step-head h2{font-size:clamp(24px,3.6vw,34px);line-height:1.1;letter-spacing:-.02em;font-weight:800}
+.step-head .tag{margin-left:auto;font-size:12px;font-weight:700;padding:4px 10px;border:1px solid var(--ink);white-space:nowrap}
+.cells{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--ink);border-left:1px solid var(--ink)}
+.cell{border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:18px 18px 20px;background:var(--paper)}
+.cell b{display:block;font-size:15px;margin-bottom:6px}
+.cell p{font-size:15px;color:var(--muted)}
+.cell.blush{background:var(--blush)}
+.cell.powder{background:var(--powder)}
+.cell.sand{background:var(--sand)}
+.cta{display:inline-flex;align-items:center;gap:10px;margin-top:20px;background:var(--ink);color:var(--paper);padding:14px 22px;border-radius:999px;font-weight:700;font-size:15px}
+.cta:hover{background:var(--cobalt);text-decoration:none}
+.cta.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.cta.ghost:hover{background:var(--ink);color:var(--paper)}
+.chapters{list-style:none;border-top:1px solid var(--ink);margin-top:20px}
+.chapters li{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--grid)}
+.chapters li b{font-size:13px;color:var(--cobalt)}
+.chapters li span{font-size:15px}
+.chapters li a{font-size:13px;color:var(--muted)}
+.video{margin-top:22px;border:1px solid var(--ink);background:var(--midnight);color:var(--paper);padding:26px 22px;display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
+.video .lbl{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--powder)}
+.video .ttl{font-size:20px;font-weight:700;margin-top:4px}
+.video small{display:block;color:var(--powder);font-size:13px;margin-top:6px}
+.bring{list-style:none;margin-top:14px}
+.bring li{padding:10px 0 10px 26px;border-top:1px solid var(--grid);position:relative;font-size:16px}
+.bring li:before{content:"";position:absolute;left:0;top:18px;width:10px;height:10px;background:var(--cobalt)}
+.check{list-style:none;margin-top:14px}
+.check li{padding:12px 0;border-top:1px solid var(--grid);display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:16px}
+.check li i{width:18px;height:18px;border:1.5px solid var(--ink);display:inline-block;margin-top:3px}
+.example{margin-top:22px;border:1px solid var(--ink);padding:18px 18px 20px;background:var(--mist)}
+.example .lbl{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--midnight)}
+.example p{margin-top:6px;font-size:15px}
+.slide{margin-top:22px;border:1px solid var(--ink);background:var(--paper);padding:22px 20px}
+.slide .lbl{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--cobalt)}
+.slide h3{font-size:22px;margin-top:6px;letter-spacing:-.01em}
+.slide p{color:var(--muted);font-size:15px;margin-top:6px}
+.next{margin-top:56px;padding:22px 0 60px;border-top:1px solid var(--ink);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+.next small{display:block;color:var(--muted);font-size:13px}
+.note{margin-top:18px;font-size:13px;color:var(--grey)}
+@media (max-width:760px){
+  body{font-size:16px}
+  .route{grid-template-columns:1fr}
+  .route > div{border-left:0;border-top:1px solid var(--ink)}
+  .route > div:first-child{border-top:0}
+  .cells{grid-template-columns:1fr}
+  .step-head .tag{margin-left:0}
+  .chapters li{grid-template-columns:36px 1fr}
+  .chapters li a{grid-column:2}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="bar">
+    <a href="redev-guide.html#t22">← Пособие · ИИ в редевелопменте</a>
+    <span style="color:var(--muted);font-weight:500">Модуль 2 · Тема 2.2 · 6 ч</span>
+  </div>
+
+  <header class="hero">
+    <div class="kicker">Тема 2.2 · Расчёты по треку</div>
+    <h1>Доходная база, CAPEX и&nbsp;OPEX <em>— скелет модели</em></h1>
+    <p>Как собрать скелет финансовой модели с нейросетью и проверить результат. Итог темы — один слайд в вашу итоговую презентацию.</p>
+
+    <div class="route" aria-label="Маршрут темы">
+      <div class="self">
+        <div class="n">Шаг 1 · до встречи</div>
+        <div class="t">Самостоятельно</div>
+        <div class="s">Лонгрид и видео, около 70 минут</div>
+      </div>
+      <div class="meet">
+        <div class="n">Шаг 2 · встреча</div>
+        <div class="t">На встрече</div>
+        <div class="s">Лекция, присутствие по возможности</div>
+      </div>
+      <div class="task">
+        <div class="n">Шаг 3 · до встречи 3</div>
+        <div class="t">Задание №3</div>
+        <div class="s">Таблица скелета и список пробелов</div>
+      </div>
+    </div>
+  </header>
+
+  <section class="step" id="self">
+    <div class="step-head">
+      <span class="num">01</span>
+      <h2>Самостоятельно</h2>
+      <span class="tag">Без группы</span>
+    </div>
+
+    <div class="cells">
+      <div class="cell powder">
+        <b>Читаете лонгрид</b>
+        <p>68 минут чтения, 20 слайдов внутри текста. Презентация отдельно не открывается: слайды стоят в тексте по ходу объяснения.</p>
+        <a class="cta" href="redev-read-income.html">Читать урок →</a>
+      </div>
+      <div class="cell">
+        <b>Смотрите видеолекцию</b>
+        <p>Главы в оглавлении совпадают с частями лонгрида. Нажали главу — видео открылось с нужной минуты.</p>
+        <div class="video">
+          <div>
+            <div class="lbl">Видеолекция</div>
+            <div class="ttl">Доходная база, CAPEX/OPEX</div>
+            <small>Ссылка на видео появится здесь после записи</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ol class="chapters" style="list-style:none">
+      <li><b>01</b><span>Скелет модели: зачем он и как выглядит</span><a href="redev-read-income.html#slide-2">Открыть →</a></li>
+      <li><b>02</b><span>CAPEX, OPEX и доходы: что входит в каждый блок</span><a href="redev-read-income.html#slide-3">Открыть →</a></li>
+      <li><b>03</b><span>C52: что известно для модели, а чего нет</span><a href="redev-read-income.html#slide-5">Открыть →</a></li>
+      <li><b>04</b><span>Промпты: структура CAPEX, OPEX и доходов</span><a href="redev-read-income.html#slide-9">Открыть →</a></li>
+      <li><b>05</b><span>Реестр пробелов: документ → зависимость</span><a href="redev-read-income.html#slide-13">Открыть →</a></li>
+      <li><b>06</b><span>Как проверить результат по первоисточнику</span><a href="redev-read-income.html#slide-15">Открыть →</a></li>
+    </ol>
+  </section>
+
+  <section class="step" id="meet">
+    <div class="step-head">
+      <span class="num">02</span>
+      <h2>На встрече</h2>
+      <span class="tag">Лекция</span>
+    </div>
+
+    <p style="font-size:17px;max-width:680px">Лектор рассказывает логику и разбирает C52. Дальше работаете вы: показываете свой скелет, проверяете расчёты друг у друга и пробуете пересобрать сценарий при других ставках.</p>
+
+    <ul class="bring">
+      <li>Свой скелет модели, даже пустой: три блока, без цифр</li>
+      <li>Список данных, которых у вас нет, и где их взять</li>
+      <li>Один вопрос по расчёту, который не понимаете</li>
+    </ul>
+  </section>
+
+  <section class="step" id="task">
+    <div class="step-head">
+      <span class="num">03</span>
+      <h2>Задание №3</h2>
+      <span class="tag">До встречи 3</span>
+    </div>
+
+    <div class="cells">
+      <div class="cell blush">
+        <b>Трек Б · Девелопер / инвестор</b>
+        <p>Базовая финансовая модель: доходная база (ставки, загрузка, площадь), CAPEX и OPEX, окупаемость. Формат — таблица.</p>
+      </div>
+      <div class="cell">
+        <b>Трек А · Проектировщик</b>
+        <p>Матрица зонирования с предпроверкой норм. Для расчётов — обзорно: доходы и CAPEX на одном листе, без полной модели.</p>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="lbl">Пример на C52</div>
+      <p>Известно: площадь 1 959,2 м² по ЕГРН, кадастровая стоимость 17,3 млн ₽. Нет данных: ПЗЗ, БТИ, технические условия. В скелете эти строки так и помечаются — «нет данных» с документом, который их закроет.</p>
+    </div>
+
+    <ul class="check">
+      <li><i></i><span>Таблица: доходы, CAPEX, OPEX в трёх блоках</span></li>
+      <li><i></i><span>Список пробелов: что не хватает и каким документом закроется</span></li>
+      <li><i></i><span>Одна проверка по первоисточнику: ставка или норма с ссылкой на документ</span></li>
+    </ul>
+
+    <a class="cta ghost" href="redev-guide.html#t25">Открыть задание в пособии →</a>
+  </section>
+
+  <section class="step" id="deck">
+    <div class="step-head">
+      <span class="num">04</span>
+      <h2>Что уходит в итоговую презентацию</h2>
+      <span class="tag">Demo Day</span>
+    </div>
+
+    <div class="slide">
+      <div class="lbl">Один слайд</div>
+      <h3>Экономика объекта: доходы, CAPEX и OPEX</h3>
+      <p>Ваша таблица из задания №3 одним экраном и список пробелов. Слайд не нужно собирать с нуля: скелет уже готов.</p>
+    </div>
+
+    <p class="note">Слайды в итоговую презентацию собираются по темам. Каждая тема даёт один слайд, поэтому финал — это сборка, а не новая работа.</p>
+  </section>
+
+  <nav class="next">
+    <div>
+      <small>Следующая тема</small>
+      <strong>2.3 · Окупаемость и сценарии</strong>
+    </div>
+    <a class="cta" href="redev-guide.html#t23">Перейти →</a>
+  </nav>
+
+</div>
+</body>
+</html>
