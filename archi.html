@@ -535,6 +535,15 @@
   .burger span { background:#0A0F1A !important; }
   #nav.open, nav.open { background:#0A0F1A !important; }
   #nav.open a, nav.open a { color:#F6F4F0 !important; }
+  /* подвал как на главной: бумага, сетка из четырёх колонок, ink-линия сверху */
+  footer { background:#F6F4F0 !important; color:#0A0F1A !important; border-top:1.5px solid #0A0F1A !important; padding:18px 24px 26px !important; font-family:'Inter Tight','Helvetica Neue',Arial,sans-serif; }
+  footer .foot-grid { display:grid; grid-template-columns:1fr; gap:14px; }
+  footer .foot-a p, footer .foot-b p { margin:0; font-size:13px; font-weight:700; letter-spacing:-0.01em; }
+  footer .foot-b p { color:#848A9A; }
+  footer .foot-c p { margin:0 0 8px; font-size:13px; line-height:1.35; color:#5A6070; }
+  footer .foot-c b { color:#0A0F1A; font-weight:700; }
+  footer .foot-c a { color:#2B4FD8; font-weight:700; text-decoration:none; border-bottom:1.5px solid #2B4FD8; }
+  @media (min-width:900px) { footer .foot-grid { grid-template-columns:repeat(4,1fr); } footer .foot-c { grid-column:2 / span 3; } }
 </style>
 <link rel="stylesheet" href="assets/ai-levels.css">
 <script src="assets/ai-levels.js" defer></script>
@@ -1095,12 +1104,14 @@ els.js" defer></script>
 </main>
 
 <footer>
-  <div class="wrap">
-    <p><b>AI2ARCH · 2026</b></p>
-    <a class="brand" href="index.html"><img class="brand-sign" src="images/ai2arch-sign.png" width="38" height="38" alt=""><span class="brand-text"><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
-    <p>Программу реализует Южный федеральный университет, Академия архитектуры и искусств. Ростов-на-Дону.</p>
-    <p>Программа утверждена приказом ЮФУ от 21.05.2026 № 1298. Форма обучения очная, с применением дистанционных технологий.</p>
-    <p><a href="redev.html">Вторая ступень: ИИ в редевелопменте</a></p>
+  <div class="foot-grid">
+    <div class="foot-a"><p>AI2ARCH · 2026</p></div>
+    <div class="foot-b"><p>Лаборатория проектного интеллекта</p></div>
+    <div class="foot-c">
+      <p><b>Программу реализует Южный федеральный университет, Академия архитектуры и искусств. Ростов-на-Дону.</b></p>
+      <p>Программа утверждена приказом ЮФУ от 21.05.2026 № 1298. Форма обучения очная, с применением дистанционных технологий.</p>
+      <p><a href="redev.html">Вторая ступень: ИИ в редевелопменте →</a></p>
+    </div>
   </div>
 </footer>
 
