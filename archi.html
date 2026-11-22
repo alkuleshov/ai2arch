@@ -337,6 +337,46 @@
   .hero h1 span, .hero h1 em, .sec.dark h2 span, .sec.dark h2 em { color:#EDC3D2 !important; }
   .head { background:var(--bg) !important; color:var(--ink) !important; border-bottom:1px solid #0A0F1A !important; }
   .head *:not(.num):not(img) { color:inherit; }
+  /* ── швейцарская сетка (глубокий слой): видимые линии, ячейки, крупная типографика ── */
+  :root { --cols:4; }
+  @media (min-width:900px){ :root { --cols:8; } }
+  .sec, .hero { background-image:linear-gradient(to right, var(--grid, #E1DDD5) 1px, transparent 1px); background-size:calc(100%/var(--cols)) 100%; background-repeat:repeat-y; }
+  .sec.alt { background-color:#EFECE6; }
+  .sec { border-top:1px solid #0A0F1A; padding:72px 0; }
+  .sec.dark, .hero { background-color:#13234B !important; background-image:linear-gradient(to right, rgba(246,244,240,.12) 1px, transparent 1px) !important; }
+  .sec.dark, .hero, .sec.dark h2, .hero h1 { color:#F6F4F0; }
+  h1, h2 { font-size:clamp(38px, 6.2vw, 72px) !important; line-height:.92 !important; letter-spacing:-0.045em !important; font-weight:900 !important; color:#0A0F1A; }
+  h1 em, h2 em, .res-big em { font-style:normal; color:#EDC3D2 !important; }
+  .sec.dark h2, .sec.dark .res-big { color:#F6F4F0; }
+  .kicker, .eyebrow { font-size:11px !important; font-weight:800 !important; letter-spacing:.12em !important; text-transform:uppercase; color:#5A6070 !important; }
+  .lead, .hero-sub { font-size:clamp(17px, 2vw, 21px); line-height:1.4; color:#5A6070; letter-spacing:-0.01em; }
+  .grid2, .grid3 { gap:0 !important; border-top:1px solid #0A0F1A; }
+  .grid2 > .card, .grid3 > .card { border-right:1px solid #E1DDD5; border-bottom:1px solid #E1DDD5; }
+  .card { background:#FFFFFF !important; padding:24px !important; }
+  .card h3 { font-weight:800 !important; letter-spacing:-0.02em; }
+  .card p { color:#5A6070; }
+  .ico { font-weight:900 !important; font-size:28px !important; letter-spacing:-0.04em; color:#2B4FD8 !important; }
+  .facts { border-top:1px solid #0A0F1A; display:grid; grid-template-columns:repeat(2,1fr); }
+  .fact { border-bottom:1px solid #2A3550; border-right:1px solid #2A3550; padding:20px 16px; }
+  .fact b { font-size:clamp(44px,6vw,64px); font-weight:900; letter-spacing:-0.05em; line-height:.95; display:block; }
+  .fact b small { font-size:14px; font-weight:700; letter-spacing:0; margin-left:6px; }
+  .fact span { font-size:13px; line-height:1.45; color:#C9D1E6; display:block; margin-top:8px; }
+  .btn { border-radius:999px !important; font-weight:800 !important; letter-spacing:-0.01em; }
+  .btn-primary { background:#0A0F1A !important; color:#F6F4F0 !important; }
+  .btn-primary:hover { background:#2B4FD8 !important; }
+  .btn-ghost { background:transparent; color:#0A0F1A; border:1px solid #0A0F1A !important; }
+  .hero .btn-ghost { color:#F6F4F0; border-color:#F6F4F0 !important; }
+  .res-big { font-size:clamp(28px, 4vw, 48px); font-weight:900; letter-spacing:-0.04em; line-height:1.02; }
+  .head { border-bottom:1px solid #0A0F1A !important; }
+  footer { background:#13234B !important; color:#C9D1E6 !important; }
+  .card.track, .card.track.b { border-top:1px solid #E1DDD5 !important; border-image:none !important; }
+  .card.track::before, .card.track::after, .card.track.b::before { display:none !important; background:none !important; }
+  .hero .hero-sub { color:#C9D1E6 !important; }
+  .hero .eyebrow, .hero .kicker { color:#BED0EE !important; }
+  .hero .hero-name { color:#A9B6D6 !important; }
+  .card, .card.track, .note, .notice, .ai-level { border-radius:0 !important; }
+  .hero p, .hero .lead, .hero .hero-sub, .hero .hero-name { color:#C9D1E6 !important; opacity:1 !important; }
+  .hero .eyebrow, .hero .kicker { color:#BED0EE !important; }
 </style>
 <link rel="stylesheet" href="assets/ai-levels.css">
 <link rel="stylesheet" href="assets/lightbox.css">
