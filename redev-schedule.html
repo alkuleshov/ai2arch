@@ -223,12 +223,24 @@ body{background-image:linear-gradient(to right, rgba(10,15,26,.07) 0 1px, transp
   .section-end-btn.ghost:hover { background:#0A0F1A !important; color:#F6F4F0 !important; }
   .back-bar { background:rgba(246,244,240,.94) !important; border-bottom:1px solid #0A0F1A !important; }
   .slot-row, .module-row { border-color:#E1DDD5 !important; }
+  /* единая верхняя панель: бумага, ink-линии, квадратные кнопки-контуры одного размера */
+  .back-bar { background:#F6F4F0 !important; border-bottom:1.5px solid #0A0F1A !important; align-items:stretch !important; }
+  .back-btn, .back-bar .workbook-btn, .back-bar .head-schedule, .back-bar .section-end-btn { background:transparent !important; color:#0A0F1A !important; border:1.5px solid #0A0F1A !important; border-radius:0 !important; font-family:'Inter Tight','Helvetica Neue',Arial,sans-serif !important; font-size:15px !important; font-weight:800 !important; letter-spacing:-0.02em !important; padding:16px 22px !important; margin:0 !important; }
+  .back-btn { gap:10px !important; line-height:normal !important; }
+  .back-btn:hover, .back-bar .workbook-btn:hover, .back-bar .head-schedule:hover { background:#0A0F1A !important; color:#F6F4F0 !important; }
+  .back-bar .head-actions { display:flex; align-items:center; gap:0 !important; }
+  .back-bar .workbook-btn + .workbook-btn, .back-bar .head-actions a + a { border-left:none !important; }
+  .bar-brand { border-left:1.5px solid #0A0F1A !important; }
+  .guide-breadcrumb { padding:0 20px !important; }
+  .bc-root { color:#848A9A !important; font-size:14px !important; font-weight:600 !important; }
+  .bc-sep { color:#848A9A !important; font-size:14px !important; }
+  .bc-cur { color:#2B4FD8 !important; font-size:15px !important; font-weight:800 !important; letter-spacing:-0.02em !important; }
 </style>
 </head>
 <body>
 
 <div class="back-bar">
-  <a class="back-btn" href="redev-guide.html"><span>←</span> Учебное пособие</a>
+  <a class="back-btn" href="index.html"><span class="arrow">←</span> <span>На главную</span></a>
   <div class="guide-breadcrumb">
     <span>ИИ в редевелопменте</span> / <span class="bc-cur">Расписание потока</span>
   </div>
