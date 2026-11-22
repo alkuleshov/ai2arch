@@ -209,6 +209,20 @@
 /* видимая сетка колонок 1200px-контейнера (4 колонки; с 900px — 8) */
 body{background-image:linear-gradient(to right, rgba(10,15,26,.07) 0 1px, transparent 1px);background-size:calc(min(100%, 1200px) / 4) 100%;background-position:center top;background-repeat:repeat-x;background-attachment:scroll}
 @media (min-width:900px){body{background-size:calc(min(100%, 1200px) / 8) 100%}}
+
+  /* ── стиль главной: сетка, квадратные ячейки, палитра ── */
+  :root { --accent:#2B4FD8 !important; --accent-l:#E4EBFB !important; --accent2:#5A6070 !important; --accent2-l:#EFECE6 !important; --green:#2B4FD8 !important; --green-l:#E4EBFB !important; --purple:#13234B !important; --purple-l:#D3D9E6 !important; --border:#E1DDD5 !important; --surface:#FFFFFF !important; }
+  *, *::before, *::after { border-radius:0 !important; box-shadow:none !important; }
+  body { background-color:#F6F4F0 !important; background-image:linear-gradient(to right,#E1DDD5 1px,transparent 1px),linear-gradient(to bottom,#E1DDD5 1px,transparent 1px) !important; background-size:calc(min(100%,1200px)/4) 100%,100% 120px !important; background-position:center top,center top !important; background-repeat:repeat-y,repeat-y !important; }
+  .meet-badge.meeting { background:#2B4FD8 !important; color:#FFFFFF !important; }
+  .meet-badge.lecture { background:#D3D9E6 !important; color:#0A0F1A !important; border:1px solid #0A0F1A !important; }
+  .meet-badge.self { background:#BED0EE !important; color:#0A0F1A !important; border:1px solid #0A0F1A !important; }
+  .section-end-btn.primary, .workbook-btn { background:#0A0F1A !important; color:#F6F4F0 !important; border:1px solid #0A0F1A !important; border-radius:999px !important; font-weight:700 !important; }
+  .section-end-btn.primary:hover, .workbook-btn:hover { background:#2B4FD8 !important; border-color:#2B4FD8 !important; color:#FFFFFF !important; }
+  .section-end-btn.ghost { background:transparent !important; color:#0A0F1A !important; border:1px solid #0A0F1A !important; border-radius:999px !important; }
+  .section-end-btn.ghost:hover { background:#0A0F1A !important; color:#F6F4F0 !important; }
+  .back-bar { background:rgba(246,244,240,.94) !important; border-bottom:1px solid #0A0F1A !important; }
+  .slot-row, .module-row { border-color:#E1DDD5 !important; }
 </style>
 </head>
 <body>
