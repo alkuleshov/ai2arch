@@ -963,16 +963,29 @@
   .tcloud a.hl { color:#2B4FD8; }
   @media (max-width:760px) { .tcloud a { font-size:14px; } .tcloud { gap:6px 14px; } }
 
-  /* module colour identity — from the main page palette */
-  #mtab-m0{--mc:#E6D9BE} #mtab-m1{--mc:#EDC3D2} #mtab-m2{--mc:#D3D9E6} #mtab-m3{--mc:#BED0EE} #mtab-m4{--mc:#2B4FD8}
-  .module-tab { box-shadow: inset 0 5px 0 var(--mc, transparent); }
-  .module-tab.active { background: var(--mc, transparent); }
-  #mtab-m4.active .mt-eyebrow, #mtab-m4.active .mt-title { color:#F6F4F0 !important; }
-  #panel-m0 { border-top:6px solid #E6D9BE; }
-  #panel-m1 { border-top:6px solid #EDC3D2; }
-  #panel-m2 { border-top:6px solid #D3D9E6; }
-  #panel-m3 { border-top:6px solid #BED0EE; }
-  #panel-m4 { border-top:6px solid #2B4FD8; }
+
+  /* module tiles — colours and layout from the main page course tiles, modules 1–5 */
+  .module-tabs { display:grid !important; grid-template-columns:repeat(5,minmax(0,1fr)) !important; gap:6px !important; overflow:visible !important; padding:14px 16px 12px !important; border-bottom:0 !important; background:transparent !important; }
+  .module-tabs::-webkit-scrollbar { display:none; }
+  .module-tab { position:relative; display:flex !important; flex-direction:column; align-items:center; justify-content:space-between; min-width:0; height:320px; padding:14px 0 14px !important; margin:0 !important; border:0 !important; border-radius:14px !important; background:var(--mc) !important; color:var(--mt-ink,#0A0F1A) !important; box-shadow:none !important; cursor:pointer; box-sizing:border-box; }
+  .module-tab.active { box-shadow: inset 0 0 0 2px #0A0F1A !important; }
+  .module-tab::before { content:'\2196'; flex:0 0 34px; width:34px; height:34px; box-sizing:border-box; border:2px solid currentColor; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:700; line-height:1; }
+  .module-tab .mt-eyebrow { display:none !important; }
+  .module-tab .mt-title { writing-mode:vertical-rl; transform:rotate(180deg); flex:1; min-height:0; display:flex; align-items:center; justify-content:flex-start; font-size:22px; font-weight:800; line-height:1.05; letter-spacing:-.02em; color:inherit !important; text-align:left; white-space:normal; overflow:hidden; padding:6px 0; }
+  .module-tab::after { content:attr(data-n); flex:0 0 34px; width:34px; height:34px; box-sizing:border-box; border-radius:50%; background:var(--mt-dot,#0A0F1A); color:var(--mt-dot-ink,#F6F4F0); display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:800; }
+  .module-tab.active::before, .module-tab.active .mt-title { color:inherit !important; }
+  @media (max-width:760px) {
+    .module-tabs { gap:5px !important; padding:12px 12px 10px !important; }
+    .module-tab { height:300px; border-radius:12px !important; padding:12px 0 12px !important; }
+    .module-tab::before { width:28px; flex-basis:28px; height:28px; font-size:14px; }
+    .module-tab::after { width:28px; flex-basis:28px; height:28px; font-size:13px; }
+    .module-tab .mt-title { font-size:15px; }
+  }
+  #mtab-m0{--mc:#EDC3D2;--mt-ink:#0A0F1A;--mt-dot:#0A0F1A;--mt-dot-ink:#F6F4F0}
+  #mtab-m1{--mc:#2B4FD8;--mt-ink:#F6F4F0;--mt-dot:#F6F4F0;--mt-dot-ink:#0A0F1A}
+  #mtab-m2{--mc:#13234B;--mt-ink:#F6F4F0;--mt-dot:#EDC3D2;--mt-dot-ink:#0A0F1A}
+  #mtab-m3{--mc:#BED0EE;--mt-ink:#0A0F1A;--mt-dot:#0A0F1A;--mt-dot-ink:#F6F4F0}
+  #mtab-m4{--mc:#E6D9BE;--mt-ink:#0A0F1A;--mt-dot:#0A0F1A;--mt-dot-ink:#F6F4F0}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -1041,25 +1054,25 @@
 
   <div class="nav-wrap" id="moduleTabsWrap" style="top:0;">
     <div class="module-tabs">
-      <div class="module-tab active" id="mtab-m0" onclick="switchModuleWithSpy('m0')">
+      <div class="module-tab active" id="mtab-m0" onclick="switchModuleWithSpy('m0')" data-n="0">
         <span class="mt-eyebrow">Вводный модуль</span>
-        <span class="mt-title">🧭 Введение в развитие территорий</span>
+        <span class="mt-title">Введение в развитие территорий</span>
       </div>
-      <div class="module-tab" id="mtab-m1" onclick="switchModuleWithSpy('m1')">
+      <div class="module-tab" id="mtab-m1" onclick="switchModuleWithSpy('m1')" data-n="2">
         <span class="mt-eyebrow">Модуль 1</span>
-        <span class="mt-title">📍 Контекст территории</span>
+        <span class="mt-title">Контекст территории</span>
       </div>
-      <div class="module-tab" id="mtab-m2" onclick="switchModuleWithSpy('m2')">
+      <div class="module-tab" id="mtab-m2" onclick="switchModuleWithSpy('m2')" data-n="3">
         <span class="mt-eyebrow">Модуль 2</span>
-        <span class="mt-title">📐 Функции и экономика</span>
+        <span class="mt-title">Функции и экономика</span>
       </div>
-      <div class="module-tab" id="mtab-m3" onclick="switchModuleWithSpy('m3')">
+      <div class="module-tab" id="mtab-m3" onclick="switchModuleWithSpy('m3')" data-n="4">
         <span class="mt-eyebrow">Модуль 3</span>
-        <span class="mt-title">🎨 Визуальная упаковка</span>
+        <span class="mt-title">Визуальная упаковка</span>
       </div>
-      <div class="module-tab" id="mtab-m4" onclick="switchModuleWithSpy('m4')">
+      <div class="module-tab" id="mtab-m4" onclick="switchModuleWithSpy('m4')" data-n="5">
         <span class="mt-eyebrow">Модуль 4</span>
-        <span class="mt-title">🏁 Синтез и защита</span>
+        <span class="mt-title">Синтез и защита</span>
       </div>
     </div>
   </div>
