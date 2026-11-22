@@ -808,6 +808,13 @@
   .module-tab.active .mt-eyebrow, .module-tab.active .mt-title { color: var(--mt-ink) !important; }
   .module-tab:hover { background: var(--mc); }
   .module-tab:hover .mt-eyebrow, .module-tab:hover .mt-title { color: var(--mt-ink) !important; }
+  /* module tabs fit the row on tablets and desktops: 5 equal columns, titles wrap */
+  @media (min-width:761px) {
+    .module-tabs { display:grid !important; grid-template-columns:repeat(5,minmax(0,1fr)) !important; overflow:visible !important; }
+    .module-tab { min-width:0 !important; padding:12px 10px !important; }
+    .module-tab .mt-eyebrow { font-size:10px !important; }
+    .module-tab .mt-title { white-space:normal !important; font-size:14px !important; line-height:1.25 !important; }
+  }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
