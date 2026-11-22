@@ -470,6 +470,14 @@
   .grid-cell h3 { font-size:clamp(19px,2.2vw,24px); font-weight:800 !important; letter-spacing:-0.02em; margin-bottom:8px; }
   .grid-cell p { color:#5A6070; font-size:15px; }
   #about .sub-h { margin:48px 0 0; }
+  /* ── «Результаты»: тёмные ячейки с номерами ── */
+  #result .grid2 { gap:0; border-top:1px solid #F6F4F0; }
+  .dark-cell { background:transparent !important; border-color:rgba(246,244,240,.16) !important; }
+  #result .grid2 > .grid-cell:nth-child(odd) { border-right:1px solid rgba(246,244,240,.16) !important; }
+  #result .cell-n { color:#EDC3D2; }
+  .dark-cell h3 { color:#F6F4F0 !important; }
+  .dark-cell p { color:#C9D1E6 !important; }
+  #result .res-big { margin-bottom:36px; }
 </style>
 <link rel="stylesheet" href="assets/ai-levels.css">
 <script src="assets/ai-levels.js" defer></script>
@@ -606,10 +614,10 @@ els.js" defer></script>
     <div class="kicker">Результаты обучения</div>
     <div class="res-big">К концу курса у вас есть <em>готовый проект по вашему участку</em>: от карт до презентации.</div>
     <div class="grid2">
-      <div class="card"><h3>Цифровой двойник территории</h3><p>Точная модель участка, готовая к любому анализу: подложки, транспорт, здания, рельеф, кадастр.</p></div>
-      <div class="card"><h3>ИИ-анализ за минуты</h3><p>Анализ территории и прогноз поведенческих сценариев там, где раньше уходили дни.</p></div>
-      <div class="card"><h3>Десятки вариантов решений</h3><p>Генерация вариантов решений и визуализаций с помощью нейросетей вместо одной ручной отрисовки.</p></div>
-      <div class="card"><h3>Презентация на данных</h3><p>Итоговая интерактивная презентация, которая выигрывает у заказчика и комиссии.</p></div>
+      <div class="grid-cell dark-cell"><div class="cell-n">01</div><h3>Цифровой двойник территории</h3><p>Точная модель участка, готовая к любому анализу: подложки, транспорт, здания, рельеф, кадастр.</p></div>
+      <div class="grid-cell dark-cell"><div class="cell-n">02</div><h3>ИИ-анализ за минуты</h3><p>Анализ территории и прогноз поведенческих сценариев там, где раньше уходили дни.</p></div>
+      <div class="grid-cell dark-cell"><div class="cell-n">03</div><h3>Десятки вариантов решений</h3><p>Генерация вариантов решений и визуализаций с помощью нейросетей вместо одной ручной отрисовки.</p></div>
+      <div class="grid-cell dark-cell"><div class="cell-n">04</div><h3>Презентация на данных</h3><p>Итоговая интерактивная презентация, которая выигрывает у заказчика и комиссии.</p></div>
     </div>
   </div>
 </section>
