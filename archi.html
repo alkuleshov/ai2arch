@@ -498,6 +498,35 @@
   .apply-grid .cell-n { font-family:var(--mono); font-size:13px; font-weight:800; color:#2B4FD8; margin-bottom:14px; }
   /* верхняя панель в формате пособий: бумага, ink-линия, без тени */
   header.hd, header.head { background:#F6F4F0 !important; border-bottom:1.5px solid #0A0F1A !important; box-shadow:none !important; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; min-height:54px; }
+  /* шапка лендинга в формате пособий: высота 54 px, квадратные кнопки-контуры */
+  header.hd, header.head { height:54px !important; min-height:54px !important; }
+  header.hd > .wrap, header.head > .wrap, header.hd .wrap, header.head .wrap { height:54px; display:flex; align-items:center; }
+  header.hd .btn, header.hd .hd-btn, header.hd .btn-primary, header.head .btn, header.head .btn-primary, header.head .btn-sm { border-radius:0 !important; border:1.5px solid #0A0F1A !important; background:transparent !important; color:#0A0F1A !important; font-size:14px !important; font-weight:800 !important; padding:14px 20px !important; line-height:normal !important; box-shadow:none !important; }
+  header.hd .btn:hover, header.hd .hd-btn:hover, header.head .btn:hover { background:transparent !important; color:#0A0F1A !important; }
+  header.hd nav a, header.head nav a, header.hd .nav a, header.head .nav a { font-size:14px !important; font-weight:800 !important; color:#0A0F1A !important; }
+  /* посадочная в стиле главной: бумага с сеткой, «ночь», пилюли, display-заголовки, цветные панели */
+  body { font-family:'Inter Tight','Helvetica Neue',Arial,sans-serif !important; background-color:#F6F4F0 !important; color:#0A0F1A !important; background-image:linear-gradient(to right,#E1DDD5 1px,transparent 1px),linear-gradient(to bottom,#E1DDD5 1px,transparent 1px) !important; background-size:calc(min(100%,1200px)/4) 100%,100% 88px !important; background-position:center top,center top !important; background-repeat:repeat-y,repeat-y !important; }
+  .sec { background:transparent !important; padding:64px 0 !important; border-bottom:1px solid #E1DDD5; }
+  .sec.alt { background:#ECE8E1 !important; }
+  .sec.dark, .corp { background:#13234B !important; color:#F6F4F0 !important; }
+  .sec.dark *:not(.btn), .corp * { color:inherit; }
+  h1, h2, h3 { font-family:'Inter Tight','Helvetica Neue',Arial,sans-serif !important; font-weight:800 !important; letter-spacing:-0.045em !important; line-height:.95 !important; color:#0A0F1A; }
+  .sec.dark h1, .sec.dark h2, .sec.dark h3, .corp h1, .corp h2 { color:#F6F4F0 !important; }
+  .btn, .btn-primary, .btn-dark, .btn-line, .btn-ghost, .btn-sm { border-radius:999px !important; box-shadow:none !important; transform:none !important; font-family:'Inter Tight','Helvetica Neue',Arial,sans-serif !important; font-weight:700 !important; letter-spacing:-0.01em !important; border:1.5px solid #0A0F1A !important; background:#0A0F1A !important; color:#F6F4F0 !important; }
+  .btn:hover, .btn-primary:hover, .btn-dark:hover { background:#1E2636 !important; border-color:#1E2636 !important; color:#F6F4F0 !important; opacity:1 !important; }
+  .btn-line, .btn-ghost { background:transparent !important; color:#0A0F1A !important; }
+  .btn-line:hover, .btn-ghost:hover { background:#E1DDD5 !important; color:#0A0F1A !important; }
+  /* hero как на главной: бумага, ink-текст, блоки-статистика с ink-линиями */
+  .hero, .hero-dark, header + section.hero, section.hero { background:#F6F4F0 !important; color:#0A0F1A !important; background-image:none !important; }
+  .hero::before, .hero::after, .hero-bg::before, .hero-bg::after { background:none !important; }
+  .hero h1, .hero h2, .hero p, .hero li, .hero span, .hero div, .hero small, .hero b, .hero strong, .hero label { color:#0A0F1A; }
+  .hero h1 em, .hero h1 .acc, .hero h1 .pink { color:#2B4FD8 !important; }
+  .hero .btn-ghost, .hero .btn-line { color:#0A0F1A !important; border-color:#0A0F1A !important; background:transparent !important; }
+  .hero [class*="stat"], .hero [class*="fact"], .hero [class*="card"], .hero [class*="cell"] { border-color:#0A0F1A !important; background:transparent !important; }
+  .hero [class*="stat"] *, .hero [class*="fact"] *, .hero [class*="card"] *, .hero [class*="cell"] * { color:#0A0F1A !important; }
+  .hero *:not(.btn):not(canvas):not(svg):not(path) { color:#0A0F1A !important; opacity:1 !important; }
+  .hero .btn-primary, .hero .btn-dark, .hero .btn:not(.btn-line):not(.btn-ghost) { color:#F6F4F0 !important; }
+  .hero h1 .ac, .hero h1 em, .hero h1 span:first-child { color:#2B4FD8 !important; }
 </style>
 <link rel="stylesheet" href="assets/ai-levels.css">
 <script src="assets/ai-levels.js" defer></script>
