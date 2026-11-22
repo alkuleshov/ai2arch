@@ -453,6 +453,14 @@
   .hero *:not(.btn):not(canvas):not(svg):not(path) { color:#0A0F1A !important; opacity:1 !important; }
   .hero .btn-primary, .hero .btn-dark, .hero .btn:not(.btn-line):not(.btn-ghost) { color:#F6F4F0 !important; }
   .hero h1 .ac, .hero h1 em, .hero h1 span:first-child { color:#2B4FD8 !important; }
+  /* ширина и поля как на экспресс-скрининге: контент от края с полем 24 px, без бургера */
+  .wrap { padding-left:24px !important; padding-right:24px !important; max-width:none !important; }
+  .hero .wrap { padding-left:24px !important; padding-right:24px !important; }
+  /* бургер — тёмный, открытое меню — тёмное с светлым текстом */
+  .burger { border:1.5px solid #0A0F1A !important; background:transparent !important; border-radius:0 !important; }
+  .burger span { background:#0A0F1A !important; }
+  #nav.open, nav.open { background:#0A0F1A !important; }
+  #nav.open a, nav.open a { color:#F6F4F0 !important; }
 </style>
 <link rel="stylesheet" href="assets/ai-levels.css">
 <script src="assets/ai-levels.js" defer></script>
