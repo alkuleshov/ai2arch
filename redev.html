@@ -11,9 +11,9 @@
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800;900&display=swap">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
-  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior:smooth; overflow-x:hidden; }
 
   :root {
@@ -262,10 +262,25 @@
   .format-plain { display:grid; gap:10px; max-width:900px; margin-top:8px; }
   .format-plain p { font-size:15px; line-height:1.55; color:var(--ink-muted); }
   .format-plain b { color:var(--ink); }
+  /* ── швейцарский стиль: тёмные блоки плоские, полночный синий; фон шапки бумажный ── */
+  canvas { display:none !important; }
+  .hero, .sec.dark, footer { background:#13234B !important; color:#F6F4F0 !important; }
+  .hero h1 span, .hero h1 em, .sec.dark h2 span, .sec.dark h2 em { color:#EDC3D2 !important; }
+  .head { background:var(--bg) !important; color:var(--ink) !important; border-bottom:1px solid #0A0F1A !important; }
+  .head *:not(.num):not(img) { color:inherit; }
 </style>
 <link rel="stylesheet" href="assets/ai-levels.css">
 <script src="assets/ai-levels.js" defer></script>
-<!-- Yandex.Metrika counter -->
+<!-- Yandex.Metrika counter
+  /* ── швейцарский стиль: только переопределения, разметка не менялась ── */
+  :root { --azure:#2B4FD8; --azure-dark:#2B4FD8; --azure-soft:#BED0EE; --bg:#F6F4F0; --surface:#FFFFFF; --surface2:#EFECE6; --border:#E1DDD5; --ink-faint:#5A6070; --accent-l:#E4EBFB; --sans:'Inter Tight','Helvetica Neue',Arial,sans-serif; }
+  body { font-family:var(--sans); letter-spacing:-0.005em; }
+  *, *::before, *::after { border-radius:0 !important; box-shadow:none !important; text-shadow:none !important; }
+  .btn-primary, .btn-azure, [class*="btn-primary"] { background:var(--azure) !important; color:#fff !important; }
+  h1, h2, h3 { font-weight:900 !important; letter-spacing:-0.035em !important; line-height:1.02 !important; }
+  img { border-radius:0 !important; }
+  footer { border-top:1px solid #0A0F1A; }
+ -->
 <script type="text/javascript">
     (function(m,e,t,r,i,k,a){
         m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -704,6 +719,7 @@
 
 <footer>
   <div class="wrap">
+    <p><b>AI2ARCH · 2026</b></p>
     <a class="brand" href="index.html"><img class="brand-sign" src="images/ai2arch-sign.png" width="38" height="38" alt=""><span class="brand-text"><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
     <p>Программу реализует Южный федеральный университет, Академия архитектуры и искусств. Ростов-на-Дону.</p>
     <p><a href="archi.html">Первая ступень: ИИ в архитектуре</a></p>
