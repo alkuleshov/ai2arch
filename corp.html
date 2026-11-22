@@ -271,6 +271,14 @@ section{background-image:linear-gradient(to right, rgba(10,15,26,.07) 0 1px, tra
   header.hd .btn, header.hd .hd-btn, header.hd .btn-primary, header.head .btn, header.head .btn-primary, header.head .btn-sm { border-radius:0 !important; border:1.5px solid #0A0F1A !important; background:transparent !important; color:#0A0F1A !important; font-size:14px !important; font-weight:800 !important; padding:14px 20px !important; line-height:normal !important; box-shadow:none !important; }
   header.hd .btn:hover, header.hd .hd-btn:hover, header.head .btn:hover { background:transparent !important; color:#0A0F1A !important; }
   header.hd nav a, header.head nav a, header.hd .nav a, header.head .nav a { font-size:14px !important; font-weight:800 !important; color:#0A0F1A !important; }
+  /* единая шапка-логотип: один отступ от края, один знак 38 px, одна подпись на всех страницах */
+  header :is(.wrap,.head-in) { max-width:none !important; width:100% !important; margin:0 !important; padding:0 24px !important; box-sizing:border-box !important; }
+  @media (max-width:760px) { header :is(.wrap,.head-in) { padding:0 16px !important; } }
+  header :is(.wrap,.head-in) > a:first-child { display:flex !important; align-items:center !important; gap:12px !important; padding:0 !important; margin:0 !important; height:auto !important; min-height:0 !important; border:0 !important; background:none !important; color:#0A0F1A !important; text-decoration:none !important; flex-shrink:0 !important; line-height:1.15 !important; }
+  header :is(.wrap,.head-in) > a:first-child img { width:38px !important; height:38px !important; min-width:38px !important; flex:0 0 38px !important; display:block !important; }
+  header :is(.wrap,.head-in) > a:first-child > span { display:flex !important; flex-direction:column !important; align-items:flex-start !important; line-height:1.15 !important; }
+  header :is(.wrap,.head-in) > a:first-child b { display:block !important; font-size:16px !important; font-weight:800 !important; letter-spacing:-0.02em !important; color:#0A0F1A !important; white-space:nowrap !important; }
+  header :is(.wrap,.head-in) > a:first-child small { display:block !important; font-size:11px !important; font-weight:600 !important; letter-spacing:0 !important; color:#5A6070 !important; white-space:nowrap !important; margin:2px 0 0 !important; }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -288,7 +296,7 @@ section{background-image:linear-gradient(to right, rgba(10,15,26,.07) 0 1px, tra
 </head>
 <body>
 <header class="hd"><div class="wrap">
-  <a class="hd-back" href="./" aria-label="AI2ARCH — на главную"><img src="images/ai2arch-sign.png" width="40" height="40" alt=""><span><b>AI2ARCH · 2026</b><small>Лаборатория проектного интеллекта</small></span></a>
+  <a class="hd-back" href="./" aria-label="AI2ARCH — на главную"><img src="images/ai2arch-sign.png" width="40" height="40" alt=""><span><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
   <nav><a href="#programs">Программы</a><a href="#builder">Конструктор</a><a href="#terms">Условия</a><a href="#faq">Вопросы</a></nav>
   <button class="hd-btn" id="shareTop" type="button">Скопировать ссылку</button>
 </div></header>
