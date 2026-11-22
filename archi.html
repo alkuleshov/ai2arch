@@ -410,6 +410,26 @@
   .avatar { border-radius:0 !important; border:1px solid #0A0F1A !important; width:112px !important; height:112px !important; }
   .person h3 { font-weight:900 !important; letter-spacing:-0.03em; font-size:clamp(20px,2.4vw,26px) !important; line-height:1.05; }
   .person .role { color:#2B4FD8; font-weight:700; font-size:14px; margin:6px 0 12px; }
+  /* ── цена и вопросы в швейцарском стиле ── */
+  .price-grid { border-top:1px solid #0A0F1A; }
+  .price.main { background:#13234B !important; color:#F6F4F0 !important; border:0 !important; border-radius:0 !important; padding:28px !important; }
+  .price.main .price-val { font-size:clamp(64px,10vw,120px) !important; font-weight:900 !important; letter-spacing:-0.06em !important; line-height:.9 !important; color:#F6F4F0; }
+  .price.main .price-val small { font-size:.45em; color:#EDC3D2; letter-spacing:0; }
+  .price.main .price-lab, .price.main li { color:#C9D1E6 !important; }
+  .price.main .list li::before { background:#EDC3D2 !important; }
+  .price:not(.main) { background:#FFFFFF; border:1px solid #E1DDD5 !important; border-radius:0 !important; }
+  details.q { border-top:1px solid #0A0F1A; background:transparent; border-left:0; border-right:0; border-bottom:0; border-radius:0 !important; }
+  details.q:last-child { border-bottom:1px solid #0A0F1A; }
+  details.q summary { padding:22px 4px; font-size:clamp(17px,2vw,22px); font-weight:800; letter-spacing:-0.02em; }
+  details.q summary .mod-plus { border:1px solid #0A0F1A; width:32px; height:32px; background:transparent !important; color:#0A0F1A !important; border-radius:0 !important; }
+  details.q .ans { padding:0 4px 22px; color:#5A6070; }
+  .deduct { background:#FFFFFF !important; border:1px solid #E1DDD5 !important; border-radius:0 !important; box-shadow:none !important; }
+  .deduct > b[aria-hidden="true"] { display:none !important; }
+  .deduct > b { color:#2B4FD8 !important; font-size:clamp(36px,4vw,48px) !important; font-weight:900 !important; letter-spacing:-0.04em; line-height:1; }
+  .deduct p, .deduct strong { color:#0A0F1A !important; }
+  .price-alt { color:#C9D1E6 !important; }
+  .price-alt b { color:#EDC3D2 !important; }
+  .price-side .note { color:#5A6070; }
 </style>
 <link rel="stylesheet" href="assets/ai-levels.css">
 <link rel="stylesheet" href="assets/lightbox.css">
