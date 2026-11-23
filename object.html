@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Анализ объекта · AI2ARCH</title>
+<title>Экспресс-скрининг объекта · AI2ARCH</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Экспресс-скрининг участка или здания для девелоперов и собственников: ограничения, сценарии использования и экономика объекта за 2–3 недели.">
+<meta name="description" content="Экспресс-скрининг участка или здания для девелоперов и собственников: ограничения, сценарии и экономика объекта. Начните с диагностики за 15 000 ₽ — сумма засчитывается в скрининг.">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -13,165 +13,253 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#0A0F1A;--paper:#F6F4F0;--card:#FBFAF7;--muted:#5A6070;--faint:#848A9A;--line:#E1DDD5;--accent:#2B4FD8;--midnight:#13234B;--blush:#EDC3D2;--powder:#BED0EE;--sand:#E6D9BE;--head:60px;--sans:'Inter Tight','Helvetica Neue',Arial,system-ui,sans-serif}
+:root{--ink:#0A0F1A;--paper:#F6F4F0;--card:#FBFAF7;--muted:#5A6070;--faint:#848A9A;--line:#E1DDD5;--accent:#2B4FD8;--midnight:#13234B;--blush:#EDC3D2;--powder:#BED0EE;--sand:#E6D9BE;--bad:#8A2D57;--head:54px;--sans:'Inter Tight','Helvetica Neue',Arial,system-ui,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;overflow-x:clip;scroll-padding-top:calc(var(--head) + 12px)}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip;letter-spacing:-.005em}
 a{color:var(--accent)}
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-/* видимая сетка колонок 1200px-контейнера (4 колонки; с 900px — 8) */
 section{background-image:linear-gradient(to right, rgba(10,15,26,.07) 0 1px, transparent 1px);background-size:calc(min(100%, 1200px) / 4) 100%;background-position:center top;background-repeat:repeat-x}
 @media (min-width:900px){section{background-size:calc(min(100%, 1200px) / 8) 100%}}
 
-/* шапка */
-.hd{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--head);background:var(--paper);border-bottom:1px solid var(--ink)}
-.hd .wrap{height:100%;display:flex;align-items:center;gap:18px}
-.hd-back{display:flex;align-items:center;gap:10px;color:var(--ink);white-space:nowrap;text-decoration:none}
-.hd-back img{width:36px;height:36px}
-.hd-back b{display:block;font-size:17px;line-height:1.1;font-weight:800;letter-spacing:-.02em}
-.hd-back small{display:block;font-size:12px;color:var(--muted);font-weight:500}
-.hd nav{display:flex;gap:14px;flex:1;justify-content:center}
-.hd nav a{font-size:14px;font-weight:600;color:var(--ink);padding:6px 2px;text-decoration:none}
+/* шапка — единая для лендингов */
+.hd{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--head);background:var(--paper);border-bottom:1.5px solid var(--ink)}
+.hd .wrap{height:100%;display:flex;align-items:center;gap:18px;max-width:none;padding:0 24px}
+.hd-back{display:flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none;flex-shrink:0;line-height:1.15}
+.hd-back img{width:38px;height:38px;flex:0 0 38px;display:block}
+.hd-back span{display:flex;flex-direction:column}
+.hd-back b{font-size:16px;font-weight:800;letter-spacing:-.02em;white-space:nowrap}
+.hd-back small{font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap;margin-top:2px}
+.hd nav{display:flex;gap:4px;flex:1;justify-content:center;min-width:0}
+.hd nav a{font-size:14px;font-weight:800;color:var(--ink);padding:6px 8px;text-decoration:none;white-space:nowrap}
 .hd nav a:hover{text-decoration:underline;text-underline-offset:3px}
-.hd-btn{font:700 13px var(--sans);border:1.5px solid var(--ink);background:transparent;color:var(--ink);border-radius:999px;padding:8px 14px;white-space:nowrap;text-decoration:none}
-.hd-btn:hover{background:var(--ink);color:var(--paper)}
+.hd-btn{font:800 14px var(--sans);border:1.5px solid var(--ink);background:transparent;color:var(--ink);padding:14px 20px;white-space:nowrap;text-decoration:none;margin-left:auto}
+@media (max-width:1100px){.hd nav{display:none}}
+@media (max-width:760px){.hd .wrap{padding:0 16px}.hd-back small{white-space:normal;max-width:138px;line-height:1.2}.hd-btn{font-size:12px;padding:9px 12px}}
+@media (max-width:380px){.hd-btn{padding:9px 10px}}
 
 /* первый экран */
-.hero{padding:calc(var(--head) + 56px) 0 56px}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:48px;align-items:center}
+.hero{padding:calc(var(--head) + 52px) 0 52px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:44px;align-items:center}
 .kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
 h1{font-size:clamp(40px,6vw,68px);line-height:.96;letter-spacing:-.045em;font-weight:800;margin-bottom:20px;text-wrap:balance}
 h1 em,h2 em{font-style:normal;color:var(--faint)}
-.lead{font-size:18px;color:var(--muted);max-width:560px;line-height:1.45}
-.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:0 22px;min-height:48px;font:700 15px var(--sans);border:1.5px solid transparent;text-decoration:none;cursor:pointer;transition:background .15s,color .15s}
+.lead{font-size:18px;color:var(--muted);max-width:580px;line-height:1.45}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:0 24px;min-height:50px;font:800 15px var(--sans);border:1.5px solid transparent;text-decoration:none;cursor:pointer;transition:background .15s,color .15s}
 .btn.pri{background:var(--ink);color:var(--paper)}.btn.pri:hover{background:var(--accent)}
 .btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}.btn.ghost:hover{background:var(--ink);color:var(--paper)}
-.facts{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
-.facts span{font-size:13px;font-weight:600;border:1px solid var(--ink);border-radius:999px;padding:5px 12px}
+.btn.light{background:var(--paper);color:var(--ink)}.btn.light:hover{background:var(--powder)}
+.btn.line{background:transparent;color:var(--paper);border-color:var(--paper)}.btn.line:hover{background:var(--paper);color:var(--ink)}
+.facts{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.facts span{font-size:13px;font-weight:700;border:1px solid var(--ink);border-radius:999px;padding:5px 12px}
 
-/* карточка стоимости */
-.pricecard{background:var(--card);border:1px solid var(--ink);padding:22px}
-.pricecard h3{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
-.pr-row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:16px 0;border-top:1px solid var(--line)}
-.pr-row:first-of-type{border-top:0}
-.pr-row b{display:block;font-size:19px;line-height:1.15;font-weight:800;letter-spacing:-.02em}
-.pr-row span{display:block;font-size:13px;color:var(--muted);margin-top:3px}
-.pr-row strong{font-size:18px;white-space:nowrap;color:var(--accent);font-weight:800}
+/* карточка двух шагов */
+.offer{background:#fff;border:1px solid var(--ink)}
+.offer-h{padding:14px 20px;border-bottom:1px solid var(--ink);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.of-row{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:12px;align-items:start;padding:18px 20px;border-top:1px solid var(--line)}
+.of-row:first-of-type{border-top:0}
+.of-n{width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+.of-row.two .of-n{background:var(--powder);color:var(--ink)}
+.of-row b{display:block;font-size:19px;line-height:1.15;font-weight:800;letter-spacing:-.02em}
+.of-row span{display:block;font-size:13.5px;color:var(--muted);margin-top:4px}
+.of-row strong{font-size:19px;white-space:nowrap;color:var(--accent);font-weight:900;letter-spacing:-.02em}
+.offer-f{padding:14px 20px;background:var(--card);border-top:1px solid var(--ink);font-size:13.5px;color:var(--muted)}
+.offer-f b{color:var(--ink)}
 
 /* секции */
 section.blk{padding:64px 0;border-top:1px solid var(--ink)}
 .sh{margin-bottom:28px}
 .sh .num{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
 .sh h2{font-size:clamp(32px,4.6vw,52px);line-height:1;letter-spacing:-.04em;font-weight:800;text-wrap:balance}
-.sh p{font-size:16px;color:var(--muted);max-width:640px;margin-top:14px}
+.sh p{font-size:16px;color:var(--muted);max-width:660px;margin-top:14px}
 
-/* ячейки сетки */
-.cells{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ink)}
-.cell{background:#fff;border-right:1px solid var(--line);padding:24px 22px}
+/* ячейки */
+.cells{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--ink);background:#fff}
+.cell{padding:24px 22px;border-right:1px solid var(--line)}
 .cell:last-child{border-right:0}
-.cell-n{font-size:13px;font-weight:800;color:var(--accent);margin-bottom:14px;font-variant-numeric:tabular-nums}
-.cell h3{font-size:clamp(19px,2.2vw,24px);font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:8px}
+.cell-n{font-size:13px;font-weight:800;color:var(--accent);margin-bottom:12px;font-variant-numeric:tabular-nums}
+.cell h3{font-size:clamp(18px,2vw,22px);font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:8px}
 .cell p{font-size:15px;color:var(--muted)}
 
+/* диагностика */
+.diag{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border:1px solid var(--ink)}
+.diag-l{background:#fff;padding:28px;border-right:1px solid var(--ink)}
+.diag-r{background:var(--midnight);color:var(--paper);padding:28px}
+.diag h3{font-size:clamp(24px,2.8vw,30px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:6px}
+.diag .sub{font-size:14.5px;color:var(--muted);margin-bottom:18px}
+.diag-r .sub{color:#C9D2E8}
+.chk{list-style:none}
+.chk li{position:relative;padding:11px 0 11px 30px;border-top:1px solid var(--line);font-size:15.5px}
+.chk li:first-child{border-top:0}
+.chk li::before{content:"";position:absolute;left:0;top:15px;width:16px;height:16px;border:1.5px solid var(--ink);background:var(--powder)}
+.chk li b{display:block;font-weight:800}
+.chk li span{display:block;color:var(--muted);font-size:14.5px}
+.diag-r .chk li{border-top-color:rgba(246,244,240,.16)}
+.diag-r .chk li::before{border-color:var(--paper);background:var(--blush)}
+.diag-r .chk li span{color:#C9D2E8}
+.price-line{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+.price-line b{font-size:clamp(34px,4vw,46px);font-weight:900;letter-spacing:-.04em;line-height:1}
+.price-line span{font-size:14px;color:var(--muted);text-align:right}
+.diag-r .price-line{border-top-color:rgba(246,244,240,.22)}
+.diag-r .price-line span{color:#C9D2E8}
+
+/* паспорт: блоки скрининга */
+.pass{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--ink);background:#fff}
+.pb{padding:22px;border-right:1px solid var(--line);border-top:1px solid var(--line)}
+.pb:nth-child(3n){border-right:0}
+.pb:nth-child(-n+3){border-top:0}
+.pb .cell-n{margin-bottom:10px}
+.pb h3{font-size:19px;font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:6px}
+.pb p{font-size:14.5px;color:var(--muted)}
+.pass-f{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:16px}
+.pass-f p{font-size:14.5px;color:var(--muted);max-width:640px}
+
+/* образец */
+.sample{background:var(--ink);color:var(--paper);padding:64px 0}
+.sample .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:44px;align-items:center}
+.sample .num{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#AEB8D3;margin-bottom:8px}
+.sample h2{font-size:clamp(32px,4.6vw,52px);line-height:1;letter-spacing:-.04em;font-weight:800}
+.sample h2 em{font-style:normal;color:var(--powder)}
+.sample p{color:#C9D2E8;margin-top:14px;max-width:520px}
+.sample .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.mock{background:var(--paper);color:var(--ink);border:1px solid var(--paper);text-decoration:none;display:block;transition:transform .2s}
+.mock:hover{transform:translateY(-3px)}
+.mock-h{display:flex;justify-content:space-between;gap:10px;padding:12px 16px;border-bottom:1px solid var(--ink);font-size:13px}
+.mock-h b{font-weight:800}
+.mock-h span{color:var(--muted)}
+.mrow{display:grid;grid-template-columns:minmax(0,1fr) 46px;gap:10px;align-items:center;padding:10px 16px;border-top:1px solid var(--line)}
+.mrow:first-of-type{border-top:0}
+.mrow b{font-size:14px;font-weight:800}
+.mbar{height:8px;background:var(--line);margin-top:5px;position:relative}
+.mbar i{position:absolute;left:0;top:0;bottom:0}
+.mrow strong{font-size:18px;font-weight:900;text-align:right}
+.mstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--ink)}
+.mstats div{padding:12px 16px;border-right:1px solid var(--line)}
+.mstats div:last-child{border-right:0}
+.mstats b{display:block;font-size:24px;font-weight:900;letter-spacing:-.03em;line-height:1}
+.mstats span{font-size:12px;color:var(--muted)}
+.mock-f{padding:10px 16px;background:var(--powder);font-size:13px;font-weight:800;border-top:1px solid var(--ink)}
+
 /* шаги */
-.steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--ink)}
-.step{background:#fff;padding:28px 24px;border-right:1px solid var(--line);display:flex;flex-direction:column}
-.step:last-child{border-right:0}
-.step.dark{background:var(--midnight);color:var(--paper)}
-.step .cell-n{margin-bottom:12px}
-.step.dark .cell-n{color:var(--blush)}
-.step h3{font-size:clamp(24px,3vw,32px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:12px}
-.step p{font-size:16px;color:var(--muted);flex:1}
-.step.dark p{color:#C9D2E8}
-.step .price{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);font-size:15px;color:var(--muted)}
-.step.dark .price{border-top-color:rgba(246,244,240,.2);color:#C9D2E8}
-.step .price b{display:block;font-size:clamp(28px,3.4vw,40px);font-weight:900;letter-spacing:-.04em;color:var(--ink);line-height:1.05}
-.step.dark .price b{color:var(--paper)}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--ink);background:#fff}
+.fs{padding:22px 18px;border-right:1px solid var(--line);position:relative}
+.fs:last-child{border-right:0}
+.fs .cell-n{margin-bottom:10px}
+.fs h3{font-size:18px;font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:6px}
+.fs p{font-size:14.5px;color:var(--muted)}
+.fs .when{display:inline-block;margin-top:10px;font-size:12px;font-weight:800;background:var(--sand);padding:3px 8px}
 
-/* образец паспорта */
-.passport{background:#fff;border:1px solid var(--ink)}
-.pp-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 20px;border-bottom:1px solid var(--ink)}
-.pp-head b{font-size:16px;font-weight:800;letter-spacing:-.01em}
-.pp-head span{font-size:13px;color:var(--muted)}
-.pp-row{display:grid;grid-template-columns:200px minmax(0,1fr) 140px;gap:0;border-top:1px solid var(--line)}
-.pp-row:first-of-type{border-top:0}
-.pp-row > div{padding:14px 20px;font-size:15px}
-.pp-row .k{font-weight:800}
-.pp-row .s{font-size:13px;color:var(--muted)}
-.nd{color:#8A2D57;font-weight:600}
-.pp-note{margin-top:14px;font-size:14px;color:var(--muted);max-width:760px}
+/* кто делает */
+.who{display:grid;grid-template-columns:120px minmax(0,1fr);gap:28px;align-items:start;background:#fff;border:1px solid var(--ink);padding:28px}
+.who img{width:120px;height:120px;border-radius:50%;object-fit:cover;display:block}
+.who h3{font-size:24px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.who .role{font-size:14.5px;color:var(--muted);margin:4px 0 14px}
+.who ul{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+.who li{font-size:15px;padding:8px 0;border-top:1px solid var(--line)}
+.who li b{font-weight:800}
 
-/* заявка */
-.req{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:48px;align-items:start}
-.req-side p{font-size:16px;color:var(--muted);margin-top:14px;max-width:440px}
-.req-side .btn{margin-top:22px}
+/* оплата */
+.pay{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:44px;align-items:start}
+.pay-side .sh{margin-bottom:18px}
+.pay-sum{background:#fff;border:1px solid var(--ink)}
+.pay-sum div{display:flex;justify-content:space-between;gap:12px;padding:12px 18px;border-top:1px solid var(--line);font-size:15px}
+.pay-sum div:first-child{border-top:0}
+.pay-sum div b{white-space:nowrap}
+.pay-sum .tot{background:var(--card);border-top:1px solid var(--ink);font-weight:800}
+.pay-sum .tot b{font-size:22px;font-weight:900;letter-spacing:-.02em}
+.pay-note{font-size:13.5px;color:var(--muted);margin-top:14px}
+.after{list-style:none;margin-top:16px;border-top:1px solid var(--ink)}
+.after li{font-size:14.5px;color:var(--muted);padding:9px 0;border-bottom:1px solid var(--line)}
+.after li b{color:var(--ink)}
+.pay-note a{color:var(--ink)}
 form{background:#fff;border:1px solid var(--ink);padding:24px}
 .f{margin-bottom:16px}
 .f label{display:block;font-size:14px;font-weight:700;margin-bottom:6px}
 .f label small{font-weight:500;color:var(--muted)}
 .f input,.f textarea{width:100%;font:16px var(--sans);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:0;padding:12px 14px}
 .f input:focus,.f textarea:focus{outline:none;border-color:var(--ink)}
-.f textarea{min-height:110px;resize:vertical}
+.f textarea{min-height:90px;resize:vertical}
+.seg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--ink);margin-bottom:16px}
+.seg label{display:flex;flex-direction:column;gap:2px;padding:12px 14px;cursor:pointer;border-right:1px solid var(--ink);font-size:14.5px;font-weight:800}
+.seg label:last-child{border-right:0}
+.seg label small{font-weight:500;color:var(--muted);font-size:12.5px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label:has(input:checked){background:var(--ink);color:var(--paper)}
+.seg label:has(input:checked) small{color:#C9D2E8}
+.seg label:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:-4px}
+.f-inn{display:none}
+.f-inn.on{display:block}
 .agree{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);margin:4px 0 18px}
 .agree input{margin-top:3px;flex:none}
-.submit{width:100%;min-height:52px;background:var(--ink);color:var(--paper);border:0;border-radius:0;font:700 16px var(--sans);cursor:pointer}
+.submit{width:100%;min-height:54px;background:var(--ink);color:var(--paper);border:0;border-radius:0;font:800 16px var(--sans);cursor:pointer}
 .submit:hover{background:var(--accent)}
 .submit:disabled{opacity:.6;cursor:default}
-.msg{display:none;background:#fff;border:1px solid var(--ink);padding:24px}
-.msg h3{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+.msg{display:none;background:#fff;border:1px solid var(--ink);padding:26px}
+.msg h3{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
 .msg p{color:var(--muted)}
+.msg .btn{margin-top:18px}
+.msg ol{margin:14px 0 0 18px;color:var(--muted);font-size:15px}
+.msg ol li{padding:3px 0}
+
+/* вопросы */
+.faq{border:1px solid var(--ink);background:#fff}
+.faq details{border-top:1px solid var(--line)}
+.faq details:first-child{border-top:0}
+.faq summary{list-style:none;cursor:pointer;padding:18px 22px;font-size:17px;font-weight:800;letter-spacing:-.01em;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:22px;line-height:1;color:var(--accent);flex:none}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding:0 22px 18px;color:var(--muted);font-size:15.5px;max-width:860px}
 
 /* подвал */
 footer{border-top:1px solid var(--ink);padding:28px 0 40px;font-size:13px;color:var(--muted)}
-.ft-row{display:grid;grid-template-columns:auto 1fr;gap:12px 32px;align-items:center}
+.ft-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px 32px;align-items:center}
 .ft-brand{display:flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none}
 .ft-brand b{display:block;font-size:17px;font-weight:800;letter-spacing:-.02em}
 .ft-brand small{display:block;font-size:12px;color:var(--muted)}
+.ft-links a{color:var(--ink);font-weight:700}
 
+@media (max-width:1100px){
+  .flow{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .fs:nth-child(3){border-right:0}
+  .fs:nth-child(n+4){border-top:1px solid var(--line)}
+}
 @media (max-width:960px){
-  .hd nav{display:none}
-  .hd .wrap{justify-content:space-between}
-  .hero .wrap,.req{grid-template-columns:minmax(0,1fr);gap:32px}
+  .hero .wrap,.pay,.sample .wrap{grid-template-columns:minmax(0,1fr);gap:32px}
   .cells{grid-template-columns:repeat(2,minmax(0,1fr))}
   .cell:nth-child(2n){border-right:0}
   .cell:nth-child(n+3){border-top:1px solid var(--line)}
+  .diag{grid-template-columns:minmax(0,1fr)}
+  .diag-l{border-right:0;border-bottom:1px solid var(--ink)}
+  .pass{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pb:nth-child(3n){border-right:1px solid var(--line)}
+  .pb:nth-child(2n){border-right:0}
+  .pb:nth-child(3){border-top:1px solid var(--line)}
   .ft-row{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:640px){
   .wrap{padding:0 16px}
-  .hd-back small{display:none}
-  .hero{padding-top:calc(var(--head) + 36px)}
-  section.blk{padding:48px 0}
-  .cells,.steps{grid-template-columns:minmax(0,1fr)}
-  .cell,.step{border-right:0}
-  .cell + .cell,.step + .step{border-top:1px solid var(--line)}
-  .pp-row{grid-template-columns:minmax(0,1fr)}
-  .pp-row > div{padding:4px 16px}
-  .pp-row .k{padding-top:14px}
-  .pp-row .s{padding-bottom:14px}
+  .hero{padding-top:calc(var(--head) + 34px)}
+  section.blk,.sample{padding:48px 0}
+  .cells,.pass,.flow{grid-template-columns:minmax(0,1fr)}
+  .cell,.pb,.fs{border-right:0 !important}
+  .cell + .cell,.pb + .pb,.fs + .fs{border-top:1px solid var(--line)}
+  .diag-l,.diag-r{padding:20px}
+  .who{grid-template-columns:minmax(0,1fr);padding:20px;gap:16px}
+  .who img{width:84px;height:84px}
+  .who ul{grid-template-columns:minmax(0,1fr)}
+  .seg{grid-template-columns:minmax(0,1fr)}
+  .seg label{border-right:0;border-top:1px solid var(--ink)}
+  .seg label:first-child{border-top:0}
   form{padding:18px}
+  .of-row{grid-template-columns:30px minmax(0,1fr);padding:16px}
+  .of-row strong{grid-column:2}
+  .mstats b{font-size:20px}
+  .faq summary{padding:16px 18px;font-size:16px}
+  .faq details p{padding:0 18px 16px}
 }
-  /* верхняя панель в формате пособий: бумага, ink-линия, без тени */
-  header.hd, header.head { background:#F6F4F0 !important; border-bottom:1.5px solid #0A0F1A !important; box-shadow:none !important; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; min-height:54px; }
-  /* шапка лендинга в формате пособий: высота 54 px, квадратные кнопки-контуры */
-  header.hd, header.head { height:54px !important; min-height:54px !important; }
-  header.hd > .wrap, header.head > .wrap, header.hd .wrap, header.head .wrap { height:54px; display:flex; align-items:center; }
-  header.hd .btn, header.hd .hd-btn, header.hd .btn-primary, header.head .btn, header.head .btn-primary, header.head .btn-sm { border-radius:0 !important; border:1.5px solid #0A0F1A !important; background:transparent !important; color:#0A0F1A !important; font-size:14px !important; font-weight:800 !important; padding:14px 20px !important; line-height:normal !important; box-shadow:none !important; }
-  header.hd .btn:hover, header.hd .hd-btn:hover, header.head .btn:hover { background:transparent !important; color:#0A0F1A !important; }
-  header.hd nav a, header.head nav a, header.hd .nav a, header.head .nav a { font-size:14px !important; font-weight:800 !important; color:#0A0F1A !important; }
-  /* единая шапка-логотип: один отступ от края, один знак 38 px, одна подпись на всех страницах */
-  header :is(.wrap,.head-in) { max-width:none !important; width:100% !important; margin:0 !important; padding:0 24px !important; box-sizing:border-box !important; }
-  @media (max-width:760px) { header :is(.wrap,.head-in) { padding:0 16px !important; } }
-  header :is(.wrap,.head-in) > a:first-child { display:flex !important; align-items:center !important; gap:12px !important; padding:0 !important; margin:0 !important; height:auto !important; min-height:0 !important; border:0 !important; background:none !important; color:#0A0F1A !important; text-decoration:none !important; flex-shrink:0 !important; line-height:1.15 !important; }
-  header :is(.wrap,.head-in) > a:first-child img { width:38px !important; height:38px !important; min-width:38px !important; flex:0 0 38px !important; display:block !important; }
-  header :is(.wrap,.head-in) > a:first-child > span { display:flex !important; flex-direction:column !important; align-items:flex-start !important; line-height:1.15 !important; }
-  header :is(.wrap,.head-in) > a:first-child b { display:block !important; font-size:16px !important; font-weight:800 !important; letter-spacing:-0.02em !important; color:#0A0F1A !important; white-space:nowrap !important; }
-  header :is(.wrap,.head-in) > a:first-child small { display:block !important; font-size:11px !important; font-weight:600 !important; letter-spacing:0 !important; color:#5A6070 !important; white-space:nowrap !important; margin:2px 0 0 !important; }
-  /* телефон: подпись бренда переносится на две строки, кнопка справа не выходит за экран */
-  @media (max-width:760px) { header :is(.wrap,.head-in) > a:first-child small { white-space:normal !important; max-width:138px !important; line-height:1.2 !important; } header.hd .hd-btn { font-size:12px !important; padding:9px 12px !important; white-space:nowrap !important; } }
-  @media (max-width:380px) { header.hd .hd-btn { padding:9px 10px !important; } }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -189,106 +277,196 @@ footer{border-top:1px solid var(--ink);padding:28px 0 40px;font-size:13px;color:
 </head>
 <body>
 <header class="hd"><div class="wrap">
-  <a class="hd-back" href="./" aria-label="AI2ARCH — на главную"><img src="images/ai2arch-sign.png" width="36" height="36" alt=""><span><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
-  <nav aria-label="Разделы"><a href="#result">Что получаете</a><a href="#steps">Как проходит</a><a href="#sample">Образец</a><a href="#request">Заявка</a></nav>
-  <a class="hd-btn" href="#request">Оставить заявку</a>
+  <a class="hd-back" href="./" aria-label="AI2ARCH — на главную"><img src="images/ai2arch-sign.png" width="38" height="38" alt=""><span><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
+  <nav aria-label="Разделы"><a href="#diag">Диагностика</a><a href="#screening">Скрининг</a><a href="#sample">Образец</a><a href="#steps">Как проходит</a><a href="#faq">Вопросы</a></nav>
+  <a class="hd-btn" href="#pay" data-goal="pay_anchor" data-src="header">Заказать диагностику</a>
 </div></header>
 
 <section class="hero"><div class="wrap">
   <div>
-    <div class="kicker">Анализ объекта · Лаборатория проектного интеллекта</div>
+    <div class="kicker">Анализ объекта для девелоперов и&nbsp;собственников</div>
     <h1>Экспресс-скрининг <em>участка или здания</em></h1>
-    <p class="lead">Ограничения, сценарии использования и&nbsp;экономика объекта за&nbsp;2–3&nbsp;недели. У&nbsp;каждой цифры есть источник, а&nbsp;то, чего не&nbsp;хватает для решения, видно сразу.</p>
+    <p class="lead">Что можно сделать с&nbsp;объектом, сколько это принесёт и&nbsp;каких документов не&nbsp;хватает для решения. У&nbsp;каждой цифры есть источник. Начните с&nbsp;диагностики: созвон и&nbsp;памятка по&nbsp;вашему объекту за&nbsp;15&nbsp;000&nbsp;₽.</p>
     <div class="cta">
-      <a class="btn pri" href="#request">Оставить заявку</a>
-      <a class="btn ghost" data-tg href="https://t.me/alkuleshov" target="_blank" rel="noopener">Написать в&nbsp;Telegram</a>
+      <a class="btn pri" href="#pay" data-goal="pay_anchor" data-src="hero">Заказать диагностику · 15&nbsp;000&nbsp;₽</a>
+      <a class="btn ghost" href="object-sample.html" data-goal="sample_open" data-src="hero">Смотреть образец отчёта</a>
     </div>
-    <div class="facts"><span>Для девелоперов и&nbsp;собственников</span><span>2–3 недели</span></div>
+    <div class="facts"><span>Онлайн</span><span>Карта, СБП или счёт для компании</span><span>Сумма засчитывается в&nbsp;скрининг</span></div>
   </div>
-  <div class="pricecard" aria-label="Стоимость">
-    <h3>Стоимость</h3>
-    <div class="pr-row"><div><b>Диагностика объекта</b><span>засчитывается в&nbsp;стоимость скрининга</span></div><strong>15 000 ₽</strong></div>
-    <div class="pr-row"><div><b>Экспресс-скрининг</b><span>один объект, 2–3 недели</span></div><strong>от 150 000 ₽</strong></div>
+  <div class="offer" aria-label="Два шага">
+    <div class="offer-h">Два шага</div>
+    <div class="of-row"><div class="of-n">1</div><div><b>Диагностика объекта</b><span>открытые данные, созвон 60–90 минут, памятка с&nbsp;красными флагами и&nbsp;списком документов</span></div><strong>15&nbsp;000&nbsp;₽</strong></div>
+    <div class="of-row two"><div class="of-n">2</div><div><b>Экспресс-скрининг</b><span>паспорт объекта: ограничения, рынок, сценарии, экономика; 2–3 недели</span></div><strong>от 150&nbsp;000&nbsp;₽</strong></div>
+    <div class="offer-f"><b>15&nbsp;000&nbsp;₽ не&nbsp;сгорают:</b> если после диагностики заказываете скрининг этого объекта, они вычитаются из&nbsp;его стоимости.</div>
   </div>
 </div></section>
 
-<section class="blk" id="result"><div class="wrap">
-  <div class="sh"><div class="num">01 · Что получаете</div><h2>Четыре ответа <em>по&nbsp;вашему объекту</em></h2></div>
+<section class="blk" id="when"><div class="wrap">
+  <div class="sh"><div class="num">01 · Когда нужно</div><h2>Решение по&nbsp;объекту <em>до&nbsp;того, как тратить деньги</em></h2></div>
   <div class="cells">
-    <div class="cell"><div class="cell-n">01</div><h3>Ограничения</h3><p>Что разрешено на&nbsp;участке и&nbsp;что мешает: территориальная зона, охранные зоны, права и&nbsp;обременения.</p></div>
-    <div class="cell"><div class="cell-n">02</div><h3>Сценарии</h3><p>Варианты использования объекта, сравнённые между собой.</p></div>
-    <div class="cell"><div class="cell-n">03</div><h3>Экономика</h3><p>Базовый расчёт по&nbsp;каждому сценарию: доход и&nbsp;вложения.</p></div>
-    <div class="cell"><div class="cell-n">04</div><h3>Чего не&nbsp;хватает</h3><p>Список недостающих документов и&nbsp;данных: что запросить, чтобы уточнить оценку.</p></div>
+    <div class="cell"><div class="cell-n">01</div><h3>Покупаете участок или здание</h3><p>Понять до&nbsp;сделки, что на&nbsp;нём разрешено, где красные флаги и&nbsp;по&nbsp;какой цене вход окупится.</p></div>
+    <div class="cell"><div class="cell-n">02</div><h3>Здание простаивает</h3><p>Или сдаётся дёшево. Какие функции дадут больше и&nbsp;сколько придётся вложить.</p></div>
+    <div class="cell"><div class="cell-n">03</div><h3>Пришёл покупатель или инвестор</h3><p>Нужны аргументы с&nbsp;цифрами и&nbsp;источниками, а&nbsp;не&nbsp;впечатления.</p></div>
+    <div class="cell"><div class="cell-n">04</div><h3>Готовите объект к&nbsp;продаже</h3><p>Паспорт с&nbsp;проверяемыми данными и&nbsp;честным списком пробелов повышает доверие покупателя.</p></div>
   </div>
+</div></section>
+
+<section class="blk" id="diag"><div class="wrap">
+  <div class="sh"><div class="num">02 · Шаг 1</div><h2>Диагностика объекта <em>за&nbsp;15&nbsp;000&nbsp;₽</em></h2>
+    <p>Быстрый ответ на&nbsp;вопрос «стоит ли этим заниматься». Работаем по&nbsp;открытым данным и&nbsp;тому, что у&nbsp;вас уже есть: документы не&nbsp;обязательны.</p></div>
+  <div class="diag">
+    <div class="diag-l">
+      <h3>Что делаем</h3>
+      <p class="sub">С&nbsp;помощью ИИ собираем данные, сверяем их с&nbsp;первоисточниками и&nbsp;разбираем с&nbsp;вами.</p>
+      <ul class="chk">
+        <li><b>Бриф</b><span>5 минут: объект, ваша задача, какие документы есть</span></li>
+        <li><b>Данные по&nbsp;объекту</b><span>ЕГРН и&nbsp;НСПД: площади, назначение, кадастровая стоимость; зона по&nbsp;ПЗЗ; окружение</span></li>
+        <li><b>Рынок</b><span>порядок ставок аренды и&nbsp;цен продажи рядом по&nbsp;объявлениям</span></li>
+        <li><b>Созвон 60–90 минут</b><span>в&nbsp;Яндекс Телемосте, можно с&nbsp;партнёрами</span></li>
+      </ul>
+      <div class="price-line"><b>до&nbsp;7&nbsp;дней</b><span>рабочих, от&nbsp;брифа<br>до&nbsp;памятки</span></div>
+    </div>
+    <div class="diag-r">
+      <h3>Что получаете</h3>
+      <p class="sub">Памятку по&nbsp;объекту — документ, с&nbsp;которым можно идти к&nbsp;партнёрам, продавцу или банку.</p>
+      <ul class="chk">
+        <li><b>Карточка объекта</b><span>что подтверждено реестрами, что известно только со&nbsp;слов, чего нет</span></li>
+        <li><b>Красные флаги</b><span>превышения по&nbsp;ПЗЗ, особые зоны, чужие доли, устаревшие документы</span></li>
+        <li><b>2–3 гипотезы использования</b><span>с&nbsp;порядком цифр по&nbsp;рынку</span></li>
+        <li><b>Список документов</b><span>что запросить и&nbsp;у&nbsp;кого, чтобы уточнить оценку</span></li>
+        <li><b>Рекомендация</b><span>нужен ли скрининг и&nbsp;в&nbsp;каком объёме</span></li>
+      </ul>
+      <div class="price-line"><b>15&nbsp;000&nbsp;₽</b><span>засчитывается<br>в&nbsp;стоимость скрининга</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="blk" id="screening"><div class="wrap">
+  <div class="sh"><div class="num">03 · Шаг 2</div><h2>Экспресс-скрининг: <em>паспорт объекта за&nbsp;2–3 недели</em></h2>
+    <p>Полный ответ на&nbsp;запрос: какие сценарии возможны, какой из&nbsp;них лучше подходит под&nbsp;ваши цели и&nbsp;при какой цене входа он окупится. От&nbsp;150&nbsp;000&nbsp;₽ за&nbsp;один объект.</p></div>
+  <div class="pass">
+    <div class="pb"><div class="cell-n">01</div><h3>Объект и&nbsp;права</h3><p>Площади, назначение, кадастровая стоимость, сверка ЕГРН с&nbsp;техпаспортами и&nbsp;обмерами.</p></div>
+    <div class="pb"><div class="cell-n">02</div><h3>Ограничения</h3><p>Зона и&nbsp;виды использования по&nbsp;ПЗЗ, этажность, процент застройки, потолок площади, особые зоны.</p></div>
+    <div class="pb"><div class="cell-n">03</div><h3>Локация и&nbsp;аудитория</h3><p>Окружение за&nbsp;15 минут пешком, прямые аналоги функций, кто будет пользоваться объектом.</p></div>
+    <div class="pb"><div class="cell-n">04</div><h3>Рынок</h3><p>Ставки аренды и&nbsp;цены продажи на&nbsp;трёх площадках, медианы и&nbsp;разброс по&nbsp;размеру лотов.</p></div>
+    <div class="pb"><div class="cell-n">05</div><h3>Сценарии</h3><p>3–4 варианта с&nbsp;оценкой соответствия вашему запросу в&nbsp;процентах и&nbsp;объяснением, почему не&nbsp;100&nbsp;%.</p></div>
+    <div class="pb"><div class="cell-n">06</div><h3>Экономика</h3><p>Чистый доход, цена выхода, кратность вложений, окупаемость и&nbsp;предельная цена входа; чувствительность.</p></div>
+  </div>
+  <div class="pass-f">
+    <p>Плюс список того, чего не&nbsp;хватает: какой документ закроет каждый пробел и&nbsp;на&nbsp;какие сценарии повлияет. Пустые места не&nbsp;прячем и&nbsp;не&nbsp;заполняем выдумками.</p>
+    <a class="btn ghost" href="object-sample.html" data-goal="sample_open" data-src="screening">Как это выглядит</a>
+  </div>
+</div></section>
+
+<section class="sample" id="sample"><div class="wrap">
+  <div>
+    <div class="num">04 · Образец</div>
+    <h2>Образец отчёта <em>можно покликать</em></h2>
+    <p>Реальный отчёт по&nbsp;объекту Б-3: два здания и&nbsp;помещения, 2&nbsp;394,8&nbsp;м². Четыре сценария с&nbsp;оценкой в&nbsp;процентах, калькулятор кратности, где можно менять ставку и&nbsp;цену входа, и&nbsp;список документов, которых не&nbsp;хватает. Адрес и&nbsp;город скрыты, цифры и&nbsp;методика — как в&nbsp;отчёте.</p>
+    <div class="btns">
+      <a class="btn light" href="object-sample.html" data-goal="sample_open" data-src="sample">Открыть образец отчёта</a>
+      <a class="btn line" href="#pay" data-goal="pay_anchor" data-src="sample">Хочу такой по&nbsp;своему объекту</a>
+    </div>
+  </div>
+  <a class="mock" href="object-sample.html#scenarios" data-goal="sample_open" data-src="mock" aria-label="Открыть образец отчёта">
+    <div class="mock-h"><b>Объект Б-3</b><span>соответствие запросу</span></div>
+    <div class="mrow"><div><b>А. Сохранить и&nbsp;сдавать</b><div class="mbar"><i style="width:71%;background:#1F7A4D"></i></div></div><strong>71</strong></div>
+    <div class="mrow"><div><b>Г. Заполнить и&nbsp;продать по&nbsp;частям</b><div class="mbar"><i style="width:61%;background:#C99A1A"></i></div></div><strong>61</strong></div>
+    <div class="mrow"><div><b>Б. Медцентр и&nbsp;wellness</b><div class="mbar"><i style="width:51%;background:#C99A1A"></i></div></div><strong>51</strong></div>
+    <div class="mrow"><div><b>В. Снос и&nbsp;новое здание</b><div class="mbar"><i style="width:35%;background:#8A2D57"></i></div></div><strong>35</strong></div>
+    <div class="mstats"><div><b>186</b><span>объявлений рынка</span></div><div><b>1,44</b><span>кратность X</span></div><div><b>62,3</b><span>млн&nbsp;₽ — предел входа</span></div></div>
+    <div class="mock-f">Открыть образец →</div>
+  </a>
 </div></section>
 
 <section class="blk" id="steps"><div class="wrap">
-  <div class="sh"><div class="num">02 · Как проходит</div><h2>Два шага: <em>диагностика и&nbsp;скрининг</em></h2></div>
-  <div class="steps">
-    <div class="step">
-      <div class="cell-n">Шаг 1</div>
-      <h3>Диагностика объекта</h3>
-      <p>Вы заполняете бриф, мы готовим материалы по&nbsp;объекту с&nbsp;помощью ИИ, проводим созвон на&nbsp;60–90 минут и&nbsp;присылаем памятку.</p>
-      <div class="price"><b>15 000 ₽</b>засчитывается в&nbsp;стоимость скрининга</div>
-    </div>
-    <div class="step dark">
-      <div class="cell-n">Шаг 2</div>
-      <h3>Экспресс-скрининг</h3>
-      <p>2–3 недели: ограничения, сценарии использования, экономика по&nbsp;каждому сценарию и&nbsp;список недостающих данных.</p>
-      <div class="price"><b>от 150 000 ₽</b>один объект</div>
+  <div class="sh"><div class="num">05 · Как проходит</div><h2>От&nbsp;оплаты до&nbsp;памятки <em>до&nbsp;8 рабочих дней</em></h2></div>
+  <div class="flow">
+    <div class="fs"><div class="cell-n">01</div><h3>Заявка и&nbsp;оплата</h3><p>Картой или СБП онлайн, компании — по&nbsp;счёту-договору.</p><span class="when">2 минуты</span></div>
+    <div class="fs"><div class="cell-n">02</div><h3>Бриф</h3><p>Объект, задача и&nbsp;документы, которые уже есть. Предлагаем время созвона.</p><span class="when">в&nbsp;день оплаты</span></div>
+    <div class="fs"><div class="cell-n">03</div><h3>Подготовка</h3><p>Собираем данные по&nbsp;объекту и&nbsp;рынку, сверяем с&nbsp;реестрами.</p><span class="when">2–3 рабочих дня</span></div>
+    <div class="fs"><div class="cell-n">04</div><h3>Созвон</h3><p>60–90 минут: что нашли, гипотезы, ответы на&nbsp;вопросы.</p><span class="when">до&nbsp;5 рабочих дней</span></div>
+    <div class="fs"><div class="cell-n">05</div><h3>Памятка</h3><p>Флаги, гипотезы, документы, рекомендация по&nbsp;скринингу.</p><span class="when">через 2 дня после созвона</span></div>
+  </div>
+</div></section>
+
+<section class="blk" id="who"><div class="wrap">
+  <div class="sh"><div class="num">06 · Кто делает</div><h2>Практик, <em>а&nbsp;не&nbsp;генератор отчётов</em></h2></div>
+  <div class="who">
+    <img src="images/kuleshov.jpg" width="120" height="120" alt="Кулешов Александр Алексеевич">
+    <div>
+      <h3>Александр Кулешов</h3>
+      <p class="role">Архитектор-урбанист, руководитель Лаборатории проектного интеллекта AI2ARCH</p>
+      <ul>
+        <li><b>15+ лет</b> в&nbsp;архитектуре, девелопменте и&nbsp;городской среде</li>
+        <li>Сооснователь креативного кластера <b>C52</b> в&nbsp;Ростове-на-Дону</li>
+        <li><b>5&nbsp;000+&nbsp;м²</b> запущенных пространств кластеров</li>
+        <li><b>17&nbsp;000+&nbsp;м²</b> концепций редевелопмента</li>
+        <li>Руководитель проектного бюро: <b>80+ проектов</b> городской среды</li>
+        <li>Автор программы ЮФУ «ИИ в&nbsp;редевелопменте»</li>
+      </ul>
     </div>
   </div>
 </div></section>
 
-<section class="blk" id="sample"><div class="wrap">
-  <div class="sh"><div class="num">03 · Образец</div><h2>Паспорт объекта <em>на&nbsp;примере C52</em></h2>
-    <p>Образец: C52, бывший склад на&nbsp;ул.&nbsp;Суворова в&nbsp;Ростове-на-Дону. Справа у&nbsp;каждой строки статус: что проверено по реестру, что известно только со слов собственника и чего нет совсем. Пустые места не скрываем: рядом указано, какой документ их закроет.</p></div>
-  <div class="passport">
-    <div class="pp-head"><b>C52 · ул. Суворова, 52а</b><span>Статус по строкам</span></div>
-    <div class="pp-row"><div class="k">Идентификация</div><div>Кадастровый номер 61:44:0040713:43; здание, склад, нежилое; площадь 1&nbsp;959,2&nbsp;м² по&nbsp;ЕГРН; кадастровая стоимость 17,3&nbsp;млн&nbsp;₽</div><div class="s">Проверено · ЕГРН</div></div>
-    <div class="pp-row"><div class="k">Физические параметры</div><div><span class="nd">нет данных:</span> нужен БТИ, техпаспорт или обследование</div><div class="s">Нет данных</div></div>
-    <div class="pp-row"><div class="k">Ограничения</div><div><span class="nd">нет данных:</span> нужна выписка ПЗЗ, проверка зон с&nbsp;особыми условиями использования и&nbsp;зон охраны объектов культурного наследия</div><div class="s">Нет данных</div></div>
-    <div class="pp-row"><div class="k">Права</div><div>Есть зарегистрированные права. Правообладатель и&nbsp;обременения: <span class="nd">нет данных:</span> нужна выписка из&nbsp;ЕГРН</div><div class="s">Частично · ЕГРН</div></div>
-    <div class="pp-row"><div class="k">Инженерия</div><div>Дефицит электрической мощности. Тепло, вода, канализация: <span class="nd">нет данных:</span> нужны технические условия</div><div class="s">Со слов собственника · не проверено</div></div>
-    <div class="pp-row"><div class="k">Текущее использование</div><div>Креативный бизнес, образование, гастро-концепции, события</div><div class="s">Со слов собственника · не проверено</div></div>
-  </div>
-  <div class="passport" style="margin-top:20px">
-    <div class="pp-head"><b>Что из этого следует</b><span>Вывод по образцу</span></div>
-    <div class="pp-row"><div class="k">Уже можно сказать</div><div>Площадь 1&nbsp;959,2&nbsp;м², кадастровая стоимость 17,3&nbsp;млн&nbsp;₽, права зарегистрированы. Масштаб и порядок цены понятны уже на этом этапе.</div><div class="s">Проверено</div></div>
-    <div class="pp-row"><div class="k">Пока нельзя</div><div>Назвать разрешённое использование: без ПЗЗ проверка «наилучшего использования» не подтверждается. Посчитать стоимость перевода в другой формат: без БТИ и техусловий не оценить объём работ и мощности.</div><div class="s">Нет данных</div></div>
-    <div class="pp-row"><div class="k">Что закроет</div><div>Выписка ПЗЗ и ЕГРН с обременениями, БТИ или обследование, технические условия от сетевых организаций. После них скрининг даёт сценарии с цифрами, а не гипотезы.</div><div class="s">Запрос на документы</div></div>
-  </div>
-  <p class="pp-note">Статус «Проверено» ставим только после сверки с первоисточником: ЕГРН, НСПД или ПЗЗ.</p>
-</div></section>
-
-<section class="blk" id="request"><div class="wrap req">
-  <div class="req-side">
-    <div class="sh"><div class="num">04 · Заявка</div><h2>Расскажите <em>об&nbsp;объекте</em></h2></div>
-    <p>Начнём с&nbsp;диагностики: обсудим объект и&nbsp;вашу задачу, договоримся о&nbsp;скрининге.</p>
-    <a class="btn ghost" data-tg href="https://t.me/alkuleshov" target="_blank" rel="noopener">Написать в&nbsp;Telegram</a>
+<section class="blk" id="pay"><div class="wrap pay">
+  <div class="pay-side">
+    <div class="sh"><div class="num">07 · Заказ</div><h2>Заказать <em>диагностику</em></h2></div>
+    <div class="pay-sum">
+      <div><span>Диагностика объекта</span><b>15&nbsp;000&nbsp;₽</b></div>
+      <div><span>Созвон 60–90 минут и&nbsp;памятка</span><b>включено</b></div>
+      <div><span>При заказе скрининга этого объекта</span><b>засчитываем</b></div>
+      <div class="tot"><span>К&nbsp;оплате сейчас</span><b>15&nbsp;000&nbsp;₽</b></div>
+    </div>
+    <ul class="after"><li><b>После оплаты</b> — бриф на&nbsp;почту в&nbsp;течение рабочего дня</li><li><b>Созвон</b> — до&nbsp;5 рабочих дней после брифа</li><li><b>Памятка</b> — через 2 рабочих дня после созвона</li></ul>
+    <p class="pay-note">Оплата картой и&nbsp;по&nbsp;СБП проходит на&nbsp;защищённой странице платёжного сервиса, чек придёт на&nbsp;почту. Для компаний — счёт-договор и&nbsp;акт. Оплата означает согласие с&nbsp;<a href="object-offer.html">условиями оферты</a>. НДС не&nbsp;облагается.</p>
   </div>
   <div>
     <form id="objForm" novalidate>
+      <div class="seg" role="radiogroup" aria-label="Способ оплаты">
+        <label><input type="radio" name="payer" value="card" checked>Картой или СБП<small>физлицо или ИП, сразу онлайн</small></label>
+        <label><input type="radio" name="payer" value="invoice">По&nbsp;счёту<small>компания, безналичный перевод</small></label>
+      </div>
       <div class="f"><label for="o-name">Имя *</label><input id="o-name" name="name" autocomplete="name" required></div>
       <div class="f"><label for="o-phone">Телефон или Telegram *</label><input id="o-phone" name="phone" autocomplete="tel" required placeholder="+7 900 000-00-00 или @ник"></div>
-      <div class="f"><label for="o-email">Email <small>(необязательно)</small></label><input id="o-email" name="email" type="email" autocomplete="email" placeholder="mail@example.com"></div>
+      <div class="f"><label for="o-email">Email * <small>(для чека, счёта и&nbsp;памятки)</small></label><input id="o-email" name="email" type="email" autocomplete="email" required placeholder="mail@example.com"></div>
+      <div class="f f-inn" id="o-inn-wrap"><label for="o-inn">ИНН компании *</label><input id="o-inn" name="inn" inputmode="numeric" autocomplete="off" placeholder="10 или 12 цифр"></div>
       <div class="f"><label for="o-obj">Объект: адрес или кадастровый номер *</label><input id="o-obj" name="object" required></div>
-      <div class="f"><label for="o-task">Что хотите понять <small>(необязательно)</small></label><textarea id="o-task" name="task" placeholder="Например: что можно сделать со зданием и&nbsp;что из&nbsp;этого окупится"></textarea></div>
-      <label class="agree"><input type="checkbox" id="o-agree" required> Согласен(на) на&nbsp;обработку персональных данных.</label>
-      <button class="submit" id="o-submit" type="submit">Отправить заявку</button>
+      <div class="f"><label for="o-task">Что хотите понять <small>(необязательно)</small></label><textarea id="o-task" name="task" placeholder="Например: стоит ли покупать и что можно сделать со зданием"></textarea></div>
+      <label class="agree"><input type="checkbox" id="o-agree" required> <span>Принимаю <a href="object-offer.html" target="_blank" rel="noopener">условия оферты</a> и&nbsp;согласен(на) на&nbsp;обработку персональных данных.</span></label>
+      <button class="submit" id="o-submit" type="submit">Перейти к&nbsp;оплате · 15&nbsp;000&nbsp;₽</button>
     </form>
-    <div class="msg" id="o-done"><h3>Заявка отправлена</h3><p>Свяжемся с&nbsp;вами, чтобы договориться о&nbsp;диагностике.</p></div>
-    <div class="msg" id="o-fail"><h3>Не&nbsp;получилось отправить</h3><p>Напишите нам в&nbsp;<a data-tg href="https://t.me/alkuleshov" target="_blank" rel="noopener">Telegram</a>, ответим там.</p></div>
+    <div class="msg" id="o-pay"><h3>Остался один шаг</h3><p>Заявка сохранена. Оплатите диагностику на&nbsp;странице платёжного сервиса — после оплаты пришлём бриф и&nbsp;предложим время созвона.</p><a class="btn pri" id="o-paylink" href="#" target="_blank" rel="noopener">Оплатить 15&nbsp;000&nbsp;₽</a></div>
+    <div class="msg" id="o-link"><h3>Заявка принята</h3><p>Пришлём ссылку на&nbsp;оплату на&nbsp;почту или в&nbsp;Telegram в&nbsp;течение рабочего дня. После оплаты — бриф и&nbsp;время созвона.</p></div>
+    <div class="msg" id="o-invoice"><h3>Готовим счёт-договор</h3><p>Пришлём его на&nbsp;почту в&nbsp;течение рабочего дня. Что дальше:</p><ol><li>Оплатите счёт с&nbsp;расчётного счёта компании.</li><li>После поступления оплаты пришлём бриф и&nbsp;предложим время созвона.</li><li>Акт оказанных услуг — после созвона и&nbsp;памятки.</li></ol></div>
+    <div class="msg" id="o-fail"><h3>Не&nbsp;получилось отправить</h3><p>Напишите нам в&nbsp;<a data-tg href="https://t.me/alkuleshov" target="_blank" rel="noopener">Telegram</a> — пришлём ссылку на&nbsp;оплату или счёт там.</p></div>
+  </div>
+</div></section>
+
+<section class="blk" id="faq"><div class="wrap">
+  <div class="sh"><div class="num">08 · Вопросы</div><h2>Частые <em>вопросы</em></h2></div>
+  <div class="faq">
+    <details><summary>Что, если документов по&nbsp;объекту нет?</summary><p>Диагностика работает по&nbsp;открытым данным: ЕГРН и&nbsp;НСПД, правила землепользования и&nbsp;застройки, карты, объявления. Чего не&nbsp;хватает, помечаем «нет данных» и&nbsp;пишем, какой документ это закроет и&nbsp;где его получить.</p></details>
+    <details><summary>Это оценка стоимости или юридическое заключение?</summary><p>Нет. Это аналитика для решения: сценарии, рыночные ориентиры и&nbsp;расчёт окупаемости. Отчёт об&nbsp;оценке по&nbsp;закону делает оценщик, проверку чистоты сделки — юрист. В&nbsp;памятке скажем, когда они понадобятся.</p></details>
+    <details><summary>Насколько можно доверять цифрам?</summary><p>У&nbsp;каждой цифры есть источник и&nbsp;статус: сверено по&nbsp;двум источникам, один источник, допущение или нет данных. Цены рынка — цены предложения, не&nbsp;сделки, это так и&nbsp;подписано. Посмотрите <a href="object-sample.html">образец отчёта</a>.</p></details>
+    <details><summary>Какие объекты вы берёте?</summary><p>Участки и&nbsp;здания в&nbsp;России, у&nbsp;которых есть кадастровый номер или адрес: коммерческие, производственные и&nbsp;общественные здания, территории под&nbsp;редевелопмент. Работаем онлайн, поэтому город значения не&nbsp;имеет.</p></details>
+    <details><summary>Как засчитываются 15&nbsp;000&nbsp;₽?</summary><p>Если в&nbsp;течение 30 дней после созвона вы заказываете экспресс-скрининг того же объекта, его стоимость уменьшается на&nbsp;15&nbsp;000&nbsp;₽.</p></details>
+    <details><summary>Можно ли вернуть деньги?</summary><p>Если созвон не&nbsp;состоялся по&nbsp;нашей вине или вы отказались до&nbsp;начала подготовки, вернём всю сумму. После начала подготовки — за&nbsp;вычетом уже выполненной работы. Перенести созвон можно без доплаты, предупредив за&nbsp;сутки.</p></details>
+    <details><summary>Что с&nbsp;конфиденциальностью?</summary><p>Данные и&nbsp;документы по&nbsp;объекту используем только для работы с&nbsp;вами, не&nbsp;публикуем и&nbsp;не&nbsp;называем вас клиентом без вашего согласия.</p></details>
+    <details><summary>Какие документы получит бухгалтерия?</summary><p>При оплате картой или по&nbsp;СБП — электронный чек. Компании получают счёт-договор до&nbsp;оплаты и&nbsp;акт после памятки. Оплата счёта означает согласие с&nbsp;его условиями, отдельный договор подписывать не&nbsp;нужно.</p></details>
   </div>
 </div></section>
 
 <footer><div class="wrap ft-row">
   <a class="ft-brand" href="./"><img src="images/ai2arch-tile.png" width="44" height="44" alt=""><span><b>AI2ARCH · 2026</b><small>Лаборатория проектного интеллекта</small></span></a>
   <p>ИП Кулешов Александр Алексеевич · ИНН 615519176752 · ОГРНИП 324619600147971</p>
+  <p class="ft-links"><a href="object-offer.html">Оферта</a> · <a data-tg href="https://t.me/alkuleshov" target="_blank" rel="noopener">Telegram</a></p>
 </div></footer>
 
 <script>
 (function () {
+  /* Ссылка на оплату 15 000 ₽ (многоразовый счёт ЮKassa). Пока пусто — после заявки обещаем прислать ссылку вручную. */
+  var PAY_URL = 'https://yookassa.ru/my/i/awPrnN7K4CUU/l';
   var ENROLL_URL = 'https://script.google.com/macros/s/AKfycby1af9vPX9ucvhf1phoY_kr0BQ3q4YMAVVRNUMB0Y_xbYHxlhyp2ca69mpD3S7uTRY/exec';
   var from = new URLSearchParams(location.search).get('from') || '';
   function goal(name, params) { if (typeof ym === 'function') ym(113526373, 'reachGoal', name, params || {}); }
@@ -296,41 +474,67 @@ footer{border-top:1px solid var(--ink);padding:28px 0 40px;font-size:13px;color:
   document.querySelectorAll('[data-tg]').forEach(function (a) {
     a.addEventListener('click', function () { goal('telegram_click', { source: 'object' + (from ? '-' + from : '') }); });
   });
+  document.querySelectorAll('[data-goal]').forEach(function (a) {
+    a.addEventListener('click', function () { goal(a.getAttribute('data-goal'), { src: a.getAttribute('data-src') || '' }); });
+  });
 
   var form = document.getElementById('objForm');
+  var submit = document.getElementById('o-submit');
+  var innWrap = document.getElementById('o-inn-wrap');
+  function payer() { return form.querySelector('input[name="payer"]:checked').value; }
+  function syncPayer() {
+    var inv = payer() === 'invoice';
+    innWrap.classList.toggle('on', inv);
+    submit.innerHTML = inv ? 'Запросить счёт · 15&nbsp;000&nbsp;₽' : 'Перейти к&nbsp;оплате · 15&nbsp;000&nbsp;₽';
+  }
+  form.querySelectorAll('input[name="payer"]').forEach(function (r) { r.addEventListener('change', syncPayer); });
+  syncPayer();
+
   var opened = false;
   form.addEventListener('focusin', function () { if (!opened) { opened = true; goal('form_open', { course: 'Анализ объекта' }); } });
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    var inv = payer() === 'invoice';
     var name = document.getElementById('o-name');
     var phone = document.getElementById('o-phone');
+    var email = document.getElementById('o-email');
     var obj = document.getElementById('o-obj');
+    var inn = document.getElementById('o-inn');
     var agree = document.getElementById('o-agree');
-    var bad = [name, phone, obj].filter(function (el) { return !el.value.trim(); });
+    var need = [name, phone, email, obj].concat(inv ? [inn] : []);
+    var bad = need.filter(function (el) { return !el.value.trim(); });
+    if (email.value.trim() && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())) bad.push(email);
+    if (inv && inn.value.trim() && !/^\d{10}(\d{2})?$/.test(inn.value.replace(/\s/g, ''))) bad.push(inn);
+    need.forEach(function (el) { el.style.borderColor = ''; });
     if (bad.length) { bad[0].focus(); bad.forEach(function (el) { el.style.borderColor = '#8A2D57'; }); return; }
-    if (!agree.checked) { agree.focus(); return; }
+    if (!agree.checked) { agree.focus(); agree.parentNode.style.color = '#8A2D57'; return; }
     var task = document.getElementById('o-task').value.trim();
     var payload = {
       name: name.value.trim(),
       phone: phone.value.trim(),
-      email: document.getElementById('o-email').value.trim(),
+      email: email.value.trim(),
       education: '',
       certEligible: '',
-      comment: 'Объект: ' + obj.value.trim() + (task ? '. Задача: ' + task : '') + (from ? '. Переход: ' + from : ''),
+      comment: 'Диагностика 15 000 ₽. Оплата: ' + (inv ? 'счёт, ИНН ' + inn.value.replace(/\s/g, '') : 'карта/СБП') + '. Объект: ' + obj.value.trim() + (task ? '. Задача: ' + task : '') + (from ? '. Переход: ' + from : ''),
       timestamp: new Date().toISOString(),
       course: 'Анализ объекта',
-      source: 'Анализ объекта'
+      source: inv ? 'Диагностика: счёт' : 'Диагностика: карта'
     };
-    var btn = document.getElementById('o-submit');
-    btn.disabled = true; btn.textContent = 'Отправка...';
+    submit.disabled = true; submit.textContent = 'Отправка...';
     var settled = false;
+    function show(id) { form.style.display = 'none'; var m = document.getElementById(id); m.style.display = 'block'; m.scrollIntoView({ block: 'nearest' }); }
     function finish(ok) {
       if (settled) return;
       settled = true; clearTimeout(timer);
-      form.style.display = 'none';
-      if (ok) { goal('form_submit', { course: payload.course, from: from }); document.getElementById('o-done').style.display = 'block'; }
-      else { document.getElementById('o-fail').style.display = 'block'; }
+      if (!ok) { show('o-fail'); return; }
+      goal('form_submit', { course: payload.course, from: from, payer: inv ? 'invoice' : 'card' });
+      if (inv) { goal('invoice_request'); show('o-invoice'); return; }
+      if (PAY_URL) {
+        var a = document.getElementById('o-paylink'); a.href = PAY_URL;
+        a.addEventListener('click', function () { goal('pay_click'); });
+        show('o-pay');
+      } else { show('o-link'); }
     }
     // Ответ скрипта Google в режиме no-cors прочитать нельзя: если запрос не завершился за 5 секунд, считаем заявку отправленной.
     var timer = setTimeout(function () { finish(true); }, 5000);
