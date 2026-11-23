@@ -37,6 +37,34 @@ ol li{margin-top:6px}
 .req p{margin:0}
 footer{border-top:1px solid var(--ink);padding:24px;font-size:13px;color:var(--muted);text-align:center}
 @media (max-width:760px){.hd .wrap{padding:0 16px}.hd-back small{white-space:normal;max-width:138px;line-height:1.2}.hd-btn{font-size:12px;padding:9px 12px}main{padding:calc(var(--head) + 28px) 16px 48px}}
+/* AFFORDANCE-V1: кликабельные элементы видны в покое и подсвечиваются при наведении */
+:root{--aff-accent:var(--accent,#2B4FD8);--aff-ink:var(--ink,#0A0F1A)}
+a,button,label,summary{cursor:pointer}
+a:focus-visible,button:focus-visible,summary:focus-visible,label:focus-within>input:focus-visible{outline:2px solid var(--aff-accent);outline-offset:3px}
+/* текстовые ссылки в содержании: подчёркнуты в покое */
+main a:not([class*="btn"]):not([class*="ix"]):not([class*="tile"]):not([class*="goto"]):not([class*="mock"]):not([class*="bullet"]),
+.wrap > p a,.wrap li a,.wrap > div a:not([class*="btn"]),.faq a,.pay-note a,.agree a,footer a{
+  color:var(--aff-accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;transition:background-color .15s,text-decoration-thickness .15s}
+main a:not([class*="btn"]):not([class*="ix"]):not([class*="tile"]):not([class*="goto"]):not([class*="mock"]):not([class*="bullet"]):hover,
+.wrap > p a:hover,.wrap li a:hover,.faq a:hover,.pay-note a:hover,.agree a:hover,footer a:hover{
+  text-decoration-thickness:2px;background-color:rgba(43,79,216,.10)}
+/* кнопки: подъём и тень при наведении */
+a[class*="btn"],button[class*="btn"],.submit,.hd-btn,.talk-btn,.linkbtn,.btn{transition:transform .15s ease,box-shadow .15s ease,background-color .15s ease,color .15s ease,border-color .15s ease}
+a[class*="btn"]:hover,button[class*="btn"]:hover,.submit:hover,.hd-btn:hover,.talk-btn:hover,.linkbtn:hover,.btn:hover{
+  opacity:1 !important;transform:translate(-2px,-2px) !important;box-shadow:4px 4px 0 var(--aff-ink) !important}
+/* контурные и призрачные кнопки: заливка при наведении (работает и на плоских страницах) */
+a[class*="btn"]:is(.btn-ghost,.btn-line,.btn-light,.btn--line,.ghost,.line):hover,.btn-ghost:hover,.btn-line:hover,.hero .btn-ghost:hover,.hero .btn-line:hover{background:rgba(43,79,216,.12) !important;color:var(--aff-ink) !important;border-color:var(--aff-ink) !important}
+/* карточки-ссылки: подъём, тень и смена фона */
+a.ix,a.tile,a.bullet,a.goto,a.mock,a.cell,a.pb,a.fs,a.alt-r,a[class*="card"],a[class*="step"]{transition:transform .15s ease,box-shadow .15s ease,background-color .15s ease}
+a.ix:hover,a.tile:hover,a.bullet:hover,a.goto:hover,a.mock:hover,a.cell:hover,a.pb:hover,a.fs:hover,a[class*="card"]:hover,a[class*="step"]:hover{
+  transform:translate(-2px,-2px) !important;box-shadow:5px 5px 0 var(--aff-ink) !important;filter:none}
+/* сворачиваемые блоки: заголовок подсвечивается, маркер виден */
+summary{transition:background-color .15s,color .15s}
+summary:hover{background-color:rgba(43,79,216,.08);color:var(--aff-accent)}
+details>summary::after{transition:transform .2s}
+/* ссылки и кнопки в шапке: подчёркивание при наведении */
+header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+@media (hover:none){a[class*="btn"]:hover,.btn:hover,a.ix:hover,a.tile:hover,a.mock:hover,a.cell:hover{transform:none;box-shadow:none}}
 </style>
 </head>
 <body>
@@ -58,7 +86,7 @@ footer{border-top:1px solid var(--ink);padding:24px;font-size:13px;color:var(--m
   <h2>2. Предмет</h2>
   <ol>
     <li>Исполнитель оказывает информационно-аналитическую услугу по&nbsp;объекту недвижимости (земельному участку, зданию, помещению), указанному Заказчиком: собирает и&nbsp;проверяет открытые данные и&nbsp;сведения, предоставленные Заказчиком, проводит онлайн-консультацию и&nbsp;передаёт памятку по&nbsp;объекту.</li>
-    <li>В&nbsp;услугу входят: анализ брифа Заказчика; сбор сведений из&nbsp;открытых источников (ЕГРН, НСПД, правила землепользования и&nbsp;застройки, картографические сервисы, объявления о&nbsp;продаже и&nbsp;аренде); онлайн-консультация продолжительностью 60–90 минут; памятка в&nbsp;электронном виде, содержащая карточку объекта, выявленные риски, 2–3 гипотезы использования, перечень недостающих документов и&nbsp;рекомендацию по&nbsp;дальнейшему анализу.</li>
+    <li>В&nbsp;услугу входят: анализ брифа Заказчика; сбор сведений из&nbsp;открытых источников (ЕГРН, НСПД, правила землепользования и&nbsp;застройки, картографические сервисы, объявления о&nbsp;продаже и&nbsp;аренде); онлайн-консультация продолжительностью 60–90 минут; памятка в&nbsp;электронном виде, содержащая карточку объекта, выявленные риски, 2–3 гипотезы использования, перечень недостающих документов и&nbsp;вывод Исполнителя: продолжать работу с&nbsp;объектом, остановиться или что уточнить, в&nbsp;том числе нужен ли дальнейший анализ.</li>
     <li>Результат услуги носит информационно-аналитический характер. Он не&nbsp;является отчётом об&nbsp;оценке в&nbsp;смысле Федерального закона «Об&nbsp;оценочной деятельности», юридическим заключением о&nbsp;чистоте сделки, техническим заключением о&nbsp;состоянии конструкций или гарантией доходности. Решения по&nbsp;объекту Заказчик принимает самостоятельно.</li>
   </ol>
 

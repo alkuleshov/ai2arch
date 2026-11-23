@@ -556,6 +556,34 @@
   @media (min-width:761px) and (max-width:1440px) { header.head .nav a { font-size:13px !important; padding:8px 7px !important; } }
   /* телефон: подпись бренда переносится на две строки, кнопка справа не выходит за экран */
   @media (max-width:760px) { header :is(.wrap,.head-in) > a:first-child small { white-space:normal !important; max-width:138px !important; line-height:1.2 !important; } header.hd .hd-btn { font-size:12px !important; padding:9px 12px !important; white-space:nowrap !important; } }
+/* AFFORDANCE-V1: кликабельные элементы видны в покое и подсвечиваются при наведении */
+:root{--aff-accent:var(--accent,#2B4FD8);--aff-ink:var(--ink,#0A0F1A)}
+a,button,label,summary{cursor:pointer}
+a:focus-visible,button:focus-visible,summary:focus-visible,label:focus-within>input:focus-visible{outline:2px solid var(--aff-accent);outline-offset:3px}
+/* текстовые ссылки в содержании: подчёркнуты в покое */
+main a:not([class*="btn"]):not([class*="ix"]):not([class*="tile"]):not([class*="goto"]):not([class*="mock"]):not([class*="bullet"]),
+.wrap > p a,.wrap li a,.wrap > div a:not([class*="btn"]),.faq a,.pay-note a,.agree a,footer a{
+  color:var(--aff-accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;transition:background-color .15s,text-decoration-thickness .15s}
+main a:not([class*="btn"]):not([class*="ix"]):not([class*="tile"]):not([class*="goto"]):not([class*="mock"]):not([class*="bullet"]):hover,
+.wrap > p a:hover,.wrap li a:hover,.faq a:hover,.pay-note a:hover,.agree a:hover,footer a:hover{
+  text-decoration-thickness:2px;background-color:rgba(43,79,216,.10)}
+/* кнопки: подъём и тень при наведении */
+a[class*="btn"],button[class*="btn"],.submit,.hd-btn,.talk-btn,.linkbtn,.btn{transition:transform .15s ease,box-shadow .15s ease,background-color .15s ease,color .15s ease,border-color .15s ease}
+a[class*="btn"]:hover,button[class*="btn"]:hover,.submit:hover,.hd-btn:hover,.talk-btn:hover,.linkbtn:hover,.btn:hover{
+  opacity:1 !important;transform:translate(-2px,-2px) !important;box-shadow:4px 4px 0 var(--aff-ink) !important}
+/* контурные и призрачные кнопки: заливка при наведении (работает и на плоских страницах) */
+a[class*="btn"]:is(.btn-ghost,.btn-line,.btn-light,.btn--line,.ghost,.line):hover,.btn-ghost:hover,.btn-line:hover,.hero .btn-ghost:hover,.hero .btn-line:hover{background:rgba(43,79,216,.12) !important;color:var(--aff-ink) !important;border-color:var(--aff-ink) !important}
+/* карточки-ссылки: подъём, тень и смена фона */
+a.ix,a.tile,a.bullet,a.goto,a.mock,a.cell,a.pb,a.fs,a.alt-r,a[class*="card"],a[class*="step"]{transition:transform .15s ease,box-shadow .15s ease,background-color .15s ease}
+a.ix:hover,a.tile:hover,a.bullet:hover,a.goto:hover,a.mock:hover,a.cell:hover,a.pb:hover,a.fs:hover,a[class*="card"]:hover,a[class*="step"]:hover{
+  transform:translate(-2px,-2px) !important;box-shadow:5px 5px 0 var(--aff-ink) !important;filter:none}
+/* сворачиваемые блоки: заголовок подсвечивается, маркер виден */
+summary{transition:background-color .15s,color .15s}
+summary:hover{background-color:rgba(43,79,216,.08);color:var(--aff-accent)}
+details>summary::after{transition:transform .2s}
+/* ссылки и кнопки в шапке: подчёркивание при наведении */
+header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+@media (hover:none){a[class*="btn"]:hover,.btn:hover,a.ix:hover,a.tile:hover,a.mock:hover,a.cell:hover{transform:none;box-shadow:none}}
 </style>
 <link rel="stylesheet" href="assets/ai-levels.css">
 <script src="assets/ai-levels.js" defer></script>

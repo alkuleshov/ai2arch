@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Паспорт объекта · AI2ARCH</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Паспорт участка или здания для девелоперов и собственников: ограничения, сценарии и экономика объекта. Начните с диагностики за 15 000 ₽ — сумма засчитывается в паспорт.">
+<meta name="description" content="Покупать объект или нет — ответ за неделю. Диагностика участка или здания за 15 000 ₽ и паспорт объекта с предельной ценой входа. У каждой цифры источник.">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -260,6 +260,50 @@ footer{border-top:1px solid var(--ink);padding:28px 0 40px;font-size:13px;color:
   .faq summary{padding:16px 18px;font-size:16px}
   .faq details p{padding:0 18px 16px}
 }
+/* УТП: сравнение и вопрос в карточке шагов */
+.of-row span .q{display:block;font-weight:800;color:var(--ink);font-size:14.5px;margin-bottom:2px}
+.alt{margin-top:16px;border:1px solid var(--ink);background:#fff}
+.alt-h{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:14px 22px;border-bottom:1px solid var(--line)}
+.alt-r{display:grid;grid-template-columns:200px 1fr auto;gap:18px;align-items:baseline;padding:14px 22px;border-top:1px solid var(--line)}
+.alt-h + .alt-r{border-top:0}
+.alt-r b{font-size:16px;font-weight:800}
+.alt-r span{font-size:15px;color:var(--muted)}
+.alt-r em{font-style:normal;font-weight:800;font-size:15px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.alt-r.us{background:var(--midnight);color:#fff;border-top:0}
+.alt-r.us span{color:#C9D3EA}
+.alt-r.us em{color:var(--powder)}
+@media (max-width:760px){.alt-r{grid-template-columns:1fr;gap:4px;padding:14px 16px}.alt-h{padding:12px 16px}.alt-r em{white-space:normal}}
+a.of-row{color:inherit;text-decoration:none !important;transition:background-color .15s}
+a.of-row:hover{background-color:rgba(43,79,216,.10);text-decoration:none !important}
+a.of-row:hover > div > b{text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
+/* AFFORDANCE-V1: кликабельные элементы видны в покое и подсвечиваются при наведении */
+:root{--aff-accent:var(--accent,#2B4FD8);--aff-ink:var(--ink,#0A0F1A)}
+a,button,label,summary{cursor:pointer}
+a:focus-visible,button:focus-visible,summary:focus-visible,label:focus-within>input:focus-visible{outline:2px solid var(--aff-accent);outline-offset:3px}
+/* текстовые ссылки в содержании: подчёркнуты в покое */
+main a:not([class*="btn"]):not([class*="ix"]):not([class*="tile"]):not([class*="goto"]):not([class*="mock"]):not([class*="bullet"]),
+.wrap > p a,.wrap li a,.wrap > div a:not([class*="btn"]),.faq a,.pay-note a,.agree a,footer a{
+  color:var(--aff-accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;transition:background-color .15s,text-decoration-thickness .15s}
+main a:not([class*="btn"]):not([class*="ix"]):not([class*="tile"]):not([class*="goto"]):not([class*="mock"]):not([class*="bullet"]):hover,
+.wrap > p a:hover,.wrap li a:hover,.faq a:hover,.pay-note a:hover,.agree a:hover,footer a:hover{
+  text-decoration-thickness:2px;background-color:rgba(43,79,216,.10)}
+/* кнопки: подъём и тень при наведении */
+a[class*="btn"],button[class*="btn"],.submit,.hd-btn,.talk-btn,.linkbtn,.btn{transition:transform .15s ease,box-shadow .15s ease,background-color .15s ease,color .15s ease,border-color .15s ease}
+a[class*="btn"]:hover,button[class*="btn"]:hover,.submit:hover,.hd-btn:hover,.talk-btn:hover,.linkbtn:hover,.btn:hover{
+  opacity:1 !important;transform:translate(-2px,-2px) !important;box-shadow:4px 4px 0 var(--aff-ink) !important}
+/* контурные и призрачные кнопки: заливка при наведении (работает и на плоских страницах) */
+a[class*="btn"]:is(.btn-ghost,.btn-line,.btn-light,.btn--line,.ghost,.line):hover,.btn-ghost:hover,.btn-line:hover,.hero .btn-ghost:hover,.hero .btn-line:hover{background:rgba(43,79,216,.12) !important;color:var(--aff-ink) !important;border-color:var(--aff-ink) !important}
+/* карточки-ссылки: подъём, тень и смена фона */
+a.ix,a.tile,a.bullet,a.goto,a.mock,a.cell,a.pb,a.fs,a.alt-r,a[class*="card"],a[class*="step"]{transition:transform .15s ease,box-shadow .15s ease,background-color .15s ease}
+a.ix:hover,a.tile:hover,a.bullet:hover,a.goto:hover,a.mock:hover,a.cell:hover,a.pb:hover,a.fs:hover,a[class*="card"]:hover,a[class*="step"]:hover{
+  transform:translate(-2px,-2px) !important;box-shadow:5px 5px 0 var(--aff-ink) !important;filter:none}
+/* сворачиваемые блоки: заголовок подсвечивается, маркер виден */
+summary{transition:background-color .15s,color .15s}
+summary:hover{background-color:rgba(43,79,216,.08);color:var(--aff-accent)}
+details>summary::after{transition:transform .2s}
+/* ссылки и кнопки в шапке: подчёркивание при наведении */
+header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+@media (hover:none){a[class*="btn"]:hover,.btn:hover,a.ix:hover,a.tile:hover,a.mock:hover,a.cell:hover{transform:none;box-shadow:none}}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -278,31 +322,49 @@ footer{border-top:1px solid var(--ink);padding:28px 0 40px;font-size:13px;color:
 <body>
 <header class="hd"><div class="wrap">
   <a class="hd-back" href="./" aria-label="AI2ARCH — на главную"><img src="images/ai2arch-sign.png" width="38" height="38" alt=""><span><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
-  <nav aria-label="Разделы"><a href="#diag">Диагностика</a><a href="#screening">Паспорт</a><a href="#sample">Образец</a><a href="#steps">Как проходит</a><a href="#faq">Вопросы</a></nav>
+  <nav aria-label="Разделы"><a href="#why">Отличия</a><a href="#diag">Диагностика</a><a href="#screening">Паспорт</a><a href="#sample">Образец</a><a href="#steps">Как проходит</a><a href="#faq">Вопросы</a></nav>
   <a class="hd-btn" href="#pay" data-goal="pay_anchor" data-src="header">Заказать диагностику</a>
 </div></header>
 
 <section class="hero"><div class="wrap">
   <div>
-    <div class="kicker">Анализ объекта для девелоперов и&nbsp;собственников</div>
-    <h1>Паспорт объекта <em>для участка или здания</em></h1>
-    <p class="lead">Что можно сделать с&nbsp;объектом, сколько это принесёт и&nbsp;каких документов не&nbsp;хватает для решения. У&nbsp;каждой цифры есть источник. Начните с&nbsp;диагностики: созвон и&nbsp;памятка по&nbsp;вашему объекту за&nbsp;15&nbsp;000&nbsp;₽.</p>
+    <div class="kicker">Участок или здание · для девелоперов и&nbsp;собственников</div>
+    <h1>Покупать объект <em>или нет?</em></h1>
+    <p class="lead">Ответим до&nbsp;сделки: что на&nbsp;объекте разрешено, где стоп-факторы, какие сценарии принесут деньги и&nbsp;до&nbsp;какой цены покупка окупается. У&nbsp;каждой цифры — источник. Первый ответ — за&nbsp;неделю и&nbsp;15&nbsp;000&nbsp;₽.</p>
     <div class="cta">
       <a class="btn pri" href="#pay" data-goal="pay_anchor" data-src="hero">Заказать диагностику · 15&nbsp;000&nbsp;₽</a>
       <a class="btn ghost" href="object-sample.html" data-goal="sample_open" data-src="hero">Смотреть образец паспорта</a>
     </div>
-    <div class="facts"><span>Онлайн</span><span>Карта, СБП или счёт для компании</span><span>Сумма засчитывается в&nbsp;паспорт</span></div>
+    <div class="facts"><span>Источник у&nbsp;каждой цифры</span><span>Онлайн, любой город России</span><span>Карта, СБП или счёт</span></div>
   </div>
   <div class="offer" aria-label="Два шага">
     <div class="offer-h">Два шага</div>
-    <div class="of-row"><div class="of-n">1</div><div><b>Диагностика объекта</b><span>открытые данные, созвон 60–90 минут, памятка с&nbsp;красными флагами и&nbsp;списком документов</span></div><strong>15&nbsp;000&nbsp;₽</strong></div>
-    <div class="of-row two"><div class="of-n">2</div><div><b>Паспорт объекта</b><span>экспресс-версия за 2–3 недели: ограничения, рынок, сценарии, экономика</span></div><strong>от 150&nbsp;000&nbsp;₽</strong></div>
+    <a class="of-row" href="#diag"><div class="of-n">1</div><div><b>Диагностика объекта</b><span><b class="q">Брать или не&nbsp;брать?</b> Стоп-факторы, 2–3 гипотезы, список документов; созвон и&nbsp;памятка за&nbsp;неделю</span></div><strong>15&nbsp;000&nbsp;₽</strong></a>
+    <a class="of-row two" href="#screening"><div class="of-n">2</div><div><b>Паспорт объекта</b><span><b class="q">По&nbsp;какой цене входить и&nbsp;что делать?</b> Ограничения, рынок, сценарии, финмодель и&nbsp;предельная цена входа; экспресс-версия за&nbsp;2–3 недели</span></div><strong>от 150&nbsp;000&nbsp;₽</strong></a>
     <div class="offer-f"><b>15&nbsp;000&nbsp;₽ не&nbsp;сгорают:</b> если после диагностики заказываете паспорт этого объекта, они вычитаются из&nbsp;его стоимости.</div>
   </div>
 </div></section>
 
+<section class="blk" id="why"><div class="wrap">
+  <div class="sh"><div class="num">01 · Чем отличаемся</div><h2>Решение, <em>а&nbsp;не&nbsp;выписка</em></h2>
+    <p>Данные по&nbsp;объекту сегодня найти легко. Сложно понять, что с&nbsp;ними делать и&nbsp;сколько можно заплатить. Это и&nbsp;есть наша работа.</p></div>
+  <div class="cells">
+    <div class="cell"><div class="cell-n">01</div><h3>Ответ «брать или нет»</h3><p>Не&nbsp;набор справок, а&nbsp;вывод: идти дальше, остановиться или торговаться — и&nbsp;почему.</p></div>
+    <div class="cell"><div class="cell-n">02</div><h3>Предельная цена входа</h3><p>Сумма, выше которой покупка не&nbsp;окупается. Опора в&nbsp;торге с&nbsp;продавцом и&nbsp;в&nbsp;разговоре с&nbsp;инвестором.</p></div>
+    <div class="cell"><div class="cell-n">03</div><h3>Источник у&nbsp;каждой цифры</h3><p>Статус: сверено по&nbsp;двум источникам, один источник, допущение или нет данных. Пробелы не&nbsp;прячем.</p></div>
+    <div class="cell"><div class="cell-n">04</div><h3>Первый ответ за&nbsp;неделю</h3><p>ИИ собирает данные, практик девелопмента делает выводы. Поэтому быстро и&nbsp;в&nbsp;разы дешевле консалтинга.</p></div>
+  </div>
+  <div class="alt" aria-label="Где ещё искать ответ">
+    <div class="alt-h">Где ещё искать ответ</div>
+    <div class="alt-r"><b>Сервисы выписок</b><span>Данные ЕГРН и&nbsp;карты — без выводов и&nbsp;экономики</span><em>сотни рублей</em></div>
+    <div class="alt-r"><b>Юрист</b><span>Права и&nbsp;обременения — без сценариев и&nbsp;цены входа</span><em>отдельная услуга</em></div>
+    <div class="alt-r"><b>Консультант</b><span>Градостроительный анализ, НЭИ, финмодель — с&nbsp;выводами, но&nbsp;дороже</span><em>от&nbsp;500&nbsp;000&nbsp;₽</em></div>
+    <div class="alt-r us"><b>AI2ARCH</b><span>Ответ «брать или нет» за&nbsp;неделю, паспорт с&nbsp;ценой входа за&nbsp;2–3 недели</span><em>15&nbsp;000&nbsp;₽ → от&nbsp;150&nbsp;000&nbsp;₽</em></div>
+  </div>
+</div></section>
+
 <section class="blk" id="when"><div class="wrap">
-  <div class="sh"><div class="num">01 · Когда нужно</div><h2>Решение по&nbsp;объекту <em>до&nbsp;того, как тратить деньги</em></h2></div>
+  <div class="sh"><div class="num">02 · Когда нужно</div><h2>Решение по&nbsp;объекту <em>до&nbsp;того, как тратить деньги</em></h2></div>
   <div class="cells">
     <div class="cell"><div class="cell-n">01</div><h3>Покупаете участок или здание</h3><p>Понять до&nbsp;сделки, что на&nbsp;нём разрешено, где красные флаги и&nbsp;по&nbsp;какой цене вход окупится.</p></div>
     <div class="cell"><div class="cell-n">02</div><h3>Здание простаивает</h3><p>Или сдаётся дёшево. Какие функции дадут больше и&nbsp;сколько придётся вложить.</p></div>
@@ -312,8 +374,8 @@ footer{border-top:1px solid var(--ink);padding:28px 0 40px;font-size:13px;color:
 </div></section>
 
 <section class="blk" id="diag"><div class="wrap">
-  <div class="sh"><div class="num">02 · Шаг 1</div><h2>Диагностика объекта <em>за&nbsp;15&nbsp;000&nbsp;₽</em></h2>
-    <p>Быстрый ответ на&nbsp;вопрос «стоит ли этим заниматься». Работаем по&nbsp;открытым данным и&nbsp;тому, что у&nbsp;вас уже есть: документы не&nbsp;обязательны.</p></div>
+  <div class="sh"><div class="num">03 · Шаг 1</div><h2>Диагностика: <em>брать или не&nbsp;брать</em></h2>
+    <p>Первичная оценка объекта до&nbsp;сделки или вложений. За&nbsp;неделю и&nbsp;15&nbsp;000&nbsp;₽ вы понимаете, идти дальше, остановиться или торговаться. Работаем по&nbsp;открытым данным и&nbsp;тому, что у&nbsp;вас уже есть: документы не&nbsp;обязательны.</p></div>
   <div class="diag">
     <div class="diag-l">
       <h3>Что делаем</h3>
@@ -324,17 +386,17 @@ footer{border-top:1px solid var(--ink);padding:28px 0 40px;font-size:13px;color:
         <li><b>Рынок</b><span>порядок ставок аренды и&nbsp;цен продажи рядом по&nbsp;объявлениям</span></li>
         <li><b>Созвон 60–90 минут</b><span>в&nbsp;Яндекс Телемосте, можно с&nbsp;партнёрами</span></li>
       </ul>
-      <div class="price-line"><b>до&nbsp;7&nbsp;дней</b><span>рабочих, от&nbsp;брифа<br>до&nbsp;памятки</span></div>
+      <div class="price-line"><b>до&nbsp;8&nbsp;дней</b><span>рабочих, от&nbsp;брифа<br>до&nbsp;памятки</span></div>
     </div>
     <div class="diag-r">
       <h3>Что получаете</h3>
       <p class="sub">Памятку по&nbsp;объекту — документ, с&nbsp;которым можно идти к&nbsp;партнёрам, продавцу или банку.</p>
       <ul class="chk">
         <li><b>Карточка объекта</b><span>что подтверждено реестрами, что известно только со&nbsp;слов, чего нет</span></li>
-        <li><b>Красные флаги</b><span>превышения по&nbsp;ПЗЗ, особые зоны, чужие доли, устаревшие документы</span></li>
+        <li><b>Стоп-факторы</b><span>превышения по&nbsp;ПЗЗ, особые зоны, чужие доли, устаревшие документы</span></li>
         <li><b>2–3 гипотезы использования</b><span>с&nbsp;порядком цифр по&nbsp;рынку</span></li>
         <li><b>Список документов</b><span>что запросить и&nbsp;у&nbsp;кого, чтобы уточнить оценку</span></li>
-        <li><b>Рекомендация</b><span>нужен ли паспорт и&nbsp;в&nbsp;каком объёме</span></li>
+        <li><b>Вывод</b><span>идти дальше, остановиться или торговаться; нужен ли паспорт</span></li>
       </ul>
       <div class="price-line"><b>15&nbsp;000&nbsp;₽</b><span>засчитывается<br>в&nbsp;стоимость паспорта</span></div>
     </div>
@@ -342,8 +404,8 @@ footer{border-top:1px solid var(--ink);padding:28px 0 40px;font-size:13px;color:
 </div></section>
 
 <section class="blk" id="screening"><div class="wrap">
-  <div class="sh"><div class="num">03 · Шаг 2</div><h2>Паспорт объекта: <em>экспресс-версия за&nbsp;2–3 недели</em></h2>
-    <p>Полный ответ на&nbsp;запрос: какие сценарии возможны, какой из&nbsp;них лучше подходит под&nbsp;ваши цели и&nbsp;при какой цене входа он окупится. От&nbsp;150&nbsp;000&nbsp;₽ за&nbsp;один объект.</p></div>
+  <div class="sh"><div class="num">04 · Шаг 2</div><h2>Паспорт объекта: <em>по&nbsp;какой цене входить и&nbsp;что делать</em></h2>
+    <p>Градостроительный анализ, рынок, анализ наилучшего использования (НЭИ) и&nbsp;экспресс-финмодель в&nbsp;одном документе. Главная цифра — предельная цена входа: выше неё объект не&nbsp;окупается. Экспресс-версия за&nbsp;2–3 недели, от&nbsp;150&nbsp;000&nbsp;₽ за&nbsp;объект.</p></div>
   <div class="pass">
     <div class="pb"><div class="cell-n">01</div><h3>Объект и&nbsp;права</h3><p>Площади, назначение, кадастровая стоимость, сверка ЕГРН с&nbsp;техпаспортами и&nbsp;обмерами.</p></div>
     <div class="pb"><div class="cell-n">02</div><h3>Ограничения</h3><p>Зона и&nbsp;виды использования по&nbsp;ПЗЗ, этажность, процент застройки, потолок площади, особые зоны.</p></div>
@@ -360,7 +422,7 @@ footer{border-top:1px solid var(--ink);padding:28px 0 40px;font-size:13px;color:
 
 <section class="sample" id="sample"><div class="wrap">
   <div>
-    <div class="num">04 · Образец</div>
+    <div class="num">05 · Образец</div>
     <h2>Образец паспорта <em>можно покликать</em></h2>
     <p>Реальный отчёт по&nbsp;объекту Б-3: два здания и&nbsp;помещения, 2&nbsp;394,8&nbsp;м². Четыре сценария с&nbsp;оценкой в&nbsp;процентах, калькулятор кратности, где можно менять ставку и&nbsp;цену входа, и&nbsp;список документов, которых не&nbsp;хватает. Адрес и&nbsp;город скрыты, цифры и&nbsp;методика — как в&nbsp;отчёте.</p>
     <div class="btns">
@@ -380,18 +442,18 @@ footer{border-top:1px solid var(--ink);padding:28px 0 40px;font-size:13px;color:
 </div></section>
 
 <section class="blk" id="steps"><div class="wrap">
-  <div class="sh"><div class="num">05 · Как проходит</div><h2>От&nbsp;оплаты до&nbsp;памятки <em>до&nbsp;8 рабочих дней</em></h2></div>
+  <div class="sh"><div class="num">06 · Как проходит</div><h2>От&nbsp;оплаты до&nbsp;памятки <em>до&nbsp;8 рабочих дней</em></h2></div>
   <div class="flow">
     <div class="fs"><div class="cell-n">01</div><h3>Заявка и&nbsp;оплата</h3><p>Картой или СБП онлайн, компании — по&nbsp;счёту-договору.</p><span class="when">2 минуты</span></div>
     <div class="fs"><div class="cell-n">02</div><h3>Бриф</h3><p>Объект, задача и&nbsp;документы, которые уже есть. Предлагаем время созвона.</p><span class="when">в&nbsp;день оплаты</span></div>
     <div class="fs"><div class="cell-n">03</div><h3>Подготовка</h3><p>Собираем данные по&nbsp;объекту и&nbsp;рынку, сверяем с&nbsp;реестрами.</p><span class="when">2–3 рабочих дня</span></div>
     <div class="fs"><div class="cell-n">04</div><h3>Созвон</h3><p>60–90 минут: что нашли, гипотезы, ответы на&nbsp;вопросы.</p><span class="when">до&nbsp;5 рабочих дней</span></div>
-    <div class="fs"><div class="cell-n">05</div><h3>Памятка</h3><p>Флаги, гипотезы, документы, рекомендация по&nbsp;паспорту.</p><span class="when">через 2 дня после созвона</span></div>
+    <div class="fs"><div class="cell-n">05</div><h3>Памятка</h3><p>Стоп-факторы, гипотезы, документы и&nbsp;вывод: идти дальше или нет.</p><span class="when">через 2 дня после созвона</span></div>
   </div>
 </div></section>
 
 <section class="blk" id="who"><div class="wrap">
-  <div class="sh"><div class="num">06 · Кто делает</div><h2>Практик, <em>а&nbsp;не&nbsp;генератор отчётов</em></h2></div>
+  <div class="sh"><div class="num">07 · Кто делает</div><h2>Практик, <em>а&nbsp;не&nbsp;генератор отчётов</em></h2></div>
   <div class="who">
     <img src="images/kuleshov.jpg" width="120" height="120" alt="Кулешов Александр Алексеевич">
     <div>
@@ -411,7 +473,7 @@ footer{border-top:1px solid var(--ink);padding:28px 0 40px;font-size:13px;color:
 
 <section class="blk" id="pay"><div class="wrap pay">
   <div class="pay-side">
-    <div class="sh"><div class="num">07 · Заказ</div><h2>Заказать <em>диагностику</em></h2></div>
+    <div class="sh"><div class="num">08 · Заказ</div><h2>Заказать <em>диагностику</em></h2></div>
     <div class="pay-sum">
       <div><span>Диагностика объекта</span><b>15&nbsp;000&nbsp;₽</b></div>
       <div><span>Созвон 60–90 минут и&nbsp;памятка</span><b>включено</b></div>
@@ -444,8 +506,9 @@ footer{border-top:1px solid var(--ink);padding:28px 0 40px;font-size:13px;color:
 </div></section>
 
 <section class="blk" id="faq"><div class="wrap">
-  <div class="sh"><div class="num">08 · Вопросы</div><h2>Частые <em>вопросы</em></h2></div>
+  <div class="sh"><div class="num">09 · Вопросы</div><h2>Частые <em>вопросы</em></h2></div>
   <div class="faq">
+    <details><summary>Чем это отличается от&nbsp;градпроработки, НЭИ и&nbsp;due diligence?</summary><p>Диагностика — первичная оценка перед покупкой: брать или нет. Паспорт объединяет градостроительный анализ, рыночный анализ, анализ наилучшего использования и&nbsp;экспресс-финмодель, а&nbsp;на&nbsp;выходе даёт предельную цену входа. Юридическую и&nbsp;техническую проверку (due diligence) делают юристы и&nbsp;инженеры — в&nbsp;памятке скажем, когда и&nbsp;что заказывать.</p></details>
     <details><summary>Что, если документов по&nbsp;объекту нет?</summary><p>Диагностика работает по&nbsp;открытым данным: ЕГРН и&nbsp;НСПД, правила землепользования и&nbsp;застройки, карты, объявления. Чего не&nbsp;хватает, помечаем «нет данных» и&nbsp;пишем, какой документ это закроет и&nbsp;где его получить.</p></details>
     <details><summary>Это оценка стоимости или юридическое заключение?</summary><p>Нет. Это аналитика для решения: сценарии, рыночные ориентиры и&nbsp;расчёт окупаемости. Отчёт об&nbsp;оценке по&nbsp;закону делает оценщик, проверку чистоты сделки — юрист. В&nbsp;памятке скажем, когда они понадобятся.</p></details>
     <details><summary>Насколько можно доверять цифрам?</summary><p>У&nbsp;каждой цифры есть источник и&nbsp;статус: сверено по&nbsp;двум источникам, один источник, допущение или нет данных. Цены рынка — цены предложения, не&nbsp;сделки, это так и&nbsp;подписано. Посмотрите <a href="object-sample.html">образец паспорта</a>.</p></details>
