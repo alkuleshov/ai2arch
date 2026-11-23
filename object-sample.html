@@ -290,7 +290,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
 </div></section>
 
 <nav class="toc" aria-label="Оглавление паспорта"><div class="wrap">
-  <a href="#summary">Сводка</a><a href="#object">Объект</a><a href="#limits">Ограничения</a><a href="#market">Рынок</a><a href="#scenarios">Сценарии</a><a href="#calc">Экономика</a><a href="#gaps">Чего не хватает</a>
+  <a href="#summary">Сводка</a><a href="#object">Объект</a><a href="#limits">Ограничения</a><a href="#market">Рынок</a><a href="#demand">Спрос</a><a href="#scenarios">Сценарии</a><a href="#calc">Экономика</a><a href="#sens">Чувствительность</a><a href="#gaps">Чего не хватает</a>
 </div></nav>
 
 <section class="blk" id="summary"><div class="wrap">
@@ -301,7 +301,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
       <div class="kv"><div class="k">Объект</div><div>Два здания и&nbsp;помещения в&nbsp;третьем, центр города <span class="st v2">2+ источника</span></div></div>
       <div class="kv"><div class="k">Площадь</div><div><b>2&nbsp;394,8&nbsp;м²</b> по&nbsp;ЕГРН: 1&nbsp;551,4 + 505,7 + 337,7 <span class="st v2">2+ источника</span></div></div>
       <div class="kv"><div class="k">Участки</div><div>1&nbsp;558,2 и&nbsp;552&nbsp;м², всего 2&nbsp;110,2&nbsp;м² <span class="st v2">НСПД</span></div></div>
-      <div class="kv"><div class="k">Цена входа</div><div>ориентир 65&nbsp;млн&nbsp;₽ за&nbsp;всё (27&nbsp;142&nbsp;₽/м², 0,9 кадастровой) <span class="st v1">1 источник</span></div></div>
+      <div class="kv"><div class="k">Цена входа</div><div>ориентир 65&nbsp;млн&nbsp;₽ за&nbsp;всё (27&nbsp;142&nbsp;₽/м², 0,9 кадастровой стоимости зданий); ожидание собственника — около 60&nbsp;млн <span class="st v1">1 источник</span></div></div>
       <div class="kv"><div class="k">Аренда рядом</div><div>медиана 793&nbsp;₽/м² в&nbsp;месяц, 79 объявлений на&nbsp;3 площадках <span class="st v2">3 площадки</span></div></div>
       <div class="kv"><div class="k">Права</div><div><span class="st nd">нет данных</span> нужна выписка ЕГРН о&nbsp;правах и&nbsp;обременениях</div></div>
     </div>
@@ -311,7 +311,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
       <div class="sc-row"><div><b>Г. Заполнить и&nbsp;продать по&nbsp;частям</b><small>кратность 1,7–2,2 по&nbsp;ценам предложения</small><div class="bar"><i class="y" style="width:61%"></i></div></div><div class="pct">61</div></div>
       <div class="sc-row"><div><b>Б. Медцентр и&nbsp;wellness</b><small>кратность 0,89–1,12 при ставках рынка</small><div class="bar"><i class="y" style="width:51%"></i></div></div><div class="pct">51</div></div>
       <div class="sc-row"><div><b>В. Снос и&nbsp;новое здание</b><small>кратность около 0,9 на&nbsp;условных затратах</small><div class="bar"><i class="r" style="width:35%"></i></div></div><div class="pct">35</div></div>
-      <div class="verdict" style="background:var(--card);color:var(--ink);border-left-color:var(--ink);font-weight:600">Вывод по&nbsp;текущим данным: лучший путь — сдавать как есть. Цель X&nbsp;=&nbsp;1,5 достижима, если купить не&nbsp;дороже 62,3&nbsp;млн&nbsp;₽ без вложений в&nbsp;ремонт или около 52&nbsp;млн&nbsp;₽ при ремонте на&nbsp;10&nbsp;млн. Сценарии Б и&nbsp;В требуют ставок выше рынка или дешёвой стройки.</div>
+      <div class="verdict" style="background:var(--card);color:var(--ink);border-left-color:var(--ink);font-weight:600">Вывод по&nbsp;текущим данным: лучший путь — сдавать как есть. Цель X&nbsp;=&nbsp;1,5 достижима, если вход не&nbsp;дороже 56,5–62,3&nbsp;млн&nbsp;₽ без вложений в&nbsp;ремонт (56,5 — при медиане аренды 793, 62,3 — при 875) или около 52&nbsp;млн&nbsp;₽ при ремонте на&nbsp;10&nbsp;млн. При ожидании собственника в&nbsp;60&nbsp;млн X&nbsp;=&nbsp;1,41–1,56. Сценарии Б и&nbsp;В требуют ставок выше рынка или дешёвой стройки.</div>
     </div>
   </div>
 </div></section>
@@ -332,6 +332,40 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
       <tr><td><b>Права и&nbsp;обременения</b></td><td>правообладатель, аресты, ипотека в&nbsp;полученных выписках не&nbsp;указаны</td><td><span class="st nd">нет данных: ЕГРН</span></td></tr>
     </tbody>
   </table></div>
+</div></section>
+
+<section class="blk" id="survey"><div class="wrap">
+  <div class="sh"><div class="num">01а · Сверка</div><h2>Как сошлись <em>документы и&nbsp;обмеры</em></h2>
+    <p>Площадь каждого здания сверена минимум с&nbsp;двумя документами: выписка ЕГРН, техпаспорт или экспликация. Рукописные обмеры сделаны на&nbsp;месте, без масштаба: они проверяют порядок величин, но не&nbsp;заменяют техплан.</p></div>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Проверка</th><th>Результат</th><th>Статус</th></tr></thead>
+    <tbody>
+      <tr><td><b>Здание 1, основное</b></td><td>1&nbsp;551,4&nbsp;м² по&nbsp;ЕГРН совпадает с&nbsp;графой техпаспорта 2009 года</td><td><span class="st v2">2 источника</span></td></tr>
+      <tr><td><b>Здание 2, бывшая столовая</b></td><td>505,7&nbsp;м² по&nbsp;ЕГРН совпадает с&nbsp;итогом экспликации 2004 года</td><td><span class="st v2">2 источника</span></td></tr>
+      <tr><td><b>Помещения в&nbsp;здании 3</b></td><td>337,7&nbsp;м² по&nbsp;ЕГРН совпадает с&nbsp;техпланом 2013 года</td><td><span class="st v2">2 источника</span></td></tr>
+      <tr><td><b>Этажность здания 1</b></td><td>расхождение: ЕГРН — 2&nbsp;этажа, в&nbsp;т.&nbsp;ч. один подземный; техпаспорт 2009 — 2&nbsp;наземных и&nbsp;подвал. В&nbsp;расчётах берём техпаспорт, пока не&nbsp;сверено на&nbsp;месте</td><td><span class="st nd">расхождение</span></td></tr>
+      <tr><td><b>Застройка здания 1</b></td><td>1&nbsp;316,9&nbsp;м² в&nbsp;техпаспорте включают подвал; наземная часть — 999,3&nbsp;м² (расчёт)</td><td><span class="st as">расчёт</span></td></tr>
+      <tr><td><b>Участки</b></td><td>1&nbsp;558,2 и&nbsp;552&nbsp;м² по&nbsp;НСПД (17.11.2026) совпадают с&nbsp;топосъёмкой 2023 года и&nbsp;техпаспортом</td><td><span class="st v2">НСПД + топосъёмка</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 style="font-size:19px;font-weight:800;letter-spacing:-.02em;margin:28px 0 12px">Обмеры рабочих схем, 11.11.2026</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Помещение</th><th>Площадь, м²</th><th>Высота, м</th><th>Сверка и&nbsp;примечание</th></tr></thead>
+    <tbody>
+      <tr><td><b>Зал, 2&nbsp;этаж, здание 2</b></td><td class="n">258</td><td class="n">3,9</td><td>на&nbsp;19&nbsp;м² больше экспликации 2004 года (239&nbsp;м²), +8&nbsp;%</td></tr>
+      <tr><td><b>Помещение 10, 1&nbsp;этаж, здание 2</b></td><td class="n">98</td><td class="n">2,8</td><td>на&nbsp;4&nbsp;м² меньше экспликации 2004 года (102&nbsp;м²)</td></tr>
+      <tr><td><b>Зал, 1&nbsp;этаж, здание 1</b></td><td class="n">251</td><td class="n">5,2</td><td>высокий зал; на&nbsp;плане второго этажа пол не&nbsp;подтверждён, возможен второй свет</td></tr>
+      <tr><td><b>Зал, 2&nbsp;этаж, здание 1</b></td><td class="n">208</td><td class="n">3,2</td><td>основа — техпаспорт 2009 года</td></tr>
+      <tr><td><b>Помещения 11–13, 2&nbsp;этаж, здание 1</b></td><td class="n">156</td><td class="n">3,3</td><td>блок из трёх помещений, удобен для выделения в&nbsp;лоты</td></tr>
+      <tr><td><b>Помещение 15, 1&nbsp;этаж, здание 3</b></td><td class="n">37</td><td class="n">3,15</td><td>офисный блок</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="grid2" style="margin-top:20px">
+    <div><h3>Что важно для решения</h3><p>Главный зал здания 1 на&nbsp;первом этаже (251&nbsp;м², 5,2&nbsp;м) — ресурс для якорной функции. Остальные помещения делятся на&nbsp;блоки 35–160&nbsp;м²: это важно для сценария «заполнить и&nbsp;продать по&nbsp;частям».</p></div>
+    <div><h3>Кадастр и&nbsp;владение</h3><p>Кадастровая стоимость по&nbsp;ЕГРН: здание 1 — 28&nbsp;982&nbsp;₽/м², здание 2 — 32&nbsp;212&nbsp;₽/м², помещения — 32&nbsp;279&nbsp;₽/м². Здание 3 связано с&nbsp;восемью участками; около 66&nbsp;м² в&nbsp;нём принадлежат неустановленным лицам — это нужно проверить до сделки.</p></div>
+  </div>
 </div></section>
 
 <section class="blk" id="limits"><div class="wrap">
@@ -378,6 +412,62 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
   </div>
 </div></section>
 
+<section class="blk" id="demand"><div class="wrap">
+  <div class="sh"><div class="num">03а · Спрос и&nbsp;окружение</div><h2>Кто придёт <em>и&nbsp;что уже рядом</em></h2>
+    <p>Спрос на&nbsp;курортный город и&nbsp;край, транспорт, окружение за&nbsp;15&nbsp;минут пешком и&nbsp;гипотезы о&nbsp;гостях. Цифры по&nbsp;городу и&nbsp;краю — не&nbsp;по&nbsp;объекту. Расстояния — по&nbsp;прямой.</p></div>
+  <div class="grid2">
+    <div><h3>Спрос курортного города</h3><ul>
+      <li>Курорт федерального значения; турпоток города за&nbsp;2025 год — около 343&nbsp;тыс. человек, +31&nbsp;% <span class="st v2">2 источника</span></li>
+      <li>Санатории: 28, на&nbsp;8&nbsp;428 мест, курс 12 дней, от 6,2&nbsp;тыс.&nbsp;₽ в&nbsp;день. Гостиницы и&nbsp;гостевые дома: 61 и&nbsp;15, 2&nbsp;464 места, ночь от 3&nbsp;003&nbsp;₽ <span class="st v1">1 источник</span></li>
+      <li>Загрузка средств размещения края: 85–90&nbsp;% в&nbsp;2025 году; отели 3–5★ — 78&nbsp;% в&nbsp;первом полугодии 2026 года, в&nbsp;низкий сезон до&nbsp;85&nbsp;% <span class="st v2">2 источника</span></li>
+      <li>Средняя ставка по&nbsp;краю — 10,8&nbsp;тыс.&nbsp;₽ за&nbsp;ночь (апрель 2026); средняя продолжительность пребывания сократилась с&nbsp;12,5 до&nbsp;10 суток <span class="st v1">1 источник</span></li>
+    </ul></div>
+    <div><h3>Транспорт и&nbsp;доступность</h3><ul>
+      <li>Аэропорт Минеральные Воды: 26,8&nbsp;км по&nbsp;прямой, 35&nbsp;км по&nbsp;дороге; такси 40–60 минут от 1&nbsp;200&nbsp;₽; автобус около часа; электричка с&nbsp;пересадкой — 1,5–2&nbsp;часа <span class="st v1">1 источник</span></li>
+      <li>Ж/д вокзал и&nbsp;автовокзал — около 1,1&nbsp;км; электрички до&nbsp;соседних курортных городов ходят примерно раз в&nbsp;час, 20–30&nbsp;минут в&nbsp;пути <span class="st v1">1 источник</span></li>
+      <li>Курортный парк — 895&nbsp;м, рейтинг 4,6 по&nbsp;7&nbsp;800 отзывам <span class="st v1">Google Places</span></li>
+      <li>Перелёт Москва — курорт: около 3,5Москва — курорт: около 3,5&nbsp;часа перелётаnbsp;часа</li>
+    </ul></div>
+  </div>
+
+  <h3 style="font-size:19px;font-weight:800;letter-spacing:-.02em;margin:28px 0 12px">Окружение в&nbsp;пешей доступности</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Радиус</th><th>Продукты</th><th>Аптеки</th><th>Гостиницы</th><th>Общепит</th><th>ТЦ</th><th>Банки</th><th>Санатории</th><th>Итого</th></tr></thead>
+    <tbody>
+      <tr><td><b>до 500 м</b></td><td class="n">2</td><td class="n">4</td><td class="n">2</td><td class="n">1</td><td class="n">1</td><td class="n">1</td><td class="n">0</td><td class="n"><b>11</b></td></tr>
+      <tr><td><b>до 1 км</b></td><td class="n">4</td><td class="n">5</td><td class="n">5</td><td class="n">3</td><td class="n">3</td><td class="n">1</td><td class="n">1</td><td class="n"><b>24</b></td></tr>
+      <tr><td><b>до 1,3 км</b></td><td class="n">4</td><td class="n">5</td><td class="n">5</td><td class="n">5</td><td class="n">3</td><td class="n">2</td><td class="n">2</td><td class="n"><b>28</b></td></tr>
+    </tbody>
+  </table></div>
+  <p style="margin-top:12px;font-size:14.5px;color:var(--muted)">Рядом центральный рынок, супермаркет в&nbsp;75&nbsp;м, гостиница в&nbsp;179&nbsp;м, торговый центр в&nbsp;224&nbsp;м. Курортное ядро — санатории и&nbsp;парк — на&nbsp;0,9–1,4&nbsp;км. Google Places, 10.11.2026; не&nbsp;сверено в&nbsp;2ГИС и&nbsp;Яндекс Картах. Изохроны 5/10/15 минут не&nbsp;построены.</p>
+
+  <h3 style="font-size:19px;font-weight:800;letter-spacing:-.02em;margin:28px 0 12px">Прямые аналоги: что уже есть рядом</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Функция</th><th>Найдено за&nbsp;15&nbsp;минут пешком</th><th>Что видно</th></tr></thead>
+    <tbody>
+      <tr><td><b>Фитнес</b></td><td>три клуба в&nbsp;пределах 900&nbsp;м, четвёртый — на&nbsp;1,3&nbsp;км</td><td>плотная категория; один клуб — женский, с&nbsp;бассейном и&nbsp;сауной</td></tr>
+      <tr><td><b>SPA и&nbsp;термальные бассейны</b></td><td>один гостиничный комплекс на&nbsp;300&nbsp;м, рейтинг 4,7 (258 отзывов)</td><td>сильный конкурент; отдельные SPA — от 1,5&nbsp;км</td></tr>
+      <tr><td><b>Медицинские центры</b></td><td>два: на&nbsp;513 и&nbsp;757&nbsp;м</td><td>один с&nbsp;рейтингом 3,9, второй — 7 отзывов</td></tr>
+      <tr><td><b>Кофейни</b></td><td>две сильные: на&nbsp;501 и&nbsp;600&nbsp;м</td><td>рейтинг 4,6–4,7, более 590 отзывов у&nbsp;каждой; ниша занята</td></tr>
+      <tr><td><b>Гостиницы</b></td><td>пять в&nbsp;радиусе 1&nbsp;км, в&nbsp;основном недорогие</td><td>по&nbsp;отзывам — жалобы на&nbsp;сервис; возможна ниша качества</td></tr>
+    </tbody>
+  </table></div>
+  <div class="verdict" style="background:var(--card);color:var(--ink);border-left-color:var(--ink);font-weight:600;margin-top:18px">Гипотеза, один источник: качественные wellness и&nbsp;медицина рядом представлены слабо, кофейни и&nbsp;магазины — насыщены. Проверить по&nbsp;ценам, загрузке и&nbsp;отзывам в&nbsp;2ГИС и&nbsp;Яндекс Картах.</div>
+
+  <h3 style="font-size:19px;font-weight:800;letter-spacing:-.02em;margin:28px 0 12px">Гости: сегменты</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Сегмент</th><th>Статус</th><th>Основание</th></tr></thead>
+    <tbody>
+      <tr><td><b>Молодой оздоровительный гость, 28–45 лет</b></td><td><span class="st as">основная гипотеза</span></td><td>средний возраст гостей курорта снизился до&nbsp;35–40 лет (мнение агентства, 1 источник)</td></tr>
+      <tr><td><b>Семьи с&nbsp;детьми</b></td><td><span class="st as">гипотеза</span></td><td>курорт края — 4-е место по турам на&nbsp;каникулы, 7,5&nbsp;% (Коммерсантъ)</td></tr>
+      <tr><td><b>Выходные из края и&nbsp;соседних республик</b></td><td><span class="st as">гипотеза</span></td><td>Дагестан назван среди регионов происхождения туристов</td></tr>
+      <tr><td><b>Местные жители</b></td><td><span class="st as">гипотеза</span></td><td>население города 119,7&nbsp;тыс. (перепись 2021), средняя зарплата 69,9&nbsp;тыс.&nbsp;₽</td></tr>
+      <tr><td><b>Санаторный гость 55+</b></td><td><span class="st nd">нецелевой</span></td><td>сегмент растёт, но для аренды и&nbsp;wellness-формата не&nbsp;основной</td></tr>
+    </tbody>
+  </table></div>
+  <p style="margin-top:12px;font-size:14.5px;color:var(--muted)">Цели поездок (лечение, отдых) и&nbsp;доли регионов в&nbsp;открытых источниках не&nbsp;найдены: нужен запрос в&nbsp;министерство туризма края или опрос гостей. Проектов реконструкции под медцентр или wellness по&nbsp;региону не&nbsp;найдено: новые гостиницы 4★ на&nbsp;200–250 номеров и&nbsp;оздоровительные курорты строятся рядом — это спрос на&nbsp;гостиничные функции, а&nbsp;не&nbsp;готовые аналоги.</p>
+</div></section>
+
 <section class="blk" id="scenarios"><div class="wrap">
   <div class="sh"><div class="num">04 · Сценарии</div><h2>Четыре варианта <em>и&nbsp;почему не&nbsp;100&nbsp;%</em></h2>
     <p>Соответствие запросу считается по&nbsp;четырём критериям: кратность X — 40&nbsp;%, реализуемость по&nbsp;правам и&nbsp;ПЗЗ — 25&nbsp;%, формат «заполнить и&nbsp;продать» — 20&nbsp;%, скорость и&nbsp;объём вложений — 15&nbsp;%. Зелёный — 70&nbsp;% и&nbsp;выше, жёлтый — 50–69&nbsp;%, красный — ниже 50&nbsp;%.</p></div>
@@ -387,6 +477,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
         <div class="kv"><div class="k">Кратность X</div><div>1,30–1,44 без вложений; 1,13–1,25 с&nbsp;ремонтом на&nbsp;10&nbsp;млн&nbsp;₽</div></div>
         <div class="kv"><div class="k">Выход</div><div>стоимость 84,7–93,5&nbsp;млн&nbsp;₽ при капитализации 12&nbsp;%; с&nbsp;арендой за&nbsp;5&nbsp;лет X&nbsp;=&nbsp;2,1–2,3, за&nbsp;7&nbsp;лет — 2,4–2,7</div></div>
         <div class="kv"><div class="k">Окупаемость</div><div>5,8–6,4 года по&nbsp;чистому доходу</div></div>
+        <div class="kv"><div class="k">Доход</div><div>накопленный чистый доход за&nbsp;5–7 лет — 51–79&nbsp;млн&nbsp;₽</div></div>
       </div>
       <details><summary>Почему не&nbsp;100&nbsp;% и&nbsp;чего не&nbsp;хватает</summary><p>X ниже цели 1,5; доход ограничен ставками рынка 793–875&nbsp;₽/м²; деревянные перекрытия без обследования. Нужны: цена и&nbsp;условия входа, арендопригодная площадь, обследование зданий.</p></details>
     </div>
@@ -415,6 +506,21 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
       <details><summary>Почему не&nbsp;100&nbsp;% и&nbsp;чего не&nbsp;хватает</summary><p>Жильё по&nbsp;ПЗЗ и&nbsp;применимость КРТ не&nbsp;проверены; застройка уже выше лимита; тяжёлая стройка, формат — продажа, а&nbsp;не&nbsp;аренда. Низкий балл — следствие неопределённости, а&nbsp;не&nbsp;приговор: потенциал площади у&nbsp;В самый высокий. Нужны: ГПЗУ, полный ПЗЗ, зоны и&nbsp;объекты наследия, юрист по&nbsp;КРТ, сметы.</p></details>
     </div>
   </div>
+
+  <div class="grid2" style="margin-top:24px">
+    <div><h3>В-1. Снос и&nbsp;новое здание без КРТ</h3><p>Работает, если вид использования по&nbsp;ПЗЗ допускает новое здание. На&nbsp;фото ПЗЗ — 19 основных видов, жилья среди них нет. Нужны градплан участка (ГПЗУ), разрешение на&nbsp;строительство и&nbsp;проверка вида использования. Срок и&nbsp;стоимость не&nbsp;оценены.</p></div>
+    <div><h3>В-2. Через КРТ</h3><p>КРТ нежилой застройки (ст.&nbsp;65 ГрК РФ) инициирует город, и&nbsp;нужны основания: аварийность, адресная программа, вид использования не&nbsp;по&nbsp;ПЗЗ. Для объекта ни одно не&nbsp;подтверждено. КРТ по&nbsp;инициативе правообладателя (ст.&nbsp;70 ГрК РФ) доступна собственнику без торгов, но&nbsp;требует территории, определённой в&nbsp;ПЗЗ; суды признавали отказ законным при неверной категории земель и&nbsp;без согласия на&nbsp;смену вида использования.</p></div>
+  </div>
+  <div class="tbl-wrap" style="margin-top:20px"><table class="tbl">
+    <thead><tr><th>Вопрос, который меняет решение</th><th>Как проверить</th><th>Если ответ «нет»</th></tr></thead>
+    <tbody>
+      <tr><td><b>Допускает ли ПЗЗ новое здание под нужную функцию</b></td><td>ГПЗУ и&nbsp;полный текст ПЗЗ</td><td>нужны КРТ или изменение ПЗЗ; сроки не&nbsp;оценены</td></tr>
+      <tr><td><b>Есть ли основания для КРТ по&nbsp;ст.&nbsp;65</b></td><td>запрос в&nbsp;город, программы, данные по&nbsp;аварийности</td><td>инициатива только у&nbsp;города, путь не&nbsp;в&nbsp;руках собственника</td></tr>
+      <tr><td><b>Можно ли инициировать КРТ по&nbsp;ст.&nbsp;70</b></td><td>проверка территории в&nbsp;ПЗЗ, категории земель, региональных оснований отказа</td><td>отказ, если территории нет в&nbsp;ПЗЗ; региональных норм края не&nbsp;найдено</td></tr>
+      <tr><td><b>Нужны ли согласия на&nbsp;снос</b></td><td>выписка по&nbsp;помещениям, не&nbsp;принадлежащим собственнику</td><td>около 66&nbsp;м² чужих — нужны согласие или выкуп</td></tr>
+    </tbody>
+  </table></div>
+  <p style="margin-top:14px;font-size:14.5px;color:var(--muted)">Рынок новых площадей: средняя цена сделок в&nbsp;новостройках города — 131,8&nbsp;тыс.&nbsp;₽/м² (семь месяцев 2026 года, данные застройщика группы), объявления 126–141&nbsp;тыс. При стройке за&nbsp;80&nbsp;тыс.&nbsp;₽/м² X около 0,9. Для X&nbsp;=&nbsp;1,5 строительство не&nbsp;должно стоить больше 42&nbsp;тыс.&nbsp;₽/м² (норматив по&nbsp;краю — 113,8&nbsp;тыс., справочно). С&nbsp;участком 552&nbsp;м² X составит 0,90–1,01: вывод не&nbsp;меняется.</p>
 
   <div class="weights" id="weights">
     <h3>Поменяйте приоритеты</h3>
@@ -463,9 +569,70 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
   </div>
 </div></section>
 
+<section class="blk" id="sens"><div class="wrap">
+  <div class="sh"><div class="num">05а · Чувствительность</div><h2>Что двигает <em>кратность</em></h2>
+    <p>Три таблицы на тех же формулах, что калькулятор выше. Жирным — X от 1,5. «С&nbsp;ремонтом» — вход плюс 10&nbsp;млн&nbsp;₽ на ремонт и&nbsp;проценты.</p></div>
+
+  <h3 style="font-size:19px;font-weight:800;letter-spacing:-.02em;margin:28px 0 12px">Кратность X по цене входа</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Вход, млн&nbsp;₽</th><th>875&nbsp;₽/м², без ремонта</th><th>793&nbsp;₽/м², без ремонта</th><th>875&nbsp;₽/м², с&nbsp;ремонтом</th><th>793&nbsp;₽/м², с&nbsp;ремонтом</th></tr></thead>
+    <tbody>
+      <tr><td><b>45</b></td><td class="n"><b>2,08</b></td><td class="n"><b>1,88</b></td><td class="n"><b>1,70</b></td><td class="n"><b>1,54</b></td></tr>
+      <tr><td><b>50</b></td><td class="n"><b>1,87</b></td><td class="n"><b>1,70</b></td><td class="n"><b>1,56</b></td><td class="n">1,41</td></tr>
+      <tr><td><b>55</b></td><td class="n"><b>1,70</b></td><td class="n"><b>1,54</b></td><td class="n">1,44</td><td class="n">1,30</td></tr>
+      <tr><td><b>60</b></td><td class="n"><b>1,56</b></td><td class="n">1,41</td><td class="n">1,34</td><td class="n">1,21</td></tr>
+      <tr><td><b>65</b></td><td class="n">1,44</td><td class="n">1,30</td><td class="n">1,25</td><td class="n">1,13</td></tr>
+    </tbody>
+  </table></div>
+  <p style="margin-top:12px;font-size:14.5px;color:var(--muted)">Ожидание собственника — около 60&nbsp;млн: X 1,41–1,56 без ремонта, 1,21–1,34 с ремонтом на&nbsp;10&nbsp;млн. Цены — ставки сдачи как есть, 70&nbsp;% площади, загрузка 85&nbsp;%, расходы 25&nbsp;%, капитализация 12&nbsp;%.</p>
+
+  <h3 style="font-size:19px;font-weight:800;letter-spacing:-.02em;margin:28px 0 12px">Доля арендопригодной площади</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Доля площади</th><th>Чистый доход, млн&nbsp;₽ в&nbsp;год</th><th>Выход, млн&nbsp;₽</th><th>X при входе 65&nbsp;млн</th></tr></thead>
+    <tbody>
+      <tr><td><b>60&nbsp;%</b></td><td class="n">9,6</td><td class="n">80,2</td><td class="n">1,23</td></tr>
+      <tr><td><b>70&nbsp;% (в&nbsp;паспорте)</b></td><td class="n">11,2</td><td class="n">93,5</td><td class="n">1,44</td></tr>
+      <tr><td><b>80&nbsp;%</b></td><td class="n">12,8</td><td class="n">106,8</td><td class="n"><b>1,64</b></td></tr>
+    </tbody>
+  </table></div>
+  <p style="margin-top:12px;font-size:14.5px;color:var(--muted)">Планов с&nbsp;подсчётом арендопригодной площади нет: 70&nbsp;% — допущение. Поэтажные планы — первое, что уточняем.</p>
+
+  <h3 style="font-size:19px;font-weight:800;letter-spacing:-.02em;margin:28px 0 12px">Цена выхода: ставка аренды × ставка капитализации</h3>
+  <div class="tbl-wrap"><table class="tbl">
+    <thead><tr><th>Аренда, ₽/м² в&nbsp;месяц</th><th>Доход, млн&nbsp;₽ в&nbsp;год</th><th>Капитализация 10&nbsp;%</th><th>12&nbsp;%</th><th>14&nbsp;%</th></tr></thead>
+    <tbody>
+      <tr><td><b>608</b> — нижний квартиль ЦИАН + Яндекс</td><td class="n">7,8</td><td class="n">78,0</td><td class="n">65,0</td><td class="n">55,7</td></tr>
+      <tr><td><b>793</b> — медиана трёх площадок</td><td class="n">10,2</td><td class="n">101,7</td><td class="n">84,7</td><td class="n">72,6</td></tr>
+      <tr><td><b>875</b> — медиана ЦИАН + Яндекс</td><td class="n">11,2</td><td class="n">112,2</td><td class="n">93,5</td><td class="n">80,1</td></tr>
+      <tr><td><b>1 100</b> — верхний квартиль</td><td class="n">14,1</td><td class="n">141,1</td><td class="n">117,6</td><td class="n">100,8</td></tr>
+    </tbody>
+  </table></div>
+  <p style="margin-top:12px;font-size:14.5px;color:var(--muted)">Каждые +100&nbsp;₽/м² ставки дают около 1,3&nbsp;млн&nbsp;₽ дохода и 9–13&nbsp;млн&nbsp;₽ цены выхода. Капитализация 12&nbsp;% — ориентир по&nbsp;офисам и&nbsp;торговым центрам России (1 источник), по&nbsp;городу не&nbsp;подтверждена.</p>
+
+  <div class="verdict" style="background:var(--card);color:var(--ink);border-left-color:var(--ink);font-weight:600;margin-top:18px">Вывод: ключ к X&nbsp;=&nbsp;1,5 — цена входа. При 793&nbsp;₽/м² вход должен быть не&nbsp;выше 56,5&nbsp;млн; при 875 — не&nbsp;выше 62,3&nbsp;млн. Каждые +100&nbsp;₽/м² ставки сдвигают предельную цену входа примерно на&nbsp;7&nbsp;млн&nbsp;₽.</div>
+</div></section>
+
 <section class="blk" id="gaps"><div class="wrap">
   <div class="sh"><div class="num">06 · Чего не&nbsp;хватает</div><h2>Документы, <em>которые меняют решение</em></h2>
     <p>Пустые места не&nbsp;прячем: у&nbsp;каждого пробела — какой документ его закроет и&nbsp;на&nbsp;какие сценарии это повлияет.</p></div>
+  <div class="grid2" style="margin-bottom:24px">
+    <div><h3>Что уже сделано</h3><ul>
+      <li>Три выписки ЕГРН, сверка площадей с техпаспортами 2004 и 2009 годов и техпланом 2013 года</li>
+      <li>Участки и виды использования по НСПД (17.11.2026)</li>
+      <li>Рукописные обмеры трёх зданий (11.11.2026) и сверка с экспликацией</li>
+      <li>ПЗЗ по фото: зона, виды, этажность, застройка</li>
+      <li>Аренда: 79 объявлений на трёх площадках; продажа: 107 объявлений</li>
+      <li>Окружение, конкуренты и транспорт по Google Places; спрос по краю и городу</li>
+      <li>Четыре сценария, калькулятор и чувствительность</li>
+    </ul></div>
+    <div><h3>Гипотезы, которые нужно проверить</h3><ul>
+      <li>Участок застроен на 64–85 %: достройка и новое здание упираются в лимит 60 %</li>
+      <li>Розница в районе насыщена: ставка на магазины и кофейни рискованна</li>
+      <li>Ниша качественных wellness и медицинских услуг рядом занята слабо</li>
+      <li>Генплан ограничивает промышленные функции, не связанные с курортом; статус части помещений нужно уточнить</li>
+      <li>Продажа по частям даёт выше X, но зависит от темпа продаж и возможности раздела — пока не проверено</li>
+    </ul></div>
+  </div>
   <div class="tbl-wrap"><table class="tbl gaps">
     <thead><tr><th>Документ или данные</th><th>Что закроет</th><th>Сценарии</th></tr></thead>
     <tbody>
