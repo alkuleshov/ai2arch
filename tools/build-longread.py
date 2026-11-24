@@ -185,7 +185,7 @@ def parse_slides(part_text):
 
 def extract_verdict(text):
     """Вынимает фразу «Вывод …: …» из основного текста."""
-    m = re.search(r'(?:(?<=[.!?])\s+|^)(Вывод[^\n:]{0,80}:\s*)(.+?\.)(?=\s|$)', text, re.S)
+    m = re.search(r'(?:(?<=[.!?])\s+|^)\*?(Вывод[^\n:]{0,80}:\s*)(.+?\.)\*?(?=\s|$)', text, re.S)
     if not m:
         return text, ''
     verdict = m.group(2).strip()
@@ -283,10 +283,15 @@ def load():
     return terms, ext, parsed
 
 def load_quiz(path):
-    """Читает вопросы к главам из docs/lectures/<тема>.quiz.json."""
-    if not path.exists():
+    """Читает вопросы к главам: из раздела «Квиз (не читать, добавляется в лонгрид)» канона,
+    иначе из <тема>.quiz.json."""
+    m = re.search(r'^#### Квиз \(не читать[^\n]*\)\s*$.*?```json\s*(.*?)```', SRC.read_text(encoding='utf-8'), re.M | re.S)
+    if m:
+        data = json.loads(m.group(1))
+    elif path.exists():
+        data = json.loads(path.read_text(encoding='utf-8'))
+    else:
         return {}
-    data = json.loads(path.read_text(encoding='utf-8'))
     quiz = {}
     for chapter in data:
         cnum = int(chapter['chapter'])
@@ -430,9 +435,20 @@ def chapter_end(ch):
     parts.append('</section>')
     return ''.join(parts)
 
+GLOSSARY_JSON = ROOT / 'docs' / 'glossary.json'
+ROLES_MD = ROOT / 'docs' / 'roles-tracks.md'
+
+def load_global_terms():
+    """Общий словарь курса (tools/build-glossary.py): термины ведут на redev-glossary.html#id."""
+    if not GLOSSARY_JSON.exists():
+        return []
+    items = json.loads(GLOSSARY_JSON.read_text(encoding='utf-8'))
+    # длинные термины раньше коротких, чтобы «Порог решения» не резался на «Порог»
+    return sorted(((x['term'], x['def'], x['id']) for x in items), key=lambda t: -len(t[0]))
+
 def mark_terms(html_text, terms):
     used=set(); out=[]; skip=0
-    skip_tags={'h1','h2','h3','h4','summary','button','pre','code','figcaption','script','style'}
+    skip_tags={'h1','h2','h3','h4','summary','button','pre','code','figcaption','script','style','a'}
     tokens=re.split(r'(<[^>]+>)', html_text)
     for tok in tokens:
         if tok.startswith('<'):
@@ -443,11 +459,11 @@ def mark_terms(html_text, terms):
             out.append(tok); continue
         if skip:
             out.append(tok); continue
-        for name,defn in terms:
+        for name,defn,tid in terms:
             if name in used: continue
             pat=r'(?<![\wА-Яа-яЁё])'+re.escape(name)+r'(?![\wА-Яа-яЁё])'
             if re.search(pat,tok):
-                tok=re.sub(pat, lambda m: f'<span class="term" tabindex="0" data-def="{html.escape(defn, True)}">{m.group(0)}</span>', tok, count=1)
+                tok=re.sub(pat, lambda m: f'<a class="term" href="redev-glossary.html#{tid}" data-def="{html.escape(defn, True)}">{m.group(0)}</a>', tok, count=1)
                 used.add(name); break
         out.append(tok)
     return ''.join(out)
@@ -474,6 +490,8 @@ def build(key='2.2'):
         else:
             toc.append(f'<a href="#chapter-{cnum}" class="toc-ch">Глава {cnum}. {esc(name)}</a>')
         header=f'<header class="chapter-head"><div class="chapter-kicker">Глава {cnum}</div><h1>{esc(name)}</h1></header>'
+        if cnum==1 and ROLES_MD.exists():
+            header+='<aside class="roles-card"><div class="roles-mark">Роли и трек · для понимания, не для выбора</div>'+md_html(ROLES_MD.read_text(encoding="utf-8"))+'</aside>'
         intro_html=''
         if part['intro']:
             intro_html='<div class="lesson-intro" id="intro">'+md_html(part['intro'])+'</div>'
@@ -525,8 +543,8 @@ def build(key='2.2'):
         body.append('</section>')
         chapter_bodies.append(''.join(body))
     body_html=''.join(chapter_bodies)
-    body_html=mark_terms(body_html, terms)
-    glossary=''.join(f'<div><dt>{esc(n)}</dt><dd>{inline(d)}</dd></div>' for n,d in terms)
+    body_html=mark_terms(body_html, load_global_terms())
+    glossary='<p class="glossary-all"><a href="redev-glossary.html">Весь словарь курса →</a></p>'+''.join(f'<div><dt>{esc(n)}</dt><dd>{inline(d)}</dd></div>' for n,d in terms)
     # rail
     rail=''.join(f'<img data-rail="{n}" src="{SLIDE_DIR}/{n:02d}-1600.webp" srcset="{SLIDE_DIR}/{n:02d}-1600.webp 1600w, {SLIDE_DIR}/{n:02d}.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд {n} из {TOTAL}">' for n in range(1,TOTAL+1))
     rail=rail.replace('data-rail="1"','data-rail="1" class="active"',1)
