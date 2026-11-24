@@ -166,6 +166,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
 <script src="assets/corp-core.js"></script>
 <script>
 const {D, REQ, rub, num, totals, rows} = Corp;
+const plural = (n, one, few, many) => { if (!Number.isInteger(n)) return few; const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many; };
 const $ = s => document.querySelector(s);
 const S = Corp.fromHash();
 if (REQ) $('#reqLine').textContent = `${REQ.name} · ИНН ${REQ.inn} · ОГРНИП ${REQ.ogrnip} · р/с ${REQ.account} в ${REQ.bank}, БИК ${REQ.bik}`;
@@ -200,7 +201,7 @@ if (!S || !totals(S).mods){
   $('#app').innerHTML = `
   <section class="top"><div class="kicker">Корпоративное обучение · Лаборатория проектного интеллекта</div>
     <h1>Программа <span>№ ${id}</span></h1>
-    <div class="meta">${date} · ${T.mods} модулей · ${num(T.off)} ч очно, ${num(T.on)} ч онлайн</div></section>
+    <div class="meta">${date} · ${T.mods} ${plural(T.mods, 'модуль', 'модуля', 'модулей')} · ${num(T.off)} ${plural(T.off, 'час', 'часа', 'часов')} очно, ${num(T.on)} ${plural(T.on, 'час', 'часа', 'часов')} онлайн</div></section>
   <div class="grid">
     <div class="paper">
       <h2>Состав и стоимость</h2>

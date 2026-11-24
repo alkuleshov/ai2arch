@@ -362,6 +362,12 @@ a.ix:hover,a.tile:hover,a.bullet:hover,a.goto:hover,a.mock:hover,a.cell:hover,a.
 summary{transition:background-color .15s,color .15s}
 summary:hover{background-color:rgba(43,79,216,.08);color:var(--aff-accent)}
 details>summary::after{transition:transform .2s}
+/* «Отзывы и проекты слушателей»: видно, что это кнопка; розовая подсветка при наведении */
+.reviews-link a{ padding:16px 20px; border:1.5px solid var(--ink); background:transparent; transition:background-color .15s ease; }
+.reviews-link a:hover,.reviews-link a:focus-visible{ background-color:var(--blush); transform:none !important; box-shadow:none !important; }
+/* пункты меню шапки: одинаковая подсветка, как у «Слушателям» (без подъёма и тени) */
+a.bullet,a.bullet:hover{transform:none !important;box-shadow:none !important}
+a.bullet:hover{background-color:rgba(43,79,216,.08);text-decoration:none !important}
 /* ссылки и кнопки в шапке: подчёркивание при наведении */
 header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
 @media (hover:none){a[class*="btn"]:hover,.btn:hover,a.ix:hover,a.tile:hover,a.mock:hover,a.cell:hover{transform:none;box-shadow:none}}
