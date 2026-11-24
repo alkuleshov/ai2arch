@@ -53,6 +53,26 @@ LECTURES = {
         drop_intro=(), example=False,
         final_name='Итог темы 2.4 и что берём в Задание №3', final_heading='Итог темы 2.4',
     ),
+    '2.5': dict(
+        src='2.5.md', out='redev-read-task3.html', slide_dir='images/slides/task3',
+        deck='redev-task3.html', total=25,
+        title='Урок 2.5 · Сборка задания №3 · AI2ARCH',
+        hero_title='Сборка задания №3', short_name='Сборка задания №3',
+        description='Урок для чтения по теме 2.5: упаковка для Трека А, проверка структуры финмодели для Трека Б, типичные ошибки и формат сдачи задания №3.',
+        kicker='Тема 2.5 · Сборка задания №3',
+        intro='Вертикальный урок по теме 2.5: как собрать задание №3 из HBU и расчёта, проверить его по первоисточникам и сдать в рабочей тетради.',
+        back_href='redev-guide.html#t25', back_label='← Тема 2.5',
+        guide_anchor='t25', guide_label='Тема 2.5 в пособии', next_anchor='t31',
+        chapters=[
+            (1, 1, 7, 'Логика и карта задания №3'),
+            (2, 8, 15, 'Для Трека А: упаковка задания'),
+            (3, 16, 22, 'Для Трека Б: проверка структуры финмодели'),
+            (4, 23, 25, 'Ошибки, основной контур и формат сдачи'),
+        ],
+        c52_slides=(7,), trainer_after=None, gaps_at=None,
+        drop_intro=(), example=False,
+        final_name='Итог темы 2.5', final_heading='Итог темы 2.5',
+    ),
 }
 CFG = {}
 SRC = QUIZ = OUT = TPL

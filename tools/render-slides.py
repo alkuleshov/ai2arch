@@ -25,6 +25,10 @@ const fs = require('fs');
   fs.mkdirSync(out, { recursive: true });
   const browser = await chromium.launch({ executablePath: chromiumPath, args: ['--no-sandbox'] });
   const page = await browser.newPage({ viewport: { width: 3208, height: 1808 } });
+  if (process.env.FONT_CSS) {
+    await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ status: 200, contentType: 'text/css', body: fs.readFileSync(process.env.FONT_CSS, 'utf8') }));
+    await page.route(/^https?:\/\/(?!fonts)/, r => r.abort());
+  }
   await page.goto('file://' + deck);
   await page.waitForTimeout(500);
   await page.evaluate(() => document.fonts.ready);
