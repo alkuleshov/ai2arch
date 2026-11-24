@@ -178,7 +178,7 @@
     const id = programId(code), T = totals(st), R = rows(st);
     const content = [
       serviceTable(st),
-      { text: 'Цены без НДС. Стоимость, дни и время занятий фиксируются в счёте-договоре после встречи.', color: MUTED, fontSize: 8.5, margin: [0, 0, 0, 12] },
+      { text: 'НДС не облагается (УСН). Стоимость, дни и время занятий фиксируются в счёте-договоре после встречи.', color: MUTED, fontSize: 8.5, margin: [0, 0, 0, 12] },
       { text: 'Что получит бюро', bold: true, fontSize: 11, margin: [0, 4, 0, 6] },
       { ul: R.filter(r => r.result).map(r => ({ text: [{ text: r.name + ' — ', bold: true }, r.result] })), margin: [0, 0, 0, 12] },
       { text: 'Как проходит работа', bold: true, fontSize: 11, margin: [0, 4, 0, 6] },
@@ -194,7 +194,7 @@
   }
   function invoiceDoc(st, code, f) {
     const id = programId(code), T = totals(st), pre = Math.round(T.t * D.prepay), no = `${id}`;
-    const purpose = `Оплата по счёту-договору № ${no} от ${today()} за информационно-консультационные услуги. Без НДС`;
+    const purpose = `Оплата по счёту-договору № ${no} от ${today()} за информационно-консультационные услуги. НДС не облагается (УСН)`;
     const party = (label, lines) => ({ stack: [{ text: label, color: MUTED, fontSize: 8, bold: true, margin: [0, 0, 0, 2] }, ...lines.filter(Boolean).map(t => ({ text: t }))] });
     const terms = [
       `Исполнитель оказывает Заказчику информационно-консультационные услуги в форме практических семинаров по применению искусственного интеллекта в проектной работе по программе, указанной в таблице.`,
