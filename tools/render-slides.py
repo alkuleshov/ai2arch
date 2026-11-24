@@ -11,10 +11,11 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DECK = ROOT / 'redev-income.html'
-OUT = ROOT / 'images' / 'slides' / 'income'
-NODE_MODULES = Path(os.environ.get('NODE_PATH', '/srv/projects/node_modules'))
-CHROMIUM = Path('/root/.cache/ms-playwright/chromium-1148/chrome-linux/chrome')
+# Использование: render-slides.py [колода] [папка_вывода]
+# Пример: render-slides.py redev-stress.html images/slides/stress
+DECK = ROOT / (sys.argv[1] if len(sys.argv) > 1 else 'redev-income.html')
+OUT = ROOT / (sys.argv[2] if len(sys.argv) > 2 else 'images/slides/income')
+CHROMIUM = Path(os.environ.get('CHROMIUM', '/usr/bin/google-chrome'))
 
 JS = r'''
 const { chromium } = require('playwright');
@@ -22,7 +23,7 @@ const fs = require('fs');
 (async () => {
   const deck = process.argv[1], out = process.argv[2], chromiumPath = process.argv[3];
   fs.mkdirSync(out, { recursive: true });
-  const browser = await chromium.launch({ executablePath: chromiumPath });
+  const browser = await chromium.launch({ executablePath: chromiumPath, args: ['--no-sandbox'] });
   const page = await browser.newPage({ viewport: { width: 3208, height: 1808 } });
   await page.goto('file://' + deck);
   await page.waitForTimeout(500);
@@ -56,6 +57,17 @@ const fs = require('fs');
     fs.writeFileSync(out + '/' + name + '-1600.webp', Buffer.from(await webp(png,1600,900),'base64'));
     process.stdout.write(name + ' ');
   }
+  // раздел «Промпты» колоды — последний кадр лонгрида (если есть)
+  const pe = await page.$('#prompts');
+  if (pe) {
+    await pe.scrollIntoViewIfNeeded();
+    const bb = await pe.boundingBox();
+    const pngp = await pe.screenshot().then(b => Buffer.from(b).toString('base64'));
+    const name = String(total + 1).padStart(2,'0');
+    fs.writeFileSync(out + '/' + name + '.webp', Buffer.from(await webp(pngp, 3200, Math.round(3200*bb.height/bb.width)),'base64'));
+    fs.writeFileSync(out + '/' + name + '-1600.webp', Buffer.from(await webp(pngp, 1600, Math.round(1600*bb.height/bb.width)),'base64'));
+    console.log('prompts frame: ' + name);
+  }
   await browser.close();
   console.log('\nslides: ' + total);
 })();
@@ -67,7 +79,9 @@ def main():
     if not CHROMIUM.exists():
         sys.exit(f'Не найден Chromium: {CHROMIUM}')
     env = dict(os.environ)
-    env['NODE_PATH'] = str(NODE_MODULES)
+    if 'NODE_PATH' not in env:
+        env['NODE_PATH'] = subprocess.run(['npm', 'root', '-g'], capture_output=True, text=True).stdout.strip()
+    OUT.mkdir(parents=True, exist_ok=True)
     cmd = ['node', '-e', JS, str(DECK), str(OUT), str(CHROMIUM)]
     subprocess.run(cmd, check=True, env=env)
 

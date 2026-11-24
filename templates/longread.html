@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Урок 2.2 · Доходная база, CAPEX/OPEX · AI2ARCH</title>
-<meta name="description" content="Урок для чтения по теме 2.2: скелет финансовой модели, доходы, OPEX и CAPEX по фазам.">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
 :root{--navy:#0A0F1A;--ink:#1F2430;--muted:#5B6475;--faint:#667085;--bg:#F6F4F0;--surface:#fff;--line:#E4E1D8;--accent:#1A6BFF;--accent-l:#EAF1FF;--accent-b:#BFD3FF;--orange:#C46A16;--orange-l:#FFF7EF;--orange-b:#F1D2BE;--sans:'Manrope','Segoe UI',system-ui,Arial,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;--fs:19px;--head:58px}
@@ -317,8 +317,8 @@ button,select{font-family:var(--sans)}
 <body class="fs-2">
 <div class="lr-progress" id="lrProgress"></div>
 <header class="lr-head" id="lrHead">
-  <a class="lr-back" href="redev-guide.html#t22">← Тема 2.2</a>
-  <div class="lr-name">Доходная база, CAPEX/OPEX</div>
+  <a class="lr-back" href="{{BACK_HREF}}">{{BACK_LABEL}}</a>
+  <div class="lr-name">{{SHORT_NAME}}</div>
   <button id="tocBtn" type="button">Содержание</button>
   <button id="fontBtn" type="button" aria-label="Размер шрифта">Aa</button>
   <select id="slideMode" aria-label="Положение слайдов">
@@ -334,10 +334,10 @@ button,select{font-family:var(--sans)}
 
 <main class="lr-main">
   <section class="hero" id="top">
-    <div class="kicker">Тема 2.2 · Доходная база, CAPEX/OPEX</div>
-    <h1>Скелет финансовой модели</h1>
-    <div class="meta"><span>20 слайдов</span><span>{{READ_TIME}} мин чтения</span><span>{{WORDS}} слов</span></div>
-    <p>Вертикальный урок по теме 2.2: как собрать структуру доходов, OPEX и CAPEX до появления цифр.</p>
+    <div class="kicker">{{KICKER}}</div>
+    <h1>{{HERO_TITLE}}</h1>
+    <div class="meta"><span>{{TOTAL}} слайдов</span><span>{{READ_TIME}} мин чтения</span><span>{{WORDS}} слов</span></div>
+    <p>{{INTRO}}</p>
     <a class="start" href="#intro">Начать →</a>
   </section>
   <details class="glossary">
@@ -348,7 +348,7 @@ button,select{font-family:var(--sans)}
     <div class="lr-text">{{BODY}}</div>
     <aside class="rail" id="rail" aria-label="Слайды урока">
       <div class="rail-frame">{{RAIL}}<button class="expand-btn" id="railExpand" type="button">⤢ Развернуть</button></div>
-      <div class="rail-caption" id="railCaption">Слайд 1 из 20</div>
+      <div class="rail-caption" id="railCaption">Слайд 1 из {{TOTAL}}</div>
     </aside>
   </div>
 </main>
@@ -356,9 +356,9 @@ button,select{font-family:var(--sans)}
 <div class="term-pop" id="termPop"></div>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Просмотр слайда">
-  <div class="modal-top"><span id="modalCount"></span><a id="openDeck" href="redev-income.html" target="_blank" rel="noopener">Открыть в презентации ↗</a><button class="modal-x" id="modalX" type="button" aria-label="Закрыть">×</button></div>
+  <div class="modal-top"><span id="modalCount"></span><a id="openDeck" href="{{DECK}}" target="_blank" rel="noopener">Открыть в презентации ↗</a><button class="modal-x" id="modalX" type="button" aria-label="Закрыть">×</button></div>
   <button class="modal-nav modal-prev" id="modalPrev" type="button" aria-label="Предыдущий слайд">‹</button>
-  <img id="modalImg" src="images/slides/income/01-1600.webp" alt="">
+  <img id="modalImg" src="{{SLIDE_DIR}}/01-1600.webp" alt="">
   <button class="modal-nav modal-next" id="modalNext" type="button" aria-label="Следующий слайд">›</button>
   <div class="modal-zoom"><button id="zoomOut" type="button">−</button><button id="zoomReset" type="button">100%</button><button id="zoomIn" type="button">+</button></div>
 </div>
@@ -444,7 +444,7 @@ function setCurrent(id,n){
   const img=document.querySelector('.rail img[data-rail="'+n+'"]');
   if(img){document.querySelectorAll('.rail img').forEach(x=>x.classList.remove('active'));img.classList.add('active');}
   const cap=document.getElementById('railCaption'), title=(SLIDES.find(s=>s.n===+n)||{}).title;
-  if(cap)cap.textContent='Слайд '+n+' из 20'+(title?' · '+title:'');
+  if(cap)cap.textContent='Слайд '+n+' из {{TOTAL}}'+(title?' · '+title:'');
 }
 if('IntersectionObserver' in window){
   const obs=new IntersectionObserver(entries=>{
@@ -484,11 +484,11 @@ document.querySelectorAll('.copy').forEach(btn=>{
 // полноэкранный просмотр слайдов
 const modal=document.getElementById('modal'), mimg=document.getElementById('modalImg'), mcount=document.getElementById('modalCount');
 let mn=1, scale=1;
-function openModal(n){n=Math.min(20,Math.max(1,+n||1));mn=n;scale=1;mimg.style.transform='scale(1)';const nn=String(n).padStart(2,'0');mimg.src='images/slides/income/'+nn+'-1600.webp';mimg.srcset='images/slides/income/'+nn+'-1600.webp 1600w, images/slides/income/'+nn+'.webp 3200w';mimg.alt='Слайд '+n;mcount.textContent='Слайд '+n+' из 20';document.getElementById('openDeck').href='redev-income.html#slide-'+n;modal.classList.add('open');body.style.overflow='hidden';mimg.style.touchAction='none';}
+function openModal(n){n=Math.min({{TOTAL}},Math.max(1,+n||1));mn=n;scale=1;mimg.style.transform='scale(1)';const nn=String(n).padStart(2,'0');mimg.src='{{SLIDE_DIR}}/'+nn+'-1600.webp';mimg.srcset='{{SLIDE_DIR}}/'+nn+'-1600.webp 1600w, {{SLIDE_DIR}}/'+nn+'.webp 3200w';mimg.alt='Слайд '+n;mcount.textContent='Слайд '+n+' из {{TOTAL}}';document.getElementById('openDeck').href='{{DECK}}#slide-'+n;modal.classList.add('open');body.style.overflow='hidden';mimg.style.touchAction='none';}
 function closeModal(){modal.classList.remove('open');body.style.overflow='';}
 document.getElementById('modalX').onclick=closeModal;
 modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
-function step(d){openModal(Math.min(20,Math.max(1,mn+d)));}
+function step(d){openModal(Math.min({{TOTAL}},Math.max(1,mn+d)));}
 document.getElementById('modalPrev').onclick=()=>step(-1);
 document.getElementById('modalNext').onclick=()=>step(1);
 document.getElementById('zoomIn').onclick=()=>{scale=Math.min(3,scale+0.25);mimg.style.transform='scale('+scale+')'};

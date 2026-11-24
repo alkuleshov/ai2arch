@@ -12,17 +12,53 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / 'docs' / 'lectures' / '2.2.md'
-QUIZ = SRC.with_name(SRC.stem + '.quiz.json')
 TPL = ROOT / 'templates' / 'longread.html'
-OUT = ROOT / 'redev-read-income.html'
-SLIDE_DIR = 'images/slides/income'
 
-CHAPTERS = [
-    (1, 1, 6, 'Как устроен скелет модели'),
-    (2, 7, 12, 'Собираем скелет с нейросетью'),
-    (3, 13, 20, 'Проверяем и забираем в работу'),
-]
+# Конфиг лонгрида по лекциям. Эталон — 2.2; 2.4 собран по тому же шаблону.
+LECTURES = {
+    '2.2': dict(
+        src='2.2.md', out='redev-read-income.html', slide_dir='images/slides/income',
+        deck='redev-income.html', total=20,
+        title='Урок 2.2 · Доходная база, CAPEX/OPEX · AI2ARCH', description='Урок для чтения по теме 2.2: скелет финансовой модели, доходы, OPEX и CAPEX по фазам.',
+        hero_title='Скелет финансовой модели', short_name='Доходная база, CAPEX/OPEX',
+        kicker='Тема 2.2 · Доходная база, CAPEX/OPEX', intro='Вертикальный урок по теме 2.2: как собрать структуру доходов, OPEX и CAPEX до появления цифр.',
+        back_href='redev-guide.html#t22', back_label='← Тема 2.2',
+        guide_anchor='t22', guide_label='Промпты темы 2.2', next_anchor='t23',
+        chapters=[
+            (1, 1, 6, 'Как устроен скелет модели'),
+            (2, 7, 12, 'Собираем скелет с нейросетью'),
+            (3, 13, 20, 'Проверяем и забираем в работу'),
+        ],
+        c52_slides=(5, 13), trainer_after=(1, 3), gaps_at=(3, 13),
+        drop_intro=(2, 3), example=True,
+        final_name='Итог темы 2.2', final_heading='Итог темы 2.2',
+    ),
+    '2.4': dict(
+        src='2.4.md', out='redev-read-stress.html', slide_dir='images/slides/stress',
+        deck='redev-stress.html', total=37,
+        title='Урок 2.4 · Стресс-тест финмодели · AI2ARCH',
+        hero_title='Стресс-тест финмодели', short_name='Стресс-тест финмодели',
+        description='Урок для чтения по теме 2.4: красная команда, чувствительность, условия отказа, лист экономики и вопросы юристу.',
+        kicker='Тема 2.4 · Стресс-тест финмодели',
+        intro='Вертикальный урок по теме 2.4: как проверить модель на прочность до решения, найти слабые допущения и задать условия отказа.',
+        back_href='redev-guide.html#t24', back_label='← Тема 2.4',
+        guide_anchor='t24', guide_label='Промпты темы 2.4', next_anchor='t25',
+        chapters=[
+            (1, 1, 8, 'Красная команда и C52'),
+            (2, 9, 18, 'Задачи A и B: допущения и чувствительность'),
+            (3, 19, 29, 'Условия отказа и юридический контур'),
+            (4, 30, 37, 'Экономика на одном листе и Задание №3'),
+        ],
+        c52_slides=(7,), trainer_after=None, gaps_at=None,
+        drop_intro=(), example=False,
+        final_name='Итог темы 2.4 и что берём в Задание №3', final_heading='Итог темы 2.4',
+    ),
+}
+CFG = {}
+SRC = QUIZ = OUT = TPL
+SLIDE_DIR = ''
+CHAPTERS = []
+TOTAL = 0
 
 C52_PLANS = [
     ('plan2016-1etazh-uroven1-fragment.jpg', '1 этаж, уровень 1 — фрагмент. По обмерам 2016 г.'),
@@ -165,10 +201,10 @@ def extract_verdict(text):
 def parse_slide(n,title,body):
     data={'n':n,'title':title,'base':'','verdict':'','why':'','context':'','c52':{},'transition':'','task':'','prompt':''}
     # prompt line
-    pm = re.search(r'^ПРОМПТ \(на экран, вслух не читается\):\s*\*«(.+?)»\*\s*$', body, re.M)
-    if pm:
-        data['prompt'] = pm.group(1).strip()
-        body = body[:pm.start()] + body[pm.end():]
+    data['prompts'] = []
+    for pm in list(re.finditer(r'^ПРОМПТ \(на экран, вслух не читается(?:, ([^)]+))?\):\s*\*«(.+?)»\*\s*$', body, re.M)):
+        data['prompts'].append(((pm.group(1) or '').strip(), pm.group(2).strip()))
+    body = re.sub(r'^ПРОМПТ \(на экран, вслух не читается(?:, [^)]+)?\):\s*\*«.+?»\*\s*$\n?', '', body, flags=re.M)
     # self-study line
     sm = re.search(r'^\*Самостоятельно после лекции:\s*(.+?)\*\s*$', body, re.M)
     if sm:
@@ -220,7 +256,7 @@ def load():
             name=m.group(1).strip(); definition=m.group(2).strip()
             terms.append((name,definition))
     # сквозной пример
-    ext = section_text(raw.splitlines(), 'Сквозной учебный пример')
+    ext = section_text(raw.splitlines(), 'Сквозной учебный пример') if CFG['example'] else ''
     ext = re.sub(r'^\*Для демонстрации.*?C52\.\*\s*', '', ext, flags=re.S).strip()
     # части
     parts=[]
@@ -236,14 +272,14 @@ def load():
         first = re.search(r'^### Слайд ', text, re.M)
         intro=text[:first.start()].strip() if first else ''
         intro=re.sub(r'^#### .*$[\s\S]*', '', intro, flags=re.M).strip()
-        if num in (2,3):
+        if num in CFG['drop_intro']:
             intro=''
         parsed.append({'num':num,'intro':intro,'slides':[parse_slide(*s) for s in slides],
                        'result':section_text(text.splitlines(),'Минимальный результат слушателя'),
                        'not':section_text(text.splitlines(),'Что не разбираем'),
                        'memo':section_text(text.splitlines(),'Практическая памятка'),
                        'caveats':section_text(text.splitlines(),'Оговорки'),
-                       'final':section_text(text.splitlines(),'Итог темы 2.2')})
+                       'final':section_text(text.splitlines(),CFG['final_name'])})
     return terms, ext, parsed
 
 def load_quiz(path):
@@ -290,11 +326,11 @@ def slide_img(n, cls='slide-inline'):
     return (f'<figure class="{cls}" data-n="{n}"><div class="inline-frame"><img src="{SLIDE_DIR}/{name}-1600.webp" '
             f'srcset="{SLIDE_DIR}/{name}-1600.webp 1600w, {SLIDE_DIR}/{name}.webp 3200w" '
             f'sizes="(min-width:1100px) 1000px, calc(100vw - 32px)" loading="lazy" '
-            f'alt="Слайд {n} из 20"><button class="expand-btn" type="button" data-open="{n}">⤢ Развернуть</button></div>'
-            f'<figcaption>Слайд {n} из 20</figcaption></figure>')
+            f'alt="Слайд {n} из {TOTAL}"><button class="expand-btn" type="button" data-open="{n}">⤢ Развернуть</button></div>'
+            f'<figcaption>Слайд {n} из {TOTAL}</figcaption></figure>')
 
 def c52_gallery(n):
-    if n not in (5, 13):
+    if n not in CFG['c52_slides']:
         return ''
     items=''.join(
         f'<button class="c52-thumb" type="button" data-img="images/c52/{file}" data-caption="{html.escape(cap, True)}">'
@@ -374,8 +410,8 @@ def finish_card(tasks, quiz_total=0):
   <div class="finish-missing" id="finishMissing"><h3>Осталось самостоятельно</h3><ul>{items}</ul></div>
   <div class="finish-actions">
     <a class="finish-btn finish-btn-dark" href="https://fortune-swing-02e.notion.site/41112bb3b5cd81839661da69963a035b?source=copy_link" target="_blank" rel="noopener">Рабочая тетрадь ↗</a>
-    <a class="finish-btn" href="redev-guide.html#t22">Промпты темы 2.2</a>
-    <a class="finish-btn" href="redev-guide.html#t23">Следующая тема →</a>
+    <a class="finish-btn" href="redev-guide.html#{CFG['guide_anchor']}">{CFG['guide_label']}</a>
+    <a class="finish-btn" href="redev-guide.html#{CFG['next_anchor']}">Следующая тема →</a>
   </div>
 </section>'''
 
@@ -416,7 +452,15 @@ def mark_terms(html_text, terms):
         out.append(tok)
     return ''.join(out)
 
-def build():
+def build(key='2.2'):
+    global CFG, SRC, QUIZ, OUT, SLIDE_DIR, CHAPTERS, TOTAL
+    CFG = LECTURES[key]
+    SRC = ROOT / 'docs' / 'lectures' / CFG['src']
+    QUIZ = SRC.with_name(SRC.stem + '.quiz.json')
+    OUT = ROOT / CFG['out']
+    SLIDE_DIR = CFG['slide_dir']
+    CHAPTERS = CFG['chapters']
+    TOTAL = CFG['total']
     terms, example, parts = load()
     quiz = load_quiz(QUIZ)
     chapter_bodies=[]; toc=[]; all_tasks=[]
@@ -439,14 +483,15 @@ def build():
         content=[]
         for s in slides:
             toc.append(f'<a href="#slide-{s["n"]}" class="toc-slide"><span>{s["n"]}</span>{esc(s["title"])}</a>')
-            sec=[f'<section class="slide-sec" id="slide-{s["n"]}" data-n="{s["n"]}"><div class="sec-kicker">Слайд {s["n"]} из 20</div><h2>{esc(s["title"])}</h2>']
+            sec=[f'<section class="slide-sec" id="slide-{s["n"]}" data-n="{s["n"]}"><div class="sec-kicker">Слайд {s["n"]} из {TOTAL}</div><h2>{esc(s["title"])}</h2>']
             sec.append(slide_img(s['n']))
             sec.append('<div class="prose">'+md_html(s['base'])+'</div>')
             if s['verdict']:
                 sec.append(f'<aside class="verdict"><div class="verdict-mark">Вывод</div><p>{inline(s["verdict"])}</p></aside>')
-            if s['prompt']:
-                pid=f'prompt-{s["n"]}'
-                sec.append(f'<div class="prompt-block"><div class="prompt-bar"><span>Промпт</span><button class="copy" type="button" data-copy="{pid}">Копировать</button></div><pre id="{pid}">{esc(s["prompt"])}</pre></div>')
+            for k,(label,ptext) in enumerate(s['prompts'],1):
+                pid=f'prompt-{s["n"]}' + (f'-{k}' if len(s['prompts'])>1 else '')
+                cap='Промпт' + (f' · {esc(label)}' if label else '')
+                sec.append(f'<div class="prompt-block"><div class="prompt-bar"><span>{cap}</span><button class="copy" type="button" data-copy="{pid}">Копировать</button></div><pre id="{pid}">{esc(ptext)}</pre></div>')
             if s['c52']:
                 sec.append(c52_card(s['c52'], s['n']))
             for key,label in [('why','Зачем и экономика'),('context','Контекст и история')]:
@@ -459,9 +504,9 @@ def build():
                 sec.append(f'<p class="transition">{inline(s["transition"])}</p>')
             sec.append('</section>')
             content.append(''.join(sec))
-            if cnum==1 and s['n']==3:
+            if CFG['trainer_after'] == (cnum, s['n']):
                 content.append(trainer_block())
-            if cnum==3 and s['n']==13:
+            if CFG['gaps_at'] == (cnum, s['n']):
                 content.append(gaps_registry())
         chapter_visible=header+intro_html+example_html+''.join(content)
         chapter_words=len(re.sub(r'<[^>]+>',' ',chapter_visible).split())
@@ -474,8 +519,8 @@ def build():
         body.append(chapter_end(part))
         if cnum in quiz:
             body.append(quiz_block(cnum, quiz[cnum]))
-        if cnum==3 and part['final']:
-            body.append('<section class="lesson-end" id="lesson-end"><h2>Итог темы 2.2</h2>'+md_html(part['final'])+'</section>')
+        if cnum==CHAPTERS[-1][0] and part['final']:
+            body.append('<section class="lesson-end" id="lesson-end"><h2>'+CFG['final_heading']+'</h2>'+md_html(part['final'])+'</section>')
             body.append(finish_card(all_tasks, len(quiz)))
         body.append('</section>')
         chapter_bodies.append(''.join(body))
@@ -483,16 +528,21 @@ def build():
     body_html=mark_terms(body_html, terms)
     glossary=''.join(f'<div><dt>{esc(n)}</dt><dd>{inline(d)}</dd></div>' for n,d in terms)
     # rail
-    rail=''.join(f'<img data-rail="{n}" src="{SLIDE_DIR}/{n:02d}-1600.webp" srcset="{SLIDE_DIR}/{n:02d}-1600.webp 1600w, {SLIDE_DIR}/{n:02d}.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд {n} из 20">' for n in range(1,21))
+    rail=''.join(f'<img data-rail="{n}" src="{SLIDE_DIR}/{n:02d}-1600.webp" srcset="{SLIDE_DIR}/{n:02d}-1600.webp 1600w, {SLIDE_DIR}/{n:02d}.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд {n} из {TOTAL}">' for n in range(1,TOTAL+1))
     rail=rail.replace('data-rail="1"','data-rail="1" class="active"',1)
-    slides_json=json.dumps([{'n':n,'title':next(s['title'] for p in parts for s in p['slides'] if s['n']==n)} for n in range(1,21)], ensure_ascii=False)
+    slides_json=json.dumps([{'n':n,'title':next(s['title'] for p in parts for s in p['slides'] if s['n']==n)} for n in range(1,TOTAL+1)], ensure_ascii=False)
     # время чтения по видимому тексту
     words=len(re.sub(r'<[^>]+>',' ',body_html).split())
     minutes=max(1,round(words/180))
     quiz_json=json.dumps(quiz, ensure_ascii=False).replace('</', '<\\/')
     quiz_key=json.dumps('lr-quiz-' + SRC.stem, ensure_ascii=False)
     tpl=TPL.read_text(encoding='utf-8')
-    out=(tpl.replace('{{READ_TIME}}',str(minutes)).replace('{{BODY}}',body_html)
+    out=(tpl.replace('{{TITLE}}',CFG['title']).replace('{{DESCRIPTION}}',CFG['description'])
+         .replace('{{KICKER}}',CFG['kicker']).replace('{{INTRO}}',CFG['intro'])
+         .replace('{{BACK_HREF}}',CFG['back_href']).replace('{{BACK_LABEL}}',CFG['back_label'])
+         .replace('{{HERO_TITLE}}',CFG['hero_title']).replace('{{SHORT_NAME}}',CFG['short_name'])
+         .replace('{{DECK}}',CFG['deck']).replace('{{SLIDE_DIR}}',SLIDE_DIR).replace('{{TOTAL}}',str(TOTAL))
+         .replace('{{READ_TIME}}',str(minutes)).replace('{{BODY}}',body_html)
          .replace('{{TOC}}',''.join(toc)).replace('{{GLOSSARY}}',glossary)
          .replace('{{RAIL}}',rail).replace('{{SLIDES_JSON}}',slides_json)
          .replace('{{QUIZ_JSON}}',quiz_json).replace('{{QUIZ_KEY}}',quiz_key)
@@ -501,4 +551,5 @@ def build():
     print(f'{OUT.name}: {words} слов, {minutes} мин, {len(body_html)} байт')
 
 if __name__=='__main__':
-    build()
+    import sys
+    build(sys.argv[1] if len(sys.argv) > 1 else '2.2')
