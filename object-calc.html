@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Стоимость паспорта объекта · AI2ARCH</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Конструктор паспорта объекта: выберите, что у вас, цель и нужные блоки — ориентир стоимости и срока пересчитывается сразу.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0A0F1A;--paper:#F6F4F0;--card:#FBFAF7;--muted:#5A6070;--faint:#848A9A;--line:#E1DDD5;--accent:#2B4FD8;--midnight:#13234B;--blush:#EDC3D2;--powder:#BED0EE;--sand:#E6D9BE;--ok:#1F7A4D;--okbg:#DDEFE4;--mid:#8A6A10;--midbg:#F3E7C2;--bad:#8A2D57;--badbg:#F4DCE6;--head:54px;--sans:'Inter Tight','Helvetica Neue',Arial,system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip;scroll-padding-top:calc(var(--head) + 64px)}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip;letter-spacing:-.005em}
+a{color:var(--accent)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+section{background-image:linear-gradient(to right, rgba(10,15,26,.07) 0 1px, transparent 1px);background-size:calc(min(100%, 1200px) / 4) 100%;background-position:center top;background-repeat:repeat-x}
+@media (min-width:900px){section{background-size:calc(min(100%, 1200px) / 8) 100%}}
+
+/* шапка — как на всех лендингах */
+.hd{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--head);background:var(--paper);border-bottom:1.5px solid var(--ink)}
+.hd .wrap{height:100%;display:flex;align-items:center;gap:18px;max-width:none;padding:0 24px}
+.hd-back{display:flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none;flex-shrink:0;line-height:1.15}
+.hd-back img{width:38px;height:38px;flex:0 0 38px;display:block}
+.hd-back span{display:flex;flex-direction:column}
+.hd-back b{font-size:16px;font-weight:800;letter-spacing:-.02em;white-space:nowrap}
+.hd-back small{font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap;margin-top:2px}
+.hd nav{display:flex;gap:4px;flex:1;justify-content:center;min-width:0}
+.hd nav a{font-size:14px;font-weight:800;color:var(--ink);padding:6px 8px;text-decoration:none;white-space:nowrap}
+.hd nav a:hover{text-decoration:underline;text-underline-offset:3px}
+.hd-btn{font:800 14px var(--sans);border:1.5px solid var(--ink);background:transparent;color:var(--ink);padding:14px 20px;white-space:nowrap;text-decoration:none;margin-left:auto}
+@media (max-width:1100px){.hd nav{display:none}}
+@media (max-width:760px){.hd .wrap{padding:0 16px}.hd-back small{white-space:normal;max-width:138px;line-height:1.2}.hd-btn{font-size:12px;padding:9px 12px}}
+@media (max-width:380px){.hd-btn{padding:9px 10px}}
+
+/* первый экран */
+.hero{padding:calc(var(--head) + 48px) 0 40px}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+h1{font-size:clamp(38px,5.6vw,64px);line-height:.96;letter-spacing:-.045em;font-weight:800;margin-bottom:18px;text-wrap:balance;max-width:900px}
+h1 em,h2 em{font-style:normal;color:var(--faint)}
+.lead{font-size:18px;color:var(--muted);max-width:720px;line-height:1.45}
+.note{margin-top:18px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--ink);padding:12px 16px;font-size:14px;color:var(--muted);max-width:820px}
+
+/* липкое оглавление паспорта */
+.toc{position:sticky;top:var(--head);z-index:40;background:var(--paper);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.toc .wrap{display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.toc .wrap::-webkit-scrollbar{display:none}
+.toc a{flex:0 0 auto;font-size:13px;font-weight:800;color:var(--ink);text-decoration:none;padding:13px 14px;border-right:1px solid var(--line);white-space:nowrap}
+.toc a:first-child{border-left:1px solid var(--line)}
+.toc a.on{background:var(--ink);color:var(--paper)}
+
+/* секции */
+section.blk{padding:56px 0;border-top:1px solid var(--ink)}
+.sh{margin-bottom:24px}
+.sh .num{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.sh h2{font-size:clamp(30px,4.2vw,46px);line-height:1;letter-spacing:-.04em;font-weight:800;text-wrap:balance}
+.sh p{font-size:16px;color:var(--muted);max-width:720px;margin-top:12px}
+
+/* статусы достоверности */
+.st{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.02em;padding:3px 8px;white-space:nowrap;vertical-align:middle}
+.st.v2{background:var(--okbg);color:var(--ok)}
+.st.v1{background:var(--midbg);color:var(--mid)}
+.st.as{background:#E7E9F2;color:#3D4766}
+.st.nd{background:var(--badbg);color:var(--bad)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-top:16px;font-size:13px;color:var(--muted)}
+
+/* сводка */
+.sum{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);border:1px solid var(--ink);background:#fff}
+.sum-l{padding:24px;border-right:1px solid var(--ink)}
+.sum-r{padding:24px}
+.kv{display:grid;grid-template-columns:150px minmax(0,1fr);gap:0;border-top:1px solid var(--line)}
+.kv:first-of-type{border-top:0}
+.kv > div{padding:10px 0;font-size:15px}
+.kv .k{font-weight:800;padding-right:12px}
+.big{font-size:clamp(40px,5vw,60px);font-weight:900;letter-spacing:-.05em;line-height:1}
+.sc-row{display:grid;grid-template-columns:minmax(0,1fr) 56px;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.sc-row:first-of-type{border-top:0}
+.sc-row b{font-size:15px;font-weight:800}
+.sc-row small{display:block;font-size:12.5px;color:var(--muted)}
+.bar{height:10px;background:var(--line);margin-top:6px;position:relative}
+.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--ink)}
+.bar i.g{background:var(--ok)}.bar i.y{background:#C99A1A}.bar i.r{background:var(--bad)}
+.pct{font-size:20px;font-weight:900;text-align:right;font-variant-numeric:tabular-nums}
+
+/* таблицы */
+.tbl{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--ink);font-size:14.5px}
+.tbl th,.tbl td{text-align:left;padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}
+.tbl th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:800;border-top:0;background:var(--card)}
+.tbl td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl-wrap{overflow-x:auto}
+.flag{background:var(--badbg)}
+
+/* карточки */
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:1px solid var(--ink);background:#fff}
+.grid2 > div{padding:22px;border-right:1px solid var(--line);border-top:1px solid var(--line)}
+.grid2 > div:nth-child(2n){border-right:0}
+.grid2 > div:nth-child(-n+2){border-top:0}
+.grid2 h3{font-size:19px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+.grid2 p,.grid2 li{font-size:15px;color:var(--muted)}
+.grid2 ul{padding-left:18px}
+
+/* рынок: диапазоны */
+.rng{background:#fff;border:1px solid var(--ink)}
+.rng-row{display:grid;grid-template-columns:220px minmax(0,1fr) 90px;gap:14px;align-items:center;padding:12px 18px;border-top:1px solid var(--line)}
+.rng-row:first-child{border-top:0}
+.rng-row b{font-size:14.5px;font-weight:800}
+.rng-row small{display:block;font-size:12.5px;color:var(--muted)}
+.track{height:14px;position:relative;background:linear-gradient(to right,var(--line) 0 1px,transparent 1px) 0 0/10% 100%,var(--card);border:1px solid var(--line)}
+.track .iq{position:absolute;top:2px;bottom:2px;background:var(--powder)}
+.track .md{position:absolute;top:-4px;bottom:-4px;width:3px;background:var(--ink)}
+.rng-row .v{font-weight:900;font-size:17px;text-align:right;font-variant-numeric:tabular-nums}
+.axis{display:flex;justify-content:space-between;font-size:11.5px;color:var(--faint);padding:6px 18px 10px 252px}
+
+/* сценарии */
+.scn{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{background:#fff;border:1px solid var(--ink);display:flex;flex-direction:column}
+.card-h{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.card-h h3{font-size:20px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.card-h h3 small{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-top:4px;letter-spacing:0}
+.match{text-align:right;flex:none}
+.match b{display:block;font-size:34px;font-weight:900;letter-spacing:-.04em;line-height:1}
+.match span{font-size:11.5px;color:var(--muted);font-weight:700}
+.card.g .match b{color:var(--ok)}.card.y .match b{color:#A57A0E}.card.r .match b{color:var(--bad)}
+.card-b{padding:6px 20px 16px;flex:1}
+.card-b .kv{grid-template-columns:118px minmax(0,1fr)}
+.card-b .kv > div{font-size:14px;padding:8px 0}
+.card details{border-top:1px solid var(--line);padding:12px 20px}
+.card summary{cursor:pointer;font-size:14px;font-weight:800;list-style:none}
+.card summary::-webkit-details-marker{display:none}
+.card summary::after{content:" +";color:var(--accent)}
+.card details[open] summary::after{content:" −"}
+.card details p{font-size:14px;color:var(--muted);margin-top:8px}
+
+/* веса */
+.weights{margin-top:20px;background:var(--card);border:1px solid var(--ink);padding:20px}
+.weights h3{font-size:18px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
+.weights > p{font-size:14px;color:var(--muted);margin-bottom:14px}
+.w-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.w label{display:flex;justify-content:space-between;font-size:13.5px;font-weight:800;margin-bottom:6px}
+.w label output{font-variant-numeric:tabular-nums;color:var(--accent)}
+input[type=range]{width:100%;accent-color:var(--ink)}
+.w-res{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:16px;border:1px solid var(--ink);background:#fff}
+.w-res div{padding:12px 14px;border-right:1px solid var(--line)}
+.w-res div:last-child{border-right:0}
+.w-res b{display:block;font-size:13px;font-weight:800}
+.w-res span{font-size:26px;font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.w-foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:13px;color:var(--muted)}
+.linkbtn{background:none;border:0;font:800 13px var(--sans);color:var(--accent);cursor:pointer;text-decoration:underline;text-underline-offset:3px;padding:0}
+
+/* калькулятор */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border:1px solid var(--ink);background:#fff}
+.calc-in{padding:22px;border-right:1px solid var(--ink)}
+.calc-out{padding:22px;background:var(--midnight);color:var(--paper)}
+.c-f{margin-bottom:16px}
+.c-f label{display:flex;justify-content:space-between;gap:10px;font-size:14px;font-weight:800;margin-bottom:4px}
+.c-f label output{font-variant-numeric:tabular-nums;color:var(--accent);white-space:nowrap}
+.c-f small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.presets button{font:700 12px var(--sans);border:1px solid var(--ink);background:transparent;color:var(--ink);padding:4px 9px;cursor:pointer}
+.presets button.on{background:var(--ink);color:var(--paper)}
+.o-main{border-bottom:1px solid rgba(246,244,240,.22);padding-bottom:16px;margin-bottom:6px}
+.o-main span{font-size:13px;color:#C9D2E8;font-weight:700}
+.o-main b{display:block;font-size:clamp(48px,6vw,72px);font-weight:900;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+.o-main em{font-style:normal;font-size:14px;color:#C9D2E8}
+.o-row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid rgba(246,244,240,.12);font-size:14.5px}
+.o-row span{color:#C9D2E8}
+.o-row b{font-variant-numeric:tabular-nums;white-space:nowrap}
+.o-note{font-size:12.5px;color:#AEB8D3;margin-top:14px}
+.verdict{margin-top:14px;padding:12px 14px;font-size:14px;font-weight:700;background:rgba(246,244,240,.08);border-left:3px solid var(--blush)}
+
+/* финальный призыв */
+.cta-band{background:var(--ink);color:var(--paper);padding:56px 0}
+.cta-band h2{font-size:clamp(30px,4.4vw,48px);line-height:1;letter-spacing:-.04em;font-weight:800;max-width:820px}
+.cta-band h2 em{font-style:normal;color:var(--powder)}
+.cta-band p{color:#C9D2E8;max-width:640px;margin-top:14px;font-size:16px}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:0 24px;min-height:50px;font:800 15px var(--sans);text-decoration:none;border:1.5px solid transparent}
+.btn.light{background:var(--paper);color:var(--ink)}
+.btn.line{border-color:var(--paper);color:var(--paper)}
+.btn.dark{background:var(--ink);color:var(--paper)}
+
+footer{border-top:1px solid var(--ink);padding:28px 0 40px;font-size:13px;color:var(--muted)}
+.ft-row{display:grid;grid-template-columns:auto 1fr;gap:12px 32px;align-items:center}
+.ft-brand{display:flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none}
+.ft-brand b{display:block;font-size:17px;font-weight:800;letter-spacing:-.02em}
+.ft-brand small{display:block;font-size:12px;color:var(--muted)}
+
+@media (max-width:960px){
+  .sum,.calc{grid-template-columns:minmax(0,1fr)}
+  .sum-l,.calc-in{border-right:0;border-bottom:1px solid var(--ink)}
+  .scn{grid-template-columns:minmax(0,1fr)}
+  .w-grid,.w-res{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .w-res div:nth-child(2){border-right:0}
+  .w-res div:nth-child(n+3){border-top:1px solid var(--line)}
+  .rng-row{grid-template-columns:minmax(0,1fr) 80px}
+  .rng-row .track{grid-column:1 / -1;grid-row:2}
+  .axis{display:none}
+  .ft-row{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .hero{padding-top:calc(var(--head) + 32px)}
+  section.blk{padding:44px 0}
+  .grid2{grid-template-columns:minmax(0,1fr)}
+  .grid2 > div{border-right:0}
+  .grid2 > div:nth-child(2){border-top:1px solid var(--line)}
+  .kv{grid-template-columns:minmax(0,1fr)}
+  .kv > div{padding:2px 0}
+  .kv .k{padding-top:10px}
+  .kv > div:last-child{padding-bottom:10px}
+  .card-b .kv{grid-template-columns:minmax(0,1fr)}
+  .sum-l,.sum-r,.calc-in,.calc-out{padding:18px}
+  .tbl{font-size:14px}
+  .tbl thead{display:none}
+  .tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}
+  .tbl tr{border-top:1px solid var(--line);padding:12px 14px}
+  .tbl tbody tr:first-child{border-top:0}
+  .tbl td{border:0;padding:2px 0}
+  .tbl td:first-child{font-size:15px}
+  .tbl td:last-child{padding-top:6px}
+  .gaps td.n{color:var(--muted);font-size:13px}
+  .gaps td.n::before{content:"Сценарии: "}
+}
+/* КОНСТРУКТОР ПАСПОРТА */
+.cg{display:grid;grid-template-columns:minmax(0,1fr) 392px;gap:32px;align-items:start}
+.step{border:1px solid var(--ink);background:#fff;margin-bottom:22px}
+.step-h{display:flex;align-items:flex-start;gap:14px;padding:18px 22px;border-bottom:1px solid var(--line);background:var(--card)}
+.step-h .n{flex:0 0 32px;height:32px;border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+.step-h h3{font-size:20px;font-weight:800;letter-spacing:-.025em;line-height:1.15}
+.step-h p{font-size:14px;color:var(--muted);margin-top:3px}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.opt{display:block;padding:18px 22px;border-top:1px solid var(--line);border-left:1px solid var(--line);cursor:pointer;transition:background-color .15s,color .15s;position:relative}
+.opt:nth-child(-n+2){border-top:0}
+.opt:nth-child(2n+1){border-left:0}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt b{display:block;font-size:16.5px;font-weight:800;letter-spacing:-.02em;line-height:1.2}
+.opt span{display:block;font-size:14px;color:var(--muted);margin-top:5px}
+.opt em{display:inline-block;font-style:normal;font-size:12px;font-weight:800;margin-top:9px;letter-spacing:.02em}
+.opt:hover{background:rgba(43,79,216,.08)}
+.opt.on{background:var(--ink);color:var(--paper)}
+.opt.on span{color:#C9D2E8}
+.opt.on em{color:var(--powder)}
+.opt:focus-within{outline:2px solid var(--accent);outline-offset:-3px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px 22px;align-items:center;padding:16px 22px;border-top:1px solid var(--line)}
+.row:first-of-type{border-top:0}
+.row b{display:block;font-size:15.5px;font-weight:800;letter-spacing:-.015em}
+.row small{display:block;font-size:13.5px;color:var(--muted);margin-top:3px;line-height:1.4}
+.seg{display:inline-flex;border:1.5px solid var(--ink);flex-wrap:wrap}
+.seg label{display:block;cursor:pointer}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:block;padding:9px 14px;font-size:13.5px;font-weight:800;border-left:1px solid var(--line);transition:background-color .15s}
+.seg label:first-child span{border-left:0}
+.seg label:hover span{background:rgba(43,79,216,.10)}
+.seg input:checked+span{background:var(--ink);color:var(--paper)}
+.seg label:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.stp{display:inline-flex;align-items:center;border:1.5px solid var(--ink)}
+.stp button{width:40px;height:40px;border:0;background:transparent;font:800 20px var(--sans);transition:background-color .15s}
+.stp button:hover:not(:disabled){background:rgba(43,79,216,.12)}
+.stp button:disabled{opacity:.35;cursor:default}
+.stp output{min-width:42px;text-align:center;font-weight:800;font-size:16px}
+.incl{padding:16px 22px 18px;border-top:1px solid var(--line);background:var(--card)}
+.incl h4{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.incl ul{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 22px}
+.incl li{font-size:14px;padding-left:20px;position:relative;line-height:1.35}
+.incl li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:800}
+.mod{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:14px;align-items:start;padding:18px 22px;border-top:1px solid var(--line);cursor:pointer;transition:background-color .15s}
+.mod:first-of-type{border-top:0}
+.mod:hover{background:rgba(43,79,216,.06)}
+.mod input{position:absolute;opacity:0;pointer-events:none}
+.mod .bx{width:24px;height:24px;border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;margin-top:1px;background:#fff;color:transparent}
+.mod.on .bx{background:var(--ink);color:var(--paper)}
+.mod:focus-within .bx{outline:2px solid var(--accent);outline-offset:2px}
+.mod b{display:block;font-size:16px;font-weight:800;letter-spacing:-.015em;line-height:1.25}
+.mod p{font-size:14px;color:var(--muted);margin-top:4px;line-height:1.4}
+.mod .res{display:block;font-size:13px;margin-top:6px;color:var(--ink)}
+.mod .res i{font-style:normal;font-weight:800;color:var(--accent)}
+.mod .pr{font-weight:800;font-size:15px;white-space:nowrap;text-align:right}
+.mod .pr small{display:block;font-size:12px;font-weight:600;color:var(--muted)}
+.psum{position:sticky;top:calc(var(--head) + 18px);background:var(--ink);color:var(--paper);padding:26px 26px 22px}
+.psum .k{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#AEB8D3}
+.psum .tot{font-size:clamp(40px,4.6vw,54px);font-weight:800;letter-spacing:-.04em;line-height:1.05;margin:8px 0 4px;font-variant-numeric:tabular-nums}
+.psum .tot small{font-size:.42em;font-weight:700;color:#AEB8D3;letter-spacing:0;margin-right:6px}
+.psum .hint{font-size:13px;color:#AEB8D3;line-height:1.4}
+.psum .meta{display:flex;gap:22px;margin:16px 0 4px;padding:14px 0;border-top:1px solid rgba(246,244,240,.2);border-bottom:1px solid rgba(246,244,240,.2)}
+.psum .meta div b{display:block;font-size:17px;font-weight:800}
+.psum .meta div span{font-size:12px;color:#AEB8D3}
+.psum ol{list-style:none;margin:12px 0 0}
+.psum li{display:flex;justify-content:space-between;gap:14px;font-size:14px;padding:6px 0;line-height:1.3}
+.psum li span:last-child{white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:700}
+.psum li.cr span:last-child{color:#9fe0bb}
+.psum li.sep{border-top:1px solid rgba(246,244,240,.2);margin-top:6px;padding-top:12px}
+.psum .chk{display:flex;gap:10px;align-items:flex-start;margin-top:14px;font-size:13.5px;line-height:1.35;cursor:pointer;color:#E7ECF8}
+.psum .chk input{width:18px;height:18px;margin-top:1px;accent-color:#BED0EE;flex:0 0 18px}
+.psum .btns{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.psum .btn{width:100%;text-align:center}
+.psum .btn.light{background:var(--paper);color:var(--ink)}
+.psum .btn.line{border-color:var(--paper);color:var(--paper);background:transparent}
+.psum .btn.line:hover{background:rgba(246,244,240,.12) !important;color:var(--paper) !important}
+.psum .ft{font-size:12.5px;color:#AEB8D3;margin-top:14px;line-height:1.4}
+.psum .ft a{color:var(--powder) !important}
+.mbar{display:none}
+.out{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--ink);background:#fff}
+.out>div{padding:20px 22px;border-left:1px solid var(--line)}
+.out>div:first-child{border-left:0}
+.out h3{font-size:17px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+.out p,.out li{font-size:14.5px;color:var(--muted)}
+.out ul{padding-left:18px}
+@media (max-width:980px){
+  .cg{grid-template-columns:minmax(0,1fr)}
+  .psum{position:static}
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:55;align-items:center;justify-content:space-between;gap:14px;background:var(--ink);color:var(--paper);padding:12px 18px calc(12px + env(safe-area-inset-bottom));text-decoration:none;border-top:1.5px solid var(--paper)}
+  .mbar b{font-size:22px;font-weight:800;letter-spacing:-.03em;display:block;line-height:1.1}
+  .mbar span{font-size:12px;color:#AEB8D3;display:block}
+  .mbar i{font-style:normal;font-weight:800;font-size:14px;border:1.5px solid var(--paper);padding:9px 14px;white-space:nowrap}
+  body{padding-bottom:78px}
+  .out{grid-template-columns:minmax(0,1fr)}
+  .out>div{border-left:0;border-top:1px solid var(--line)}
+  .out>div:first-child{border-top:0}
+}
+@media (max-width:640px){
+  .opts{grid-template-columns:minmax(0,1fr)}
+  .opt:nth-child(n){border-left:0}
+  .opt:nth-child(2){border-top:1px solid var(--line)}
+  .row{grid-template-columns:minmax(0,1fr)}
+  .incl ul{grid-template-columns:minmax(0,1fr)}
+  .mod{grid-template-columns:28px minmax(0,1fr)}
+  .mod .pr{grid-column:2;text-align:left}
+  .step-h{padding:16px}
+  .opt,.row,.mod,.incl{padding-left:16px;padding-right:16px}
+}
+
+.row.stack{grid-template-columns:minmax(0,1fr)}
+/* AFFORDANCE-V1: кликабельные элементы видны в покое и подсвечиваются при наведении */
+:root{--aff-accent:var(--accent,#2B4FD8);--aff-ink:var(--ink,#0A0F1A)}
+a,button,label,summary{cursor:pointer}
+a:focus-visible,button:focus-visible,summary:focus-visible,label:focus-within>input:focus-visible{outline:2px solid var(--aff-accent);outline-offset:3px}
+/* текстовые ссылки в содержании: подчёркнуты в покое */
+main a:not([class*="btn"]):not([class*="ix"]):not([class*="tile"]):not([class*="goto"]):not([class*="mock"]):not([class*="bullet"]),
+.wrap > p a,.wrap li a,.wrap > div a:not([class*="btn"]),.faq a,.pay-note a,.agree a,footer a{
+  color:var(--aff-accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;transition:background-color .15s,text-decoration-thickness .15s}
+main a:not([class*="btn"]):not([class*="ix"]):not([class*="tile"]):not([class*="goto"]):not([class*="mock"]):not([class*="bullet"]):hover,
+.wrap > p a:hover,.wrap li a:hover,.faq a:hover,.pay-note a:hover,.agree a:hover,footer a:hover{
+  text-decoration-thickness:2px;background-color:rgba(43,79,216,.10)}
+/* кнопки: подъём и тень при наведении */
+a[class*="btn"],button[class*="btn"],.submit,.hd-btn,.talk-btn,.linkbtn,.btn{transition:transform .15s ease,box-shadow .15s ease,background-color .15s ease,color .15s ease,border-color .15s ease}
+a[class*="btn"]:hover,button[class*="btn"]:hover,.submit:hover,.hd-btn:hover,.talk-btn:hover,.linkbtn:hover,.btn:hover{
+  opacity:1 !important;transform:translate(-2px,-2px) !important;box-shadow:4px 4px 0 var(--aff-ink) !important}
+/* контурные и призрачные кнопки: заливка при наведении (работает и на плоских страницах) */
+.hero .btn-ghost:hover,.hero .btn-line:hover{background:rgba(43,79,216,.12) !important}
+/* карточки-ссылки: подъём, тень и смена фона */
+a.ix,a.tile,a.bullet,a.goto,a.mock,a.cell,a.pb,a.fs,a.alt-r,a[class*="card"],a[class*="step"]{transition:transform .15s ease,box-shadow .15s ease,background-color .15s ease}
+a.ix:hover,a.tile:hover,a.bullet:hover,a.goto:hover,a.mock:hover,a.cell:hover,a.pb:hover,a.fs:hover,a[class*="card"]:hover,a[class*="step"]:hover{
+  transform:translate(-2px,-2px) !important;box-shadow:5px 5px 0 var(--aff-ink) !important;filter:none}
+/* сворачиваемые блоки: заголовок подсвечивается, маркер виден */
+summary{transition:background-color .15s,color .15s}
+summary:hover{background-color:rgba(43,79,216,.08);color:var(--aff-accent)}
+details>summary::after{transition:transform .2s}
+/* ссылки и кнопки в шапке: подчёркивание при наведении */
+header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+@media (hover:none){a[class*="btn"]:hover,.btn:hover,a.ix:hover,a.tile:hover,a.mock:hover,a.cell:hover{transform:none;box-shadow:none}}
+</style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113526373', 'ym');
+    ym(113526373, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113526373" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<header class="hd"><div class="wrap">
+  <a class="hd-back" href="./" aria-label="AI2ARCH — на главную"><img src="images/ai2arch-sign.png" width="38" height="38" alt=""><span><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
+  <nav aria-label="Разделы"><a href="object.html">Паспорт объекта</a><a href="object-sample.html">Образец</a><a href="object.html#faq">Вопросы</a></nav>
+  <a class="hd-btn" href="object.html#pay" data-goal="calc_head_pay">Заказать диагностику</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div class="kicker">Паспорт объекта · ориентир стоимости</div>
+  <h1>Соберите паспорт <em>и&nbsp;сразу увидите цену</em></h1>
+  <p class="lead">Выберите, для чего он нужен, опишите объект и&nbsp;отметьте, что включить. Справа пересчитывается ориентир стоимости и&nbsp;срок. Точную цену называем после диагностики за&nbsp;15&nbsp;000&nbsp;₽: она засчитывается в&nbsp;паспорт.</p>
+  <div class="note">Базовый экспресс-паспорт — 150&nbsp;000&nbsp;₽: шесть разделов, три-четыре сценария, предельная цена входа и&nbsp;список недостающих документов. Дополнительные блоки заказывают, когда они нужны для решения, а&nbsp;не&nbsp;«на всякий случай». Образец готового паспорта — <a href="object-sample.html">объект Б3</a>.</div>
+</div></section>
+
+<section class="blk" id="calc"><div class="wrap">
+  <div class="cg">
+    <div id="left">
+
+      <div class="step" id="s1">
+        <div class="step-h"><span class="n">1</span><div><h3>Для чего вам паспорт</h3><p>Выбор подставит рекомендуемый набор: его можно менять дальше.</p></div></div>
+        <div class="opts" id="presets" role="radiogroup" aria-label="Цель паспорта"></div>
+      </div>
+
+      <div class="step" id="s2">
+        <div class="step-h"><span class="n">2</span><div><h3>Объект</h3><p>Размер и&nbsp;число объектов влияют на&nbsp;объём работы.</p></div></div>
+        <div class="row stack"><div><b>Что у вас</b><small>от этого зависят состав данных и&nbsp;цена: у пустого участка данных меньше, и&nbsp;паспорт дешевле</small></div><div class="seg" id="ptype" role="radiogroup" aria-label="Тип объекта"></div></div>
+        <div class="row stack"><div><b id="areaT">Общая площадь объекта</b><small id="areaS"></small></div>
+          <div class="seg" id="area" role="radiogroup" aria-label="Площадь"></div></div>
+        <div class="row"><div><b id="cntT">Сколько объектов</b><small>каждый следующий — с&nbsp;общими данными по&nbsp;рынку и&nbsp;локации, поэтому дешевле первого</small></div>
+          <div class="stp" id="cnt"><button type="button" data-d="-1" aria-label="Меньше">−</button><output id="cntO">1</output><button type="button" data-d="1" aria-label="Больше">+</button></div></div>
+        <div class="incl">
+          <h4>В базовый паспорт входит</h4>
+          <ul id="baseList"></ul>
+        </div>
+      </div>
+
+      <div class="step" id="s3">
+        <div class="step-h"><span class="n">3</span><div><h3>Что добавить к&nbsp;базе</h3><p>Каждый блок отвечает на&nbsp;конкретный вопрос. Отметьте нужные.</p></div></div>
+        <div id="mods"></div>
+      </div>
+
+      <div class="step" id="s4">
+        <div class="step-h"><span class="n">4</span><div><h3>Срок</h3><p>Считается с&nbsp;момента, когда получены ваши документы.</p></div></div>
+        <div class="row"><div><b>Когда нужен результат</b><small id="termNote"></small></div>
+          <div class="seg" id="rush" role="radiogroup" aria-label="Срок"></div></div>
+      </div>
+    </div>
+
+    <aside id="sum" class="psum" aria-live="polite">
+      <div class="k">Ориентир стоимости</div>
+      <div class="tot" id="tot">150&nbsp;000&nbsp;₽</div>
+      <div class="hint" id="hint">без НДС · точная цена после диагностики</div>
+      <div class="meta"><div><b id="mTerm">2–3 недели</b><span>срок</span></div><div><b id="mMods">0</b><span>доп. блоков</span></div><div><b id="mObj">1</b><span id="mObjK">объект</span></div></div>
+      <ol id="lines"></ol>
+      <label class="chk"><input type="checkbox" id="dPaid"> Диагностика 15&nbsp;000&nbsp;₽ уже оплачена: засчитать</label>
+      <div class="btns">
+        <a class="btn light" id="ctaDiag" href="object.html#pay" data-goal="calc_to_diag">Начать с&nbsp;диагностики · 15&nbsp;000&nbsp;₽</a>
+        <a class="btn line" id="ctaTg" href="https://t.me/alkuleshov" target="_blank" rel="noopener">Обсудить расчёт в&nbsp;Telegram</a>
+        <button class="btn line" id="ctaCopy" type="button">Скопировать ссылку на расчёт</button>
+      </div>
+      <p class="ft">Диагностика — первый шаг: за&nbsp;неделю вы узнаете, нужен&nbsp;ли паспорт. Если нужен, 15&nbsp;000&nbsp;₽ вычитаются из&nbsp;его стоимости в&nbsp;течение 30&nbsp;дней. <a href="object-offer.html">Оферта</a></p>
+    </aside>
+  </div>
+</div></section>
+
+<section class="blk" id="not"><div class="wrap">
+  <div class="sh"><div class="num">Границы</div><h2>Что в&nbsp;цену <em>не&nbsp;входит</em></h2></div>
+  <div class="out">
+    <div><h3>Юридическая проверка</h3><p>Правоустанавливающие документы, обременения и&nbsp;сделка — задача юриста. В&nbsp;паспорте указываем, что именно проверить и&nbsp;когда это заказывать.</p></div>
+    <div><h3>Обследование и&nbsp;сметы</h3><p>Состояние конструкций и&nbsp;стоимость строительства оценивают специализированные организации. Берём их данные в&nbsp;расчёт или закладываем допущение с&nbsp;пометкой.</p></div>
+    <div><h3>Цена зависит от&nbsp;исходных данных</h3><p>Если документов нет или объект сложный (охрана, несколько собственников, нестандартные права), цена уточняется после диагностики, до&nbsp;начала работы.</p></div>
+  </div>
+</div></section>
+
+<section class="cta-band"><div class="wrap">
+  <h2>Не&nbsp;уверены, <em>нужен&nbsp;ли паспорт?</em></h2>
+  <p>Начните с&nbsp;диагностики: за&nbsp;15&nbsp;000&nbsp;₽ и&nbsp;до&nbsp;8&nbsp;рабочих дней вы получите памятку со&nbsp;стоп-факторами и&nbsp;выводом: идти дальше, остановиться или торговаться.</p>
+  <div class="btns">
+    <a class="btn light" href="object.html#pay" data-goal="calc_band_pay">Заказать диагностику · 15&nbsp;000&nbsp;₽</a>
+    <a class="btn line" href="object-sample.html">Посмотреть образец паспорта</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap ft-row">
+  <a class="ft-brand" href="./"><img src="images/ai2arch-tile.png" width="44" height="44" alt=""><span><b>AI2ARCH · 2026</b><small>Лаборатория проектного интеллекта</small></span></a>
+  <p>ИП Кулешов Александр Алексеевич · ИНН 615519176752 · ОГРНИП 324619600147971</p>
+</div></footer>
+
+<a class="mbar" id="bar" href="#sum"><div><b id="barTot">150 000 ₽</b><span id="barSub">ориентир · 2–3 недели</span></div><i>Смета ↓</i></a>
+<script>
+(function () {
+  /* Цены и состав — правятся здесь. Ориентир, не оферта: окончательная цена называется после диагностики. */
+  var DATA = {
+    base: 150000,
+    types: [
+      { id: 'bld', label: 'Здание или помещения', base: 150000, noun: 'объекта' },
+      { id: 'mix', label: 'Участок со зданиями', base: 150000, noun: 'объекта' },
+      { id: 'lot', label: 'Пустой участок', base: 120000, noun: 'участка' }
+    ],
+    lotAreas: ['до 1 га', '1–5 га', 'свыше 5 га'],
+    baseInclLot: [
+      'Участок и права: площадь, вид использования, кадастровая стоимость',
+      'Ограничения: ПЗЗ, этажность, процент застройки, потолок площади',
+      'Локация за 15 минут пешком и прямые аналоги функций',
+      'Рынок: ставки аренды и цены продажи по функциям на трёх площадках',
+      '3–4 сценария использования с оценкой соответствия запросу',
+      'Экономика: затраты по допущениям, кратность, предельная цена входа',
+      'Список недостающих документов и вывод'
+    ],
+    diag: 15000,
+    extraObj: 60000,
+    rushPct: 0.25,
+    baseIncl: [
+      'Объект и права: площади, назначение, кадастровая стоимость',
+      'Ограничения: ПЗЗ, этажность, процент застройки, потолок площади',
+      'Локация за 15 минут пешком и прямые аналоги функций',
+      'Рынок: ставки аренды и цены продажи на трёх площадках',
+      '3–4 сценария с оценкой соответствия вашему запросу',
+      'Экономика: кратность, предельная цена входа, чувствительность',
+      'Список недостающих документов и вывод'
+    ],
+    areas: [
+      { id: 0, label: 'до 3 000 м²', add: 0 },
+      { id: 1, label: '3 000–10 000 м²', add: 40000 },
+      { id: 2, label: 'свыше 10 000 м²', add: null }
+    ],
+    mods: [
+      { id: 'docs', name: 'Разбор ваших документов и обмеров', nameLot: 'Разбор документов на участок', price: 20000,
+        why: 'Сверяем техпаспорта, экспликации и планы с выписками ЕГРН, считаем арендопригодную площадь вместо допущения 70 %.',
+        whyLot: 'Сверяем выписки ЕГРН, топосъёмку и ГПЗУ с границами и видом использования участка.',
+        res: 'Таблица сверки площадей и расхождений' },
+      { id: 'loc', name: 'Углублённая локация', price: 25000,
+        why: 'Изохроны 5/10/15 минут, 20+ аналогов с рейтингами и ценами, транспортная доступность.',
+        res: 'Карта окружения и таблица конкурентов' },
+      { id: 'aud', name: 'Спрос и аудитория', price: 30000,
+        why: 'Кто будет пользоваться объектом: сегменты, статистика города и региона, гипотезы и вопросы для проверки опросом.',
+        res: 'Портрет аудитории и список гипотез' },
+      { id: 'krt', name: 'Правовой путь: КРТ и новое строительство', price: 35000,
+        why: 'Когда нужен снос и новое здание: что допускает ПЗЗ, основания и риски КРТ, что запросить у города.',
+        res: 'Схема путей с рисками и документами' },
+      { id: 'model', name: 'Финмодель в Excel', price: 30000,
+        why: 'Модель с формулами передаём вам: меняйте ставки, цену входа и ремонт, смотрите кратность сами.',
+        res: 'Файл Excel с вашими допущениями' },
+      { id: 'deck', name: 'Презентация для инвестора или банка', price: 40000,
+        why: 'Ключевые цифры, сценарии и предельная цена входа на 12–15 слайдах.',
+        res: 'Презентация PDF' },
+      { id: 'land', name: 'Рынок земли и участков', price: 20000, only: ['lot', 'mix'],
+        why: 'Цены предложения на участки рядом с поправкой на размер и вид использования, сделки по открытым данным, цена строительства по допущениям.',
+        res: 'Таблица цен участков и вывод по стоимости земли' },
+      { id: 'call', name: 'Второй созвон с партнёрами', price: 10000,
+        why: 'Разбор результата с партнёрами или инвестором: 60 минут, ответы на вопросы.',
+        res: 'Запись и список решений' }
+    ],
+    presets: [
+      { id: 'buy', name: 'Купить объект или торговаться', text: 'Сколько можно заплатить и где красные флаги.', mods: ['docs'], n: 1, tag: 'главное — предельная цена входа' },
+      { id: 'own', name: 'Решить, что делать с моим объектом', text: 'Сдавать, продавать частями, перепрофилировать или строить заново.', mods: ['docs', 'krt'], n: 1, tag: 'главное — выбор сценария' },
+      { id: 'inv', name: 'Показать инвестору или банку', text: 'Документ и модель, с которыми идут на переговоры.', mods: ['model', 'deck'], n: 1, tag: 'главное — цифры с источниками' },
+      { id: 'cmp', name: 'Сравнить несколько объектов', text: 'Какой из объектов выбрать и в каком порядке покупать.', mods: [], n: 2, tag: 'главное — сопоставимые цифры' }
+    ]
+  };
+
+  var $ = function (s) { return document.querySelector(s); };
+  function goal(name, params) { try { if (typeof ym === 'function') ym(113526373, 'reachGoal', name, params || {}); } catch (e) {} }
+  function rub(n) { return Math.round(n).toLocaleString('ru-RU').replace(/\s/g, ' ') + ' ₽'; }
+  function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function byId(list, id) { for (var i = 0; i < list.length; i++) if (String(list[i].id) === String(id)) return list[i]; return null; }
+
+  var S = { p: 'buy', m: {}, a: 0, n: 1, r: 0, d: 0, t: 'bld' };
+  function T() { return byId(DATA.types, S.t); }
+  function modsFor() { return DATA.mods.filter(function (m) { return !m.only || m.only.indexOf(S.t) >= 0; }); }
+
+  function applyPreset(id) {
+    var p = byId(DATA.presets, id); if (!p) return;
+    S.p = id; S.m = {}; p.mods.forEach(function (m) { S.m[m] = 1; }); S.n = p.n;
+  }
+  function loadHash() {
+    var h = location.hash.replace(/^#/, ''); if (h.indexOf('p=') < 0) { applyPreset('buy'); return; }
+    var q = new URLSearchParams(h);
+    var p = q.get('p'); if (byId(DATA.presets, p)) S.p = p;
+    S.m = {}; (q.get('m') || '').split(',').forEach(function (m) { if (byId(DATA.mods, m)) S.m[m] = 1; });
+    var a = +q.get('a'); S.a = byId(DATA.areas, a) ? a : 0;
+    var n = +q.get('n'); S.n = n >= 1 && n <= 5 ? n : 1;
+    S.r = q.get('r') === '1' ? 1 : 0; S.d = q.get('d') === '1' ? 1 : 0;
+    var t = q.get('t'); S.t = byId(DATA.types, t) ? t : 'bld';
+    Object.keys(S.m).forEach(function (m) { if (modsFor().indexOf(byId(DATA.mods, m)) < 0) delete S.m[m]; });
+  }
+  function hash() {
+    return 'p=' + S.p + '&m=' + Object.keys(S.m).join(',') + '&a=' + S.a + '&n=' + S.n + '&r=' + S.r + '&d=' + S.d + '&t=' + S.t;
+  }
+
+  function calc() {
+    var lines = [], sub = T().base, area = byId(DATA.areas, S.a), req = false;
+    var aLabel = S.t === 'lot' ? DATA.lotAreas[S.a] : area.label;
+    lines.push({ t: 'Паспорт ' + T().noun + ', экспресс', v: T().base });
+    modsFor().forEach(function (m) { if (S.m[m.id]) { sub += m.price; lines.push({ t: m.name, v: m.price }); } });
+    if (area.add === null) { req = true; lines.push({ t: 'Площадь ' + aLabel, v: null }); }
+    else if (area.add) { sub += area.add; lines.push({ t: 'Площадь ' + aLabel, v: area.add }); }
+    if (S.n > 1) { var x = (S.n - 1) * DATA.extraObj; sub += x; lines.push({ t: 'Ещё ' + (S.t === 'lot' ? 'участков' : 'объектов') + ': ' + (S.n - 1), v: x }); }
+    var rush = 0;
+    if (S.r) { rush = Math.round(sub * DATA.rushPct / 5000) * 5000; sub += rush; lines.push({ t: 'Срочность (+25 %)', v: rush }); }
+    var credit = S.d ? DATA.diag : 0;
+    if (credit) lines.push({ t: 'Зачёт диагностики', v: -credit, cr: 1 });
+    var nm = Object.keys(S.m).length;
+    var term = (nm >= 3 || S.n >= 3) ? '3–4 недели' : '2–3 недели';
+    if (S.r) term = (nm <= 2 && S.n === 1) ? '7 рабочих дней' : 'срок согласуем';
+    return { lines: lines, total: sub - credit, req: req, term: term, nm: nm };
+  }
+
+  function summaryText(c) {
+    var p = byId(DATA.presets, S.p), mods = modsFor().filter(function (m) { return S.m[m.id]; }).map(function (m) { return S.t === 'lot' && m.nameLot ? m.nameLot : m.name; });
+    return 'Паспорт (' + T().label.toLowerCase() + ') ' + (c.req ? 'от ' : '≈') + Math.round(c.total).toLocaleString('ru-RU').replace(/\s/g, ' ') + ' ₽. Цель: ' + (p ? p.name : 'свой набор') +
+      '. Блоки: ' + (mods.length ? mods.join(', ') : 'только база') + '. Объектов: ' + S.n + '. Площадь ' + (S.t === 'lot' ? DATA.lotAreas[S.a] : byId(DATA.areas, S.a).label) + '. Срок: ' + c.term + (S.d ? '. Диагностика оплачена' : '');
+  }
+
+  function renderStatic() {
+    $('#presets').innerHTML = DATA.presets.map(function (p) {
+      return '<label class="opt" data-p="' + p.id + '"><input type="radio" name="preset" value="' + p.id + '"><b>' + esc(p.name) + '</b><span>' + esc(p.text) + '</span><em>' + esc(p.tag) + '</em></label>';
+    }).join('');
+    $('#baseList').innerHTML = DATA.baseIncl.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('');
+    $('#ptype').innerHTML = DATA.types.map(function (t) {
+      return '<label><input type="radio" name="ptype" value="' + t.id + '"><span>' + esc(t.label) + '</span></label>';
+    }).join('');
+    $('#rush').innerHTML = '<label><input type="radio" name="rush" value="0"><span>Стандартно</span></label><label><input type="radio" name="rush" value="1"><span>Срочно · +25 %</span></label>';
+  }
+  function renderMods() {
+    var lot = S.t === 'lot';
+    $('#mods').innerHTML = modsFor().map(function (m) {
+      return '<label class="mod" data-m="' + m.id + '"><input type="checkbox" value="' + m.id + '"><span class="bx" aria-hidden="true">✓</span><div><b>' + esc(lot && m.nameLot ? m.nameLot : m.name) + '</b><p>' + esc(lot && m.whyLot ? m.whyLot : m.why) + '</p><span class="res"><i>Получите:</i> ' + esc(m.res) + '</span></div><div class="pr">+' + rub(m.price) + '</div></label>';
+    }).join('');
+  }
+
+  function render() {
+    var lot = S.t === 'lot';
+    renderMods();
+    $('#baseList').innerHTML = (lot ? DATA.baseInclLot : DATA.baseIncl).map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('');
+    $('#areaT').textContent = lot ? 'Площадь участка' : 'Общая площадь объекта';
+    $('#areaS').textContent = lot ? 'по ЕГРН или кадастровой карте; для пустого участка данных меньше, затраты на стройку берём по допущениям' : 'здания и помещения, которые входят в задачу, по ЕГРН или техпаспорту';
+    $('#cntT').textContent = lot ? 'Сколько участков' : 'Сколько объектов';
+    $('#area').innerHTML = DATA.areas.map(function (a) {
+      var l = lot ? DATA.lotAreas[a.id] : a.label;
+      return '<label><input type="radio" name="area" value="' + a.id + '"><span>' + esc(l) + (a.add ? ' · +' + (a.add / 1000) + ' тыс.' : (a.add === null ? ' · по запросу' : '')) + '</span></label>';
+    }).join('');
+    document.querySelectorAll('#ptype input').forEach(function (i) { i.checked = i.value === S.t; });
+    var c = calc();
+    document.querySelectorAll('.opt').forEach(function (el) {
+      var p = byId(DATA.presets, el.getAttribute('data-p'));
+      var same = p.n === S.n && p.mods.length === c.nm && p.mods.every(function (m) { return S.m[m]; });
+      el.classList.toggle('on', S.p === p.id && same);
+      el.querySelector('input').checked = S.p === p.id && same;
+    });
+    document.querySelectorAll('.mod').forEach(function (el) {
+      var on = !!S.m[el.getAttribute('data-m')]; el.classList.toggle('on', on); el.querySelector('input').checked = on;
+    });
+    document.querySelectorAll('#area input').forEach(function (i) { i.checked = +i.value === S.a; });
+    document.querySelectorAll('#rush input').forEach(function (i) { i.checked = +i.value === S.r; });
+    $('#cntO').textContent = S.n;
+    document.querySelector('#cnt [data-d="-1"]').disabled = S.n <= 1;
+    document.querySelector('#cnt [data-d="1"]').disabled = S.n >= 5;
+    $('#dPaid').checked = !!S.d;
+    $('#termNote').textContent = S.r ? 'Срочно: 7 рабочих дней при одном объекте и до двух дополнительных блоков, иначе срок согласуем.' : 'Стандарт: 2–3 недели; с тремя и более блоками или тремя объектами — 3–4 недели.';
+
+    $('#tot').innerHTML = (c.req ? '<small>от</small>' : '<small>≈</small>') + rub(c.total);
+    $('#hint').textContent = c.req ? 'без НДС · для площади свыше 10 000 м² цена по запросу, показана без доплаты за площадь' : 'без НДС · точная цена после диагностики';
+    $('#mTerm').textContent = c.term; $('#mMods').textContent = c.nm; $('#mObj').textContent = S.n; $('#mObjK').textContent = lot ? 'участок' : 'объект';
+    $('#lines').innerHTML = c.lines.map(function (l, i) {
+      return '<li class="' + (l.cr ? 'cr ' : '') + (i === c.lines.length - 1 && c.lines.length > 1 ? '' : '') + '"><span>' + esc(l.t) + '</span><span>' + (l.v === null ? 'по запросу' : (l.v < 0 ? '−' + rub(-l.v) : (i ? '+' : '') + rub(l.v))) + '</span></li>';
+    }).join('');
+    $('#barTot').innerHTML = (c.req ? 'от ' : '≈') + rub(c.total); $('#barSub').textContent = 'ориентир · ' + c.term;
+
+    var txt = summaryText(c);
+    $('#ctaDiag').href = 'object.html?from=calc&calc=' + encodeURIComponent(txt) + '#pay';
+    try { history.replaceState(null, '', '#' + hash()); } catch (e) {}
+  }
+
+  document.addEventListener('click', function (e) {
+    var op = e.target.closest('.opt');
+    if (op) { e.preventDefault(); applyPreset(op.getAttribute('data-p')); goal('calc_preset', { p: S.p }); render(); return; }
+    var md = e.target.closest('.mod');
+    if (md) { e.preventDefault(); var id = md.getAttribute('data-m'); if (S.m[id]) delete S.m[id]; else S.m[id] = 1; goal('calc_module', { m: id }); render(); return; }
+    var st = e.target.closest('#cnt button');
+    if (st) { S.n = Math.max(1, Math.min(5, S.n + +st.getAttribute('data-d'))); render(); return; }
+    if (e.target.closest('#ctaCopy')) {
+      goal('calc_copy');
+      var b = $('#ctaCopy'), url = location.href;
+      (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(function () { b.textContent = 'Ссылка скопирована'; }, function () { b.textContent = 'Скопируйте адрес из строки браузера'; });
+      setTimeout(function () { b.textContent = 'Скопировать ссылку на расчёт'; }, 2400); return;
+    }
+    if (e.target.closest('#ctaTg')) {
+      goal('calc_telegram');
+      var t = summaryText(calc());
+      try { navigator.clipboard.writeText('Здравствуйте! Мой расчёт паспорта: ' + t + ' ' + location.href); } catch (er) {}
+    }
+  });
+  document.addEventListener('change', function (e) {
+    var t = e.target;
+    if (t.name === 'ptype') { S.t = t.value; Object.keys(S.m).forEach(function (m) { if (modsFor().indexOf(byId(DATA.mods, m)) < 0) delete S.m[m]; }); goal('calc_type', { t: S.t }); render(); }
+    else if (t.name === 'area') { S.a = +t.value; render(); }
+    else if (t.name === 'rush') { S.r = +t.value; render(); }
+    else if (t.id === 'dPaid') { S.d = t.checked ? 1 : 0; render(); }
+  });
+
+  loadHash(); renderStatic(); render(); goal('calc_open');
+})();
+</script>
+</body>
+</html>

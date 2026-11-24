@@ -330,7 +330,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
   <div>
     <div class="kicker">Участок или здание · для девелоперов и&nbsp;собственников</div>
     <h1>Покупать объект <em>или нет?</em></h1>
-    <p class="lead">Ответим до&nbsp;сделки: что на&nbsp;объекте разрешено, где стоп-факторы, какие сценарии принесут деньги и&nbsp;до&nbsp;какой цены покупка окупается. У&nbsp;каждой цифры — источник. Первый ответ — за&nbsp;неделю и&nbsp;15&nbsp;000&nbsp;₽.</p>
+    <p class="lead">Ответим до&nbsp;сделки: что на&nbsp;участке или в&nbsp;здании разрешено, где стоп-факторы, какие сценарии принесут деньги и&nbsp;до&nbsp;какой цены покупка окупается. У&nbsp;каждой цифры — источник. Первый ответ — за&nbsp;неделю и&nbsp;15&nbsp;000&nbsp;₽.</p>
     <div class="cta">
       <a class="btn pri" href="#pay" data-goal="pay_anchor" data-src="hero">Заказать диагностику · 15&nbsp;000&nbsp;₽</a>
       <a class="btn ghost" href="object-sample.html" data-goal="sample_open" data-src="hero">Смотреть образец паспорта</a>
@@ -405,7 +405,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
 
 <section class="blk" id="screening"><div class="wrap">
   <div class="sh"><div class="num">04 · Шаг 2</div><h2>Паспорт объекта: <em>по&nbsp;какой цене входить и&nbsp;что делать</em></h2>
-    <p>Градостроительный анализ, рынок, анализ наилучшего использования (НЭИ) и&nbsp;экспресс-финмодель в&nbsp;одном документе. Главная цифра — предельная цена входа: выше неё объект не&nbsp;окупается. Экспресс-версия за&nbsp;2–3 недели, от&nbsp;150&nbsp;000&nbsp;₽ за&nbsp;объект.</p></div>
+    <p>Градостроительный анализ, рынок, анализ наилучшего использования (НЭИ) и&nbsp;экспресс-финмодель в&nbsp;одном документе. Главная цифра — предельная цена входа: выше неё объект не&nbsp;окупается. Экспресс-версия за&nbsp;2–3 недели, от&nbsp;150&nbsp;000&nbsp;₽ за&nbsp;объект, для пустого участка — от&nbsp;120&nbsp;000&nbsp;₽: данных меньше, затраты на&nbsp;строительство берём по&nbsp;допущениям.</p></div>
   <div class="pass">
     <div class="pb"><div class="cell-n">01</div><h3>Объект и&nbsp;права</h3><p>Площади, назначение, кадастровая стоимость, сверка ЕГРН с&nbsp;техпаспортами и&nbsp;обмерами.</p></div>
     <div class="pb"><div class="cell-n">02</div><h3>Ограничения</h3><p>Зона и&nbsp;виды использования по&nbsp;ПЗЗ, этажность, процент застройки, потолок площади, особые зоны.</p></div>
@@ -416,7 +416,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
   </div>
   <div class="pass-f">
     <p>Плюс список того, чего не&nbsp;хватает: какой документ закроет каждый пробел и&nbsp;на&nbsp;какие сценарии повлияет. Пустые места не&nbsp;прячем и&nbsp;не&nbsp;заполняем выдумками.</p>
-    <a class="btn ghost" href="object-sample.html" data-goal="sample_open" data-src="screening">Как это выглядит</a>
+    <div class="btns" style="margin-top:0"><a class="btn pri" href="object-calc.html" data-goal="calc_from_page">Рассчитать стоимость паспорта</a><a class="btn ghost" href="object-sample.html" data-goal="sample_open" data-src="screening">Как это выглядит</a></div>
   </div>
 </div></section>
 
@@ -496,6 +496,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
       <div class="f"><label for="o-obj">Объект: адрес или кадастровый номер *</label><input id="o-obj" name="object" required></div>
       <div class="f"><label for="o-task">Что хотите понять <small>(необязательно)</small></label><textarea id="o-task" name="task" placeholder="Например: стоит ли покупать и что можно сделать со зданием"></textarea></div>
       <label class="agree"><input type="checkbox" id="o-agree" required> <span>Принимаю <a href="object-offer.html" target="_blank" rel="noopener">условия оферты</a> и&nbsp;согласен(на) на&nbsp;обработку персональных данных.</span></label>
+      <p class="pay-note" id="o-calcnote" style="display:none"></p>
       <button class="submit" id="o-submit" type="submit">Перейти к&nbsp;оплате · 15&nbsp;000&nbsp;₽</button>
     </form>
     <div class="msg" id="o-pay"><h3>Остался один шаг</h3><p>Заявка сохранена. Оплатите диагностику на&nbsp;странице платёжного сервиса — после оплаты пришлём бриф и&nbsp;предложим время созвона.</p><a class="btn pri" id="o-paylink" href="#" target="_blank" rel="noopener">Оплатить 15&nbsp;000&nbsp;₽</a></div>
@@ -532,6 +533,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
   var PAY_URL = 'https://yookassa.ru/my/i/awPrnN7K4CUU/l';
   var ENROLL_URL = 'https://script.google.com/macros/s/AKfycby1af9vPX9ucvhf1phoY_kr0BQ3q4YMAVVRNUMB0Y_xbYHxlhyp2ca69mpD3S7uTRY/exec';
   var from = new URLSearchParams(location.search).get('from') || '';
+  var calcInfo = (new URLSearchParams(location.search).get('calc') || '').slice(0, 600);
   function goal(name, params) { if (typeof ym === 'function') ym(113526373, 'reachGoal', name, params || {}); }
 
   document.querySelectorAll('[data-tg]').forEach(function (a) {
@@ -541,6 +543,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
     a.addEventListener('click', function () { goal(a.getAttribute('data-goal'), { src: a.getAttribute('data-src') || '' }); });
   });
 
+  if (calcInfo) { var cn = document.getElementById('o-calcnote'); if (cn) { cn.textContent = 'Ваш расчёт паспорта передадим вместе с заявкой: ' + calcInfo; cn.style.display = 'block'; } }
   var form = document.getElementById('objForm');
   var submit = document.getElementById('o-submit');
   var innWrap = document.getElementById('o-inn-wrap');
@@ -579,7 +582,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
       email: email.value.trim(),
       education: '',
       certEligible: '',
-      comment: 'Диагностика 15 000 ₽. Оплата: ' + (inv ? 'счёт, ИНН ' + inn.value.replace(/\s/g, '') : 'карта/СБП') + '. Объект: ' + obj.value.trim() + (task ? '. Задача: ' + task : '') + (from ? '. Переход: ' + from : ''),
+      comment: 'Диагностика 15 000 ₽. Оплата: ' + (inv ? 'счёт, ИНН ' + inn.value.replace(/\s/g, '') : 'карта/СБП') + '. Объект: ' + obj.value.trim() + (task ? '. Задача: ' + task : '') + (from ? '. Переход: ' + from : '') + (calcInfo ? '. Расчёт паспорта: ' + calcInfo : ''),
       timestamp: new Date().toISOString(),
       course: 'Анализ объекта',
       source: inv ? 'Диагностика: счёт' : 'Диагностика: карта'
