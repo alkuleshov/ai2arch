@@ -1042,40 +1042,86 @@ details>summary::after{transition:transform .2s}
 header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
 @media (hover:none){a[class*="btn"]:hover,.btn:hover,a.ix:hover,a.tile:hover,a.mock:hover,a.cell:hover{transform:none;box-shadow:none}}
 
-  /* ===== Мобильная адаптация (v2) ===== */
-  details.fold{border:1px solid var(--border,#E2DED3);border-radius:10px;margin:10px 0;background:rgba(255,255,255,.5)}
-  details.fold>summary{cursor:pointer;list-style:none;padding:10px 14px;font-size:14px;font-weight:700;color:var(--ink,#1F2430);display:flex;align-items:center;justify-content:space-between;gap:10px}
+  /* ===== Мобильная адаптация (v3) ===== */
+  details.fold{border:1px solid var(--border,#E2DED3);border-radius:10px;margin:10px 0;background:rgba(255,255,255,.55)}
+  details.fold>summary{cursor:pointer;list-style:none;padding:11px 14px;font-size:14px;font-weight:700;color:var(--ink,#1F2430);display:flex;align-items:center;justify-content:space-between;gap:10px}
   details.fold>summary::-webkit-details-marker{display:none}
   details.fold>summary:after{content:'+';font-size:18px;font-weight:500;color:var(--accent,#2B5CE6);flex:none}
   details.fold[open]>summary:after{content:'–'}
   details.fold>.fold-body{padding:0 14px 12px}
-  @media (max-width:640px){
-    .back-bar{flex-wrap:nowrap!important;gap:4px!important;padding:6px 8px!important;justify-content:space-between}
+  details.fold>.fold-body>h3:first-child,details.fold>.fold-body>h4:first-child{display:none}
+  #mnav,.mn-sheet{display:none}
+  @media (max-width:720px){
+    /* верхняя панель уезжает при прокрутке, липкой остаётся только одна полоса */
+    .back-bar{position:static!important;flex-wrap:nowrap!important;gap:4px!important;padding:6px 8px!important;justify-content:space-between}
     .back-btn{font-size:11px;padding:6px 8px;white-space:nowrap}
-    .bar-brand{display:none!important}
-    .head-schedule{display:none!important}
-    .guide-breadcrumb{display:none}
+    .bar-brand,.head-schedule,.guide-breadcrumb{display:none!important}
     .head-actions{gap:4px;margin-left:auto}
     .workbook-btn{padding:6px 7px;font-size:10.5px;white-space:nowrap}
-    .bar-brand{padding:0 8px}
-    .bar-brand img{width:22px;height:22px}
-    .nav-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-    .nav-wrap::-webkit-scrollbar{display:none}
-    .nav-pills{flex-wrap:nowrap;gap:6px;padding:6px 10px}
-    .pill{font-size:12px;padding:5px 10px;white-space:nowrap;flex:none}
-    .lesson-body{font-size:14.5px;line-height:1.5}
-    .lesson-body h3,.wrap h3{font-size:16px;margin:16px 0 8px}
-    .lesson-title{font-size:17px}
+    #moduleTabsWrap,.module-panel .nav-wrap{display:none!important}
+    #mnav{display:flex;position:sticky;top:0;z-index:60;gap:6px;padding:6px 8px;background:#fff;border-bottom:1px solid #0A0F1A}
+    #mnav button{flex:1 1 0;min-width:0;text-align:left;border:1px solid #0A0F1A;background:#fff;padding:5px 24px 5px 9px;font:inherit;position:relative;cursor:pointer;display:block}
+    #mnav button:after{content:'▾';position:absolute;right:9px;top:50%;transform:translateY(-50%);font-size:11px}
+    #mnav .mn-l{display:block;font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:#6B7280;font-weight:700;line-height:1.3}
+    #mnav .mn-v{display:block;font-size:12.5px;font-weight:700;color:#0A0F1A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3}
+    .mn-sheet{display:none;position:fixed;left:0;right:0;top:0;bottom:0;z-index:300;background:rgba(10,15,26,.5)}
+    .mn-sheet.open{display:block}
+    .mn-sheet-in{position:absolute;left:0;right:0;bottom:0;max-height:78vh;overflow-y:auto;-webkit-overflow-scrolling:touch;background:#fff;border-top:2px solid #0A0F1A;padding-bottom:max(10px,env(safe-area-inset-bottom))}
+    .mn-sheet-h{padding:12px 16px 8px;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#6B7280;font-weight:700}
+    .mn-item{display:block;width:100%;text-align:left;padding:12px 16px;font:inherit;font-size:15px;line-height:1.3;border:0;border-top:1px solid #E5E7EB;background:#fff;cursor:pointer;color:#0A0F1A}
+    .mn-item small{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#6B7280;font-weight:700}
+    .mn-item.on{background:#EEF3FF;font-weight:700}
+    /* страница */
+    .lesson-body{padding:12px 14px 16px!important;font-size:14.5px;line-height:1.5}
+    .lesson-header{padding:12px 40px 12px 14px!important;gap:10px!important;cursor:pointer;position:relative}
+    .lesson-header:after{content:'+';position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--accent,#2B5CE6)}
+    .lesson-block.open .lesson-header:after{content:'–'}
+    .lesson-block:not(.open) .lesson-body{display:none}
+    .lesson-block:not(.open) .lesson-header{border-bottom:0!important}
+    .lesson-title{font-size:16px;line-height:1.25}
+    .lh-meta{display:block;margin-top:4px;font-size:11.5px;color:var(--ink-faint,#6B7280);line-height:1.35}
+    .lesson-body h3,.wrap h3{font-size:16px;margin:14px 0 8px}
+    .lesson-body h4{font-size:14px}
     .card{padding:12px 13px;margin:10px 0}
     .card h3{font-size:14.5px}
     .card p,.card li,.lesson-body li{font-size:13.5px}
-    table{display:table;width:100%;table-layout:fixed;font-size:12px;border-collapse:collapse}
-    th,td{padding:6px 5px;word-break:break-word;overflow-wrap:anywhere;vertical-align:top}
+    .card-grid{grid-template-columns:1fr!important}
     img{max-width:100%;height:auto}
-    iframe{min-height:0!important}
-    .lesson-body iframe[src^="redev-"]{aspect-ratio:auto!important;height:280px!important}
+    iframe{min-height:0!important;max-width:100%}
+    .lesson-body iframe[src^="redev-"]{aspect-ratio:auto!important;height:260px!important}
     .checklist li{padding:7px 0;font-size:13.5px}
     .lect-fmt,.meet-badge{font-size:10.5px;padding:3px 7px}
+    .lr-preview{display:block!important;aspect-ratio:auto!important;padding:16px!important}
+    .lr-preview:after{display:none}
+    .trackbar{padding:8px 12px!important;gap:2px!important}
+    .trackbar-row{display:flex!important;align-items:center;flex-wrap:nowrap!important;gap:8px!important}
+    .trackbar b{grid-row:auto;margin:0;font-size:12px}
+    .trackbar-buttons{display:flex!important;flex:1 1 auto;gap:6px!important;grid-template-columns:none!important}
+    .trackbar button{min-height:34px!important;padding:0 6px!important;font-size:11.5px!important;width:auto!important;flex:1 1 0}
+    .trackbar .track-schedule,.trackbar-note{display:none!important}
+    .guide-ref-section{padding:0!important}
+    .guide-ref-section>.guide-ref-inner{padding:0 10px!important}
+    .ref-fold{margin:8px 10px!important}
+    .ref-fold .ref-eyebrow{display:none}
+    .mn-link{display:block;padding:13px 16px;font-size:15px;border-top:1px solid #E5E7EB;color:var(--accent,#1A6BFF);font-weight:700;text-decoration:none}
+    .t21-prompts-grid{grid-template-columns:1fr!important}
+    .t21-prompt-text,.prompt-box pre,.prompt-box code{white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere;font-size:12.5px}
+    .ctr-wrap{overflow:visible!important}
+    /* таблицы → карточки строк */
+    table{min-width:0!important}
+    section[id],.module-panel [id]{scroll-margin-top:64px}
+    table.ctr,table.ctr tbody{display:block!important;width:100%!important}
+    table.ctr{border:0!important;background:none!important;margin:8px 0!important;font-size:13px}
+    table.ctr tr{display:block;background:#fff;border:1px solid var(--border,#E2DED3);border-radius:8px;margin:0 0 8px;padding:6px 11px}
+    table.ctr tr.tr-head,table.ctr tr.fill{display:none}
+    table.ctr th,table.ctr td{display:block;width:auto!important;height:auto!important;border:0!important;padding:4px 0!important;text-align:left;word-break:break-word;overflow-wrap:anywhere;background:none!important}
+    table.ctr td:empty{display:none}
+    table.ctr td[data-label]:before{content:attr(data-label);display:block;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint,#6B7280);font-weight:700;font-style:normal}
+    table.ctr td:first-child{font-weight:700}
+    table.ctr td:first-child:before{display:none}
+    table.ctr tr.sample td{font-style:normal}
+    table:not(.ctr){width:100%;table-layout:fixed;font-size:12.5px;border-collapse:collapse}
+    table:not(.ctr) th,table:not(.ctr) td{padding:6px 5px;word-break:break-word;overflow-wrap:anywhere;vertical-align:top}
   }
 </style>
 <!-- Yandex.Metrika counter -->
@@ -1590,6 +1636,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
                 </div>
               </div>
               <div class="lesson-body">
+<div style="border:1px solid #0A0F1A;background:#FFFFFF;padding:16px 18px;margin:0 0 18px;display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap"><div><div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#2B4FD8">Лонгрид · 50 мин</div><div style="font-size:17px;font-weight:800">Стресс-тест финмодели</div><div style="font-size:14px;color:#5A6070">Красная команда, чувствительность, условия отказа, вопросы юристу</div></div><a href="redev-read-stress.html" style="display:inline-flex;background:#0A0F1A;color:#F6F4F0;padding:12px 20px;border-radius:999px;font-weight:700;font-size:15px">Пройти занятие →</a></div>
 <div class="lect"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span></div><div class="video-lecture" hidden><h3>Видеолекция</h3><div class="video-embed"><!-- Вставьте сюда iframe VK: <iframe src="https://vkvideo.ru/video_ext.php?oid=&id=&hash=" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe> --></div></div><h3>Презентация темы</h3><iframe src="redev-stress.html" title="2.4 Стресс-тест финмодели — презентация" style="width:100%;aspect-ratio:16/9;min-height:420px;border:1px solid var(--border);border-radius:12px;background:#fff;display:block;margin-bottom:20px;" allow="fullscreen" allowfullscreen loading="lazy"></iframe><p style="font-size:13px"><a href="redev-stress.html" target="_blank" rel="noopener">Открыть презентацию отдельно ↗</a></p><div class="card-grid">
   <div class="card card-a only-a"><h3><span class="trk a">ТРЕК А</span>Проектировщик</h3><p style="font-size:13px">Обзорно: экономика объекта на одном листе; чтение модели напарника.</p><div class="depth">Самостоятельно: отзыв из пяти замечаний на работу напарника из другого трека.</div></div>
   <div class="card card-b only-b"><h3><span class="trk b">ТРЕК Б</span>Девелопер / инвестор</h3><p style="font-size:13px">Стресс-тест модели («красная команда» на языковой модели), чувствительность, форма реализации и юридический контур.</p></div>
@@ -2189,29 +2236,195 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
 })();
 </script>
 <script>
-/* Вторичные блоки урока — свёрнуты по умолчанию */
+/* Мобильная версия v3: свёртки, таблицы-карточки, одно меню, занятия-аккордеоны */
 (function(){
-  var re = /^(Презентация|Промпты|Шаблон|Пример|Документы|Артефакты|Состав объекта|Рабочая тетрадь|Как устроена|Три способа|Сервисы|Расширенный контур|Данные и справочники|Два контура|Объект курса|Обзор)/;
-  document.querySelectorAll('.lesson-body').forEach(function(body){
+  var mq = window.matchMedia('(max-width:720px)');
+  function clean(s){ return (s||'').replace(/\s+/g,' ').trim(); }
+  function stripLead(s){ return clean(s).replace(/^[^A-Za-zА-Яа-яЁё0-9]+/,''); }
+
+  /* 1. Свёртки вторичных блоков */
+  var SEC = /^(Презентаци|Промпт|Шаблон|Пример|Образец|Документы|Состав объекта|Рабочая тетрадь|Как устроена|Три способа|Исходник|Ползунок|Сборка серии|Сервисы|Расширенный контур|Данные и справочники|Два контура|Объект курса|Обзор|Чек-лист|Структура (CAPEX|OPEX|доходов)|Часть \d|Реальный источник|Ответ модели|Практикум|Доходная база)/i;
+  function isSec(el){ return /^H[34]$/.test(el.tagName) && SEC.test(stripLead(el.textContent)); }
+  function isHead(el){ return /^H[34]$/.test(el.tagName); }
+  function mkFold(title, beforeEl, parent){
+    var det = document.createElement('details'); det.className = 'fold';
+    var sum = document.createElement('summary'); sum.textContent = title;
+    var fb = document.createElement('div'); fb.className = 'fold-body';
+    det.appendChild(sum); det.appendChild(fb);
+    if (/^Презентаци/i.test(stripLead(title))) det.open = true;
+    parent.insertBefore(det, beforeEl);
+    return fb;
+  }
+  function foldBody(body){
     var kids = Array.prototype.slice.call(body.children);
-    kids.forEach(function(h){
-      if (h.parentElement !== body || h.tagName !== 'H3' || !/^(Презентация|Промпты|Шаблон|Пример|Документы|Артефакты|Состав объекта|Рабочая тетрадь|Как устроена|Три способа|Сервисы|Расширенный контур|Данные и справочники|Два контура|Объект курса|Обзор|Задания)/.test(h.textContent.trim())) return;
-      var det = document.createElement('details'); det.className = 'fold';
-      var sum = document.createElement('summary'); sum.textContent = h.textContent.trim();
-      var fb = document.createElement('div'); fb.className = 'fold-body';
-      det.appendChild(sum); det.appendChild(fb);
-      if (/^Презентация/.test(sum.textContent)) det.open = true;
-      body.insertBefore(det, h);
-      var n = h.nextElementSibling;
-      fb.appendChild(h);
-      h.style.display = 'none';
-      while (n && !(n.tagName === 'H3' && !re.test(n.textContent.trim())) && !n.classList.contains('sec-divider') && n.tagName !== 'SECTION') {
-        var nx = n.nextElementSibling; fb.appendChild(n);
-        if (n.tagName === 'H3' && re.test(n.textContent.trim())) break;
-        n = nx;
+    var cur = null, curLevel = 0;
+    kids.forEach(function(el){
+      if (el.classList.contains('sec-divider')) { cur = null; return; }
+      /* контейнеры, которые всегда вторичны */
+      var cls = el.className && el.className.toString ? el.className.toString() : '';
+      var h = null, title = null;
+      if (/(^|\s)\S*prompts(\s|$)/.test(cls)) { h = el.querySelector('h3'); title = h ? clean(h.textContent) : 'Промпты'; }
+      else if (el.classList.contains('prompt-box')) { title = 'Пример промпта'; }
+      else if (el.classList.contains('steps')) { title = 'Шаги выполнения'; }
+      else if (el.classList.contains('res-links')) { title = 'Сервисы и ссылки'; }
+      else if (el.tagName === 'SECTION') { h = el.querySelector('h3'); if (h && SEC.test(stripLead(h.textContent))) title = clean(h.textContent); }
+      else if (el.classList.contains('ctr-wrap') && !cur) { title = 'Таблица'; }
+      if (title) {
+        if (h) h.style.display = 'none';
+        var fb0 = mkFold(title, el, body); fb0.appendChild(el); cur = null; return;
       }
+      if (isHead(el)) {
+        var lvl = el.tagName === 'H3' ? 3 : 4;
+        if (isSec(el)) {
+          if (cur && curLevel < lvl) { cur.appendChild(el); return; }
+          var fb = mkFold(clean(el.textContent), el, body);
+          fb.appendChild(el); cur = fb; curLevel = lvl; return;
+        }
+        cur = null; return;
+      }
+      if (cur) cur.appendChild(el);
+    });
+  }
+  document.querySelectorAll('.lesson-body').forEach(foldBody);
+  /* раздел «Инструменты»: каждый подраздел отдельной свёрткой */
+  var tools = document.getElementById('tools');
+  if (tools) {
+    var cur2 = null;
+    Array.prototype.slice.call(tools.children).forEach(function(el){
+      if (el.tagName === 'H3') { var fb = mkFold(clean(el.textContent), el, tools); fb.appendChild(el); cur2 = fb; return; }
+      if (cur2 && !el.classList.contains('lect')) cur2.appendChild(el);
+    });
+  }
+  /* «Объект курса» вне урока */
+  var co = document.getElementById('case-object');
+  if (co && co.querySelector('h3')) {
+    var fbc = mkFold(clean(co.querySelector('h3').textContent), co.firstElementChild, co);
+    Array.prototype.slice.call(co.children).forEach(function(el){ if (el.tagName !== 'DETAILS') fbc.appendChild(el); });
+  }
+
+  /* 2. Таблицы: подписи ячеек для карточек */
+  document.querySelectorAll('table.ctr').forEach(function(t){
+    var rows = t.querySelectorAll('tr'); if (!rows.length) return;
+    var head = rows[0];
+    var cells = Array.prototype.slice.call(head.children);
+    if (!cells.length || !cells.every(function(c){ return c.tagName === 'TH'; })) return;
+    var labels = cells.map(function(c){ return clean(c.textContent); });
+    head.classList.add('tr-head');
+    Array.prototype.slice.call(rows, 1).forEach(function(r){
+      Array.prototype.slice.call(r.children).forEach(function(c, i){ if (labels[i]) c.setAttribute('data-label', labels[i]); });
     });
   });
+
+  /* 3. Занятия-аккордеоны + краткая подпись */
+  document.querySelectorAll('.lesson-block').forEach(function(lb){
+    var head = lb.querySelector('.lesson-header'), body = lb.querySelector('.lesson-body');
+    if (!head || !body) return;
+    var parts = [];
+    var fmt = body.querySelector('.lect-fmt, .meet-badge'); if (fmt) parts.push(clean(fmt.textContent));
+    var task = body.querySelector('.t22-task'); if (task) parts.push(Array.prototype.map.call(task.children, function(c){ return clean(c.textContent); }).filter(Boolean).join(' · '));
+    if (parts.length) {
+      var box = head.lastElementChild || head;
+      var m = document.createElement('span'); m.className = 'lh-meta'; m.textContent = parts.filter(Boolean).join(' — ');
+      box.appendChild(m);
+    }
+    head.addEventListener('click', function(){ if (mq.matches) lb.classList.toggle('open'); });
+  });
+  function openBlockFor(el){
+    if (!el) return;
+    var lb = el.closest ? el.closest('.lesson-block') : null;
+    if (!lb && el.querySelector) lb = el.querySelector('.lesson-block');
+    if (lb) lb.classList.add('open');
+    var d = el.closest ? el.closest('details.fold') : null;
+    while (d) { d.open = true; d = d.parentElement ? d.parentElement.closest('details.fold') : null; }
+  }
+  var _jump = window.jumpTo;
+  if (typeof _jump === 'function') {
+    window.jumpTo = jumpTo = function(id){ openBlockFor(document.getElementById(id)); return _jump(id); };
+  }
+  var _off = window.getOffset;
+  if (typeof _off === 'function') {
+    window.getOffset = getOffset = function(){
+      if (mq.matches) { var m = document.getElementById('mnav'); return (m ? m.offsetHeight : 0) + 8; }
+      return _off();
+    };
+  }
+
+  /* справочные материалы: на телефоне свёрнуты */
+  if (mq.matches) {
+    var refIn = document.querySelector('.guide-ref-inner');
+    if (refIn) {
+      var rd = document.createElement('details'); rd.className = 'fold ref-fold';
+      var rs = document.createElement('summary'); rs.textContent = 'Справочные материалы: сервисы и данные';
+      var rb = document.createElement('div'); rb.className = 'fold-body';
+      refIn.parentNode.insertBefore(rd, refIn); rd.appendChild(rs); rd.appendChild(rb); rb.appendChild(refIn);
+    }
+  }
+
+  /* 4. Одно компактное меню: «Модуль» и «Занятие» */
+  var modTabs = Array.prototype.slice.call(document.querySelectorAll('.module-tab'));
+  var mods = modTabs.map(function(t){
+    var e = t.querySelector('.mt-eyebrow'), v = t.querySelector('.mt-title');
+    return { id: t.id.replace('mtab-',''), eb: e ? clean(e.textContent) : '', title: v ? clean(v.textContent) : '' };
+  });
+  var anchorEl = document.getElementById('moduleTabsWrap');
+  if (anchorEl && mods.length) {
+    var bar = document.createElement('div'); bar.id = 'mnav';
+    bar.innerHTML = '<button type="button" id="mnMod"><span class="mn-l">Модуль</span><span class="mn-v"></span></button><button type="button" id="mnSec"><span class="mn-l">Занятие</span><span class="mn-v"></span></button>';
+    anchorEl.parentNode.insertBefore(bar, anchorEl);
+    var sheet = document.createElement('div'); sheet.className = 'mn-sheet';
+    sheet.innerHTML = '<div class="mn-sheet-in"><div class="mn-sheet-h"></div><div class="mn-list"></div></div>';
+    document.body.appendChild(sheet);
+    var curSec = null;
+    function activeMod(){ var p = document.querySelector('.module-panel.active'); return p ? p.id.replace('panel-','') : 'm0'; }
+    function secsOf(mod){
+      return Array.prototype.map.call(document.querySelectorAll('#panel-' + mod + ' .nav-pills .pill'), function(p){ return { id: p.getAttribute('data-target'), label: clean(p.textContent) }; });
+    }
+    function refresh(){
+      var am = activeMod();
+      var mm = mods.filter(function(m){ return m.id === am; })[0];
+      bar.querySelector('#mnMod .mn-l').textContent = mm ? mm.eb : 'Модуль';
+      bar.querySelector('#mnMod .mn-v').textContent = mm ? stripLead(mm.title) : '';
+      var ss = secsOf(am);
+      var cs = ss.filter(function(s){ return s.id === curSec; })[0] || ss[0];
+      bar.querySelector('#mnSec .mn-v').textContent = cs ? cs.label : '—';
+      bar.querySelector('#mnSec').style.visibility = ss.length ? 'visible' : 'hidden';
+    }
+    function closeSheet(){ sheet.classList.remove('open'); }
+    function openSheet(kind){
+      var list = sheet.querySelector('.mn-list'); list.innerHTML = '';
+      var am = activeMod();
+      sheet.querySelector('.mn-sheet-h').textContent = kind === 'mod' ? 'Модуль курса' : 'Занятие модуля';
+      var items = kind === 'mod'
+        ? mods.map(function(m){ return { id: m.id, eb: m.eb, label: m.title, on: m.id === am }; })
+        : secsOf(am).map(function(s){ return { id: s.id, eb: '', label: s.label, on: s.id === curSec }; });
+      items.forEach(function(it){
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'mn-item' + (it.on ? ' on' : '');
+        b.innerHTML = (it.eb ? '<small></small>' : '') + '<span class="mn-t"></span>';
+        if (it.eb) b.querySelector('small').textContent = it.eb;
+        b.querySelector('.mn-t').textContent = it.label;
+        b.addEventListener('click', function(){
+          closeSheet();
+          if (kind === 'mod') { curSec = null; switchModuleWithSpy(it.id); setTimeout(refresh, 80); }
+          else { curSec = it.id; refresh(); scrollToSection(it.id); }
+        });
+        list.appendChild(b);
+      });
+      if (kind === 'mod') { var a = document.createElement('a'); a.className = 'mn-link'; a.href = 'redev-schedule.html'; a.textContent = 'Расписание потока ↗'; list.appendChild(a); }
+      sheet.classList.add('open');
+    }
+    bar.querySelector('#mnMod').addEventListener('click', function(){ openSheet('mod'); });
+    bar.querySelector('#mnSec').addEventListener('click', function(){ openSheet('sec'); });
+    sheet.addEventListener('click', function(e){ if (e.target === sheet) closeSheet(); });
+    var _sap = window.setActivePill;
+    if (typeof _sap === 'function') {
+      window.setActivePill = setActivePill = function(id){ _sap(id); if (id) curSec = id; refresh(); };
+    }
+    var _sw = window.switchModule;
+    if (typeof _sw === 'function') {
+      window.switchModule = switchModule = function(m){ curSec = null; _sw(m); refresh(); };
+    }
+    refresh();
+  }
 })();
 </script>
 </body>
