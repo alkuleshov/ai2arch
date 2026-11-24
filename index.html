@@ -363,8 +363,8 @@ summary{transition:background-color .15s,color .15s}
 summary:hover{background-color:rgba(43,79,216,.08);color:var(--aff-accent)}
 details>summary::after{transition:transform .2s}
 /* «Отзывы и проекты слушателей»: видно, что это кнопка; розовая подсветка при наведении */
-.reviews-link a{ padding:16px 20px; border:1.5px solid var(--ink); background:transparent; transition:background-color .15s ease; }
-.reviews-link a:hover,.reviews-link a:focus-visible{ background-color:var(--blush); transform:none !important; box-shadow:none !important; }
+.reviews-link a{ transition:background-color .15s ease; }
+.reviews-link a:hover,.reviews-link a:focus-visible{ background-color:rgba(43,79,216,.08); transform:none !important; box-shadow:none !important; }
 /* пункты меню шапки: одинаковая подсветка, как у «Слушателям» (без подъёма и тени) */
 a.bullet,a.bullet:hover{transform:none !important;box-shadow:none !important}
 a.bullet:hover{background-color:rgba(43,79,216,.08);text-decoration:none !important}
