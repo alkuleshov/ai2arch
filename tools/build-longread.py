@@ -73,6 +73,27 @@ LECTURES = {
         drop_intro=(), example=False,
         final_name='Итог темы 2.5', final_heading='Итог темы 2.5',
     ),
+    '2.1': dict(
+        src='2.1.md', out='redev-read-hbu.html', slide_dir='images/slides/hbu',
+        deck='redev-hbu.html', total=40,
+        title='Урок 2.1 · HBU и сценарии · AI2ARCH',
+        hero_title='HBU и сценарии', short_name='HBU и сценарии',
+        description='Урок для чтения по теме 2.1: четыре теста HBU, расчёт NOI по шагам и баланс площадей сценария-победителя.',
+        kicker='Тема 2.1 · HBU и сценарии',
+        intro='Вертикальный урок по теме 2.1: как отобрать функциональные сценарии через четыре теста HBU, посчитать NOI и перевести победителя в баланс площадей.',
+        back_href='redev-guide.html#t21', back_label='← Тема 2.1',
+        guide_anchor='t21', guide_label='Тема 2.1 в пособии', next_anchor='t22',
+        chapters=[
+            (1, 1, 10, 'Входные данные, сервисы и логика HBU'),
+            (2, 11, 20, 'Сценарии, ПЗЗ, ЗОУИТ и промпт для тестов 1–2'),
+            (3, 21, 27, 'NOI и логика тестов 3–4'),
+            (4, 28, 33, 'Промпт для экономики, проверка и ограничения'),
+            (5, 34, 40, 'Баланс площадей, сбои и основной контур'),
+        ],
+        c52_slides=(36,), trainer_after=None, gaps_at=None,
+        drop_intro=(), example=False,
+        final_name='Итог темы 2.1', final_heading='Итог темы 2.1',
+    ),
 }
 CFG = {}
 SRC = QUIZ = OUT = TPL
