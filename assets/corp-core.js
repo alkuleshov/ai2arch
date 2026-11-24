@@ -10,7 +10,7 @@
   const isNum = v => typeof v === 'number';
   const rub = v => Math.round(v).toLocaleString('ru-RU') + ' ₽';
   const num = v => (Math.round(v * 10) / 10).toLocaleString('ru-RU');
-  const plural = (n, one, few, many) => { if (!Number.isInteger(n)) return few; const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many; };
+  const plural = (n, one, few, many) => { if (!Number.isInteger(n)) return many; const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many; };
   const modWord = n => plural(n, 'модуль', 'модуля', 'модулей');
   const hrWord = n => plural(n, 'ч', 'ч', 'ч');
   const clampN = n => Math.min(20, Math.max(1, n || 6));
