@@ -17,6 +17,7 @@ TPL = ROOT / 'templates' / 'longread.html'
 # Конфиг лонгрида по лекциям. Эталон — 2.2; 2.4 собран по тому же шаблону.
 LECTURES = {
     '2.2': dict(
+        page_key='',
         src='2.2.md', out='redev-read-income.html', slide_dir='images/slides/income',
         deck='redev-income.html', total=20,
         title='Урок 2.2 · Доходная база, CAPEX/OPEX · AI2ARCH', description='Урок для чтения по теме 2.2: скелет финансовой модели, доходы, OPEX и CAPEX по фазам.',
@@ -247,6 +248,11 @@ def extract_verdict(text):
         text = before or after
     text = re.sub(r' {2,}', ' ', text).strip()
     return text, verdict
+
+def page_prefix(cfg, key):
+    """Префикс ключей прогресса чтения. page_key='' — старые общие ключи (lr-seen), как у 2.2."""
+    pk = cfg.get('page_key', key)
+    return 'lr-' + (pk + '-' if pk else '')
 
 def parse_slide(n,title,body):
     data={'n':n,'title':title,'base':'','verdict':'','why':'','context':'','c52':{},'transition':'','task':'','prompt':''}
@@ -492,7 +498,7 @@ GLOSSARY_JSON = ROOT / 'docs' / 'glossary.json'
 ROLES_MD = ROOT / 'docs' / 'roles-tracks.md'
 
 def load_global_terms():
-    """Общий словарь курса (tools/build-glossary.py): термины ведут на redev-glossary.html#id."""
+    """Общий словарь курса (tools/build-glossary.py): термины в тексте открывают окошко с определением (без перехода)."""
     if not GLOSSARY_JSON.exists():
         return []
     items = json.loads(GLOSSARY_JSON.read_text(encoding='utf-8'))
@@ -516,7 +522,7 @@ def mark_terms(html_text, terms):
             if name in used: continue
             pat=r'(?<![\wА-Яа-яЁё])'+re.escape(name)+r'(?![\wА-Яа-яЁё])'
             if re.search(pat,tok):
-                tok=re.sub(pat, lambda m: f'<a class="term" href="redev-glossary.html#{tid}" data-def="{html.escape(defn, True)}">{m.group(0)}</a>', tok, count=1)
+                tok=re.sub(pat, lambda m: f'<span class="term" tabindex="0" role="button" data-def="{html.escape(defn, True)}">{m.group(0)}</span>', tok, count=1)
                 used.add(name); break
         out.append(tok)
     return ''.join(out)
@@ -598,8 +604,6 @@ def build(key='2.2'):
     body_html=''.join(chapter_bodies)
     body_html=mark_terms(body_html, load_global_terms())
     terms_html=''.join(f'<div><dt>{esc(n)}</dt><dd>{inline(d)}</dd></div>' for n,d in terms)
-    terms_toc=f'<details class="toc-terms" open><summary>Термины урока</summary><dl>{terms_html}</dl></details>'
-    glossary='<p class="glossary-all"><a href="redev-glossary.html">Весь словарь курса →</a></p>'+''.join(f'<div><dt>{esc(n)}</dt><dd>{inline(d)}</dd></div>' for n,d in terms)
     # rail
     rail=''.join(f'<img data-rail="{n}" src="{SLIDE_DIR}/{n:02d}-1600.webp" srcset="{SLIDE_DIR}/{n:02d}-1600.webp 1600w, {SLIDE_DIR}/{n:02d}.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд {n} из {TOTAL}">' for n in range(1,TOTAL+1))
     rail=rail.replace('data-rail="1"','data-rail="1" class="active"',1)
@@ -609,14 +613,14 @@ def build(key='2.2'):
     minutes=max(1,round(words/180))
     quiz_json=json.dumps(quiz, ensure_ascii=False).replace('</', '<\\/')
     quiz_key=json.dumps('lr-quiz-' + SRC.stem, ensure_ascii=False)
-    tpl=TPL.read_text(encoding='utf-8').replace('{{PAGE_KEY}}', CFG.get('page_key', key))
+    tpl=TPL.read_text(encoding='utf-8').replace('lr-{{PAGE_KEY}}-', page_prefix(CFG, key))
     out=(tpl.replace('{{TITLE}}',CFG['title']).replace('{{DESCRIPTION}}',CFG['description'])
          .replace('{{KICKER}}',CFG['kicker']).replace('{{INTRO}}',CFG['intro'])
          .replace('{{BACK_HREF}}',CFG['back_href']).replace('{{BACK_LABEL}}',CFG['back_label'])
          .replace('{{HERO_TITLE}}',CFG['hero_title']).replace('{{SHORT_NAME}}',CFG['short_name'])
          .replace('{{DECK}}',CFG['deck']).replace('{{SLIDE_DIR}}',SLIDE_DIR).replace('{{TOTAL}}',str(TOTAL))
          .replace('{{READ_TIME}}',str(minutes)).replace('{{BODY}}',body_html)
-         .replace('{{TERMS_TOC}}',terms_toc).replace('{{TOC}}',''.join(toc)).replace('{{GLOSSARY}}',glossary)
+         .replace('{{TOC}}',''.join(toc)).replace('{{TERMS}}',terms_html)
          .replace('{{RAIL}}',rail).replace('{{SLIDES_JSON}}',slides_json)
          .replace('{{QUIZ_JSON}}',quiz_json).replace('{{QUIZ_KEY}}',quiz_key)
          .replace('{{WORDS}}',str(words)))

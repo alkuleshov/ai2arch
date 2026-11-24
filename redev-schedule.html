@@ -246,6 +246,20 @@ body{background-image:linear-gradient(to right, rgba(10,15,26,.07) 0 1px, transp
   .back-bar { padding:0 !important; min-height:54px !important; height:auto; align-items:stretch !important; }
   .back-bar > * { align-self:stretch; display:flex; align-items:center; }
 
+
+  /* ── единая среда: блоки как на главной/в пособии ── */
+  .wrap { max-width:760px; }
+  .schedule { border:1.5px solid #0A0F1A !important; background:#fff !important; }
+  .schedule thead th { background:#F6F4F0 !important; border-bottom:1.5px solid #0A0F1A !important; color:#5A6070 !important; }
+  .schedule .module-row td { border-top:1.5px solid #0A0F1A !important; }
+  .schedule .module-row:first-child td { border-top:none !important; }
+  .schedule .slot-row.day-start td { border-top:1px solid #0A0F1A !important; }
+  .cal-subscribe { background:#fff !important; border:1.5px solid #0A0F1A !important; }
+  .cal-subscribe .section-end-btn.primary { border-radius:0 !important; background:#0A0F1A !important; border:1.5px solid #0A0F1A !important; font-weight:800 !important; letter-spacing:-0.02em; }
+  .cal-subscribe .section-end-btn.primary:hover { background:#2B4FD8 !important; border-color:#2B4FD8 !important; }
+  .meet-legend { background:#fff !important; border:1.5px solid #0A0F1A !important; }
+  @media (max-width:640px){ .schedule tr.slot-row { border:1.5px solid #0A0F1A !important; background:#fff !important; } }
+
   /* ===== Мобильная адаптация (v2) ===== */
   @media (max-width:640px){
     .back-bar{flex-wrap:nowrap!important;padding:6px 8px!important;gap:4px!important}

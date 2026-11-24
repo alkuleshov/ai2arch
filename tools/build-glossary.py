@@ -87,31 +87,70 @@ def render_html(items):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Словарь курса «ИИ в редевелопменте» · AI2ARCH</title>
 <meta name="description" content="Общий словарь терминов курса: расшифровки и простые объяснения.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&display=swap">
 <style>
-:root{{--bg:#F6F4F0;--surface:#fff;--ink:#0F1B2D;--muted:#5B6678;--line:#E2DED6;--accent:#C46A16;--accent-l:#FBF1E6;}}
-@media (prefers-color-scheme:dark){{:root:not([data-theme="light"]){{--bg:#101827;--surface:#172236;--ink:#F3F6FC;--muted:#A9B4C7;--line:#2A3550;--accent:#F0A35C;--accent-l:#2A2418;}}}}
-:root[data-theme="dark"]{{--bg:#101827;--surface:#172236;--ink:#F3F6FC;--muted:#A9B4C7;--line:#2A3550;--accent:#F0A35C;--accent-l:#2A2418;}}
-body{{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}}
-.wrap{{max-width:860px;margin:0 auto;padding:28px 16px 64px}}
-h1{{font-size:clamp(26px,4vw,36px);line-height:1.15;margin:6px 0 8px}}
-.lead{{color:var(--muted);margin:0 0 18px}}
-.back{{font-size:14px;color:var(--accent);text-decoration:none;font-weight:700}}
-.search{{width:100%;box-sizing:border-box;font:inherit;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);margin:12px 0 22px}}
-.g-sec{{margin:0 0 26px}}
-.g-sec h2{{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}}
-.g-list{{display:grid;gap:8px}}
-.g-item{{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;scroll-margin-top:16px}}
-.g-item:target{{border-color:var(--accent);background:var(--accent-l)}}
-.g-item dt{{font-weight:800}}
-.g-item dd{{margin:3px 0 0;color:var(--muted);font-size:15px}}
+*,*::before,*::after{{margin:0;padding:0;box-sizing:border-box;border-radius:0}}
+:root{{--ink:#0A0F1A;--muted:#2A2F3E;--faint:#5A6070;--line:#E1DDD5;--blue:#2B4FD8;--blue-l:#E4EBFB;--sans:'Inter Tight','Helvetica Neue',Arial,sans-serif}}
+html{{scroll-behavior:smooth}}
+body{{font-family:var(--sans);letter-spacing:-0.005em;color:var(--ink);background-color:#F6F4F0;
+  background-image:linear-gradient(to right,#E1DDD5 1px,transparent 1px),linear-gradient(to bottom,#E1DDD5 1px,transparent 1px);
+  background-size:calc(min(100%,1200px)/4) 100%,100% 120px;background-position:center top,center top;background-repeat:repeat-y,repeat-y}}
+@media(min-width:900px){{body{{background-size:calc(min(100%,1200px)/8) 100%,100% 120px}}}}
+a{{color:var(--blue);text-decoration:none}}
+.back-bar{{position:sticky;top:0;z-index:50;display:flex;align-items:stretch;min-height:54px;background:#F6F4F0;border-bottom:1.5px solid var(--ink)}}
+.back-bar>*{{display:flex;align-items:center}}
+.back-btn,.head-actions a{{background:transparent;color:var(--ink);border:1.5px solid var(--ink);font-size:15px;font-weight:800;letter-spacing:-0.02em;padding:16px 22px;white-space:nowrap;text-decoration:none}}
+.back-btn{{gap:10px}}
+.guide-breadcrumb{{flex:1;min-width:0;overflow:hidden;gap:8px;padding:0 20px 0 16px;white-space:nowrap}}
+.bc-root,.bc-sep{{color:#848A9A;font-size:14px;font-weight:600}}
+.bc-cur{{color:var(--blue);font-size:15px;font-weight:800;letter-spacing:-0.02em}}
+.head-actions a+a{{border-left:none}}
+.bar-brand{{padding:0 16px;border-left:1.5px solid var(--ink)}}
+.bar-brand img{{width:30px;height:30px}}
+.hs-short{{display:none}}
+.wrap{{max-width:760px;margin:0 auto;padding:36px 20px 72px}}
+h1{{font-size:clamp(26px,4vw,34px);line-height:1.15;font-weight:900;letter-spacing:-0.035em;margin:0 0 10px}}
+.lead{{color:var(--muted);font-size:15px;line-height:1.5;margin:0 0 22px}}
+.search{{display:block;width:100%;font:inherit;font-size:15px;padding:13px 14px;border:1.5px solid var(--ink);background:#fff;color:var(--ink);margin:0 0 26px;outline:none}}
+.search:focus{{border-color:var(--blue)}}
+.g-sec{{margin:0 0 28px}}
+.g-sec h2{{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin:0 0 10px}}
+.g-list{{display:grid;gap:0;border:1.5px solid var(--ink);background:#fff}}
+.g-item{{padding:13px 16px;border-top:1px solid var(--line);scroll-margin-top:72px}}
+.g-item:first-child{{border-top:none}}
+.g-item:target{{background:var(--blue-l);box-shadow:inset 3px 0 0 var(--blue)}}
+.g-item dt{{font-weight:800;letter-spacing:-0.02em}}
+.g-item dd{{margin:3px 0 0;color:var(--muted);font-size:14.5px;line-height:1.5}}
 .hide{{display:none!important}}
+@media(max-width:760px){{.hs-full{{display:none}}.hs-short{{display:inline}}}}
+@media(max-width:640px){{
+  .back-bar{{padding:6px 8px;gap:4px;min-height:0}}
+  .back-btn,.head-actions a{{font-size:11px;padding:6px 8px}}
+  .bar-brand,.guide-breadcrumb{{display:none}}
+  .head-actions{{margin-left:auto}}
+  .wrap{{padding:24px 16px 56px}}
+}}
 </style>
 </head>
 <body>
+<div class="back-bar">
+  <a class="back-btn" href="redev-guide.html"><span>←</span> <span>К пособию</span></a>
+  <div class="guide-breadcrumb">
+    <span class="bc-root">ИИ в редевелопменте</span>
+    <span class="bc-sep">/</span>
+    <span class="bc-cur">Словарь</span>
+  </div>
+  <div class="head-actions">
+    <a href="redev-schedule.html"><span class="hs-full">Расписание ↗</span><span class="hs-short">Расписание</span></a>
+  </div>
+  <a class="bar-brand" href="index.html" title="AI2ARCH — на главную" aria-label="AI2ARCH — на главную"><img src="images/ai2arch-sign.png" width="30" height="30" alt=""></a>
+</div>
 <div class="wrap">
-  <a class="back" href="redev-guide.html">← Пособие курса</a>
   <h1>Словарь курса</h1>
-  <p class="lead">Все термины курса «ИИ в редевелопменте» в одном месте. В лонгридах термины ведут сюда.</p>
+  <p class="lead">Все термины курса «ИИ в редевелопменте» в одном месте.</p>
   <input class="search" id="q" type="search" placeholder="Поиск по термину или слову в определении" aria-label="Поиск по словарю">
   {body}
 </div>
