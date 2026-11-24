@@ -29,7 +29,8 @@ a{color:var(--blue);text-decoration:none}
 .bar-brand{padding:0 16px;border-left:1.5px solid var(--ink)}
 .bar-brand img{width:30px;height:30px}
 .hs-short{display:none}
-.wrap{max-width:760px;margin:0 auto;padding:36px 20px 72px}
+.wrap{max-width:1200px;margin:0 auto;padding:44px 32px 80px}
+@media(min-width:900px){.g-list{grid-template-columns:repeat(2,1fr);gap:0}.g-item{border-left:1px solid var(--line)}.g-item:nth-child(2n+1){border-left:none}.g-item:nth-child(-n+2){border-top:none}}
 h1{font-size:clamp(26px,4vw,34px);line-height:1.15;font-weight:900;letter-spacing:-0.035em;margin:0 0 10px}
 .lead{color:var(--muted);font-size:15px;line-height:1.5;margin:0 0 22px}
 .search{display:block;width:100%;font:inherit;font-size:15px;padding:13px 14px;border:1.5px solid var(--ink);background:#fff;color:var(--ink);margin:0 0 26px;outline:none}
@@ -43,6 +44,8 @@ h1{font-size:clamp(26px,4vw,34px);line-height:1.15;font-weight:900;letter-spacin
 .g-item dt{font-weight:800;letter-spacing:-0.02em}
 .g-item dd{margin:3px 0 0;color:var(--muted);font-size:14.5px;line-height:1.5}
 .hide{display:none!important}
+.back-bar{background:#F6F4F0!important;backdrop-filter:none!important;z-index:100}
+.back-bar .head-actions a{background:#F6F4F0!important;opacity:1!important}
   /* ── компактные пилюли в шапке (кнопки расписания/тетради/пособия/словаря) ── */
   .back-bar .head-actions{align-self:center !important;display:flex !important;align-items:center !important;gap:6px !important;border:0 !important;padding:0 14px 0 0 !important;}
   .back-bar .head-actions a:not(.head-schedule){display:inline-flex !important;}

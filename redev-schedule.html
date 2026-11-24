@@ -61,7 +61,7 @@
   .head-actions{display:flex;align-items:center;flex:none}
   .hs-short{display:none}
   @media(max-width:760px){.hs-full{display:none}.hs-short{display:inline}}
-  .wrap { max-width:760px; margin:0 auto; padding:36px 20px 60px; }
+  .wrap { max-width:1200px; margin:0 auto; padding:44px 32px 72px; }
   h1 { font-size:26px; font-weight:800; letter-spacing:-.01em; margin-bottom:8px; }
   .lead { font-size:14.5px; color:var(--ink-muted); margin-bottom:22px; line-height:1.5; }
 
@@ -248,7 +248,11 @@ body{background-image:linear-gradient(to right, rgba(10,15,26,.07) 0 1px, transp
 
 
   /* ── единая среда: блоки как на главной/в пособии ── */
-  .wrap { max-width:760px; }
+  .wrap { max-width:1200px; }
+  /* ── шапка сплошная, пилюли без просвечивания ── */
+  .back-bar{background:#F6F4F0 !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;z-index:100 !important;}
+  .back-bar .head-actions a,.back-bar .workbook-btn{background:#F6F4F0 !important;opacity:1 !important;}
+  .back-bar .head-actions a:hover,.back-bar .workbook-btn:hover{background:#0A0F1A !important;}
   .schedule { border:1.5px solid #0A0F1A !important; background:#fff !important; }
   .schedule thead th { background:#F6F4F0 !important; border-bottom:1.5px solid #0A0F1A !important; color:#5A6070 !important; }
   .schedule .module-row td { border-top:1.5px solid #0A0F1A !important; }
