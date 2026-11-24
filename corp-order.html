@@ -206,11 +206,11 @@ if (!S || !totals(S).mods){
       <h2>Состав и стоимость</h2>
       <table><thead><tr><th>№</th><th>Услуга</th><th class="r hide">Часы</th><th class="r">Сумма</th></tr></thead>
         <tbody>${body}<tr class="tot"><td></td><td>Итого</td><td class="r hide">${num(T.off + T.on)} ч</td><td class="r big">${rub(T.t)}</td></tr></tbody></table>
-      <p class="small">Цены без НДС. ${T.req ? `Модули с ценой по запросу (${T.req}) в итог не входят. ` : ''}Оплата ${Math.round(D.prepay*100)}% — ${rub(pre)} до первого занятия. Акт оказанных услуг — после последнего занятия.</p>
+      <p class="small">НДС не облагается (УСН). ${T.req ? `Модули с ценой по запросу (${T.req}) в итог не входят. ` : ''}Оплата ${Math.round(D.prepay*100)}% — ${rub(pre)} до первого занятия. Акт оказанных услуг — после последнего занятия.</p>
       <div class="res"><h2>Что получит бюро</h2><ul>${R.filter(r => r.result).map(r => `<li><b>${esc(r.name)}</b> — ${esc(r.result)}</li>`).join('')}</ul></div>
     </div>
     <div class="side">
-      <div class="card"><div class="kicker" style="margin:0">К оплате</div><div class="sum">${rub(T.t)}</div><p>100% до первого занятия · без НДС</p></div>
+      <div class="card"><div class="kicker" style="margin:0">К оплате</div><div class="sum">${rub(T.t)}</div><p>100% до первого занятия · НДС не облагается (УСН)</p></div>
       <div class="card"><h3><span class="num">1</span>Программа в PDF</h3><p>Состав, стоимость и порядок работы — чтобы показать руководителю или бухгалтерии.</p>
         <button class="btn ghost" id="pdf" type="button">Скачать PDF</button></div>
       ${invoice}
@@ -239,7 +239,7 @@ if (!S || !totals(S).mods){
     const b = $('#invBtn'); b.disabled = true; b.textContent = 'Готовлю счёт…';
     try{
       await Corp.downloadPdf(S, 'invoice', f); goal('corp_invoice');
-      const purpose = `Оплата по счёту-договору № ${id} от ${date} за информационно-консультационные услуги. Без НДС`;
+      const purpose = `Оплата по счёту-договору № ${id} от ${date} за информационно-консультационные услуги. НДС не облагается (УСН)`;
       $('#qr').innerHTML = Corp.qrSvg(Corp.payString(pre, purpose)) + `<p>Отсканируйте в банковском приложении организации: получатель, сумма ${rub(pre)} и назначение платежа заполнятся сами.</p>`;
       $('#qr').classList.add('show'); toast('Счёт-договор скачан');
     }catch(err){ toast('Не получилось сформировать счёт, попробуйте ещё раз'); }
