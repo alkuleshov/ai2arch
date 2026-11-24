@@ -232,6 +232,12 @@ button,select{font-family:var(--sans)}
 .toc-slide.current{background:var(--accent-l);color:var(--navy)!important;font-weight:700}
 .toc-slide.read:after{content:'✓';position:absolute;right:8px;color:var(--accent);font-size:11px}
 .toc-quiz{display:none;margin-left:6px;font-size:10px;letter-spacing:0;text-transform:none;color:#16724F;white-space:nowrap}
+.toc-terms{margin:0 0 14px;border:1px solid var(--line);border-radius:10px;padding:0 12px;background:#fff}
+.toc-terms summary{cursor:pointer;padding:11px 0;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);list-style:none}
+.toc-terms summary::-webkit-details-marker{display:none}
+.toc-terms dl{display:grid;gap:9px;padding:0 0 12px;margin:0}
+.toc-terms dt{font-weight:800;font-size:13.5px;color:var(--navy)}
+.toc-terms dd{font-size:12.5px;color:var(--muted);margin:0}
 .toc-ch.passed .toc-quiz{display:inline}
 .continue{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:55;background:var(--navy);color:#fff;border-radius:999px;padding:9px 16px;font-size:12.5px;font-weight:700;box-shadow:0 8px 24px rgba(10,15,26,.22);display:none;max-width:calc(100vw - 24px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .continue.show{display:block}
@@ -334,6 +340,7 @@ button,select{font-family:var(--sans)}
 </header>
 <nav class="lr-toc" id="lrToc" aria-label="Содержание урока">
   <div class="toc-top"><b>Содержание</b><button id="tocClose" type="button" aria-label="Закрыть">×</button></div>
+  <details class="toc-terms" open><summary>Термины урока</summary><dl><div><dt>NOI</dt><dd>чистый операционный доход: доход от аренды минус операционные расходы. Проще: доход от аренды минус расходы.</dd></div><div><dt>CAPEX</dt><dd>капитальные затраты: разовые вложения в создание или реконструкцию объекта. Проще: вложения в стройку и ремонт.</dd></div><div><dt>OPEX</dt><dd>операционные расходы: регулярные платежи за содержание объекта. Проще: регулярные счета за эксплуатацию.</dd></div><div><dt>WBS</dt><dd>иерархический перечень работ или статей затрат. Проще: структура статей затрат.</dd></div><div><dt>NPV и IRR</dt><dd>NPV — чистая приведённая стоимость; IRR — внутренняя норма доходности. Проще: дисконтированные показатели проекта.</dd></div><div><dt>ЕГРН</dt><dd>Единый государственный реестр недвижимости. Проще: реестр с данными об объекте.</dd></div><div><dt>ТП</dt><dd>трансформаторная подстанция. Проще: подстанция, дающая зданию электричество.</dd></div><div><dt>ПЗЗ</dt><dd>правила землепользования и застройки города. Проще: что и как можно строить на участке.</dd></div><div><dt>БТИ</dt><dd>бюро технической инвентаризации; здесь: технический паспорт и поэтажные планы здания. Проще: официальные чертежи и экспликация помещений.</dd></div><div><dt>ТУ</dt><dd>технические условия, которые выдаёт ресурсоснабжающая организация на подключение и мощность. Проще: условия, на которых здание получает ресурс.</dd></div><div><dt>GBA и GLA</dt><dd>GBA: общая площадь здания; GLA: сдаваемая в аренду площадь. Проще: вся площадь и та её часть, что приносит доход.</dd></div></dl></details>
   <a href="#chapter-1" class="toc-ch" data-quiz-chapter="1">Глава 1. Как устроен скелет модели<span class="toc-quiz" data-quiz-chapter="1">✓ Проверено</span></a><a href="#slide-1" class="toc-slide"><span>1</span>Собрать скелет финансовой модели</a><a href="#slide-2" class="toc-slide"><span>2</span>Зачем скелет модели</a><a href="#slide-3" class="toc-slide"><span>3</span>Контекст: CAPEX, OPEX и доходы</a><a href="#slide-4" class="toc-slide"><span>4</span>Схема финансовой модели</a><a href="#slide-5" class="toc-slide"><span>5</span>C52: что известно для модели</a><a href="#slide-6" class="toc-slide"><span>6</span>Что нужно на входе</a><a href="#chapter-2" class="toc-ch" data-quiz-chapter="2">Глава 2. Собираем скелет с нейросетью<span class="toc-quiz" data-quiz-chapter="2">✓ Проверено</span></a><a href="#slide-7" class="toc-slide"><span>7</span>Сервисы: сравнение</a><a href="#slide-8" class="toc-slide"><span>8</span>Флагман по критерию: Gemini</a><a href="#slide-9" class="toc-slide"><span>9</span>Промпт для структуры CAPEX</a><a href="#slide-10" class="toc-slide"><span>10</span>Промпт для OPEX</a><a href="#slide-11" class="toc-slide"><span>11</span>Промпт для структуры доходов</a><a href="#slide-12" class="toc-slide"><span>12</span>Как стыкуется с таблицей NOI</a><a href="#chapter-3" class="toc-ch" data-quiz-chapter="3">Глава 3. Проверяем и забираем в работу<span class="toc-quiz" data-quiz-chapter="3">✓ Проверено</span></a><a href="#slide-13" class="toc-slide"><span>13</span>Реестр пробелов: документ → зависимость</a><a href="#slide-14" class="toc-slide"><span>14</span>Клики: по шагам</a><a href="#slide-15" class="toc-slide"><span>15</span>Как проверить</a><a href="#slide-16" class="toc-slide"><span>16</span>Как забрать в работу</a><a href="#slide-17" class="toc-slide"><span>17</span>Типичный сбой и что делать</a><a href="#slide-18" class="toc-slide"><span>18</span>Типичные ошибки</a><a href="#slide-19" class="toc-slide"><span>19</span>Путь в основном контуре</a><a href="#slide-20" class="toc-slide"><span>20</span>Что берём в Задание №3</a>
 </nav>
 
@@ -343,7 +350,6 @@ button,select{font-family:var(--sans)}
     <h1>Скелет финансовой модели</h1>
     <div class="meta"><span>20 слайдов</span><span>70 мин чтения</span><span>12575 слов</span></div>
     <p>Вертикальный урок по теме 2.2: как собрать структуру доходов, OPEX и CAPEX до появления цифр.</p>
-    <a class="start" href="#intro">Начать →</a>
   </section>
   <details class="glossary">
     <summary>Термины урока</summary>

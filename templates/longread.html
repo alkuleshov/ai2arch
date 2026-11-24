@@ -232,6 +232,12 @@ button,select{font-family:var(--sans)}
 .toc-slide.current{background:var(--accent-l);color:var(--navy)!important;font-weight:700}
 .toc-slide.read:after{content:'✓';position:absolute;right:8px;color:var(--accent);font-size:11px}
 .toc-quiz{display:none;margin-left:6px;font-size:10px;letter-spacing:0;text-transform:none;color:#16724F;white-space:nowrap}
+.toc-terms{margin:0 0 14px;border:1px solid var(--line);border-radius:10px;padding:0 12px;background:#fff}
+.toc-terms summary{cursor:pointer;padding:11px 0;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);list-style:none}
+.toc-terms summary::-webkit-details-marker{display:none}
+.toc-terms dl{display:grid;gap:9px;padding:0 0 12px;margin:0}
+.toc-terms dt{font-weight:800;font-size:13.5px;color:var(--navy)}
+.toc-terms dd{font-size:12.5px;color:var(--muted);margin:0}
 .toc-ch.passed .toc-quiz{display:inline}
 .continue{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:55;background:var(--navy);color:#fff;border-radius:999px;padding:9px 16px;font-size:12.5px;font-weight:700;box-shadow:0 8px 24px rgba(10,15,26,.22);display:none;max-width:calc(100vw - 24px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .continue.show{display:block}
@@ -334,6 +340,7 @@ button,select{font-family:var(--sans)}
 </header>
 <nav class="lr-toc" id="lrToc" aria-label="Содержание урока">
   <div class="toc-top"><b>Содержание</b><button id="tocClose" type="button" aria-label="Закрыть">×</button></div>
+  {{TERMS_TOC}}
   {{TOC}}
 </nav>
 
@@ -343,7 +350,6 @@ button,select{font-family:var(--sans)}
     <h1>{{HERO_TITLE}}</h1>
     <div class="meta"><span>{{TOTAL}} слайдов</span><span>{{READ_TIME}} мин чтения</span><span>{{WORDS}} слов</span></div>
     <p>{{INTRO}}</p>
-    <a class="start" href="#intro">Начать →</a>
   </section>
   <details class="glossary">
     <summary>Термины урока</summary>

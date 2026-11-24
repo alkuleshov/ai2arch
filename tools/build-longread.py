@@ -597,6 +597,8 @@ def build(key='2.2'):
         chapter_bodies.append(''.join(body))
     body_html=''.join(chapter_bodies)
     body_html=mark_terms(body_html, load_global_terms())
+    terms_html=''.join(f'<div><dt>{esc(n)}</dt><dd>{inline(d)}</dd></div>' for n,d in terms)
+    terms_toc=f'<details class="toc-terms" open><summary>Термины урока</summary><dl>{terms_html}</dl></details>'
     glossary='<p class="glossary-all"><a href="redev-glossary.html">Весь словарь курса →</a></p>'+''.join(f'<div><dt>{esc(n)}</dt><dd>{inline(d)}</dd></div>' for n,d in terms)
     # rail
     rail=''.join(f'<img data-rail="{n}" src="{SLIDE_DIR}/{n:02d}-1600.webp" srcset="{SLIDE_DIR}/{n:02d}-1600.webp 1600w, {SLIDE_DIR}/{n:02d}.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд {n} из {TOTAL}">' for n in range(1,TOTAL+1))
@@ -614,7 +616,7 @@ def build(key='2.2'):
          .replace('{{HERO_TITLE}}',CFG['hero_title']).replace('{{SHORT_NAME}}',CFG['short_name'])
          .replace('{{DECK}}',CFG['deck']).replace('{{SLIDE_DIR}}',SLIDE_DIR).replace('{{TOTAL}}',str(TOTAL))
          .replace('{{READ_TIME}}',str(minutes)).replace('{{BODY}}',body_html)
-         .replace('{{TOC}}',''.join(toc)).replace('{{GLOSSARY}}',glossary)
+         .replace('{{TERMS_TOC}}',terms_toc).replace('{{TOC}}',''.join(toc)).replace('{{GLOSSARY}}',glossary)
          .replace('{{RAIL}}',rail).replace('{{SLIDES_JSON}}',slides_json)
          .replace('{{QUIZ_JSON}}',quiz_json).replace('{{QUIZ_KEY}}',quiz_key)
          .replace('{{WORDS}}',str(words)))
