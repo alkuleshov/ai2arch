@@ -1498,7 +1498,40 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
                 </div>
               </div>
               <div class="lesson-body">
-<div style="border:1px solid #0A0F1A;background:#FFFFFF;padding:16px 18px;margin:0 0 18px;display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap"><div><div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#2B4FD8">Лонгрид · 54 мин</div><div style="font-size:17px;font-weight:800">HBU, сценарии и баланс площадей</div><div style="font-size:14px;color:#5A6070">Четыре теста HBU, NOI по шагам, баланс площадей</div></div><a href="redev-read-hbu.html" style="display:inline-flex;background:#0A0F1A;color:#F6F4F0;padding:12px 20px;border-radius:999px;font-weight:700;font-size:15px">Пройти занятие →</a></div>
+<div class="lr-preview" id="lrPreview21">
+  <div class="lr-copy">
+    <div class="lr-kicker">Урок · 54 мин чтения · 40 слайдов</div>
+    <h3>HBU, сценарии и баланс площадей</h3>
+    <p>Тема 2.1 в формате лонгрида: как пройти четыре теста HBU, посчитать NOI по шагам и собрать баланс площадей сценария-победителя. Со слайдами и промптами.</p>
+    <div class="lr-progress-wrap" id="lrProgressWrap21" hidden><div class="lr-progress-track"><i id="lrBar21"></i></div><span id="lrPercent21">Прочитано 0 %</span></div>
+    <a class="lr-btn" id="lrLessonBtn21" href="redev-read-hbu.html">Читать урок →</a>
+  </div>
+  <div class="lr-ribbon">
+    <img src="images/slides/hbu/01-1600.webp" alt="Слайд 1" loading="lazy"><img src="images/slides/hbu/08-1600.webp" alt="Слайд 8" loading="lazy"><img src="images/slides/hbu/18-1600.webp" alt="Слайд 18" loading="lazy"><img src="images/slides/hbu/26-1600.webp" alt="Слайд 26" loading="lazy"><img src="images/slides/hbu/40-1600.webp" alt="Слайд 40" loading="lazy">
+    <div class="lr-ribbon-note"><b>40</b><span>слайдов<br>54 мин</span></div>
+  </div>
+</div>
+<script>
+(function(){
+  const TITLES=["Оценить сценарии и собрать баланс","Что нужно на входе","Сервисы: сравнение","Флагман по критерию","Генерация сценариев и тесты 1–2","Зачем нужен HBU","Контекст: откуда HBU","Воронка: от сценариев к победителю","C52: стена","Четыре теста HBU","Откуда берутся сценарии","Как читать ПЗЗ","ЗОУИТ: где проверить","C52: что у нас есть","Как менялось здание","Промпт для тестов 1–2","Разбор промпта по частям","Как читать ответ модели","Клики и проверка","Самостоятельная работа","Тесты 3–4","NOI по шагам","Зачем считать NOI до CAPEX","Тест 3 и тест 4","Какая таблица нужна","NOI на примере","C52: почему NOI пока не считаем","Промпт для экономики","Разбор промпта по частям","Клики и проверка","Как пересчитать строку формулой","Ограничения расчёта","Самостоятельная работа","Баланс площадей сценария-победителя","GBA → МОП → GLA → помещения","Зачем разделять GBA и GLA","Промпт для баланса площадей","Клики и проверка","Сбой и что забрать","Путь в основном контуре"];
+  const TOTAL=40;
+  const PAGE='redev-read-hbu.html';
+  const btn=document.getElementById('lrLessonBtn21'),wrap=document.getElementById('lrProgressWrap21'),bar=document.getElementById('lrBar21'),pct=document.getElementById('lrPercent21');
+  function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+  function update(){
+    let seen=[];try{seen=JSON.parse(get('lr-hbu-seen')||'[]')}catch(e){}
+    const nums=new Set(seen.map(x=>{const m=/^slide-(\d+)$/.exec(x);return m?+m[1]:0}).filter(Boolean));
+    const last=(get('lr-hbu-last')||'').match(/^slide-(\d+)$/); const n=last?+last[1]:0;
+    if(!n && !nums.size){wrap.hidden=true;btn.textContent='Читать урок →';btn.href=PAGE;return;}
+    const read=nums.size||n;
+    const percent=Math.max(5,Math.min(100,Math.round(read/TOTAL*100)));
+    wrap.hidden=false;bar.style.width=percent+'%';pct.textContent='Прочитано '+percent+' %';
+    if(n){btn.textContent='Продолжить: Слайд '+n+' · '+(TITLES[n-1]||'');btn.href=PAGE+'#slide-'+n;}
+    else {btn.textContent='Продолжить чтение';btn.href=PAGE;}
+  }
+  update();addEventListener('pageshow',update);
+})();
+</script>
 <div class="lect"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span></div><div class="video-lecture" hidden><h3>Видеолекция</h3><div class="video-embed"><!-- Вставьте сюда iframe VK: <iframe src="https://vkvideo.ru/video_ext.php?oid=&id=&hash=" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe> --></div></div><h3>Презентация темы</h3><iframe src="redev-hbu.html" title="2.1 HBU, сценарии и баланс площадей — презентация" style="width:100%;aspect-ratio:16/9;min-height:420px;border:1px solid var(--border);border-radius:12px;background:#fff;display:block;margin-bottom:20px;" allow="fullscreen" allowfullscreen loading="lazy"></iframe>
 <div class="t21-prompts" id="prompts">
   <h3>Промпты темы 2.1</h3>
@@ -1635,7 +1668,40 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
                 </div>
               </div>
               <div class="lesson-body">
-<div style="border:1px solid #0A0F1A;background:#FFFFFF;padding:16px 18px;margin:0 0 18px;display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap"><div><div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#2B4FD8">Лонгрид · 50 мин</div><div style="font-size:17px;font-weight:800">Стресс-тест финмодели</div><div style="font-size:14px;color:#5A6070">Красная команда, чувствительность, условия отказа, вопросы юристу</div></div><a href="redev-read-stress.html" style="display:inline-flex;background:#0A0F1A;color:#F6F4F0;padding:12px 20px;border-radius:999px;font-weight:700;font-size:15px">Пройти занятие →</a></div>
+<div class="lr-preview" id="lrPreview24">
+  <div class="lr-copy">
+    <div class="lr-kicker">Урок · 50 мин чтения · 37 слайдов</div>
+    <h3>Стресс-тест финмодели</h3>
+    <p>Тема 2.4 в формате лонгрида: красная команда, чувствительность, условия отказа и вопросы юристу. Со слайдами и промптами.</p>
+    <div class="lr-progress-wrap" id="lrProgressWrap24" hidden><div class="lr-progress-track"><i id="lrBar24"></i></div><span id="lrPercent24">Прочитано 0 %</span></div>
+    <a class="lr-btn" id="lrLessonBtn24" href="redev-read-stress.html">Читать урок →</a>
+  </div>
+  <div class="lr-ribbon">
+    <img src="images/slides/stress/01-1600.webp" alt="Слайд 1" loading="lazy"><img src="images/slides/stress/07-1600.webp" alt="Слайд 7" loading="lazy"><img src="images/slides/stress/17-1600.webp" alt="Слайд 17" loading="lazy"><img src="images/slides/stress/24-1600.webp" alt="Слайд 24" loading="lazy"><img src="images/slides/stress/37-1600.webp" alt="Слайд 37" loading="lazy">
+    <div class="lr-ribbon-note"><b>37</b><span>слайдов<br>50 мин</span></div>
+  </div>
+</div>
+<script>
+(function(){
+  const TITLES=["Стресс-тест финмодели","Стресс-тест против самообмана","Откуда стресс-тест","Красная команда и чувствительность","Допущение → сценарий → эффект на NOI","Как ранжировать допущения","C52: работаем с тем, что есть","Красная команда: роль","Найти слабые допущения","Сервисы: сравнение и флагман","Промпт красной команды","Шаги и проверка","Путь в основном контуре","Проверить чувствительность","Сервисы: те же, расчёт в таблице","Промпт для сценариев стресса","Шаги и проверка","Путь в основном контуре","Юридический контур и экономика на одном листе","Условия отказа и чувствительность","Вопросы юристу: что и зачем","Вопрос юристу: документ → ответ","Лист экономики: статьи и порог","Страница 1 инвестиционного паспорта","Собрать вопросы юристу","Сервисы: сравнение и флагман","Промпт для вопросов юристу","Шаги и проверка","Путь в основном контуре","Собрать экономику на одном листе","Сервисы: сравнение и флагман","Промпты листа и отзыва","Шаги и проверка","Типичные ошибки","Путь в основном контуре","Что берём в Задание №3","Промпты темы 2.4"];
+  const TOTAL=37;
+  const PAGE='redev-read-stress.html';
+  const btn=document.getElementById('lrLessonBtn24'),wrap=document.getElementById('lrProgressWrap24'),bar=document.getElementById('lrBar24'),pct=document.getElementById('lrPercent24');
+  function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+  function update(){
+    let seen=[];try{seen=JSON.parse(get('lr-stress-seen')||'[]')}catch(e){}
+    const nums=new Set(seen.map(x=>{const m=/^slide-(\d+)$/.exec(x);return m?+m[1]:0}).filter(Boolean));
+    const last=(get('lr-stress-last')||'').match(/^slide-(\d+)$/); const n=last?+last[1]:0;
+    if(!n && !nums.size){wrap.hidden=true;btn.textContent='Читать урок →';btn.href=PAGE;return;}
+    const read=nums.size||n;
+    const percent=Math.max(5,Math.min(100,Math.round(read/TOTAL*100)));
+    wrap.hidden=false;bar.style.width=percent+'%';pct.textContent='Прочитано '+percent+' %';
+    if(n){btn.textContent='Продолжить: Слайд '+n+' · '+(TITLES[n-1]||'');btn.href=PAGE+'#slide-'+n;}
+    else {btn.textContent='Продолжить чтение';btn.href=PAGE;}
+  }
+  update();addEventListener('pageshow',update);
+})();
+</script>
 <div class="lect"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span></div><div class="video-lecture" hidden><h3>Видеолекция</h3><div class="video-embed"><!-- Вставьте сюда iframe VK: <iframe src="https://vkvideo.ru/video_ext.php?oid=&id=&hash=" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe> --></div></div><h3>Презентация темы</h3><iframe src="redev-stress.html" title="2.4 Стресс-тест финмодели — презентация" style="width:100%;aspect-ratio:16/9;min-height:420px;border:1px solid var(--border);border-radius:12px;background:#fff;display:block;margin-bottom:20px;" allow="fullscreen" allowfullscreen loading="lazy"></iframe><p style="font-size:13px"><a href="redev-stress.html" target="_blank" rel="noopener">Открыть презентацию отдельно ↗</a></p><div class="card-grid">
   <div class="card card-a only-a"><h3><span class="trk a">ТРЕК А</span>Проектировщик</h3><p style="font-size:13px">Обзорно: экономика объекта на одном листе; чтение модели напарника.</p><div class="depth">Самостоятельно: отзыв из пяти замечаний на работу напарника из другого трека.</div></div>
   <div class="card card-b only-b"><h3><span class="trk b">ТРЕК Б</span>Девелопер / инвестор</h3><p style="font-size:13px">Стресс-тест модели («красная команда» на языковой модели), чувствительность, форма реализации и юридический контур.</p></div>
@@ -1654,7 +1720,40 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
                 </div>
               </div>
               <div class="lesson-body">
-<div style="border:1px solid #0A0F1A;background:#FFFFFF;padding:16px 18px;margin:0 0 18px;display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap"><div><div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#2B4FD8">Лонгрид · 32 мин</div><div style="font-size:17px;font-weight:800">Сборка задания №3</div><div style="font-size:14px;color:#5A6070">Упаковка для Трека А, проверка структуры финмодели для Трека Б, ошибки и сдача</div></div><a href="redev-read-task3.html" style="display:inline-flex;background:#0A0F1A;color:#F6F4F0;padding:12px 20px;border-radius:999px;font-weight:700;font-size:15px">Пройти занятие →</a></div>
+<div class="lr-preview" id="lrPreview25">
+  <div class="lr-copy">
+    <div class="lr-kicker">Урок · 32 мин чтения · 25 слайдов</div>
+    <h3>Сборка задания №3</h3>
+    <p>Тема 2.5 в формате лонгрида: как упаковать задание №3 из HBU и расчёта, проверить структуру финмодели и сдать его. Со слайдами и промптами.</p>
+    <div class="lr-progress-wrap" id="lrProgressWrap25" hidden><div class="lr-progress-track"><i id="lrBar25"></i></div><span id="lrPercent25">Прочитано 0 %</span></div>
+    <a class="lr-btn" id="lrLessonBtn25" href="redev-read-task3.html">Читать урок →</a>
+  </div>
+  <div class="lr-ribbon">
+    <img src="images/slides/task3/01-1600.webp" alt="Слайд 1" loading="lazy"><img src="images/slides/task3/05-1600.webp" alt="Слайд 5" loading="lazy"><img src="images/slides/task3/11-1600.webp" alt="Слайд 11" loading="lazy"><img src="images/slides/task3/16-1600.webp" alt="Слайд 16" loading="lazy"><img src="images/slides/task3/25-1600.webp" alt="Слайд 25" loading="lazy">
+    <div class="lr-ribbon-note"><b>25</b><span>слайдов<br>32 мин</span></div>
+  </div>
+</div>
+<script>
+(function(){
+  const TITLES=["Сборка задания №3","Задание №3 как проверяемый результат","Откуда задание №3","Карта задания №3","Карта задания по трекам","HBU → NOI → финмодель → упаковка","C52: что уже есть для задания","Для Трека А: упаковка","Упаковка трека А: что входит","Сборка упаковки: порядок","Собрать упаковку задания","Сервисы: сравнение и флагман","Промпт для упаковки","Шаги и проверка","Путь в основном контуре","Для Трека Б: финмодель","Финмодель трека Б: листы","Проверка структуры: цепочка","Проверить структуру финмодели","Сервисы: сравнение и флагман","Промпт для проверки структуры","Шаги и проверка","Типичные ошибки","Путь в основном контуре","Сдача Задания №3"];
+  const TOTAL=25;
+  const PAGE='redev-read-task3.html';
+  const btn=document.getElementById('lrLessonBtn25'),wrap=document.getElementById('lrProgressWrap25'),bar=document.getElementById('lrBar25'),pct=document.getElementById('lrPercent25');
+  function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+  function update(){
+    let seen=[];try{seen=JSON.parse(get('lr-task3-seen')||'[]')}catch(e){}
+    const nums=new Set(seen.map(x=>{const m=/^slide-(\d+)$/.exec(x);return m?+m[1]:0}).filter(Boolean));
+    const last=(get('lr-task3-last')||'').match(/^slide-(\d+)$/); const n=last?+last[1]:0;
+    if(!n && !nums.size){wrap.hidden=true;btn.textContent='Читать урок →';btn.href=PAGE;return;}
+    const read=nums.size||n;
+    const percent=Math.max(5,Math.min(100,Math.round(read/TOTAL*100)));
+    wrap.hidden=false;bar.style.width=percent+'%';pct.textContent='Прочитано '+percent+' %';
+    if(n){btn.textContent='Продолжить: Слайд '+n+' · '+(TITLES[n-1]||'');btn.href=PAGE+'#slide-'+n;}
+    else {btn.textContent='Продолжить чтение';btn.href=PAGE;}
+  }
+  update();addEventListener('pageshow',update);
+})();
+</script>
 <div class="t22-task"><span class="t22-task-k">К следующей встрече</span><b>Задание №3</b><span class="t22-task-d">Задание №3 по вашему объекту</span></div>
 <div class="lect"><span class="meet-badge lecture" title="Лекция: присутствие по возможности" aria-label="Лекция: присутствие по возможности">Лекция</span></div><div class="video-lecture" hidden><h3>Видеолекция</h3><div class="video-embed"><!-- Вставьте сюда iframe VK: <iframe src="https://vkvideo.ru/video_ext.php?oid=&id=&hash=" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" allowfullscreen></iframe> --></div></div><h3>Презентация темы</h3><iframe src="redev-task3.html" title="2.5 Сборка задания №3 — презентация" style="width:100%;aspect-ratio:16/9;min-height:420px;border:1px solid var(--border);border-radius:12px;background:#fff;display:block;margin-bottom:20px;" allow="fullscreen" allowfullscreen loading="lazy"></iframe><p style="font-size:13px"><a href="redev-task3.html" target="_blank" rel="noopener">Открыть презентацию отдельно ↗</a></p><div class="card-grid" style="margin:16px 0"><div class="card card-a only-a"><h3>Для Трека А</h3><p>Упаковка</p></div><div class="card card-b only-b"><h3>Для Трека Б</h3><p>Финмодель</p></div></div><ul class="checklist"><li><div class="chk">✓</div> Сборка и самопроверка заданиеа 2 по карте своего трека</li><li><div class="chk">✓</div> Доработка по замечаниям наставника</li></ul><div class="card card-success"><h3>📝 Задание №3 по вашему объекту (по треку)</h3><p style="font-size:13px">Трек А: матрица зонирования + предпроверка норм. Трек Б: базовая финансовая модель. Входит в список «любые 3 из заданий 1–4».</p></div>              </div>
             </div>

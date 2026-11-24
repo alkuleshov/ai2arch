@@ -34,6 +34,7 @@ LECTURES = {
         final_name='Итог темы 2.2', final_heading='Итог темы 2.2',
     ),
     '2.4': dict(
+        page_key='stress',
         src='2.4.md', out='redev-read-stress.html', slide_dir='images/slides/stress',
         deck='redev-stress.html', total=37,
         title='Урок 2.4 · Стресс-тест финмодели · AI2ARCH',
@@ -54,6 +55,7 @@ LECTURES = {
         final_name='Итог темы 2.4 и что берём в Задание №3', final_heading='Итог темы 2.4',
     ),
     '2.5': dict(
+        page_key='task3',
         src='2.5.md', out='redev-read-task3.html', slide_dir='images/slides/task3',
         deck='redev-task3.html', total=25,
         title='Урок 2.5 · Сборка задания №3 · AI2ARCH',
@@ -74,6 +76,7 @@ LECTURES = {
         final_name='Итог темы 2.5', final_heading='Итог темы 2.5',
     ),
     '2.1': dict(
+        page_key='hbu',
         src='2.1.md', out='redev-read-hbu.html', slide_dir='images/slides/hbu',
         deck='redev-hbu.html', total=40,
         title='Урок 2.1 · HBU и сценарии · AI2ARCH',
@@ -601,7 +604,7 @@ def build(key='2.2'):
     minutes=max(1,round(words/180))
     quiz_json=json.dumps(quiz, ensure_ascii=False).replace('</', '<\\/')
     quiz_key=json.dumps('lr-quiz-' + SRC.stem, ensure_ascii=False)
-    tpl=TPL.read_text(encoding='utf-8')
+    tpl=TPL.read_text(encoding='utf-8').replace('{{PAGE_KEY}}', CFG.get('page_key', key))
     out=(tpl.replace('{{TITLE}}',CFG['title']).replace('{{DESCRIPTION}}',CFG['description'])
          .replace('{{KICKER}}',CFG['kicker']).replace('{{INTRO}}',CFG['intro'])
          .replace('{{BACK_HREF}}',CFG['back_href']).replace('{{BACK_LABEL}}',CFG['back_label'])

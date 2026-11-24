@@ -527,19 +527,19 @@ taskBoxes.forEach(cb=>{
 
 // продолжение чтения
 const sections=[...document.querySelectorAll('.slide-sec')];
-const seen=new Set(JSON.parse(LS.get('lr-seen')||'[]'));
+const seen=new Set(JSON.parse(LS.get('lr-hbu-seen')||'[]'));
 sections.forEach(s=>{if(seen.has(s.id))s.classList.add('read')});
 let saveTimer=null;
 function savePos(){
   const y=scrollY+innerHeight*0.35;
   let cur=sections[0];
   sections.forEach(s=>{if(s.offsetTop<=y)cur=s});
-  if(cur){LS.set('lr-last',cur.id);const t=cur.querySelector('h2');if(t)LS.set('lr-last-title',t.textContent);seen.add(cur.id);LS.set('lr-seen',JSON.stringify([...seen]));cur.classList.add('read');}
+  if(cur){LS.set('lr-hbu-last',cur.id);const t=cur.querySelector('h2');if(t)LS.set('lr-hbu-last-title',t.textContent);seen.add(cur.id);LS.set('lr-hbu-seen',JSON.stringify([...seen]));cur.classList.add('read');}
   document.querySelectorAll('.toc-slide').forEach(a=>a.classList.toggle('read',seen.has(a.getAttribute('href').slice(1))));
 }
 addEventListener('scroll',()=>{clearTimeout(saveTimer);saveTimer=setTimeout(savePos,160)},{passive:true});
 const cont=document.getElementById('continue');
-const saved=LS.get('lr-last');
+const saved=LS.get('lr-hbu-last');
 if(saved){const el=document.getElementById(saved);if(el && scrollY<200){const t=el.querySelector('h2');cont.textContent='Продолжить: '+(t?t.textContent:el.id);cont.href='#'+saved;cont.classList.add('show');cont.onclick=()=>cont.classList.remove('show');}}
 
 // текущий раздел и липкий слайд
