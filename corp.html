@@ -95,6 +95,17 @@ section.blk{padding:56px 0;border-top:1px solid var(--ink)}
 .pc.own.sel{border-style:solid;background:var(--dark)}
 .pc.own p{font-size:14px;color:var(--muted);margin:14px 0 16px;flex:1}
 .pc.sel.own p{color:#B9C3DA}
+/* коннекторы */
+.cns{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.cn{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);padding:20px}
+.cn.base{border-color:var(--ink)}
+.cn .tagline{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.cn h3{font-size:24px;line-height:1.05;letter-spacing:-.03em;font-weight:800;color:var(--ink);margin:8px 0 8px}
+.cn p{font-size:14px;color:var(--muted);flex:1}
+.cn .cp{margin-top:14px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:var(--faint);display:grid;gap:2px}
+.cn .cp b{color:var(--ink);font-weight:700}
+.cn-also{margin-top:16px;font-size:15px;color:var(--muted)}.cn-also b{color:var(--ink)}
+.cn-go{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 /* конструктор */
 .bgrid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:28px;align-items:start}
 .params{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:18px}
@@ -219,6 +230,7 @@ footer .ft-row{display:grid;grid-template-columns:auto 1fr 1fr;gap:12px 32px;ali
 }
 @media(max-width:1080px){
  .progs{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .cns{grid-template-columns:repeat(2,minmax(0,1fr))}
  .flow{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:960px){
@@ -247,6 +259,7 @@ footer .ft-row{display:grid;grid-template-columns:auto 1fr 1fr;gap:12px 32px;ali
  .hd-btn{display:none}
  section.blk{padding:40px 0}
  .progs{grid-template-columns:minmax(0,1fr);gap:12px}
+ .cns{grid-template-columns:minmax(0,1fr)}
  .pc .who{min-height:0}
  .pc .pr{margin-top:10px}
  .params{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -328,7 +341,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
 <body>
 <header class="hd"><div class="wrap">
   <a class="hd-back" href="./" aria-label="AI2ARCH — на главную"><img src="images/ai2arch-sign.png" width="40" height="40" alt=""><span><b>AI2ARCH</b><small>Лаборатория проектного интеллекта</small></span></a>
-  <nav><a href="#programs">Программы</a><a href="#builder">Конструктор</a><a href="#terms">Условия</a><a href="#faq">Вопросы</a></nav>
+  <nav><a href="#programs">Программы</a><a href="#connectors">Коннекторы</a><a href="#builder">Конструктор</a><a href="#terms">Условия</a><a href="#faq">Вопросы</a></nav>
   <button class="hd-btn" id="shareTop" type="button">Скопировать ссылку</button>
 </div></header>
 
@@ -336,7 +349,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
   <div>
     <div class="kicker">Корпоративное обучение · Лаборатория проектного интеллекта</div>
     <h1>Обучение ИИ для <em>проектного бюро</em></h1>
-    <p class="lead">Практикум на проектах вашей команды: анализ участка, концепции, визуализации, Revit, нормы и тексты. Выберите готовую программу или соберите свою, стоимость видна сразу.</p>
+    <p class="lead">Практикум на проектах вашей команды: анализ участка, концепции, визуализации, Revit, нормы, тексты и коннекторы ИИ к Revit, SketchUp и Blender. Выберите готовую программу или соберите свою, стоимость видна сразу.</p>
     <div class="cta"><a class="btn pri" href="#programs">Выбрать программу</a><a class="btn ghost" href="#builder">Собрать свою</a></div>
     <div class="facts" id="facts"></div>
   </div>
@@ -352,6 +365,14 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
   <div class="sh"><div><div class="num">Шаг 1</div><h2>Программы обучения</h2></div><p>Каждую программу можно взять как есть или изменить в конструкторе ниже.</p></div>
   <div class="progs" id="progs"></div>
   <div class="talk"><p><strong>Не поняли, чем отличаются программы? Разъясним лично и доступно. Запишитесь на консультацию и расскажите о бюро.</strong></p><a class="talk-btn" data-tg href="https://t.me/alkuleshov" target="_blank" rel="noopener">Записаться на консультацию</a></div>
+</div></section>
+
+<section class="blk" id="connectors"><div class="wrap">
+  <div class="sh"><div><div class="num">Отдельное направление</div><h2>ИИ-агент в ваших программах</h2></div><p>Подключаем ИИ напрямую к Revit, SketchUp и Blender: он читает модель, правит параметры и строит массинг по описанию. Можно взять отдельно от остальных модулей.</p></div>
+  <div class="cns" id="cns"></div>
+  <p class="cn-also"><b>Обзором</b> — AutoCAD, Archicad, Rhino и Grasshopper, QGIS, Twinmotion: что уже подключается и где ограничения. Доступ к Claude и VPN поможем настроить после оплаты.</p>
+  <div class="cn-go"><button type="button" class="btn pri" id="pickConn">Собрать программу из коннекторов</button></div>
+  <div class="talk"><p><strong>Не уверены, подойдёт ли коннектор к вашей версии Revit? Проверим вместе до оплаты.</strong></p><a class="talk-btn" data-tg href="https://t.me/alkuleshov" target="_blank" rel="noopener">Записаться на консультацию</a></div>
 </div></section>
 
 <section class="blk" id="builder" style="padding-top:10px"><div class="wrap">
@@ -415,7 +436,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
     <h3 class="fq-h">Документы и оплата</h3>
     <details><summary>Можно работать по счёту-договору, без отдельного договора?</summary><p>Да. Мы выставляем счёт-договор (счёт-оферту): в нём программа, дни и время занятий, стоимость и условия. Оплата счёта означает согласие с условиями, и договор считается заключённым в письменной форме (п. 3 ст. 434 и п. 3 ст. 438 ГК РФ). Если бухгалтерии бюро нужен отдельный двусторонний договор, подпишем его по форме бюро.</p></details>
     <details><summary>Сколько стоит добавить ещё человека?</summary><p>Базовая цена модуля рассчитана на группу до 6 человек. Каждый следующий человек с 7-го по 10-го — плюс 5% к цене модуля, с 11-го по 20-го — плюс 4%. Число участников можно задать отдельно для каждого модуля: например, ГИПов и инженеров — только на тех модулях, которые им нужны. Точная сумма считается в конструкторе и фиксируется в счёте-договоре.</p></details>
-    <details><summary>Можно ли взять только коннекторы ИИ к Revit, AutoCAD и Blender?</summary><p>Да. В конструкторе есть отдельный модуль «Коннекторы: Claude + Revit, AutoCAD, Blender»: настроим подключение на рабочих местах и разберём сценарии на модели бюро. Его можно взять один или вместе с остальными модулями.</p></details>
+    <details><summary>Можно ли взять только коннекторы ИИ к Revit, SketchUp и Blender?</summary><p>Да. Нажмите «Собрать программу из коннекторов» в разделе «ИИ-агент в ваших программах»: в конструктор добавятся основа и три трека — SketchUp, Revit, Blender. Лишнее можно выключить. Для Revit заранее проверим, подходит ли коннектор к вашей версии программы.</p></details>
     <details><summary>Как оплатить?</summary><p>Безналичным переводом с расчётного счёта организации или ИП: по реквизитам из счёта-договора или по QR-коду в банковском приложении. 100% — до первого занятия. Если занятия не состоятся по нашей вине или вы откажетесь до их начала — вернём стоимость непроведённых занятий. Цены НДС не облагается (УСН).</p></details>
     <details><summary>Какие документы получим?</summary><p>Счёт-договор — до начала обучения, акт оказанных услуг — после последнего занятия. Документ об обучении не выдаётся: это практикум для команды, а не программа повышения квалификации.</p></details>
     <details><summary>Получим ли мы удостоверение после курса?</summary><p>Нет, это практикум для команды, документ об обучении не выдаётся. Если нужно официальное удостоверение о повышении квалификации, есть два курса ЮФУ: <a href="archi.html">«ИИ в архитектуре»</a> и <a href="redev.html">«ИИ в редевелопменте»</a>. Просто оставьте заявку на странице курса.</p></details>
@@ -456,7 +477,7 @@ function renderHero(){
     const p = D.presets[k], T = totals(presetState(k));
     return `<a class="hp-row" href="#programs"><div><b>${p.name}</b><span>${hours(T.off + T.on)} · ${T.minN === T.maxN ? 'группа ' + people(T.maxN) : `группы от ${T.minN} до ${people(T.maxN)}`}</span></div><strong>${rub(T.t)}</strong></a>`;
   }).join('');
-  $('#heroProgs').innerHTML = rows + `<a class="hp-row" href="#builder"><div><b>Собрать с нуля</b><span>только нужные модули</span></div><strong>от ${rub(D.start.price)}</strong></a>`;
+  $('#heroProgs').innerHTML = rows + `<a class="hp-row" href="#connectors"><div><b>Коннекторы ИИ</b><span>Revit, SketchUp, Blender</span></div><strong>от ${rub(byId.M12.price[0])}</strong></a><a class="hp-row" href="#builder"><div><b>Собрать с нуля</b><span>только нужные модули</span></div><strong>от ${rub(D.start.price)}</strong></a>`;
 }
 function renderFacts(){
   $('#facts').innerHTML = [`${CAT.length} модулей`, '3 уровня глубины', 'очно или онлайн', 'счёт-договор'].map(t => `<span>${t}</span>`).join('');
@@ -473,6 +494,11 @@ function renderPrograms(){
   $('#progs').innerHTML = cards + `<div class="pc own ${S.preset==='own'?'sel':''}"><div class="tagline">Своя</div><h3>Собрать с нуля</h3><div class="who">Только нужные модули</div>
     <div class="pr">от ${rub(D.start.price)}</div><div class="hrs">включён модуль «Старт»</div><div class="ppl">Группа от 1 до 20 человек</div>
     <p>Выберите модули и глубину в конструкторе. Стоимость пересчитывается сразу.</p><button type="button" class="btn dark pick" data-preset="own">${S.preset==='own'?'Выбрано':'Собрать'}</button></div>`;
+}
+const CONN = [['M12','Основа','Что такое коннектор, установка на рабочих местах, правила работы с моделями'],['M13','Концепции','Массинг по ТЗ и из скетча, альтернативы по высотности'],['M14','Модель','Запросы к модели: состав, площади, параметры, спецификации, проверки'],['M15','Сцены','Сцена из модели, материалы и свет по референсу']];
+function renderConn(){
+  $('#cns').innerHTML = CONN.map(([id, tag, what], i) => { const x = byId[id];
+    return `<div class="cn ${i ? '' : 'base'}"><div class="tagline">${tag}</div><h3>${x.name}</h3><p>${what}</p><div class="cp"><span>Обзор · <b>${rub(x.price[0])}</b> · ${hours(x.hours[0])}</span><span>Практика · <b>${rub(x.price[1])}</b> · ${hours(x.hours[1])}</span><span>онлайн, группа до 6 человек</span></div></div>`; }).join('');
 }
 function renderParams(){
   const mixed = S.order.some(id => S.m[id].lvl >= 0 && S.m[id].own);
@@ -537,7 +563,7 @@ function animate(el, to){
   const tick = now => { const p = Math.min(1, (now - t0)/dur), v = from + (to - from) * (1 - Math.pow(1-p, 3)); el.textContent = rub(v); if (p < 1) requestAnimationFrame(tick); };
   requestAnimationFrame(tick);
 }
-function render(){ renderPrograms(); renderParams(); renderCatalog(); renderCanvas(); history.replaceState(null, '', '#c=' + Corp.encode(S)); }
+function render(){ renderPrograms(); renderConn(); renderParams(); renderCatalog(); renderCanvas(); history.replaceState(null, '', '#c=' + Corp.encode(S)); }
 
 function toast(t){ const el = $('#toast'); el.textContent = t; el.classList.add('show'); clearTimeout(toast.h); toast.h = setTimeout(() => el.classList.remove('show'), 2600); }
 async function copy(t, msg){ try{ await navigator.clipboard.writeText(t); toast(msg); }catch(e){ window.prompt('Скопируйте:', t); } }
@@ -568,6 +594,8 @@ document.addEventListener('click', async e => {
     try{ await Corp.downloadPdf(S, 'program'); goal('corp_pdf'); toast('PDF с программой скачан'); }
     catch(err){ toast('Не получилось сформировать PDF, попробуйте ещё раз'); }
     b.disabled = false; b.textContent = t; return; }
+  if (b.id === 'pickConn'){ S = blank(); CONN.forEach(([id]) => { S.m[id].lvl = 1; }); S.fmt = 0; S.preset = 'own'; render(); goal('corp_connectors');
+    document.getElementById('builder').scrollIntoView({behavior:'smooth'}); toast('Коннекторы добавлены в конструктор, уровень «Практика», онлайн'); return; }
   if (b.id === 'reset'){ S = blank(); render(); return; }
   if (b.hasAttribute('data-tg')){ goal('corp_telegram'); if (totals(S).mods) copy(`Здравствуйте! Хочу записаться на консультацию по программе № ${Corp.programId(Corp.encode(S))}: ${Corp.builderUrl(Corp.encode(S))}`, 'Номер программы скопирован — вставьте его в сообщение'); return; }
   if (b.id === 'tg'){ goal('corp_telegram'); copy(`Здравствуйте! Вопрос по программе № ${Corp.programId(Corp.encode(S))}: ${Corp.builderUrl(Corp.encode(S))}`, 'Номер программы скопирован — вставьте его в сообщение'); return; }
