@@ -53,6 +53,14 @@
   .guide-breadcrumb { font-size:12px; color:var(--ink-faint); flex:1; }
   .bc-cur { color:var(--ink-muted); font-weight:600; }
 
+  .bc-root,.bc-sep{font-weight:600;white-space:nowrap}
+  .guide-breadcrumb{display:flex;align-items:center;gap:8px;min-width:0;overflow:hidden}
+  .back-btn,.back-btn:hover,.back-bar .workbook-btn,.back-bar .workbook-btn:hover,.bar-brand{text-decoration:none}
+  .bar-brand{display:flex;align-items:center;padding:0 16px;flex-shrink:0}
+  .bar-brand img{width:30px;height:30px}
+  .head-actions{display:flex;align-items:center;flex:none}
+  .hs-short{display:none}
+  @media(max-width:760px){.hs-full{display:none}.hs-short{display:inline}}
   .wrap { max-width:760px; margin:0 auto; padding:36px 20px 60px; }
   h1 { font-size:26px; font-weight:800; letter-spacing:-.01em; margin-bottom:8px; }
   .lead { font-size:14.5px; color:var(--ink-muted); margin-bottom:22px; line-height:1.5; }
@@ -231,7 +239,7 @@ body{background-image:linear-gradient(to right, rgba(10,15,26,.07) 0 1px, transp
   .back-bar .head-actions { display:flex; align-items:center; gap:0 !important; }
   .back-bar .workbook-btn + .workbook-btn, .back-bar .head-actions a + a { border-left:none !important; }
   .bar-brand { border-left:1.5px solid #0A0F1A !important; }
-  .guide-breadcrumb { padding:0 20px !important; }
+  .guide-breadcrumb { padding:0 20px 0 16px !important; font-size:16px; color:#0A0F1A; }
   .bc-root { color:#848A9A !important; font-size:14px !important; font-weight:600 !important; }
   .bc-sep { color:#848A9A !important; font-size:14px !important; }
   .bc-cur { color:#2B4FD8 !important; font-size:15px !important; font-weight:800 !important; letter-spacing:-0.02em !important; }
@@ -242,7 +250,7 @@ body{background-image:linear-gradient(to right, rgba(10,15,26,.07) 0 1px, transp
   @media (max-width:640px){
     .back-bar{flex-wrap:nowrap!important;padding:6px 8px!important;gap:4px!important}
     .back-btn{font-size:11px;padding:6px 8px;white-space:nowrap}
-    .bar-brand{display:none!important}
+    .bar-brand,.head-schedule{display:none!important}
     .guide-breadcrumb{display:none}
     .workbook-btn{font-size:10.5px;padding:6px 7px;white-space:nowrap}
     h1{font-size:22px;line-height:1.2}
@@ -257,9 +265,15 @@ body{background-image:linear-gradient(to right, rgba(10,15,26,.07) 0 1px, transp
 <div class="back-bar">
   <a class="back-btn" href="index.html"><span class="arrow">←</span> <span>На главную</span></a>
   <div class="guide-breadcrumb">
-    <span>ИИ в редевелопменте</span> / <span class="bc-cur">Расписание потока</span>
+    <span class="bc-root">ИИ в редевелопменте</span>
+    <span class="bc-sep">/</span>
+    <span class="bc-cur">Расписание потока</span>
   </div>
-  <a class="workbook-btn" href="https://fortune-swing-02e.notion.site/41112bb3b5cd81839661da69963a035b?source=copy_link" target="_blank" rel="noopener">Рабочая тетрадь ↗</a>
+  <div class="head-actions">
+    <a class="workbook-btn head-schedule" href="redev-guide.html"><span class="hs-full">Учебное пособие ↗</span><span class="hs-short">Пособие</span></a>
+    <a class="workbook-btn" href="https://fortune-swing-02e.notion.site/41112bb3b5cd81839661da69963a035b?source=copy_link" target="_blank" rel="noopener"><span class="hs-full">Рабочая тетрадь ↗</span><span class="hs-short">Рабочая тетрадь</span></a>
+  </div>
+  <a class="bar-brand" href="index.html" title="AI2ARCH — на главную" aria-label="AI2ARCH — на главную"><img src="images/ai2arch-sign.png" width="30" height="30" alt=""></a>
 </div>
 
 <div class="wrap">

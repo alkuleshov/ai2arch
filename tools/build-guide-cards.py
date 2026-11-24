@@ -14,13 +14,13 @@ ROOT = Path(__file__).resolve().parent.parent
 GUIDE = ROOT / 'redev-guide.html'
 
 CARDS = [
-    dict(key='2.1', page='redev-read-hbu.html', src='2.1.md', slide_dir='images/slides/hbu', total=40, minutes=54, page_key='hbu',
+    dict(key='2.1', page='redev-read-hbu.html', src='2.1.md', slide_dir='images/slides/hbu', total=40, minutes=68, page_key='hbu',
          title='HBU, сценарии и баланс площадей',
          desc='Тема 2.1 в формате лонгрида: как пройти четыре теста HBU, посчитать NOI по шагам и собрать баланс площадей сценария-победителя. Со слайдами и промптами.'),
-    dict(key='2.4', page='redev-read-stress.html', src='2.4.md', slide_dir='images/slides/stress', total=37, minutes=50, page_key='stress',
+    dict(key='2.4', page='redev-read-stress.html', src='2.4.md', slide_dir='images/slides/stress', total=37, minutes=65, page_key='stress',
          title='Стресс-тест финмодели',
          desc='Тема 2.4 в формате лонгрида: красная команда, чувствительность, условия отказа и вопросы юристу. Со слайдами и промптами.'),
-    dict(key='2.5', page='redev-read-task3.html', src='2.5.md', slide_dir='images/slides/task3', total=25, minutes=32, page_key='task3',
+    dict(key='2.5', page='redev-read-task3.html', src='2.5.md', slide_dir='images/slides/task3', total=25, minutes=39, page_key='task3',
          title='Сборка задания №3',
          desc='Тема 2.5 в формате лонгрида: как упаковать задание №3 из HBU и расчёта, проверить структуру финмодели и сдать его. Со слайдами и промптами.'),
 ]
@@ -77,6 +77,13 @@ def card_html(c):
 def main():
     g = GUIDE.read_text(encoding='utf-8')
     for c in CARDS:
+        k = c['key'].replace('.', '')
+        start = g.find(f'<div class="lr-preview" id="lrPreview{k}">')
+        if start >= 0:  # карточка уже стоит: обновляем на месте
+            end = g.index('</script>', start) + len('</script>')
+            g = g[:start] + card_html(c) + g[end:]
+            print(f'{c["key"]}: карточка обновлена на месте')
+            continue
         lines = g.split('\n')
         idx = [i for i, l in enumerate(lines) if f'href="{c["page"]}"' in l and l.lstrip().startswith('<div style="border:1px solid #0A0F1A')]
         if len(idx) != 1:

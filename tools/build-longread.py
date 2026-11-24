@@ -285,9 +285,12 @@ def parse_slide(n,title,body):
         text=body[e:end].strip()
         if key=='c52':
             fields={}
-            for line in text.splitlines():
-                m=re.match(r'^\*\*(Что есть|Чего нет|С чем работаем|Как закрываем):\*\*\s*(.*)$', line.strip())
-                if m: fields[m.group(1)]=m.group(2).strip()
+            # метки полей: в начале строки (в т.ч. в списке или жирным) либо в одной строке подряд
+            labs=list(re.finditer(r'(?:^|(?<=\s))[-*•]?\s*\**(Что есть|Чего нет|С чем работаем|Как закрываем)\s*:\s*\**\s*', text, re.M))
+            for i,m in enumerate(labs):
+                end=labs[i+1].start() if i+1<len(labs) else len(text)
+                val=re.sub(r'\s+',' ',text[m.end():end]).strip().rstrip('-*• ').strip()
+                if val: fields[m.group(1)]=val
             data['c52']=fields
         elif key in ('base','why','context','transition'):
             data[key]=(data[key]+'\n\n'+text).strip() if data[key] else text
