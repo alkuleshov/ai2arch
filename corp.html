@@ -310,6 +310,9 @@ details>summary::after{transition:transform .2s}
 /* ссылки и кнопки в шапке: подчёркивание при наведении */
 header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
 @media (hover:none){a[class*="btn"]:hover,.btn:hover,a.ix:hover,a.tile:hover,a.mock:hover,a.cell:hover{transform:none;box-shadow:none}}
+/* ОТСТУПЫ МЕЖДУ КНОПКАМИ: тень и кольцо фокуса не налезают на соседнюю кнопку */
+.btns,.cta{display:flex;flex-wrap:wrap;gap:14px !important}
+a[class*="btn"]:focus-visible,button[class*="btn"]:focus-visible{outline-offset:4px}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -370,7 +373,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
         <div class="sum-h"><div class="kicker">Ваша программа</div><span class="pid" id="progId"></span><button class="x" type="button" id="closeSheet" aria-label="Закрыть">✕</button></div>
         <div class="total" id="total">0 ₽</div>
         <div class="sub" id="perPerson"></div>
-        <div class="stats"><div><b id="stMods">0</b><span>модулей</span></div><div><b id="stOff">0</b><span>часов очно</span></div><div><b id="stOn">0</b><span>часов онлайн</span></div></div>
+        <div class="stats"><div><b id="stMods">0</b><span id="stModsL">модулей</span></div><div><b id="stOff">0</b><span id="stOffL">часов очно</span></div><div><b id="stOn">0</b><span id="stOnL">часов онлайн</span></div></div>
         <div class="cv-h">Канва программы <span>⋮⋮ меняет порядок</span></div>
         <ol class="canvas" id="canvas"></ol>
         <div class="warn" id="warn"></div>
@@ -440,7 +443,7 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
 <script>
 const {D, LV, FMT, byId, CAT, isNum, rub, num, clampN, tierOf, blank, presetState, eff, cost, totals} = Corp;
 const $ = s => document.querySelector(s);
-const plural = (n, one, few, many) => { if (!Number.isInteger(n)) return few; const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many; };
+const plural = (n, one, few, many) => { if (!Number.isInteger(n)) return many; const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many; };
 const hours = h => `${num(h)} ${plural(h, 'час', 'часа', 'часов')}`;
 const people = n => `${n} ${plural(n, 'человек', 'человека', 'человек')}`;
 let S;
@@ -452,7 +455,7 @@ function seg(labels, cur, attr, dis, req){
 function renderHero(){
   const rows = Object.keys(D.presets).map(k => {
     const p = D.presets[k], T = totals(presetState(k));
-    return `<a class="hp-row" href="#programs"><div><b>${p.name}</b><span>${hours(T.off + T.on)} · ${T.minN === T.maxN ? 'группа ' + people(T.maxN) : `группы от ${T.minN} до ${people(T.maxN)}`}</span></div><strong>${rub(T.t)}</strong></a>`;
+    return `<a class="hp-row" href="#programs"><div><b>${p.name}</b><span>${hours(T.off + T.on)} · ${T.minN === T.maxN ? 'группа ' + people(T.maxN) : `группы от ${T.minN} до ${T.maxN} человек`}</span></div><strong>${rub(T.t)}</strong></a>`;
   }).join('');
   $('#heroProgs').innerHTML = rows + `<a class="hp-row" href="#builder"><div><b>Собрать с нуля</b><span>только нужные модули</span></div><strong>от ${rub(D.start.price)}</strong></a>`;
 }
@@ -465,7 +468,7 @@ function renderPrograms(){
     const p = D.presets[k], st = presetState(k), T = totals(st);
     const items = st.order.filter(id => st.m[id].lvl >= 0).map(id => { const e = eff(st, id); return `<li><span>${byId[id].name}${T.minN !== T.maxN ? `<small>${people(e.n)}</small>` : ''}</span><i class="d${st.m[id].lvl}">${LV[st.m[id].lvl]}</i></li>`; }).join('');
     return `<div class="pc ${S.preset===k?'sel':''}"><div class="tagline">${p.tag}</div><h3>${p.name}</h3><div class="who">${p.who}</div>
-      <div class="pr">${rub(T.t)}</div><div class="hrs">${hours(T.off)} очно · ${hours(T.on)} онлайн</div><div class="ppl">${T.minN === T.maxN ? 'Группа ' + people(T.maxN) : `Группы от ${T.minN} до ${people(T.maxN)}`}</div>
+      <div class="pr">${rub(T.t)}</div><div class="hrs">${hours(T.off)} очно · ${hours(T.on)} онлайн</div><div class="ppl">${T.minN === T.maxN ? 'Группа ' + people(T.maxN) : `Группы от ${T.minN} до ${T.maxN} человек`}</div>
       <details class="pc-more"><summary>Состав · ${modsN(st)}</summary><ul>${items}</ul></details><button type="button" class="btn dark pick" data-preset="${k}">${S.preset===k?'Выбрано':'Выбрать'}</button></div>`;
   }).join('');
   $('#progs').innerHTML = cards + `<div class="pc own ${S.preset==='own'?'sel':''}"><div class="tagline">Своя</div><h3>Собрать с нуля</h3><div class="who">Только нужные модули</div>
@@ -513,7 +516,9 @@ function renderCanvas(){
   animate($('#total'), T.t);
   $('#perPerson').textContent = !T.mods ? 'Выберите программу или включите модули' : T.minN === T.maxN ? `≈ ${rub(T.t/T.maxN)} на участника · группа ${T.maxN} чел.` : `Группы по модулям: от ${T.minN} до ${T.maxN} чел.`;
   $('#progId').textContent = T.mods ? `№ ${Corp.programId(code)}` : '';
-  $('#stMods').textContent = T.mods; $('#stOff').textContent = num(T.off); $('#stOn').textContent = num(T.on);
+  $('#stMods').textContent = T.mods; $('#stModsL').textContent = plural(T.mods, 'модуль', 'модуля', 'модулей');
+  $('#stOff').textContent = num(T.off); $('#stOffL').textContent = plural(T.off, 'час', 'часа', 'часов') + ' очно';
+  $('#stOn').textContent = num(T.on); $('#stOnL').textContent = plural(T.on, 'час', 'часа', 'часов') + ' онлайн';
   const rows = [`<li class="cv"><button class="h fix" type="button" tabindex="-1">1</button><div>${D.start.name}<small>онлайн · ${num(D.start.hours)} ч · обязательно</small></div><em>${rub(D.start.price)}</em></li>`];
   let k = 2;
   S.order.forEach(id => { const r = cost(S, id); if (!r.on) return; const x = byId[id], c = S.m[id];

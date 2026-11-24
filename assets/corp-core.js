@@ -10,6 +10,9 @@
   const isNum = v => typeof v === 'number';
   const rub = v => Math.round(v).toLocaleString('ru-RU') + ' ₽';
   const num = v => (Math.round(v * 10) / 10).toLocaleString('ru-RU');
+  const plural = (n, one, few, many) => { if (!Number.isInteger(n)) return many; const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many; };
+  const modWord = n => plural(n, 'модуль', 'модуля', 'модулей');
+  const hrWord = n => plural(n, 'ч', 'ч', 'ч');
   const clampN = n => Math.min(20, Math.max(1, n || 6));
   const tierOf = n => D.tiers.find(t => n >= t.from && n <= t.to) || D.tiers[D.tiers.length - 1];
 
@@ -190,7 +193,7 @@
       ], margin: [0, 0, 0, 12] },
       { text: [{ text: 'Открыть программу в конструкторе', link: builderUrl(code), color: ACC, decoration: 'underline' }, { text: '   ·   Telegram: @alkuleshov', color: MUTED }] }
     ];
-    return docBase('Программа корпоративного обучения ИИ', `№ ${id} от ${today()} · ${T.mods} модулей · ${num(T.off)} ч очно, ${num(T.on)} ч онлайн`, content);
+    return docBase('Программа корпоративного обучения ИИ', `№ ${id} от ${today()} · ${T.mods} ${modWord(T.mods)} · ${num(T.off)} ${hrWord(T.off)} очно, ${num(T.on)} ${hrWord(T.on)} онлайн`, content);
   }
   function invoiceDoc(st, code, f) {
     const id = programId(code), T = totals(st), pre = Math.round(T.t * D.prepay), no = `${id}`;
