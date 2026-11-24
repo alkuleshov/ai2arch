@@ -1123,6 +1123,15 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
     table:not(.ctr){width:100%;table-layout:fixed;font-size:12.5px;border-collapse:collapse}
     table:not(.ctr) th,table:not(.ctr) td{padding:6px 5px;word-break:break-word;overflow-wrap:anywhere;vertical-align:top}
   }
+  /* ── компактные пилюли в шапке (кнопки расписания/тетради/пособия/словаря) ── */
+  .back-bar .head-actions{align-self:center !important;display:flex !important;align-items:center !important;gap:6px !important;border:0 !important;padding:0 14px 0 0 !important;}
+  .back-bar .head-actions a:not(.head-schedule){display:inline-flex !important;}
+  .back-bar .head-actions a,.back-bar .workbook-btn{align-items:center !important;justify-content:center !important;height:30px !important;padding:0 13px !important;margin:0 !important;border:1px solid #0A0F1A !important;border-radius:999px !important;background:transparent !important;color:#0A0F1A !important;font-family:'Inter Tight','Helvetica Neue',Arial,sans-serif !important;font-size:12px !important;font-weight:700 !important;letter-spacing:-0.01em !important;line-height:1 !important;white-space:nowrap !important;text-decoration:none !important;box-shadow:none !important;}
+  .back-bar .head-actions a:hover,.back-bar .workbook-btn:hover{background:#0A0F1A !important;color:#F6F4F0 !important;text-decoration:none !important;}
+  @media (max-width:640px){
+    .back-bar .head-actions{gap:4px !important;padding:0 8px 0 0 !important;}
+    .back-bar .head-actions a,.back-bar .workbook-btn{height:26px !important;padding:0 9px !important;font-size:11px !important;}
+  }
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
