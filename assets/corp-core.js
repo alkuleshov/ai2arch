@@ -11,7 +11,8 @@
   const rub = v => Math.round(v).toLocaleString('ru-RU') + ' ₽';
   const num = v => (Math.round(v * 10) / 10).toLocaleString('ru-RU');
   const clampN = n => Math.min(20, Math.max(1, n || 6));
-  const tierOf = n => D.tiers.find(t => n >= t.from && n <= t.to) || D.tiers[D.tiers.length - 1];
+  // до 6 человек — база; 7–10: +5% базы за человека; 11–20: +4% за человека (10 → ×1,2; 15 → ×1,4; 20 → ×1,6)
+  const tierOf = n => { n = Math.max(1, Math.min(20, n)); const k = n <= 6 ? 1 : n <= 10 ? 1 + 0.05 * (n - 6) : 1.2 + 0.04 * (n - 10); return { from: n, to: n, k: Math.round(k * 10000) / 10000 }; };
 
   /* ---------- состояние и расчёт ---------- */
   function blank() {
