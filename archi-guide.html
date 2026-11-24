@@ -881,6 +881,9 @@ header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:ho
     .back-bar .head-actions{gap:4px !important;padding:0 8px 0 0 !important;}
     .back-bar .head-actions a,.back-bar .workbook-btn{height:26px !important;padding:0 9px !important;font-size:11px !important;}
   }
+/* ОТСТУПЫ МЕЖДУ КНОПКАМИ: тень и кольцо фокуса не налезают на соседнюю кнопку */
+.btns,.cta{display:flex;flex-wrap:wrap;gap:14px !important}
+a[class*="btn"]:focus-visible,button[class*="btn"]:focus-visible{outline-offset:4px}
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">

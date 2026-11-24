@@ -65,6 +65,9 @@ details>summary::after{transition:transform .2s}
 /* ссылки и кнопки в шапке: подчёркивание при наведении */
 header a:not([class*="btn"]):not(.hd-back):hover,.hd nav a:hover,header nav a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
 @media (hover:none){a[class*="btn"]:hover,.btn:hover,a.ix:hover,a.tile:hover,a.mock:hover,a.cell:hover{transform:none;box-shadow:none}}
+/* ОТСТУПЫ МЕЖДУ КНОПКАМИ: тень и кольцо фокуса не налезают на соседнюю кнопку */
+.btns,.cta{display:flex;flex-wrap:wrap;gap:14px !important}
+a[class*="btn"]:focus-visible,button[class*="btn"]:focus-visible{outline-offset:4px}
 </style>
 </head>
 <body>
