@@ -525,7 +525,7 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
 
 <section class="band toc" id="toc" aria-labelledby="toc-h">
   <div class="grid toc-g">
-    <h2 class="toc-cap" id="toc-h"><b>Содержание</b><span>{n_ses} занятий · 4&nbsp;декабря&nbsp;— 24&nbsp;февраля</span></h2>
+    <h2 class="toc-cap" id="toc-h"><b>Содержание</b><span>{n_ses} занятий · 7&nbsp;декабря&nbsp;— 24&nbsp;февраля</span></h2>
     <nav class="toc-gen" aria-label="Общие разделы"><p class="toc-k">Общее</p>{toc_general()}</nav>
     {toc_block(1)}
     <a class="toc-pz" href="#pause"><b>Пауза между блоками: задание на&nbsp;живых проектах</b><span>{t(PAUSE["range"])}</span></a>
