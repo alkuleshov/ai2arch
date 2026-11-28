@@ -710,7 +710,7 @@ button:hover{opacity:.9}button:disabled{opacity:.6}
     if(hash){ setTimeout(function(){ var el=document.getElementById(hash.slice(1)); if(el) el.scrollIntoView(); }, 60); }
   }
   async function tryKey(key, silent){
-    try{ await open(key); return true; }catch(x){ if(!silent) er.textContent='Неверный логин или пароль'; return false; }
+    try{ await open(key); return true; }catch(x){ if(!silent) er.textContent='Неверный пароль'; return false; }
   }
   f.addEventListener('submit', async function(ev){
     ev.preventDefault(); er.textContent=''; bt.disabled=true; bt.textContent='Проверяем…';
