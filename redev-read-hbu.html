@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Урок 2.1 · HBU и сценарии · AI2ARCH</title>
 <meta name="description" content="Урок для чтения по теме 2.1: четыре теста HBU, расчёт NOI по шагам и баланс площадей сценария-победителя.">
+<link rel="stylesheet" href="isp-shell.css">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap');
 :root{--navy:#0A0F1A;--ink:#1F2430;--muted:#5B6475;--faint:#667085;--bg:#F6F4F0;--surface:#fff;--line:#E4E1D8;--accent:#1A6BFF;--accent-l:#EAF1FF;--accent-b:#BFD3FF;--orange:#C46A16;--orange-l:#FFF7EF;--orange-b:#F1D2BE;--sans:'Manrope','Segoe UI',system-ui,Arial,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;--fs:19px;--head:58px}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;overflow-x:clip}
@@ -14,28 +15,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:var
 body.fs-1{--fs:18px} body.fs-2{--fs:19px} body.fs-3{--fs:21px}
 a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
 button,select{font-family:var(--sans)}
-.lr-head{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--head);display:flex;align-items:center;gap:10px;padding:0 18px;background:rgba(246,244,240,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);transition:transform .25s ease}
-.lr-head.hide{transform:translateY(-105%)}
-.lr-back{font-size:13px;font-weight:800;color:var(--ink);white-space:nowrap}
-.lr-name{font-size:13px;font-weight:600;color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
-.lr-head button,.lr-head select{font:700 12px var(--sans);border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:7px 11px;cursor:pointer;white-space:nowrap}
-.lr-head button:hover,.lr-head select:hover{border-color:var(--accent);color:var(--accent)}
-.lr-head select{padding-right:8px}
 .lr-progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:70;transition:width .1s linear}
-.lr-main{max-width:1934px;margin:0 auto;padding:calc(var(--head) + 26px) 32px 80px}
-.hero{max-width:820px;margin:20px auto 26px;padding:0 4px}
-.hero .kicker{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
-.hero h1{font-size:clamp(30px,5vw,52px);line-height:1.08;letter-spacing:-.02em;color:var(--navy);margin-bottom:14px}
-.hero p{font-size:15px;color:var(--muted);margin-bottom:18px}
-.hero .meta{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--faint);margin-bottom:18px}
-.start{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;border-radius:10px;padding:12px 20px;font-size:14px;font-weight:800}
-.start:hover{background:#1A2333;color:#fff;text-decoration:none}
-.glossary{max-width:820px;margin:0 auto 34px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:0 18px}
-.glossary summary{cursor:pointer;padding:14px 0;font-size:13px;font-weight:800;color:var(--muted);list-style:none}
-.glossary summary::-webkit-details-marker{display:none}
-.glossary dl{display:grid;gap:10px;padding:0 0 16px}
-.glossary dt{font-weight:800;font-size:14px;color:var(--navy)}
-.glossary dd{font-size:13px;color:var(--muted);margin:0}
 .lr-body{display:block;max-width:1000px;margin:0 auto}
 .lr-text{min-width:0;max-width:1000px;margin:0 auto}
 .chapter-head,.lesson-intro,.example-card,.chapter-brief,.sec-kicker,.slide-sec h2,.prose,.verdict,.prompt-block,.c52-card,.fold,.task-card,.transition,.chapter-end,.lesson-end,.finish-card,.trainer,.gaps-block,.quiz{max-width:680px;margin-left:auto;margin-right:auto}
@@ -219,26 +199,7 @@ button,select{font-family:var(--sans)}
 .mode-hide .lr-body{max-width:760px}
 .mode-hide .slide-inline,.mode-hide .rail{display:none}
 .rail{display:none}
-.lr-toc{position:fixed;top:0;right:0;bottom:0;width:min(420px,92vw);z-index:100;background:#fff;border-left:1px solid var(--line);box-shadow:-20px 0 50px rgba(10,15,26,.12);transform:translateX(102%);transition:transform .22s ease;overflow-y:auto;padding:18px 18px 40px}
-.lr-toc.open{transform:none}
-.toc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.toc-top b{font-size:15px;color:var(--navy)}
-.toc-top button{border:0;background:transparent;font-size:24px;cursor:pointer;color:var(--muted)}
-.lr-toc a{display:block;color:var(--ink);text-decoration:none;border-radius:7px;padding:7px 8px}
-.lr-toc a:hover{background:var(--bg)}
-.toc-ch{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)!important;margin-top:12px}
-.toc-slide{font-size:13.5px;color:var(--muted)!important;padding-left:26px!important;position:relative}
-.toc-slide span{position:absolute;left:6px;color:var(--faint);font-size:11px}
-.toc-slide.current{background:var(--accent-l);color:var(--navy)!important;font-weight:700}
-.toc-slide.read:after{content:'✓';position:absolute;right:8px;color:var(--accent);font-size:11px}
-.toc-quiz{display:none;margin-left:6px;font-size:10px;letter-spacing:0;text-transform:none;color:#16724F;white-space:nowrap}
-.lr-terms{position:fixed;top:0;right:0;bottom:0;width:min(420px,92vw);z-index:100;background:#fff;border-left:1px solid var(--line);box-shadow:-20px 0 50px rgba(10,15,26,.12);transform:translateX(102%);transition:transform .22s ease;overflow-y:auto;padding:18px 18px 40px}
-.lr-terms.open{transform:none}
-.lr-terms dl{display:grid;gap:14px;margin:0}
-.lr-terms dt{font-weight:800;font-size:14px;color:var(--navy)}
-.lr-terms dd{font-size:13px;line-height:1.45;color:var(--muted);margin:2px 0 0}
 .term{text-decoration:none}
-.toc-ch.passed .toc-quiz{display:inline}
 .continue{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:55;background:var(--navy);color:#fff;border-radius:999px;padding:9px 16px;font-size:12.5px;font-weight:700;box-shadow:0 8px 24px rgba(10,15,26,.22);display:none;max-width:calc(100vw - 24px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .continue.show{display:block}
 .continue:hover{color:#fff;text-decoration:none}
@@ -267,20 +228,6 @@ button,select{font-family:var(--sans)}
   .slide-inline{max-width:100%}
   .hero,.glossary{max-width:760px}
   .trainer,.gaps-block,.quiz{max-width:none}
-}
-@media(min-width:1280px){
-  :root{--fs:19px}
-  body.fs-1{--fs:17px} body.fs-2{--fs:19px} body.fs-3{--fs:21px}
-  .mode-side .lr-body{display:grid;grid-template-columns:minmax(600px,680px) minmax(0,1fr);gap:40px;max-width:1870px;align-items:start}
-  .mode-side .lr-text{max-width:none;margin:0}
-  .mode-side .slide-inline{display:none}
-  .mode-side .hero,.mode-side .glossary{max-width:680px;margin-left:0}
-  .mode-side .rail{display:block;position:sticky;top:calc(var(--head) + 16px);width:min(100%,1150px,calc((100vh - var(--head) - 32px)*16/9));max-height:calc(100vh - var(--head) - 32px);align-self:start}
-  .mode-side .rail-frame{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:#fff}
-  .mode-side .rail img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .25s;background:#fff;pointer-events:none}
-  .mode-side .rail img.active{opacity:1;pointer-events:auto;cursor:zoom-in}
-  .mode-side .rail .expand-btn{top:8px;right:8px}
-  .rail-caption{font-size:11px;color:var(--faint);margin-top:6px;text-align:center}
 }
 @media(min-width:1100px) and (max-width:1279px){
   .lr-body{max-width:1000px}
@@ -322,41 +269,149 @@ button,select{font-family:var(--sans)}
 .roles-mark{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
 .roles-card h4{font-size:15px;margin:14px 0 6px}
 .roles-card p,.roles-card li{font-size:15px}
-.glossary-all{margin:0 0 14px}
-@media(max-width:440px){.lr-head select{width:62px;text-overflow:ellipsis;padding-left:7px}.lr-head button{padding-left:6px;padding-right:6px}}
+
+/* ═══ ISP: переопределения под швейцарскую сетку ═══ */
+:root{--navy:#0A0F1A;--ink:#0A0F1A;--muted:#5A6070;--faint:#848A9A;--bg:#F6F4F0;--line:#E1DDD5;--accent:#1A82FF;--accent-l:#EAF2FF;--accent-b:#BED0EE;--orange:#B4601A;--orange-l:#F6EEDC;--orange-b:#E6D9BE;--sans:'Inter Tight','Helvetica Neue',Arial,sans-serif;--head:0px}
+body{font-family:var(--sans)}
+body.fs-1{--fs:16px} body.fs-2{--fs:17.5px} body.fs-3{--fs:19.5px}
+.lr-progress{position:fixed;top:0;left:0;height:3px;background:var(--i-ink);width:0;z-index:70}
+.lr-app .i-cover .i-h1{font-size:clamp(38px,8vw,88px)}
+.lr-meta{display:flex;gap:16px;flex-wrap:wrap;margin-top:16px;font-size:13px;font-weight:600;color:var(--i-muted)}
+.lr-main{padding:0 var(--i-pad) 70px;max-width:none}
+.lr-body{max-width:1000px;margin:0 auto;padding-top:40px}
+.chapter{margin:0 0 60px;scroll-margin-top:12px}
+.chapter-head{padding-top:30px;border-top:1.5px solid var(--i-ink);margin-bottom:22px}
+.chapter-kicker{font-size:12px;font-weight:700;letter-spacing:.02em;text-transform:none;color:var(--i-gray)}
+.chapter h1{font-size:clamp(34px,5.4vw,60px);font-weight:800;letter-spacing:-.045em;line-height:.95;color:var(--i-ink)}
+.slide-sec{border-top:1px solid var(--i-grid);padding:30px 0 34px}
+.slide-sec h2{font-weight:800;letter-spacing:-.035em;line-height:1.02;font-size:clamp(26px,3.6vw,38px)}
+.sec-kicker{font-size:11.5px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--i-gray)}
+.example-card,.chapter-brief,.fold,.prompt-block,.task-card,.chapter-end,.quiz,.trainer,.gaps-block,.finish-card,.lesson-end,.roles-card,.c52-card,.verdict{border-radius:0}
+.slide-inline img{border-radius:0}
+.verdict{border-left:3px solid var(--i-ink);background:#fff}
+.verdict-mark,.chapter-brief .brief-head>span:first-child{color:var(--i-ink)}
+.chapter-brief a b{background:var(--i-ink);color:#F6F4F0;border-radius:0}
+.start,.finish-btn-dark,.trainer-actions button,#trainerRestart{border-radius:999px}
+.copy{border-radius:999px}
+.lr-app .lr-head{position:static;display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0;padding:0;background:none;border:0;backdrop-filter:none;height:auto;transform:none}
+.lr-app .lr-head .lr-back{flex:1 0 100%;font-size:12.5px;display:none}
+.lr-app .lr-head button,.lr-app .lr-head select{font:700 12px var(--sans);border:1.5px solid var(--i-ink);background:transparent;color:var(--i-ink);border-radius:999px;padding:6px 11px;cursor:pointer}
+.lr-app .lr-head button:hover,.lr-app .lr-head select:hover{background:rgba(10,15,26,.06);color:var(--i-ink);border-color:var(--i-ink)}
+.lr-app .lr-head #tocBtn{display:none}
+.lr-app .lr-head select{flex:1 1 100%;margin-top:0}
+/* панель терминов */
+.lr-terms{position:fixed;top:0;right:0;bottom:0;width:min(420px,92vw);z-index:120;background:#F6F4F0;border-left:1.5px solid var(--i-ink);box-shadow:none;transform:translateX(102%);transition:transform .22s ease;overflow-y:auto;padding:18px 18px 40px}
+.lr-terms.open{transform:none;box-shadow:-20px 0 50px rgba(10,15,26,.12)}
+.lr-terms .toc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.lr-terms .toc-top b{font-size:16px;font-weight:800;letter-spacing:-.02em}
+.lr-terms .toc-top button{border:0;background:transparent;font-size:26px;cursor:pointer;color:var(--i-muted)}
+.lr-terms dl{display:grid;gap:14px;margin:0}
+.lr-terms dt{font-weight:800;font-size:14px;color:var(--i-ink)}
+.lr-terms dd{font-size:13px;line-height:1.45;color:var(--i-muted);margin:2px 0 0}
+/* меню: главы и слайды */
+.lr-app .lr-toc{position:static;transform:none;width:auto;overflow:visible;padding:0;border:0;box-shadow:none;background:none;margin-top:10px;display:flex;flex-direction:column}
+.lr-toc .toc-top{display:none}
+.lr-toc a.toc-slide{display:none;padding-left:8px!important;color:var(--i-ink)!important;font-weight:600;font-size:13px}
+.lr-toc a.toc-slide.on-ch{display:grid}
+.lr-toc a.toc-slide.current{background:var(--i-ink);color:#F6F4F0!important}
+.lr-toc a.toc-slide.current span{color:rgba(246,244,240,.7)}
+.lr-toc a.toc-slide.read:after{content:'';}
+.lr-toc a.toc-ch{display:grid;grid-template-columns:34px minmax(0,1fr) auto;margin-top:12px;padding:9px 8px 6px;border-top:1.5px solid var(--i-ink);border-radius:0;font-size:14px;font-weight:800;letter-spacing:-.025em;text-transform:none;color:var(--i-ink)!important}
+.lr-toc a.toc-ch:first-of-type{margin-top:4px}
+.lr-toc a.toc-ch.is-cur-ch{background:rgba(10,15,26,.05)}
+.lr-toc a.toc-ch>span{font-size:11px;font-weight:600;color:var(--i-gray)}
+.lr-toc a.toc-home{font-weight:700}
+.toc-quiz{display:none}
+.toc-ch.passed .toc-quiz{display:inline;font-size:10px;font-weight:600;color:#16724F;white-space:nowrap}
+@media(min-width:1100px){
+  .lr-app{display:grid;grid-template-columns:288px minmax(0,1fr)}
+  .lr-app .lr-terms{z-index:120}
+  .lr-app .lr-toc{flex:0 1 auto}
+}
+/* телефон и планшет: тулбар сверху, содержание — выезжающая панель */
+@media(max-width:1099px){
+  :root{--head:54px}
+  .lr-app .i-side{display:contents}
+  .lr-app .sd-top,.lr-app .sd-course,.lr-app .sd-tg{display:none}
+  .lr-app .lr-head{position:sticky;top:0;z-index:60;height:54px;flex-wrap:nowrap;margin:0;padding:0 var(--i-pad);align-items:center;background:#F6F4F0;border-bottom:1.5px solid var(--i-ink);gap:6px;order:-1}
+  .lr-app .lr-head .lr-back{display:block;flex:1 1 auto;min-width:0;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--i-ink)}
+  .lr-app .lr-head #tocBtn{display:inline-block}
+  .lr-app .lr-head select{flex:0 0 auto;margin:0;width:72px;text-overflow:ellipsis}
+  .lr-app .lr-head.hide{transform:translateY(-105%)}
+  .lr-app .lr-toc{position:fixed;top:0;right:0;bottom:0;width:min(420px,92vw);z-index:100;background:#F6F4F0;border-left:1.5px solid var(--i-ink);box-shadow:none;transform:translateX(102%);transition:transform .22s ease;overflow-y:auto;padding:16px 18px 40px;margin:0}
+  .lr-app .lr-toc.open{transform:none;box-shadow:-20px 0 50px rgba(10,15,26,.12)}
+  .lr-toc .toc-top{display:flex}
+  .lr-toc a.toc-slide{display:grid}
+  .lr-terms{background:#F6F4F0}
+  .lr-app .i-cover{min-height:calc(100svh - 54px)}
+}
+/* всё по левому краю, как в ISP */
+.lr-body{margin:0;max-width:1000px}
+.lr-text{margin:0}
+.chapter-head,.lesson-intro,.example-card,.chapter-brief,.sec-kicker,.slide-sec h2,.prose,.verdict,.prompt-block,.c52-card,.fold,.task-card,.transition,.chapter-end,.lesson-end,.finish-card,.trainer,.gaps-block,.quiz,.slide-inline{margin-left:0!important;margin-right:auto!important}
+.lr-app .lr-toc:not(.open){box-shadow:none}
+@media(max-width:560px){
+  .lr-app .lr-head .lr-back{font-size:0;flex:0 0 auto}
+  .lr-app .lr-head .lr-back:before{content:'←';font-size:20px;line-height:1}
+  .lr-app .lr-head button,.lr-app .lr-head select{padding:6px 9px;font-size:11.5px}
+  .lr-app .lr-head select{width:56px}
+}
+@media(min-width:1600px){
+  .mode-side .lr-body{max-width:none;display:grid;grid-template-columns:minmax(600px,680px) minmax(0,1fr);gap:40px;align-items:start}
+  .mode-side .lr-text{max-width:none}
+  .mode-side .slide-inline{display:none}
+  .mode-side .rail{display:block;position:sticky;top:16px;width:min(100%,1000px,calc((100vh - 32px)*16/9));max-height:calc(100vh - 32px);align-self:start}
+  .mode-side .rail-frame{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);border-radius:0;background:#fff}
+  .mode-side .rail img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .25s;background:#fff;pointer-events:none}
+  .mode-side .rail img.active{opacity:1;pointer-events:auto;cursor:zoom-in}
+  .mode-side .rail .expand-btn{top:8px;right:8px}
+  .rail-caption{font-size:11px;color:var(--faint);margin-top:6px;text-align:center}
+}
+@media(min-width:1280px) and (max-width:1599px){
+  .mode-side .rail{display:none}
+  .mode-side .slide-inline{display:block}
+}
 </style>
 </head>
 <body class="fs-2">
 <div class="lr-progress" id="lrProgress"></div>
-<header class="lr-head" id="lrHead">
-  <a class="lr-back" href="redev-guide.html#t21">← Тема 2.1</a>
-  <div class="lr-name">HBU и сценарии</div>
-  <button id="termsBtn" type="button">Термины</button>
-  <button id="tocBtn" type="button">Содержание</button>
-  <button id="fontBtn" type="button" aria-label="Размер шрифта">Aa</button>
-  <select id="slideMode" aria-label="Положение слайдов">
-    <option value="side">Сбоку</option>
-    <option value="top">Над текстом</option>
-    <option value="hide">Скрыть</option>
-  </select>
-</header>
-<nav class="lr-toc" id="lrToc" aria-label="Содержание урока">
-  <div class="toc-top"><b>Содержание</b><button id="tocClose" type="button" aria-label="Закрыть">×</button></div>
-  <a href="#chapter-1" class="toc-ch" data-quiz-chapter="1">Глава 1. Входные данные, сервисы и логика HBU<span class="toc-quiz" data-quiz-chapter="1">✓ Проверено</span></a><a href="#slide-1" class="toc-slide"><span>1</span>Оценить сценарии и собрать баланс</a><a href="#slide-2" class="toc-slide"><span>2</span>Что нужно на входе</a><a href="#slide-3" class="toc-slide"><span>3</span>Сервисы: сравнение</a><a href="#slide-4" class="toc-slide"><span>4</span>Флагман по критерию</a><a href="#slide-5" class="toc-slide"><span>5</span>Генерация сценариев и тесты 1–2</a><a href="#slide-6" class="toc-slide"><span>6</span>Зачем нужен HBU</a><a href="#slide-7" class="toc-slide"><span>7</span>Контекст: откуда HBU</a><a href="#slide-8" class="toc-slide"><span>8</span>Воронка: от сценариев к победителю</a><a href="#slide-9" class="toc-slide"><span>9</span>C52: стена</a><a href="#slide-10" class="toc-slide"><span>10</span>Четыре теста HBU</a><a href="#chapter-2" class="toc-ch" data-quiz-chapter="2">Глава 2. Сценарии, ПЗЗ, ЗОУИТ и промпт для тестов 1–2<span class="toc-quiz" data-quiz-chapter="2">✓ Проверено</span></a><a href="#slide-11" class="toc-slide"><span>11</span>Откуда берутся сценарии</a><a href="#slide-12" class="toc-slide"><span>12</span>Как читать ПЗЗ</a><a href="#slide-13" class="toc-slide"><span>13</span>ЗОУИТ: где проверить</a><a href="#slide-14" class="toc-slide"><span>14</span>C52: что у нас есть</a><a href="#slide-15" class="toc-slide"><span>15</span>Как менялось здание</a><a href="#slide-16" class="toc-slide"><span>16</span>Промпт для тестов 1–2</a><a href="#slide-17" class="toc-slide"><span>17</span>Разбор промпта по частям</a><a href="#slide-18" class="toc-slide"><span>18</span>Как читать ответ модели</a><a href="#slide-19" class="toc-slide"><span>19</span>Клики и проверка</a><a href="#slide-20" class="toc-slide"><span>20</span>Самостоятельная работа</a><a href="#chapter-3" class="toc-ch" data-quiz-chapter="3">Глава 3. NOI и логика тестов 3–4<span class="toc-quiz" data-quiz-chapter="3">✓ Проверено</span></a><a href="#slide-21" class="toc-slide"><span>21</span>Тесты 3–4</a><a href="#slide-22" class="toc-slide"><span>22</span>NOI по шагам</a><a href="#slide-23" class="toc-slide"><span>23</span>Зачем считать NOI до CAPEX</a><a href="#slide-24" class="toc-slide"><span>24</span>Тест 3 и тест 4</a><a href="#slide-25" class="toc-slide"><span>25</span>Какая таблица нужна</a><a href="#slide-26" class="toc-slide"><span>26</span>NOI на примере</a><a href="#slide-27" class="toc-slide"><span>27</span>C52: почему NOI пока не считаем</a><a href="#chapter-4" class="toc-ch" data-quiz-chapter="4">Глава 4. Промпт для экономики, проверка и ограничения<span class="toc-quiz" data-quiz-chapter="4">✓ Проверено</span></a><a href="#slide-28" class="toc-slide"><span>28</span>Промпт для экономики</a><a href="#slide-29" class="toc-slide"><span>29</span>Разбор промпта по частям</a><a href="#slide-30" class="toc-slide"><span>30</span>Клики и проверка</a><a href="#slide-31" class="toc-slide"><span>31</span>Как пересчитать строку формулой</a><a href="#slide-32" class="toc-slide"><span>32</span>Ограничения расчёта</a><a href="#slide-33" class="toc-slide"><span>33</span>Самостоятельная работа</a><a href="#chapter-5" class="toc-ch" data-quiz-chapter="5">Глава 5. Баланс площадей, сбои и основной контур<span class="toc-quiz" data-quiz-chapter="5">✓ Проверено</span></a><a href="#slide-34" class="toc-slide"><span>34</span>Баланс площадей сценария-победителя</a><a href="#slide-35" class="toc-slide"><span>35</span>GBA → МОП → GLA → помещения</a><a href="#slide-36" class="toc-slide"><span>36</span>Зачем разделять GBA и GLA</a><a href="#slide-37" class="toc-slide"><span>37</span>Промпт для баланса площадей</a><a href="#slide-38" class="toc-slide"><span>38</span>Клики и проверка</a><a href="#slide-39" class="toc-slide"><span>39</span>Сбой и что забрать</a><a href="#slide-40" class="toc-slide"><span>40</span>Путь в основном контуре</a>
-</nav>
+<div class="i-app lr-app" id="iApp">
+<aside class="i-side" id="iSide">
+  <div class="sd-top"><a class="sd-brand" href="index.html"><span class="sd-logo"><img src="images/ai2arch-sign.png" alt="" width="26" height="26"></span><span class="sd-bt"><b>AI2ARCH</b><small>Редевелопмент · методическое пособие</small></span></a></div>
+  <div class="sd-course"><a class="on" href="redev-guide.html">Редевелопмент</a><a href="archi-guide.html">Архитектура</a></div>
+  <header class="lr-head" id="lrHead">
+    <a class="lr-back" href="redev-guide.html#t21">← Тема 2.1</a>
+    <button id="termsBtn" type="button">Термины</button>
+    <button id="tocBtn" type="button">Содержание</button>
+    <button id="fontBtn" type="button" aria-label="Размер шрифта">Aa</button>
+    <select id="slideMode" aria-label="Положение слайдов">
+      <option value="side">Слайды сбоку</option>
+      <option value="top">Над текстом</option>
+      <option value="hide">Скрыть слайды</option>
+    </select>
+  </header>
+  <nav class="sd-nav lr-toc" id="lrToc" aria-label="Содержание урока">
+    <div class="toc-top"><b>Содержание</b><button id="tocClose" type="button" aria-label="Закрыть">×</button></div>
+    <a class="toc-home" href="redev-guide.html#t21"><span>←</span><b>Тема 2.1 в пособии</b></a>
+    <a href="redev-schedule.html"><span>·</span><b>Расписание</b></a>
+    <a href="redev-glossary.html"><span>·</span><b>Словарь терминов</b></a>
+    <div class="sd-gap"></div>
+    <a href="#chapter-1" class="toc-ch" data-quiz-chapter="1"><span>1</span><b>Входные данные, сервисы и логика HBU<span class="toc-quiz" data-quiz-chapter="1">✓ Проверено</span></b></a><a href="#slide-1" class="toc-slide"><span>1</span><b>Оценить сценарии и собрать баланс</b></a><a href="#slide-2" class="toc-slide"><span>2</span><b>Что нужно на входе</b></a><a href="#slide-3" class="toc-slide"><span>3</span><b>Сервисы: сравнение</b></a><a href="#slide-4" class="toc-slide"><span>4</span><b>Флагман по критерию</b></a><a href="#slide-5" class="toc-slide"><span>5</span><b>Генерация сценариев и тесты 1–2</b></a><a href="#slide-6" class="toc-slide"><span>6</span><b>Зачем нужен HBU</b></a><a href="#slide-7" class="toc-slide"><span>7</span><b>Контекст: откуда HBU</b></a><a href="#slide-8" class="toc-slide"><span>8</span><b>Воронка: от сценариев к победителю</b></a><a href="#slide-9" class="toc-slide"><span>9</span><b>C52: стена</b></a><a href="#slide-10" class="toc-slide"><span>10</span><b>Четыре теста HBU</b></a><a href="#chapter-2" class="toc-ch" data-quiz-chapter="2"><span>2</span><b>Сценарии, ПЗЗ, ЗОУИТ и промпт для тестов 1–2<span class="toc-quiz" data-quiz-chapter="2">✓ Проверено</span></b></a><a href="#slide-11" class="toc-slide"><span>11</span><b>Откуда берутся сценарии</b></a><a href="#slide-12" class="toc-slide"><span>12</span><b>Как читать ПЗЗ</b></a><a href="#slide-13" class="toc-slide"><span>13</span><b>ЗОУИТ: где проверить</b></a><a href="#slide-14" class="toc-slide"><span>14</span><b>C52: что у нас есть</b></a><a href="#slide-15" class="toc-slide"><span>15</span><b>Как менялось здание</b></a><a href="#slide-16" class="toc-slide"><span>16</span><b>Промпт для тестов 1–2</b></a><a href="#slide-17" class="toc-slide"><span>17</span><b>Разбор промпта по частям</b></a><a href="#slide-18" class="toc-slide"><span>18</span><b>Как читать ответ модели</b></a><a href="#slide-19" class="toc-slide"><span>19</span><b>Клики и проверка</b></a><a href="#slide-20" class="toc-slide"><span>20</span><b>Самостоятельная работа</b></a><a href="#chapter-3" class="toc-ch" data-quiz-chapter="3"><span>3</span><b>NOI и логика тестов 3–4<span class="toc-quiz" data-quiz-chapter="3">✓ Проверено</span></b></a><a href="#slide-21" class="toc-slide"><span>21</span><b>Тесты 3–4</b></a><a href="#slide-22" class="toc-slide"><span>22</span><b>NOI по шагам</b></a><a href="#slide-23" class="toc-slide"><span>23</span><b>Зачем считать NOI до CAPEX</b></a><a href="#slide-24" class="toc-slide"><span>24</span><b>Тест 3 и тест 4</b></a><a href="#slide-25" class="toc-slide"><span>25</span><b>Какая таблица нужна</b></a><a href="#slide-26" class="toc-slide"><span>26</span><b>NOI на примере</b></a><a href="#slide-27" class="toc-slide"><span>27</span><b>C52: почему NOI пока не считаем</b></a><a href="#chapter-4" class="toc-ch" data-quiz-chapter="4"><span>4</span><b>Промпт для экономики, проверка и ограничения<span class="toc-quiz" data-quiz-chapter="4">✓ Проверено</span></b></a><a href="#slide-28" class="toc-slide"><span>28</span><b>Промпт для экономики</b></a><a href="#slide-29" class="toc-slide"><span>29</span><b>Разбор промпта по частям</b></a><a href="#slide-30" class="toc-slide"><span>30</span><b>Клики и проверка</b></a><a href="#slide-31" class="toc-slide"><span>31</span><b>Как пересчитать строку формулой</b></a><a href="#slide-32" class="toc-slide"><span>32</span><b>Ограничения расчёта</b></a><a href="#slide-33" class="toc-slide"><span>33</span><b>Самостоятельная работа</b></a><a href="#chapter-5" class="toc-ch" data-quiz-chapter="5"><span>5</span><b>Баланс площадей, сбои и основной контур<span class="toc-quiz" data-quiz-chapter="5">✓ Проверено</span></b></a><a href="#slide-34" class="toc-slide"><span>34</span><b>Баланс площадей сценария-победителя</b></a><a href="#slide-35" class="toc-slide"><span>35</span><b>GBA → МОП → GLA → помещения</b></a><a href="#slide-36" class="toc-slide"><span>36</span><b>Зачем разделять GBA и GLA</b></a><a href="#slide-37" class="toc-slide"><span>37</span><b>Промпт для баланса площадей</b></a><a href="#slide-38" class="toc-slide"><span>38</span><b>Клики и проверка</b></a><a href="#slide-39" class="toc-slide"><span>39</span><b>Сбой и что забрать</b></a><a href="#slide-40" class="toc-slide"><span>40</span><b>Путь в основном контуре</b></a>
+  </nav>
+  <a class="sd-tg" href="https://t.me/alkuleshov" target="_blank" rel="noopener">Вопросы: @alkuleshov</a>
+</aside>
 <aside class="lr-terms" id="lrTerms" aria-label="Термины урока">
   <div class="toc-top"><b>Термины урока</b><button id="termsClose" type="button" aria-label="Закрыть">×</button></div>
   <dl><div><dt>ПЗЗ</dt><dd>правила землепользования и застройки города. Проще: что можно строить на участке.</dd></div><div><dt>ВРИ</dt><dd>вид разрешённого использования земельного участка. Проще: что по закону можно строить на этом участке.</dd></div><div><dt>ЗОУИТ</dt><dd>зоны с особыми условиями использования территорий. Проще: ограничения на участке.</dd></div><div><dt>БТИ</dt><dd>бюро технической инвентаризации: технический паспорт и поэтажные планы. Проще: официальные технические чертежи здания.</dd></div><div><dt>NotebookLM</dt><dd>сервис для работы с загруженными документами и ответами со ссылками. Проще: работа с загруженными документами и ссылками.</dd></div><div><dt>LLM (Large Language Model)</dt><dd>большая языковая модель. Проще: алгоритм для анализа и генерации текста.</dd></div><div><dt>Artifacts</dt><dd>функция Claude: отдельное окно с готовым документом. Проще: отдельное окно с готовым документом.</dd></div><div><dt>HBU (Highest and Best Use)</dt><dd>наилучшее и наиболее эффективное использование. Проще: какая функция даёт объекту максимум пользы.</dd></div><div><dt>Жизнеспособность</dt><dd>способность функции окупаться и работать в данном здании и на данном месте. Проще: функция окупается здесь.</dd></div><div><dt>ЕГРН</dt><dd>Единый государственный реестр недвижимости. Проще: реестр с данными об объекте.</dd></div><div><dt>Продуктовая гипотеза</dt><dd>проверяемое утверждение «функция X для аудитории Y, потому что фактор Z». Проще: кому, что и почему вы предлагаете.</dd></div><div><dt>НСПД</dt><dd>государственный портал карт и кадастра. Проще: где проверить участок и ограничения.</dd></div><div><dt>Обмеры</dt><dd>натурные измерения здания, по которым строят планы и уточняют площади. Проще: замеры здания для чертежей.</dd></div><div><dt>Промпт</dt><dd>текстовая инструкция модели. Проще: запрос к нейросети.</dd></div><div><dt>Галлюцинация</dt><dd>уверенно звучащий, но не подтверждённый данными ответ. Проще: ответ без источника.</dd></div><div><dt>NOI</dt><dd>чистый операционный доход: доход от аренды минус операционные расходы. Проще: доход от аренды минус расходы.</dd></div><div><dt>OPEX</dt><dd>операционные расходы: регулярные платежи за содержание объекта. Проще: ежемесячные счета за эксплуатацию здания.</dd></div><div><dt>CAPEX</dt><dd>капитальные затраты: разовые вложения в создание или реконструкцию объекта. Проще: инвестиции в стройку и ремонт.</dd></div><div><dt>NPV</dt><dd>чистая приведённая стоимость. Проще: будущие потоки в сегодняшних деньгах.</dd></div><div><dt>IRR</dt><dd>внутренняя норма доходности. Проще: доходность проекта.</dd></div><div><dt>GBA</dt><dd>общая площадь здания по внешним границам. Проще: вся площадь здания снаружи.</dd></div><div><dt>МОП</dt><dd>места общего пользования: площади, которые не сдаются отдельному арендатору. Проще: общие коридоры, холлы и санузлы.</dd></div><div><dt>GLA</dt><dd>арендопригодная площадь, которую можно сдать арендаторам. Проще: площадь, которую реально сдаём.</dd></div></dl>
 </aside>
-
-<main class="lr-main">
-  <section class="hero" id="top">
-    <div class="kicker">Тема 2.1 · HBU и сценарии</div>
-    <h1>HBU и сценарии</h1>
-    <div class="meta"><span>40 слайдов</span><span>68 мин чтения</span><span>12282 слов</span></div>
-    <p>Вертикальный урок по теме 2.1: как отобрать функциональные сценарии через четыре теста HBU, посчитать NOI и перевести победителя в баланс площадей.</p>
-  </section>
-  <div class="lr-body" id="lrBody">
+<div class="i-main" id="iMain">
+  <div class="i-cover"><header class="i-band i-head"><div class="i-grid"><div class="i-display i-brand">AI2<span class="g">ARCH</span></div>
+  <div class="i-head-text"><p class="i-small"><b>Тема 2.1 · HBU и сценарии</b><br>ААИ ЮФУ · Ростов-на-Дону</p><div class="i-course"><a class="on" href="redev-guide.html">Редевелопмент</a><a href="archi-guide.html">Архитектура</a></div></div></div></header>
+  <section class="i-band i-title-band" id="top"><h1 class="i-display i-h1">HBU<span class="g">и сценарии</span></h1>
+    <p class="i-lead">Вертикальный урок по теме 2.1: как отобрать функциональные сценарии через четыре теста HBU, посчитать NOI и перевести победителя в баланс площадей.</p>
+    <div class="lr-meta"><span>40 слайдов</span><span>68 мин чтения</span><span>12282 слов</span></div>
+    <a class="i-down" href="#chapter-1">Вниз ↓</a></section></div>
+  <div class="lr-main"><div class="lr-body" id="lrBody">
     <div class="lr-text"><section class="chapter" id="chapter-1" data-chapter="1"><header class="chapter-head"><div class="chapter-kicker">Глава 1</div><h1>Входные данные, сервисы и логика HBU</h1></header><aside class="roles-card"><div class="roles-mark">Роли и трек · для понимания, не для выбора</div><p>Здесь трек не выбираем. Разбираем, чем отличаются роли и результаты, чтобы понимать качественную разницу. Окончательный выбор делается на вводном модуле; в заявке достаточно предварительного.</p>
 <h4>Роли в редевелопменте</h4>
 <p>Редевелопмент — командная работа. Общее у всех: объект, контекст, HBU и итоговый документ. Разное — фокус и результат.</p>
@@ -463,8 +518,11 @@ button,select{font-family:var(--sans)}
       <div class="rail-frame"><img data-rail="1" class="active" src="images/slides/hbu/01-1600.webp" srcset="images/slides/hbu/01-1600.webp 1600w, images/slides/hbu/01.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 1 из 40"><img data-rail="2" src="images/slides/hbu/02-1600.webp" srcset="images/slides/hbu/02-1600.webp 1600w, images/slides/hbu/02.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 2 из 40"><img data-rail="3" src="images/slides/hbu/03-1600.webp" srcset="images/slides/hbu/03-1600.webp 1600w, images/slides/hbu/03.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 3 из 40"><img data-rail="4" src="images/slides/hbu/04-1600.webp" srcset="images/slides/hbu/04-1600.webp 1600w, images/slides/hbu/04.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 4 из 40"><img data-rail="5" src="images/slides/hbu/05-1600.webp" srcset="images/slides/hbu/05-1600.webp 1600w, images/slides/hbu/05.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 5 из 40"><img data-rail="6" src="images/slides/hbu/06-1600.webp" srcset="images/slides/hbu/06-1600.webp 1600w, images/slides/hbu/06.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 6 из 40"><img data-rail="7" src="images/slides/hbu/07-1600.webp" srcset="images/slides/hbu/07-1600.webp 1600w, images/slides/hbu/07.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 7 из 40"><img data-rail="8" src="images/slides/hbu/08-1600.webp" srcset="images/slides/hbu/08-1600.webp 1600w, images/slides/hbu/08.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 8 из 40"><img data-rail="9" src="images/slides/hbu/09-1600.webp" srcset="images/slides/hbu/09-1600.webp 1600w, images/slides/hbu/09.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 9 из 40"><img data-rail="10" src="images/slides/hbu/10-1600.webp" srcset="images/slides/hbu/10-1600.webp 1600w, images/slides/hbu/10.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 10 из 40"><img data-rail="11" src="images/slides/hbu/11-1600.webp" srcset="images/slides/hbu/11-1600.webp 1600w, images/slides/hbu/11.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 11 из 40"><img data-rail="12" src="images/slides/hbu/12-1600.webp" srcset="images/slides/hbu/12-1600.webp 1600w, images/slides/hbu/12.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 12 из 40"><img data-rail="13" src="images/slides/hbu/13-1600.webp" srcset="images/slides/hbu/13-1600.webp 1600w, images/slides/hbu/13.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 13 из 40"><img data-rail="14" src="images/slides/hbu/14-1600.webp" srcset="images/slides/hbu/14-1600.webp 1600w, images/slides/hbu/14.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 14 из 40"><img data-rail="15" src="images/slides/hbu/15-1600.webp" srcset="images/slides/hbu/15-1600.webp 1600w, images/slides/hbu/15.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 15 из 40"><img data-rail="16" src="images/slides/hbu/16-1600.webp" srcset="images/slides/hbu/16-1600.webp 1600w, images/slides/hbu/16.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 16 из 40"><img data-rail="17" src="images/slides/hbu/17-1600.webp" srcset="images/slides/hbu/17-1600.webp 1600w, images/slides/hbu/17.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 17 из 40"><img data-rail="18" src="images/slides/hbu/18-1600.webp" srcset="images/slides/hbu/18-1600.webp 1600w, images/slides/hbu/18.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 18 из 40"><img data-rail="19" src="images/slides/hbu/19-1600.webp" srcset="images/slides/hbu/19-1600.webp 1600w, images/slides/hbu/19.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 19 из 40"><img data-rail="20" src="images/slides/hbu/20-1600.webp" srcset="images/slides/hbu/20-1600.webp 1600w, images/slides/hbu/20.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 20 из 40"><img data-rail="21" src="images/slides/hbu/21-1600.webp" srcset="images/slides/hbu/21-1600.webp 1600w, images/slides/hbu/21.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 21 из 40"><img data-rail="22" src="images/slides/hbu/22-1600.webp" srcset="images/slides/hbu/22-1600.webp 1600w, images/slides/hbu/22.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 22 из 40"><img data-rail="23" src="images/slides/hbu/23-1600.webp" srcset="images/slides/hbu/23-1600.webp 1600w, images/slides/hbu/23.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 23 из 40"><img data-rail="24" src="images/slides/hbu/24-1600.webp" srcset="images/slides/hbu/24-1600.webp 1600w, images/slides/hbu/24.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 24 из 40"><img data-rail="25" src="images/slides/hbu/25-1600.webp" srcset="images/slides/hbu/25-1600.webp 1600w, images/slides/hbu/25.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 25 из 40"><img data-rail="26" src="images/slides/hbu/26-1600.webp" srcset="images/slides/hbu/26-1600.webp 1600w, images/slides/hbu/26.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 26 из 40"><img data-rail="27" src="images/slides/hbu/27-1600.webp" srcset="images/slides/hbu/27-1600.webp 1600w, images/slides/hbu/27.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 27 из 40"><img data-rail="28" src="images/slides/hbu/28-1600.webp" srcset="images/slides/hbu/28-1600.webp 1600w, images/slides/hbu/28.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 28 из 40"><img data-rail="29" src="images/slides/hbu/29-1600.webp" srcset="images/slides/hbu/29-1600.webp 1600w, images/slides/hbu/29.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 29 из 40"><img data-rail="30" src="images/slides/hbu/30-1600.webp" srcset="images/slides/hbu/30-1600.webp 1600w, images/slides/hbu/30.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 30 из 40"><img data-rail="31" src="images/slides/hbu/31-1600.webp" srcset="images/slides/hbu/31-1600.webp 1600w, images/slides/hbu/31.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 31 из 40"><img data-rail="32" src="images/slides/hbu/32-1600.webp" srcset="images/slides/hbu/32-1600.webp 1600w, images/slides/hbu/32.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 32 из 40"><img data-rail="33" src="images/slides/hbu/33-1600.webp" srcset="images/slides/hbu/33-1600.webp 1600w, images/slides/hbu/33.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 33 из 40"><img data-rail="34" src="images/slides/hbu/34-1600.webp" srcset="images/slides/hbu/34-1600.webp 1600w, images/slides/hbu/34.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 34 из 40"><img data-rail="35" src="images/slides/hbu/35-1600.webp" srcset="images/slides/hbu/35-1600.webp 1600w, images/slides/hbu/35.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 35 из 40"><img data-rail="36" src="images/slides/hbu/36-1600.webp" srcset="images/slides/hbu/36-1600.webp 1600w, images/slides/hbu/36.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 36 из 40"><img data-rail="37" src="images/slides/hbu/37-1600.webp" srcset="images/slides/hbu/37-1600.webp 1600w, images/slides/hbu/37.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 37 из 40"><img data-rail="38" src="images/slides/hbu/38-1600.webp" srcset="images/slides/hbu/38-1600.webp 1600w, images/slides/hbu/38.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 38 из 40"><img data-rail="39" src="images/slides/hbu/39-1600.webp" srcset="images/slides/hbu/39-1600.webp 1600w, images/slides/hbu/39.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 39 из 40"><img data-rail="40" src="images/slides/hbu/40-1600.webp" srcset="images/slides/hbu/40-1600.webp 1600w, images/slides/hbu/40.webp 3200w" sizes="(min-width:1280px) 1150px, 1px" loading="lazy" alt="Слайд 40 из 40"><button class="expand-btn" id="railExpand" type="button">⤢ Развернуть</button></div>
       <div class="rail-caption" id="railCaption">Слайд 1 из 40</div>
     </aside>
-  </div>
-</main>
+  </div></div>
+  <footer class="i-band i-foot i-grid"><div class="i-foot-a"><p>AI2ARCH · 2026</p><p class="i-small" style="margin-top:4px">Лаборатория проектного интеллекта</p></div>
+  <div class="i-foot-b"><p>Курс дополнительного образования</p><p>ААИ ЮФУ · Ростов-на-Дону</p></div>
+  <div class="i-foot-c"><p>Остались вопросы?</p><a class="i-btn" href="https://t.me/alkuleshov" target="_blank" rel="noopener">Написать в Telegram →</a></div></footer>
+</div></div>
 <a class="continue" id="continue" href="#"></a>
 <div class="term-pop" id="termPop"></div>
 
@@ -488,11 +546,12 @@ const QUIZZES = {"1": {"title": "Входные данные, сервисы и 
 const QUIZ_KEY = "lr-quiz-2.1";
 const LS = {get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 const body=document.body, head=document.getElementById('lrHead');
+const isDesk=()=>innerWidth>=1100;
 const progress=document.getElementById('lrProgress');
 function onScroll(){
   const h=document.documentElement.scrollHeight-innerHeight;
   progress.style.width=(h>0?Math.min(100,scrollY/h*100):0)+'%';
-  if(innerWidth<=720){
+  if(innerWidth<=1099){
     if(scrollY>120 && scrollY>lastY) head.classList.add('hide');
     else head.classList.remove('hide');
   } else head.classList.remove('hide');
@@ -516,12 +575,12 @@ document.getElementById('fontBtn').onclick=()=>{fsIndex=(fsIndex+1)%3;body.class
 // режим слайдов: сбоку / над текстом / скрыть
 const modeSel=document.getElementById('slideMode');
 let wantedMode=LS.get('lr-slide-mode') || (LS.get('lr-slides')==='0' ? 'hide' : 'side');
-function effectiveMode(){return (wantedMode==='side' && innerWidth<1280) ? 'top' : wantedMode;}
+function effectiveMode(){return (wantedMode==='side' && innerWidth<1600) ? 'top' : wantedMode;}
 function applyMode(){
   const m=effectiveMode();
   body.classList.remove('mode-side','mode-top','mode-hide'); body.classList.add('mode-'+m);
   const sideOpt=modeSel.querySelector('option[value="side"]');
-  sideOpt.disabled=innerWidth<1280;
+  sideOpt.disabled=innerWidth<1600;
   modeSel.value=m;
 }
 applyMode();
@@ -552,10 +611,19 @@ const cont=document.getElementById('continue');
 const saved=LS.get('lr-hbu-last');
 if(saved){const el=document.getElementById(saved);if(el && scrollY<200){const t=el.querySelector('h2');cont.textContent='Продолжить: '+(t?t.textContent:el.id);cont.href='#'+saved;cont.classList.add('show');cont.onclick=()=>cont.classList.remove('show');}}
 
+// меню: раскрыта только текущая глава
+function markChapter(id){
+  const sec=document.getElementById(id); const ch=sec&&sec.closest('.chapter'); if(!ch)return;
+  let on=false;
+  document.querySelectorAll('#lrToc a.toc-ch,#lrToc a.toc-slide').forEach(a=>{
+    if(a.classList.contains('toc-ch')){on=a.getAttribute('href')==='#'+ch.id;a.classList.toggle('is-cur-ch',on);}
+    else a.classList.toggle('on-ch',on);
+  });
+}
 // текущий раздел и липкий слайд
 let currentN=1;
 function setCurrent(id,n){
-  currentN=+n;
+  currentN=+n; markChapter(id);
   document.querySelectorAll('.toc-slide').forEach(a=>a.classList.toggle('current',a.getAttribute('href')==='#'+id));
   const img=document.querySelector('.rail img[data-rail="'+n+'"]');
   if(img){document.querySelectorAll('.rail img').forEach(x=>x.classList.remove('active'));img.classList.add('active');}
