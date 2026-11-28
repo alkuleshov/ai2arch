@@ -664,9 +664,8 @@ button:hover{opacity:.9}button:disabled{opacity:.6}
 </style></head><body>
 <div class="gate" role="region" aria-label="Вход">
   <span class="badge">🔒 ИСП × AI2ARCH</span>
-  <span class="txt">Пособие откроется по логину и паролю от Александра Кулешова</span>
+  <span class="txt">Пароль предоставляет Александр Кулешов</span>
   <form id="f" autocomplete="on">
-    <input id="u" name="username" placeholder="Логин" aria-label="Логин" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required>
     <input id="p" name="password" type="password" placeholder="Пароль" aria-label="Пароль" autocomplete="current-password" required>
     <button id="b" type="submit">Войти</button>
   </form>
@@ -678,9 +677,9 @@ button:hover{opacity:.9}button:disabled{opacity:.6}
   var D = __PAYLOAD__;
   var f=document.getElementById('f'), er=document.getElementById('e'), bt=document.getElementById('b');
   function b64(s){ var r=atob(s), a=new Uint8Array(r.length); for(var i=0;i<r.length;i++) a[i]=r.charCodeAt(i); return a; }
-  async function keyFrom(login, pass){
+  async function keyFrom(pass){
     var enc=new TextEncoder();
-    var base=await crypto.subtle.importKey('raw', enc.encode(login.trim().toLowerCase()+':'+pass), 'PBKDF2', false, ['deriveKey']);
+    var base=await crypto.subtle.importKey('raw', enc.encode(pass.trim()), 'PBKDF2', false, ['deriveKey']);
     return crypto.subtle.deriveKey({name:'PBKDF2', salt:b64(D.s), iterations:D.i, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, true, ['decrypt']);
   }
   async function open(key){
@@ -696,7 +695,7 @@ button:hover{opacity:.9}button:disabled{opacity:.6}
     ev.preventDefault(); er.textContent=''; bt.disabled=true; bt.textContent='Проверяем…';
     try{
       if(!(window.crypto&&crypto.subtle)){ er.textContent='Откройте страницу по защищённой ссылке https://'; return; }
-      var key=await keyFrom(document.getElementById('u').value, document.getElementById('p').value);
+      var key=await keyFrom(document.getElementById('p').value);
       var raw=await crypto.subtle.exportKey('raw', key);
       var ok=await tryKey(key, false);
       if(ok){ try{ sessionStorage.setItem('isp_k', btoa(String.fromCharCode.apply(null,new Uint8Array(raw)))); }catch(x){} }
@@ -734,14 +733,14 @@ def previews(plain):
         br.close()
     return out
 
-def encrypt(plain, login, password, iters=300000):
+def encrypt(plain, password, iters=300000):
     import base64, secrets
     from cryptography.hazmat.primitives.ciphers.aead import AESGCM
     from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
     from cryptography.hazmat.primitives import hashes
     import json
     salt, nonce = secrets.token_bytes(16), secrets.token_bytes(12)
-    key = PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=salt, iterations=iters).derive((login.strip().lower() + ":" + password).encode("utf-8"))
+    key = PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=salt, iterations=iters).derive(password.strip().encode("utf-8"))
     ct = AESGCM(key).encrypt(nonce, plain.encode("utf-8"), None)
     b = lambda x: base64.b64encode(x).decode()
     pd, pm = previews(plain)
@@ -749,14 +748,14 @@ def encrypt(plain, login, password, iters=300000):
                  .replace("__PAYLOAD__", json.dumps({"s": b(salt), "n": b(nonce), "i": iters, "c": b(ct)})))
 
 if __name__ == "__main__":
-    # Логин и пароль в репозиторий не кладём: передаются переменными ISP_LOGIN и ISP_PASS при сборке.
+    # Пароль в репозиторий не кладём: передаётся переменной ISP_PASS при сборке.
     # Без них (или с --plain) открытая версия пишется только во временный файл для просмотра и в сайт не попадает.
     plain = build()
-    login, pw = os.environ.get("ISP_LOGIN"), os.environ.get("ISP_PASS")
-    if "--plain" in sys.argv or not (login and pw):
+    pw = os.environ.get("ISP_PASS")
+    if "--plain" in sys.argv or not pw:
         path = "/tmp/isp_plain.html"; open(path, "w", encoding="utf-8").write(plain)
-        print("plain ->", path, "(в сайт не попадает; для публикации задайте ISP_LOGIN и ISP_PASS)")
+        print("plain ->", path, "(в сайт не попадает; для публикации задайте ISP_PASS)")
     else:
         os.makedirs(os.path.dirname(OUT), exist_ok=True)
-        open(OUT, "w", encoding="utf-8").write(encrypt(plain, login, pw))
+        open(OUT, "w", encoding="utf-8").write(encrypt(plain, pw))
         print("ok (encrypted)", OUT, os.path.getsize(OUT))
