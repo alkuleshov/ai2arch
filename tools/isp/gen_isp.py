@@ -306,7 +306,8 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
 .sec-head{{ padding-block:20px 18px; }}
 .sec-title{{ grid-column:span 4; font-size:clamp(32px, 8.4vw, 64px); padding-bottom:14px; }}
 .sec-note{{ grid-column:span 4; }}
-@media (min-width:900px){{ .sec-title{{ grid-column:span 5; padding-bottom:0; }} .sec-note{{ grid-column:6 / span 3; padding-top:6px; }} }}
+.sec-note--2{{ margin-top:8px; }}
+@media (min-width:900px){{ .sec-title{{ grid-column:span 5; padding-bottom:0; }} .sec-note{{ grid-column:6 / span 3; padding-top:6px; }} .sec-note--2{{ grid-row:2; padding-top:0; margin-top:0; }} }}
 .wrap{{ padding-block:18px 24px; }}
 .wrap > *{{ grid-column:1/-1; }}
 
@@ -524,6 +525,7 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
   <div class="band sec-head"><div class="grid">
     <h2 class="display sec-title" id="schedule-h">Расписание <span class="g">двух блоков</span></h2>
     <p class="small sec-note"><b>Даты и&nbsp;время предварительные на&nbsp;{t(AS_OF)}&nbsp;г.</b> Время московское, час&nbsp;— 60&nbsp;минут. Название занятия ведёт к&nbsp;его описанию.</p>
+    <p class="small sec-note sec-note--2"><b>На&nbsp;всех занятиях присутствует Александр Кулешов,</b> отдельные занятия ведут приглашённые эксперты: Екатерина Петренко и&nbsp;эксперт по&nbsp;QGIS.</p>
   </div></div>
   <div class="band"><div class="grid wrap">
     <table class="sch">
