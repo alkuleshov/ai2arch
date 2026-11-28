@@ -637,7 +637,98 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
 </html>
 '''
 
+SHELL = """<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="no-referrer"><meta name="theme-color" content="#F6F4F0">
+<title>ИСП × AI2ARCH — вход</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&display=swap">
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#F6F4F0;color:#0A0F1A;font-family:'Inter Tight','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.w{min-height:100vh;display:grid;place-items:center;padding:24px}
+form{width:min(100%,380px)}
+.k{font-size:12px;font-weight:700;color:#5A6070;margin:0 0 10px}
+h1{margin:0 0 6px;font-size:40px;line-height:.92;font-weight:800;letter-spacing:-0.045em}h1 span{color:#848A9A}
+p{margin:14px 0 22px;font-size:14px;line-height:1.3;color:#5A6070;font-weight:500}
+label{display:block;margin:0 0 5px;font-size:12px;font-weight:700}
+input{display:block;width:100%;height:46px;margin:0 0 14px;padding:0 12px;border:1.5px solid #0A0F1A;border-radius:0;background:#fff;font:600 16px 'Inter Tight',Arial,sans-serif;color:#0A0F1A}
+input:focus-visible{outline:2px solid #1A82FF;outline-offset:2px}
+button{width:100%;height:48px;border:0;border-radius:999px;background:#0A0F1A;color:#F6F4F0;font:700 15px 'Inter Tight',Arial,sans-serif;cursor:pointer}
+button:disabled{opacity:.6}
+.e{min-height:18px;margin:12px 0 0;font-size:13px;font-weight:700;color:#C0243A}
+</style></head><body>
+<div class="w"><form id="f" autocomplete="on">
+<p class="k">ИСП × AI2ARCH</p>
+<h1>Методическое <span>пособие</span></h1>
+<p>Страница закрыта. Логин и пароль вам прислал Александр Кулешов.</p>
+<label for="u">Логин</label><input id="u" name="username" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required>
+<label for="p">Пароль</label><input id="p" name="password" type="password" autocomplete="current-password" required>
+<button id="b" type="submit">Войти</button>
+<div class="e" id="e" role="alert"></div>
+</form></div>
+<script>
+(function(){
+  var D = __PAYLOAD__;
+  var f=document.getElementById('f'), er=document.getElementById('e'), bt=document.getElementById('b');
+  function b64(s){ var r=atob(s), a=new Uint8Array(r.length); for(var i=0;i<r.length;i++) a[i]=r.charCodeAt(i); return a; }
+  async function keyFrom(login, pass){
+    var enc=new TextEncoder();
+    var base=await crypto.subtle.importKey('raw', enc.encode(login.trim().toLowerCase()+':'+pass), 'PBKDF2', false, ['deriveKey']);
+    return crypto.subtle.deriveKey({name:'PBKDF2', salt:b64(D.s), iterations:D.i, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, true, ['decrypt']);
+  }
+  async function open(key){
+    var buf=await crypto.subtle.decrypt({name:'AES-GCM', iv:b64(D.n)}, key, b64(D.c));
+    var html=new TextDecoder().decode(buf), hash=location.hash;
+    document.open(); document.write(html); document.close();
+    if(hash){ setTimeout(function(){ var el=document.getElementById(hash.slice(1)); if(el) el.scrollIntoView(); }, 60); }
+  }
+  async function tryKey(key, silent){
+    try{ await open(key); return true; }catch(x){ console.log("isp-err", String(x)); if(!silent) er.textContent='Неверный логин или пароль'; return false; }
+  }
+  f.addEventListener('submit', async function(ev){
+    ev.preventDefault(); er.textContent=''; bt.disabled=true; bt.textContent='Проверяем…';
+    try{
+      if(!(window.crypto&&crypto.subtle)){ er.textContent='Откройте страницу по защищённой ссылке https://'; return; }
+      var key=await keyFrom(document.getElementById('u').value, document.getElementById('p').value);
+      var raw=await crypto.subtle.exportKey('raw', key);
+      var ok=await tryKey(key, false);
+      if(ok){ try{ sessionStorage.setItem('isp_k', btoa(String.fromCharCode.apply(null,new Uint8Array(raw)))); }catch(x){} }
+    } finally { bt.disabled=false; bt.textContent='Войти'; }
+  });
+  /* повторное открытие в той же вкладке: ключ хранится до закрытия вкладки */
+  window.addEventListener('load', function(){
+    try{
+      var saved=sessionStorage.getItem('isp_k');
+      if(saved && window.crypto && crypto.subtle){
+        crypto.subtle.importKey('raw', b64(saved), {name:'AES-GCM'}, false, ['decrypt']).then(function(k){ return tryKey(k, true); }).then(function(ok){ if(!ok) sessionStorage.removeItem('isp_k'); });
+      }
+    }catch(x){}
+  });
+})();
+</script></body></html>
+"""
+
+def encrypt(plain, login, password, iters=300000):
+    import base64, secrets
+    from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+    from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+    from cryptography.hazmat.primitives import hashes
+    import json
+    salt, nonce = secrets.token_bytes(16), secrets.token_bytes(12)
+    key = PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=salt, iterations=iters).derive((login.strip().lower() + ":" + password).encode("utf-8"))
+    ct = AESGCM(key).encrypt(nonce, plain.encode("utf-8"), None)
+    b = lambda x: base64.b64encode(x).decode()
+    return SHELL.replace("__PAYLOAD__", json.dumps({"s": b(salt), "n": b(nonce), "i": iters, "c": b(ct)}))
+
 if __name__ == "__main__":
-    os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    open(OUT, "w", encoding="utf-8").write(build())
-    print("ok", OUT, os.path.getsize(OUT))
+    # Логин и пароль в репозиторий не кладём: передаются переменными ISP_LOGIN и ISP_PASS при сборке.
+    # Без них (или с --plain) открытая версия пишется только во временный файл для просмотра и в сайт не попадает.
+    plain = build()
+    login, pw = os.environ.get("ISP_LOGIN"), os.environ.get("ISP_PASS")
+    if "--plain" in sys.argv or not (login and pw):
+        path = "/tmp/isp_plain.html"; open(path, "w", encoding="utf-8").write(plain)
+        print("plain ->", path, "(в сайт не попадает; для публикации задайте ISP_LOGIN и ISP_PASS)")
+    else:
+        os.makedirs(os.path.dirname(OUT), exist_ok=True)
+        open(OUT, "w", encoding="utf-8").write(encrypt(plain, login, pw))
+        print("ok (encrypted)", OUT, os.path.getsize(OUT))
