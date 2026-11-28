@@ -12,7 +12,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TPL = ROOT / 'templates' / 'longread.html'
+TPL = ROOT / 'templates' / 'longread-isp.html'
 
 # Конфиг лонгрида по лекциям. Эталон — 2.2; 2.4 собран по тому же шаблону.
 LECTURES = {
@@ -545,9 +545,9 @@ def build(key='2.2'):
         mark = ''
         if cnum in quiz:
             mark = f'<span class="toc-quiz" data-quiz-chapter="{cnum}">✓ Проверено</span>'
-            toc.append(f'<a href="#chapter-{cnum}" class="toc-ch" data-quiz-chapter="{cnum}">Глава {cnum}. {esc(name)}{mark}</a>')
+            toc.append(f'<a href="#chapter-{cnum}" class="toc-ch" data-quiz-chapter="{cnum}"><span>{cnum}</span><b>{esc(name)}{mark}</b></a>')
         else:
-            toc.append(f'<a href="#chapter-{cnum}" class="toc-ch">Глава {cnum}. {esc(name)}</a>')
+            toc.append(f'<a href="#chapter-{cnum}" class="toc-ch"><span>{cnum}</span><b>{esc(name)}</b></a>')
         header=f'<header class="chapter-head"><div class="chapter-kicker">Глава {cnum}</div><h1>{esc(name)}</h1></header>'
         if cnum==1 and ROLES_MD.exists():
             header+='<aside class="roles-card"><div class="roles-mark">Роли и трек · для понимания, не для выбора</div>'+md_html(ROLES_MD.read_text(encoding="utf-8"))+'</aside>'
@@ -559,7 +559,7 @@ def build(key='2.2'):
             example_html='<aside class="example-card" id="example"><div class="example-mark">Учебный пример, не данные C52</div>'+md_html(example)+'</aside>'
         content=[]
         for s in slides:
-            toc.append(f'<a href="#slide-{s["n"]}" class="toc-slide"><span>{s["n"]}</span>{esc(s["title"])}</a>')
+            toc.append(f'<a href="#slide-{s["n"]}" class="toc-slide"><span>{s["n"]}</span><b>{esc(s["title"])}</b></a>')
             sec=[f'<section class="slide-sec" id="slide-{s["n"]}" data-n="{s["n"]}"><div class="sec-kicker">Слайд {s["n"]} из {TOTAL}</div><h2>{esc(s["title"])}</h2>']
             sec.append(slide_img(s['n']))
             sec.append('<div class="prose">'+md_html(s['base'])+'</div>')
@@ -624,6 +624,11 @@ def build(key='2.2'):
          .replace('{{RAIL}}',rail).replace('{{SLIDES_JSON}}',slides_json)
          .replace('{{QUIZ_JSON}}',quiz_json).replace('{{QUIZ_KEY}}',quiz_key)
          .replace('{{WORDS}}',str(words)))
+    ht=CFG['hero_title'].split(' ',1)
+    h1=esc(ht[0])+(f'<span class="g">{esc(ht[1])}</span>' if len(ht)>1 else '')
+    out=(out.replace('{{HERO_H1}}',h1).replace('{{COURSE_SUB}}','Редевелопмент · методическое пособие')
+         .replace('{{COURSE_SWITCH}}','<a class="on" href="redev-guide.html">Редевелопмент</a><a href="archi-guide.html">Архитектура</a>')
+         .replace('{{BACK_LABEL_PLAIN}}',CFG['back_label'].lstrip('← ').strip()+' в пособии'))
     OUT.write_text(out,encoding='utf-8')
     print(f'{OUT.name}: {words} слов, {minutes} мин, {len(body_html)} байт')
 
