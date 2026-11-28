@@ -623,7 +623,9 @@ def build(key='2.2'):
          .replace('{{TOC}}',''.join(toc)).replace('{{TERMS}}',terms_html)
          .replace('{{RAIL}}',rail).replace('{{SLIDES_JSON}}',slides_json)
          .replace('{{QUIZ_JSON}}',quiz_json).replace('{{QUIZ_KEY}}',quiz_key)
-         .replace('{{WORDS}}',str(words)))
+         .replace('{{WORDS}}',str(words))
+         .replace('{{COURSE_LABEL}}','ИИ в редевелопменте')
+         .replace('{{COURSE_SWITCH}}','<a class="on" href="redev-guide.html">Редевелопмент</a><a href="archi-guide.html">Архитектура</a>'))
     OUT.write_text(out,encoding='utf-8')
     print(f'{OUT.name}: {words} слов, {minutes} мин, {len(body_html)} байт')
 

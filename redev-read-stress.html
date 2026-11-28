@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="isp-shell.css">
 <title>Урок 2.4 · Стресс-тест финмодели · AI2ARCH</title>
 <meta name="description" content="Урок для чтения по теме 2.4: красная команда, чувствительность, условия отказа, лист экономики и вопросы юристу.">
 <style>
@@ -324,6 +326,67 @@ button,select{font-family:var(--sans)}
 .roles-card p,.roles-card li{font-size:15px}
 .glossary-all{margin:0 0 14px}
 @media(max-width:440px){.lr-head select{width:62px;text-overflow:ellipsis;padding-left:7px}.lr-head button{padding-left:6px;padding-right:6px}}
+
+/* ── Стиль ISP: закреплённое левое меню, display-заголовки, швейцарская сетка ── */
+:root{--navy:#0A0F1A;--ink:#0A0F1A;--muted:#5A6070;--faint:#848A9A;--bg:#F6F4F0;--line:#E1DDD5;--accent:#2B4FD8;--accent-l:#E4EBFB;--accent-b:#BFD3FF;--sans:'Inter Tight','Helvetica Neue',Arial,sans-serif;--head:54px}
+body{background:#F6F4F0;font-family:var(--sans);letter-spacing:-.005em}
+.lr-head{background:#F6F4F0;border-bottom:1.5px solid #0A0F1A;backdrop-filter:none}
+.lr-head button,.lr-head select{border-radius:999px!important;border:1.5px solid #0A0F1A;background:transparent;color:#0A0F1A;font-weight:700}
+.lr-head button:hover,.lr-head select:hover{background:#0A0F1A;color:#F6F4F0;border-color:#0A0F1A}
+.lr-back{font-size:13px;font-weight:800;color:#0A0F1A;text-decoration:none;letter-spacing:-.01em}
+.lr-name{font-size:12.5px;font-weight:600;color:#5A6070;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.lr-progress{background:#0A0F1A}
+/* левое меню: на десктопе закреплено, как в пособии */
+.lr-toc{background:#F6F4F0;border-left:0;border-right:1.5px solid #0A0F1A;box-shadow:none;padding:14px 16px 14px 20px}
+.lr-toc .toc-top{display:none}
+.lr-toc a{font-size:13.5px;line-height:1.25;font-weight:600;color:#0A0F1A;padding:6px 8px}
+.lr-toc a:hover{background:rgba(10,15,26,.06)}
+.lr-side-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#0A0F1A;padding-bottom:12px;border-bottom:1.5px solid #0A0F1A;margin-bottom:10px}
+.lr-side-brand .sd-logo{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:8px;background:#0A0F1A}
+.lr-side-brand .sd-logo img{display:block;width:26px;height:26px}
+.lr-side-brand b{display:block;font-size:17px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.lr-side-brand small{display:block;margin-top:3px;font-size:11px;font-weight:600;color:#5A6070;line-height:1.1}
+.lr-side-course{display:flex;gap:6px;margin-bottom:12px}
+.lr-side-course a{flex:1;text-align:center;padding:7px 6px!important;border:1.5px solid #0A0F1A;border-radius:999px;font-size:12px!important;line-height:1.1;color:#0A0F1A}
+.lr-side-course a.on{background:#0A0F1A;color:#F6F4F0}
+.lr-side-course a:hover{background:rgba(10,15,26,.06)}
+.lr-side-course a.on:hover{background:#0A0F1A;color:#F6F4F0}
+.toc-slide{font-size:13.5px!important;color:#0A0F1A!important;padding-left:26px!important}
+.toc-slide span{color:#848A9A}
+.toc-slide.current{background:#0A0F1A!important;color:#F6F4F0!important;border-radius:6px}
+.toc-slide.current span{color:rgba(246,244,240,.7)}
+.toc-slide.read:after{color:#2B4FD8}
+.lr-terms{background:#F6F4F0;border-left:1.5px solid #0A0F1A;box-shadow:none}
+.lr-terms dt{font-size:15px;font-weight:800;letter-spacing:-.02em}
+.lr-terms dd{color:#5A6070}
+/* hero — display */
+.hero{max-width:1000px;margin:12px auto 24px;padding:0 4px;border-bottom:1.5px solid #0A0F1A;padding-bottom:22px}
+.hero .kicker{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#848A9A}
+.hero h1{font-size:clamp(38px,7.2vw,88px);font-weight:800;letter-spacing:-.045em;line-height:.92;color:#0A0F1A;margin:10px 0 18px}
+.hero p{font-size:16px;line-height:1.42;font-weight:500;color:#5A6070;max-width:62ch}
+.hero .meta{color:#5A6070;font-weight:600}
+/* секции — полосы */
+.slide-sec{border-top:1px solid #E1DDD5;padding:24px 0 28px}
+.slide-sec h2{font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#0A0F1A;margin-bottom:14px}
+.lr-text{max-width:1000px}
+.lr-main{max-width:none;padding-left:32px;padding-right:32px}
+.lr-body{max-width:1000px}
+/* десктоп: меню слева постоянно, основное содержание справа */
+@media(min-width:1100px){
+  .lr-head{left:288px}
+  .lr-head #tocBtn{display:none}
+  .lr-toc{position:fixed;top:0;left:0;right:auto;bottom:0;width:288px;transform:none!important;transition:none;overflow-y:auto;z-index:90;padding-top:14px}
+  .lr-toc .lr-side-brand,.lr-toc .lr-side-course{display:flex}
+  .lr-toc #tocClose{display:none}
+  .lr-main{margin-left:288px;margin-right:0;padding-top:calc(var(--head) + 24px)}
+  .lr-progress{left:288px}
+  .continue{left:calc(50% + 144px)}
+}
+@media(max-width:1099px){
+  .lr-toc .lr-side-brand,.lr-toc .lr-side-course{display:flex}
+  .lr-toc{padding-top:14px}
+  .lr-main{padding-top:calc(var(--head) + 22px)}
+}
 </style>
 </head>
 <body class="fs-2">
@@ -341,6 +404,8 @@ button,select{font-family:var(--sans)}
   </select>
 </header>
 <nav class="lr-toc" id="lrToc" aria-label="Содержание урока">
+  <a class="lr-side-brand" href="index.html"><span class="sd-logo"><img src="images/ai2arch-sign.png" alt="" width="26" height="26"></span><span><b>AI2ARCH</b><small>ИИ в редевелопменте</small></span></a>
+  <div class="lr-side-course"><a class="on" href="redev-guide.html">Редевелопмент</a><a href="archi-guide.html">Архитектура</a></div>
   <div class="toc-top"><b>Содержание</b><button id="tocClose" type="button" aria-label="Закрыть">×</button></div>
   <a href="#chapter-1" class="toc-ch" data-quiz-chapter="1">Глава 1. Красная команда и C52<span class="toc-quiz" data-quiz-chapter="1">✓ Проверено</span></a><a href="#slide-1" class="toc-slide"><span>1</span>Стресс-тест финмодели</a><a href="#slide-2" class="toc-slide"><span>2</span>Стресс-тест против самообмана</a><a href="#slide-3" class="toc-slide"><span>3</span>Откуда стресс-тест</a><a href="#slide-4" class="toc-slide"><span>4</span>Красная команда и чувствительность</a><a href="#slide-5" class="toc-slide"><span>5</span>Допущение → сценарий → эффект на NOI</a><a href="#slide-6" class="toc-slide"><span>6</span>Как ранжировать допущения</a><a href="#slide-7" class="toc-slide"><span>7</span>C52: работаем с тем, что есть</a><a href="#slide-8" class="toc-slide"><span>8</span>Красная команда: роль</a><a href="#chapter-2" class="toc-ch" data-quiz-chapter="2">Глава 2. Задачи A и B: допущения и чувствительность<span class="toc-quiz" data-quiz-chapter="2">✓ Проверено</span></a><a href="#slide-9" class="toc-slide"><span>9</span>Найти слабые допущения</a><a href="#slide-10" class="toc-slide"><span>10</span>Сервисы: сравнение и флагман</a><a href="#slide-11" class="toc-slide"><span>11</span>Промпт красной команды</a><a href="#slide-12" class="toc-slide"><span>12</span>Шаги и проверка</a><a href="#slide-13" class="toc-slide"><span>13</span>Путь в основном контуре</a><a href="#slide-14" class="toc-slide"><span>14</span>Проверить чувствительность</a><a href="#slide-15" class="toc-slide"><span>15</span>Сервисы: те же, расчёт в таблице</a><a href="#slide-16" class="toc-slide"><span>16</span>Промпт для сценариев стресса</a><a href="#slide-17" class="toc-slide"><span>17</span>Шаги и проверка</a><a href="#slide-18" class="toc-slide"><span>18</span>Путь в основном контуре</a><a href="#chapter-3" class="toc-ch" data-quiz-chapter="3">Глава 3. Условия отказа и юридический контур<span class="toc-quiz" data-quiz-chapter="3">✓ Проверено</span></a><a href="#slide-19" class="toc-slide"><span>19</span>Юридический контур и экономика на одном листе</a><a href="#slide-20" class="toc-slide"><span>20</span>Условия отказа и чувствительность</a><a href="#slide-21" class="toc-slide"><span>21</span>Вопросы юристу: что и зачем</a><a href="#slide-22" class="toc-slide"><span>22</span>Вопрос юристу: документ → ответ</a><a href="#slide-23" class="toc-slide"><span>23</span>Лист экономики: статьи и порог</a><a href="#slide-24" class="toc-slide"><span>24</span>Страница 1 инвестиционного паспорта</a><a href="#slide-25" class="toc-slide"><span>25</span>Собрать вопросы юристу</a><a href="#slide-26" class="toc-slide"><span>26</span>Сервисы: сравнение и флагман</a><a href="#slide-27" class="toc-slide"><span>27</span>Промпт для вопросов юристу</a><a href="#slide-28" class="toc-slide"><span>28</span>Шаги и проверка</a><a href="#slide-29" class="toc-slide"><span>29</span>Путь в основном контуре</a><a href="#chapter-4" class="toc-ch" data-quiz-chapter="4">Глава 4. Экономика на одном листе и Задание №3<span class="toc-quiz" data-quiz-chapter="4">✓ Проверено</span></a><a href="#slide-30" class="toc-slide"><span>30</span>Собрать экономику на одном листе</a><a href="#slide-31" class="toc-slide"><span>31</span>Сервисы: сравнение и флагман</a><a href="#slide-32" class="toc-slide"><span>32</span>Промпты листа и отзыва</a><a href="#slide-33" class="toc-slide"><span>33</span>Шаги и проверка</a><a href="#slide-34" class="toc-slide"><span>34</span>Типичные ошибки</a><a href="#slide-35" class="toc-slide"><span>35</span>Путь в основном контуре</a><a href="#slide-36" class="toc-slide"><span>36</span>Что берём в Задание №3</a><a href="#slide-37" class="toc-slide"><span>37</span>Промпты темы 2.4</a>
 </nav>
