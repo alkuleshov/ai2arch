@@ -5,7 +5,7 @@ import html
 esc = html.escape
 NOTION = 'https://fortune-swing-02e.notion.site/41112bb3b5cd81839661da69963a035b?source=copy_link'
 PAGES = [('guide', 'redev-guide.html', 'Пособие'), ('schedule', 'redev-schedule.html', 'Расписание'),
-         ('glossary', 'redev-glossary.html', 'Словарь терминов')]
+         ('glossary', 'redev-glossary.html', 'Словарь')]
 
 JS = r'''<script>
 (function(){
@@ -43,7 +43,9 @@ def page(key, title, desc, sub, sections, main_html, head_extra='', script=''):
         em = f'<em>{esc(right)}</em>' if right else ''
         nav.append(f'<a href="#{sid}" data-s="{sid}"><span>{esc(num)}</span><b>{esc(name)}</b>{em}</a>')
     opts_p = ''.join(f'<option value="{h}"{" selected" if k == key else ""}>{esc(n)}</option>' for k, h, n in PAGES)
-    opts_s = ''.join(f'<option value="{sid}">{esc(name)}</option>' for sid, num, name, right in sections)
+    def _w(t, n=15):
+        return t if len(t) <= n else (t[:n].rsplit(' ', 1)[0] + '…')
+    opts_s = ''.join(f'<option value="{sid}">{esc(_w(name))}</option>' for sid, num, name, right in sections)
     tb_end = main_html.index('</section>') + len('</section>')
     cover = main_html[:tb_end].replace('</section>', f'<a class="i-down" href="#{sections[0][0]}">Вниз ↓</a></section>')
     rest = main_html[tb_end:]
@@ -63,7 +65,7 @@ def page(key, title, desc, sub, sections, main_html, head_extra='', script=''):
 </head>
 <body>
 <div class="i-app" id="iApp">
-<div class="i-topbar"><select class="i-sel" id="iSelM" aria-label="Страница">{opts_p}</select><select class="i-sel" id="iSelL" aria-label="Раздел">{opts_s}</select></div>
+<div class="i-topbar"><a class="i-home" href="index.html" aria-label="На главную" title="На главную"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/></svg></a><select class="i-sel" id="iSelM" aria-label="Страница">{opts_p}</select><select class="i-sel" id="iSelL" aria-label="Раздел">{opts_s}</select></div>
 <aside class="i-side" id="iSide"><div class="sd-top"><a class="sd-brand" href="index.html"><span class="sd-logo"><img src="images/ai2arch-sign.png" alt="" width="26" height="26"></span><span class="sd-bt"><b>AI2ARCH</b><small>{esc(sub)}</small></span></a></div>
 <div class="sd-course"><a class="on" href="redev-guide.html">Редевелопмент</a><a href="archi-guide.html">Архитектура</a></div>
 <nav class="sd-nav" id="sdNav">{''.join(nav)}</nav><a class="sd-tg" href="https://t.me/alkuleshov" target="_blank" rel="noopener">Вопросы: @alkuleshov</a></aside>
