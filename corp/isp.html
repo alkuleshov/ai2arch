@@ -143,7 +143,8 @@ h4{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; }
 .sec-head{ padding-block:20px 18px; }
 .sec-title{ grid-column:span 4; font-size:clamp(32px, 8.4vw, 64px); padding-bottom:14px; }
 .sec-note{ grid-column:span 4; }
-@media (min-width:900px){ .sec-title{ grid-column:span 5; padding-bottom:0; } .sec-note{ grid-column:6 / span 3; padding-top:6px; } }
+.sec-note--2{ margin-top:8px; }
+@media (min-width:900px){ .sec-title{ grid-column:span 5; padding-bottom:0; } .sec-note{ grid-column:6 / span 3; padding-top:6px; } .sec-note--2{ grid-row:2; padding-top:0; margin-top:0; } }
 .wrap{ padding-block:18px 24px; }
 .wrap > *{ grid-column:1/-1; }
 
@@ -383,6 +384,7 @@ h4{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; }
   <div class="band sec-head"><div class="grid">
     <h2 class="display sec-title" id="schedule-h">Расписание <span class="g">двух блоков</span></h2>
     <p class="small sec-note"><b>Даты и&nbsp;время предварительные на&nbsp;28&nbsp;ноября 2026&nbsp;г.</b> Время московское, час&nbsp;— 60&nbsp;минут. Название занятия ведёт к&nbsp;его описанию.</p>
+    <p class="small sec-note sec-note--2"><b>На&nbsp;всех занятиях присутствует Александр Кулешов,</b> отдельные занятия ведут приглашённые эксперты: Екатерина Петренко и&nbsp;эксперт по&nbsp;QGIS.</p>
   </div></div>
   <div class="band"><div class="grid wrap">
     <table class="sch">
@@ -418,7 +420,7 @@ h4{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; }
     <p class="small sec-note">Показываем приём&nbsp;— вы делаете на&nbsp;своём объекте&nbsp;— проверяем результат и&nbsp;замеряем время.</p>
   </div></div>
   <div class="band"><div class="grid wrap"><div class="prs"><div class="pr"><small>01</small><b>Очно в&nbsp;бюро</b><p>Все занятия, кроме Старта, проходят у&nbsp;вас в&nbsp;бюро на&nbsp;рабочих компьютерах. Старт&nbsp;— онлайн в&nbsp;Яндекс Телемосте.</p></div><div class="pr"><small>02</small><b>Ваш объект</b><p>Бюро выбирает один текущий объект. На&nbsp;нём проходят все практические занятия: ТЗ, образы, ракурсы, нормы, участок, модель.</p></div><div class="pr"><small>03</small><b>Показываем&nbsp;— вы&nbsp;делаете</b><p>Ведущий показывает приём, участники повторяют на&nbsp;своём объекте и&nbsp;сами проверяют результат. Готовые ответы ИИ&nbsp;без проверки не&nbsp;принимаем.</p></div><div class="pr"><small>04</small><b>Замер «до&nbsp;и&nbsp;после»</b><p>По&nbsp;каждой задаче фиксируем, сколько времени она занимала раньше и&nbsp;сколько с&nbsp;ИИ. Это главный показатель результата обучения.</p></div><div class="pr"><small>05</small><b>Копилка бюро</b><p>Промпты, скрипты, шаблоны и&nbsp;журналы замеров складываем в&nbsp;общую папку бюро. На&nbsp;итоговой сессии из&nbsp;неё собираем библиотеку и&nbsp;регламент.</p></div><div class="pr"><small>06</small><b>Три уровня глубины</b><p>Обзор, Практика или Внедрение&nbsp;— глубина указана у&nbsp;каждого занятия. Что они означают, описано под расписанием.</p></div><div class="pr"><small>07</small><b>Между блоками</b><p>С&nbsp;19&nbsp;декабря по&nbsp;7&nbsp;февраля бюро применяет инструменты на&nbsp;живых проектах. Задание на&nbsp;паузу&nbsp;— в&nbsp;разделе «Между блоками».</p></div><div class="pr"><small>08</small><b>Время</b><p>Час занятия&nbsp;— астрономический, 60&nbsp;минут. Время московское. Даты и&nbsp;время предварительные на&nbsp;28&nbsp;ноября 2026 г.</p></div></div></div></div>
-  <div class="band"><div class="grid wrap"><h4>Кто ведёт</h4><div class="prs"><div class="pp"><b>Александр Кулешов</b><p>Руководитель лаборатории проектного интеллекта AI2ARCH, архитектор. Ведёт ИИ-ТЗ, нормы, Revit, AutoCAD, занятия для ГИПов и&nbsp;инженеров, итоговую сессию.</p></div><div class="pp"><b>Екатерина Петренко</b><p>Лектор курса «ИИ&nbsp;в&nbsp;редевелопменте» AI2ARCH. Ведёт образы концепции, визуализации, презентации и&nbsp;тексты.</p></div><div class="pp"><b>Эксперт по&nbsp;QGIS</b><p>Ведёт анализ участка в&nbsp;QGIS вместе с&nbsp;Александром Кулешовым.</p></div></div></div></div>
+  <div class="band"><div class="grid wrap"><h4>Кто ведёт</h4><div class="prs"><div class="pp"><b>Александр Кулешов</b><p>Руководитель лаборатории проектного интеллекта AI2ARCH, архитектор. Присутствует на&nbsp;всех занятиях программы. Сам ведёт ИИ-ТЗ, нормы, Revit, AutoCAD, занятия для ГИПов и&nbsp;инженеров, итоговую сессию.</p></div><div class="pp"><b>Екатерина Петренко</b><p>Лектор курса «ИИ&nbsp;в&nbsp;редевелопменте» AI2ARCH. Ведёт образы концепции, визуализации, презентации и&nbsp;тексты, Александр Кулешов рядом.</p></div><div class="pp"><b>Эксперт по&nbsp;QGIS</b><p>Приглашённый эксперт: ведёт анализ участка в&nbsp;QGIS вместе с&nbsp;Александром Кулешовым.</p></div></div></div></div>
 </section>
 
 <section aria-labelledby="prep-h" id="prep">
