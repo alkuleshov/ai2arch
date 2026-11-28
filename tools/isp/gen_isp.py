@@ -43,7 +43,7 @@ def sched_rows():
             f'<td class="c-l"><span class="lv {s["lvc"]}">{s["lvl"]}</span></td>'
             f'<td class="c-w">{t(s["lead"])}<small>{t(s["who"])}</small></td></tr>')
         if s["block"] == 1 and s["date"].startswith("Пт 11"):
-            out.append('<tr class="r-res"><td colspan="6"><b>14–18 декабря</b> · резерв на переносы</td></tr>')
+            out.append('<tr class="r-res"><td colspan="6"><b>17–18 декабря</b> · резерв на переносы</td></tr>')
     return "\n".join(out)
 
 # ---------- карточки занятий ----------
