@@ -105,6 +105,8 @@ def lshort(l):
     return (l.replace("Эксперт по QGIS, Александр Кулешов", "эксперт QGIS + Кулешов")
              .replace("Александр ", "").replace("Екатерина ", ""))
 
+SHORT = {"Нормы и проверка документации":"Нормы и проверка","Презентации и подача":"Презентации","Тексты и документы":"Тексты",
+         "ИИ для инженерных разделов":"ИИ для инженеров","Анализ участка (QGIS)":"Анализ участка","Концепции и ИИ-ТЗ":"Концепции и ИИ-ТЗ"}
 def part(s):
     m = re.match(r"часть (\d)", s["sub"])
     return f" · ч. {m.group(1)}" if m else ""
@@ -118,19 +120,18 @@ GENERAL = [
 ]
 
 def side_nav():
-    o = ['<p class="sd-cap">Общее</p>',
-         '<a href="#toc" data-l="Содержание"><span>—</span>Содержание</a>']
+    o = ['<a href="#toc" data-l="Содержание"><span>—</span>Содержание</a>']
     for k, n, a, _ in GENERAL:
         o.append(f'<a href="#{k}" data-l="{a}"><span>{n}</span>{t(a)}</a>')
     cur = None
     for i, s in enumerate(SESSIONS, 1):
         if s["block"] != cur:
             if cur == 1:
-                o.append(f'<a class="sd-pz" href="#pause" data-l="Пауза: задание между блоками"><span>пауза</span>Задание между блоками</a>')
+                o.append(f'<a class="sd-pz" href="#pause" data-l="Пауза: задание между блоками"><span>пауза</span>Задание на паузу</a>')
             cur = s["block"]; b = BLOCKS[cur]
-            o.append(f'<a class="sd-blk" href="#block{cur}" data-l="Блок {cur}: {b["name"]}"><span>Блок {cur} · {t(b["range"])} · {b["hours"]}&nbsp;ч</span>{t(b["name"])}</a>')
+            o.append(f'<a class="sd-blk" href="#block{cur}" data-l="Блок {cur}: {b["name"]}"><span>Блок {cur}</span>{t(b["name"])}</a>')
         wd, d = dshort(s["date"])
-        o.append(f'<a class="sd-s" href="#s{i:02d}" data-l="{i:02d} · {s["title"]}{part(s)}"><span>{d}</span>{t(s["title"])}{part(s)}</a>')
+        o.append(f'<a class="sd-s" href="#s{i:02d}" data-l="{i:02d} · {s["title"]}{part(s)}"><span>{d}</span>{t(SHORT.get(s["title"], s["title"]))}{part(s)}</a>')
     return "\n      ".join(o)
 
 def toc_block(bn):
@@ -196,9 +197,7 @@ body{{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sa
 a{{ color:inherit; }}
 :focus-visible{{ outline:2px solid var(--azure); outline-offset:3px; }}
 .band{{ position:relative; padding-left:var(--pad); padding-right:var(--pad-r);
-  background-image:linear-gradient(to right, var(--grid) 0 1px, transparent 1px), linear-gradient(to bottom, var(--grid) 0 1px, transparent 1px);
-  background-size:calc((100% - var(--pad) - var(--pad-r)) / var(--cols)) 100%, 100% var(--row);
-  background-position:var(--pad) 0, 0 0; border-bottom:1px solid var(--grid); }}
+  border-bottom:1px solid var(--grid); }}
 .grid{{ display:grid; grid-template-columns:repeat(var(--cols), minmax(0,1fr)); column-gap:0; }}
 .grid > *{{ min-width:0; }}
 .display{{ margin:0; font-weight:800; letter-spacing:-0.045em; line-height:.92; text-wrap:balance; }}
@@ -232,32 +231,33 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
 .tb-cur{{ flex:1; min-width:0; font-size:12.5px; font-weight:600; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }}
 .tb-btn{{ flex:none; display:inline-flex; align-items:center; gap:8px; height:38px; padding:0 15px; border:0; border-radius:999px; background:var(--ink); color:var(--paper); font:700 13px/1 var(--sans); cursor:pointer; }}
 .tb-btn svg{{ width:14px; height:14px; }}
-.side{{ position:fixed; top:0; right:0; bottom:0; z-index:60; width:min(88vw, 360px); overflow-y:auto; overscroll-behavior:contain; padding:16px 20px 28px; background:var(--paper); border-left:1.5px solid var(--ink); transform:translateX(104%); transition:transform .25s ease; }}
+.side{{ position:fixed; top:0; right:0; bottom:0; z-index:60; width:min(88vw, 360px); overflow-y:auto; overscroll-behavior:contain; padding:14px 16px 14px 20px; background:var(--paper); border-left:1.5px solid var(--ink); transform:translateX(104%); transition:transform .25s ease; }}
 .nav-open .side{{ transform:none; }}
 .scrim{{ position:fixed; inset:0; z-index:55; background:rgba(10,15,26,.35); opacity:0; pointer-events:none; transition:opacity .2s; }}
 .nav-open .scrim{{ opacity:1; pointer-events:auto; }}
-.sd-top{{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; padding-bottom:12px; border-bottom:1.5px solid var(--ink); }}
-.sd-brand{{ text-decoration:none; font-size:19px; font-weight:800; letter-spacing:-0.04em; line-height:1; }}
-.sd-brand span{{ display:block; margin-top:4px; font-size:12px; font-weight:600; letter-spacing:0; color:var(--muted); }}
-.sd-close{{ flex:none; width:36px; height:36px; border:1.5px solid var(--ink); border-radius:50%; background:none; font:700 18px/1 var(--sans); color:var(--ink); cursor:pointer; }}
-.sd-asof{{ margin:10px 0 0; font-size:11.5px; line-height:1.25; font-weight:500; color:var(--muted); }}
-.sd-cap{{ margin:16px 0 4px; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gray); }}
-.sd-nav a{{ display:grid; grid-template-columns:46px minmax(0,1fr); gap:4px; align-items:baseline; margin:0 -8px; padding:6px 8px; border-radius:6px; text-decoration:none; font-size:13.5px; font-weight:600; line-height:1.2; letter-spacing:-0.01em; color:var(--ink); }}
-.sd-nav a > span{{ font-size:11.5px; font-weight:600; color:var(--gray); font-variant-numeric:tabular-nums; white-space:nowrap; }}
+.side{{ display:flex; flex-direction:column; }}
+.sd-top{{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; padding-bottom:10px; border-bottom:1.5px solid var(--ink); }}
+.sd-brand{{ text-decoration:none; font-size:17px; font-weight:800; letter-spacing:-0.04em; line-height:1; }}
+.sd-brand span{{ display:block; margin-top:3px; font-size:11px; font-weight:600; letter-spacing:0; color:var(--muted); }}
+.sd-close{{ flex:none; width:32px; height:32px; border:1.5px solid var(--ink); border-radius:50%; background:none; font:700 17px/1 var(--sans); color:var(--ink); cursor:pointer; }}
+.sd-nav{{ --rh:clamp(21px, calc((100vh - 190px) / 25), 28px); margin-top:8px; display:flex; flex-direction:column; }}
+.sd-nav a{{ display:grid; grid-template-columns:40px minmax(0,1fr) auto; gap:4px; align-items:center; height:var(--rh); margin:0 -8px; padding:0 8px; border-radius:5px; text-decoration:none; font-size:12.5px; font-weight:600; letter-spacing:-0.01em; color:var(--ink); white-space:nowrap; overflow:hidden; }}
+.sd-nav a > span{{ font-size:10.5px; font-weight:600; color:var(--gray); font-variant-numeric:tabular-nums; }}
 .sd-nav a:hover{{ background:rgba(10,15,26,.06); }}
 .sd-nav a.is-on{{ background:var(--ink); color:var(--paper); }}
-.sd-nav a.is-on > span{{ color:rgba(246,244,240,.7); }}
-.sd-nav .sd-blk{{ display:block; margin-top:16px; padding-top:10px; border-top:1.5px solid var(--ink); border-radius:0; font-size:15.5px; font-weight:800; letter-spacing:-0.03em; }}
-.sd-nav .sd-blk > span{{ display:block; margin-bottom:3px; font-size:10.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }}
-.sd-nav .sd-blk.is-on{{ border-radius:6px; }}
-.sd-nav .sd-pz{{ margin-top:10px; border-top:1px dashed var(--gray); border-radius:0; padding-top:9px; }}
-.sd-nav .sd-pz.is-on{{ border-radius:6px; }}
-.sd-tg{{ display:inline-flex; align-items:center; min-height:40px; margin-top:20px; padding:0 16px; border-radius:999px; background:var(--ink); color:var(--paper); font-size:13px; font-weight:700; text-decoration:none; }}
+.sd-nav a.is-on > span, .sd-nav a.is-on em{{ color:rgba(246,244,240,.7); }}
+.sd-nav .sd-blk{{ margin-top:8px; border-top:1.5px solid var(--ink); border-radius:0; font-size:13.5px; font-weight:800; letter-spacing:-0.03em; grid-template-columns:40px minmax(0,1fr) auto; }}
+.sd-nav .sd-blk em{{ font-style:normal; font-size:10.5px; font-weight:600; color:var(--gray); }}
+.sd-nav .sd-blk.is-on{{ border-radius:5px; }}
+.sd-nav .sd-pz{{ border-top:1px dashed var(--gray); border-radius:0; }}
+.sd-nav .sd-pz.is-on{{ border-radius:5px; }}
+.sd-tg{{ margin-top:auto; padding-top:10px; font-size:11.5px; font-weight:700; color:var(--muted); text-decoration:none; }}
+.sd-tg:hover{{ color:var(--ink); text-decoration:underline; }}
 [id]{{ scroll-margin-top:66px; }}
 @media (min-width:1100px){{
   .topbar, .scrim, .sd-close{{ display:none; }}
   .app{{ display:grid; grid-template-columns:276px minmax(0,1fr); }}
-  .side{{ position:sticky; top:0; height:100vh; width:auto; z-index:1; transform:none; transition:none; border-left:0; border-right:1.5px solid var(--ink); padding:20px 20px 28px 24px; }}
+  .side{{ position:sticky; top:0; height:100vh; width:auto; z-index:1; transform:none; transition:none; border-left:0; border-right:1.5px solid var(--ink); padding:16px 16px 14px 24px; }}
   [id]{{ scroll-margin-top:12px; }}
 }}
 .main{{ min-width:0; }}
@@ -386,8 +386,7 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
 .note{{ margin:14px 0 0; padding:10px 12px; border-left:3px solid var(--azure); background:rgba(26,130,255,.06); font-size:13.5px; line-height:1.35; font-weight:500; }}
 
 /* правила данных — полночная полоса */
-.dark{{ background-color:var(--midnight); color:var(--on-dark); border-bottom:0;
-  background-image:linear-gradient(to right, rgba(246,244,240,.10) 0 1px, transparent 1px), linear-gradient(to bottom, rgba(246,244,240,.10) 0 1px, transparent 1px); }}
+.dark{{ background-color:var(--midnight); color:var(--on-dark); border-bottom:0; }}
 .dk{{ padding-block:22px 26px; row-gap:16px; }}
 .dk-k{{ grid-column:span 4; }}
 .dk-k .small{{ color:rgba(246,244,240,.75); }}
@@ -488,7 +487,6 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
 <div class="app">
 <aside class="side" id="side" aria-label="Содержание пособия">
   <div class="sd-top"><a class="sd-brand" href="#top">ИСП × AI2ARCH<span>Методическое пособие</span></a><button class="sd-close" type="button" aria-label="Закрыть меню">×</button></div>
-  <p class="sd-asof">Даты и&nbsp;время предварительные на&nbsp;{t(AS_OF)}&nbsp;г., время московское</p>
   <nav class="sd-nav">
       {side_nav()}
   </nav>
