@@ -639,33 +639,40 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
 
 SHELL = """<!DOCTYPE html>
 <html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="no-referrer"><meta name="theme-color" content="#F6F4F0">
-<title>ИСП × AI2ARCH — вход</title>
+<meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="no-referrer"><meta name="theme-color" content="#F9DADA">
+<title>ИСП × AI2ARCH — методическое пособие</title>
 <link rel="icon" type="image/x-icon" href="/favicon.ico"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&display=swap">
 <style>
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#F6F4F0;color:#0A0F1A;font-family:'Inter Tight','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased}
-.w{min-height:100vh;display:grid;place-items:center;padding:24px}
-form{width:min(100%,380px)}
-.k{font-size:12px;font-weight:700;color:#5A6070;margin:0 0 10px}
-h1{margin:0 0 6px;font-size:40px;line-height:.92;font-weight:800;letter-spacing:-0.045em}h1 span{color:#848A9A}
-p{margin:14px 0 22px;font-size:14px;line-height:1.3;color:#5A6070;font-weight:500}
-label{display:block;margin:0 0 5px;font-size:12px;font-weight:700}
-input{display:block;width:100%;height:46px;margin:0 0 14px;padding:0 12px;border:1.5px solid #0A0F1A;border-radius:0;background:#fff;font:600 16px 'Inter Tight',Arial,sans-serif;color:#0A0F1A}
-input:focus-visible{outline:2px solid #1A82FF;outline-offset:2px}
-button{width:100%;height:48px;border:0;border-radius:999px;background:#0A0F1A;color:#F6F4F0;font:700 15px 'Inter Tight',Arial,sans-serif;cursor:pointer}
-button:disabled{opacity:.6}
-.e{min-height:18px;margin:12px 0 0;font-size:13px;font-weight:700;color:#C0243A}
+*{box-sizing:border-box}html,body{margin:0;background:#F6F4F0;color:#0A0F1A;font-family:'Inter Tight','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.gate{position:sticky;top:0;z-index:10;display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;padding:12px 16px;background:#F9DADA;border-bottom:1px solid #E8A3A3;border-left:4px solid #C0392B}
+.badge{display:inline-flex;align-items:center;gap:6px;background:#C0392B;color:#fff;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:6px 11px;border-radius:6px;white-space:nowrap}
+.txt{flex:1 1 180px;font-size:13px;line-height:1.25;color:#8A3232;font-weight:600}
+form{display:flex;gap:8px;flex-wrap:wrap;flex:0 1 auto}
+input{width:150px;height:38px;padding:0 12px;border:1px solid #E8A3A3;border-radius:7px;background:#fff;font:600 14px 'Inter Tight',Arial,sans-serif;color:#0A0F1A}
+input::placeholder{color:#B87A7A;font-weight:500}
+input:focus-visible{outline:2px solid #C0392B;outline-offset:1px}
+button{height:38px;padding:0 18px;border:0;border-radius:7px;background:#C0392B;color:#fff;font:700 13.5px 'Inter Tight',Arial,sans-serif;cursor:pointer;white-space:nowrap}
+button:hover{opacity:.9}button:disabled{opacity:.6}
+.err{flex-basis:100%;min-height:0;margin:0;font-size:12.5px;font-weight:700;color:#8A3232}
+.err:empty{display:none}
+.prev{position:relative;height:calc(100vh - 62px);overflow:hidden;pointer-events:none;user-select:none}
+.prev img{display:block;width:100%;height:auto;min-height:100%;object-fit:cover;object-position:top}
+.prev::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(246,244,240,0) 55%,#F6F4F0 100%)}
+.prev .m{display:none}
+@media (max-width:700px){.prev .d{display:none}.prev .m{display:block}input{flex:1 1 40%;width:auto;min-width:0}form{flex:1 1 100%}button{flex:1 1 100%}.txt{flex-basis:100%;font-size:12.5px}.gate{padding:10px 14px}}
 </style></head><body>
-<div class="w"><form id="f" autocomplete="on">
-<p class="k">ИСП × AI2ARCH</p>
-<h1>Методическое <span>пособие</span></h1>
-<p>Страница закрыта. Логин и пароль вам прислал Александр Кулешов.</p>
-<label for="u">Логин</label><input id="u" name="username" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required>
-<label for="p">Пароль</label><input id="p" name="password" type="password" autocomplete="current-password" required>
-<button id="b" type="submit">Войти</button>
-<div class="e" id="e" role="alert"></div>
-</form></div>
+<div class="gate" role="region" aria-label="Вход">
+  <span class="badge">🔒 ИСП × AI2ARCH</span>
+  <span class="txt">Пособие откроется по логину и паролю от Александра Кулешова</span>
+  <form id="f" autocomplete="on">
+    <input id="u" name="username" placeholder="Логин" aria-label="Логин" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" required>
+    <input id="p" name="password" type="password" placeholder="Пароль" aria-label="Пароль" autocomplete="current-password" required>
+    <button id="b" type="submit">Войти</button>
+  </form>
+  <p class="err" id="e" role="alert"></p>
+</div>
+<div class="prev" aria-hidden="true"><img class="d" alt="" src="__PREV_D__"><img class="m" alt="" src="__PREV_M__"></div>
 <script>
 (function(){
   var D = __PAYLOAD__;
@@ -683,7 +690,7 @@ button:disabled{opacity:.6}
     if(hash){ setTimeout(function(){ var el=document.getElementById(hash.slice(1)); if(el) el.scrollIntoView(); }, 60); }
   }
   async function tryKey(key, silent){
-    try{ await open(key); return true; }catch(x){ console.log("isp-err", String(x)); if(!silent) er.textContent='Неверный логин или пароль'; return false; }
+    try{ await open(key); return true; }catch(x){ if(!silent) er.textContent='Неверный логин или пароль'; return false; }
   }
   f.addEventListener('submit', async function(ev){
     ev.preventDefault(); er.textContent=''; bt.disabled=true; bt.textContent='Проверяем…';
@@ -708,6 +715,25 @@ button:disabled{opacity:.6}
 </script></body></html>
 """
 
+def previews(plain):
+    """Размытые снимки начала страницы (размытие запечено в картинку, текст не восстановить)."""
+    import base64, io
+    from PIL import Image, ImageFilter
+    from playwright.sync_api import sync_playwright
+    tmp = "/tmp/isp_plain.html"; open(tmp, "w", encoding="utf-8").write(plain)
+    out = []
+    with sync_playwright() as p:
+        br = p.chromium.launch(executable_path="/usr/bin/google-chrome", args=["--no-sandbox"])
+        for w, h, tw, rad in ((1440, 1100, 1100, 6), (390, 1300, 390, 4)):
+            pg = br.new_page(viewport={"width": w, "height": 900}); pg.goto("file://" + tmp); pg.wait_for_timeout(900)
+            png = pg.screenshot(clip={"x": 0, "y": 0, "width": w, "height": h}, full_page=True)
+            im = Image.open(io.BytesIO(png)).convert("RGB")
+            im = im.resize((tw, int(im.height * tw / im.width)), Image.LANCZOS).filter(ImageFilter.GaussianBlur(rad))
+            buf = io.BytesIO(); im.save(buf, "JPEG", quality=60)
+            out.append("data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode())
+        br.close()
+    return out
+
 def encrypt(plain, login, password, iters=300000):
     import base64, secrets
     from cryptography.hazmat.primitives.ciphers.aead import AESGCM
@@ -718,7 +744,9 @@ def encrypt(plain, login, password, iters=300000):
     key = PBKDF2HMAC(algorithm=hashes.SHA256(), length=32, salt=salt, iterations=iters).derive((login.strip().lower() + ":" + password).encode("utf-8"))
     ct = AESGCM(key).encrypt(nonce, plain.encode("utf-8"), None)
     b = lambda x: base64.b64encode(x).decode()
-    return SHELL.replace("__PAYLOAD__", json.dumps({"s": b(salt), "n": b(nonce), "i": iters, "c": b(ct)}))
+    pd, pm = previews(plain)
+    return (SHELL.replace("__PREV_D__", pd).replace("__PREV_M__", pm)
+                 .replace("__PAYLOAD__", json.dumps({"s": b(salt), "n": b(nonce), "i": iters, "c": b(ct)})))
 
 if __name__ == "__main__":
     # Логин и пароль в репозиторий не кладём: передаются переменными ISP_LOGIN и ISP_PASS при сборке.
