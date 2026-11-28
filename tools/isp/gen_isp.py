@@ -95,6 +95,59 @@ def pause_band():
   </div>
 </section>'''
 
+MON = {"декабря": "дек", "февраля": "фев", "января": "янв", "ноября": "ноя"}
+def dshort(d):
+    """'Пт 4 декабря' -> ('Пт', '4 дек')"""
+    wd, day, mon = d.split(" ")
+    return wd, f"{day} {MON.get(mon, mon)}"
+
+def lshort(l):
+    return (l.replace("Эксперт по QGIS, Александр Кулешов", "эксперт QGIS + Кулешов")
+             .replace("Александр ", "").replace("Екатерина ", ""))
+
+def part(s):
+    m = re.match(r"часть (\d)", s["sub"])
+    return f" · ч. {m.group(1)}" if m else ""
+
+GENERAL = [
+    ("tasks", "01", "Задачи бюро", "Что бюро хочет получить и где это решается"),
+    ("schedule", "02", "Расписание", "Все занятия: даты, время, ведущие"),
+    ("how", "03", "Как устроено", "Формат, глубина, кто ведёт"),
+    ("prep", "04", "Рабочие места", "Что установить и к какой дате"),
+    ("rules", "05", "Правила данных", "Что можно загружать в ИИ"),
+]
+
+def side_nav():
+    o = ['<p class="sd-cap">Общее</p>',
+         '<a href="#toc" data-l="Содержание"><span>—</span>Содержание</a>']
+    for k, n, a, _ in GENERAL:
+        o.append(f'<a href="#{k}" data-l="{a}"><span>{n}</span>{t(a)}</a>')
+    cur = None
+    for i, s in enumerate(SESSIONS, 1):
+        if s["block"] != cur:
+            if cur == 1:
+                o.append(f'<a class="sd-pz" href="#pause" data-l="Пауза: задание между блоками"><span>пауза</span>Задание между блоками</a>')
+            cur = s["block"]; b = BLOCKS[cur]
+            o.append(f'<a class="sd-blk" href="#block{cur}" data-l="Блок {cur}: {b["name"]}"><span>Блок {cur} · {t(b["range"])} · {b["hours"]}&nbsp;ч</span>{t(b["name"])}</a>')
+        wd, d = dshort(s["date"])
+        o.append(f'<a class="sd-s" href="#s{i:02d}" data-l="{i:02d} · {s["title"]}{part(s)}"><span>{d}</span>{t(s["title"])}{part(s)}</a>')
+    return "\n      ".join(o)
+
+def toc_block(bn):
+    b = BLOCKS[bn]
+    rows = []
+    for i, s in enumerate(SESSIONS, 1):
+        if s["block"] != bn: continue
+        wd, d = dshort(s["date"])
+        fmt = "онлайн" if s["fmt"] == "Онлайн" else "очно"
+        rows.append(f'<a class="ts" href="#s{i:02d}"><span class="ts-n">{i:02d}</span><span class="ts-d">{wd}<b>{d}</b></span>'
+                    f'<span class="ts-t">{t(s["title"])}{part(s)}<small>{s["time"]} · {fmt} · {t(lshort(s["lead"]))}</small></span></a>')
+    return (f'<div class="toc-b toc-b{bn}"><a class="tb-h" href="#block{bn}"><span>Блок {bn} · {t(b["when"])}</span>'
+            f'<b>{t(b["name"])}</b><em>{t(b["range"])} · {b["hours"]}&nbsp;ч очно</em></a>{"".join(rows)}</div>')
+
+def toc_general():
+    return "".join(f'<a class="tc" href="#{k}"><span class="tc-n">{n}</span><span class="tc-t">{t(a)}<small>{t(d)}</small></span></a>' for k, n, a, d in GENERAL)
+
 def build():
     n_ses = len(SESSIONS)
     tasks = "".join(f'<li><span class="tk">{t(a)}</span><span class="tz">{t(b)}</span><span class="td">{t(c)}</span></li>' for a, b, c in TASKS)
@@ -142,7 +195,6 @@ html{{ background:var(--paper); scroll-behavior:smooth; }}
 body{{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); font-size:15px; line-height:1.35; -webkit-font-smoothing:antialiased; overflow-x:clip; }}
 a{{ color:inherit; }}
 :focus-visible{{ outline:2px solid var(--azure); outline-offset:3px; }}
-[id]{{ scroll-margin-top:16px; }}
 .band{{ position:relative; padding-left:var(--pad); padding-right:var(--pad-r);
   background-image:linear-gradient(to right, var(--grid) 0 1px, transparent 1px), linear-gradient(to bottom, var(--grid) 0 1px, transparent 1px);
   background-size:calc((100% - var(--pad) - var(--pad-r)) / var(--cols)) 100%, 100% var(--row);
@@ -163,8 +215,7 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
 .brand{{ grid-column:span 4; font-size:clamp(34px, 9.5vw, 46px); padding-bottom:18px; }}
 .head-text{{ grid-column:span 2; padding:2px 14px 16px 0; }}
 .head-menu{{ grid-column:span 2; display:flex; flex-direction:column; gap:9px; padding:4px 0 16px; }}
-.head-text--2{{ display:none; }}
-@media (min-width:900px){{ .brand{{ grid-column:span 2; font-size:40px; }} .head-text--2{{ display:block; grid-column:span 2; }} }}
+@media (min-width:900px){{ .brand{{ grid-column:span 5; font-size:52px; padding-right:20px; }} .head-text{{ grid-column:span 3; padding-top:6px; }} .head-text--2{{ grid-column:6 / span 3; padding-top:0; }} }}
 .marks{{ display:flex; align-items:center; justify-content:space-between; padding-block:14px 26px; }}
 .signs{{ display:flex; align-items:center; gap:8px; }}
 .signs svg{{ display:block; height:52px; width:auto; }}
@@ -174,37 +225,79 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
 .goto-cap{{ font-size:12.5px; font-weight:600; color:var(--muted); max-width:13ch; line-height:1.15; text-align:right; }}
 @media (min-width:900px){{ .num-badge{{ width:72px; height:72px; font-size:34px; }} .signs svg{{ height:72px; }} .goto svg{{ width:76px; height:76px; }} }}
 
-/* панель */
-.stage{{ position:relative; padding-block:8px 0; overflow:hidden; }}
-.panel{{ position:relative; z-index:1; margin-inline:auto; width:min(100%, 760px); background:var(--ink); border-radius:26px; padding:8px; }}
-.panel-in{{ background:var(--panel); border-radius:19px; padding:8px; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:6px; }}
-.panel-bar{{ grid-column:1/-1; display:flex; justify-content:space-between; padding:2px 8px; font-size:11px; font-weight:600; }}
-.tile{{ position:relative; border-radius:12px; padding:12px; min-height:200px; display:flex; flex-direction:column; justify-content:space-between; text-decoration:none; overflow:hidden; color:var(--ink); }}
-.tile h3{{ margin:0; font-size:17px; line-height:1; font-weight:800; letter-spacing:-0.03em; }}
-.tile .kick{{ display:block; margin:0 0 4px; font-size:10.5px; font-weight:600; opacity:.75; }}
-.tile .big{{ font-size:56px; line-height:.82; font-weight:800; letter-spacing:-0.06em; }}
-.tile .unit{{ font-size:11px; font-weight:600; line-height:1.15; text-align:right; }}
-.tile .big--s{{ font-size:44px; }}
-.tile-foot{{ display:flex; flex-direction:column; align-items:flex-start; gap:8px; }}
-.tile .unit{{ text-align:left !important; white-space:nowrap; }}
-.tile--blush{{ background:var(--blush); }}
-.tile--cobalt{{ background:var(--cobalt); color:var(--on-dark); }}
-.index{{ grid-column:1/-1; display:flex; flex-direction:column; gap:3px; }}
-.ix{{ display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:10px; padding:9px 10px; border-radius:9px; text-decoration:none; color:var(--ink); transition:filter .15s; }}
-.ix:hover{{ filter:brightness(.95); }}
-.ix-n{{ display:grid; place-items:center; width:20px; height:20px; border-radius:50%; background:var(--ink); color:var(--paper); font-size:11px; font-weight:800; }}
-.ix-t{{ font-size:19px; line-height:1; font-weight:800; letter-spacing:-0.035em; }}
-.ix-s{{ display:block; margin-top:3px; font-size:11px; font-weight:600; letter-spacing:0; opacity:.78; line-height:1.2; }}
-.ix-go{{ width:26px; height:26px; }}
-.ix--blush{{ background:var(--blush); }} .ix--powder{{ background:var(--powder); }} .ix--sand{{ background:var(--sand); }}
-.ix--cobalt{{ background:var(--cobalt); color:var(--on-dark); }}
-.ix--midnight{{ background:var(--midnight); color:var(--on-dark); }}
-.ix--cobalt .ix-n{{ background:var(--on-dark); color:var(--cobalt); }}
-.ix--midnight .ix-n{{ background:var(--blush); color:var(--midnight); }}
+/* рабочая среда: закреплённое меню */
+.app{{ position:relative; }}
+.topbar{{ position:sticky; top:0; z-index:40; display:flex; align-items:center; gap:12px; height:54px; padding:0 var(--pad-r) 0 var(--pad); background:rgba(246,244,240,.95); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); border-bottom:1.5px solid var(--ink); }}
+.tb-brand{{ font-size:15px; font-weight:800; letter-spacing:-0.035em; text-decoration:none; white-space:nowrap; }}
+.tb-cur{{ flex:1; min-width:0; font-size:12.5px; font-weight:600; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }}
+.tb-btn{{ flex:none; display:inline-flex; align-items:center; gap:8px; height:38px; padding:0 15px; border:0; border-radius:999px; background:var(--ink); color:var(--paper); font:700 13px/1 var(--sans); cursor:pointer; }}
+.tb-btn svg{{ width:14px; height:14px; }}
+.side{{ position:fixed; top:0; right:0; bottom:0; z-index:60; width:min(88vw, 360px); overflow-y:auto; overscroll-behavior:contain; padding:16px 20px 28px; background:var(--paper); border-left:1.5px solid var(--ink); transform:translateX(104%); transition:transform .25s ease; }}
+.nav-open .side{{ transform:none; }}
+.scrim{{ position:fixed; inset:0; z-index:55; background:rgba(10,15,26,.35); opacity:0; pointer-events:none; transition:opacity .2s; }}
+.nav-open .scrim{{ opacity:1; pointer-events:auto; }}
+.sd-top{{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; padding-bottom:12px; border-bottom:1.5px solid var(--ink); }}
+.sd-brand{{ text-decoration:none; font-size:19px; font-weight:800; letter-spacing:-0.04em; line-height:1; }}
+.sd-brand span{{ display:block; margin-top:4px; font-size:12px; font-weight:600; letter-spacing:0; color:var(--muted); }}
+.sd-close{{ flex:none; width:36px; height:36px; border:1.5px solid var(--ink); border-radius:50%; background:none; font:700 18px/1 var(--sans); color:var(--ink); cursor:pointer; }}
+.sd-asof{{ margin:10px 0 0; font-size:11.5px; line-height:1.25; font-weight:500; color:var(--muted); }}
+.sd-cap{{ margin:16px 0 4px; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gray); }}
+.sd-nav a{{ display:grid; grid-template-columns:46px minmax(0,1fr); gap:4px; align-items:baseline; margin:0 -8px; padding:6px 8px; border-radius:6px; text-decoration:none; font-size:13.5px; font-weight:600; line-height:1.2; letter-spacing:-0.01em; color:var(--ink); }}
+.sd-nav a > span{{ font-size:11.5px; font-weight:600; color:var(--gray); font-variant-numeric:tabular-nums; white-space:nowrap; }}
+.sd-nav a:hover{{ background:rgba(10,15,26,.06); }}
+.sd-nav a.is-on{{ background:var(--ink); color:var(--paper); }}
+.sd-nav a.is-on > span{{ color:rgba(246,244,240,.7); }}
+.sd-nav .sd-blk{{ display:block; margin-top:16px; padding-top:10px; border-top:1.5px solid var(--ink); border-radius:0; font-size:15.5px; font-weight:800; letter-spacing:-0.03em; }}
+.sd-nav .sd-blk > span{{ display:block; margin-bottom:3px; font-size:10.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }}
+.sd-nav .sd-blk.is-on{{ border-radius:6px; }}
+.sd-nav .sd-pz{{ margin-top:10px; border-top:1px dashed var(--gray); border-radius:0; padding-top:9px; }}
+.sd-nav .sd-pz.is-on{{ border-radius:6px; }}
+.sd-tg{{ display:inline-flex; align-items:center; min-height:40px; margin-top:20px; padding:0 16px; border-radius:999px; background:var(--ink); color:var(--paper); font-size:13px; font-weight:700; text-decoration:none; }}
+[id]{{ scroll-margin-top:66px; }}
+@media (min-width:1100px){{
+  .topbar, .scrim, .sd-close{{ display:none; }}
+  .app{{ display:grid; grid-template-columns:276px minmax(0,1fr); }}
+  .side{{ position:sticky; top:0; height:100vh; width:auto; z-index:1; transform:none; transition:none; border-left:0; border-right:1.5px solid var(--ink); padding:20px 20px 28px 24px; }}
+  [id]{{ scroll-margin-top:12px; }}
+}}
+.main{{ min-width:0; }}
+
+/* первый экран: содержание прямо на полотне */
+.toc-g{{ padding-block:18px 28px; row-gap:26px; }}
+.toc-cap{{ grid-column:1/-1; display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin:0; padding-bottom:10px; border-bottom:1.5px solid var(--ink); }}
+.toc-cap b{{ font-size:clamp(30px, 8vw, 48px); font-weight:800; letter-spacing:-0.05em; line-height:.9; }}
+.toc-cap span{{ font-size:12.5px; font-weight:600; color:var(--muted); text-align:right; }}
+.toc-gen, .toc-b{{ grid-column:1/-1; display:flex; flex-direction:column; }}
+.toc-k{{ margin:0 0 6px; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gray); }}
+.tc{{ display:grid; grid-template-columns:34px minmax(0,1fr); gap:8px; align-items:baseline; padding:10px 0; border-bottom:1px solid var(--grid); text-decoration:none; }}
+.tc-n{{ font-size:13px; font-weight:800; color:var(--gray); font-variant-numeric:tabular-nums; }}
+.tc-t{{ font-size:21px; font-weight:800; letter-spacing:-0.035em; line-height:1.02; }}
+.tc-t small, .ts-t small{{ display:block; margin-top:4px; font-size:12px; font-weight:500; letter-spacing:0; line-height:1.25; color:var(--muted); }}
+.tc:hover .tc-t, .ts:hover .ts-t, .tb-h:hover b{{ text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:1.5px; }}
+.tb-h{{ display:block; padding:0 0 10px; border-bottom:1.5px solid var(--ink); text-decoration:none; }}
+.tb-h span{{ display:block; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gray); }}
+.tb-h b{{ display:block; margin:5px 0 4px; font-size:24px; font-weight:800; letter-spacing:-0.04em; line-height:1; }}
+.tb-h em{{ font-style:normal; font-size:12.5px; font-weight:600; color:var(--muted); }}
+.ts{{ display:grid; grid-template-columns:24px 58px minmax(0,1fr); gap:8px; align-items:baseline; padding:9px 0; border-bottom:1px solid var(--grid); text-decoration:none; }}
+.ts-n{{ font-size:11.5px; font-weight:800; color:var(--gray); font-variant-numeric:tabular-nums; }}
+.ts-d{{ font-size:11px; font-weight:600; color:var(--muted); line-height:1.1; }}
+.ts-d b{{ display:block; font-size:14px; font-weight:800; color:var(--ink); letter-spacing:-0.02em; white-space:nowrap; }}
+.ts-t{{ font-size:15.5px; font-weight:700; letter-spacing:-0.02em; line-height:1.15; }}
+.toc-pz{{ grid-column:1/-1; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:4px 14px; align-items:baseline; padding:12px 0; border-top:1px dashed var(--gray); border-bottom:1px dashed var(--gray); text-decoration:none; }}
+.toc-pz b{{ font-size:17px; font-weight:800; letter-spacing:-0.025em; }}
+.toc-pz span{{ font-size:12.5px; font-weight:600; color:var(--muted); }}
+.toc-pz:hover b{{ text-decoration:underline; text-underline-offset:3px; }}
 @media (min-width:900px){{
-  .panel-in{{ grid-template-columns:repeat(4, minmax(0,1fr)); }}
-  .tile{{ min-height:250px; padding:14px; }} .tile h3{{ font-size:22px; }} .tile .big{{ font-size:84px; }} .tile .big--s{{ font-size:62px; }}
-  .index{{ grid-column:3 / span 2; grid-row:2; }} .ix-t{{ font-size:20px; }}
+  .toc-gen{{ grid-column:1 / span 3; padding-right:24px; }}
+  .toc-b1{{ grid-column:4 / span 5; }}
+  .toc-pz{{ grid-column:4 / span 5; }}
+  .toc-b2{{ grid-column:4 / span 5; }}
+}}
+@media (min-width:1360px){{
+  .toc-gen{{ grid-column:1 / span 2; padding-right:20px; }}
+  .toc-b1{{ grid-column:3 / span 3; padding-right:20px; }}
+  .toc-b2{{ grid-column:6 / span 3; grid-row:2; }}
+  .toc-pz{{ grid-column:3 / span 6; }}
 }}
 .word{{ position:relative; z-index:0; margin:-.1em 0 0; padding:0; font-weight:800; letter-spacing:-0.075em; line-height:.76; font-size:22vw; white-space:nowrap; width:max-content; }}
 .word-wrap{{ overflow:hidden; padding-bottom:1.2vw; }}
@@ -247,14 +340,12 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
 .sch .c-n a{{ font-weight:700; text-decoration:none; }}
 .sch .c-n a:hover{{ text-decoration:underline; text-underline-offset:3px; }}
 .sch .c-n .g{{ color:var(--muted); font-weight:500; }}
-.r-blk td{{ padding:12px 12px; border-bottom:0; }}
+.r-blk td{{ padding:22px 0 10px; border-bottom:1.5px solid var(--ink); }}
 .r-blk span{{ display:block; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; opacity:.8; }}
 .r-blk b{{ font-size:22px; font-weight:800; letter-spacing:-0.035em; margin-right:10px; }}
 .r-blk em{{ font-style:normal; font-size:13px; font-weight:600; white-space:nowrap; display:inline-block; }}
-.r-blk.b1 td{{ background:var(--blush); }}
-.r-blk.b2 td{{ background:var(--powder); }}
-.r-pause td{{ background:var(--sand); padding:12px; font-size:13.5px; }}
-.r-res td{{ background:var(--cell); padding:10px 12px; font-size:13.5px; }}
+.r-pause td{{ padding:12px 0; font-size:13.5px; border-top:1px dashed var(--gray); border-bottom:1px dashed var(--gray); }}
+.r-res td{{ padding:10px 0; font-size:13.5px; color:var(--muted); }}
 @media (max-width:899px){{
   .sch, .sch tbody, .sch tr, .sch td{{ display:block; width:100%; }}
   .sch thead{{ display:none; }}
@@ -266,7 +357,7 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
   .sch .c-t small{{ display:none; }}
   .sch .c-n, .sch .c-l, .sch .c-w{{ grid-column:1/-1; }}
   .sch .c-n a{{ font-size:17px; }}
-  .sch tr.r-blk td, .sch tr.r-pause td, .sch tr.r-res td{{ padding:10px 12px; }}
+  .sch tr.r-blk td{{ padding:18px 0 8px; }} .sch tr.r-pause td, .sch tr.r-res td{{ padding:10px 0; }}
 }}
 .sch-note{{ margin:12px 0 0; }}
 
@@ -355,12 +446,11 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
 .blk-head{{ padding-block:22px 20px; }}
 .blk-head .bh-k{{ grid-column:span 4; }}
 .blk-head .bh-t{{ grid-column:span 4; font-size:clamp(36px, 10vw, 72px); }}
-.blk-head.b1{{ background-color:var(--blush); }}
-.blk-head.b2{{ background-color:var(--powder); }}
+.blk-head{{ border-top:3px solid var(--ink); }}
 @media (min-width:900px){{ .blk-head .bh-k{{ grid-column:span 2; padding-top:8px; }} .blk-head .bh-t{{ grid-column:3 / span 6; }} }}
 
 /* пауза */
-.pause{{ background-color:var(--sand); }}
+.pause{{ border-top:1px dashed var(--gray); }}
 .pz{{ padding-block:24px 28px; row-gap:16px; }}
 .pz-k{{ grid-column:span 4; }}
 .pz-mark{{ margin:8px 0 0; font-size:26px; font-weight:800; letter-spacing:-0.04em; line-height:1; }}
@@ -381,7 +471,7 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
 @media (prefers-reduced-motion: reduce){{ *{{ transition:none !important; }} html{{ scroll-behavior:auto; }} }}
 @media print{{
   .band{{ background-image:none !important; }}
-  .marks, .stage, .word-wrap, .btn{{ display:none !important; }}
+  .topbar, .side, .scrim, .word-wrap, .btn{{ display:none !important; }} .app{{ display:block !important; }}
   .ses, .box, .pr, .tasks li{{ break-inside:avoid; }}
   .dark{{ background:#fff !important; color:var(--ink) !important; }}
   .dark .results li{{ color:var(--ink); }} .dk-title .g{{ color:var(--gray); }}
@@ -390,57 +480,41 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
 </style>
 </head>
 <body>
+<div class="topbar">
+  <a class="tb-brand" href="#top">ИСП × AI2ARCH</a>
+  <span class="tb-cur" id="tbCur">Содержание</span>
+  <button class="tb-btn" type="button" aria-controls="side" aria-expanded="false"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 3h12M1 7h12M1 11h12" stroke="currentColor" stroke-width="2"/></svg>Содержание</button>
+</div>
+<div class="app">
+<aside class="side" id="side" aria-label="Содержание пособия">
+  <div class="sd-top"><a class="sd-brand" href="#top">ИСП × AI2ARCH<span>Методическое пособие</span></a><button class="sd-close" type="button" aria-label="Закрыть меню">×</button></div>
+  <p class="sd-asof">Даты и&nbsp;время предварительные на&nbsp;{t(AS_OF)}&nbsp;г., время московское</p>
+  <nav class="sd-nav">
+      {side_nav()}
+  </nav>
+  <a class="sd-tg" href="https://t.me/alkuleshov" rel="noopener" target="_blank">Вопросы: @alkuleshov</a>
+</aside>
+<main class="main" id="top">
 
 <header class="band head">
   <div class="grid">
     <h1 class="display brand">ИСП × AI2ARCH <span class="g">Методическое пособие для&nbsp;сотрудников</span></h1>
     <p class="small head-text">Корпоративное обучение ИИ для&nbsp;проектного бюро ИСП: расписание и&nbsp;описание каждого занятия под&nbsp;задачи бюро.</p>
-    <nav class="head-menu" aria-label="Разделы">
-      <a class="bullet" href="#schedule">Расписание</a>
-      <a class="bullet" href="#block1">Занятия</a>
-      <a class="bullet" href="#prep">Подготовка рабочих мест</a>
-      <a class="bullet" href="#rules">Правила работы с&nbsp;данными</a>
-    </nav>
     <p class="small head-text head-text--2"><b>Даты и&nbsp;время предварительные на&nbsp;{t(AS_OF)}&nbsp;г.</b> Время московское. Час занятия&nbsp;— астрономический, 60&nbsp;минут.</p>
-  </div>
-  <div class="marks">
-    <div class="signs" aria-hidden="true">
-      <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="31" fill="#0A0F1A"/><path d="M32 9 L45 45 L32 37 L19 45 Z" fill="#F6F4F0"/><path d="M32 9 L32 37 L19 45 Z" fill="#0A0F1A" stroke="#F6F4F0" stroke-width="2.5" stroke-linejoin="round"/><text x="32" y="58" text-anchor="middle" font-family="Inter Tight, Arial, sans-serif" font-weight="800" font-size="10" fill="#F6F4F0">С</text></svg>
-      <svg viewBox="0 0 92 64"><path d="M60 14 L90 32 L60 50 Z" fill="#0A0F1A"/><circle cx="32" cy="32" r="28.5" fill="#F6F4F0" stroke="#0A0F1A" stroke-width="5"/><path d="M4 32 H60" stroke="#0A0F1A" stroke-width="4"/><text x="32" y="26" text-anchor="middle" font-family="Inter Tight, Arial, sans-serif" font-weight="800" font-size="17" fill="#0A0F1A">2</text><text x="32" y="50" text-anchor="middle" font-family="Inter Tight, Arial, sans-serif" font-weight="700" font-size="12" fill="#0A0F1A">ИСП</text></svg>
-    </div>
-    <a class="goto" href="#schedule" aria-label="К расписанию: {n_ses} занятий">
-      <span class="goto-cap">Занятий в&nbsp;программе, старт 4&nbsp;декабря</span>
-      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M14 50 L46 18 M22 16 H48 V42" fill="none" stroke="#0A0F1A" stroke-width="9" stroke-linecap="square"/></svg>
-      <span class="num-badge" aria-hidden="true">{n_ses}</span>
-    </a>
   </div>
 </header>
 
-<section class="band stage" aria-label="Два блока обучения">
-  <div class="panel">
-    <div class="panel-in">
-      <div class="panel-bar"><span>ИСП × AI2ARCH</span><span>Ростов-на-Дону · очно в&nbsp;бюро</span></div>
-      <a class="tile tile--blush" href="#block1">
-        <div><span class="kick">Блок 1 · {t(BLOCKS[1]["when"])}</span><h3>{t(BLOCKS[1]["name"])}</h3></div>
-        <div class="tile-foot"><span class="big">{BLOCKS[1]["hours"]}</span><span class="unit">ч очно · {t(BLOCKS[1]["range"])}</span></div>
-      </a>
-      <a class="tile tile--cobalt" href="#block2">
-        <div><span class="kick">Блок 2 · {t(BLOCKS[2]["when"])}</span><h3>{t(BLOCKS[2]["name"])}</h3></div>
-        <div class="tile-foot"><span class="big big--s">{BLOCKS[2]["hours"]}</span><span class="unit">ч очно · {t(BLOCKS[2]["range"])}</span></div>
-      </a>
-      <nav class="index" aria-label="Содержание">
-        <a class="ix ix--blush" href="#schedule"><span class="ix-n">1</span><span class="ix-t">Расписание<span class="ix-s">{n_ses} занятий, даты и&nbsp;время</span></span>{GO}</a>
-        <a class="ix ix--cobalt" href="#how"><span class="ix-n">2</span><span class="ix-t">Как устроено<span class="ix-s">Формат, глубина, ведущие</span></span>{GO}</a>
-        <a class="ix ix--midnight" href="#prep"><span class="ix-n">3</span><span class="ix-t">Рабочие места<span class="ix-s">Что установить и&nbsp;к&nbsp;какой дате</span></span>{GO}</a>
-        <a class="ix ix--powder" href="#rules"><span class="ix-n">4</span><span class="ix-t">Правила данных<span class="ix-s">Что можно загружать в&nbsp;ИИ</span></span>{GO}</a>
-        <a class="ix ix--sand" href="#pause"><span class="ix-n">5</span><span class="ix-t">Между блоками<span class="ix-s">Задание на&nbsp;паузу</span></span>{GO}</a>
-      </nav>
-    </div>
+<section class="band toc" id="toc" aria-labelledby="toc-h">
+  <div class="grid toc-g">
+    <h2 class="toc-cap" id="toc-h"><b>Содержание</b><span>{n_ses} занятий · 4&nbsp;декабря&nbsp;— 24&nbsp;февраля</span></h2>
+    <nav class="toc-gen" aria-label="Общие разделы"><p class="toc-k">Общее</p>{toc_general()}</nav>
+    {toc_block(1)}
+    <a class="toc-pz" href="#pause"><b>Пауза между блоками: задание на&nbsp;живых проектах</b><span>{t(PAUSE["range"])}</span></a>
+    {toc_block(2)}
   </div>
-  <div class="word-wrap"><p class="word" aria-hidden="true">ИСП×AI2ARCH</p></div>
 </section>
 
-<section aria-labelledby="tasks-h">
+<section aria-labelledby="tasks-h" id="tasks">
   <div class="band sec-head"><div class="grid">
     <h2 class="display sec-title" id="tasks-h">Задачи бюро <span class="g">и&nbsp;где они решаются</span></h2>
     <p class="small sec-note">Программа собрана под задачи, которые назвало бюро. Команда прошла базовый курс по&nbsp;нейросетям и&nbsp;работает в&nbsp;ChatGPT Plus и&nbsp;Qwen, поэтому начинаем сразу с&nbsp;работы на&nbsp;объекте.</p>
@@ -520,7 +594,11 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
       <a class="btn" href="https://t.me/alkuleshov" rel="noopener" target="_blank">Telegram @alkuleshov</a>
     </div>
   </div>
+  <div class="word-wrap"><p class="word" aria-hidden="true">ИСП×AI2ARCH</p></div>
 </footer>
+</main>
+</div>
+<div class="scrim" aria-hidden="true"></div>
 
 <script>
 /* Марка растягивается ровно на ширину полосы */
@@ -529,6 +607,32 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
   function fit(){{ w.style.fontSize='100px'; var box=w.parentNode.clientWidth; var k=box/w.scrollWidth; w.style.fontSize=(100*k)+'px'; }}
   fit(); window.addEventListener('resize', fit);
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
+}})();
+/* Меню: открытие на телефоне и подсветка текущего раздела */
+(function(){{
+  var body=document.body, btn=document.querySelector('.tb-btn'), side=document.getElementById('side'), cur=document.getElementById('tbCur');
+  function open(v){{ body.classList.toggle('nav-open', v); btn.setAttribute('aria-expanded', v?'true':'false'); }}
+  btn.addEventListener('click', function(){{ open(!body.classList.contains('nav-open')); }});
+  document.querySelector('.sd-close').addEventListener('click', function(){{ open(false); }});
+  document.querySelector('.scrim').addEventListener('click', function(){{ open(false); }});
+  document.addEventListener('keydown', function(e){{ if(e.key==='Escape') open(false); }});
+  var links=[].slice.call(side.querySelectorAll('.sd-nav a'));
+  links.forEach(function(a){{ a.addEventListener('click', function(){{ open(false); }}); }});
+  var map=links.map(function(a){{ return {{a:a, el:document.getElementById(a.getAttribute('href').slice(1))}}; }}).filter(function(m){{ return m.el; }});
+  var last=null, tick=false;
+  function spy(){{
+    tick=false; var line=Math.min(window.innerHeight*0.3, 260), on=null;
+    for(var i=0;i<map.length;i++){{ if(map[i].el.getBoundingClientRect().top-line<=0) on=map[i]; }}
+    if(!on) on=map[0];
+    if(on===last) return; last=on;
+    links.forEach(function(a){{ a.classList.remove('is-on'); a.removeAttribute('aria-current'); }});
+    on.a.classList.add('is-on'); on.a.setAttribute('aria-current','location');
+    cur.textContent=on.a.getAttribute('data-l')||'';
+    var r=on.a.offsetTop, h=side.clientHeight;
+    if(r<side.scrollTop+60 || r>side.scrollTop+h-80) side.scrollTop=Math.max(0, r-h/3);
+  }}
+  window.addEventListener('scroll', function(){{ if(!tick){{ tick=true; requestAnimationFrame(spy); }} }}, {{passive:true}});
+  window.addEventListener('resize', spy); spy();
 }})();
 </script>
 </body>
