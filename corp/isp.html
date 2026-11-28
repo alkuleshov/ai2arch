@@ -68,32 +68,33 @@ h4{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; }
 .tb-cur{ flex:1; min-width:0; font-size:12.5px; font-weight:600; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .tb-btn{ flex:none; display:inline-flex; align-items:center; gap:8px; height:38px; padding:0 15px; border:0; border-radius:999px; background:var(--ink); color:var(--paper); font:700 13px/1 var(--sans); cursor:pointer; }
 .tb-btn svg{ width:14px; height:14px; }
-.side{ position:fixed; top:0; right:0; bottom:0; z-index:60; width:min(88vw, 360px); overflow-y:auto; overscroll-behavior:contain; padding:16px 20px 28px; background:var(--paper); border-left:1.5px solid var(--ink); transform:translateX(104%); transition:transform .25s ease; }
+.side{ position:fixed; top:0; right:0; bottom:0; z-index:60; width:min(88vw, 360px); overflow-y:auto; overscroll-behavior:contain; padding:14px 16px 14px 20px; background:var(--paper); border-left:1.5px solid var(--ink); transform:translateX(104%); transition:transform .25s ease; }
 .nav-open .side{ transform:none; }
 .scrim{ position:fixed; inset:0; z-index:55; background:rgba(10,15,26,.35); opacity:0; pointer-events:none; transition:opacity .2s; }
 .nav-open .scrim{ opacity:1; pointer-events:auto; }
-.sd-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; padding-bottom:12px; border-bottom:1.5px solid var(--ink); }
-.sd-brand{ text-decoration:none; font-size:19px; font-weight:800; letter-spacing:-0.04em; line-height:1; }
-.sd-brand span{ display:block; margin-top:4px; font-size:12px; font-weight:600; letter-spacing:0; color:var(--muted); }
-.sd-close{ flex:none; width:36px; height:36px; border:1.5px solid var(--ink); border-radius:50%; background:none; font:700 18px/1 var(--sans); color:var(--ink); cursor:pointer; }
-.sd-asof{ margin:10px 0 0; font-size:11.5px; line-height:1.25; font-weight:500; color:var(--muted); }
-.sd-cap{ margin:16px 0 4px; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gray); }
-.sd-nav a{ display:grid; grid-template-columns:46px minmax(0,1fr); gap:4px; align-items:baseline; margin:0 -8px; padding:6px 8px; border-radius:6px; text-decoration:none; font-size:13.5px; font-weight:600; line-height:1.2; letter-spacing:-0.01em; color:var(--ink); }
-.sd-nav a > span{ font-size:11.5px; font-weight:600; color:var(--gray); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.side{ display:flex; flex-direction:column; }
+.sd-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; padding-bottom:10px; border-bottom:1.5px solid var(--ink); }
+.sd-brand{ text-decoration:none; font-size:17px; font-weight:800; letter-spacing:-0.04em; line-height:1; }
+.sd-brand span{ display:block; margin-top:3px; font-size:11px; font-weight:600; letter-spacing:0; color:var(--muted); }
+.sd-close{ flex:none; width:32px; height:32px; border:1.5px solid var(--ink); border-radius:50%; background:none; font:700 17px/1 var(--sans); color:var(--ink); cursor:pointer; }
+.sd-nav{ --rh:clamp(21px, calc((100vh - 190px) / 25), 28px); margin-top:8px; display:flex; flex-direction:column; }
+.sd-nav a{ display:grid; grid-template-columns:40px minmax(0,1fr) auto; gap:4px; align-items:center; height:var(--rh); margin:0 -8px; padding:0 8px; border-radius:5px; text-decoration:none; font-size:12.5px; font-weight:600; letter-spacing:-0.01em; color:var(--ink); white-space:nowrap; overflow:hidden; }
+.sd-nav a > span{ font-size:10.5px; font-weight:600; color:var(--gray); font-variant-numeric:tabular-nums; }
 .sd-nav a:hover{ background:rgba(10,15,26,.06); }
 .sd-nav a.is-on{ background:var(--ink); color:var(--paper); }
-.sd-nav a.is-on > span{ color:rgba(246,244,240,.7); }
-.sd-nav .sd-blk{ display:block; margin-top:16px; padding-top:10px; border-top:1.5px solid var(--ink); border-radius:0; font-size:15.5px; font-weight:800; letter-spacing:-0.03em; }
-.sd-nav .sd-blk > span{ display:block; margin-bottom:3px; font-size:10.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
-.sd-nav .sd-blk.is-on{ border-radius:6px; }
-.sd-nav .sd-pz{ margin-top:10px; border-top:1px dashed var(--gray); border-radius:0; padding-top:9px; }
-.sd-nav .sd-pz.is-on{ border-radius:6px; }
-.sd-tg{ display:inline-flex; align-items:center; min-height:40px; margin-top:20px; padding:0 16px; border-radius:999px; background:var(--ink); color:var(--paper); font-size:13px; font-weight:700; text-decoration:none; }
+.sd-nav a.is-on > span, .sd-nav a.is-on em{ color:rgba(246,244,240,.7); }
+.sd-nav .sd-blk{ margin-top:8px; border-top:1.5px solid var(--ink); border-radius:0; font-size:13.5px; font-weight:800; letter-spacing:-0.03em; grid-template-columns:40px minmax(0,1fr) auto; }
+.sd-nav .sd-blk em{ font-style:normal; font-size:10.5px; font-weight:600; color:var(--gray); }
+.sd-nav .sd-blk.is-on{ border-radius:5px; }
+.sd-nav .sd-pz{ border-top:1px dashed var(--gray); border-radius:0; }
+.sd-nav .sd-pz.is-on{ border-radius:5px; }
+.sd-tg{ margin-top:auto; padding-top:10px; font-size:11.5px; font-weight:700; color:var(--muted); text-decoration:none; }
+.sd-tg:hover{ color:var(--ink); text-decoration:underline; }
 [id]{ scroll-margin-top:66px; }
 @media (min-width:1100px){
   .topbar, .scrim, .sd-close{ display:none; }
   .app{ display:grid; grid-template-columns:276px minmax(0,1fr); }
-  .side{ position:sticky; top:0; height:100vh; width:auto; z-index:1; transform:none; transition:none; border-left:0; border-right:1.5px solid var(--ink); padding:20px 20px 28px 24px; }
+  .side{ position:sticky; top:0; height:100vh; width:auto; z-index:1; transform:none; transition:none; border-left:0; border-right:1.5px solid var(--ink); padding:16px 16px 14px 24px; }
   [id]{ scroll-margin-top:12px; }
 }
 .main{ min-width:0; }
@@ -323,31 +324,29 @@ h4{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; }
 <div class="app">
 <aside class="side" id="side" aria-label="Содержание пособия">
   <div class="sd-top"><a class="sd-brand" href="#top">ИСП × AI2ARCH<span>Методическое пособие</span></a><button class="sd-close" type="button" aria-label="Закрыть меню">×</button></div>
-  <p class="sd-asof">Даты и&nbsp;время предварительные на&nbsp;28&nbsp;ноября 2026&nbsp;г., время московское</p>
   <nav class="sd-nav">
-      <p class="sd-cap">Общее</p>
       <a href="#toc" data-l="Содержание"><span>—</span>Содержание</a>
       <a href="#tasks" data-l="Задачи бюро"><span>01</span>Задачи бюро</a>
       <a href="#schedule" data-l="Расписание"><span>02</span>Расписание</a>
       <a href="#how" data-l="Как устроено"><span>03</span>Как устроено</a>
       <a href="#prep" data-l="Рабочие места"><span>04</span>Рабочие места</a>
       <a href="#rules" data-l="Правила данных"><span>05</span>Правила данных</a>
-      <a class="sd-blk" href="#block1" data-l="Блок 1: Концепция и подача"><span>Блок 1 · 4–11 декабря · 12&nbsp;ч</span>Концепция и&nbsp;подача</a>
+      <a class="sd-blk" href="#block1" data-l="Блок 1: Концепция и подача"><span>Блок 1</span>Концепция и&nbsp;подача</a>
       <a class="sd-s" href="#s01" data-l="01 · Старт"><span>4 дек</span>Старт</a>
       <a class="sd-s" href="#s02" data-l="02 · Концепции и ИИ-ТЗ · ч. 1"><span>7 дек</span>Концепции и&nbsp;ИИ-ТЗ · ч. 1</a>
       <a class="sd-s" href="#s03" data-l="03 · Концепции и ИИ-ТЗ · ч. 2"><span>8 дек</span>Концепции и&nbsp;ИИ-ТЗ · ч. 2</a>
       <a class="sd-s" href="#s04" data-l="04 · Визуализации"><span>8 дек</span>Визуализации</a>
-      <a class="sd-s" href="#s05" data-l="05 · Презентации и подача"><span>10 дек</span>Презентации и&nbsp;подача</a>
-      <a class="sd-s" href="#s06" data-l="06 · Тексты и документы"><span>10 дек</span>Тексты и&nbsp;документы</a>
-      <a class="sd-s" href="#s07" data-l="07 · Нормы и проверка документации"><span>11 дек</span>Нормы и&nbsp;проверка документации</a>
-      <a class="sd-pz" href="#pause" data-l="Пауза: задание между блоками"><span>пауза</span>Задание между блоками</a>
-      <a class="sd-blk" href="#block2" data-l="Блок 2: Участок, модель, команда"><span>Блок 2 · 8–24 февраля · 13,5&nbsp;ч</span>Участок, модель, команда</a>
-      <a class="sd-s" href="#s08" data-l="08 · Анализ участка (QGIS) · ч. 1"><span>8 фев</span>Анализ участка (QGIS) · ч. 1</a>
+      <a class="sd-s" href="#s05" data-l="05 · Презентации и подача"><span>10 дек</span>Презентации</a>
+      <a class="sd-s" href="#s06" data-l="06 · Тексты и документы"><span>10 дек</span>Тексты</a>
+      <a class="sd-s" href="#s07" data-l="07 · Нормы и проверка документации"><span>11 дек</span>Нормы и&nbsp;проверка</a>
+      <a class="sd-pz" href="#pause" data-l="Пауза: задание между блоками"><span>пауза</span>Задание на паузу</a>
+      <a class="sd-blk" href="#block2" data-l="Блок 2: Участок, модель, команда"><span>Блок 2</span>Участок, модель, команда</a>
+      <a class="sd-s" href="#s08" data-l="08 · Анализ участка (QGIS) · ч. 1"><span>8 фев</span>Анализ участка · ч. 1</a>
       <a class="sd-s" href="#s09" data-l="09 · Revit + ИИ"><span>9 фев</span>Revit + ИИ</a>
       <a class="sd-s" href="#s10" data-l="10 · ИИ для ГИПа"><span>10 фев</span>ИИ&nbsp;для ГИПа</a>
-      <a class="sd-s" href="#s11" data-l="11 · ИИ для инженерных разделов"><span>10 фев</span>ИИ&nbsp;для инженерных разделов</a>
+      <a class="sd-s" href="#s11" data-l="11 · ИИ для инженерных разделов"><span>10 фев</span>ИИ&nbsp;для инженеров</a>
       <a class="sd-s" href="#s12" data-l="12 · AutoCAD + ИИ"><span>11 фев</span>AutoCAD + ИИ</a>
-      <a class="sd-s" href="#s13" data-l="13 · Анализ участка (QGIS) · ч. 2"><span>15 фев</span>Анализ участка (QGIS) · ч. 2</a>
+      <a class="sd-s" href="#s13" data-l="13 · Анализ участка (QGIS) · ч. 2"><span>15 фев</span>Анализ участка · ч. 2</a>
       <a class="sd-s" href="#s14" data-l="14 · Итоговая сессия"><span>24 фев</span>Итоговая сессия</a>
   </nav>
   <a class="sd-tg" href="https://t.me/alkuleshov" rel="noopener" target="_blank">Вопросы: @alkuleshov</a>
