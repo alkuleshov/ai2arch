@@ -1,0 +1,587 @@
+{
+ "h1": "Расписание потока",
+ "lead": "Все встречи — синхронные созвоны прямо в чате потока в Яндекс Телемост, в назначенное время. Время московское. Названия тем ведут в соответствующий раздел пособия.",
+ "cal": "<div class=\"cal-subscribe\" id=\"calSubscribe\">\n<h3>Календарь потока</h3>\n<div class=\"cal-subscribe-actions\">\n<a aria-label=\"Подписаться на календарь\" class=\"section-end-btn primary\" href=\"webcal://ai2arch.ru/redev-calendar.ics\">Подписаться на календарь</a>\n<a class=\"cal-copy-link\" href=\"https://ai2arch.ru/redev-calendar.ics\" id=\"calCopy\">Скопировать адрес</a>\n</div>\n<p class=\"cal-subscribe-note\">Подписка обновляется сама.</p>\n</div>",
+ "end": [
+  "Нашли нестыковку в датах — напишите в чат потока."
+ ],
+ "rows": [
+  {
+   "k": "module",
+   "html": "<span class=\"mod-title\">Вводный модуль</span><span class=\"mod-dates\">5–8 ноября</span>"
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "day-start"
+   ],
+   "cells": [
+    "5 ноя <span class=\"wd\">чт</span>",
+    "18:00–19:30",
+    "<div class=\"slot\"><span aria-label=\"Встреча: присутствие обязательно\" class=\"meet-badge meeting\" title=\"Встреча: присутствие обязательно\">Встреча</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t01\">Встреча 1 — жизненный цикл объекта, кейс «C52»</a></div></div>",
+    "<span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "self-row"
+   ],
+   "cells": [
+    "",
+    "сделать до Лекции 1.2",
+    "<div class=\"slot\"><span class=\"meet-badge self\">Самостоятельно</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t02\">0.2 Роли и трек</a></div></div>",
+    ""
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "self-row"
+   ],
+   "cells": [
+    "",
+    "сделать до Лекции 1.2",
+    "<div class=\"slot\"><span class=\"meet-badge self\">Самостоятельно</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t03\">0.3 Практикум: ошибка модели</a></div></div>",
+    ""
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "self-row"
+   ],
+   "cells": [
+    "",
+    "сделать до Лекции 1.2",
+    "<div class=\"slot\"><span class=\"meet-badge self\">Самостоятельно</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#tools\">Два контура инструментов</a></div></div>",
+    ""
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "module",
+   "html": "<span class=\"mod-title\">Модуль 1 · Контекст территории</span><span class=\"mod-dates\">8–15 ноября</span>"
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "self-row"
+   ],
+   "cells": [
+    "",
+    "сделать до Лекции 1.2",
+    "<div class=\"slot\"><span class=\"meet-badge self\">Самостоятельно</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t11\">1.1 ПЗЗ и нормативная карточка</a></div></div>",
+    ""
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "day-start"
+   ],
+   "cells": [
+    "8 ноя <span class=\"wd\">вс</span>",
+    "18:00–19:30",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t12-1\">1.2 ч.1 Окружение и источники данных</a></div></div>",
+    "<span class=\"who-p\">Петренко</span>"
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row"
+   ],
+   "cells": [
+    "<span class=\"sr-only\">8 ноя · вс</span>",
+    "19:30–21:00",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t12-2\">1.2 ч.2 ИИ-обработка, аудитория, сценарии</a></div></div>",
+    "<span class=\"who-p\">Петренко</span>"
+   ],
+   "dcls": [
+    "date-cell",
+    "date-empty"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "day-start"
+   ],
+   "cells": [
+    "10 ноя <span class=\"wd\">вт</span>",
+    "18:00–19:30",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t12-3\">1.2 ч.3 ГИС-связка, ЦИАН, ставки</a></div></div>",
+    "<span class=\"who-p\">Петренко</span>"
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row"
+   ],
+   "cells": [
+    "<span class=\"sr-only\">10 ноя · вт</span>",
+    "19:30–21:00",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t13\">1.3 Продуктовая гипотеза (треки А и Б)</a></div></div>",
+    "<span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell",
+    "date-empty"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "day-start"
+   ],
+   "cells": [
+    "15 ноя <span class=\"wd\">вс</span>",
+    "18:00–19:30",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t14\">1.4 Сборка досье контекста</a></div></div>",
+    "<span class=\"who-p\">Петренко</span>"
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "module",
+   "html": "<span class=\"mod-title\">Модуль 2 · Функции и экономика</span><span class=\"mod-dates\">16–18 ноября</span>"
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "day-start"
+   ],
+   "cells": [
+    "16 ноя <span class=\"wd\">пн</span>",
+    "18:00–19:30",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t21\">2.1 HBU и сценарии, ч.1 (тесты 1–2)</a></div></div>",
+    "<span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row"
+   ],
+   "cells": [
+    "<span class=\"sr-only\">16 ноя · пн</span>",
+    "19:30–21:00",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t21\">2.1 HBU и сценарии, ч.2 (тесты 3–4)</a></div></div>",
+    "<span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell",
+    "date-empty"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "day-start"
+   ],
+   "cells": [
+    "17 ноя <span class=\"wd\">вт</span>",
+    "18:00–19:30",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t21\">2.1 HBU и сценарии, ч.3 (баланс площадей)</a></div></div>",
+    "<span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row"
+   ],
+   "cells": [
+    "<span class=\"sr-only\">17 ноя · вт</span>",
+    "19:30–21:00",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t22\">2.2 Часть 1</a></div></div>",
+    "<span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell",
+    "date-empty"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "day-start"
+   ],
+   "cells": [
+    "18 ноя <span class=\"wd\">ср</span>",
+    "18:00–19:30",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t22\">2.2 Часть 2</a></div></div>",
+    "<span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row"
+   ],
+   "cells": [
+    "<span class=\"sr-only\">18 ноя · ср</span>",
+    "19:30–21:00",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t22\">2.2 Часть 3</a></div></div>",
+    "<span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell",
+    "date-empty"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "self-row",
+    "dated-self"
+   ],
+   "cells": [
+    "18 ноя – 1 дек",
+    "сделать до Лекции 2.4",
+    "<div class=\"slot\"><span class=\"meet-badge self\">Самостоятельно</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-read-income.html\">2.2 · Урок для чтения: Доходная база, CAPEX/OPEX</a></div></div>",
+    ""
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row"
+   ],
+   "cells": [
+    "<span class=\"sr-only\">18 ноя · ср</span>",
+    "21:00–22:30",
+    "<div class=\"slot\"><span aria-label=\"Встреча: присутствие обязательно\" class=\"meet-badge meeting\" title=\"Встреча: присутствие обязательно\">Встреча</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t23\">Встреча 2 — разбор досье, вопросы</a></div></div>",
+    "<span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell",
+    "date-empty"
+   ]
+  },
+  {
+   "k": "module",
+   "html": "<span class=\"mod-title\">Модуль 2 · Функции и экономика</span><span class=\"mod-sub\">продолжение</span><span class=\"mod-dates\">23–24 ноября</span>"
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "day-start"
+   ],
+   "cells": [
+    "23 ноя <span class=\"wd\">пн</span>",
+    "18:00–19:30",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t24\">2.4 Стресс-тест финмодели, ч.1</a></div></div>",
+    "<span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row"
+   ],
+   "cells": [
+    "<span class=\"sr-only\">23 ноя · пн</span>",
+    "19:30–21:00",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t24\">2.4 Стресс-тест финмодели, ч.2</a></div></div>",
+    "<span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell",
+    "date-empty"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "day-start"
+   ],
+   "cells": [
+    "24 ноя <span class=\"wd\">вт</span>",
+    "18:00–19:30",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t25\">2.5 Задание №3 — упаковка (Трек А) и финмодель (Трек Б)</a></div></div>",
+    "<span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "pause",
+   "t": "25–29 ноября — пауза (время на домашние задания)"
+  },
+  {
+   "k": "module",
+   "html": "<span class=\"mod-title\">Модуль 3 · Визуальная упаковка</span><span class=\"mod-sub\">старт</span><span class=\"mod-dates\">30 ноября</span>"
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "day-start"
+   ],
+   "cells": [
+    "30 ноя <span class=\"wd\">пн</span>",
+    "18:00–19:30",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t31\">3.1 Мудборд, референсы, промпт-схема, ч.1</a></div></div>",
+    "<span class=\"who-p\">Петренко</span>"
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row"
+   ],
+   "cells": [
+    "<span class=\"sr-only\">30 ноя · пн</span>",
+    "19:30–21:00",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t31\">3.1 Мудборд, референсы, промпт-схема, ч.2</a></div></div>",
+    "<span class=\"who-p\">Петренко</span>"
+   ],
+   "dcls": [
+    "date-cell",
+    "date-empty"
+   ]
+  },
+  {
+   "k": "module",
+   "html": "<span class=\"mod-title\">Модуль 3 · Визуальная упаковка</span><span class=\"mod-sub\">продолжение</span><span class=\"mod-dates\">1–2 декабря</span>"
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "day-start"
+   ],
+   "cells": [
+    "1 дек <span class=\"wd\">вт</span>",
+    "18:00–19:30",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t32\">3.2 Live-демо — генерация</a></div></div>",
+    "<span class=\"who-p\">Петренко</span>"
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row"
+   ],
+   "cells": [
+    "<span class=\"sr-only\">1 дек · вт</span>",
+    "19:30–21:00",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t32\">3.2 Live-демо — Flux.1 + ControlNet</a></div></div>",
+    "<span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell",
+    "date-empty"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "self-row"
+   ],
+   "cells": [
+    "",
+    "сделать до Встречи 3",
+    "<div class=\"slot\"><span class=\"meet-badge self\">Самостоятельно</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t33\">3.3 Доводка</a></div></div>",
+    ""
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "self-row"
+   ],
+   "cells": [
+    "",
+    "сделать до Встречи 3",
+    "<div class=\"slot\"><span class=\"meet-badge self\">Самостоятельно</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-guide.html#t34\">3.4 Сториборд</a></div></div>",
+    ""
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "module",
+   "html": "<span class=\"mod-title\">Модуль 4 · Синтез и защита</span><span class=\"mod-dates\">2–6 декабря</span>"
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "day-start"
+   ],
+   "cells": [
+    "2 дек <span class=\"wd\">ср</span>",
+    "18:00–19:30",
+    "<div class=\"slot\"><span aria-label=\"Встреча: присутствие обязательно\" class=\"meet-badge meeting\" title=\"Встреча: присутствие обязательно\">Встреча</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-m4-meeting3.html\">Встреча 3 — итоги Модуля 3</a></div></div>",
+    "<span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row"
+   ],
+   "cells": [
+    "<span class=\"sr-only\">2 дек · ср</span>",
+    "19:30–21:00",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-m4-structure.html\">4.1 Начало Модуля 4 — структура документа</a></div></div>",
+    "<span class=\"who-p\">Петренко</span>"
+   ],
+   "dcls": [
+    "date-cell",
+    "date-empty"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "day-start"
+   ],
+   "cells": [
+    "3 дек <span class=\"wd\">чт</span>",
+    "18:00–19:30",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-m4-assembly.html\">4.2 Сборка в Gamma / Claude</a></div></div>",
+    "<span class=\"who-p\">Петренко</span>"
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row"
+   ],
+   "cells": [
+    "<span class=\"sr-only\">3 дек · чт</span>",
+    "19:30–21:00",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-m4-norms-econ.html\">4.3 Нормы и экономика</a></div></div>",
+    "<span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell",
+    "date-empty"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "day-start"
+   ],
+   "cells": [
+    "5 дек <span class=\"wd\">сб</span>",
+    "18:00–19:30",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-m4-draft.html\">4.4 Черновик итогового документа</a></div></div>",
+    "<span class=\"who-p\">Петренко</span> + <span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row"
+   ],
+   "cells": [
+    "<span class=\"sr-only\">5 дек · сб</span>",
+    "19:30–20:30",
+    "<div class=\"slot\"><span aria-label=\"Лекция: присутствие по возможности\" class=\"meet-badge lecture\" title=\"Лекция: присутствие по возможности\">Лекция</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-m4-pitch.html\">4.5 Видеопитч</a> <span class=\"task-chip\">Задание №5 обязательно</span></div></div>",
+    "<span class=\"who-p\">Петренко</span> + <span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell",
+    "date-empty"
+   ]
+  },
+  {
+   "k": "slot",
+   "cls": [
+    "slot-row",
+    "day-start"
+   ],
+   "cells": [
+    "6 дек <span class=\"wd\">вс</span>",
+    "по расписанию дня",
+    "<div class=\"slot\"><span aria-label=\"Встреча: присутствие обязательно\" class=\"meet-badge meeting\" title=\"Встреча: присутствие обязательно\">Встреча</span><div class=\"slot-main\"><a class=\"topic-link\" href=\"redev-m4-demoday.html\">Demo Day — питч и разбор результатов экспертизы</a></div></div>",
+    "<span class=\"who-k\">Кулешов</span>"
+   ],
+   "dcls": [
+    "date-cell"
+   ]
+  }
+ ]
+}
