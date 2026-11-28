@@ -77,13 +77,13 @@ h4{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; }
 .sd-brand{ text-decoration:none; font-size:17px; font-weight:800; letter-spacing:-0.04em; line-height:1; }
 .sd-brand span{ display:block; margin-top:3px; font-size:11px; font-weight:600; letter-spacing:0; color:var(--muted); }
 .sd-close{ flex:none; width:32px; height:32px; border:1.5px solid var(--ink); border-radius:50%; background:none; font:700 17px/1 var(--sans); color:var(--ink); cursor:pointer; }
-.sd-nav{ --rh:clamp(21px, calc((100vh - 190px) / 25), 28px); margin-top:8px; display:flex; flex-direction:column; }
-.sd-nav a{ display:grid; grid-template-columns:40px minmax(0,1fr) auto; gap:4px; align-items:center; height:var(--rh); margin:0 -8px; padding:0 8px; border-radius:5px; text-decoration:none; font-size:12.5px; font-weight:600; letter-spacing:-0.01em; color:var(--ink); white-space:nowrap; overflow:hidden; }
-.sd-nav a > span{ font-size:10.5px; font-weight:600; color:var(--gray); font-variant-numeric:tabular-nums; }
+.sd-nav{ --rh:clamp(21px, calc((100vh - 190px) / 25), 31px); margin-top:8px; display:flex; flex-direction:column; }
+.sd-nav a{ display:grid; grid-template-columns:46px minmax(0,1fr) auto; gap:4px; align-items:center; height:var(--rh); margin:0 -8px; padding:0 8px; border-radius:5px; text-decoration:none; font-size:clamp(12px, calc(var(--rh) * .47), 14px); font-weight:600; letter-spacing:-0.01em; color:var(--ink); white-space:nowrap; overflow:hidden; }
+.sd-nav a > span{ font-size:clamp(10.5px, calc(var(--rh) * .4), 12px); font-weight:600; color:var(--gray); font-variant-numeric:tabular-nums; }
 .sd-nav a:hover{ background:rgba(10,15,26,.06); }
 .sd-nav a.is-on{ background:var(--ink); color:var(--paper); }
 .sd-nav a.is-on > span, .sd-nav a.is-on em{ color:rgba(246,244,240,.7); }
-.sd-nav .sd-blk{ margin-top:8px; border-top:1.5px solid var(--ink); border-radius:0; font-size:13.5px; font-weight:800; letter-spacing:-0.03em; grid-template-columns:40px minmax(0,1fr) auto; }
+.sd-nav .sd-blk{ margin-top:8px; border-top:1.5px solid var(--ink); border-radius:0; font-size:clamp(13px, calc(var(--rh) * .5), 15px); font-weight:800; letter-spacing:-0.03em; grid-template-columns:46px minmax(0,1fr) auto; }
 .sd-nav .sd-blk em{ font-style:normal; font-size:10.5px; font-weight:600; color:var(--gray); }
 .sd-nav .sd-blk.is-on{ border-radius:5px; }
 .sd-nav .sd-pz{ border-top:1px dashed var(--gray); border-radius:0; }
