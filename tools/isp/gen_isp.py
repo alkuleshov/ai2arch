@@ -685,7 +685,6 @@ button:hover{opacity:.9}button:disabled{opacity:.6}
 </style></head><body>
 <div class="gate" role="region" aria-label="Вход">
   <span class="badge">🔒 ИСП × AI2ARCH</span>
-  <span class="txt">Пароль предоставляет Александр Кулешов</span>
   <form id="f" autocomplete="on">
     <input id="p" name="password" type="password" placeholder="Пароль" aria-label="Пароль" autocomplete="current-password" required>
     <button id="b" type="submit">Войти</button>
