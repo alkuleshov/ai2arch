@@ -236,9 +236,12 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
 .scrim{{ position:fixed; inset:0; z-index:55; background:rgba(10,15,26,.35); opacity:0; pointer-events:none; transition:opacity .2s; }}
 .nav-open .scrim{{ opacity:1; pointer-events:auto; }}
 .side{{ display:flex; flex-direction:column; }}
-.sd-top{{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; padding-bottom:10px; border-bottom:1.5px solid var(--ink); }}
-.sd-brand{{ text-decoration:none; font-size:17px; font-weight:800; letter-spacing:-0.04em; line-height:1; }}
-.sd-brand span{{ display:block; margin-top:3px; font-size:11px; font-weight:600; letter-spacing:0; color:var(--muted); }}
+.sd-top{{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding-bottom:10px; border-bottom:1.5px solid var(--ink); }}
+.sd-brand{{ display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); }}
+.sd-logo{{ flex:none; display:grid; place-items:center; width:36px; height:36px; border-radius:8px; background:#0A0F1A; }}
+.sd-logo img{{ display:block; width:26px; height:26px; }}
+.sd-bt b{{ display:block; font-size:17px; font-weight:800; letter-spacing:-0.04em; line-height:1; }}
+.sd-bt small{{ display:block; margin-top:3px; font-size:11px; font-weight:600; letter-spacing:0; line-height:1.1; color:var(--muted); }}
 .sd-close{{ flex:none; width:32px; height:32px; border:1.5px solid var(--ink); border-radius:50%; background:none; font:700 17px/1 var(--sans); color:var(--ink); cursor:pointer; }}
 .sd-nav{{ --rh:clamp(21px, calc((100vh - 190px) / 25), 31px); margin-top:8px; display:flex; flex-direction:column; }}
 .sd-nav a{{ display:grid; grid-template-columns:46px minmax(0,1fr) auto; gap:4px; align-items:center; height:var(--rh); margin:0 -8px; padding:0 8px; border-radius:5px; text-decoration:none; font-size:clamp(12px, calc(var(--rh) * .47), 14px); font-weight:600; letter-spacing:-0.01em; color:var(--ink); white-space:nowrap; overflow:hidden; }}
@@ -486,7 +489,7 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
 </div>
 <div class="app">
 <aside class="side" id="side" aria-label="Содержание пособия">
-  <div class="sd-top"><a class="sd-brand" href="#top">ИСП × AI2ARCH<span>Методическое пособие</span></a><button class="sd-close" type="button" aria-label="Закрыть меню">×</button></div>
+  <div class="sd-top"><a class="sd-brand" href="/"><span class="sd-logo"><img src="/images/ai2arch-sign.png" alt="" width="26" height="26"></span><span class="sd-bt"><b>AI2ARCH</b><small>ИСП · методическое пособие</small></span></a><button class="sd-close" type="button" aria-label="Закрыть меню">×</button></div>
   <nav class="sd-nav">
       {side_nav()}
   </nav>
