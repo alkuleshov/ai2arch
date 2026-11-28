@@ -3,8 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&display=swap">
-<link rel="stylesheet" href="isp-shell.css">
 <title>{{TITLE}}</title>
 <meta name="description" content="{{DESCRIPTION}}">
 <style>
@@ -326,67 +324,6 @@ button,select{font-family:var(--sans)}
 .roles-card p,.roles-card li{font-size:15px}
 .glossary-all{margin:0 0 14px}
 @media(max-width:440px){.lr-head select{width:62px;text-overflow:ellipsis;padding-left:7px}.lr-head button{padding-left:6px;padding-right:6px}}
-
-/* ── Стиль ISP: закреплённое левое меню, display-заголовки, швейцарская сетка ── */
-:root{--navy:#0A0F1A;--ink:#0A0F1A;--muted:#5A6070;--faint:#848A9A;--bg:#F6F4F0;--line:#E1DDD5;--accent:#2B4FD8;--accent-l:#E4EBFB;--accent-b:#BFD3FF;--sans:'Inter Tight','Helvetica Neue',Arial,sans-serif;--head:54px}
-body{background:#F6F4F0;font-family:var(--sans);letter-spacing:-.005em}
-.lr-head{background:#F6F4F0;border-bottom:1.5px solid #0A0F1A;backdrop-filter:none}
-.lr-head button,.lr-head select{border-radius:999px!important;border:1.5px solid #0A0F1A;background:transparent;color:#0A0F1A;font-weight:700}
-.lr-head button:hover,.lr-head select:hover{background:#0A0F1A;color:#F6F4F0;border-color:#0A0F1A}
-.lr-back{font-size:13px;font-weight:800;color:#0A0F1A;text-decoration:none;letter-spacing:-.01em}
-.lr-name{font-size:12.5px;font-weight:600;color:#5A6070;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
-.lr-progress{background:#0A0F1A}
-/* левое меню: на десктопе закреплено, как в пособии */
-.lr-toc{background:#F6F4F0;border-left:0;border-right:1.5px solid #0A0F1A;box-shadow:none;padding:14px 16px 14px 20px}
-.lr-toc .toc-top{display:none}
-.lr-toc a{font-size:13.5px;line-height:1.25;font-weight:600;color:#0A0F1A;padding:6px 8px}
-.lr-toc a:hover{background:rgba(10,15,26,.06)}
-.lr-side-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#0A0F1A;padding-bottom:12px;border-bottom:1.5px solid #0A0F1A;margin-bottom:10px}
-.lr-side-brand .sd-logo{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:8px;background:#0A0F1A}
-.lr-side-brand .sd-logo img{display:block;width:26px;height:26px}
-.lr-side-brand b{display:block;font-size:17px;font-weight:800;letter-spacing:-.04em;line-height:1}
-.lr-side-brand small{display:block;margin-top:3px;font-size:11px;font-weight:600;color:#5A6070;line-height:1.1}
-.lr-side-course{display:flex;gap:6px;margin-bottom:12px}
-.lr-side-course a{flex:1;text-align:center;padding:7px 6px!important;border:1.5px solid #0A0F1A;border-radius:999px;font-size:12px!important;line-height:1.1;color:#0A0F1A}
-.lr-side-course a.on{background:#0A0F1A;color:#F6F4F0}
-.lr-side-course a:hover{background:rgba(10,15,26,.06)}
-.lr-side-course a.on:hover{background:#0A0F1A;color:#F6F4F0}
-.toc-slide{font-size:13.5px!important;color:#0A0F1A!important;padding-left:26px!important}
-.toc-slide span{color:#848A9A}
-.toc-slide.current{background:#0A0F1A!important;color:#F6F4F0!important;border-radius:6px}
-.toc-slide.current span{color:rgba(246,244,240,.7)}
-.toc-slide.read:after{color:#2B4FD8}
-.lr-terms{background:#F6F4F0;border-left:1.5px solid #0A0F1A;box-shadow:none}
-.lr-terms dt{font-size:15px;font-weight:800;letter-spacing:-.02em}
-.lr-terms dd{color:#5A6070}
-/* hero — display */
-.hero{max-width:1000px;margin:12px auto 24px;padding:0 4px;border-bottom:1.5px solid #0A0F1A;padding-bottom:22px}
-.hero .kicker{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#848A9A}
-.hero h1{font-size:clamp(38px,7.2vw,88px);font-weight:800;letter-spacing:-.045em;line-height:.92;color:#0A0F1A;margin:10px 0 18px}
-.hero p{font-size:16px;line-height:1.42;font-weight:500;color:#5A6070;max-width:62ch}
-.hero .meta{color:#5A6070;font-weight:600}
-/* секции — полосы */
-.slide-sec{border-top:1px solid #E1DDD5;padding:24px 0 28px}
-.slide-sec h2{font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-.04em;line-height:1;color:#0A0F1A;margin-bottom:14px}
-.lr-text{max-width:1000px}
-.lr-main{max-width:none;padding-left:32px;padding-right:32px}
-.lr-body{max-width:1000px}
-/* десктоп: меню слева постоянно, основное содержание справа */
-@media(min-width:1100px){
-  .lr-head{left:288px}
-  .lr-head #tocBtn{display:none}
-  .lr-toc{position:fixed;top:0;left:0;right:auto;bottom:0;width:288px;transform:none!important;transition:none;overflow-y:auto;z-index:90;padding-top:14px}
-  .lr-toc .lr-side-brand,.lr-toc .lr-side-course{display:flex}
-  .lr-toc #tocClose{display:none}
-  .lr-main{margin-left:288px;margin-right:0;padding-top:calc(var(--head) + 24px)}
-  .lr-progress{left:288px}
-  .continue{left:calc(50% + 144px)}
-}
-@media(max-width:1099px){
-  .lr-toc .lr-side-brand,.lr-toc .lr-side-course{display:flex}
-  .lr-toc{padding-top:14px}
-  .lr-main{padding-top:calc(var(--head) + 22px)}
-}
 </style>
 </head>
 <body class="fs-2">
@@ -404,8 +341,6 @@ body{background:#F6F4F0;font-family:var(--sans);letter-spacing:-.005em}
   </select>
 </header>
 <nav class="lr-toc" id="lrToc" aria-label="Содержание урока">
-  <a class="lr-side-brand" href="index.html"><span class="sd-logo"><img src="images/ai2arch-sign.png" alt="" width="26" height="26"></span><span><b>AI2ARCH</b><small>{{COURSE_LABEL}}</small></span></a>
-  <div class="lr-side-course">{{COURSE_SWITCH}}</div>
   <div class="toc-top"><b>Содержание</b><button id="tocClose" type="button" aria-label="Закрыть">×</button></div>
   {{TOC}}
 </nav>
