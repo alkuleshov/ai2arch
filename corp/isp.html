@@ -34,9 +34,7 @@ body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--san
 a{ color:inherit; }
 :focus-visible{ outline:2px solid var(--azure); outline-offset:3px; }
 .band{ position:relative; padding-left:var(--pad); padding-right:var(--pad-r);
-  background-image:linear-gradient(to right, var(--grid) 0 1px, transparent 1px), linear-gradient(to bottom, var(--grid) 0 1px, transparent 1px);
-  background-size:calc((100% - var(--pad) - var(--pad-r)) / var(--cols)) 100%, 100% var(--row);
-  background-position:var(--pad) 0, 0 0; border-bottom:1px solid var(--grid); }
+  border-bottom:1px solid var(--grid); }
 .grid{ display:grid; grid-template-columns:repeat(var(--cols), minmax(0,1fr)); column-gap:0; }
 .grid > *{ min-width:0; }
 .display{ margin:0; font-weight:800; letter-spacing:-0.045em; line-height:.92; text-wrap:balance; }
@@ -224,8 +222,7 @@ h4{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; }
 .note{ margin:14px 0 0; padding:10px 12px; border-left:3px solid var(--azure); background:rgba(26,130,255,.06); font-size:13.5px; line-height:1.35; font-weight:500; }
 
 /* правила данных — полночная полоса */
-.dark{ background-color:var(--midnight); color:var(--on-dark); border-bottom:0;
-  background-image:linear-gradient(to right, rgba(246,244,240,.10) 0 1px, transparent 1px), linear-gradient(to bottom, rgba(246,244,240,.10) 0 1px, transparent 1px); }
+.dark{ background-color:var(--midnight); color:var(--on-dark); border-bottom:0; }
 .dk{ padding-block:22px 26px; row-gap:16px; }
 .dk-k{ grid-column:span 4; }
 .dk-k .small{ color:rgba(246,244,240,.75); }
