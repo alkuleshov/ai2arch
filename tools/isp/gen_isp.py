@@ -300,6 +300,26 @@ h4{{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; 
   .toc-b2{{ grid-column:6 / span 3; grid-row:2; }}
   .toc-pz{{ grid-column:3 / span 6; }}
 }}
+/* приветственный экран: на десктопе вся шапка и содержание помещаются в одну высоту окна */
+@media (min-width:1100px) and (min-height:720px){{
+  .head{{ padding-block:clamp(10px, 2.2vh, 20px) 0; }}
+  .brand{{ font-size:clamp(40px, 7vh, 56px); padding-bottom:clamp(8px, 1.6vh, 16px); }}
+  .head-text, .head-text--2{{ padding-top:0; padding-bottom:clamp(6px, 1.2vh, 12px); }}
+  .toc-g{{ padding-block:clamp(8px, 1.6vh, 16px) 0; row-gap:clamp(8px, 1.6vh, 16px); }}
+  .toc-cap b{{ font-size:clamp(26px, 4.4vh, 40px); }}
+  .toc-cap{{ padding-bottom:6px; }}
+  .toc-k{{ margin-bottom:2px; }}
+  .tc{{ padding:clamp(3px, .6vh, 7px) 0; }}
+  .tc-t{{ font-size:clamp(15px, 2.3vh, 19px); }}
+  .tc-t small, .ts-t small{{ display:inline; margin:0 0 0 8px; font-size:12px; }}
+  .tb-h{{ padding-bottom:clamp(4px, .8vh, 8px); }}
+  .tb-h b{{ font-size:clamp(18px, 3.2vh, 26px); margin:2px 0; }}
+  .ts{{ padding:clamp(3px, .6vh, 7px) 0; }}
+  .ts-t{{ font-size:clamp(13.5px, 2.1vh, 16px); }}
+  .ts-d b{{ font-size:13px; }}
+  .toc-pz{{ padding:clamp(5px, .9vh, 9px) 0; }}
+  .toc-pz b{{ font-size:15px; }}
+}}
 .word{{ position:relative; z-index:0; margin:-.1em 0 0; padding:0; font-weight:800; letter-spacing:-0.075em; line-height:.76; font-size:22vw; white-space:nowrap; width:max-content; }}
 .word-wrap{{ overflow:hidden; padding-bottom:1.2vw; }}
 
