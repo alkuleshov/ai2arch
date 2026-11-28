@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F6F4F0">
+<title>ИСП × AI2ARCH — методическое пособие</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800;900&display=swap">
+<style>
+/* Пособие ИСП: стиль главной ai2arch.ru — швейцарская сетка, видимые линии, двухцветные заголовки, цветные строки-индексы.
+   Страница открывается только по прямой ссылке: noindex, ссылок с сайта нет. Генерируется скриптом gen_isp.py. */
+:root{
+  color-scheme: light;
+  --paper:#F6F4F0; --grid:#E1DDD5; --cell:#F1E1E7;
+  --ink:#0A0F1A; --gray:#848A9A; --muted:#5A6070;
+  --azure:#1A82FF; --blush:#EDC3D2; --cobalt:#2B4FD8; --midnight:#13234B; --powder:#BED0EE; --sand:#E6D9BE;
+  --on-dark:#F6F4F0; --on-dark-2:#EDC3D2; --panel:#E7E3DB; --ink-hover:#1E2636;
+  --sans:'Inter Tight', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  --cols:4; --row:88px;
+  --pad:max(16px, env(safe-area-inset-left, 0px)); --pad-r:max(16px, env(safe-area-inset-right, 0px));
+}
+@media (min-width: 900px){ :root{ --cols:8; --row:120px; --pad:max(32px, env(safe-area-inset-left, 0px)); --pad-r:max(32px, env(safe-area-inset-right, 0px)); } }
+*{ box-sizing:border-box; }
+html{ background:var(--paper); scroll-behavior:smooth; }
+body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); font-size:15px; line-height:1.35; -webkit-font-smoothing:antialiased; overflow-x:clip; }
+a{ color:inherit; }
+:focus-visible{ outline:2px solid var(--azure); outline-offset:3px; }
+[id]{ scroll-margin-top:16px; }
+.band{ position:relative; padding-left:var(--pad); padding-right:var(--pad-r);
+  background-image:linear-gradient(to right, var(--grid) 0 1px, transparent 1px), linear-gradient(to bottom, var(--grid) 0 1px, transparent 1px);
+  background-size:calc((100% - var(--pad) - var(--pad-r)) / var(--cols)) 100%, 100% var(--row);
+  background-position:var(--pad) 0, 0 0; border-bottom:1px solid var(--grid); }
+.grid{ display:grid; grid-template-columns:repeat(var(--cols), minmax(0,1fr)); column-gap:0; }
+.grid > *{ min-width:0; }
+.display{ margin:0; font-weight:800; letter-spacing:-0.045em; line-height:.92; text-wrap:balance; }
+.display .g{ color:var(--gray); }
+.small{ margin:0; font-size:12.5px; line-height:1.22; font-weight:500; color:var(--muted); letter-spacing:-0.005em; }
+.small b{ color:var(--ink); font-weight:700; }
+.bullet{ display:flex; gap:7px; align-items:baseline; margin:0; font-size:13px; line-height:1.15; font-weight:700; letter-spacing:-0.01em; text-decoration:none; }
+.bullet::before{ content:''; flex:none; width:8px; height:8px; border-radius:50%; background:var(--ink); transform:translateY(-1px); }
+.bullet:hover{ text-decoration:underline; text-underline-offset:3px; }
+h4{ margin:0 0 8px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; }
+
+/* шапка */
+.head{ padding-block:18px 0; }
+.brand{ grid-column:span 4; font-size:clamp(34px, 9.5vw, 46px); padding-bottom:18px; }
+.head-text{ grid-column:span 2; padding:2px 14px 16px 0; }
+.head-menu{ grid-column:span 2; display:flex; flex-direction:column; gap:9px; padding:4px 0 16px; }
+.head-text--2{ display:none; }
+@media (min-width:900px){ .brand{ grid-column:span 2; font-size:40px; } .head-text--2{ display:block; grid-column:span 2; } }
+.marks{ display:flex; align-items:center; justify-content:space-between; padding-block:14px 26px; }
+.signs{ display:flex; align-items:center; gap:8px; }
+.signs svg{ display:block; height:52px; width:auto; }
+.goto{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+.goto svg{ width:56px; height:56px; }
+.num-badge{ display:grid; place-items:center; width:52px; height:52px; border-radius:50%; background:var(--ink); color:var(--paper); font-weight:800; font-size:26px; letter-spacing:-0.04em; }
+.goto-cap{ font-size:12.5px; font-weight:600; color:var(--muted); max-width:13ch; line-height:1.15; text-align:right; }
+@media (min-width:900px){ .num-badge{ width:72px; height:72px; font-size:34px; } .signs svg{ height:72px; } .goto svg{ width:76px; height:76px; } }
+
+/* панель */
+.stage{ position:relative; padding-block:8px 0; overflow:hidden; }
+.panel{ position:relative; z-index:1; margin-inline:auto; width:min(100%, 760px); background:var(--ink); border-radius:26px; padding:8px; }
+.panel-in{ background:var(--panel); border-radius:19px; padding:8px; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:6px; }
+.panel-bar{ grid-column:1/-1; display:flex; justify-content:space-between; padding:2px 8px; font-size:11px; font-weight:600; }
+.tile{ position:relative; border-radius:12px; padding:12px; min-height:200px; display:flex; flex-direction:column; justify-content:space-between; text-decoration:none; overflow:hidden; color:var(--ink); }
+.tile h3{ margin:0; font-size:17px; line-height:1; font-weight:800; letter-spacing:-0.03em; }
+.tile .kick{ display:block; margin:0 0 4px; font-size:10.5px; font-weight:600; opacity:.75; }
+.tile .big{ font-size:56px; line-height:.82; font-weight:800; letter-spacing:-0.06em; }
+.tile .unit{ font-size:11px; font-weight:600; line-height:1.15; text-align:right; }
+.tile .big--s{ font-size:44px; }
+.tile-foot{ display:flex; flex-direction:column; align-items:flex-start; gap:8px; }
+.tile .unit{ text-align:left !important; white-space:nowrap; }
+.tile--blush{ background:var(--blush); }
+.tile--cobalt{ background:var(--cobalt); color:var(--on-dark); }
+.index{ grid-column:1/-1; display:flex; flex-direction:column; gap:3px; }
+.ix{ display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:10px; padding:9px 10px; border-radius:9px; text-decoration:none; color:var(--ink); transition:filter .15s; }
+.ix:hover{ filter:brightness(.95); }
+.ix-n{ display:grid; place-items:center; width:20px; height:20px; border-radius:50%; background:var(--ink); color:var(--paper); font-size:11px; font-weight:800; }
+.ix-t{ font-size:19px; line-height:1; font-weight:800; letter-spacing:-0.035em; }
+.ix-s{ display:block; margin-top:3px; font-size:11px; font-weight:600; letter-spacing:0; opacity:.78; line-height:1.2; }
+.ix-go{ width:26px; height:26px; }
+.ix--blush{ background:var(--blush); } .ix--powder{ background:var(--powder); } .ix--sand{ background:var(--sand); }
+.ix--cobalt{ background:var(--cobalt); color:var(--on-dark); }
+.ix--midnight{ background:var(--midnight); color:var(--on-dark); }
+.ix--cobalt .ix-n{ background:var(--on-dark); color:var(--cobalt); }
+.ix--midnight .ix-n{ background:var(--blush); color:var(--midnight); }
+@media (min-width:900px){
+  .panel-in{ grid-template-columns:repeat(4, minmax(0,1fr)); }
+  .tile{ min-height:250px; padding:14px; } .tile h3{ font-size:22px; } .tile .big{ font-size:84px; } .tile .big--s{ font-size:62px; }
+  .index{ grid-column:3 / span 2; grid-row:2; } .ix-t{ font-size:20px; }
+}
+.word{ position:relative; z-index:0; margin:-.1em 0 0; padding:0; font-weight:800; letter-spacing:-0.075em; line-height:.76; font-size:22vw; white-space:nowrap; width:max-content; }
+.word-wrap{ overflow:hidden; padding-bottom:1.2vw; }
+
+/* разделы */
+.sec-head{ padding-block:20px 18px; }
+.sec-title{ grid-column:span 4; font-size:clamp(32px, 8.4vw, 64px); padding-bottom:14px; }
+.sec-note{ grid-column:span 4; }
+@media (min-width:900px){ .sec-title{ grid-column:span 5; padding-bottom:0; } .sec-note{ grid-column:6 / span 3; padding-top:6px; } }
+.wrap{ padding-block:18px 24px; }
+.wrap > *{ grid-column:1/-1; }
+
+/* задачи бюро */
+.tasks{ list-style:none; margin:0; padding:0; }
+.tasks li{ display:grid; grid-template-columns:1fr; gap:2px; padding:12px 0; border-top:1px solid var(--grid); }
+.tasks li:last-child{ border-bottom:1px solid var(--grid); }
+.tk{ font-size:20px; font-weight:800; letter-spacing:-0.035em; line-height:1.05; }
+.tz{ font-size:14px; font-weight:600; }
+.td{ font-size:13px; color:var(--muted); font-weight:500; }
+@media (min-width:900px){ .tasks li{ grid-template-columns:3fr 3fr 2fr; align-items:baseline; gap:12px; } .tk{ font-size:24px; } }
+
+/* уровни и форматы */
+.lv{ display:inline-block; padding:3px 8px 4px; border-radius:999px; font-size:11.5px; font-weight:700; line-height:1; white-space:nowrap; }
+.lv-o{ background:var(--powder); } .lv-p{ background:var(--blush); } .lv-v{ background:var(--cobalt); color:var(--on-dark); } .lv-s{ background:var(--midnight); color:var(--on-dark); }
+.fm{ display:inline-block; padding:2px 7px 3px; border:1.5px solid var(--ink); border-radius:999px; font-size:11.5px; font-weight:700; line-height:1; }
+.fm-on{ border-style:dashed; }
+.levels{ display:grid; gap:10px; margin-top:16px; }
+.lvd{ display:grid; grid-template-columns:96px minmax(0,1fr); gap:10px; align-items:baseline; }
+.lvd .lv{ justify-self:start; }
+.lvd p{ margin:0; font-size:13.5px; color:var(--muted); font-weight:500; line-height:1.3; }
+@media (min-width:900px){ .levels{ grid-template-columns:repeat(3, minmax(0,1fr)); gap:20px; } .lvd{ grid-template-columns:1fr; gap:8px; } }
+
+/* расписание */
+.sch{ width:100%; border-collapse:collapse; font-size:14px; }
+.sch th{ text-align:left; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); padding:0 10px 8px 0; border-bottom:1.5px solid var(--ink); }
+.sch td{ padding:12px 10px 12px 0; border-bottom:1px solid var(--grid); vertical-align:top; }
+.sch small{ display:block; margin-top:3px; font-size:11.5px; color:var(--muted); font-weight:500; }
+.sch .tm{ font-weight:700; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.sch .c-d b{ white-space:nowrap; }
+.sch .c-n a{ font-weight:700; text-decoration:none; }
+.sch .c-n a:hover{ text-decoration:underline; text-underline-offset:3px; }
+.sch .c-n .g{ color:var(--muted); font-weight:500; }
+.r-blk td{ padding:12px 12px; border-bottom:0; }
+.r-blk span{ display:block; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; opacity:.8; }
+.r-blk b{ font-size:22px; font-weight:800; letter-spacing:-0.035em; margin-right:10px; }
+.r-blk em{ font-style:normal; font-size:13px; font-weight:600; white-space:nowrap; display:inline-block; }
+.r-blk.b1 td{ background:var(--blush); }
+.r-blk.b2 td{ background:var(--powder); }
+.r-pause td{ background:var(--sand); padding:12px; font-size:13.5px; }
+.r-res td{ background:var(--cell); padding:10px 12px; font-size:13.5px; }
+@media (max-width:899px){
+  .sch, .sch tbody, .sch tr, .sch td{ display:block; width:100%; }
+  .sch thead{ display:none; }
+  .sch tr{ padding:12px 0; border-bottom:1px solid var(--grid); }
+  .sch tr.r-blk, .sch tr.r-pause, .sch tr.r-res{ padding:0; border:0; margin-top:8px; }
+  .sch td{ border:0; padding:2px 0; }
+  .sch tr:not(.r-blk):not(.r-pause):not(.r-res){ display:grid; grid-template-columns:auto auto 1fr; gap:4px 10px; align-items:baseline; }
+  .sch .c-d{ grid-column:1; } .sch .c-t{ grid-column:2; } .sch .c-f{ grid-column:3; justify-self:end; }
+  .sch .c-t small{ display:none; }
+  .sch .c-n, .sch .c-l, .sch .c-w{ grid-column:1/-1; }
+  .sch .c-n a{ font-size:17px; }
+  .sch tr.r-blk td, .sch tr.r-pause td, .sch tr.r-res td{ padding:10px 12px; }
+}
+.sch-note{ margin:12px 0 0; }
+
+/* принципы и ведущие */
+.prs{ display:grid; grid-template-columns:repeat(var(--cols), minmax(0,1fr)); }
+.pr, .pp{ grid-column:span 4; padding:16px 14px 18px 0; border-top:1px solid var(--grid); }
+.pr small{ font-size:10.5px; font-weight:600; color:var(--gray); }
+.pr b, .pp b{ display:block; margin:6px 0 6px; font-size:20px; font-weight:800; letter-spacing:-0.035em; line-height:1; }
+.pr p, .pp p{ margin:0; font-size:13.5px; line-height:1.32; color:var(--muted); font-weight:500; }
+@media (min-width:900px){ .pr{ grid-column:span 2; min-height:calc(var(--row) * 1.5); } .pp{ grid-column:span 2; } .pp:first-child{ grid-column:span 4; } }
+
+/* подготовка рабочих мест */
+.prep{ width:100%; border-collapse:collapse; font-size:14px; }
+.prep th{ text-align:left; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); padding:0 10px 8px 0; border-bottom:1.5px solid var(--ink); }
+.prep td{ padding:11px 12px 11px 0; border-bottom:1px solid var(--grid); vertical-align:top; }
+.prep td:first-child{ font-weight:600; }
+.prep .nw{ white-space:nowrap; font-weight:700; }
+@media (max-width:899px){
+  .prep thead{ display:none; }
+  .prep, .prep tbody, .prep tr, .prep td{ display:block; }
+  .prep tr{ padding:10px 0; border-bottom:1px solid var(--grid); }
+  .prep td{ border:0; padding:1px 0; }
+  .prep td:nth-child(2){ color:var(--muted); font-size:13px; }
+  .prep td:nth-child(3)::before{ content:'Готово к: '; font-weight:500; color:var(--muted); }
+}
+.note{ margin:14px 0 0; padding:10px 12px; border-left:3px solid var(--azure); background:rgba(26,130,255,.06); font-size:13.5px; line-height:1.35; font-weight:500; }
+
+/* правила данных — полночная полоса */
+.dark{ background-color:var(--midnight); color:var(--on-dark); border-bottom:0;
+  background-image:linear-gradient(to right, rgba(246,244,240,.10) 0 1px, transparent 1px), linear-gradient(to bottom, rgba(246,244,240,.10) 0 1px, transparent 1px); }
+.dk{ padding-block:22px 26px; row-gap:16px; }
+.dk-k{ grid-column:span 4; }
+.dk-k .small{ color:rgba(246,244,240,.75); }
+.dk-mark{ display:block; font-size:clamp(64px, 18vw, 120px); font-weight:800; letter-spacing:-0.07em; line-height:.8; margin-top:10px; }
+.dk-title{ grid-column:span 4; font-size:clamp(34px, 9vw, 60px); }
+.dk-title .g{ color:var(--on-dark-2); }
+.dk-list{ grid-column:span 4; }
+.dark .results li{ color:var(--on-dark); font-weight:600; }
+.dark .results li::before{ background:var(--blush); color:var(--midnight); }
+@media (min-width:900px){ .dk-k{ grid-column:span 2; } .dk-mark{ font-size:84px; } .dk-title{ grid-column:3 / span 5; } .dk-list{ grid-column:3 / span 5; } }
+
+/* списки */
+.results{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; counter-reset:r; }
+.results li{ display:grid; grid-template-columns:22px minmax(0,1fr); gap:8px; align-items:start; font-size:14px; font-weight:600; line-height:1.25; letter-spacing:-0.01em; }
+.results li::before{ counter-increment:r; content:counter(r); display:grid; place-items:center; width:20px; height:20px; border-radius:50%; background:var(--ink); color:var(--paper); font-size:11px; font-weight:800; }
+.sq{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:7px; }
+.sq li{ display:grid; grid-template-columns:14px minmax(0,1fr); gap:8px; font-size:14px; line-height:1.28; font-weight:500; }
+.sq li::before{ content:''; width:10px; height:10px; border:1.5px solid var(--ink); margin-top:3px; }
+
+/* занятия */
+.ses{ padding-block:0; }
+.ses-g{ padding-block:26px 30px; row-gap:20px; }
+.ses-n{ grid-column:span 4; display:flex; align-items:center; gap:10px; }
+.nn{ font-size:56px; font-weight:800; letter-spacing:-0.07em; line-height:.8; }
+.bt{ display:inline-block; padding:4px 9px 5px; border-radius:999px; font-size:11.5px; font-weight:700; line-height:1; }
+.bt.b1{ background:var(--blush); } .bt.b2{ background:var(--powder); }
+.ses-main{ grid-column:span 4; display:flex; flex-direction:column; gap:16px; }
+.ses-side{ grid-column:span 4; display:flex; flex-direction:column; gap:14px; }
+@media (min-width:900px){
+  .ses-g{ row-gap:0; }
+  .ses-n{ grid-column:span 1; flex-direction:column; align-items:flex-start; }
+  .nn{ font-size:64px; }
+  .ses-main{ grid-column:2 / span 4; padding-right:28px; }
+  .ses-side{ grid-column:6 / span 3; }
+}
+.skick{ margin:0; font-size:13px; font-weight:600; color:var(--muted); }
+.skick b{ color:var(--ink); }
+.pre{ white-space:nowrap; }
+.ses-title{ font-size:clamp(32px, 8.4vw, 52px); }
+.ses-title .g{ display:block; margin-top:6px; font-size:.56em; letter-spacing:-0.035em; line-height:1; }
+.facts{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px 12px; margin:0; }
+.facts dt{ margin:0 0 3px; font-size:12.5px; font-weight:800; letter-spacing:-0.01em; }
+.facts dd{ margin:0; font-size:13.5px; line-height:1.28; font-weight:500; color:var(--muted); }
+@media (min-width:900px){ .facts{ grid-template-columns:repeat(4, minmax(0,1fr)); } }
+.why p{ margin:0; font-size:15px; line-height:1.42; font-weight:500; max-width:62ch; }
+.flow ol{ list-style:none; margin:0; padding:0; border-top:1px solid var(--grid); }
+.flow li{ display:grid; grid-template-columns:92px minmax(0,1fr) auto; gap:4px 12px; align-items:baseline; padding:9px 0; border-bottom:1px solid var(--grid); font-size:14px; line-height:1.3; }
+.flow .ft{ font-weight:700; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.flow .fw{ font-weight:500; }
+.flow li.brk .fw{ color:var(--muted); }
+.who{ font-size:11px; font-weight:700; color:var(--muted); white-space:nowrap; }
+.who-s{ color:var(--ink); background:var(--blush); padding:2px 7px 3px; border-radius:999px; }
+@media (max-width:520px){ .flow li{ grid-template-columns:1fr auto; } .flow .ft{ grid-column:1; } .flow .who{ grid-column:2; grid-row:1; } .flow .fw{ grid-column:1/-1; } }
+.box{ padding:14px; background:rgba(246,244,240,.85); border:1.5px solid var(--ink); }
+.box p{ margin:0; font-size:14px; line-height:1.32; font-weight:500; }
+.blk-head{ padding-block:22px 20px; }
+.blk-head .bh-k{ grid-column:span 4; }
+.blk-head .bh-t{ grid-column:span 4; font-size:clamp(36px, 10vw, 72px); }
+.blk-head.b1{ background-color:var(--blush); }
+.blk-head.b2{ background-color:var(--powder); }
+@media (min-width:900px){ .blk-head .bh-k{ grid-column:span 2; padding-top:8px; } .blk-head .bh-t{ grid-column:3 / span 6; } }
+
+/* пауза */
+.pause{ background-color:var(--sand); }
+.pz{ padding-block:24px 28px; row-gap:16px; }
+.pz-k{ grid-column:span 4; }
+.pz-mark{ margin:8px 0 0; font-size:26px; font-weight:800; letter-spacing:-0.04em; line-height:1; }
+.pz-title{ grid-column:span 4; font-size:clamp(34px, 9vw, 60px); }
+.pz-text{ grid-column:span 4; margin:0; font-size:15px; line-height:1.4; font-weight:500; max-width:60ch; }
+.pz-list{ grid-column:span 4; }
+@media (min-width:900px){ .pz-k{ grid-column:span 2; } .pz-title, .pz-text, .pz-list{ grid-column:3 / span 5; } }
+
+/* подвал */
+.foot{ padding-block:18px 26px; row-gap:14px; }
+.foot-a{ grid-column:span 2; } .foot-b{ grid-column:span 2; } .foot-c{ grid-column:span 4; }
+.foot-a p, .foot-b p{ margin:0; font-size:13px; font-weight:700; letter-spacing:-0.01em; }
+.foot-b p{ color:var(--gray); }
+.btn{ display:inline-flex; align-items:center; gap:10px; min-height:44px; padding:0 18px; border-radius:999px; font-size:14px; font-weight:700; text-decoration:none; border:1.5px solid var(--ink); background:var(--ink); color:var(--paper); margin-top:10px; }
+.btn:hover{ background:var(--ink-hover); }
+@media (min-width:900px){ .foot-a{ grid-column:span 1; } .foot-b{ grid-column:span 1; } .foot-c{ grid-column:4 / span 4; } }
+
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } html{ scroll-behavior:auto; } }
+@media print{
+  .band{ background-image:none !important; }
+  .marks, .stage, .word-wrap, .btn{ display:none !important; }
+  .ses, .box, .pr, .tasks li{ break-inside:avoid; }
+  .dark{ background:#fff !important; color:var(--ink) !important; }
+  .dark .results li{ color:var(--ink); } .dk-title .g{ color:var(--gray); }
+  body{ font-size:12px; }
+}
+</style>
+</head>
+<body>
+
+<header class="band head">
+  <div class="grid">
+    <h1 class="display brand">ИСП × AI2ARCH <span class="g">Методическое пособие для&nbsp;сотрудников</span></h1>
+    <p class="small head-text">Корпоративное обучение ИИ для&nbsp;проектного бюро ИСП: расписание и&nbsp;описание каждого занятия под&nbsp;задачи бюро.</p>
+    <nav class="head-menu" aria-label="Разделы">
+      <a class="bullet" href="#schedule">Расписание</a>
+      <a class="bullet" href="#block1">Занятия</a>
+      <a class="bullet" href="#prep">Подготовка рабочих мест</a>
+      <a class="bullet" href="#rules">Правила работы с&nbsp;данными</a>
+    </nav>
+    <p class="small head-text head-text--2"><b>Даты и&nbsp;время предварительные на&nbsp;28&nbsp;ноября 2026&nbsp;г.</b> Время московское. Час занятия&nbsp;— астрономический, 60&nbsp;минут.</p>
+  </div>
+  <div class="marks">
+    <div class="signs" aria-hidden="true">
+      <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="31" fill="#0A0F1A"/><path d="M32 9 L45 45 L32 37 L19 45 Z" fill="#F6F4F0"/><path d="M32 9 L32 37 L19 45 Z" fill="#0A0F1A" stroke="#F6F4F0" stroke-width="2.5" stroke-linejoin="round"/><text x="32" y="58" text-anchor="middle" font-family="Inter Tight, Arial, sans-serif" font-weight="800" font-size="10" fill="#F6F4F0">С</text></svg>
+      <svg viewBox="0 0 92 64"><path d="M60 14 L90 32 L60 50 Z" fill="#0A0F1A"/><circle cx="32" cy="32" r="28.5" fill="#F6F4F0" stroke="#0A0F1A" stroke-width="5"/><path d="M4 32 H60" stroke="#0A0F1A" stroke-width="4"/><text x="32" y="26" text-anchor="middle" font-family="Inter Tight, Arial, sans-serif" font-weight="800" font-size="17" fill="#0A0F1A">2</text><text x="32" y="50" text-anchor="middle" font-family="Inter Tight, Arial, sans-serif" font-weight="700" font-size="12" fill="#0A0F1A">ИСП</text></svg>
+    </div>
+    <a class="goto" href="#schedule" aria-label="К расписанию: 14 занятий">
+      <span class="goto-cap">Занятий в&nbsp;программе, старт 4&nbsp;декабря</span>
+      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M14 50 L46 18 M22 16 H48 V42" fill="none" stroke="#0A0F1A" stroke-width="9" stroke-linecap="square"/></svg>
+      <span class="num-badge" aria-hidden="true">14</span>
+    </a>
+  </div>
+</header>
+
+<section class="band stage" aria-label="Два блока обучения">
+  <div class="panel">
+    <div class="panel-in">
+      <div class="panel-bar"><span>ИСП × AI2ARCH</span><span>Ростов-на-Дону · очно в&nbsp;бюро</span></div>
+      <a class="tile tile--blush" href="#block1">
+        <div><span class="kick">Блок 1 · декабрь 2026</span><h3>Концепция и&nbsp;подача</h3></div>
+        <div class="tile-foot"><span class="big">12</span><span class="unit">ч очно · 4–11 декабря</span></div>
+      </a>
+      <a class="tile tile--cobalt" href="#block2">
+        <div><span class="kick">Блок 2 · февраль 2027</span><h3>Участок, модель, команда</h3></div>
+        <div class="tile-foot"><span class="big big--s">13,5</span><span class="unit">ч очно · 8–24 февраля</span></div>
+      </a>
+      <nav class="index" aria-label="Содержание">
+        <a class="ix ix--blush" href="#schedule"><span class="ix-n">1</span><span class="ix-t">Расписание<span class="ix-s">14 занятий, даты и&nbsp;время</span></span><svg class="ix-go" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 17 L17 9 M11 9 H17 V15" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        <a class="ix ix--cobalt" href="#how"><span class="ix-n">2</span><span class="ix-t">Как устроено<span class="ix-s">Формат, глубина, ведущие</span></span><svg class="ix-go" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 17 L17 9 M11 9 H17 V15" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        <a class="ix ix--midnight" href="#prep"><span class="ix-n">3</span><span class="ix-t">Рабочие места<span class="ix-s">Что установить и&nbsp;к&nbsp;какой дате</span></span><svg class="ix-go" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 17 L17 9 M11 9 H17 V15" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        <a class="ix ix--powder" href="#rules"><span class="ix-n">4</span><span class="ix-t">Правила данных<span class="ix-s">Что можно загружать в&nbsp;ИИ</span></span><svg class="ix-go" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 17 L17 9 M11 9 H17 V15" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        <a class="ix ix--sand" href="#pause"><span class="ix-n">5</span><span class="ix-t">Между блоками<span class="ix-s">Задание на&nbsp;паузу</span></span><svg class="ix-go" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 17 L17 9 M11 9 H17 V15" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+      </nav>
+    </div>
+  </div>
+  <div class="word-wrap"><p class="word" aria-hidden="true">ИСП×AI2ARCH</p></div>
+</section>
+
+<section aria-labelledby="tasks-h">
+  <div class="band sec-head"><div class="grid">
+    <h2 class="display sec-title" id="tasks-h">Задачи бюро <span class="g">и&nbsp;где они решаются</span></h2>
+    <p class="small sec-note">Программа собрана под задачи, которые назвало бюро. Команда прошла базовый курс по&nbsp;нейросетям и&nbsp;работает в&nbsp;ChatGPT Plus и&nbsp;Qwen, поэтому начинаем сразу с&nbsp;работы на&nbsp;объекте.</p>
+  </div></div>
+  <div class="band"><div class="grid wrap"><ul class="tasks"><li><span class="tk">Концепции</span><span class="tz">Концепции и&nbsp;ИИ-ТЗ, Презентации и&nbsp;подача</span><span class="td">7, 8 и&nbsp;10&nbsp;декабря</span></li><li><span class="tk">Визуализации</span><span class="tz">Визуализации</span><span class="td">8&nbsp;декабря</span></li><li><span class="tk">Тексты</span><span class="tz">Тексты и&nbsp;документы, ИИ&nbsp;для ГИПа</span><span class="td">10&nbsp;декабря, 10&nbsp;февраля</span></li><li><span class="tk">Соответствие архитектурных решений нормам</span><span class="tz">Нормы и&nbsp;проверка документации</span><span class="td">11&nbsp;декабря</span></li><li><span class="tk">Анализ участка</span><span class="tz">Анализ участка (QGIS)</span><span class="td">8 и&nbsp;15&nbsp;февраля</span></li><li><span class="tk">Ускорение модели в&nbsp;Revit</span><span class="tz">Revit + ИИ</span><span class="td">9&nbsp;февраля</span></li></ul></div></div>
+</section>
+
+<section aria-labelledby="schedule-h" id="schedule">
+  <div class="band sec-head"><div class="grid">
+    <h2 class="display sec-title" id="schedule-h">Расписание <span class="g">двух блоков</span></h2>
+    <p class="small sec-note"><b>Даты и&nbsp;время предварительные на&nbsp;28&nbsp;ноября 2026&nbsp;г.</b> Время московское, час&nbsp;— 60&nbsp;минут. Название занятия ведёт к&nbsp;его описанию.</p>
+  </div></div>
+  <div class="band"><div class="grid wrap">
+    <table class="sch">
+      <thead><tr><th>Дата</th><th>Время</th><th>Формат</th><th>Занятие</th><th>Глубина</th><th>Ведёт · участники</th></tr></thead>
+      <tbody>
+<tr class="r-blk b1"><td colspan="6"><span>Блок 1 · декабрь 2026</span><b>Концепция и&nbsp;подача</b><em>4–11 декабря · 12&nbsp;ч очно</em></td></tr>
+<tr><td class="c-d"><b>Пт&nbsp;4&nbsp;декабря</b></td><td class="c-t"><span class="tm">10:00–10:30</span><small>предварительно</small></td><td class="c-f"><span class="fm fm-on">Онлайн</span></td><td class="c-n"><a href="#s01">Старт<span class="g"> — рабочие места и&nbsp;правила данных</span></a></td><td class="c-l"><span class="lv lv-s">Обязательно</span></td><td class="c-w">Александр Кулешов<small>все участники программы</small></td></tr>
+<tr><td class="c-d"><b>Пн&nbsp;7&nbsp;декабря</b></td><td class="c-t"><span class="tm">10:00–11:30</span><small>предварительно</small></td><td class="c-f"><span class="fm">Очно</span></td><td class="c-n"><a href="#s02">Концепции и&nbsp;ИИ-ТЗ<span class="g"> — часть 1: задание и&nbsp;функциональная программа</span></a></td><td class="c-l"><span class="lv lv-p">Практика</span></td><td class="c-w">Александр Кулешов<small>архитекторы</small></td></tr>
+<tr><td class="c-d"><b>Вт&nbsp;8&nbsp;декабря</b></td><td class="c-t"><span class="tm">10:00–11:30</span><small>предварительно</small></td><td class="c-f"><span class="fm">Очно</span></td><td class="c-n"><a href="#s03">Концепции и&nbsp;ИИ-ТЗ<span class="g"> — часть 2: образы концепции</span></a></td><td class="c-l"><span class="lv lv-p">Практика</span></td><td class="c-w">Екатерина Петренко<small>архитекторы</small></td></tr>
+<tr><td class="c-d"><b>Вт&nbsp;8&nbsp;декабря</b></td><td class="c-t"><span class="tm">12:00–15:00</span><small>предварительно</small></td><td class="c-f"><span class="fm">Очно</span></td><td class="c-n"><a href="#s04">Визуализации<span class="g"> — D5 Render, нейросети, Photoshop</span></a></td><td class="c-l"><span class="lv lv-p">Практика</span></td><td class="c-w">Екатерина Петренко<small>архитекторы</small></td></tr>
+<tr><td class="c-d"><b>Чт&nbsp;10&nbsp;декабря</b></td><td class="c-t"><span class="tm">10:00–11:30</span><small>предварительно</small></td><td class="c-f"><span class="fm">Очно</span></td><td class="c-n"><a href="#s05">Презентации и&nbsp;подача<span class="g"> — сборка подачи из&nbsp;материалов объекта</span></a></td><td class="c-l"><span class="lv lv-o">Обзор</span></td><td class="c-w">Екатерина Петренко<small>архитекторы</small></td></tr>
+<tr><td class="c-d"><b>Чт&nbsp;10&nbsp;декабря</b></td><td class="c-t"><span class="tm">12:00–13:30</span><small>предварительно</small></td><td class="c-f"><span class="fm">Очно</span></td><td class="c-n"><a href="#s06">Тексты и&nbsp;документы<span class="g"> — записки, ответы, задания смежникам</span></a></td><td class="c-l"><span class="lv lv-o">Обзор</span></td><td class="c-w">Екатерина Петренко<small>10&nbsp;человек</small></td></tr>
+<tr><td class="c-d"><b>Пт&nbsp;11&nbsp;декабря</b></td><td class="c-t"><span class="tm">10:00–13:00</span><small>предварительно</small></td><td class="c-f"><span class="fm">Очно</span></td><td class="c-n"><a href="#s07">Нормы и&nbsp;проверка документации<span class="g"> — своя база норм бюро в&nbsp;ИИ</span></a></td><td class="c-l"><span class="lv lv-p">Практика</span></td><td class="c-w">Александр Кулешов<small>10&nbsp;человек</small></td></tr>
+<tr class="r-res"><td colspan="6"><b>14–18 декабря</b> · резерв на переносы</td></tr>
+<tr class="r-pause"><td colspan="6"><b>19&nbsp;декабря&nbsp;— 7&nbsp;февраля</b> · пауза: применение на живых проектах, <a href="#pause">задание между блоками</a></td></tr>
+<tr class="r-blk b2"><td colspan="6"><span>Блок 2 · февраль 2027</span><b>Участок, модель, команда</b><em>8–24 февраля · 13,5&nbsp;ч очно</em></td></tr>
+<tr><td class="c-d"><b>Пн&nbsp;8&nbsp;февраля</b></td><td class="c-t"><span class="tm">10:00–12:00</span><small>предварительно</small></td><td class="c-f"><span class="fm">Очно</span></td><td class="c-n"><a href="#s08">Анализ участка (QGIS)<span class="g"> — часть 1: данные и&nbsp;подложка</span></a></td><td class="c-l"><span class="lv lv-v">Внедрение</span></td><td class="c-w">Эксперт по&nbsp;QGIS, Александр Кулешов<small>архитекторы</small></td></tr>
+<tr><td class="c-d"><b>Вт&nbsp;9&nbsp;февраля</b></td><td class="c-t"><span class="tm">10:00–13:00</span><small>предварительно</small></td><td class="c-f"><span class="fm">Очно</span></td><td class="c-n"><a href="#s09">Revit + ИИ<span class="g"> — скрипты под рутину бюро</span></a></td><td class="c-l"><span class="lv lv-p">Практика</span></td><td class="c-w">Александр Кулешов<small>архитекторы</small></td></tr>
+<tr><td class="c-d"><b>Ср&nbsp;10&nbsp;февраля</b></td><td class="c-t"><span class="tm">10:00–11:30</span><small>предварительно</small></td><td class="c-f"><span class="fm">Очно</span></td><td class="c-n"><a href="#s10">ИИ&nbsp;для ГИПа<span class="g"> — замечания, сводки, комплектность</span></a></td><td class="c-l"><span class="lv lv-o">Обзор</span></td><td class="c-w">Александр Кулешов<small>ГИПы</small></td></tr>
+<tr><td class="c-d"><b>Ср&nbsp;10&nbsp;февраля</b></td><td class="c-t"><span class="tm">12:00–13:30</span><small>предварительно</small></td><td class="c-f"><span class="fm">Очно</span></td><td class="c-n"><a href="#s11">ИИ&nbsp;для инженерных разделов<span class="g"> — расчёты, спецификации, записки</span></a></td><td class="c-l"><span class="lv lv-o">Обзор</span></td><td class="c-w">Александр Кулешов<small>инженеры</small></td></tr>
+<tr><td class="c-d"><b>Чт&nbsp;11&nbsp;февраля</b></td><td class="c-t"><span class="tm">10:00–11:30</span><small>предварительно</small></td><td class="c-f"><span class="fm">Очно</span></td><td class="c-n"><a href="#s12">AutoCAD + ИИ<span class="g"> — скрипты AutoLISP по&nbsp;описанию</span></a></td><td class="c-l"><span class="lv lv-o">Обзор</span></td><td class="c-w">Александр Кулешов<small>6&nbsp;человек</small></td></tr>
+<tr><td class="c-d"><b>Пн&nbsp;15&nbsp;февраля</b></td><td class="c-t"><span class="tm">10:00–12:00</span><small>предварительно</small></td><td class="c-f"><span class="fm">Очно</span></td><td class="c-n"><a href="#s13">Анализ участка (QGIS)<span class="g"> — часть 2: разбор и&nbsp;шаблон бюро</span></a></td><td class="c-l"><span class="lv lv-v">Внедрение</span></td><td class="c-w">Эксперт по&nbsp;QGIS, Александр Кулешов<small>архитекторы</small></td></tr>
+<tr><td class="c-d"><b>Ср&nbsp;24&nbsp;февраля</b></td><td class="c-t"><span class="tm">10:00–12:00</span><small>предварительно</small></td><td class="c-f"><span class="fm">Очно</span></td><td class="c-n"><a href="#s14">Итоговая сессия<span class="g"> — библиотека промптов и&nbsp;регламент</span></a></td><td class="c-l"><span class="lv lv-p">Практика</span></td><td class="c-w">Александр Кулешов<small>вся команда</small></td></tr>
+      </tbody>
+    </table>
+    <div class="levels"><div class="lvd"><span class="lv lv-o">Обзор</span><p>Ведущий показывает, что умеют инструменты, на&nbsp;примерах бюро. Участники смотрят, задают вопросы и&nbsp;получают список того, что попробовать самим.</p></div><div class="lvd"><span class="lv lv-p">Практика</span><p>Участники сами выполняют задание на&nbsp;объекте бюро. Больше половины времени&nbsp;— самостоятельная работа, ведущий помогает и&nbsp;проверяет.</p></div><div class="lvd"><span class="lv lv-v">Внедрение</span><p>Практика плюс шаблон под стандарты бюро и&nbsp;разбор результатов через неделю.</p></div></div>
+  </div></div>
+</section>
+
+<section aria-labelledby="how-h" id="how">
+  <div class="band sec-head"><div class="grid">
+    <h2 class="display sec-title" id="how-h">Как устроено <span class="g">обучение</span></h2>
+    <p class="small sec-note">Показываем приём&nbsp;— вы делаете на&nbsp;своём объекте&nbsp;— проверяем результат и&nbsp;замеряем время.</p>
+  </div></div>
+  <div class="band"><div class="grid wrap"><div class="prs"><div class="pr"><small>01</small><b>Очно в&nbsp;бюро</b><p>Все занятия, кроме Старта, проходят у&nbsp;вас в&nbsp;бюро на&nbsp;рабочих компьютерах. Старт&nbsp;— онлайн в&nbsp;Яндекс Телемосте.</p></div><div class="pr"><small>02</small><b>Ваш объект</b><p>Бюро выбирает один текущий объект. На&nbsp;нём проходят все практические занятия: ТЗ, образы, ракурсы, нормы, участок, модель.</p></div><div class="pr"><small>03</small><b>Показываем&nbsp;— вы&nbsp;делаете</b><p>Ведущий показывает приём, участники повторяют на&nbsp;своём объекте и&nbsp;сами проверяют результат. Готовые ответы ИИ&nbsp;без проверки не&nbsp;принимаем.</p></div><div class="pr"><small>04</small><b>Замер «до&nbsp;и&nbsp;после»</b><p>По&nbsp;каждой задаче фиксируем, сколько времени она занимала раньше и&nbsp;сколько с&nbsp;ИИ. Это главный показатель результата обучения.</p></div><div class="pr"><small>05</small><b>Копилка бюро</b><p>Промпты, скрипты, шаблоны и&nbsp;журналы замеров складываем в&nbsp;общую папку бюро. На&nbsp;итоговой сессии из&nbsp;неё собираем библиотеку и&nbsp;регламент.</p></div><div class="pr"><small>06</small><b>Три уровня глубины</b><p>Обзор, Практика или Внедрение&nbsp;— глубина указана у&nbsp;каждого занятия. Что они означают, описано под расписанием.</p></div><div class="pr"><small>07</small><b>Между блоками</b><p>С&nbsp;19&nbsp;декабря по&nbsp;7&nbsp;февраля бюро применяет инструменты на&nbsp;живых проектах. Задание на&nbsp;паузу&nbsp;— в&nbsp;разделе «Между блоками».</p></div><div class="pr"><small>08</small><b>Время</b><p>Час занятия&nbsp;— астрономический, 60&nbsp;минут. Время московское. Даты и&nbsp;время предварительные на&nbsp;28&nbsp;ноября 2026 г.</p></div></div></div></div>
+  <div class="band"><div class="grid wrap"><h4>Кто ведёт</h4><div class="prs"><div class="pp"><b>Александр Кулешов</b><p>Руководитель лаборатории проектного интеллекта AI2ARCH, архитектор. Ведёт ИИ-ТЗ, нормы, Revit, AutoCAD, занятия для ГИПов и&nbsp;инженеров, итоговую сессию.</p></div><div class="pp"><b>Екатерина Петренко</b><p>Лектор курса «ИИ&nbsp;в&nbsp;редевелопменте» AI2ARCH. Ведёт образы концепции, визуализации, презентации и&nbsp;тексты.</p></div><div class="pp"><b>Эксперт по&nbsp;QGIS</b><p>Ведёт анализ участка в&nbsp;QGIS вместе с&nbsp;Александром Кулешовым.</p></div></div></div></div>
+</section>
+
+<section aria-labelledby="prep-h" id="prep">
+  <div class="band sec-head"><div class="grid">
+    <h2 class="display sec-title" id="prep-h">Подготовка <span class="g">рабочих мест</span></h2>
+    <p class="small sec-note">Все занятия проходят на&nbsp;компьютерах бюро. Ответственный в&nbsp;бюро ставит программы к&nbsp;указанной дате, на&nbsp;Старте проверяем всё вместе.</p>
+  </div></div>
+  <div class="band"><div class="grid wrap">
+    <table class="prep"><thead><tr><th>Что подготовить</th><th>Для каких занятий</th><th>Готово к</th></tr></thead><tbody><tr><td>Общая папка бюро «ИИ»: промпты, скрипты, шаблоны, журналы замеров</td><td>все занятия</td><td class="nw">4&nbsp;декабря</td></tr><tr><td>ChatGPT Plus на&nbsp;каждом рабочем месте</td><td>все занятия</td><td class="nw">4&nbsp;декабря</td></tr><tr><td>В&nbsp;настройках ChatGPT отключить «Улучшать модель для всех» (раздел «Управление данными»)</td><td>все занятия</td><td class="nw">4&nbsp;декабря</td></tr><tr><td>Яндекс Телемост</td><td>Старт</td><td class="nw">4&nbsp;декабря</td></tr><tr><td>Qwen Chat и&nbsp;Шедеврум: вход в&nbsp;аккаунт в&nbsp;браузере</td><td>Образы концепции, Визуализации</td><td class="nw">8&nbsp;декабря</td></tr><tr><td>D5 Render и&nbsp;Photoshop</td><td>Визуализации</td><td class="nw">8&nbsp;декабря</td></tr><tr><td>Gamma: вход в&nbsp;аккаунт в&nbsp;браузере</td><td>Презентации и&nbsp;подача</td><td class="nw">10&nbsp;декабря</td></tr><tr><td>QGIS (версия LTR) и&nbsp;модуль QuickOSM</td><td>Анализ участка</td><td class="nw">8&nbsp;февраля</td></tr><tr><td>Revit 2025, копия модели объекта</td><td>Revit + ИИ</td><td class="nw">9&nbsp;февраля</td></tr><tr><td>pyRevit (установка с&nbsp;правами администратора); Dynamo входит в&nbsp;Revit</td><td>Revit + ИИ</td><td class="nw">9&nbsp;февраля</td></tr><tr><td>AutoCAD: полная версия или AutoCAD LT&nbsp;2024 и&nbsp;новее (поддерживают AutoLISP)</td><td>AutoCAD + ИИ</td><td class="nw">11&nbsp;февраля</td></tr></tbody></table>
+    <p class="note">На&nbsp;рабочем месте без дискретной видеокарты D5 Render не&nbsp;работает: на&nbsp;визуализациях участник работает в&nbsp;паре или выполняет часть с&nbsp;нейросетями и&nbsp;Photoshop. Практика по&nbsp;Revit проходит в&nbsp;Revit 2025: в&nbsp;Revit 2021 и&nbsp;2025 разные версии Dynamo и&nbsp;Python, поэтому скрипты для Revit 2021 проверяем отдельно.</p>
+  </div></div>
+</section>
+
+<section class="band dark" id="rules" aria-labelledby="rules-h">
+  <div class="grid dk">
+    <div class="dk-k"><p class="small">Обязательно для&nbsp;всех участников</p><span class="dk-mark">6</span></div>
+    <h2 class="display dk-title" id="rules-h">Правила работы <span class="g">с&nbsp;данными в&nbsp;ИИ</span></h2>
+    <ol class="results dk-list"><li>Не&nbsp;загружаем в&nbsp;облачные ИИ&nbsp;персональные данные (ФИО, телефоны, паспортные данные) и&nbsp;сведения, которые заказчик запретил передавать.</li><li>Перед загрузкой обезличиваем документы: убираем название заказчика, адрес и&nbsp;реквизиты, если они не&nbsp;нужны для задачи.</li><li>Работаем на&nbsp;копиях: модели и&nbsp;файлы в&nbsp;работе не&nbsp;трогаем, скрипты запускаем только на&nbsp;копии модели.</li><li>Любой результат ИИ&nbsp;проверяет специалист: цифры, площади, ссылки на&nbsp;нормы, формулировки.</li><li>Пользуемся аккаунтами бюро и&nbsp;общей папкой. Удачные промпты и&nbsp;скрипты сохраняем в&nbsp;копилку, а&nbsp;не&nbsp;в&nbsp;личных чатах.</li><li>Если сомневаетесь, можно ли&nbsp;загружать документ, спросите ГИПа или руководителя до&nbsp;загрузки.</li></ol>
+  </div>
+</section>
+
+<section aria-labelledby="b1-h" id="block1">
+  <div class="band blk-head b1"><div class="grid">
+    <p class="small bh-k"><b>Блок 1 · декабрь 2026</b><br>4–11 декабря · 12&nbsp;ч очно и&nbsp;0,5&nbsp;ч онлайн</p>
+    <h2 class="display bh-t" id="b1-h">Концепция и&nbsp;подача</h2>
+  </div></div>
+  
+  <article class="band ses" id="s01">
+    <div class="grid ses-g">
+      <div class="ses-n"><span class="nn">01</span><span class="bt b1">Блок 1</span></div>
+      <div class="ses-main">
+        <p class="skick"><b>Пт&nbsp;4&nbsp;декабря</b> · 10:00–10:30 · <span class="pre">время предварительное</span></p>
+        <h3 class="display ses-title">Старт <span class="g">рабочие места и&nbsp;правила данных</span></h3>
+        <dl class="facts">
+          <div><dt>Формат</dt><dd>Онлайн, Яндекс Телемост · 30&nbsp;минут</dd></div>
+          <div><dt>Глубина</dt><dd><span class="lv lv-s">Обязательно</span></dd></div>
+          <div><dt>Ведёт</dt><dd>Александр Кулешов</dd></div>
+          <div><dt>Участники</dt><dd>все участники программы</dd></div>
+        </dl>
+        <div class="why"><h4>Зачем бюро</h4><p>Чтобы первое очное занятие не&nbsp;ушло на&nbsp;установку программ и&nbsp;восстановление паролей. За&nbsp;полчаса проверяем рабочие места, договариваемся о&nbsp;правилах работы с&nbsp;данными и&nbsp;фиксируем объект для практики.</p></div>
+        <div class="flow"><h4>Ход занятия</h4><ol><li><span class="ft">10:00–10:10</span><span class="fw">Правила работы с&nbsp;данными бюро в&nbsp;облачных ИИ</span><span class="who">ведущий</span></li><li><span class="ft">10:10–10:25</span><span class="fw">Проверка рабочих мест по&nbsp;чек-листу: каждый открывает сервисы на&nbsp;своём компьютере</span><span class="who who-s">сами</span></li><li><span class="ft">10:25–10:30</span><span class="fw">Объект для практики и&nbsp;порядок декабрьских занятий</span><span class="who">ведущий</span></li></ol></div>
+        
+      </div>
+      <aside class="ses-side">
+        <div class="box"><h4>Подготовить до занятия</h4><ul class="sq"><li>Ответственный в&nbsp;бюро ставит программы по&nbsp;разделу «Подготовка рабочих мест» до&nbsp;3&nbsp;декабря</li><li>Каждый участник проверяет вход в&nbsp;ChatGPT Plus</li><li>Бюро выбирает текущий объект для практических занятий</li></ul></div>
+        <div class="box"><h4>Результат</h4><ol class="results"><li>Рабочие места готовы</li><li>Правила работы с&nbsp;данными приняты</li><li>Объект для практики выбран</li></ol></div>
+        <div class="box"><h4>После занятия</h4><p>Доустановить недостающее до&nbsp;7&nbsp;декабря.</p></div>
+      </aside>
+    </div>
+  </article>
+  <article class="band ses" id="s02">
+    <div class="grid ses-g">
+      <div class="ses-n"><span class="nn">02</span><span class="bt b1">Блок 1</span></div>
+      <div class="ses-main">
+        <p class="skick"><b>Пн&nbsp;7&nbsp;декабря</b> · 10:00–11:30 · <span class="pre">время предварительное</span></p>
+        <h3 class="display ses-title">Концепции и&nbsp;ИИ-ТЗ <span class="g">часть 1: задание и&nbsp;функциональная программа</span></h3>
+        <dl class="facts">
+          <div><dt>Формат</dt><dd>Очно в бюро · 1,5&nbsp;часа</dd></div>
+          <div><dt>Глубина</dt><dd><span class="lv lv-p">Практика</span></dd></div>
+          <div><dt>Ведёт</dt><dd>Александр Кулешов</dd></div>
+          <div><dt>Участники</dt><dd>архитекторы</dd></div>
+        </dl>
+        <div class="why"><h4>Зачем бюро</h4><p>Задание заказчика почти всегда неполное: часть требований подразумевается, часть противоречит друг другу. ИИ&nbsp;за&nbsp;минуты раскладывает текст на&nbsp;требования, вопросы к&nbsp;заказчику и&nbsp;сценарии использования&nbsp;— архитектор тратит время на&nbsp;решения, а&nbsp;не&nbsp;на&nbsp;разбор переписки. Риск в&nbsp;том, что ИИ&nbsp;уверенно добавляет то, чего в&nbsp;задании нет, поэтому каждый пункт сверяем с&nbsp;исходником.</p></div>
+        <div class="flow"><h4>Ход занятия</h4><ol><li><span class="ft">10:00–10:15</span><span class="fw">Как ИИ&nbsp;работает с&nbsp;заданием и&nbsp;где ошибается. Показ на&nbsp;примере</span><span class="who">ведущий</span></li><li><span class="ft">10:15–10:45</span><span class="fw">Разбор ТЗ&nbsp;объекта: требования, противоречия, вопросы к&nbsp;заказчику</span><span class="who who-s">сами</span></li><li><span class="ft">10:45–11:15</span><span class="fw">Сценарии использования и&nbsp;функциональная программа: помещения, площади, связи&nbsp;— таблицей. Сверка суммы площадей</span><span class="who who-s">сами</span></li><li><span class="ft">11:15–11:30</span><span class="fw">Разбор результатов, промпты в&nbsp;копилку бюро</span><span class="who">ведущий</span></li></ol></div>
+        
+      </div>
+      <aside class="ses-side">
+        <div class="box"><h4>Подготовить до занятия</h4><ul class="sq"><li>Задание или ТЗ&nbsp;выбранного объекта без персональных данных заказчика</li><li>Исходные данные: назначение, площадь участка, ТЭП, если есть</li><li>2–3 референса</li></ul></div>
+        <div class="box"><h4>Результат</h4><ol class="results"><li>ИИ-ТЗ объекта: требования и&nbsp;вопросы к&nbsp;заказчику</li><li>Функциональная программа таблицей</li></ol></div>
+        <div class="box"><h4>После занятия</h4><p>К&nbsp;8&nbsp;декабря подготовить скетч или вид модели объекта (скриншот из&nbsp;SketchUp или Revit).</p></div>
+      </aside>
+    </div>
+  </article>
+  <article class="band ses" id="s03">
+    <div class="grid ses-g">
+      <div class="ses-n"><span class="nn">03</span><span class="bt b1">Блок 1</span></div>
+      <div class="ses-main">
+        <p class="skick"><b>Вт&nbsp;8&nbsp;декабря</b> · 10:00–11:30 · <span class="pre">время предварительное</span></p>
+        <h3 class="display ses-title">Концепции и&nbsp;ИИ-ТЗ <span class="g">часть 2: образы концепции</span></h3>
+        <dl class="facts">
+          <div><dt>Формат</dt><dd>Очно в бюро · 1,5&nbsp;часа</dd></div>
+          <div><dt>Глубина</dt><dd><span class="lv lv-p">Практика</span></dd></div>
+          <div><dt>Ведёт</dt><dd>Екатерина Петренко</dd></div>
+          <div><dt>Участники</dt><dd>архитекторы</dd></div>
+        </dl>
+        <div class="why"><h4>Зачем бюро</h4><p>До&nbsp;моделирования заказчику нужно показать направление. Два-три образа за&nbsp;час помогают договориться о&nbsp;характере объекта раньше, чем на&nbsp;него потрачены дни моделирования. Образ&nbsp;— это настроение, материал и&nbsp;свет, а&nbsp;не&nbsp;проект: нейросеть меняет геометрию, поэтому образ не&nbsp;заменяет модель.</p></div>
+        <div class="flow"><h4>Ход занятия</h4><ol><li><span class="ft">10:00–10:15</span><span class="fw">Схема запроса для образа: объект, материал, свет, окружение, ракурс</span><span class="who">ведущий</span></li><li><span class="ft">10:15–11:00</span><span class="fw">2–3 варианта образа из&nbsp;скетча и&nbsp;вида модели в&nbsp;ChatGPT, Qwen и&nbsp;Шедевруме</span><span class="who who-s">сами</span></li><li><span class="ft">11:00–11:30</span><span class="fw">Отбор вариантов для заказчика, промпты в&nbsp;копилку бюро</span><span class="who">ведущий</span></li></ol></div>
+        
+      </div>
+      <aside class="ses-side">
+        <div class="box"><h4>Подготовить до занятия</h4><ul class="sq"><li>Скетч от&nbsp;руки или вид модели объекта</li><li>ИИ-ТЗ с&nbsp;занятия 7&nbsp;декабря</li></ul></div>
+        <div class="box"><h4>Результат</h4><ol class="results"><li>2–3 варианта образа объекта</li><li>Рабочие промпты для образов</li></ol></div>
+        <div class="box"><h4>После занятия</h4><p>Ничего дополнительно: в&nbsp;12:00 продолжаем визуализациями.</p></div>
+      </aside>
+    </div>
+  </article>
+  <article class="band ses" id="s04">
+    <div class="grid ses-g">
+      <div class="ses-n"><span class="nn">04</span><span class="bt b1">Блок 1</span></div>
+      <div class="ses-main">
+        <p class="skick"><b>Вт&nbsp;8&nbsp;декабря</b> · 12:00–15:00 · <span class="pre">время предварительное</span></p>
+        <h3 class="display ses-title">Визуализации <span class="g">D5 Render, нейросети, Photoshop</span></h3>
+        <dl class="facts">
+          <div><dt>Формат</dt><dd>Очно в бюро · 3&nbsp;часа с&nbsp;перерывом</dd></div>
+          <div><dt>Глубина</dt><dd><span class="lv lv-p">Практика</span></dd></div>
+          <div><dt>Ведёт</dt><dd>Екатерина Петренко</dd></div>
+          <div><dt>Участники</dt><dd>архитекторы</dd></div>
+        </dl>
+        <div class="why"><h4>Зачем бюро</h4><p>Визуализация&nbsp;— одна из&nbsp;самых затратных по&nbsp;времени частей подачи. Цель занятия&nbsp;— сократить время на&nbsp;один ракурс и&nbsp;измерить это: сколько уходило раньше и&nbsp;сколько сейчас. Каждый инструмент берём под свою задачу: D5&nbsp;— для точной геометрии модели, нейросети&nbsp;— для атмосферы и&nbsp;окружения, Photoshop&nbsp;— для финальной доводки.</p></div>
+        <div class="flow"><h4>Ход занятия</h4><ol><li><span class="ft">12:00–12:20</span><span class="fw">Что и&nbsp;когда использовать: D5 Render, генеративные нейросети, Photoshop</span><span class="who">ведущий</span></li><li><span class="ft">12:20–13:20</span><span class="fw">D5: модель из&nbsp;Revit или SketchUp, ракурсы, свет, ИИ-инструменты D5</span><span class="who who-s">сами</span></li><li class="brk"><span class="ft">13:20–13:35</span><span class="fw">Перерыв</span></li><li><span class="ft">13:35–14:30</span><span class="fw">Доработка: ракурс из&nbsp;D5&nbsp;→ нейросеть (атмосфера, окружение, люди)&nbsp;→ Photoshop</span><span class="who who-s">сами</span></li><li><span class="ft">14:30–15:00</span><span class="fw">Замер времени до&nbsp;и&nbsp;после, пресеты и&nbsp;промпты в&nbsp;копилку бюро</span><span class="who">ведущий</span></li></ol></div>
+        <p class="note">На&nbsp;рабочем месте без дискретной видеокарты D5 не&nbsp;работает: участник работает в&nbsp;паре или выполняет часть с&nbsp;нейросетями и&nbsp;Photoshop.</p>
+      </div>
+      <aside class="ses-side">
+        <div class="box"><h4>Подготовить до занятия</h4><ul class="sq"><li>Модель объекта в&nbsp;Revit или SketchUp, которая открывается в&nbsp;D5</li><li>Записать, сколько времени сейчас уходит на&nbsp;один ракурс</li></ul></div>
+        <div class="box"><h4>Результат</h4><ol class="results"><li>Серия ракурсов объекта</li><li>Замер времени до&nbsp;и&nbsp;после</li><li>Пресеты и&nbsp;промпты визуализации</li></ol></div>
+        <div class="box"><h4>После занятия</h4><p>Вести журнал «до&nbsp;и&nbsp;после» по&nbsp;визуализациям на&nbsp;текущих проектах.</p></div>
+      </aside>
+    </div>
+  </article>
+  <article class="band ses" id="s05">
+    <div class="grid ses-g">
+      <div class="ses-n"><span class="nn">05</span><span class="bt b1">Блок 1</span></div>
+      <div class="ses-main">
+        <p class="skick"><b>Чт&nbsp;10&nbsp;декабря</b> · 10:00–11:30 · <span class="pre">время предварительное</span></p>
+        <h3 class="display ses-title">Презентации и&nbsp;подача <span class="g">сборка подачи из&nbsp;материалов объекта</span></h3>
+        <dl class="facts">
+          <div><dt>Формат</dt><dd>Очно в бюро · 1,5&nbsp;часа</dd></div>
+          <div><dt>Глубина</dt><dd><span class="lv lv-o">Обзор</span></dd></div>
+          <div><dt>Ведёт</dt><dd>Екатерина Петренко</dd></div>
+          <div><dt>Участники</dt><dd>архитекторы</dd></div>
+        </dl>
+        <div class="why"><h4>Зачем бюро</h4><p>К&nbsp;этому дню у&nbsp;объекта уже есть ИИ-ТЗ, образы и&nbsp;ракурсы. Задача&nbsp;— быстро собрать из&nbsp;них подачу для заказчика: от&nbsp;его задачи к&nbsp;предлагаемому решению. ИИ&nbsp;берёт на&nbsp;себя вёрстку и&nbsp;черновик текста, архитектор отвечает за&nbsp;логику и&nbsp;акценты.</p></div>
+        <div class="flow"><h4>Ход занятия</h4><ol><li><span class="ft">10:00–10:20</span><span class="fw">Структура подачи концепции: задача заказчика, анализ, решение, образ</span><span class="who">ведущий</span></li><li><span class="ft">10:20–11:10</span><span class="fw">Демонстрация: презентация из&nbsp;материалов объекта в&nbsp;Gamma, экспорт в&nbsp;PDF и&nbsp;PowerPoint</span><span class="who">ведущий</span></li><li><span class="ft">11:10–11:30</span><span class="fw">Шаблон подачи бюро, вопросы</span><span class="who">ведущий</span></li></ol></div>
+        
+      </div>
+      <aside class="ses-side">
+        <div class="box"><h4>Подготовить до занятия</h4><ul class="sq"><li>Материалы объекта с&nbsp;занятий 7 и&nbsp;8&nbsp;декабря</li></ul></div>
+        <div class="box"><h4>Результат</h4><ol class="results"><li>Шаблон подачи бюро</li><li>Пример презентации концепции объекта</li></ol></div>
+        <div class="box"><h4>После занятия</h4><p>По&nbsp;желанию: собрать презентацию своего объекта по&nbsp;шаблону и&nbsp;показать на&nbsp;итоговой сессии.</p></div>
+      </aside>
+    </div>
+  </article>
+  <article class="band ses" id="s06">
+    <div class="grid ses-g">
+      <div class="ses-n"><span class="nn">06</span><span class="bt b1">Блок 1</span></div>
+      <div class="ses-main">
+        <p class="skick"><b>Чт&nbsp;10&nbsp;декабря</b> · 12:00–13:30 · <span class="pre">время предварительное</span></p>
+        <h3 class="display ses-title">Тексты и&nbsp;документы <span class="g">записки, ответы, задания смежникам</span></h3>
+        <dl class="facts">
+          <div><dt>Формат</dt><dd>Очно в бюро · 1,5&nbsp;часа</dd></div>
+          <div><dt>Глубина</dt><dd><span class="lv lv-o">Обзор</span></dd></div>
+          <div><dt>Ведёт</dt><dd>Екатерина Петренко</dd></div>
+          <div><dt>Участники</dt><dd>10&nbsp;человек</dd></div>
+        </dl>
+        <div class="why"><h4>Зачем бюро</h4><p>Пояснительные записки, ответы на&nbsp;замечания, задания смежникам и&nbsp;письма&nbsp;— большой объём однотипного текста. ИИ&nbsp;даёт черновик за&nbsp;минуты, но&nbsp;цифры, ссылки на&nbsp;нормы и&nbsp;формулировки проверяет специалист. На&nbsp;занятии разбираем, где черновик ИИ&nbsp;экономит время, а&nbsp;где ему нельзя доверять.</p></div>
+        <div class="flow"><h4>Ход занятия</h4><ol><li><span class="ft">12:00–12:15</span><span class="fw">Какие документы ИИ&nbsp;готовит быстрее и&nbsp;где ему нельзя доверять</span><span class="who">ведущий</span></li><li><span class="ft">12:15–13:00</span><span class="fw">Демонстрация на&nbsp;документах бюро: раздел пояснительной записки, ответ на&nbsp;замечания экспертизы, ТЗ&nbsp;смежнику</span><span class="who">ведущий</span></li><li><span class="ft">13:00–13:30</span><span class="fw">Как проверять текст ИИ: цифры, ссылки на&nbsp;нормы, термины. Шаблоны и&nbsp;промпты</span><span class="who">ведущий</span></li></ol></div>
+        
+      </div>
+      <aside class="ses-side">
+        <div class="box"><h4>Подготовить до занятия</h4><ul class="sq"><li>1–2 образца документов бюро без персональных данных: раздел пояснительной записки, ответ на&nbsp;замечания, ТЗ&nbsp;смежнику</li></ul></div>
+        <div class="box"><h4>Результат</h4><ol class="results"><li>Шаблоны и&nbsp;промпты для документов бюро</li></ol></div>
+        <div class="box"><h4>После занятия</h4><p>Пробовать шаблоны на&nbsp;текущих документах, удачные промпты&nbsp;— в&nbsp;копилку бюро.</p></div>
+      </aside>
+    </div>
+  </article>
+  <article class="band ses" id="s07">
+    <div class="grid ses-g">
+      <div class="ses-n"><span class="nn">07</span><span class="bt b1">Блок 1</span></div>
+      <div class="ses-main">
+        <p class="skick"><b>Пт&nbsp;11&nbsp;декабря</b> · 10:00–13:00 · <span class="pre">время предварительное</span></p>
+        <h3 class="display ses-title">Нормы и&nbsp;проверка документации <span class="g">своя база норм бюро в&nbsp;ИИ</span></h3>
+        <dl class="facts">
+          <div><dt>Формат</dt><dd>Очно в бюро · 3&nbsp;часа с&nbsp;перерывом</dd></div>
+          <div><dt>Глубина</dt><dd><span class="lv lv-p">Практика</span></dd></div>
+          <div><dt>Ведёт</dt><dd>Александр Кулешов</dd></div>
+          <div><dt>Участники</dt><dd>10&nbsp;человек</dd></div>
+        </dl>
+        <div class="why"><h4>Зачем бюро</h4><p>Поиск нужного пункта СП&nbsp;и&nbsp;сверка решения с&nbsp;ним занимают много времени. ИИ&nbsp;ускоряет поиск, но&nbsp;может сослаться на&nbsp;несуществующий пункт или устаревшую редакцию. Поэтому работаем не&nbsp;с&nbsp;«памятью нейросети», а&nbsp;с&nbsp;собственной базой актуальных норм бюро и&nbsp;требуем от&nbsp;ИИ&nbsp;номер пункта и&nbsp;цитату.</p></div>
+        <div class="flow"><h4>Ход занятия</h4><ol><li><span class="ft">10:00–10:20</span><span class="fw">Что ИИ&nbsp;проверяет хорошо и&nbsp;где ошибается: разбор примеров</span><span class="who">ведущий</span></li><li><span class="ft">10:20–11:00</span><span class="fw">База норм бюро: проект в&nbsp;ChatGPT с&nbsp;загруженными СП, правило ответа «пункт + цитата»</span><span class="who who-s">сами</span></li><li><span class="ft">11:00–11:45</span><span class="fw">Чек-лист проверки под профиль объектов бюро</span><span class="who who-s">сами</span></li><li class="brk"><span class="ft">11:45–12:00</span><span class="fw">Перерыв</span></li><li><span class="ft">12:00–12:45</span><span class="fw">Проверка раздела АР&nbsp;по&nbsp;чек-листу, сверка каждого замечания с&nbsp;текстом СП</span><span class="who who-s">сами</span></li><li><span class="ft">12:45–13:00</span><span class="fw">Порядок проверки в&nbsp;бюро: кто проверяет и&nbsp;что фиксируем</span><span class="who">ведущий</span></li></ol></div>
+        
+      </div>
+      <aside class="ses-side">
+        <div class="box"><h4>Подготовить до занятия</h4><ul class="sq"><li>Профиль объектов бюро: какие типы зданий проектируете чаще всего</li><li>PDF актуальных редакций СП, по&nbsp;которым бюро работает чаще всего</li><li>Раздел АР&nbsp;текущего проекта в&nbsp;PDF</li></ul></div>
+        <div class="box"><h4>Результат</h4><ol class="results"><li>База норм бюро в&nbsp;ИИ</li><li>Чек-лист проверки</li><li>Протокол проверки раздела АР</li></ol></div>
+        <div class="box"><h4>После занятия</h4><p>До&nbsp;февраля проверить по&nbsp;чек-листу ещё один раздел и&nbsp;записать время в&nbsp;журнал.</p></div>
+      </aside>
+    </div>
+  </article>
+</section>
+
+
+<section class="band pause" id="pause" aria-labelledby="pause-h">
+  <div class="grid pz">
+    <div class="pz-k"><p class="small"><b>Между блоками</b></p><p class="pz-mark">19&nbsp;декабря&nbsp;— 7&nbsp;февраля</p></div>
+    <h2 class="display pz-title" id="pause-h">Задание <span class="g">на паузу</span></h2>
+    <p class="pz-text">Между блоками бюро применяет инструменты декабря на&nbsp;живых проектах. Из&nbsp;того, что накопится за&nbsp;паузу, строится февраль: скрипты Revit пишем под вашу рутину, а&nbsp;регламент&nbsp;— по&nbsp;реальным результатам.</p>
+    <ol class="results pz-list"><li><span><b>Журнал «до&nbsp;и&nbsp;после»</b>&nbsp;— задача, сколько занимала раньше, сколько с&nbsp;ИИ. Ведёт каждый участник декабрьских занятий.</span></li><li><span><b>Список рутины в&nbsp;Revit</b>&nbsp;— операция, как часто встречается, сколько времени занимает. Прислать Александру Кулешову до&nbsp;1&nbsp;февраля.</span></li><li><span><b>Копилка промптов</b>&nbsp;— удачные запросы по&nbsp;концепциям, визуализациям, нормам и&nbsp;текстам&nbsp;— в&nbsp;общую папку бюро.</span></li><li><span><b>Для ГИПов</b>&nbsp;— 3–5 обезличенных замечаний экспертизы с&nbsp;ответами по&nbsp;прошлым проектам&nbsp;— к&nbsp;10&nbsp;февраля.</span></li><li><span><b>Для инженеров</b>&nbsp;— 1–2 типовые задачи от&nbsp;каждого раздела&nbsp;— к&nbsp;10&nbsp;февраля.</span></li></ol>
+  </div>
+</section>
+
+<section aria-labelledby="b2-h" id="block2">
+  <div class="band blk-head b2"><div class="grid">
+    <p class="small bh-k"><b>Блок 2 · февраль 2027</b><br>8–24 февраля · 13,5&nbsp;ч очно</p>
+    <h2 class="display bh-t" id="b2-h">Участок, модель, команда</h2>
+  </div></div>
+  
+  <article class="band ses" id="s08">
+    <div class="grid ses-g">
+      <div class="ses-n"><span class="nn">08</span><span class="bt b2">Блок 2</span></div>
+      <div class="ses-main">
+        <p class="skick"><b>Пн&nbsp;8&nbsp;февраля</b> · 10:00–12:00 · <span class="pre">время предварительное</span></p>
+        <h3 class="display ses-title">Анализ участка (QGIS) <span class="g">часть 1: данные и&nbsp;подложка</span></h3>
+        <dl class="facts">
+          <div><dt>Формат</dt><dd>Очно в бюро · 2&nbsp;часа</dd></div>
+          <div><dt>Глубина</dt><dd><span class="lv lv-v">Внедрение</span></dd></div>
+          <div><dt>Ведёт</dt><dd>Эксперт по&nbsp;QGIS, Александр Кулешов</dd></div>
+          <div><dt>Участники</dt><dd>архитекторы</dd></div>
+        </dl>
+        <div class="why"><h4>Зачем бюро</h4><p>Исходные данные по&nbsp;участку обычно собирают вручную из&nbsp;разных источников: кадастр, градостроительные регламенты, окружение. Цель&nbsp;— за&nbsp;два занятия получить ситуационную схему и&nbsp;таблицу ограничений по&nbsp;своему участку и&nbsp;закрепить это как повторяемый порядок работы бюро.</p></div>
+        <div class="flow"><h4>Ход занятия</h4><ol><li><span class="ft">10:00–10:20</span><span class="fw">Открытые данные: НСПД (границы и&nbsp;кадастр), OpenStreetMap (окружение), ПЗЗ города</span><span class="who">ведущий</span></li><li><span class="ft">10:20–11:20</span><span class="fw">Подложка участка в&nbsp;QGIS: границы, окружение, зоны</span><span class="who who-s">сами</span></li><li><span class="ft">11:20–12:00</span><span class="fw">Таблица ограничений: ИИ&nbsp;сводит выдержки ПЗЗ и&nbsp;ГПЗУ, сверка с&nbsp;первоисточником</span><span class="who who-s">сами</span></li></ol></div>
+        
+      </div>
+      <aside class="ses-side">
+        <div class="box"><h4>Подготовить до занятия</h4><ul class="sq"><li>QGIS (версия LTR) и&nbsp;модуль QuickOSM на&nbsp;рабочих местах</li><li>Кадастровый номер участка объекта</li><li>Выдержка из&nbsp;ПЗЗ для зоны участка, ГПЗУ&nbsp;— если есть</li></ul></div>
+        <div class="box"><h4>Результат</h4><ol class="results"><li>Черновик ситуационной схемы</li><li>Черновик таблицы ограничений</li></ol></div>
+        <div class="box"><h4>После занятия</h4><p>К&nbsp;15&nbsp;февраля довести схему и&nbsp;таблицу по&nbsp;своему участку.</p></div>
+      </aside>
+    </div>
+  </article>
+  <article class="band ses" id="s09">
+    <div class="grid ses-g">
+      <div class="ses-n"><span class="nn">09</span><span class="bt b2">Блок 2</span></div>
+      <div class="ses-main">
+        <p class="skick"><b>Вт&nbsp;9&nbsp;февраля</b> · 10:00–13:00 · <span class="pre">время предварительное</span></p>
+        <h3 class="display ses-title">Revit + ИИ <span class="g">скрипты под рутину бюро</span></h3>
+        <dl class="facts">
+          <div><dt>Формат</dt><dd>Очно в бюро · 3&nbsp;часа с&nbsp;перерывом</dd></div>
+          <div><dt>Глубина</dt><dd><span class="lv lv-p">Практика</span></dd></div>
+          <div><dt>Ведёт</dt><dd>Александр Кулешов</dd></div>
+          <div><dt>Участники</dt><dd>архитекторы</dd></div>
+        </dl>
+        <div class="why"><h4>Зачем бюро</h4><p>Ускорение модели&nbsp;— одна из&nbsp;главных задач бюро. Много времени в&nbsp;Revit уходит на&nbsp;повторяющиеся операции: листы, виды, марки, заполнение параметров. ИИ&nbsp;пишет скрипт Dynamo или pyRevit по&nbsp;описанию задачи обычным языком. Скрипт пишется один раз и&nbsp;экономит время на&nbsp;каждом следующем проекте.</p></div>
+        <div class="flow"><h4>Ход занятия</h4><ol><li><span class="ft">10:00–10:20</span><span class="fw">Как ИИ&nbsp;пишет скрипты для Revit, где они ломаются. Правило: только на&nbsp;копии модели</span><span class="who">ведущий</span></li><li><span class="ft">10:20–10:40</span><span class="fw">Выбор 3–5 задач из&nbsp;списка рутины бюро</span><span class="who">ведущий</span></li><li><span class="ft">10:40–11:50</span><span class="fw">Первый скрипт: описание задачи&nbsp;→ код от&nbsp;ИИ&nbsp;→ запуск на&nbsp;копии&nbsp;→ исправление по&nbsp;сообщению об&nbsp;ошибке</span><span class="who who-s">сами</span></li><li class="brk"><span class="ft">11:50–12:05</span><span class="fw">Перерыв</span></li><li><span class="ft">12:05–12:40</span><span class="fw">Второй скрипт</span><span class="who who-s">сами</span></li><li><span class="ft">12:40–13:00</span><span class="fw">Замер времени, скрипты с&nbsp;описаниями в&nbsp;библиотеку бюро</span><span class="who">ведущий</span></li></ol></div>
+        <p class="note">Практика проходит в&nbsp;Revit 2025. В&nbsp;Revit 2021 и&nbsp;2025 разные версии Dynamo и&nbsp;Python, поэтому скрипты для Revit 2021 проверяем отдельно.</p>
+      </div>
+      <aside class="ses-side">
+        <div class="box"><h4>Подготовить до занятия</h4><ul class="sq"><li>Список рутинных операций из&nbsp;задания между блоками</li><li>Копия рабочей модели объекта</li><li>pyRevit установлен на&nbsp;рабочих местах</li></ul></div>
+        <div class="box"><h4>Результат</h4><ol class="results"><li>3–5 рабочих скриптов под рутину бюро</li><li>Описания скриптов в&nbsp;библиотеке бюро</li></ol></div>
+        <div class="box"><h4>После занятия</h4><p>Запускать скрипты на&nbsp;текущих проектах, время&nbsp;— в&nbsp;журнал «до&nbsp;и&nbsp;после».</p></div>
+      </aside>
+    </div>
+  </article>
+  <article class="band ses" id="s10">
+    <div class="grid ses-g">
+      <div class="ses-n"><span class="nn">10</span><span class="bt b2">Блок 2</span></div>
+      <div class="ses-main">
+        <p class="skick"><b>Ср&nbsp;10&nbsp;февраля</b> · 10:00–11:30 · <span class="pre">время предварительное</span></p>
+        <h3 class="display ses-title">ИИ&nbsp;для ГИПа <span class="g">замечания, сводки, комплектность</span></h3>
+        <dl class="facts">
+          <div><dt>Формат</dt><dd>Очно в бюро · 1,5&nbsp;часа</dd></div>
+          <div><dt>Глубина</dt><dd><span class="lv lv-o">Обзор</span></dd></div>
+          <div><dt>Ведёт</dt><dd>Александр Кулешов</dd></div>
+          <div><dt>Участники</dt><dd>ГИПы</dd></div>
+        </dl>
+        <div class="why"><h4>Зачем бюро</h4><p>У&nbsp;ГИПа много текста и&nbsp;сверки: замечания экспертизы, переписка, протоколы, комплектность. ИИ&nbsp;берёт на&nbsp;себя первичную сортировку и&nbsp;черновики, решения остаются за&nbsp;ГИПом.</p></div>
+        <div class="flow"><h4>Ход занятия</h4><ol><li><span class="ft">10:00–10:30</span><span class="fw">Матрица ответов на&nbsp;замечания экспертизы: замечание&nbsp;→ раздел&nbsp;→ ответственный&nbsp;→ черновик ответа</span><span class="who">ведущий</span></li><li><span class="ft">10:30–10:55</span><span class="fw">Сводка по&nbsp;проекту из&nbsp;переписки и&nbsp;протоколов</span><span class="who">ведущий</span></li><li><span class="ft">10:55–11:15</span><span class="fw">Контроль комплектности по&nbsp;составу разделов (Постановление Правительства РФ&nbsp;№&nbsp;87) и&nbsp;ТЗ&nbsp;смежникам</span><span class="who">ведущий</span></li><li><span class="ft">11:15–11:30</span><span class="fw">Что ГИПы берут в&nbsp;работу сразу, порядок проверки результатов ИИ</span><span class="who">ведущий</span></li></ol></div>
+        
+      </div>
+      <aside class="ses-side">
+        <div class="box"><h4>Подготовить до занятия</h4><ul class="sq"><li>3–5 обезличенных замечаний экспертизы по&nbsp;прошлым проектам</li></ul></div>
+        <div class="box"><h4>Результат</h4><ol class="results"><li>Шаблоны ГИПа: матрица ответов, сводка по&nbsp;проекту, проверка комплектности</li></ol></div>
+        <div class="box"><h4>После занятия</h4><p>Попробовать матрицу ответов на&nbsp;следующем пакете замечаний.</p></div>
+      </aside>
+    </div>
+  </article>
+  <article class="band ses" id="s11">
+    <div class="grid ses-g">
+      <div class="ses-n"><span class="nn">11</span><span class="bt b2">Блок 2</span></div>
+      <div class="ses-main">
+        <p class="skick"><b>Ср&nbsp;10&nbsp;февраля</b> · 12:00–13:30 · <span class="pre">время предварительное</span></p>
+        <h3 class="display ses-title">ИИ&nbsp;для инженерных разделов <span class="g">расчёты, спецификации, записки</span></h3>
+        <dl class="facts">
+          <div><dt>Формат</dt><dd>Очно в бюро · 1,5&nbsp;часа</dd></div>
+          <div><dt>Глубина</dt><dd><span class="lv lv-o">Обзор</span></dd></div>
+          <div><dt>Ведёт</dt><dd>Александр Кулешов</dd></div>
+          <div><dt>Участники</dt><dd>инженеры</dd></div>
+        </dl>
+        <div class="why"><h4>Зачем бюро</h4><p>В&nbsp;инженерных разделах главный риск ИИ&nbsp;— неверные коэффициенты и&nbsp;нормативные значения. Поэтому показываем расчёт, который ИИ&nbsp;выполняет кодом и&nbsp;выводит формулы и&nbsp;исходные данные: инженер проверяет каждый шаг, а&nbsp;не&nbsp;только итоговую цифру.</p></div>
+        <div class="flow"><h4>Ход занятия</h4><ol><li><span class="ft">12:00–12:35</span><span class="fw">Расчёт с&nbsp;проверкой кодом: ИИ&nbsp;считает в&nbsp;Python и&nbsp;показывает формулы и&nbsp;исходные значения</span><span class="who">ведущий</span></li><li><span class="ft">12:35–13:05</span><span class="fw">Спецификации из&nbsp;таблиц и&nbsp;пояснительные записки разделов</span><span class="who">ведущий</span></li><li><span class="ft">13:05–13:30</span><span class="fw">Где ИИ&nbsp;ошибается в&nbsp;инженерных задачах, порядок проверки</span><span class="who">ведущий</span></li></ol></div>
+        
+      </div>
+      <aside class="ses-side">
+        <div class="box"><h4>Подготовить до занятия</h4><ul class="sq"><li>1–2 типовые задачи от&nbsp;каждого инженерного раздела бюро</li></ul></div>
+        <div class="box"><h4>Результат</h4><ol class="results"><li>Понимание, какие инженерные задачи передавать ИИ&nbsp;и&nbsp;как проверять результат</li></ol></div>
+        <div class="box"><h4>После занятия</h4><p>Удачные расчётные запросы&nbsp;— в&nbsp;копилку бюро с&nbsp;пометкой раздела.</p></div>
+      </aside>
+    </div>
+  </article>
+  <article class="band ses" id="s12">
+    <div class="grid ses-g">
+      <div class="ses-n"><span class="nn">12</span><span class="bt b2">Блок 2</span></div>
+      <div class="ses-main">
+        <p class="skick"><b>Чт&nbsp;11&nbsp;февраля</b> · 10:00–11:30 · <span class="pre">время предварительное</span></p>
+        <h3 class="display ses-title">AutoCAD + ИИ <span class="g">скрипты AutoLISP по&nbsp;описанию</span></h3>
+        <dl class="facts">
+          <div><dt>Формат</dt><dd>Очно в бюро · 1,5&nbsp;часа</dd></div>
+          <div><dt>Глубина</dt><dd><span class="lv lv-o">Обзор</span></dd></div>
+          <div><dt>Ведёт</dt><dd>Александр Кулешов</dd></div>
+          <div><dt>Участники</dt><dd>6&nbsp;человек</dd></div>
+        </dl>
+        <div class="why"><h4>Зачем бюро</h4><p>Рутина в&nbsp;AutoCAD&nbsp;— однотипные правки по&nbsp;всему чертежу. Скрипт AutoLISP делает их&nbsp;за&nbsp;секунды, а&nbsp;ИИ&nbsp;пишет такой скрипт по&nbsp;описанию задачи обычным языком.</p></div>
+        <div class="flow"><h4>Ход занятия</h4><ol><li><span class="ft">10:00–10:20</span><span class="fw">Как ИИ&nbsp;пишет AutoLISP по&nbsp;описанию задачи; загрузка скрипта командой APPLOAD</span><span class="who">ведущий</span></li><li><span class="ft">10:20–11:10</span><span class="fw">Демонстрация на&nbsp;задачах бюро: пакетная замена текста, подсчёт длин, порядок в&nbsp;слоях</span><span class="who">ведущий</span></li><li><span class="ft">11:10–11:30</span><span class="fw">Что в&nbsp;бюро стоит автоматизировать в&nbsp;первую очередь</span><span class="who">ведущий</span></li></ol></div>
+        
+      </div>
+      <aside class="ses-side">
+        <div class="box"><h4>Подготовить до занятия</h4><ul class="sq"><li>2–3 рутинные операции в&nbsp;AutoCAD, которые хочется автоматизировать</li></ul></div>
+        <div class="box"><h4>Результат</h4><ol class="results"><li>Список задач для автоматизации</li><li>Примеры скриптов AutoLISP</li></ol></div>
+        <div class="box"><h4>После занятия</h4><p>Попробовать скрипт на&nbsp;копии чертежа.</p></div>
+      </aside>
+    </div>
+  </article>
+  <article class="band ses" id="s13">
+    <div class="grid ses-g">
+      <div class="ses-n"><span class="nn">13</span><span class="bt b2">Блок 2</span></div>
+      <div class="ses-main">
+        <p class="skick"><b>Пн&nbsp;15&nbsp;февраля</b> · 10:00–12:00 · <span class="pre">время предварительное</span></p>
+        <h3 class="display ses-title">Анализ участка (QGIS) <span class="g">часть 2: разбор и&nbsp;шаблон бюро</span></h3>
+        <dl class="facts">
+          <div><dt>Формат</dt><dd>Очно в бюро · 2&nbsp;часа</dd></div>
+          <div><dt>Глубина</dt><dd><span class="lv lv-v">Внедрение</span></dd></div>
+          <div><dt>Ведёт</dt><dd>Эксперт по&nbsp;QGIS, Александр Кулешов</dd></div>
+          <div><dt>Участники</dt><dd>архитекторы</dd></div>
+        </dl>
+        <div class="why"><h4>Зачем бюро</h4><p>Через неделю после первой части разбираем, что получилось у&nbsp;каждого, и&nbsp;превращаем удачные решения в&nbsp;шаблон, по&nbsp;которому бюро будет делать анализ участка на&nbsp;следующих объектах.</p></div>
+        <div class="flow"><h4>Ход занятия</h4><ol><li><span class="ft">10:00–10:50</span><span class="fw">Разбор схем и&nbsp;таблиц участников: ошибки, что упущено</span><span class="who">ведущий</span></li><li><span class="ft">10:50–11:40</span><span class="fw">Шаблон анализа участка бюро: слои, стили, таблица ограничений, порядок действий</span><span class="who who-s">сами</span></li><li><span class="ft">11:40–12:00</span><span class="fw">Как применять шаблон на&nbsp;следующих объектах</span><span class="who">ведущий</span></li></ol></div>
+        
+      </div>
+      <aside class="ses-side">
+        <div class="box"><h4>Подготовить до занятия</h4><ul class="sq"><li>Ситуационная схема и&nbsp;таблица ограничений по&nbsp;своему участку</li></ul></div>
+        <div class="box"><h4>Результат</h4><ol class="results"><li>Ситуационная схема участка</li><li>Таблица ограничений</li><li>Шаблон анализа участка бюро</li></ol></div>
+        <div class="box"><h4>После занятия</h4><p>Шаблон&nbsp;— в&nbsp;общую папку бюро.</p></div>
+      </aside>
+    </div>
+  </article>
+  <article class="band ses" id="s14">
+    <div class="grid ses-g">
+      <div class="ses-n"><span class="nn">14</span><span class="bt b2">Блок 2</span></div>
+      <div class="ses-main">
+        <p class="skick"><b>Ср&nbsp;24&nbsp;февраля</b> · 10:00–12:00 · <span class="pre">время предварительное</span></p>
+        <h3 class="display ses-title">Итоговая сессия <span class="g">библиотека промптов и&nbsp;регламент</span></h3>
+        <dl class="facts">
+          <div><dt>Формат</dt><dd>Очно в бюро · 2&nbsp;часа</dd></div>
+          <div><dt>Глубина</dt><dd><span class="lv lv-p">Практика</span></dd></div>
+          <div><dt>Ведёт</dt><dd>Александр Кулешов</dd></div>
+          <div><dt>Участники</dt><dd>вся команда</dd></div>
+        </dl>
+        <div class="why"><h4>Зачем бюро</h4><p>Закрепить то, что работает, в&nbsp;общих правилах бюро. Без регламента инструменты остаются у&nbsp;тех, кто был на&nbsp;занятии, а&nbsp;с&nbsp;регламентом становятся частью работы всего бюро.</p></div>
+        <div class="flow"><h4>Ход занятия</h4><ol><li><span class="ft">10:00–10:40</span><span class="fw">Библиотека промптов бюро: сортируем накопленное по&nbsp;задачам</span><span class="who who-s">сами</span></li><li><span class="ft">10:40–11:20</span><span class="fw">Результаты участников: что ускорилось, по&nbsp;журналам «до&nbsp;и&nbsp;после»</span><span class="who who-s">сами</span></li><li><span class="ft">11:20–12:00</span><span class="fw">Регламент ИИ&nbsp;в&nbsp;бюро: что можно, что нельзя, кто проверяет результат, где хранятся промпты и&nbsp;скрипты</span><span class="who">ведущий</span></li></ol></div>
+        
+      </div>
+      <aside class="ses-side">
+        <div class="box"><h4>Подготовить до занятия</h4><ul class="sq"><li>Журналы «до&nbsp;и&nbsp;после»</li><li>Промпты, скрипты и&nbsp;шаблоны в&nbsp;общей папке бюро</li></ul></div>
+        <div class="box"><h4>Результат</h4><ol class="results"><li>Библиотека промптов бюро</li><li>Регламент ИИ&nbsp;в&nbsp;бюро</li><li>Итоговый замер «до&nbsp;и&nbsp;после»</li></ol></div>
+        
+      </aside>
+    </div>
+  </article>
+</section>
+
+<footer class="band">
+  <div class="grid foot">
+    <div class="foot-a"><p>ИСП × AI2ARCH</p></div>
+    <div class="foot-b"><p>Лаборатория проектного интеллекта</p></div>
+    <div class="foot-c">
+      <p class="small"><b>Вопросы по&nbsp;программе, переносы и&nbsp;материалы&nbsp;— Александр Кулешов.</b></p>
+      <p class="small" style="margin-top:6px">Пособие для&nbsp;сотрудников ИСП. Материалы занятий бюро использует внутри компании.</p>
+      <a class="btn" href="https://t.me/alkuleshov" rel="noopener" target="_blank">Telegram @alkuleshov</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Марка растягивается ровно на ширину полосы */
+(function(){
+  var w=document.querySelector('.word'); if(!w) return;
+  function fit(){ w.style.fontSize='100px'; var box=w.parentNode.clientWidth; var k=box/w.scrollWidth; w.style.fontSize=(100*k)+'px'; }
+  fit(); window.addEventListener('resize', fit);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+</body>
+</html>
