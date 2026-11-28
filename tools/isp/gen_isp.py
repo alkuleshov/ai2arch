@@ -33,8 +33,6 @@ def sched_rows():
             out.append(f'<tr class="r-blk {b["cls"]}"><td colspan="6"><span>Блок {cur} · {t(b["when"])}</span><b>{t(b["name"])}</b><em>{t(b["range"])} · {b["hours"]}&nbsp;ч очно</em></td></tr>')
             if cur == 1:
                 pass
-        if s["block"] == 1 and s["date"].startswith("Пт 11"):
-            pass
         out.append(
             f'<tr><td class="c-d"><b>{t(s["date"])}</b></td>'
             f'<td class="c-t"><span class="tm">{s["time"]}</span><small>предварительно</small></td>'
@@ -42,7 +40,7 @@ def sched_rows():
             f'<td class="c-n"><a href="#s{i:02d}">{t(s["title"])}<span class="g"> — {t(s["sub"])}</span></a></td>'
             f'<td class="c-l"><span class="lv {s["lvc"]}">{s["lvl"]}</span></td>'
             f'<td class="c-w">{t(s["lead"])}<small>{t(s["who"])}</small></td></tr>')
-        if s["block"] == 1 and s["date"].startswith("Пт 11"):
+        if s["block"] == 1 and i == max(j for j, x in enumerate(SESSIONS, 1) if x["block"] == 1):
             out.append('<tr class="r-res"><td colspan="6"><b>17–18 декабря</b> · резерв на переносы</td></tr>')
     return "\n".join(out)
 
